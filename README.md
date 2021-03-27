@@ -12,3 +12,5 @@ Because it's a student project we can't add parts of work of people around the w
 
 # Where can I find the build of the game?
 This project is actually in progress. There is no public build actually. Maybe in the future we will share a build of the project with you. 
+
+test
