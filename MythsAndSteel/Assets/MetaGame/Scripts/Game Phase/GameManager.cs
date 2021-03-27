@@ -41,6 +41,9 @@ public class GameManager : MonoSingleton<GameManager>{
     GameObject actualSwitchPhasePanel = null;
 
 
+    [Header("Les Références des phases")]
+    //Objet pour la phase d'activation
+    [SerializeField] private GameObject _phaseActivationObj = null;
 
     //Event pour quand le joueur clique sur un bouton pour passer à la phase suivante
     public delegate void ClickButtonSwitchPhase();
@@ -58,18 +61,18 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <summary>
     /// Fonction qui se lance uniquement lorsque le jeu est lancé dans l'éditeur de unity
     /// </summary>
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
     private void Update(){
-        if(Input.GetKeyDown(KeyCode.A) && actualSwitchPhasePanel == null){
+        if(Input.GetKeyDown(KeyCode.A) && actualSwitchPhasePanel == null && _actualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation){
             NextPhase();
         }
 
-        if(Input.GetKeyDown(KeyCode.E) && actualSwitchPhasePanel == null){
+        if(Input.GetKeyDown(KeyCode.E) && actualSwitchPhasePanel == null && _actualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation){
             int randomPhase = Random.Range(0, 7);
             GoToPhase((MYthsAndSteel_Enum.PhaseDeJeu) randomPhase);
         }
     }
-#endif
+//#endif
 
     /// <summary>
     /// Obtenir la phase suivante et appeler la fonction qui permet de passer à la phase suivante
@@ -161,13 +164,6 @@ public class GameManager : MonoSingleton<GameManager>{
     }
 
     /// <summary>
-    /// Phase de début
-    /// </summary>
-    public void PhaseActivation(){
-        Debug.Log("Phase D'activation");
-    }
-
-    /// <summary>
     /// Fonction qui est appellée lorsque l'event est appellé (event lors du clic sur le bouton pour passer à la phase suivante)
     /// </summary>
     public void OnclickedEvent(){
@@ -182,7 +178,6 @@ public class GameManager : MonoSingleton<GameManager>{
         OnClicked += OnclickedEvent;
     }
 
-    #region UIFunction
     /// <summary>
     /// Permet d'appeler l'event pour passer a une autre phase
     /// </summary>
@@ -190,6 +185,7 @@ public class GameManager : MonoSingleton<GameManager>{
         OnClicked();
     }
 
+    #region UIFunction
     /// <summary>
     /// Affiche le panneau d'indication de changement de phase. Les joueurs doivent cliquer sur un bouton pour passer la phase
     /// </summary>
@@ -219,4 +215,26 @@ public class GameManager : MonoSingleton<GameManager>{
         }
     }
     #endregion UIFunction
+
+    /// <summary>
+    /// Permet d'avoir en référence si c'est le joueur 1 qui commence ou le joueur 2
+    /// </summary>
+    /// <param name="player1"></param>
+    public void SetPlayerStart(bool player1){
+        _isPlayer1Starting = player1;
+    }
+
+
+    #region Phase
+    /// <summary>
+    /// Ajoute la phase d'activation à l'event
+    /// </summary>
+    public void PhaseActivation(){
+        UIInstance.Instance.UiManager.ActivateActivationPhase(true);
+        OnClicked += _phaseActivationObj.GetComponent<PhaseActivation>().ResetPhaseActivation;
+    }
+
+
+    #endregion Phase
+
 }

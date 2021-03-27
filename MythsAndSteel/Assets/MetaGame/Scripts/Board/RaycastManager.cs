@@ -13,6 +13,11 @@ public class RaycastManager : MonoSingleton<RaycastManager>{
     //Dernière tile en mémoire par ce script
     GameObject _lastTile = null;
 
+    //tile qui se trouve sous le raycast
+    [SerializeField] private GameObject _unitInTile;
+    public GameObject UnitInTile => _unitInTile;
+
+
     //Est ce que les joueurs peuvent jouer
     bool _isInTurn = false;
 
@@ -28,6 +33,9 @@ public class RaycastManager : MonoSingleton<RaycastManager>{
         //Remplace le gameObject Tile pour avoir en avoir une sauvegarde
         _tile = hit.collider != null? hit.collider.gameObject : null;
         
+        //Assigne l'unité si la tile qui est sélectionnée possède une unité
+        _unitInTile = _tile != null ? _tile.GetComponent<TileScript>().Unit != null ? _tile.GetComponent<TileScript>().Unit : null : null;
+
         //Si la tile change
         if(_tile != _lastTile || _isInTurn != GameManager.Instance.IsInTurn){
             _isInTurn = GameManager.Instance.IsInTurn;

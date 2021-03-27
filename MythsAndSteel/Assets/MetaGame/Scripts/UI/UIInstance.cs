@@ -17,6 +17,10 @@ public class UIInstance : MonoSingleton<UIInstance>{
     [SerializeField] private GameObject _switchPhaseObject = null;
     public GameObject SwitchPhaseObject => _switchPhaseObject;
 
+    //Le canvas en jeu pour la phase d'activation
+    [SerializeField] private GameObject _canvasActivation = null;
+    public GameObject CanvasActivation => _canvasActivation;
+
     [Header("Cartes Événements")]
     //L'objet d'event à afficher lorsqu'une nouvelle carte event est piochée
     [SerializeField] private GameObject _eventCardObject = null;

@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-static class PlayerStatic
-{
+static class PlayerStatic{
     /// <summary>
     /// Est ce que la valeur du joueur est supérieur ou égale au cout
     /// </summary>
