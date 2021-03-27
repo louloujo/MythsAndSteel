@@ -27,6 +27,10 @@ public class GameManager : MonoSingleton<GameManager>{
     [SerializeField] private bool _isPlayer1Turn = false;
     public bool IsPlayer1Turn => _isPlayer1Turn;
 
+    //Est ce que les joueurs sont actuellement dans un tour de jeu?
+    [SerializeField] private bool _isInTurn = false;
+    public bool IsInTurn => _isInTurn;
+
 
     [Header("Info de la phase de jeu actuelle")]
     //Correspond à la phase actuelle durant le tour
@@ -40,7 +44,7 @@ public class GameManager : MonoSingleton<GameManager>{
 
     //Event pour quand le joueur clique sur un bouton pour passer à la phase suivante
     public delegate void ClickButtonSwitchPhase();
-    public static event ClickButtonSwitchPhase OnClicked;
+    public event ClickButtonSwitchPhase OnClicked;
     #endregion Variables
 
     /// <summary>
@@ -48,6 +52,7 @@ public class GameManager : MonoSingleton<GameManager>{
     /// </summary>
     private void Start(){
         OnClicked += OnclickedEvent;
+        _isInTurn = true;
     }
 
     /// <summary>
@@ -102,6 +107,7 @@ public class GameManager : MonoSingleton<GameManager>{
     public void GoToPhase(MYthsAndSteel_Enum.PhaseDeJeu phaseToGoTo){
         //Change le statut de la phase de jeu
         _actualTurnPhase = phaseToGoTo;
+        _isInTurn = false;
 
         //Affiche le panneau qui montre au joueur qu'il a changé de phase
         SwitchPhaseObjectUI(false);
@@ -165,6 +171,9 @@ public class GameManager : MonoSingleton<GameManager>{
     /// Fonction qui est appellée lorsque l'event est appellé (event lors du clic sur le bouton pour passer à la phase suivante)
     /// </summary>
     public void OnclickedEvent(){
+        //Les joueurs peuvent à nouveau jouer
+        _isInTurn = true;
+
         //Détruit le panneau de changement de phase
         SwitchPhaseObjectUI(true);
 

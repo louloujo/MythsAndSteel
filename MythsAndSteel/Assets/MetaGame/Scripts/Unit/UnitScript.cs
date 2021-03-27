@@ -89,7 +89,7 @@ public class UnitScript : MonoBehaviour{
 
     #endregion Variables
 
-    void Start()
+/*    void Start()
     {
         //------------ Assign Les Stat du scriptable a l'unité et aux text de l'UI ------------------
         allchildren = this.transform.GetComponentsInChildren<Text>();
@@ -104,28 +104,26 @@ public class UnitScript : MonoBehaviour{
 
         //------------------------------------------------------------------------------------------------
 
-    }
+    }*/
 
     private void Update(){
-        //-------------Actualise l'affichage des valeurs dans L'UI------------------------------------------------------
+       /* //-------------Actualise l'affichage des valeurs dans L'UI------------------------------------------------------
         allchildren[0].text = "Vie : " + _life.ToString() + " / " + _unitSO.LifeMax.ToString();
         allchildren[1].text = "Bouclier : " + _shield.ToString() + " / " + _unitSO.ShieldMax.ToString();
         allchildren[2].text = "Portée : " + _attackRange.ToString();
         allchildren[3].text = "Déplacement : " + _moveSpeed.ToString();
         allchildren[5].text = _unitSO.Description.ToString();
-        //-------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------*/
 
         //Test--------------------------------------
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             GiveLife(1);
-            Debug.Log("noice");
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             TakeDamage(1);
-            Debug.Log("oof");
         }
         //----------------------------------------
     }
@@ -172,6 +170,9 @@ public class UnitScript : MonoBehaviour{
     /// Update les stats de l'unité avec les stats de base
     /// </summary>
     public virtual void UpdateUnitStat(){
+        //Si il n'y a pas de scriptable object alors ca arrete la fonction
+        if(_unitSO == null) return;
+
         //Assigne les stats
         _life = _unitSO.LifeMax;
         _shield = _unitSO.ShieldMax;
@@ -180,7 +181,6 @@ public class UnitScript : MonoBehaviour{
         _creationCost = _unitSO.CreationCost;
 
         //Assigne le sprite de l'unité
-        if(GetComponent<SpriteRenderer>().sprite != null) 
         GetComponent<SpriteRenderer>().sprite = _unitSO.Sprite;
     }
 

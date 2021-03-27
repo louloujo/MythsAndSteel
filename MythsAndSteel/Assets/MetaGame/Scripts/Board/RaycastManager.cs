@@ -3,13 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RaycastManager : MonoSingleton<RaycastManager>{
+    #region Variables
     //Les layer qui sont détectés par le raycast
     [SerializeField] private LayerMask layerM;
 
     //tile qui se trouve sous le raycast
     [SerializeField] private GameObject _tile;
     public GameObject Tile => _tile;
+    //Dernière tile en mémoire par ce script
+    GameObject _lastTile = null;
 
+    //Est ce que les joueurs peuvent jouer
+    bool _isInTurn = false;
+
+    //Event pour quand le joueur clique sur un bouton pour passer à la phase suivante
+    public delegate void TileRaycastChange();
+    public event TileRaycastChange OnTileChanged;
+    #endregion Variables
 
     void Update(){
         //obtient le premier objet touché par le raycast
@@ -17,6 +27,13 @@ public class RaycastManager : MonoSingleton<RaycastManager>{
 
         //Remplace le gameObject Tile pour avoir en avoir une sauvegarde
         _tile = hit.collider != null? hit.collider.gameObject : null;
+        
+        //Si la tile change
+        if(_tile != _lastTile || _isInTurn != GameManager.Instance.IsInTurn){
+            _isInTurn = GameManager.Instance.IsInTurn;
+            _lastTile = _tile;
+            OnTileChanged();
+        }
     }
     
     /// <summary>

@@ -56,9 +56,6 @@ static class PlayerStatic
         //De la je return la valeur de ces ID.
         List<int> currentList = new List<int>();
 
-        int topInterditValor = 80;
-        int bottomInterditValor = 0;
-
         int witchLeftLine = 9 * (ligne - 1);
         int witchRightLine = (9 * ligne) - 1;
 
@@ -68,11 +65,8 @@ static class PlayerStatic
         int leftTile = idTile - 1;
         int rightTile = idTile + 1;
 
-        if (diag)
-        {
-            //Check la case en Haut à Gauche.
+        if (diag){
             int lTopTile = idTile + 8;
-            //Check la case à Haut à Droite.
             int rTopTile = idTile + 10;
 
             int lDownTile = idTile - 10;
@@ -83,28 +77,20 @@ static class PlayerStatic
             currentList.Add(lDownTile);
             currentList.Add(rDownTile);
 
-            if (topTile >= topInterditValor || idTile == witchLeftLine)
-            {
+            if (topTile > 80 || idTile == witchLeftLine){
                 currentList.Remove(lTopTile);
-                Debug.Log("J'ai atteint ma limite en Haut à Gauche");
             }
 
-            if (topTile >= topInterditValor || idTile == witchRightLine)
-            {
+            if (topTile > 80 || idTile == witchRightLine){
                 currentList.Remove(rTopTile);
-                Debug.Log("J'ai atteint ma limite en Haut à Droite");
             }
 
-            if (downTile <= bottomInterditValor || idTile == witchLeftLine)
-            {
+            if (downTile < 0 || idTile == witchLeftLine){
                 currentList.Remove(lDownTile);
-                Debug.Log("J'ai atteint ma limite à Bas à Gauche");
             }
 
-            if (downTile <= bottomInterditValor || idTile == witchRightLine)
-            {
+            if (downTile < 0 || idTile == witchRightLine){
                 currentList.Remove(rDownTile);
-                Debug.Log("J'ai atteint ma limite à Bas à Droite");
             }
         }
 
@@ -114,29 +100,20 @@ static class PlayerStatic
         currentList.Add(leftTile);
         currentList.Add(rightTile);
 
-        if (idTile == witchLeftLine)
-        {
+        if (idTile == witchLeftLine){
             currentList.Remove(leftTile);
-            Debug.Log("J'ai atteint ma limite à gauche");
         }
 
-        if (idTile == witchRightLine)
-        {
+        if (idTile == witchRightLine){
             currentList.Remove(rightTile);
-            Debug.Log("J'ai atteint ma limite à droite");
         }
-        if (downTile <= bottomInterditValor)
-        {
+        if (downTile < 0){
             currentList.Remove(downTile);
-            Debug.Log("J'ai atteint ma limite en bas");
         }
 
-        if (topTile >= topInterditValor)
-        {
+        if (topTile > 80){
             currentList.Remove(topTile);
-            Debug.Log("J'ai atteint ma limite en Haut");
         }
-        Debug.Log(currentList.Count);
         return currentList;
     }
 
