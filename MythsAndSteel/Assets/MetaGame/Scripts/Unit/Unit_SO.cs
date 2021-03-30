@@ -18,6 +18,14 @@ public class Unit_SO : ScriptableObject{
     public int MoveSpeed; //Vitesse de déplacement de l'unité
     public int CreationCost; //Cout de création de l'unité
 
+    [Header("Attaque Minimum")]
+    public int DamageMinimum;//Dégats minimum infligé
+    public Vector2 NumberRangeMin;
+
+    [Header("Attaque Maximum")]
+    public int DamageMaximum;//Dégats maximum infligé
+    public Vector2 NumberRangeMax;
+
     [Header("Son de l'unité")]
     public AudioClip Son1; //Son 1 de l'unité
     public AudioClip Son2; //Son 2 de l'unité

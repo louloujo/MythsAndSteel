@@ -5,10 +5,39 @@ using UnityEngine;
 public class TileScript : MonoBehaviour
 {
     [SerializeField] private GameObject _unit;
-    public GameObject  Unit => _unit;
+    public GameObject Unit
+    {
+        get
+        {
+            return _unit;
+        }
+        set
+        {
+            _unit = value;
+        }
+    }
+
+    [SerializeField] private List<GameObject> Child;
+    public List<GameObject> _Child
+    {
+        get
+        {
+            return Child;
+        }
+        set
+        {
+            Child = value;
+        }
+    }
 
     [SerializeField] private int _line;
     public int Line => _line;
+
+    //Liste des effets de terrain sur chaque tile
+
+    [SerializeField] private List<MYthsAndSteel_Enum.TerrainType> _terrainEffectList = new List<MYthsAndSteel_Enum.TerrainType>();
+    public List<MYthsAndSteel_Enum.TerrainType> TerrainEffectList => _terrainEffectList;
+
 
     private void Start(){
         //Met l'unité à la bonne position
@@ -16,27 +45,6 @@ public class TileScript : MonoBehaviour
             _unit.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, _unit.transform.position.z);
         }
     }
-
-
-    /*    public void Select()
-        {
-            if (!Tiles.Instance._Selected)
-            {
-                if (Unit != null)
-                {
-                    Unit.GetComponent<UnitScript>()._Menu.enabled = true; // Active et désactive le menu atk, mvmt, cancel, power. 
-                    Tiles.Instance._Selected = true;
-                    Tiles.Instance._actualTileSelected = this.gameObject;
-                }
-            }
-            else if (Tiles.Instance._Selected)
-            {
-                if (Tiles.Instance._Mouvement)
-                {
-                    Mouvement.Instance.AddMouvement(Tiles.Instance.Tile.IndexOf(gameObject));
-                }
-            }
-        }*/
 
     /// <summary>
     /// Ajoute une unité à cette case

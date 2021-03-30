@@ -128,12 +128,20 @@ public class GameManager : MonoSingleton<GameManager>{
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1:
+                UnitScript[] unitList = GameObject.FindObjectsOfType<UnitScript>();
+                foreach(UnitScript unit in unitList){
+                    unit.ResetTurn();
+                }
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2:
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2:
+                UnitScript[] unitList2 = GameObject.FindObjectsOfType<UnitScript>();
+                foreach(UnitScript unit in unitList2){
+                    unit.ResetTurn();
+                }
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.Strategie:
