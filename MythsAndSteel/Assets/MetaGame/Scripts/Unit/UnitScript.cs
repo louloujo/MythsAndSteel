@@ -37,11 +37,31 @@ public class UnitScript : MonoBehaviour{
     [Header("Stats non nécéssaire")]
     // Déplacement réstant de l'unité durant cette activation
     [SerializeField] int _moveLeft;
-    public int MoveLeft => _moveLeft;
+    public int MoveLeft
+    {
+        get
+        {
+            return _moveLeft;
+        }
+        set
+        {
+            _moveLeft = value;
+        }
+    }
 
     //Valeur (id) de la case sur laquelle se trouve l'unité
     [SerializeField] int _actualTileld;
-    public int ActualTiledId => _actualTileld;
+    public int ActualTiledId
+    {
+        get
+        {
+            return _actualTileld;
+        }
+        set
+        {
+            _actualTileld = value;
+        }
+    }
 
     //déplacement actuel de l'unité pour la fonction "MoveWithPath"
     int _i;
@@ -128,6 +148,7 @@ public class UnitScript : MonoBehaviour{
         //----------------------------------------
     }
 
+    //------------------------------
     #region LifeMethods
     /// <summary>
     /// Rajoute de la vie au joueur
@@ -182,15 +203,22 @@ public class UnitScript : MonoBehaviour{
 
         //Assigne le sprite de l'unité
         GetComponent<SpriteRenderer>().sprite = _unitSO.Sprite;
+
+        ResetTurn();
     }
 
-#if UNITY_EDITOR
     /// <summary>
-    /// Lorsqu'une valeur est modifié dans l'inspecteur ca update le UnitScript a partir du scriptable
+    /// Reset les valeurs nécéssaires pour un nouveau tour
     /// </summary>
-    private void OnValidate(){
-        UpdateUnitStat();
+    public virtual void ResetTurn(){
+        _moveLeft = _unitSO.MoveSpeed;
+        _isMoveDone = false;
     }
-#endif
+
+    public void checkMovementLeft(){
+        if(_moveLeft == 0){
+            _isMoveDone = true;
+        }
+    }
 }
 
