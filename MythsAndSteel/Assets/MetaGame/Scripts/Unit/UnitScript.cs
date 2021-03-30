@@ -38,25 +38,17 @@ public class UnitScript : MonoBehaviour{
     [SerializeField] int _DamageMinimum;
     public int DamageMinimum => _DamageMinimum;
 
-    //Nombre minimum pour infligé les dégats minimum
-    [SerializeField] int _LowNumberMin;
-    public int LownumberMin => _LowNumberMin;
-
-    //Nombre maximum pour infligé les dégats minimum
-    [SerializeField] int _HighNumberMin;
-    public int HighnumberMin => _LowNumberMin;
+    [SerializeField] Vector2 _NumberRangeMin;
+    public Vector2 NumberRangeMin => _NumberRangeMin;
 
     //Dégats maximum infligé
     [SerializeField] int _DamageMaximum;
     public int DamageMaximum => _DamageMaximum;
 
-    //Nombre minimum pour infligé les dégats maximum
-    [SerializeField] int _LowNumberMax;
-    public int LowNumberMax => _LowNumberMax;
+    [SerializeField] Vector2 _NumberRangeMax;
+    public Vector2 NumberRangeMax => _NumberRangeMax;
 
-    //Nombre maximum pour infligé les dégats maximum
-    [SerializeField] int _HighNumberMax;
-    public int HighNumberMax => _HighNumberMax;
+
 
     [Header("Stats non nécéssaire")]
     // Déplacement réstant de l'unité durant cette activation
@@ -205,10 +197,8 @@ public class UnitScript : MonoBehaviour{
         _creationCost = _unitSO.CreationCost;
         _DamageMinimum = _unitSO.DamageMinimum;
         _DamageMaximum = _unitSO.DamageMaximum;
-        _LowNumberMin = _unitSO.LowNumberMin;
-        _LowNumberMax = _unitSO.LowNumberMax;
-        _HighNumberMin = _unitSO.HighNumberMin;
-        _HighNumberMax = _unitSO.HighNumberMax;
+        _NumberRangeMax = _unitSO.NumberRangeMax;
+        _NumberRangeMin = _unitSO.NumberRangeMin;
 
         //Assigne le sprite de l'unité
         GetComponent<SpriteRenderer>().sprite = _unitSO.Sprite;

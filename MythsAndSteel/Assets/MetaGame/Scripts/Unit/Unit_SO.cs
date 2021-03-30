@@ -20,13 +20,11 @@ public class Unit_SO : ScriptableObject{
 
     [Header("Attaque Minimum")]
     public int DamageMinimum;//Dégats minimum infligé
-    public int LowNumberMin; //Nombre minimum pour infligé les dégats minimum
-    public int HighNumberMin;//Nombre maximum pour infligé les dégats minimum
+    public Vector2 NumberRangeMin;
 
     [Header("Attaque Maximum")]
     public int DamageMaximum;//Dégats maximum infligé
-    public int LowNumberMax; //Nombre minimum pour infligé les dégats maximum
-    public int HighNumberMax;//Nombre maximum pour infligé les dégats maximum
+    public Vector2 NumberRangeMax;
 
     [Header("Son de l'unité")]
     public AudioClip Son1; //Son 1 de l'unité
