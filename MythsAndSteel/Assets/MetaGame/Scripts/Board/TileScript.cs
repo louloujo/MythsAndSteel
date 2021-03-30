@@ -17,6 +17,19 @@ public class TileScript : MonoBehaviour
         }
     }
 
+    [SerializeField] private List<GameObject> Child;
+    public List<GameObject> _Child
+    {
+        get
+        {
+            return Child;
+        }
+        set
+        {
+            Child = value;
+        }
+    }
+
     [SerializeField] private int _line;
     public int Line => _line;
 
@@ -27,35 +40,26 @@ public class TileScript : MonoBehaviour
         }
     }
 
-    // AV. Test -----------------------------------------------------
-    private void OnMouseDown()
+    public void Select()
     {
-        Debug.Log("AV.Script; Click!");
-        Select();
-    }
-        public void Select()
+        if (!TilesManager.Instance._Selected)
         {
-            if (!TilesManager.Instance._Selected)
+            if (Unit != null)
             {
-                if (Unit != null)
-                {
                 Debug.Log("AV.Script; Unit selected!");
                 TilesManager.Instance._Selected = true;
-                TilesManager.Instance._actualTileSelected = this.gameObject;
-                }
-            }
-            else if (TilesManager.Instance._Selected)
-            {
-                if (TilesManager.Instance._Mouvement)
-                {
-                Debug.Log("AV.Script; Path selected!");
-                Mouvement.Instance.AddMouvement(TilesManager.Instance.TileList.IndexOf(gameObject));
-                }
+                RaycastManager.Instance._actualTileSelected = this.gameObject;
             }
         }
-
-
-    // -----------------------------------------------------
+        else if (TilesManager.Instance._Selected)
+        {
+            if (TilesManager.Instance._Mouvement)
+            {
+                Debug.Log("AV.Script; Path selected!");
+                Mouvement.Instance.AddMouvement(TilesManager.Instance.TileList.IndexOf(gameObject));
+            }
+        }
+    }
 
     /// <summary>
     /// Ajoute une unité à cette case

@@ -35,18 +35,6 @@ public class TilesManager : MonoSingleton<TilesManager>
             Selected = value;
         }
     }
-    [SerializeField] private GameObject actualTileSelected;
-    public GameObject _actualTileSelected
-    {
-        get
-        {
-            return actualTileSelected;
-        }
-        set
-        {
-            actualTileSelected = value;
-        }
-    }
 }
 
 

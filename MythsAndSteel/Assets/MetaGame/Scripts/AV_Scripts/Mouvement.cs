@@ -59,9 +59,9 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
     /// <param name="Range">Mvmt de l'unité</param>
     public void StartMvmtForSelectedUnit()
     {
-        if (TilesManager.Instance._actualTileSelected != null)
+        if (RaycastManager.Instance._actualTileSelected != null)
         {
-            StartMouvement(TilesManager.Instance.TileList.IndexOf(TilesManager.Instance._actualTileSelected), TilesManager.Instance._actualTileSelected.GetComponent<TileScript>().Unit.GetComponent<UnitScript>().MoveSpeed);
+            StartMouvement(TilesManager.Instance.TileList.IndexOf(RaycastManager.Instance._actualTileSelected), RaycastManager.Instance._actualTileSelected.GetComponent<TileScript>().Unit.GetComponent<UnitScript>().MoveSpeed);
         }
     }
 
@@ -84,7 +84,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
         {
             TilesManager.Instance.TileList[Neighbour].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("empty"); // Assigne un sprite empty à toutes les anciennes cases "neighbour".
         }
-        if(TilesManager.Instance._actualTileSelected != null) // Si une case était séléctionnée.
+        if(RaycastManager.Instance._actualTileSelected != null) // Si une case était séléctionnée.
         {
             //Tiles.Instance._actualTileSelected.GetComponent<TileScript>().Unit.GetComponent<UnitScript>().DemandMenu.enabled = false;
             //Tiles.Instance._actualTileSelected.GetComponent<TileScript>().Unit.GetComponent<UnitScript>().Menu.enabled = false;
@@ -103,7 +103,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
         LocalRange = 0;
         TilesManager.Instance._Mouvement = false;
         TilesManager.Instance._Selected = false;
-        TilesManager.Instance._actualTileSelected = null;
+        RaycastManager.Instance._actualTileSelected = null;
     }
 
     /// <summary>
@@ -146,7 +146,6 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
                         LocalRange--; // sup 1 mvmt.
                         selectedTileId.Add(tileId); 
                         TilesManager.Instance.TileList[tileId].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("selecttile");
-                        //Tiles.Instance._actualTileSelected.GetComponent<TileScript>().Unit.GetComponent<UnitScript>()._DemandMenu.enabled = true;
                     }
                 }
                 else // Sinon cette case est trop loin de l'ancienne seletion.
@@ -171,11 +170,10 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
     /// </summary>
     public void ApplyMouvement()
     {
-        mUnit = TilesManager.Instance._actualTileSelected.GetComponent<TileScript>().Unit; // Assignation de l'unité.
-        mStart = TilesManager.Instance._actualTileSelected; // Assignation du nouveau départ.
+        mUnit = RaycastManager.Instance._actualTileSelected.GetComponent<TileScript>().Unit; // Assignation de l'unité.
+        mStart = RaycastManager.Instance._actualTileSelected; // Assignation du nouveau départ.
         mEnd = TilesManager.Instance.TileList[selectedTileId[MvmtIndex]];  // Assignation du nouvel arrirée.
-        //mUnit.GetComponent<UnitScript>()._DemandMenu.enabled = false; // Désactive le menu (Se déplacer, annuler)
-        //mUnit.GetComponent<UnitScript>()._Menu.enabled = false; // Désactive le menu global de l'unité.
+
         foreach (int Neighbour in newNeighbourId) // Désactive toutes les cases selectionnées par la fonction Highlight.
         {
             if (!selectedTileId.Contains(Neighbour))
@@ -185,6 +183,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
         }
         Debug.Log("Actual tile target: " + TilesManager.Instance.TileList[selectedTileId[MvmtIndex]]);
     }
+
     /// <summary>
     /// Coroutine d'attente entre chaque case. Probablement pendant ce temps que l'on devra appliquer les effets de case.
     /// </summary>
@@ -197,8 +196,8 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
         mEnd.GetComponent<TileScript>().AddUnitToTile(mStart.GetComponent<TileScript>().Unit); // L'unité de la case d'arrivée devient celle de la case de départ.
         mStart.GetComponent<TileScript>().RemoveUnitFromTile(); // L'ancienne case n'a plus d'unité.
         mUnit = mEnd.GetComponent<TileScript>().Unit;
-        mUnit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(mEnd); 
-        TilesManager.Instance._actualTileSelected = mEnd; 
+        mUnit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(mEnd);
+        RaycastManager.Instance._actualTileSelected = mEnd; 
         mStart = mEnd;
         mEnd = null;
         yield return new WaitForSeconds(1); // Temps d'attente.
@@ -228,7 +227,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
         if (Unit != null && StartPos != null && EndPos != null)
         {
             Unit.transform.position = Vector2.MoveTowards(Unit.transform.position, EndPos.transform.position, speed1); // Application du mvmt.
-            speed1 = Mathf.Abs((Vector2.Distance(mUnit.transform.position, mEnd.transform.position) * speed)); // Régulation de la vitesse. (effet de ralentissement) 
+            speed1 = Mathf.Abs((Vector2.Distance(mUnit.transform.position, mEnd.transform.position) * speed * Time.deltaTime)); // Régulation de la vitesse. (effet de ralentissement) 
             if (Vector2.Distance(mUnit.transform.position, mEnd.transform.position) <= 0.05f && Launch == false) // Si l'unité est arrivée.
             {
                 Launch = true;
