@@ -184,6 +184,7 @@ public class UnitScript : MonoBehaviour{
         GetComponent<SpriteRenderer>().sprite = _unitSO.Sprite;
     }
 
+
 #if UNITY_EDITOR
     /// <summary>
     /// Lorsqu'une valeur est modifié dans l'inspecteur ca update le UnitScript a partir du scriptable
