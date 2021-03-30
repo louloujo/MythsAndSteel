@@ -16,7 +16,18 @@ public class RaycastManager : MonoSingleton<RaycastManager>{
     //tile qui se trouve sous le raycast
     [SerializeField] private GameObject _unitInTile;
     public GameObject UnitInTile => _unitInTile;
-
+    [SerializeField] private GameObject actualTileSelected;
+    public GameObject _actualTileSelected
+    {
+        get
+        {
+            return actualTileSelected;
+        }
+        set
+        {
+            actualTileSelected = value;
+        }
+    }
 
     //Est ce que les joueurs peuvent jouer
     bool _isInTurn = false;
@@ -42,6 +53,14 @@ public class RaycastManager : MonoSingleton<RaycastManager>{
             _lastTile = _tile;
             OnTileChanged();
         }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if(_tile != null)
+            {
+                _tile.GetComponent<TileScript>().Select();
+            }
+        }
     }
     
     /// <summary>
@@ -53,4 +72,6 @@ public class RaycastManager : MonoSingleton<RaycastManager>{
         Ray2D ray = new Ray2D(Camera.main.ScreenToWorldPoint(Input.mousePosition), mouseDirection);
         return Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, layerM);
     }
+
+
 }

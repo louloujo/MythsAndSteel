@@ -37,11 +37,31 @@ public class UnitScript : MonoBehaviour{
     [Header("Stats non nécéssaire")]
     // Déplacement réstant de l'unité durant cette activation
     [SerializeField] int _moveLeft;
-    public int MoveLeft => _moveLeft;
+    public int MoveLeft
+    {
+        get
+        {
+            return _moveLeft;
+        }
+        set
+        {
+            _moveLeft = value;
+        }
+    }
 
     //Valeur (id) de la case sur laquelle se trouve l'unité
     [SerializeField] int _actualTileld;
-    public int ActualTiledId => _actualTileld;
+    public int ActualTiledId
+    {
+        get
+        {
+            return _actualTileld;
+        }
+        set
+        {
+            _actualTileld = value;
+        }
+    }
 
     //déplacement actuel de l'unité pour la fonction "MoveWithPath"
     int _i;
@@ -128,6 +148,18 @@ public class UnitScript : MonoBehaviour{
         //----------------------------------------
     }
 
+    // Test -------------------------
+    private void Start()
+    {
+        Synch();
+    }
+    public void Synch()
+    {
+        //--- Assign unit's start pos // 
+        transform.position = TilesManager.Instance.TileList[ActualTiledId].gameObject.transform.position;
+        TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().Unit = this.gameObject;
+    }
+    //------------------------------
     #region LifeMethods
     /// <summary>
     /// Rajoute de la vie au joueur
