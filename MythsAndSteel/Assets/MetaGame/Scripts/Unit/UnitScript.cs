@@ -148,17 +148,6 @@ public class UnitScript : MonoBehaviour{
         //----------------------------------------
     }
 
-    // Test -------------------------
-    private void Start()
-    {
-        Synch();
-    }
-    public void Synch()
-    {
-        //--- Assign unit's start pos // 
-        transform.position = TilesManager.Instance.TileList[ActualTiledId].gameObject.transform.position;
-        TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().Unit = this.gameObject;
-    }
     //------------------------------
     #region LifeMethods
     /// <summary>
@@ -214,15 +203,22 @@ public class UnitScript : MonoBehaviour{
 
         //Assigne le sprite de l'unité
         GetComponent<SpriteRenderer>().sprite = _unitSO.Sprite;
+
+        ResetTurn();
     }
 
-#if UNITY_EDITOR
     /// <summary>
-    /// Lorsqu'une valeur est modifié dans l'inspecteur ca update le UnitScript a partir du scriptable
+    /// Reset les valeurs nécéssaires pour un nouveau tour
     /// </summary>
-    private void OnValidate(){
-        UpdateUnitStat();
+    public virtual void ResetTurn(){
+        _moveLeft = _unitSO.MoveSpeed;
+        _isMoveDone = false;
     }
-#endif
+
+    public void checkMovementLeft(){
+        if(_moveLeft == 0){
+            _isMoveDone = true;
+        }
+    }
 }
 

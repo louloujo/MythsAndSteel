@@ -33,31 +33,16 @@ public class TileScript : MonoBehaviour
     [SerializeField] private int _line;
     public int Line => _line;
 
+    //Liste des effets de terrain sur chaque tile
+
+    [SerializeField] private List<MYthsAndSteel_Enum.TerrainType> _terrainEffectList = new List<MYthsAndSteel_Enum.TerrainType>();
+    public List<MYthsAndSteel_Enum.TerrainType> TerrainEffectList => _terrainEffectList;
+
+
     private void Start(){
         //Met l'unité à la bonne position
         if(_unit != null){
             _unit.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, _unit.transform.position.z);
-        }
-    }
-
-    public void Select()
-    {
-        if (!TilesManager.Instance._Selected)
-        {
-            if (Unit != null)
-            {
-                Debug.Log("AV.Script; Unit selected!");
-                TilesManager.Instance._Selected = true;
-                RaycastManager.Instance._actualTileSelected = this.gameObject;
-            }
-        }
-        else if (TilesManager.Instance._Selected)
-        {
-            if (TilesManager.Instance._Mouvement)
-            {
-                Debug.Log("AV.Script; Path selected!");
-                Mouvement.Instance.AddMouvement(TilesManager.Instance.TileList.IndexOf(gameObject));
-            }
         }
     }
 

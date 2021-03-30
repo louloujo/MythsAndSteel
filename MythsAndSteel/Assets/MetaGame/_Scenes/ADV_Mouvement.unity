@@ -279,6 +279,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &8931588 stripped
@@ -360,6 +388,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -595,6 +651,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &40783625 stripped
@@ -812,6 +896,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &73086320 stripped
@@ -950,6 +1062,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &77447034 stripped
@@ -1031,6 +1171,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -1192,6 +1360,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -1479,6 +1675,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &165397526 stripped
@@ -1560,6 +1784,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -2095,6 +2347,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &221773237 stripped
@@ -2331,6 +2611,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -2625,6 +2933,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &271013629 stripped
@@ -2842,6 +3178,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &308248038 stripped
@@ -2923,6 +3287,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -3019,12 +3411,14 @@ MonoBehaviour:
   neighbourValue: 
   newNeighbourId: 
   selectedTileId: 
-  speed: 0.01
+  speed: 5
   mStart: {fileID: 0}
   mEnd: {fileID: 0}
   mUnit: {fileID: 0}
   outTileLeft: []
   outTileRight: []
+  _isInMouvement: 0
+  _selected: 0
   Launch: 0
 --- !u!4 &328410293
 Transform:
@@ -3267,6 +3661,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &376971837 stripped
@@ -3481,6 +3903,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &430475908 stripped
@@ -3639,6 +4089,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &436885145 stripped
@@ -3720,6 +4198,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -4343,6 +4849,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &501642601 stripped
@@ -4425,6 +4959,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &502502423 stripped
@@ -4495,6 +5057,10 @@ PrefabInstance:
       propertyPath: _line
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: _unit
+      value: 
+      objectReference: {fileID: 566606115}
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_Name
       value: Tile id:30
@@ -4506,6 +5072,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -4588,6 +5182,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -4707,9 +5329,6 @@ MonoBehaviour:
   - {fileID: 1247149686}
   - {fileID: 124700319}
   - {fileID: 606152037}
-  Mouvement: 0
-  Selected: 0
-  actualTileSelected: {fileID: 0}
 --- !u!4 &518194978
 Transform:
   m_ObjectHideFlags: 0
@@ -4887,7 +5506,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 566606115}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.83, y: -8.62, z: 0}
+  m_LocalPosition: {x: -5.15, y: -1.87, z: 0}
   m_LocalScale: {x: 13.451775, y: 13.451775, z: 13.451775}
   m_Children: []
   m_Father: {fileID: 1392689568}
@@ -4911,7 +5530,7 @@ MonoBehaviour:
   _attackRange: 3
   _moveSpeed: 3
   _creationCost: 2
-  _moveLeft: 0
+  _moveLeft: 3
   _actualTileld: 50
   _isMoveDone: 0
   _isActionDone: 0
@@ -5121,6 +5740,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -5570,6 +6217,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &637757758 stripped
@@ -5577,6 +6252,113 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3443668466286875165, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
   m_PrefabInstance: {fileID: 637757757}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &648489748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 648489749}
+  - component: {fileID: 648489751}
+  - component: {fileID: 648489750}
+  m_Layer: 0
+  m_Name: Unite2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &648489749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648489748}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.83, y: -6.32, z: 0}
+  m_LocalScale: {x: 13.451775, y: 13.451775, z: 13.451775}
+  m_Children: []
+  m_Father: {fileID: 1392689568}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &648489750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648489748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c89df6f8c9e0a544f8b9b64be3ed31ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitSO: {fileID: 11400000, guid: de7341a724493fc4b8ef2f7b5fad5c81, type: 2}
+  _life: 3
+  _shield: 2
+  _attackRange: 3
+  _moveSpeed: 3
+  _creationCost: 2
+  _moveLeft: 3
+  _actualTileld: 50
+  _isMoveDone: 0
+  _isActionDone: 0
+  _isActivationDone: 0
+  _pathtomake: 
+--- !u!212 &648489751
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648489748}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.16, y: 0.16}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &648684244 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -5708,6 +6490,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &665405644 stripped
@@ -5823,6 +6633,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -6042,6 +6880,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &679224475 stripped
@@ -6123,6 +6989,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -6206,6 +7100,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &705971411 stripped
@@ -6287,6 +7209,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -6445,6 +7395,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -6639,6 +7617,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -6930,6 +7936,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &789968854 stripped
@@ -7087,6 +8121,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -7407,6 +8469,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &862560554 stripped
@@ -7656,6 +8746,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -8239,6 +9357,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &931652606 stripped
@@ -8477,6 +9623,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -8896,6 +10070,10 @@ PrefabInstance:
       propertyPath: _line
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: _unit
+      value: 
+      objectReference: {fileID: 648489748}
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_Name
       value: Tile id:16
@@ -8907,6 +10085,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -9068,6 +10274,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -9246,6 +10480,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1092058262 stripped
@@ -9378,7 +10640,7 @@ GameObject:
   - component: {fileID: 1117078539}
   - component: {fileID: 1117078538}
   m_Layer: 0
-  m_Name: Launch_Mvmt
+  m_Name: Start_Mvmt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9859,6 +11121,7 @@ MonoBehaviour:
     m_Bits: 8
   _tile: {fileID: 0}
   _unitInTile: {fileID: 0}
+  _actualTileSelected: {fileID: 0}
 --- !u!4 &1172681290
 Transform:
   m_ObjectHideFlags: 0
@@ -9948,6 +11211,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1176604578 stripped
@@ -10029,6 +11320,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -10280,6 +11599,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1234345343 stripped
@@ -10362,6 +11709,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1236047579 stripped
@@ -10443,6 +11818,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -10800,6 +12203,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1264845471 stripped
@@ -10881,6 +12312,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -11076,6 +12535,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1292962136 stripped
@@ -11214,6 +12701,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1320055110 stripped
@@ -11295,6 +12810,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -11625,6 +13168,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1368688368 stripped
@@ -11819,6 +13390,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1389652118 stripped
@@ -11854,6 +13453,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 566606116}
+  - {fileID: 648489749}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11987,6 +13587,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -12394,6 +14022,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1468190369 stripped
@@ -12720,6 +14376,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1500759450 stripped
@@ -12801,6 +14485,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -13015,6 +14727,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -13266,6 +15006,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1589946409 stripped
@@ -13347,6 +15115,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -13556,7 +15352,7 @@ GameObject:
   - component: {fileID: 1614068276}
   - component: {fileID: 1614068275}
   m_Layer: 0
-  m_Name: Accept_Mvmt
+  m_Name: Launch_Mvmt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13750,6 +15546,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -14156,6 +15980,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1718597980 stripped
@@ -14238,6 +16090,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1746135270 stripped
@@ -14250,57 +16130,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
   m_PrefabInstance: {fileID: 715024987887419626}
   m_PrefabAsset: {fileID: 0}
---- !u!212 &1760329658
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760329655}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 10fe0b0f972768b488ecd6188288670b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 8, y: 8}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1 &1776767779
 GameObject:
   m_ObjectHideFlags: 0
@@ -14457,6 +16286,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -14784,6 +16641,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1799853929 stripped
@@ -14865,6 +16750,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -15657,6 +17570,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1878363048 stripped
@@ -15739,6 +17680,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1888254306 stripped
@@ -15820,6 +17789,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -16127,6 +18124,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &1948051019 stripped
@@ -16208,6 +18233,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -16482,6 +18535,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &2015524533 stripped
@@ -16563,6 +18644,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -16894,6 +19003,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &2082065133 stripped
@@ -16976,6 +19113,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &2089597834 stripped
@@ -17057,6 +19222,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -17196,6 +19389,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &2108662809 stripped
@@ -17278,6 +19499,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &2110111734 stripped
@@ -17359,6 +19608,34 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_TagString
       value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
@@ -17574,6 +19851,34 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214264329171517941, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
 --- !u!4 &2139653472 stripped
@@ -17633,13 +19938,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
-      propertyPath: _line
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _unit
       value: 
       objectReference: {fileID: 566606115}
+    - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: _terrainEffectList.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_Name
       value: Tile id:0
