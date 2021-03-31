@@ -20,6 +20,10 @@ MonoBehaviour:
   AttackRange: 3
   MoveSpeed: 3
   CreationCost: 2
+  DamageMinimum: 0
+  NumberRangeMin: {x: 0, y: 0}
+  DamageMaximum: 0
+  NumberRangeMax: {x: 0, y: 0}
   Son1: {fileID: 0}
   Son2: {fileID: 0}
   Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}

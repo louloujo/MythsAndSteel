@@ -14,6 +14,10 @@ public class UnitScript : MonoBehaviour{
 
 
     [Header("Stats en jeu de l'unité")]
+
+    [SerializeField] MYthsAndSteel_Enum.TypeUnite _UnitType;
+    public MYthsAndSteel_Enum.TypeUnite UniteType => _UnitType;
+
     //Vie actuelle
     [SerializeField] int _life; 
     public int Life => _life;
@@ -83,6 +87,9 @@ public class UnitScript : MonoBehaviour{
     int _i;
     public int i => _i;
 
+    //Est ce que l'unité est activable 
+    public bool isActivable = true;
+
     //lorsque le joueur a fini d'utiliser tous ses points de déplacement
     [SerializeField] bool _isMoveDone;
     public bool IsMoveDone => _isMoveDone;
@@ -122,12 +129,17 @@ public class UnitScript : MonoBehaviour{
     //A CHANGER AU BON ENDROIT QUAND CE SERA FAIT
     //list qui va chercher les text enfant dans la hiérarchie pour l'UI
     Text[] allchildren;
-
     #endregion Variables
 
-/*    void Start()
+
+    private void Awake()
     {
-        //------------ Assign Les Stat du scriptable a l'unité et aux text de l'UI ------------------
+        PlayerScript.Instance.NewUnit(this);
+    }
+    void Start()
+    {
+        
+        /*//------------ Assign Les Stat du scriptable a l'unité et aux text de l'UI ------------------
         allchildren = this.transform.GetComponentsInChildren<Text>();
 
         UpdateUnitStat();
@@ -139,8 +151,8 @@ public class UnitScript : MonoBehaviour{
         allchildren[5].text = _unitSO.Description.ToString();
 
         //------------------------------------------------------------------------------------------------
-
-    }*/
+        */
+    }
 
     private void Update(){
        /* //-------------Actualise l'affichage des valeurs dans L'UI------------------------------------------------------
