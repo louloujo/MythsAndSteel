@@ -48,6 +48,15 @@ public class GameManager : MonoSingleton<GameManager>{
     //Event pour quand le joueur clique sur un bouton pour passer à la phase suivante
     public delegate void ClickButtonSwitchPhase();
     public event ClickButtonSwitchPhase OnClicked;
+
+    [Header("REFERENCES DES PHASES")]
+    //UI Manager
+    [SerializeField] private UIManager _uiManager = null;
+    public UIManager UIManager => _uiManager;
+    //Event Manager
+    [SerializeField] private EventCardClass _eventCardSO = null;
+    public EventCardClass EventCardSO => _eventCardSO;
+
     #endregion Variables
 
     /// <summary>

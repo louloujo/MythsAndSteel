@@ -6,7 +6,7 @@ using UnityEngine;
 
 static class PlayerStatic{
     /// <summary>
-    /// Est ce que la valeur du joueur est supÈrieur ou Ègale au cout
+    /// Est ce que la valeur du joueur est sup√©rieur ou √©gale au cout
     /// </summary>
     /// <param name="Cout"></param>
     /// <param name="ValeurJoueur"></param>
@@ -17,23 +17,23 @@ static class PlayerStatic{
     }
 
     /// <summary>
-    /// Est ce que l'unitÈ appartient bien ‡ cette armÈe ? On doit y insÈrer notre scriptable.
+    /// Est ce que l'unit√© appartient bien √† cette arm√©e ? On doit y ins√©rer notre scriptable.
     /// </summary>
     /// <param name="unite"></param>
     /// <param name="J1"></param>
     /// <returns></returns>
     public static bool CheckIsUnitArmy(UnitScript unite, bool J1)
     {
-        //Permet de dire si l'unitÈ fait partie de l'armÈe, par dÈfault il est null (ni oui, ni non).
+        //Permet de dire si l'unit√© fait partie de l'arm√©e, par d√©fault il est null (ni oui, ni non).
         bool IsUnitInArmy;
-        //Si la valeur de l'armÈe est Ègale au cout alors..
+        //Si la valeur de l'arm√©e est √©gale au cout alors..
         if (unite.UnitSO.IsInArmy1 == J1){
-            //..Oui l'unitÈ fait partie de l'armÈe.
+            //..Oui l'unit√© fait partie de l'arm√©e.
             IsUnitInArmy = true;
             Debug.Log("IsUnitInArmy est vrai");
         }
         else{
-            //..Non l'unitÈ fait partie de l'armÈe.
+            //..Non l'unit√© fait partie de l'arm√©e.
             IsUnitInArmy = false;
             Debug.Log("IsUnitInArmy est faux");
         }
@@ -50,7 +50,7 @@ static class PlayerStatic{
     public static List<int> GetNeighbourDiag(int idTile, int ligne, bool diag)
     {
         //Je prend la position du raycast, a partir de cette position je prends son ID.
-        //De cette position, j'ajoute +9 pour la tile au nord, -9 pour la tile au Sud, +1 pour la tile ‡ l'est et -1 pour la tile ‡ l'ouest.
+        //De cette position, j'ajoute +9 pour la tile au nord, -9 pour la tile au Sud, +1 pour la tile √† l'est et -1 pour la tile √† l'ouest.
         //Pour la diagonale, j'ajoute +10 pour la tile au Nord Est, +8 pour la tile au Nord Ouest, -10 pour le Sud Ouest et -8 pour le Sud Est.
         //De la je return la valeur de ces ID.
         List<int> currentList = new List<int>();
@@ -58,7 +58,7 @@ static class PlayerStatic{
         int witchLeftLine = 9 * (ligne - 1);
         int witchRightLine = (9 * ligne) - 1;
 
-        //DÈfinit la position sur le quadrillage
+        //D√©finit la position sur le quadrillage
         int topTile = idTile + 9;
         int downTile = idTile - 9;
         int leftTile = idTile - 1;
@@ -93,7 +93,6 @@ static class PlayerStatic{
             }
         }
 
-        currentList.Add(idTile);
         currentList.Add(topTile);
         currentList.Add(downTile);
         currentList.Add(leftTile);
@@ -131,6 +130,35 @@ static class PlayerStatic{
         else{
             return false;
         }
+    }
+
+    /// <summary>
+    /// Cherche si la tile en id poss√®de l'effet de terrain demand√©
+    /// </summary>
+    /// <param name="effectToCheck"></param>
+    /// <param name="idTiles"></param>
+    /// <returns></returns>
+
+    public static bool CheckTiles(MYthsAndSteel_Enum.TerrainType effectToCheck, int idTiles){
+        bool hasTiles = false;
+        hasTiles = TilesManager.Instance.TileList[idTiles].GetComponent<TileScript>().TerrainEffectList.Contains(effectToCheck);
+        return hasTiles;
+    }
+
+    /// <summary>
+    /// obtiens la direction de la tile
+    /// </summary>
+    public static string CheckDirection(int OriginTile, int NextTile)
+    {
+        int Result = NextTile - OriginTile;
+        switch (Result)
+        {
+            case 9: return "Nord";
+            case -9: return "Sud"; 
+            case -1: return "Ouest";
+            case 1: return "Est";
+        }
+        return "NotANeighbour";
     }
 }
 
