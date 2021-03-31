@@ -47,7 +47,7 @@ static class PlayerStatic{
     /// <param name="ligne"></param>
     /// <param name="diag"></param>
     /// <returns></returns>
-    public static List<int> GetNeighbourDiag(int idTile, int ligne, bool diag, bool EffetTerrain = false)
+    public static List<int> GetNeighbourDiag(int idTile, int ligne, bool diag)
     {
         //Je prend la position du raycast, a partir de cette position je prends son ID.
         //De cette position, j'ajoute +9 pour la tile au nord, -9 pour la tile au Sud, +1 pour la tile à l'est et -1 pour la tile à l'ouest.
@@ -93,7 +93,6 @@ static class PlayerStatic{
             }
         }
 
-        //currentList.Add(idTile);
         currentList.Add(topTile);
         currentList.Add(downTile);
         currentList.Add(leftTile);
