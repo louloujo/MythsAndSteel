@@ -1,44 +1,47 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
-public class Mouvement : MonoSingleton<Mouvement> // Script AV.
+public class Mouvement : MonoSingleton<Mouvement>
 {
     #region Variables
     [Header("LISTES DES CASES")]
     [SerializeField] private int[] neighbourValue; // +1 +9 +10...
 
-    [SerializeField] private List<int> newNeighbourId = new List<int>(); // Voisins atteignables avec le range de l'unité.
+    [SerializeField] private List<int> newNeighbourId = new List<int>(); // Voisins atteignables avec le range de l'unitÃ©.
     public List<int> _selectedTileId => selectedTileId;
 
-    [SerializeField] private List<int> selectedTileId = new List<int>(); // Cases selectionnées par le joueur.
+    [SerializeField] private List<int> selectedTileId = new List<int>(); // Cases selectionnÃ©es par le joueur.
     public List<int> _newNeighbourId => newNeighbourId;
 
-    [SerializeField] private float speed = 1; // Speed de déplacement de l'unité 
+    [SerializeField] private float speed = 1; // Speed de dÃ©placement de l'unitÃ© 
 
     private GameObject mStart; // mT Start. 
     private GameObject mEnd; // mT End.
-    private GameObject mUnit; // mT Unité.
+    private GameObject mUnit; // mT UnitÃ©.
 
     private List<int> temp = new List<int>(); //
 
-    //Déplacement restant de l'unité au départ
+    //DÃ©placement restant de l'unitÃ© au dÃ©part
     int MoveLeftBase = 0;
-    
+
     [Header("INFOS DE L UNITE")]
-    //Est ce que l'unité a commencé à choisir son déplacement
+    //Est ce que l'unitÃ© a commencÃ© Ã  choisir son dÃ©placement
     [SerializeField] private bool _isInMouvement;
-    public bool IsInMouvement{
-        get{
+    public bool IsInMouvement
+    {
+        get
+        {
             return _isInMouvement;
         }
-        set{
+        set
+        {
             _isInMouvement = value;
         }
     }
 
-    //Est ce qu'une unité est sélectionnée
+    //Est ce qu'une unitÃ© est sÃ©lectionnÃ©e
     [SerializeField] private bool _selected;
     public bool Selected
     {
@@ -53,7 +56,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
     }
 
     // Mouvement en cours de traitement ?
-   [SerializeField] private bool _mvmtRunning = false; 
+    [SerializeField] private bool _mvmtRunning = false;
     public bool MvmtRunning => _mvmtRunning;
 
     [Header("SPRITES POUR LES CASES")]
@@ -64,16 +67,17 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
 
     #endregion Variables
 
-    private void Update(){
-        // Permet d'effectuer le moveTowards de l'unité à sa prochaine case.
-        UpdatingMove(mUnit, mStart, mEnd); 
+    private void Update()
+    {
+        // Permet d'effectuer le moveTowards de l'unitÃ© Ã  sa prochaine case.
+        UpdatingMove(mUnit, mStart, mEnd);
     }
 
     /// <summary>
-    /// Cette fonction "highlight" les cases atteignables par l'unité sur la case sélectionnée.
+    /// Cette fonction "highlight" les cases atteignables par l'unitÃ© sur la case sÃ©lectionnÃ©e.
     /// </summary>
     /// <param name="tileId">Tile centrale</param>
-    /// <param name="Range">Range de l'unité</param>
+    /// <param name="Range">Range de l'unitÃ©</param>
     public void Highlight(int tileId, int Range)
     {
         if (Range > 0)
@@ -93,28 +97,28 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
                             i = true;
                             break;
                         }
-                        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Rivière_Est, tileId) && PlayerStatic.CheckDirection(tileId, ID) == "Est")
+                        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.RiviÃ¨re_Est, tileId) && PlayerStatic.CheckDirection(tileId, ID) == "Est")
                         {
                             i = true;
                             break;
                         }
-                        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Rivière_Nord, tileId) && PlayerStatic.CheckDirection(tileId, ID) == "Nord")
+                        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.RiviÃ¨re_Nord, tileId) && PlayerStatic.CheckDirection(tileId, ID) == "Nord")
                         {
                             Debug.Log("Nord");
                             i = true;
                             break;
                         }
-                        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Rivière_Sud, tileId) && PlayerStatic.CheckDirection(tileId, ID) == "Sud")
+                        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.RiviÃ¨re_Sud, tileId) && PlayerStatic.CheckDirection(tileId, ID) == "Sud")
                         {
                             i = true;
                             break;
                         }
-                        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Rivière_Ouest, tileId) && PlayerStatic.CheckDirection(tileId, ID) == "Ouest")
+                        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.RiviÃ¨re_Ouest, tileId) && PlayerStatic.CheckDirection(tileId, ID) == "Ouest")
                         {
                             i = true;
                             break;
                         }
-                        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Mont, ID) || PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Forêt, ID))
+                        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Mont, ID) || PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.ForÃªt, ID))
                         {
                             if (Range >= 2)
                             {
@@ -153,66 +157,74 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
 
 
     /// <summary>
-    /// Lance le mouvement d'une unité avec une range défini.
+    /// Lance le mouvement d'une unitÃ© avec une range dÃ©fini.
     /// </summary>
-    /// <param name="tileId">Tile de l'unité</param>
-    /// <param name="Range">Mvmt de l'unité</param>
-    public void StartMvmtForSelectedUnit(){
+    /// <param name="tileId">Tile de l'unitÃ©</param>
+    /// <param name="Range">Mvmt de l'unitÃ©</param>
+    public void StartMvmtForSelectedUnit()
+    {
         GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
 
-        if (tileSelected != null){
+        if (tileSelected != null)
+        {
             mUnit = tileSelected.GetComponent<TileScript>().Unit;
-            if(!mUnit.GetComponent<UnitScript>().IsMoveDone){
+            if (!mUnit.GetComponent<UnitScript>().IsMoveDone)
+            {
                 MoveLeftBase = mUnit.GetComponent<UnitScript>().MoveLeft;
                 StartMouvement(TilesManager.Instance.TileList.IndexOf(tileSelected), mUnit.GetComponent<UnitScript>().MoveSpeed - (mUnit.GetComponent<UnitScript>().MoveSpeed - MoveLeftBase));
             }
-            else{
+            else
+            {
                 _selected = false;
             }
         }
-        else{
+        else
+        {
             _selected = false;
         }
     }
 
-    public void StartMouvement(int tileId, int Range){
-        if(!_mvmtRunning && !_isInMouvement){
+    public void StartMouvement(int tileId, int Range)
+    {
+        if (!_mvmtRunning && !_isInMouvement)
+        {
             _isInMouvement = true;
             selectedTileId.Add(tileId);
             List<int> ID = new List<int>();
             ID.Add(tileId);
 
             // Lance l'highlight des cases dans la range.
-            Highlight(tileId, Range); 
+            Highlight(tileId, Range);
         }
     }
 
     /// <summary>
-    /// Arête le Mouvement pour l'unité selectionnée (menu, cases highlights...)
+    /// ArÃªte le Mouvement pour l'unitÃ© selectionnÃ©e (menu, cases highlights...)
     /// </summary>
     public void StopMouvement(bool forceStop)
-    {        
+    {
         foreach (int Neighbour in newNeighbourId) // Supprime toutes les tiles.
         {
-            TilesManager.Instance.TileList[Neighbour].GetComponent<SpriteRenderer>().sprite = _emptySprite; // Assigne un sprite empty à toutes les anciennes cases "neighbour".
+            TilesManager.Instance.TileList[Neighbour].GetComponent<SpriteRenderer>().sprite = _emptySprite; // Assigne un sprite empty Ã  toutes les anciennes cases "neighbour".
         }
-        if(RaycastManager.Instance.ActualTileSelected != null) // Si une case était séléctionnée.
+        if (RaycastManager.Instance.ActualTileSelected != null) // Si une case Ã©tait sÃ©lÃ©ctionnÃ©e.
         {
             //Tiles.Instance._actualTileSelected.GetComponent<TileScript>().Unit.GetComponent<UnitScript>().DemandMenu.enabled = false;
             //Tiles.Instance._actualTileSelected.GetComponent<TileScript>().Unit.GetComponent<UnitScript>().Menu.enabled = false;
         }
-        foreach (int NeighbourSelect in selectedTileId) // Si un path de mvmt était séléctionné.
+        foreach (int NeighbourSelect in selectedTileId) // Si un path de mvmt Ã©tait sÃ©lÃ©ctionnÃ©.
         {
             TilesManager.Instance.TileList[NeighbourSelect].GetComponent<SpriteRenderer>().sprite = _emptySprite;
             TilesManager.Instance.TileList[NeighbourSelect].GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
         }
         // Clear de toutes les listes et stats.
-        selectedTileId.Clear(); 
+        selectedTileId.Clear();
         newNeighbourId.Clear();
         mStart = null;
         mEnd = null;
         _isInMouvement = false;
         _selected = false;
+
         mUnit.GetComponent<UnitScript>().MoveLeft = forceStop? MoveLeftBase : mUnit.GetComponent<UnitScript>().MoveLeft;
         mUnit.GetComponent<UnitScript>().checkMovementLeft();
 
@@ -224,49 +236,49 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
     }
 
     /// <summary>
-    /// Ajoute la tile à TileSelected. Pour le mvmt du joueur => Check egalement toutes les conditions de déplacement.
+    /// Ajoute la tile Ã  TileSelected. Pour le mvmt du joueur => Check egalement toutes les conditions de dÃ©placement.
     /// </summary>
     /// <param name="tileId">Tile</param>
-    public void AddMouvement(int tileId) 
+    public void AddMouvement(int tileId)
     {
         bool check = false;
         if (_isInMouvement)
         {
-            if (newNeighbourId.Contains(tileId)) // Si cette case est dans la range de l'unité.
+            if (newNeighbourId.Contains(tileId)) // Si cette case est dans la range de l'unitÃ©.
             {
-                if(selectedTileId.Contains(tileId)) // Si cette case est déjà selectionnée.
+                if (selectedTileId.Contains(tileId)) // Si cette case est dÃ©jÃ  selectionnÃ©e.
                 {
-                    // Supprime toutes les cases sélectionnées à partir de l'ID tileId.
+                    // Supprime toutes les cases sÃ©lectionnÃ©es Ã  partir de l'ID tileId.
                     for(int i = selectedTileId.IndexOf(tileId); i < selectedTileId.Count; i++){
-                        if(PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Forêt, selectedTileId[i]) || PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Mont, selectedTileId[i]))
+                        if(PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.ForÃªt, selectedTileId[i]) || PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Mont, selectedTileId[i]))
                         {
                             Debug.Log("REMOVE");
-                            mUnit.GetComponent<UnitScript>().MoveLeft += 2; // Redistribution du Range à chaque suppression de case.
+                            mUnit.GetComponent<UnitScript>().MoveLeft += 2; // Redistribution du Range Ã  chaque suppression de case.
                             temp.Add(selectedTileId[i]);
-                            TilesManager.Instance.TileList[selectedTileId[i]].GetComponent<SpriteRenderer>().sprite = _selectedSprite; // Repasse les sprites en apparence "séléctionnable".
+                            TilesManager.Instance.TileList[selectedTileId[i]].GetComponent<SpriteRenderer>().sprite = _selectedSprite; // Repasse les sprites en apparence "sÃ©lÃ©ctionnable".
                         }
                         else
                         {
                             Debug.Log("REMOVE");
-                            mUnit.GetComponent<UnitScript>().MoveLeft++; // Redistribution du Range à chaque suppression de case.
+                            mUnit.GetComponent<UnitScript>().MoveLeft++; // Redistribution du Range Ã  chaque suppression de case.
                             temp.Add(selectedTileId[i]);
-                            TilesManager.Instance.TileList[selectedTileId[i]].GetComponent<SpriteRenderer>().sprite = _selectedSprite; // Repasse les sprites en apparence "séléctionnable".
+                            TilesManager.Instance.TileList[selectedTileId[i]].GetComponent<SpriteRenderer>().sprite = _selectedSprite; // Repasse les sprites en apparence "sÃ©lÃ©ctionnable".
                         }
-
                     }
-                    foreach(int i in temp){
+                    foreach (int i in temp)
+                    {
                         selectedTileId.Remove(i);
                     }
                     temp.Clear();
 
                 }
                 // Sinon, si cette case est bien voisine de l'ancienne selection. 
-                else if(PlayerStatic.IsNeighbour(tileId, selectedTileId[selectedTileId.Count - 1], TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().Line, false))
+                else if (PlayerStatic.IsNeighbour(tileId, selectedTileId[selectedTileId.Count - 1], TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().Line, false))
                 {
-                    // et qu'il reste du mvmt, on assigne la nouvelle case selectionnée à la liste SelectedTile.
-                    if(mUnit.GetComponent<UnitScript>().MoveLeft > 0)
+                    // et qu'il reste du mvmt, on assigne la nouvelle case selectionnÃ©e Ã  la liste SelectedTile.
+                    if (mUnit.GetComponent<UnitScript>().MoveLeft > 0)
                     {
-                        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Forêt, tileId) || PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Mont, tileId))
+                        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.ForÃªt, tileId) || PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Mont, tileId))
                         {
                             if (mUnit.GetComponent<UnitScript>().MoveLeft >= 2)
                             {
@@ -281,21 +293,21 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
                                 Debug.Log("La tile d'ID : " + tileId + " est une foret ou un mont.");
                             }
                         }
-                        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Rivière_Est, tileId) && PlayerStatic.CheckDirection(tileId, selectedTileId[selectedTileId.Count - 1]) == "Est")
+                        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.RiviÃ¨re_Est, tileId) && PlayerStatic.CheckDirection(tileId, selectedTileId[selectedTileId.Count - 1]) == "Est")
                         {
-                            Debug.Log("La tile d'ID : " + tileId + " est séparée par une rivière de la tile d'ID :" + selectedTileId[selectedTileId.Count - 1]);
+                            Debug.Log("La tile d'ID : " + tileId + " est sÃ©parÃ©e par une riviÃ¨re de la tile d'ID :" + selectedTileId[selectedTileId.Count - 1]);
                         }
-                        else if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Rivière_Nord, tileId) && PlayerStatic.CheckDirection(tileId, selectedTileId[selectedTileId.Count - 1]) == "Nord")
+                        else if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.RiviÃ¨re_Nord, tileId) && PlayerStatic.CheckDirection(tileId, selectedTileId[selectedTileId.Count - 1]) == "Nord")
                         {
-                            Debug.Log("La tile d'ID : " + tileId + " est séparée par une rivière de la tile d'ID :" + selectedTileId[selectedTileId.Count - 1]);
+                            Debug.Log("La tile d'ID : " + tileId + " est sÃ©parÃ©e par une riviÃ¨re de la tile d'ID :" + selectedTileId[selectedTileId.Count - 1]);
                         }
-                        else if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Rivière_Sud, tileId) && PlayerStatic.CheckDirection(tileId, selectedTileId[selectedTileId.Count - 1]) == "Sud")
+                        else if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.RiviÃ¨re_Sud, tileId) && PlayerStatic.CheckDirection(tileId, selectedTileId[selectedTileId.Count - 1]) == "Sud")
                         {
-                            Debug.Log("La tile d'ID : " + tileId + " est séparée par une rivière de la tile d'ID :" + selectedTileId[selectedTileId.Count - 1]);
+                            Debug.Log("La tile d'ID : " + tileId + " est sÃ©parÃ©e par une riviÃ¨re de la tile d'ID :" + selectedTileId[selectedTileId.Count - 1]);
                         }
-                        else if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Rivière_Ouest, tileId) && PlayerStatic.CheckDirection(tileId, selectedTileId[selectedTileId.Count - 1]) == "Ouest")
+                        else if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.RiviÃ¨re_Ouest, tileId) && PlayerStatic.CheckDirection(tileId, selectedTileId[selectedTileId.Count - 1]) == "Ouest")
                         {
-                            Debug.Log("La tile d'ID : " + tileId + " est séparée par une rivière de la tile d'ID :" + selectedTileId[selectedTileId.Count - 1]);
+                            Debug.Log("La tile d'ID : " + tileId + " est sÃ©parÃ©e par une riviÃ¨re de la tile d'ID :" + selectedTileId[selectedTileId.Count - 1]);
                         }
                         else if(!check)
                         {
@@ -311,33 +323,36 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
                     Debug.Log("La tile d'ID : " + tileId + " est trop loin de la tile d'ID: " + selectedTileId[selectedTileId.Count - 1]);
                 }
             }
-            // Sinon cette case est hors de la range de l'unité.
-            else{
+            // Sinon cette case est hors de la range de l'unitÃ©.
+            else
+            {
                 Debug.Log("La tile d'ID : " + tileId + " est trop loin de la tile d'ID: " + selectedTileId[selectedTileId.Count - 1]);
             }
         }
     }
 
 
-    int MvmtIndex = 1; // Numéro du mvmt actuel dans la liste selectedTileId;
-    [SerializeField] bool Launch = false; // Evite les répétitions dans updatingmove();
+    int MvmtIndex = 1; // NumÃ©ro du mvmt actuel dans la liste selectedTileId;
+    [SerializeField] bool Launch = false; // Evite les rÃ©pÃ©titions dans updatingmove();
 
     /// <summary>
-    /// Assigne le prochain mouvement demandé à l'unité. Change les stats de l'ancienne et de la nouvelle case. Actualise les informations de position de l'unité.
+    /// Assigne le prochain mouvement demandÃ© Ã  l'unitÃ©. Change les stats de l'ancienne et de la nouvelle case. Actualise les informations de position de l'unitÃ©.
     /// </summary>
-    public void ApplyMouvement(){
+    public void ApplyMouvement()
+    {
         GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
 
-        if(tileSelected != null && (_selectedTileId.Count != 0 && _selectedTileId.Count != 1)){
+        if (tileSelected != null && (_selectedTileId.Count != 0 && _selectedTileId.Count != 1))
+        {
             _mvmtRunning = true;
-            mStart = tileSelected; // Assignation du nouveau départ.
-            mEnd = TilesManager.Instance.TileList[selectedTileId[MvmtIndex]];  // Assignation du nouvel arrirée.
+            mStart = tileSelected; // Assignation du nouveau dÃ©part.
+            mEnd = TilesManager.Instance.TileList[selectedTileId[MvmtIndex]];  // Assignation du nouvel arrirÃ©e.
 
-            foreach(int Neighbour in newNeighbourId) // Désactive toutes les cases selectionnées par la fonction Highlight.
+            foreach (int Neighbour in newNeighbourId) // DÃ©sactive toutes les cases selectionnÃ©es par la fonction Highlight.
             {
-                if(!selectedTileId.Contains(Neighbour))
+                if (!selectedTileId.Contains(Neighbour))
                 {
-                    TilesManager.Instance.TileList[Neighbour].GetComponent<SpriteRenderer>().sprite = _emptySprite; // Assigne un sprite empty à toutes les anciennes cases "neighbour"
+                    TilesManager.Instance.TileList[Neighbour].GetComponent<SpriteRenderer>().sprite = _emptySprite; // Assigne un sprite empty Ã  toutes les anciennes cases "neighbour"
                 }
             }
             Debug.Log("Actual tile target: " + TilesManager.Instance.TileList[selectedTileId[MvmtIndex]]);
@@ -347,21 +362,21 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
     /// <summary>
     /// Coroutine d'attente entre chaque case. Probablement pendant ce temps que l'on devra appliquer les effets de case.
     /// </summary>
-    /// <returns>Temps à définir</returns>
+    /// <returns>Temps Ã  dÃ©finir</returns>
     IEnumerator MvmtEnd()
     {
-        mEnd.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("empty"); // La case dépassée redevient une "empty"
+        mEnd.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("empty"); // La case dÃ©passÃ©e redevient une "empty"
         mEnd.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255); // La case reprend sa couleur d'origine.
-        mEnd.GetComponent<TileScript>().AddUnitToTile(mStart.GetComponent<TileScript>().Unit); // L'unité de la case d'arrivée devient celle de la case de départ.
-        mStart.GetComponent<TileScript>().RemoveUnitFromTile(); // L'ancienne case n'a plus d'unité.
+        mEnd.GetComponent<TileScript>().AddUnitToTile(mStart.GetComponent<TileScript>().Unit); // L'unitÃ© de la case d'arrivÃ©e devient celle de la case de dÃ©part.
+        mStart.GetComponent<TileScript>().RemoveUnitFromTile(); // L'ancienne case n'a plus d'unitÃ©.
         mUnit = mEnd.GetComponent<TileScript>().Unit;
         mUnit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(mEnd);
-        RaycastManager.Instance.ActualTileSelected = mEnd; 
+        RaycastManager.Instance.ActualTileSelected = mEnd;
         mStart = mEnd;
         mEnd = null;
 
         yield return new WaitForSeconds(1); // Temps d'attente.
-        if (MvmtIndex < selectedTileId.Count - 1) // Si il reste des mvmts à effectuer dans la liste SelectedTile.
+        if (MvmtIndex < selectedTileId.Count - 1) // Si il reste des mvmts Ã  effectuer dans la liste SelectedTile.
         {
             MvmtIndex++;
             ApplyMouvement();
@@ -369,7 +384,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
         else // Si il ne reste aucun mvmt dans la liste SelectedTile.
         {
             MvmtIndex = 1;
-            StopMouvement(false); // Arête le mvmt de l'unité.
+            StopMouvement(false); // ArÃªte le mvmt de l'unitÃ©.
         }
         Launch = false; // Reset de la bool Launch
     }
@@ -377,7 +392,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
     float speed1;
 
     /// <summary>
-    /// Cette fonction lance l'animation de translation de l'unité entre les cases.
+    /// Cette fonction lance l'animation de translation de l'unitÃ© entre les cases.
     /// </summary>
     /// <param name="Unit">The unit gameobject.</param>
     /// <param name="StartPos">start position tile</param>
@@ -387,13 +402,13 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
         if (Unit != null && StartPos != null && EndPos != null)
         {
             Unit.transform.position = Vector2.MoveTowards(Unit.transform.position, EndPos.transform.position, speed1); // Application du mvmt.
-            speed1 = Mathf.Abs((Vector2.Distance(mUnit.transform.position, mEnd.transform.position) * speed * Time.deltaTime)); // Régulation de la vitesse. (effet de ralentissement) 
-            if (Vector2.Distance(mUnit.transform.position, mEnd.transform.position) <= 0.05f && Launch == false) // Si l'unité est arrivée.
+            speed1 = Mathf.Abs((Vector2.Distance(mUnit.transform.position, mEnd.transform.position) * speed * Time.deltaTime)); // RÃ©gulation de la vitesse. (effet de ralentissement) 
+            if (Vector2.Distance(mUnit.transform.position, mEnd.transform.position) <= 0.05f && Launch == false) // Si l'unitÃ© est arrivÃ©e.
             {
                 Launch = true;
-                StartCoroutine(MvmtEnd()); // Lancer le prochain mvmt avec délai. 
+                StartCoroutine(MvmtEnd()); // Lancer le prochain mvmt avec dÃ©lai. 
             }
-            else // Sinon appliqué l'opacité à la case d'arrivée en fonction de la distance unité - arrivée.
+            else // Sinon appliquÃ© l'opacitÃ© Ã  la case d'arrivÃ©e en fonction de la distance unitÃ© - arrivÃ©e.
             {
                 mEnd.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, Vector2.Distance(mUnit.transform.position, mEnd.transform.position));
             }
