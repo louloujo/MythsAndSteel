@@ -47,7 +47,7 @@ static class PlayerStatic{
     /// <param name="ligne"></param>
     /// <param name="diag"></param>
     /// <returns></returns>
-    public static List<int> GetNeighbourDiag(int idTile, int ligne, bool diag)
+    public static List<int> GetNeighbourDiag(int idTile, int ligne, bool diag, bool EffetTerrain = false)
     {
         //Je prend la position du raycast, a partir de cette position je prends son ID.
         //De cette position, j'ajoute +9 pour la tile au nord, -9 pour la tile au Sud, +1 pour la tile à l'est et -1 pour la tile à l'ouest.
@@ -93,7 +93,7 @@ static class PlayerStatic{
             }
         }
 
-        currentList.Add(idTile);
+        //currentList.Add(idTile);
         currentList.Add(topTile);
         currentList.Add(downTile);
         currentList.Add(leftTile);
@@ -131,6 +131,35 @@ static class PlayerStatic{
         else{
             return false;
         }
+    }
+
+    /// <summary>
+    /// Cherche si la tile en id possède l'effet de terrain demandé
+    /// </summary>
+    /// <param name="effectToCheck"></param>
+    /// <param name="idTiles"></param>
+    /// <returns></returns>
+    public static bool CheckTiles(MYthsAndSteel_Enum.TerrainType effectToCheck, int idTiles)
+    {
+        bool hasTiles = false;
+        hasTiles = TilesManager.Instance.TileList[idTiles].GetComponent<TileScript>().TerrainEffectList.Contains(effectToCheck);
+        return hasTiles;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string CheckDirection(int OriginTile, int NextTile)
+    {
+        int Result = NextTile - OriginTile;
+        switch (Result)
+        {
+            case 9: return "Nord";
+            case -9: return "Sud"; 
+            case -1: return "Ouest";
+            case 1: return "Est";
+        }
+        return "NotANeighbour";
     }
 }
 
