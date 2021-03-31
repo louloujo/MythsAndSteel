@@ -198,7 +198,6 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
         }
     }
 
-
     int MvmtIndex = 1; // Numéro du mvmt actuel dans la liste selectedTileId;
     [SerializeField] bool Launch = false; // Evite les répétitions dans updatingmove();
 
@@ -280,5 +279,3 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
         }
     }
 }
-
-
