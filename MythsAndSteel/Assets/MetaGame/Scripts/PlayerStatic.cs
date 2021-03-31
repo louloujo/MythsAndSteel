@@ -132,5 +132,17 @@ static class PlayerStatic{
             return false;
         }
     }
+
+    /// <summary>
+    /// Cherche si la tile en id possède l'effet de terrain demandé
+    /// </summary>
+    /// <param name="effectToCheck"></param>
+    /// <param name="idTiles"></param>
+    /// <returns></returns>
+    public static bool CheckTiles(MYthsAndSteel_Enum.TerrainType effectToCheck, int idTiles){
+        bool hasTiles = false;
+        hasTiles = TilesManager.Instance.TileList[idTiles].GetComponent<TileScript>().TerrainEffectList.Contains(effectToCheck);
+        return hasTiles;
+    }
 }
 
