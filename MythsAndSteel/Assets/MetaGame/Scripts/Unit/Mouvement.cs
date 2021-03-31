@@ -5,6 +5,8 @@ using System;
 
 public class Mouvement : MonoSingleton<Mouvement> // Script AV.
 {
+    #region Variables
+    [Header("Listes des cases")]
     [SerializeField] private int[] neighbourValue; // +1 +9 +10...
 
     [SerializeField] private List<int> newNeighbourId = new List<int>(); // Voisins atteignables avec le range de l'unité.
@@ -15,18 +17,16 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
 
     [SerializeField] private float speed = 1; // Speed de déplacement de l'unité 
 
-    [SerializeField] private GameObject mStart; // mT Start. 
-    [SerializeField] private GameObject mEnd; // mT End.
-    [SerializeField] private GameObject mUnit; // mT Unité.
-
-    [SerializeField] private List<GameObject> outTileLeft; 
-    [SerializeField] private List<GameObject> outTileRight;
+    private GameObject mStart; // mT Start. 
+    private GameObject mEnd; // mT End.
+    private GameObject mUnit; // mT Unité.
 
     private List<int> temp = new List<int>(); //
 
     //Déplacement restant de l'unité au départ
     int MoveLeftBase = 0;
-
+    
+    [Header("Infos de l'unité")]
     //Est ce que l'unité a commencé à choisir son déplacement
     [SerializeField] private bool _isInMouvement;
     public bool IsInMouvement{
@@ -54,7 +54,13 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
 
     // Mouvement en cours de traitement ?
    [SerializeField] private bool _mvmtRunning = false; 
-    public bool MvmtRunning => _mvmtRunning; 
+    public bool MvmtRunning => _mvmtRunning;
+
+    [Header("Sprites pour les cases")]
+    [SerializeField] private Sprite _tileSprite = null;
+    [SerializeField] private Sprite _emptySprite = null;
+    [SerializeField] private Sprite _selectedSprite = null;
+    #endregion Variables
 
     private void Update(){
         // Permet d'effectuer le moveTowards de l'unité à sa prochaine case.
@@ -70,7 +76,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
         if (Range > 0){
             foreach (int ID in PlayerStatic.GetNeighbourDiag(tileId, TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().Line, false)){
                 if (!newNeighbourId.Contains(ID)){
-                    TilesManager.Instance.TileList[ID].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("selectedtile");
+                    TilesManager.Instance.TileList[ID].GetComponent<SpriteRenderer>().sprite = _selectedSprite;
                     newNeighbourId.Add(ID);
                 }
                 Highlight(ID, Range - 1);
@@ -120,7 +126,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
     {        
         foreach (int Neighbour in newNeighbourId) // Supprime toutes les tiles.
         {
-            TilesManager.Instance.TileList[Neighbour].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("empty"); // Assigne un sprite empty à toutes les anciennes cases "neighbour".
+            TilesManager.Instance.TileList[Neighbour].GetComponent<SpriteRenderer>().sprite = _emptySprite; // Assigne un sprite empty à toutes les anciennes cases "neighbour".
         }
         if(RaycastManager.Instance.ActualTileSelected != null) // Si une case était séléctionnée.
         {
@@ -129,7 +135,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
         }
         foreach (int NeighbourSelect in selectedTileId) // Si un path de mvmt était séléctionné.
         {
-            TilesManager.Instance.TileList[NeighbourSelect].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("empty");
+            TilesManager.Instance.TileList[NeighbourSelect].GetComponent<SpriteRenderer>().sprite = _emptySprite;
             TilesManager.Instance.TileList[NeighbourSelect].GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
         }
         // Clear de toutes les listes et stats.
@@ -166,7 +172,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
                         Debug.Log("REMOVE");
                         mUnit.GetComponent<UnitScript>().MoveLeft++; // Redistribution du Range à chaque suppression de case.
                         temp.Add(selectedTileId[i]);
-                        TilesManager.Instance.TileList[selectedTileId[i]].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("selectedtile"); // Repasse les sprites en apparence "séléctionnable".
+                        TilesManager.Instance.TileList[selectedTileId[i]].GetComponent<SpriteRenderer>().sprite = _selectedSprite; // Repasse les sprites en apparence "séléctionnable".
                     }
                     foreach(int i in temp){
                         selectedTileId.Remove(i);
@@ -182,7 +188,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
                     {
                         mUnit.GetComponent<UnitScript>().MoveLeft--; // sup 1 mvmt.
                         selectedTileId.Add(tileId);
-                        TilesManager.Instance.TileList[tileId].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("selecttile");
+                        TilesManager.Instance.TileList[tileId].GetComponent<SpriteRenderer>().sprite = _tileSprite;
                     }
                 }
                 // Sinon cette case est trop loin de l'ancienne seletion.
@@ -217,7 +223,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
             {
                 if(!selectedTileId.Contains(Neighbour))
                 {
-                    TilesManager.Instance.TileList[Neighbour].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("empty"); // Assigne un sprite empty à toutes les anciennes cases "neighbour"
+                    TilesManager.Instance.TileList[Neighbour].GetComponent<SpriteRenderer>().sprite = _emptySprite; // Assigne un sprite empty à toutes les anciennes cases "neighbour"
                 }
             }
             Debug.Log("Actual tile target: " + TilesManager.Instance.TileList[selectedTileId[MvmtIndex]]);
