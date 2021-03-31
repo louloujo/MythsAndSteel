@@ -204,6 +204,7 @@ MonoBehaviour:
   _switchPhaseObject: {fileID: 4950479300666342195, guid: 111b4523566bf904e984f7c9843eb641, type: 3}
   _canvasActivation: {fileID: 936428740}
   _eventCardObject: {fileID: 5249351300956634737, guid: 7b4e07eb63565d04b8e25cd06fad29ca, type: 3}
+  _buttonID: []
 --- !u!1001 &8931587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4192,6 +4193,10 @@ MonoBehaviour:
   _attackRange: 3
   _moveSpeed: 3
   _creationCost: 2
+  _DamageMinimum: 0
+  _NumberRangeMin: {x: 0, y: 0}
+  _DamageMaximum: 0
+  _NumberRangeMax: {x: 0, y: 0}
   _moveLeft: 0
   _actualTileld: 0
   _isMoveDone: 0
@@ -8256,11 +8261,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7574c15913b0edf439bf419f62a96469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerM:
+  _mouseCommand: {fileID: 0}
+  _layerM:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   _tile: {fileID: 0}
   _unitInTile: {fileID: 0}
+  _actualTileSelected: {fileID: 0}
 --- !u!4 &1172681290
 Transform:
   m_ObjectHideFlags: 0
@@ -8782,6 +8789,8 @@ MonoBehaviour:
   _isInTurn: 0
   _actualTurnPhase: 0
   _phaseActivationObj: {fileID: 910332992}
+  _uiManager: {fileID: 11400000, guid: 10a49bba6254aed429b2fac2cbf6887f, type: 2}
+  _eventCardSO: {fileID: 11400000, guid: 955303dc40a1fa54984cef9072aef4ad, type: 2}
 --- !u!4 &1255301779
 Transform:
   m_ObjectHideFlags: 0
