@@ -6,7 +6,7 @@ using System;
 public class Mouvement : MonoSingleton<Mouvement> // Script AV.
 {
     #region Variables
-    [Header("Listes des cases")]
+    [Header("LISTES DES CASES")]
     [SerializeField] private int[] neighbourValue; // +1 +9 +10...
 
     [SerializeField] private List<int> newNeighbourId = new List<int>(); // Voisins atteignables avec le range de l'unité.
@@ -26,7 +26,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
     //Déplacement restant de l'unité au départ
     int MoveLeftBase = 0;
     
-    [Header("Infos de l'unité")]
+    [Header("INFOS DE L UNITE")]
     //Est ce que l'unité a commencé à choisir son déplacement
     [SerializeField] private bool _isInMouvement;
     public bool IsInMouvement{
@@ -56,7 +56,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
    [SerializeField] private bool _mvmtRunning = false; 
     public bool MvmtRunning => _mvmtRunning;
 
-    [Header("Sprites pour les cases")]
+    [Header("SPRITES POUR LES CASES")]
     [SerializeField] private Sprite _tileSprite = null;
     [SerializeField] private Sprite _emptySprite = null;
     [SerializeField] private Sprite _selectedSprite = null;

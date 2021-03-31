@@ -14,7 +14,7 @@ using TMPro;
 public class GameManager : MonoSingleton<GameManager>{
 
     #region Variables
-    [Header("Info du tour actuel")]
+    [Header("INFO TOUR ACTUEL")]
     //Correspond à la valeur du tour actuel
     [SerializeField] private int _actualTurnNumber = 0;
     public int ActualTurnNumber => _actualTurnNumber;
@@ -32,7 +32,7 @@ public class GameManager : MonoSingleton<GameManager>{
     public bool IsInTurn => _isInTurn;
 
 
-    [Header("Info de la phase de jeu actuelle")]
+    [Header("INFO PHASE DE JEU ACTUEL")]
     //Correspond à la phase actuelle durant le tour
     [SerializeField] private MYthsAndSteel_Enum.PhaseDeJeu _actualTurnPhase = MYthsAndSteel_Enum.PhaseDeJeu.Debut;
     public MYthsAndSteel_Enum.PhaseDeJeu ActualTurnPhase => _actualTurnPhase;
@@ -41,7 +41,7 @@ public class GameManager : MonoSingleton<GameManager>{
     GameObject actualSwitchPhasePanel = null;
 
 
-    [Header("Les Références des phases")]
+    [Header("REFERENCES DES PHASES")]
     //Objet pour la phase d'activation
     [SerializeField] private GameObject _phaseActivationObj = null;
 
