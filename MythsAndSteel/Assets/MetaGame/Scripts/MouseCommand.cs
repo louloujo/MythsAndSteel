@@ -14,18 +14,18 @@ public class MouseCommand : MonoBehaviour
     public bool CheckIfPlayerAsClic => _checkIfPlayerAsClic;
 
 
-    [Header("UI Statistiques Unité")]
+    [Header("UI STATIQUE UNITE")]
     //Le panneau à afficher lorsqu'on souhaite voir les statistiques de l'unité en cliquant.
     [SerializeField] private GameObject _mouseOverUI;
     public GameObject MouseOverUI => _mouseOverUI;
     //Le panneau ou les panneaux à afficher lorsqu'on souhaite le shift click sur l'unité
     [SerializeField] private List<GameObject> _shiftUI;
     public List<GameObject> ShiftUI => _shiftUI;
-    [Header("Délai Coroutine pour MouseOver")]
+    [Header("DELAI ATTENTE MOUSE OVER")]
     //Paramètre de délai qui s'applique à la couritine.
     [SerializeField] private float _timeToWait = 2f;
     public float TimeToWait => _timeToWait;
-    [Header("Valeur de la position de l'UI en Mouse")]
+    [Header("VALEUR POSITION UI")]
     //Permet de modifier la position de l'UI dans l'escpace
     [SerializeField] private int _offsetX;
     public int OffSetX => _offsetX;
