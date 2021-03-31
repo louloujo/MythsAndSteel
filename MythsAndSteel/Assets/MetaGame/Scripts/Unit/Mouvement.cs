@@ -277,6 +277,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
                             }
                             else
                             {
+                                check = true;
                                 Debug.Log("La tile d'ID : " + tileId + " est une foret ou un mont.");
                             }
                         }

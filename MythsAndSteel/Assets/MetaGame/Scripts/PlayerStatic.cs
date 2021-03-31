@@ -146,7 +146,7 @@ static class PlayerStatic{
     }
 
     /// <summary>
-    /// 
+    /// obtiens la direction de la tile
     /// </summary>
     public static string CheckDirection(int OriginTile, int NextTile)
     {
