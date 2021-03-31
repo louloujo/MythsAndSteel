@@ -1,9 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
-public class Mouvement : MonoSingleton<Mouvement> // Script AV.
+public class Mouvement : MonoSingleton<Mouvement>
 {
     #region Variables
     [Header("LISTES DES CASES")]
@@ -25,15 +25,18 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
 
     //Déplacement restant de l'unité au départ
     int MoveLeftBase = 0;
-    
+
     [Header("INFOS DE L UNITE")]
     //Est ce que l'unité a commencé à choisir son déplacement
     [SerializeField] private bool _isInMouvement;
-    public bool IsInMouvement{
-        get{
+    public bool IsInMouvement
+    {
+        get
+        {
             return _isInMouvement;
         }
-        set{
+        set
+        {
             _isInMouvement = value;
         }
     }
@@ -53,7 +56,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
     }
 
     // Mouvement en cours de traitement ?
-   [SerializeField] private bool _mvmtRunning = false; 
+    [SerializeField] private bool _mvmtRunning = false;
     public bool MvmtRunning => _mvmtRunning;
 
     [Header("SPRITES POUR LES CASES")]
@@ -62,9 +65,10 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
     [SerializeField] private Sprite _selectedSprite = null;
     #endregion Variables
 
-    private void Update(){
+    private void Update()
+    {
         // Permet d'effectuer le moveTowards de l'unité à sa prochaine case.
-        UpdatingMove(mUnit, mStart, mEnd); 
+        UpdatingMove(mUnit, mStart, mEnd);
     }
 
     /// <summary>
@@ -72,10 +76,14 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
     /// </summary>
     /// <param name="tileId">Tile centrale</param>
     /// <param name="Range">Range de l'unité</param>
-    public void Highlight(int tileId, int Range){
-        if (Range > 0){
-            foreach (int ID in PlayerStatic.GetNeighbourDiag(tileId, TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().Line, false)){
-                if (!newNeighbourId.Contains(ID)){
+    public void Highlight(int tileId, int Range)
+    {
+        if (Range > 0)
+        {
+            foreach (int ID in PlayerStatic.GetNeighbourDiag(tileId, TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().Line, false))
+            {
+                if (!newNeighbourId.Contains(ID))
+                {
                     TilesManager.Instance.TileList[ID].GetComponent<SpriteRenderer>().sprite = _selectedSprite;
                     newNeighbourId.Add(ID);
                 }
@@ -89,33 +97,40 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
     /// </summary>
     /// <param name="tileId">Tile de l'unité</param>
     /// <param name="Range">Mvmt de l'unité</param>
-    public void StartMvmtForSelectedUnit(){
+    public void StartMvmtForSelectedUnit()
+    {
         GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
 
-        if (tileSelected != null){
+        if (tileSelected != null)
+        {
             mUnit = tileSelected.GetComponent<TileScript>().Unit;
-            if(!mUnit.GetComponent<UnitScript>().IsMoveDone){
+            if (!mUnit.GetComponent<UnitScript>().IsMoveDone)
+            {
                 MoveLeftBase = mUnit.GetComponent<UnitScript>().MoveLeft;
                 StartMouvement(TilesManager.Instance.TileList.IndexOf(tileSelected), mUnit.GetComponent<UnitScript>().MoveSpeed - (mUnit.GetComponent<UnitScript>().MoveSpeed - MoveLeftBase));
             }
-            else{
+            else
+            {
                 _selected = false;
             }
         }
-        else{
+        else
+        {
             _selected = false;
         }
     }
 
-    public void StartMouvement(int tileId, int Range){
-        if(!_mvmtRunning && !_isInMouvement){
+    public void StartMouvement(int tileId, int Range)
+    {
+        if (!_mvmtRunning && !_isInMouvement)
+        {
             _isInMouvement = true;
             selectedTileId.Add(tileId);
             List<int> ID = new List<int>();
             ID.Add(tileId);
 
             // Lance l'highlight des cases dans la range.
-            Highlight(tileId, Range); 
+            Highlight(tileId, Range);
         }
     }
 
@@ -123,12 +138,12 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
     /// Arête le Mouvement pour l'unité selectionnée (menu, cases highlights...)
     /// </summary>
     public void StopMouvement(bool forceStop)
-    {        
+    {
         foreach (int Neighbour in newNeighbourId) // Supprime toutes les tiles.
         {
             TilesManager.Instance.TileList[Neighbour].GetComponent<SpriteRenderer>().sprite = _emptySprite; // Assigne un sprite empty à toutes les anciennes cases "neighbour".
         }
-        if(RaycastManager.Instance.ActualTileSelected != null) // Si une case était séléctionnée.
+        if (RaycastManager.Instance.ActualTileSelected != null) // Si une case était séléctionnée.
         {
             //Tiles.Instance._actualTileSelected.GetComponent<TileScript>().Unit.GetComponent<UnitScript>().DemandMenu.enabled = false;
             //Tiles.Instance._actualTileSelected.GetComponent<TileScript>().Unit.GetComponent<UnitScript>().Menu.enabled = false;
@@ -139,14 +154,14 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
             TilesManager.Instance.TileList[NeighbourSelect].GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
         }
         // Clear de toutes les listes et stats.
-        selectedTileId.Clear(); 
+        selectedTileId.Clear();
         newNeighbourId.Clear();
         mStart = null;
         mEnd = null;
         _isInMouvement = false;
         _selected = false;
         mUnit.GetComponent<UnitScript>().checkMovementLeft();
-        mUnit.GetComponent<UnitScript>().MoveLeft = forceStop? MoveLeftBase : mUnit.GetComponent<UnitScript>().MoveLeft;
+        mUnit.GetComponent<UnitScript>().MoveLeft = forceStop ? MoveLeftBase : mUnit.GetComponent<UnitScript>().MoveLeft;
 
         mUnit = null;
 
@@ -159,32 +174,34 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
     /// Ajoute la tile à TileSelected. Pour le mvmt du joueur => Check egalement toutes les conditions de déplacement.
     /// </summary>
     /// <param name="tileId">Tile</param>
-    public void AddMouvement(int tileId) 
+    public void AddMouvement(int tileId)
     {
         if (_isInMouvement)
         {
             if (newNeighbourId.Contains(tileId)) // Si cette case est dans la range de l'unité.
             {
-                if(selectedTileId.Contains(tileId)) // Si cette case est déjà selectionnée.
+                if (selectedTileId.Contains(tileId)) // Si cette case est déjà selectionnée.
                 {
                     // Supprime toutes les cases sélectionnées à partir de l'ID tileId.
-                    for(int i = selectedTileId.IndexOf(tileId); i < selectedTileId.Count; i++){
+                    for (int i = selectedTileId.IndexOf(tileId); i < selectedTileId.Count; i++)
+                    {
                         Debug.Log("REMOVE");
                         mUnit.GetComponent<UnitScript>().MoveLeft++; // Redistribution du Range à chaque suppression de case.
                         temp.Add(selectedTileId[i]);
                         TilesManager.Instance.TileList[selectedTileId[i]].GetComponent<SpriteRenderer>().sprite = _selectedSprite; // Repasse les sprites en apparence "séléctionnable".
                     }
-                    foreach(int i in temp){
+                    foreach (int i in temp)
+                    {
                         selectedTileId.Remove(i);
                     }
                     temp.Clear();
 
                 }
                 // Sinon, si cette case est bien voisine de l'ancienne selection. 
-                else if(PlayerStatic.IsNeighbour(tileId, selectedTileId[selectedTileId.Count - 1], TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().Line, false))
+                else if (PlayerStatic.IsNeighbour(tileId, selectedTileId[selectedTileId.Count - 1], TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().Line, false))
                 {
                     // et qu'il reste du mvmt, on assigne la nouvelle case selectionnée à la liste SelectedTile.
-                    if(mUnit.GetComponent<UnitScript>().MoveLeft > 0)
+                    if (mUnit.GetComponent<UnitScript>().MoveLeft > 0)
                     {
                         mUnit.GetComponent<UnitScript>().MoveLeft--; // sup 1 mvmt.
                         selectedTileId.Add(tileId);
@@ -198,7 +215,8 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
                 }
             }
             // Sinon cette case est hors de la range de l'unité.
-            else{
+            else
+            {
                 Debug.Log("La tile d'ID : " + tileId + " est trop loin de la tile d'ID: " + selectedTileId[selectedTileId.Count - 1]);
             }
         }
@@ -211,17 +229,19 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
     /// <summary>
     /// Assigne le prochain mouvement demandé à l'unité. Change les stats de l'ancienne et de la nouvelle case. Actualise les informations de position de l'unité.
     /// </summary>
-    public void ApplyMouvement(){
+    public void ApplyMouvement()
+    {
         GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
 
-        if(tileSelected != null && (_selectedTileId.Count != 0 && _selectedTileId.Count != 1)){
+        if (tileSelected != null && (_selectedTileId.Count != 0 && _selectedTileId.Count != 1))
+        {
             _mvmtRunning = true;
             mStart = tileSelected; // Assignation du nouveau départ.
             mEnd = TilesManager.Instance.TileList[selectedTileId[MvmtIndex]];  // Assignation du nouvel arrirée.
 
-            foreach(int Neighbour in newNeighbourId) // Désactive toutes les cases selectionnées par la fonction Highlight.
+            foreach (int Neighbour in newNeighbourId) // Désactive toutes les cases selectionnées par la fonction Highlight.
             {
-                if(!selectedTileId.Contains(Neighbour))
+                if (!selectedTileId.Contains(Neighbour))
                 {
                     TilesManager.Instance.TileList[Neighbour].GetComponent<SpriteRenderer>().sprite = _emptySprite; // Assigne un sprite empty à toutes les anciennes cases "neighbour"
                 }
@@ -242,7 +262,7 @@ public class Mouvement : MonoSingleton<Mouvement> // Script AV.
         mStart.GetComponent<TileScript>().RemoveUnitFromTile(); // L'ancienne case n'a plus d'unité.
         mUnit = mEnd.GetComponent<TileScript>().Unit;
         mUnit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(mEnd);
-        RaycastManager.Instance.ActualTileSelected = mEnd; 
+        RaycastManager.Instance.ActualTileSelected = mEnd;
         mStart = mEnd;
         mEnd = null;
 

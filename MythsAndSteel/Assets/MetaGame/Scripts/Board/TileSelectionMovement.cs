@@ -8,10 +8,11 @@ public class TileSelectionMovement : MonoBehaviour{
     bool _hasMakeMovement = false;
 
     //Est ce que l'objet a fait le déplacement
-    [SerializeField] bool _isVisble = false;
+    [SerializeField] private bool _isVisble = false;    
 
     //SpriteRenderer de l'objet
     SpriteRenderer _spritRender => GetComponent<SpriteRenderer>();
+    public SpriteRenderer SpriteRendererCursor => _spritRender;
 
     [Range(15,40)]
     [SerializeField] private float _speedTiles = 0f;

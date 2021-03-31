@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/MetaGame/_Scenes/MainScene.unity
     guid: 49c2b99d539231944aa83f161cd4b8b8
+  - enabled: 1
+    path: Assets/MetaGame/_Scenes/BAV/BAV_Master1.unity
+    guid: 64100270129ce02479eedc27d31bdfa5
   m_configObjects: {}
