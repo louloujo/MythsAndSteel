@@ -34,6 +34,22 @@ public class UnitScript : MonoBehaviour{
     [SerializeField] int _creationCost; 
     public int CreationCost => _creationCost;
 
+    //Dégats minimum infligé
+    [SerializeField] int _DamageMinimum;
+    public int DamageMinimum => _DamageMinimum;
+
+    [SerializeField] Vector2 _NumberRangeMin;
+    public Vector2 NumberRangeMin => _NumberRangeMin;
+
+    //Dégats maximum infligé
+    [SerializeField] int _DamageMaximum;
+    public int DamageMaximum => _DamageMaximum;
+
+    [SerializeField] Vector2 _NumberRangeMax;
+    public Vector2 NumberRangeMax => _NumberRangeMax;
+
+
+
     [Header("Stats non nécéssaire")]
     // Déplacement réstant de l'unité durant cette activation
     [SerializeField] int _moveLeft;
@@ -200,6 +216,10 @@ public class UnitScript : MonoBehaviour{
         _attackRange = _unitSO.AttackRange;
         _moveSpeed = _unitSO.MoveSpeed;
         _creationCost = _unitSO.CreationCost;
+        _DamageMinimum = _unitSO.DamageMinimum;
+        _DamageMaximum = _unitSO.DamageMaximum;
+        _NumberRangeMax = _unitSO.NumberRangeMax;
+        _NumberRangeMin = _unitSO.NumberRangeMin;
 
         //Assigne le sprite de l'unité
         GetComponent<SpriteRenderer>().sprite = _unitSO.Sprite;
