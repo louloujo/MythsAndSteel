@@ -7,32 +7,33 @@ public class PlayerScript : MonoSingleton<PlayerScript>
 {
     //List<MYthsAndSteel_Enum.EventCard> EventCardUse; Déjà présente normalement
     public List<UnitScript> Unites;//Liste des Unités
-
+    public List<MYthsAndSteel_Enum.TypeUnite> DisactivateUnitType = new List<MYthsAndSteel_Enum.TypeUnite>();
+    
     [SerializeField] bool _Army1WinAtTheEnd;
     public bool Army1WinAtTheEnd => _Army1WinAtTheEnd;
 
-    MYthsAndSteel_Enum.EventCard Last
+    public UnitScript actualUnitClic;
+    public  GameObject TileUnderMouse;
 
-
-
-
-
-    public void NewUnit(UnitScript unitScript)//Ajoute une unité a la liste 
+    void Update()
     {
-        Unites.Add(unitScript);
+        TileUnderMouse = RaycastManager.Instance.Tile;
     }
-
     public void DesactivateUnitType(MYthsAndSteel_Enum.TypeUnite DesactiveUnit)//Désactive un type d'unité
     {
+        
        for (int i=0; i < Unites.Count; i++ )
         {
             
             if (Unites[i].UniteType == DesactiveUnit)
             {
                 Unites[i].isActivable = false;
+                DisactivateUnitType.Add(DesactiveUnit);
             }
         }
     }
+
+    
 
     public void ActivateAllUnitType()//active tous les types d'unités
     {
@@ -41,6 +42,7 @@ public class PlayerScript : MonoSingleton<PlayerScript>
           Unites[i].isActivable = true;
         }
     }
+    
     public void CheckkArmy()//fonciton qui lance le CheckArmy
     {
 
@@ -71,4 +73,5 @@ public class PlayerScript : MonoSingleton<PlayerScript>
         }
         return false;
     }
+    
 }

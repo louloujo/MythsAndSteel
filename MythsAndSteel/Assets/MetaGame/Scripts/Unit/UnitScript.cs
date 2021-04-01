@@ -134,11 +134,12 @@ public class UnitScript : MonoBehaviour{
 
     private void Awake()
     {
-        PlayerScript.Instance.NewUnit(this);
+        
+        
     }
     void Start()
     {
-        
+        PlayerScript.Instance.Unites.Add(this);
         /*//------------ Assign Les Stat du scriptable a l'unité et aux text de l'UI ------------------
         allchildren = this.transform.GetComponentsInChildren<Text>();
 

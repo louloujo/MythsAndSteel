@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ClickUnité : MonoBehaviour
 {
-    /*
+   /*
     void ClicSurUnit(UnitScript uniTouch)
     {
         if (uniTouch.IsActivationDone == false)
@@ -16,7 +16,7 @@ public class ClickUnité : MonoBehaviour
                 {
                     if (uniTouch.UnitSO.typeUnite != type)
                     {
-                        PlayerScript.Instance.actualUnitClic == uniTouch;
+                        PlayerScript.Instance.actualUnitClic = uniTouch;
                     }
                 }
             }
@@ -28,7 +28,7 @@ public class ClickUnité : MonoBehaviour
                 {
                     if (uniTouch.UnitSO.typeUnite != type)
                     {
-                        PlayerScript.Instance.actualUnitClic == uniTouch;
+                        PlayerScript.Instance.actualUnitClic = uniTouch;
                     }
                 }
             }
@@ -40,7 +40,7 @@ public class ClickUnité : MonoBehaviour
                 {
                     if (uniTouch.UnitSO.typeUnite != type)
                     {
-                        PlayerScript.Instance.actualUnitClic == uniTouch;
+                        PlayerScript.Instance.actualUnitClic = uniTouch;
                     }
                 }
             }
@@ -52,7 +52,7 @@ public class ClickUnité : MonoBehaviour
                 {
                     if (uniTouch.UnitSO.typeUnite != type)
                     {
-                        PlayerScript.Instance.actualUnitClic == uniTouch;
+                        PlayerScript.Instance.actualUnitClic = uniTouch;
                     }
                 }
             }
