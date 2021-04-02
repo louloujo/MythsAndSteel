@@ -27,6 +27,11 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private GameObject _canvasActivation = null;
     public GameObject CanvasActivation => _canvasActivation;
 
+    [Header("PANNEAU D'ACTIVATION D'UNE UNITE")]
+    [SerializeField] private GameObject _activationUnitPanel = null;
+    public GameObject ActivationUnitPanel => _activationUnitPanel;
+
+
     [Header("CARTES EVENEMENTS")]
     //L'objet d'event à afficher lorsqu'une nouvelle carte event est piochée.
     [SerializeField] private GameObject _eventCardObject = null;

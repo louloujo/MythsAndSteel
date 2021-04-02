@@ -22,20 +22,19 @@ static class PlayerStatic{
     /// <param name="unite"></param>
     /// <param name="J1"></param>
     /// <returns></returns>
-    public static bool CheckIsUnitArmy(UnitScript unite, bool J1)
+    public static bool CheckIsUnitArmy(UnitScript unite, bool RedPlayer)
     {
         //Permet de dire si l'unité fait partie de l'armée, par défault il est null (ni oui, ni non).
         bool IsUnitInArmy;
         //Si la valeur de l'armée est égale au cout alors..
-        if (unite.UnitSO.IsInArmy1 == J1){
+        if (unite.UnitSO.IsInRedArmy == RedPlayer)
+        {
             //..Oui l'unité fait partie de l'armée.
             IsUnitInArmy = true;
-            Debug.Log("IsUnitInArmy est vrai");
         }
         else{
             //..Non l'unité fait partie de l'armée.
             IsUnitInArmy = false;
-            Debug.Log("IsUnitInArmy est faux");
         }
         return IsUnitInArmy;
     }

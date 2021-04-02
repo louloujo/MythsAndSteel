@@ -36,6 +36,12 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         }
     }
 
+    //Lorsque le joueur clique sur une tile et qu'il y a une unité
+    [SerializeField] private GameObject _actualUnitSelected;
+    public GameObject ActualUnitSelected => _actualUnitSelected;
+
+
+
     //Est ce que les joueurs peuvent jouer
     bool _isInTurn = false;
 
@@ -44,8 +50,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     public event TileRaycastChange OnTileChanged;
     #endregion Variables
 
-    void Update()
-    {
+    void Update(){
         //obtient le premier objet touché par le raycast
         RaycastHit2D hit = GetRaycastHit();
 
@@ -60,6 +65,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         {
             //Si il il y a une unité sur la tile, le joueur peut utiliser ShiftClick.
             _mouseCommand.ShiftClick();
+
             //Si le joueur a utilisé le Shift puis leclick, le joueur est considéré comme click et on applique les fonctions propres au bouton des panneaux. De plus, le mouseOver est désactivé.
             if (_mouseCommand.CheckIfPlayerAsClic == true)
             {
@@ -71,6 +77,8 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                 //Si le joueur n'a pas continué sa combinaison d'action( Shif+clic), alors quand ma souris reste sur une case sans cliqué, l'interface résumé des statistiques s'active.
                 _mouseCommand.MouseOverWithoutClick();
             }
+
+            //Lorsque le joueur clic sur une unité
         }
         else
         {
@@ -86,26 +94,11 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             OnTileChanged();
         }
 
-
-        //Lorsque le joueur appui sur la souris
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        //Lorsque le joueur clique sur le plateau
+        if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (_tile != null)
-            {
-                Select();
-            }
+            Select();
         }
-    }
-
-    /// <summary>
-    /// Permet d'obtenir les objets touchés par le raycast
-    /// </summary>
-    /// <returns></returns>
-    public RaycastHit2D GetRaycastHit()
-    {
-        Vector2 mouseDirection = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        Ray2D ray = new Ray2D(Camera.main.ScreenToWorldPoint(Input.mousePosition), mouseDirection);
-        return Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, _layerM);
     }
 
     /// <summary>
@@ -113,15 +106,23 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     /// </summary>
     public void Select()
     {
+        //Si le mouvement n'a pas été lancé
         if (!Mouvement.Instance.Selected)
         {
-            if (_tile.GetComponent<TileScript>().Unit != null)
+            if(_unitInTile != null)
             {
-                Mouvement.Instance.Selected = true;
-                _actualTileSelected = _tile;
+                if(CanUseUnitWhenClic(_unitInTile.GetComponent<UnitScript>()))
+                {
+                    _actualTileSelected = _tile;
+                    _actualUnitSelected = _actualTileSelected.GetComponent<TileScript>().Unit;
+
+                    Mouvement.Instance.Selected = true;
+                    Mouvement.Instance.ShowActivationPanel();
+                }
             }
         }
 
+        //Si le mouvement a été lancé
         else
         {
             if (Mouvement.Instance.IsInMouvement && !Mouvement.Instance.MvmtRunning)
@@ -135,6 +136,85 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                     Mouvement.Instance.StopMouvement(true);
                 }
             }
+            else
+            {
+                if(_tile != null)
+                {
+                    _actualTileSelected = _tile;
+                    _actualUnitSelected = null;
+
+                    Mouvement.Instance.Selected = false;
+                    Mouvement.Instance.CloseActivationPanel();
+                }
+            }
         }
+    }
+
+
+
+    /// <summary>
+    /// Est ce que l'unité qui a été cliquée fait partie de l'armée
+    /// </summary>
+    /// <param name="uniTouch"></param>
+    /// <returns></returns>
+    bool CanUseUnitWhenClic(UnitScript uniTouch)
+    {
+        if(uniTouch.IsActivationDone == false)
+        {
+            if(GameManager.Instance.IsPlayerRedTurn)
+            {
+                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, true))
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, false))
+                {
+                    return false;
+                }
+            }
+
+
+            if(GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
+            {
+                return false;
+            }
+
+            bool isDeactivate = false;
+            foreach(MYthsAndSteel_Enum.TypeUnite type in PlayerScript.Instance.DisactivateUnitType)
+            {
+                if(uniTouch.UnitSO.typeUnite == type)
+                {
+                    isDeactivate = true;
+                }
+            }
+
+            if(isDeactivate)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    /// <summary>
+    /// Permet d'obtenir les objets touchés par le raycast
+    /// </summary>
+    /// <returns></returns>
+    public RaycastHit2D GetRaycastHit()
+    {
+        Vector2 mouseDirection = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        Ray2D ray = new Ray2D(Camera.main.ScreenToWorldPoint(Input.mousePosition), mouseDirection);
+        return Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, _layerM);
     }
 }

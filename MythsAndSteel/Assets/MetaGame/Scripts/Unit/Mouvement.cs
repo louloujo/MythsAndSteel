@@ -67,6 +67,11 @@ public class Mouvement : MonoSingleton<Mouvement>
 
     #endregion Variables
 
+    private void Start()
+    {
+        CloseActivationPanel();
+    }
+
     private void Update()
     {
         // Permet d'effectuer le moveTowards de l'unité à sa prochaine case.
@@ -153,8 +158,6 @@ public class Mouvement : MonoSingleton<Mouvement>
             }
         }
     }
-
-
 
     /// <summary>
     /// Lance le mouvement d'une unité avec une range défini.
@@ -340,6 +343,8 @@ public class Mouvement : MonoSingleton<Mouvement>
     /// </summary>
     public void ApplyMouvement()
     {
+        CloseActivationPanel();
+
         GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
 
         if (tileSelected != null && (_selectedTileId.Count != 0 && _selectedTileId.Count != 1))
@@ -414,6 +419,20 @@ public class Mouvement : MonoSingleton<Mouvement>
             }
         }
     }
+
+    /// <summary>
+    /// mintre le panneau d'activation
+    /// </summary>
+    public void ShowActivationPanel()
+    {
+        UIInstance.Instance.ActivationUnitPanel.SetActive(true);
+    }
+
+    /// <summary>
+    /// Ferme le panneau d'activation
+    /// </summary>
+    public void CloseActivationPanel()
+    {
+        UIInstance.Instance.ActivationUnitPanel.SetActive(false);
+    }
 }
-
-
