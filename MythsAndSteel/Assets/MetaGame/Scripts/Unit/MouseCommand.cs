@@ -87,6 +87,7 @@ public class MouseCommand : MonoBehaviour
         }
     }
     #endregion UpdateStats
+
     #region ActivateUI
     /// <summary>
     /// Permet d'activer un élément de l'UI en utilisant un Raycast distint de la position et d'assigner une position custom par rapport au Canvas (Conflit avec le Canvas).
@@ -121,7 +122,6 @@ public class MouseCommand : MonoBehaviour
         else
         {
             pos = new Vector3(offSetX, offSetY, ShiftUI[0].transform.position.z);
-            Debug.Log(hit.transform.position + "Position");
         }
 
         //Rendre l'élément visible.

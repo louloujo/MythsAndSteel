@@ -126,34 +126,8 @@ public class UnitScript : MonoBehaviour
 
     #endregion Variables
 
-    /*    void Start()
-        {
-            //------------ Assign Les Stat du scriptable a l'unité et aux text de l'UI ------------------
-            allchildren = this.transform.GetComponentsInChildren<Text>();
-
-            UpdateUnitStat();
-
-            allchildren[0].text = "Vie : " + _life.ToString() + " / " + _unitSO.LifeMax.ToString() ;
-            allchildren[1].text = "Bouclier : " + _shield.ToString() + " / " + _unitSO.ShieldMax.ToString();
-            allchildren[2].text = "Portée : " + _attackRange.ToString();
-            allchildren[3].text = "Déplacement : " + _moveSpeed.ToString();
-            allchildren[5].text = _unitSO.Description.ToString();
-
-            //------------------------------------------------------------------------------------------------
-
-        }*/
-
     private void Update()
     {
-        /* //-------------Actualise l'affichage des valeurs dans L'UI------------------------------------------------------
-         allchildren[0].text = "Vie : " + _life.ToString() + " / " + _unitSO.LifeMax.ToString();
-         allchildren[1].text = "Bouclier : " + _shield.ToString() + " / " + _unitSO.ShieldMax.ToString();
-         allchildren[2].text = "Portée : " + _attackRange.ToString();
-         allchildren[3].text = "Déplacement : " + _moveSpeed.ToString();
-         allchildren[5].text = _unitSO.Description.ToString();
-         //-------------------------------------------------------------------------------------------------*/
-
-        //Test--------------------------------------
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             GiveLife(1);
@@ -163,10 +137,8 @@ public class UnitScript : MonoBehaviour
         {
             TakeDamage(1);
         }
-        //----------------------------------------
     }
 
-    //------------------------------
     #region LifeMethods
     /// <summary>
     /// Rajoute de la vie au joueur

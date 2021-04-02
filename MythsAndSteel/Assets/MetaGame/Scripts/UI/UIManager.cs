@@ -8,19 +8,6 @@ public class UIManager : ScriptableObject
     [Header("Cartes événements")]
     [SerializeField] EventCardClass _eventCardClass = null;
 
-    #region PhaseDeJeu
-    /// <summary>
-    /// Appelle la fonction dans le GameManager pour passer à la phase suivante
-    /// </summary>
-    public void ClicToNextPhase(){
-        GameManager.Instance.CallEventToSwitchPhase();
-    }
-
-    public void ActivateActivationPhase(bool activate){
-        UIInstance.Instance.CanvasActivation.SetActive(activate);
-    }
-    #endregion PhaseDeJeu
-
     #region Evenement
     /// <summary>
     /// Call an event
