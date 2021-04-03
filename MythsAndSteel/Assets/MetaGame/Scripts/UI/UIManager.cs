@@ -26,7 +26,7 @@ public class UIManager : ScriptableObject
     /// </summary>
     /// <param name="PlayerId"></param>
     public void AddRandomEvent(int PlayerId){
-        int randomEvent = Random.Range(0, _eventCardClass.NumberCarteEvent + 1);
+        int randomEvent = Random.Range(0, _eventCardClass.NumberOfEventCard + 1);
     }
     #endregion Evenement
 
