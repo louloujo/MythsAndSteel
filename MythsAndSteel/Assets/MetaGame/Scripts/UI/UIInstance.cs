@@ -9,14 +9,6 @@ public class UIInstance : MonoSingleton<UIInstance>
     #region AppelDeScript
     MouseCommand mouseCommand;
     #endregion
-    [Header("UI MANAGER")]
-    //Avoir en référence l'UI Manager pour appeler des fonctions à l'intérieur
-    [SerializeField] private UIManager _uiManager = null;
-    public UIManager UiManager => _uiManager;
-
-    //Le canvas en jeu pour afficher des menus
-    [SerializeField] private GameObject _canvasTurnPhase = null;
-    public GameObject CanvasTurnPhase => _canvasTurnPhase;
 
     [Header("PHASE DE JEU")]
     //Le panneau à afficher lorsque l'on change de phase
@@ -26,6 +18,11 @@ public class UIInstance : MonoSingleton<UIInstance>
     //Le canvas en jeu pour la phase d'activation
     [SerializeField] private GameObject _canvasActivation = null;
     public GameObject CanvasActivation => _canvasActivation;
+
+    //Le canvas en jeu pour afficher des menus
+    [SerializeField] private GameObject _canvasTurnPhase = null;
+    public GameObject CanvasTurnPhase => _canvasTurnPhase;
+
 
     [Header("PANNEAU D'ACTIVATION D'UNE UNITE")]
     [SerializeField] private GameObject _activationUnitPanel = null;
@@ -65,11 +62,7 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private List<GameObject> _middleStatistiques;
     public List<GameObject> MiddleStatistique => _middleStatistiques;
 
-    //Ordre : 0 => Icon Vie, 1 => Icon Portée et 2 => Icon Déplacement
-    [SerializeField] private List<GameObject> _middleImage;
-    public List<GameObject> MiddleImage => _middleImage;
-
-    //Ordre : 0 => Valeur Min entre deux valeurs, 1 => Valeur Min entre deux valeurs, 2 => Degats Min et 3 Degats Max
+    //Ordre : 0 => Valeur Min entre deux valeurs, 1 => Valeur Max entre deux valeurs, 2 => Degats Min et 3 Degats Max
     [SerializeField] private List<GameObject> _basseStatistique;
     public List<GameObject> BasseStatistique => _basseStatistique;
 
@@ -86,4 +79,8 @@ public class UIInstance : MonoSingleton<UIInstance>
 
     [SerializeField] private List<GameObject> _middleTextTerrain;
     public List<GameObject> MiddleTextTerrain => _middleTextTerrain;
+
+    [Header("ENFANTS CASE DU PLATEAU")]
+    [SerializeField] private GameObject _mouvementTilePrefab;
+    public GameObject MouvementTilePrefab => _mouvementTilePrefab;
 }

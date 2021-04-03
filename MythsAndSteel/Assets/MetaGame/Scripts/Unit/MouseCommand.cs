@@ -131,9 +131,6 @@ public class MouseCommand : MonoBehaviour
         {
             uiElements.transform.position = pos;
         }
-        //Met le focus de la souris sur l'UI mouse over
-        EventSystem.current.SetSelectedGameObject(uiElements);
-
     }
     #endregion ActivateUI
 
