@@ -29,7 +29,6 @@ public class TileScript : MonoBehaviour
             Child = value;
         }
     }
-    [SerializeField] private GameObject ChildPrefab;
 
     [SerializeField] private int _line;
     public int Line => _line;
@@ -66,7 +65,7 @@ public class TileScript : MonoBehaviour
         bool add = true;
         if(Rendu != null)
         {
-            GameObject R = Instantiate(ChildPrefab, transform.position, Quaternion.identity);
+            GameObject R = Instantiate(UIInstance.Instance.MouvementTilePrefab, transform.position, Quaternion.identity);
             R.transform.parent = this.transform;
             R.name = Rendu.name;
             R.GetComponent<SpriteRenderer>().sprite = Rendu;

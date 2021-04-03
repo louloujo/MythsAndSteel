@@ -4053,7 +4053,7 @@ MonoBehaviour:
   _tileSprite: {fileID: 21300000, guid: 11abac58d8e168a41bc71c5024f82eca, type: 3}
   _emptySprite: {fileID: 21300000, guid: 10fe0b0f972768b488ecd6188288670b, type: 3}
   _selectedSprite: {fileID: 21300000, guid: 77b08518472808f4a81cb0cdfa06b5ec, type: 3}
-  EffectToCheck: 
+  EffectToCheck: 07000000080000000a0000000b0000000c0000000d0000000100000006000000
   Launch: 0
 --- !u!4 &554525475
 Transform:
@@ -13618,6 +13618,7 @@ MonoBehaviour:
   - {fileID: 2145928972}
   - {fileID: 1040494495}
   - {fileID: 880218715}
+  _mouvementTilePrefab: {fileID: 5418695048351900630, guid: fb0b1478d0b2d3d41a6a69566fbf7ccf, type: 3}
 --- !u!114 &1870703327
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -79,4 +79,8 @@ public class UIInstance : MonoSingleton<UIInstance>
 
     [SerializeField] private List<GameObject> _middleTextTerrain;
     public List<GameObject> MiddleTextTerrain => _middleTextTerrain;
+
+    [Header("ENFANTS CASE DU PLATEAU")]
+    [SerializeField] private GameObject _mouvementTilePrefab;
+    public GameObject MouvementTilePrefab => _mouvementTilePrefab;
 }
