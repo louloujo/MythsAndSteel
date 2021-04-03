@@ -18,8 +18,34 @@ public class EventCardClass : ScriptableObject{
     public void PointeursLaserOptimisés(){
 
     }
+
+    /// <summary>
+    /// Call an event
+    /// </summary>
+    /// <param name="id"></param>
+    public void CallEvent(int id)
+    {
+        switch(id)
+        {
+            case 0:
+                PointeursLaserOptimisés();
+                break;
+        }
+    }
+
+    /// <summary>
+    /// get a random event card and add it to the player
+    /// </summary>
+    /// <param name="PlayerId"></param>
+    public void AddRandomEvent(int PlayerId)
+    {
+        int randomEvent = Random.Range(0, NumberOfEventCard + 1);
+    }
 }
 
+/// <summary>
+/// Class qui regroupe toutes les variables pour une carte event
+/// </summary>
 [System.Serializable]
 public class EventCard {
     public string _eventName = "";
