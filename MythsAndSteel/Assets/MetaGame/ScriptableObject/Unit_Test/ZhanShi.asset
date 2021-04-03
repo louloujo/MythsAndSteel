@@ -18,7 +18,7 @@ MonoBehaviour:
   LifeMax: 3
   ShieldMax: 2
   AttackRange: 3
-  MoveSpeed: 6
+  MoveSpeed: 4
   CreationCost: 2
   DamageMinimum: 0
   NumberRangeMin: {x: 0, y: 0}
