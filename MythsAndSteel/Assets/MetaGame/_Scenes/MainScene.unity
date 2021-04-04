@@ -3231,7 +3231,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 866.94, y: 285.80197}
+  m_AnchoredPosition: {x: 820, y: 226}
   m_SizeDelta: {x: 64.2796, y: 47.9579}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &279259943
@@ -4381,13 +4381,13 @@ MonoBehaviour:
   _life: 3
   _shield: 2
   _attackRange: 3
-  _moveSpeed: 3
+  _moveSpeed: 4
   _creationCost: 2
   _NumberRangeMin: {x: 0, y: 0}
   _DamageMinimum: 0
   _NumberRangeMax: {x: 0, y: 0}
   _DamageMaximum: 0
-  _moveLeft: 3
+  _moveLeft: 4
   _actualTileld: 11
   _isMoveDone: 0
   _isActionDone: 0
@@ -12063,7 +12063,7 @@ GameObject:
   - component: {fileID: 1479327043}
   - component: {fileID: 1479327042}
   m_Layer: 5
-  m_Name: Statistiques_Canvas
+  m_Name: UnitStat_Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12143,7 +12143,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -13893,7 +13893,7 @@ GameObject:
   - component: {fileID: 1645117450}
   - component: {fileID: 1645117453}
   m_Layer: 5
-  m_Name: "Selection_Unit\xE9s_Actions_Canvas"
+  m_Name: ActionUnitMenu_Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13972,7 +13972,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -14014,7 +14014,7 @@ GameObject:
   - component: {fileID: 1658327344}
   - component: {fileID: 1658327343}
   m_Layer: 5
-  m_Name: PhaseDejeu_Canvas
+  m_Name: GamePhase_Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14092,7 +14092,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -17884,7 +17884,7 @@ GameObject:
   - component: {fileID: 2125945375}
   - component: {fileID: 2125945374}
   m_Layer: 5
-  m_Name: Activation_Canvas
+  m_Name: ActivationPhase_Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17963,7 +17963,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
