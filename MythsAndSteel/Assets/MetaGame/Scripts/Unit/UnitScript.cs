@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using EasyButtons;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class UnitScript : MonoBehaviour{
+public class UnitScript : MonoBehaviour
+{
     #region Variables
     [Header("Stats de base de l'unité")]
     //Scriptable qui contient les stats de base de l'unité
@@ -15,38 +16,38 @@ public class UnitScript : MonoBehaviour{
 
     [Header("Stats en jeu de l'unité")]
     //Vie actuelle
-    [SerializeField] int _life; 
+    [SerializeField] int _life;
     public int Life => _life;
 
     // Bouclier actuelle
-    [SerializeField] int _shield; 
+    [SerializeField] int _shield;
     public int Shield => _shield;
-    
+
     //Portée
-    [SerializeField] int _attackRange; 
+    [SerializeField] int _attackRange;
     public int AttackRange => _attackRange;
-    
+
     //Vitesse de déplacement
-    [SerializeField] int _moveSpeed; 
+    [SerializeField] int _moveSpeed;
     public int MoveSpeed => _moveSpeed;
 
     // Coût de création
-    [SerializeField] int _creationCost; 
+    [SerializeField] int _creationCost;
     public int CreationCost => _creationCost;
 
     //Dégats minimum infligé
+    [SerializeField] Vector2 _NumberRangeMin;
+    public Vector2 NumberRangeMin => _NumberRangeMin;
     [SerializeField] int _DamageMinimum;
     public int DamageMinimum => _DamageMinimum;
 
-    [SerializeField] Vector2 _NumberRangeMin;
-    public Vector2 NumberRangeMin => _NumberRangeMin;
 
     //Dégats maximum infligé
+    [SerializeField] Vector2 _NumberRangeMax;
+    public Vector2 NumberRangeMax => _NumberRangeMax;
     [SerializeField] int _DamageMaximum;
     public int DamageMaximum => _DamageMaximum;
 
-    [SerializeField] Vector2 _NumberRangeMax;
-    public Vector2 NumberRangeMax => _NumberRangeMax;
 
 
 
@@ -125,33 +126,8 @@ public class UnitScript : MonoBehaviour{
 
     #endregion Variables
 
-/*    void Start()
+    private void Update()
     {
-        //------------ Assign Les Stat du scriptable a l'unité et aux text de l'UI ------------------
-        allchildren = this.transform.GetComponentsInChildren<Text>();
-
-        UpdateUnitStat();
-
-        allchildren[0].text = "Vie : " + _life.ToString() + " / " + _unitSO.LifeMax.ToString() ;
-        allchildren[1].text = "Bouclier : " + _shield.ToString() + " / " + _unitSO.ShieldMax.ToString();
-        allchildren[2].text = "Portée : " + _attackRange.ToString();
-        allchildren[3].text = "Déplacement : " + _moveSpeed.ToString();
-        allchildren[5].text = _unitSO.Description.ToString();
-
-        //------------------------------------------------------------------------------------------------
-
-    }*/
-
-    private void Update(){
-       /* //-------------Actualise l'affichage des valeurs dans L'UI------------------------------------------------------
-        allchildren[0].text = "Vie : " + _life.ToString() + " / " + _unitSO.LifeMax.ToString();
-        allchildren[1].text = "Bouclier : " + _shield.ToString() + " / " + _unitSO.ShieldMax.ToString();
-        allchildren[2].text = "Portée : " + _attackRange.ToString();
-        allchildren[3].text = "Déplacement : " + _moveSpeed.ToString();
-        allchildren[5].text = _unitSO.Description.ToString();
-        //-------------------------------------------------------------------------------------------------*/
-
-        //Test--------------------------------------
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             GiveLife(1);
@@ -161,16 +137,15 @@ public class UnitScript : MonoBehaviour{
         {
             TakeDamage(1);
         }
-        //----------------------------------------
     }
 
-    //------------------------------
     #region LifeMethods
     /// <summary>
     /// Rajoute de la vie au joueur
     /// </summary>
     /// <param name="Lifeadd"></param>
-    public virtual void GiveLife(int Lifeadd){
+    public virtual void GiveLife(int Lifeadd)
+    {
         _life += Lifeadd;
     }
 
@@ -178,7 +153,8 @@ public class UnitScript : MonoBehaviour{
     /// Fait perdre de la vie au joueur
     /// </summary>
     /// <param name="Damage"></param>
-    public virtual void TakeDamage(int Damage){
+    public virtual void TakeDamage(int Damage)
+    {
         _life -= Damage;
         CheckLife();
     }
@@ -186,8 +162,10 @@ public class UnitScript : MonoBehaviour{
     /// <summary>
     /// Check la vie du joueur
     /// </summary>
-    void CheckLife(){
-        if (_life <= 0){
+    void CheckLife()
+    {
+        if (_life <= 0)
+        {
             _isLiving = false; //A voir si c'est nécéssaire
             Death();
         }
@@ -197,7 +175,8 @@ public class UnitScript : MonoBehaviour{
     /// <summary>
     /// Tue l'unité
     /// </summary>
-    public virtual void Death(){
+    public virtual void Death()
+    {
         Destroy(gameObject);
         Debug.Log("Unité Détruite");
     }
@@ -206,9 +185,10 @@ public class UnitScript : MonoBehaviour{
     /// <summary>
     /// Update les stats de l'unité avec les stats de base
     /// </summary>
-    public virtual void UpdateUnitStat(){
+    public virtual void UpdateUnitStat()
+    {
         //Si il n'y a pas de scriptable object alors ca arrete la fonction
-        if(_unitSO == null) return;
+        if (_unitSO == null) return;
 
         //Assigne les stats
         _life = _unitSO.LifeMax;
@@ -230,13 +210,16 @@ public class UnitScript : MonoBehaviour{
     /// <summary>
     /// Reset les valeurs nécéssaires pour un nouveau tour
     /// </summary>
-    public virtual void ResetTurn(){
+    public virtual void ResetTurn()
+    {
         _moveLeft = _unitSO.MoveSpeed;
         _isMoveDone = false;
     }
 
-    public void checkMovementLeft(){
-        if(_moveLeft == 0){
+    public void checkMovementLeft()
+    {
+        if (_moveLeft == 0)
+        {
             _isMoveDone = true;
         }
     }
