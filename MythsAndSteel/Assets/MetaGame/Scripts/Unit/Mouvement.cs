@@ -195,7 +195,7 @@ public class Mouvement : MonoSingleton<Mouvement>
             if (!mUnit.GetComponent<UnitScript>().IsMoveDone)
             {
                 MoveLeftBase = mUnit.GetComponent<UnitScript>().MoveLeft;
-                StartMouvement(TilesManager.Instance.TileList.IndexOf(tileSelected), mUnit.GetComponent<UnitScript>().MoveSpeed - (mUnit.GetComponent<UnitScript>().MoveSpeed - MoveLeftBase));
+                StartMouvement(TilesManager.Instance.TileList.IndexOf(tileSelected), mUnit.GetComponent<UnitScript>().MoveSpeed - (mUnit.GetComponent<UnitScript>().MoveSpeed - MoveLeftBase) + mUnit.GetComponent<UnitScript>().MoveSpeedBonus);
             }
             else
             {
@@ -227,17 +227,30 @@ public class Mouvement : MonoSingleton<Mouvement>
     /// </summary>
     public void StopMouvement(bool forceStop)
     {
-        foreach (int Neighbour in newNeighbourId) // Supprime toutes les tiles.
+        if(newNeighbourId.Count > 0)
         {
-            TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>().RemoveChild();
-            Destroy(TilesManager.Instance.TileList[Neighbour].transform.GetChild(0).gameObject);
+            foreach(int Neighbour in newNeighbourId) // Supprime toutes les tiles.
+            {
+                if(TilesManager.Instance.TileList[Neighbour] != null)
+                {
+                    TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>().RemoveChild();
+                    Destroy(TilesManager.Instance.TileList[Neighbour].transform.GetChild(0).gameObject);
+                }
+            }
         }
 
-        foreach (int NeighbourSelect in selectedTileId) // Si un path de mvmt était séléctionné.
+        if(selectedTileId.Count > 1)
         {
-            TilesManager.Instance.TileList[NeighbourSelect].GetComponent<TileScript>().RemoveChild();
-            Destroy(TilesManager.Instance.TileList[NeighbourSelect].transform.GetChild(0).gameObject);
+            foreach(int NeighbourSelect in selectedTileId) // Si un path de mvmt était séléctionné.
+            {
+                if(TilesManager.Instance.TileList[NeighbourSelect] != null)
+                {
+                    TilesManager.Instance.TileList[NeighbourSelect].GetComponent<TileScript>().RemoveChild();
+                    Destroy(TilesManager.Instance.TileList[NeighbourSelect].transform.GetChild(0).gameObject);
+                }
+            }
         }
+
         // Clear de toutes les listes et stats.
         selectedTileId.Clear();
         newNeighbourId.Clear();
@@ -275,14 +288,37 @@ public class Mouvement : MonoSingleton<Mouvement>
                         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Forêt, selectedTileId[i]) || PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Mont, selectedTileId[i]))
                         {
                             Debug.Log("REMOVE");
-                            mUnit.GetComponent<UnitScript>().MoveLeft += 2; // Redistribution du Range à chaque suppression de case.
+
+                            // Redistribution du Range à chaque suppression de case.
+                            if(mUnit.GetComponent<UnitScript>().MoveLeft + 2 > mUnit.GetComponent<UnitScript>().UnitSO.MoveSpeed){
+                                int moveToAdd = 2 - (mUnit.GetComponent<UnitScript>().UnitSO.MoveSpeed - mUnit.GetComponent<UnitScript>().MoveLeft);
+                                mUnit.GetComponent<UnitScript>().MoveLeft = mUnit.GetComponent<UnitScript>().UnitSO.MoveSpeed;
+                                mUnit.GetComponent<UnitScript>().MoveSpeedBonus += moveToAdd;
+                            }
+                            else
+                            {
+                                mUnit.GetComponent<UnitScript>().MoveLeft += 2; 
+                            }
+
                             temp.Add(selectedTileId[i]);
                             TilesManager.Instance.TileList[selectedTileId[i]].GetComponent<TileScript>().AddChildRender(_selectedSprite); // Repasse les sprites en apparence "séléctionnable".
                         }
                         else
                         {
                             Debug.Log("REMOVE");
-                            mUnit.GetComponent<UnitScript>().MoveLeft++; // Redistribution du Range à chaque suppression de case.
+
+                            // Redistribution du Range à chaque suppression de case.
+                            if(mUnit.GetComponent<UnitScript>().MoveLeft + 1 > mUnit.GetComponent<UnitScript>().UnitSO.MoveSpeed)
+                            {
+                                int moveToAdd = 1 - (mUnit.GetComponent<UnitScript>().UnitSO.MoveSpeed - mUnit.GetComponent<UnitScript>().MoveLeft);
+                                mUnit.GetComponent<UnitScript>().MoveLeft = mUnit.GetComponent<UnitScript>().UnitSO.MoveSpeed;
+                                mUnit.GetComponent<UnitScript>().MoveSpeedBonus += moveToAdd;
+                            }
+                            else
+                            {
+                                mUnit.GetComponent<UnitScript>().MoveLeft += 1;
+                            }
+
                             temp.Add(selectedTileId[i]);
                             TilesManager.Instance.TileList[selectedTileId[i]].GetComponent<TileScript>().AddChildRender(_selectedSprite); // Repasse les sprites en apparence "séléctionnable".
                         }
@@ -308,6 +344,13 @@ public class Mouvement : MonoSingleton<Mouvement>
                                 mUnit.GetComponent<UnitScript>().MoveLeft -= 2; // sup 2 mvmt.
                                 selectedTileId.Add(tileId);
                                 TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().AddChildRender(_tileSprite);
+                            }
+                            else if(mUnit.GetComponent<UnitScript>().MoveLeft + mUnit.GetComponent<UnitScript>().MoveSpeedBonus >= 2)
+                            {
+                                int moveToDecrease = 2;
+                                moveToDecrease -= mUnit.GetComponent<UnitScript>().MoveLeft;
+                                mUnit.GetComponent<UnitScript>().MoveLeft = 0;
+                                mUnit.GetComponent<UnitScript>().MoveSpeedBonus -= moveToDecrease;
                             }
                             else
                             {
@@ -358,6 +401,12 @@ public class Mouvement : MonoSingleton<Mouvement>
                             selectedTileId.Add(tileId);
                             TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().AddChildRender(_tileSprite);
                         }
+                        else if(mUnit.GetComponent<UnitScript>().MoveSpeedBonus > 0)
+                        {
+                            mUnit.GetComponent<UnitScript>().MoveSpeedBonus--; // sup 1 mvmt.
+                            selectedTileId.Add(tileId);
+                            TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().AddChildRender(_tileSprite);
+                        }
                     }
                 }
             }
@@ -398,6 +447,7 @@ public class Mouvement : MonoSingleton<Mouvement>
         {
             if (GameManager.Instance.IsPlayerRedTurn == TilesManager.Instance.TileList[_selectedTileId[_selectedTileId.Count - 1]].GetComponent<TileScript>().Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy)
             {
+                UIInstance.Instance.ActivationUnitPanel.ShowMovementPanel();
                 Debug.Log("Vous ne pouvez pas terminer votre mouvement sur une unité alliée.");
                 return;
             }

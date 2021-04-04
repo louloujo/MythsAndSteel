@@ -30,20 +30,6 @@ public class EventCardClass : ScriptableObject{
     }
 
     /// <summary>
-    /// Call an event
-    /// </summary>
-    /// <param name="id"></param>
-    public void CallEvent(int id)
-    {
-        switch(id)
-        {
-            case 0:
-                PointeursLaserOptimisés();
-                break;
-        }
-    }
-
-    /// <summary>
     /// Lorsqu'un événement est utilisé il faut le retirer
     /// </summary>
     public void RemoveEventsAfterUse(){
@@ -267,21 +253,143 @@ public class EventCardClass : ScriptableObject{
     }
 
     #region Evenement
+
+    #region Reprogrammation
     /// <summary>
     /// Carte event du pointeur optimisé
     /// </summary>
-    public void PointeursLaserOptimisés(){
+    public void Reproggramation(){
+        foreach(GameObject unit in GameManager.Instance.UnitChooseList){
+            unit.GetComponent<UnitScript>()._usefullForOpponent = true;
+            unit.GetComponent<UnitScript>().DiceBonus -= 4;
+        }
 
+        GameManager.Instance.UnitChooseList.Clear();
+    }
+
+    public void LaunchReproggramation(){
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Reprogrammation);
+        
+        if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
+        {
+            LaunchEvent(1, true, false, player == 1? true : false);
+            GameManager.Instance._eventCardCall += Reproggramation;
+        }
+    }
+    #endregion Reprogrammation
+
+    #region SerumExpérimental
+    /// <summary>
+    /// Carte event du sérum expérimental
+    /// </summary>
+    public void SerumExperimental()
+    {
+        foreach(GameObject unit in GameManager.Instance.UnitChooseList)
+        {
+            unit.GetComponent<UnitScript>().MoveSpeedBonus++;
+        }
+
+        GameManager.Instance.UnitChooseList.Clear();
+    }
+
+    public void LaunchSerumExperimental()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Sérum_expérimental);
+        
+        if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
+        {
+            LaunchEvent(2, false, true, player == 1 ? true : false);
+            GameManager.Instance._eventCardCall += SerumExperimental;
+        }
+    }
+    #endregion SerumExpérimental
+
+    #region PointeursLaser
+    /// <summary>
+    /// Carte event du pointeur laser
+    /// </summary>
+    public void PointeursLaserOptimisés()
+    {
+        foreach(GameObject unit in GameManager.Instance.UnitChooseList)
+        {
+            unit.GetComponent<UnitScript>().AttackRangeBonus += 1;
+        }
+
+        GameManager.Instance.UnitChooseList.Clear();
+    }
+
+    public void LaunchPointeursLaserOptimisés()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Pointeurs_laser_optimisés);
+
+        if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
+        {
+            LaunchEvent(2, false, true, player == 1 ? true : false);
+            GameManager.Instance._eventCardCall += PointeursLaserOptimisés;
+        }
+    }
+    #endregion PointeursLaser
+
+    #region Réapprovisionnement
+    /// <summary>
+    /// Carte event du réapprovisionnement
+    /// </summary>
+    public void Reapprovisionnement()
+    {
+        foreach(GameObject unit in GameManager.Instance.UnitChooseList)
+        {
+            unit.GetComponent<UnitScript>().GiveLife(1);
+        }
+
+        GameManager.Instance.UnitChooseList.Clear();
+    }
+
+    public void LaunchReapprovisionnement()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Réapprovisionnement);
+
+        if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
+        {
+            LaunchEvent(2, false, true, player == 1 ? true : false);
+            GameManager.Instance._eventCardCall += Reapprovisionnement;
+        }
+    }
+    #endregion Réapprovisionnement
+
+    /// <summary>
+    /// Lance un événement en appellant la fonction dans le gameManager
+    /// </summary>
+    /// <param name="unitNumber"></param>
+    /// <param name="opponent"></param>
+    /// <param name="army"></param>
+    /// <param name="redPlayer"></param>
+    void LaunchEvent(int unitNumber, bool opponent, bool army, bool redPlayer){
+        GameManager.Instance.StartEventMode(unitNumber, opponent, army, redPlayer);
+    }
+
+    /// <summary>
+    /// Determine à quelle armée appartient la carte
+    /// </summary>
+    int DeterminArmy(MYthsAndSteel_Enum.EventCard cardToFind){
+        foreach(MYthsAndSteel_Enum.EventCard card in PlayerScript.Instance.EventCardList._eventCardRedPlayer)
+        {
+            if(card == cardToFind)
+            {
+                return 1;
+            }
+        }
+
+        foreach(MYthsAndSteel_Enum.EventCard card in PlayerScript.Instance.EventCardList._eventCardBluePlayer)
+        {
+            if(card == cardToFind)
+            {
+                return 2;
+            }
+        }
+
+        return 0;
     }
     #endregion Evenement
-
-
-
-
-
-
-
-
 
 }
 

@@ -57,10 +57,17 @@ public class GameManagerSO : ScriptableObject
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1:
                 GoToActionJ1Phase();
 
-                UnitScript[] unitList = GameObject.FindObjectsOfType<UnitScript>();
-                foreach(UnitScript unit in unitList)
+                List<GameObject> unitList = GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance._unitListRedPlayer : PlayerScript.Instance._unitListBluePlayer;
+
+                foreach(GameObject unit in unitList){
+                    unit.GetComponent<UnitScript>().ResetTurn();
+                }
+
+                unitList = !GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance._unitListRedPlayer : PlayerScript.Instance._unitListBluePlayer;
+
+                foreach(GameObject unit in unitList)
                 {
-                    unit.ResetTurn();
+                    unit.GetComponent<UnitScript>().ResetOponentTurn();
                 }
                 break;
 
@@ -71,10 +78,17 @@ public class GameManagerSO : ScriptableObject
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2:
                 GoToActionJ2Phase();
 
-                UnitScript[] unitList2 = GameObject.FindObjectsOfType<UnitScript>();
-                foreach(UnitScript unit in unitList2)
+                List<GameObject> unitList2 = GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance._unitListRedPlayer : PlayerScript.Instance._unitListBluePlayer;
+
+                foreach(GameObject unit in unitList2){
+                    unit.GetComponent<UnitScript>().ResetTurn();
+                }
+
+                unitList2 = !GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance._unitListRedPlayer : PlayerScript.Instance._unitListBluePlayer;
+
+                foreach(GameObject unit in unitList2)
                 {
-                    unit.ResetTurn();
+                    unit.GetComponent<UnitScript>().ResetOponentTurn();
                 }
                 break;
 

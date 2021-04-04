@@ -59,6 +59,29 @@ public class GameManager : MonoSingleton<GameManager>{
     [SerializeField] private GameManagerSO _managerSO = null;
     public GameManagerSO ManagerSO => _managerSO;
 
+    [Header("COUPURE DE PHASE")]
+    //Est ce que le joueur est en train de choisir des unités
+    [SerializeField] private bool _chooseUnitForEvent = false;
+    public bool ChooseUnitForEvent => _chooseUnitForEvent;
+
+    [SerializeField] bool _chooseOponnentUnit = false;
+    public bool ChooseOponentUnit => _chooseOponnentUnit;
+    [SerializeField] bool _chooseArmyUnit = false;
+    public bool ChooseArmyUnit => _chooseArmyUnit;
+
+    [SerializeField] bool _redPlayerUseEvent = false;
+    public bool RedPlayerUseEvent => _redPlayerUseEvent;
+
+    //Liste des unités choisies
+    [SerializeField] private List<GameObject> _unitChooseList = new List<GameObject>();
+    public List<GameObject> UnitChooseList => _unitChooseList;
+
+    public int _numberOfUnitToChoose = 0;
+
+    //Fonctions à appeler après que le joueur ait choisit les unités
+    public delegate void EventToCallAfterChoose();
+    public EventToCallAfterChoose _eventCardCall;
+
     #endregion Variables
 
     /// <summary>
@@ -125,8 +148,6 @@ public class GameManager : MonoSingleton<GameManager>{
         }
     }
 
-
-
     /// <summary>
     /// Fonction qui est appellée lorsque l'event est appellé (event lors du clic sur le bouton pour passer à la phase suivante)
     /// </summary>
@@ -185,4 +206,56 @@ public class GameManager : MonoSingleton<GameManager>{
     public void SetPlayerStart(bool player1){
         _isPlayerRedStarting = player1;
     }
+
+    #region EventMode
+    /// <summary>
+    /// Commence le mode event
+    /// </summary>
+    /// <param name="numberUnit"></param>
+    /// <param name="opponentUnit"></param>
+    /// <param name="armyUnit"></param>
+    public void StartEventMode(int numberUnit, bool opponentUnit, bool armyUnit, bool redPlayer){
+        _numberOfUnitToChoose = numberUnit;
+        _chooseUnitForEvent = true;
+        _chooseOponnentUnit = opponentUnit;
+        _chooseArmyUnit = armyUnit;
+        _redPlayerUseEvent = redPlayer;
+
+        UIInstance.Instance.RedPlayerEventtransf.gameObject.SetActive(false);
+        UIInstance.Instance.BluePlayerEventtransf.gameObject.SetActive(false);
+        UIInstance.Instance.ButtonNextPhase.SetActive(false);
+        UIInstance.Instance.ButtonEventRedPlayer._upButton.SetActive(false);
+        UIInstance.Instance.ButtonEventRedPlayer._downButton.SetActive(false);
+        UIInstance.Instance.ButtonEventBluePlayer._upButton.SetActive(false);
+        UIInstance.Instance.ButtonEventBluePlayer._downButton.SetActive(false);
+
+        _eventCardCall += StopEventMode;
+    }
+
+    void StopEventMode(){
+        _numberOfUnitToChoose = 0;
+        _chooseUnitForEvent = false;
+        _chooseOponnentUnit = false;
+        _chooseArmyUnit = false;
+        _redPlayerUseEvent = false;
+
+        UIInstance.Instance.RedPlayerEventtransf.gameObject.SetActive(true);
+        UIInstance.Instance.BluePlayerEventtransf.gameObject.SetActive(true);
+        UIInstance.Instance.ButtonNextPhase.SetActive(true);
+        UIInstance.Instance.ButtonEventRedPlayer._upButton.SetActive(true);
+        UIInstance.Instance.ButtonEventRedPlayer._downButton.SetActive(true);
+        UIInstance.Instance.ButtonEventBluePlayer._upButton.SetActive(true);
+        UIInstance.Instance.ButtonEventBluePlayer._downButton.SetActive(true);
+
+        _eventCardCall = null;
+    }
+
+    public void AddUnitToList(GameObject unit){
+        _unitChooseList.Add(unit);
+
+        if(_unitChooseList.Count == _numberOfUnitToChoose){
+            _eventCardCall();
+        }
+    }
+    #endregion EventMode
 }
