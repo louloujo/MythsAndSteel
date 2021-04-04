@@ -208,7 +208,7 @@ public class MouseCommand : MonoBehaviour
     {
         //0 et  1 sont pour les boutons quitter, 2 et 3 sont pour switch entre la Page 1 et la Page 2
         button._quitMenuPage1.onClick.AddListener(clickQuit);
-        button._quitMenuPage1.onClick.AddListener(clickQuit);
+        button._quitMenuPage2.onClick.AddListener(clickQuit);
         button._rightArrowPage1.onClick.AddListener(switchWindows1);
         button._leftArrowPage2.onClick.AddListener(switchWindows2);
 
