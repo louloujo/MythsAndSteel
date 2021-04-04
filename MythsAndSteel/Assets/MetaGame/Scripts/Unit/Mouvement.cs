@@ -74,11 +74,6 @@ public class Mouvement : MonoSingleton<Mouvement>
 
     #endregion Variables
 
-    private void Start()
-    {
-        CloseActivationPanel();
-    }
-
     private void Update()
     {
         // Permet d'effectuer le moveTowards de l'unité à sa prochaine case.
@@ -377,10 +372,16 @@ public class Mouvement : MonoSingleton<Mouvement>
         {
             Debug.Log("La tile d'ID : " + tileId + " est trop loin de la tile d'ID: " + selectedTileId[selectedTileId.Count - 1]);
         }
+
+        if(selectedTileId.Count > 1)
+        {
+            UIInstance.Instance.ActivationUnitPanel.ShowMovementPanel();
+        }
+        else
+        {
+            UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
+        }
     }
-
-
-
 
     int MvmtIndex = 1; // Numéro du mvmt actuel dans la liste selectedTileId;
     [SerializeField] bool Launch = false; // Evite les répétitions dans updatingmove();
@@ -390,6 +391,9 @@ public class Mouvement : MonoSingleton<Mouvement>
     /// </summary>
     public void ApplyMouvement()
     {
+        //Ferme le panneau de déplacement
+        UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
+
         if (TilesManager.Instance.TileList[_selectedTileId[_selectedTileId.Count - 1]].GetComponent<TileScript>().Unit != null)
         {
             if (GameManager.Instance.IsPlayerRedTurn == TilesManager.Instance.TileList[_selectedTileId[_selectedTileId.Count - 1]].GetComponent<TileScript>().Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy)
@@ -398,8 +402,6 @@ public class Mouvement : MonoSingleton<Mouvement>
                 return;
             }
         }
-    
-        CloseActivationPanel();
 
         GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
 
@@ -474,21 +476,5 @@ public class Mouvement : MonoSingleton<Mouvement>
                 mEnd.GetComponent<TileScript>()._Child[0].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, Vector2.Distance(mUnit.transform.position, mEnd.transform.position));
             }
         }
-    }
-
-    /// <summary>
-    /// mintre le panneau d'activation
-    /// </summary>
-    public void ShowActivationPanel()
-    {
-        UIInstance.Instance.ActivationUnitPanel.SetActive(true);
-    }
-
-    /// <summary>
-    /// Ferme le panneau d'activation
-    /// </summary>
-    public void CloseActivationPanel()
-    {
-        UIInstance.Instance.ActivationUnitPanel.SetActive(false);
     }
 }

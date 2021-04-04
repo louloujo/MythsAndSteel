@@ -28,8 +28,8 @@ public class UIInstance : MonoSingleton<UIInstance>
 
 
     [Header("PANNEAU D'ACTIVATION D'UNE UNITE")]
-    [SerializeField] private GameObject _activationUnitPanel = null;
-    public GameObject ActivationUnitPanel => _activationUnitPanel;
+    [SerializeField] private MenuActionUnite _activationUnitPanel = null;
+    public MenuActionUnite ActivationUnitPanel => _activationUnitPanel;
 
 
     [Header("CARTES EVENEMENTS")]

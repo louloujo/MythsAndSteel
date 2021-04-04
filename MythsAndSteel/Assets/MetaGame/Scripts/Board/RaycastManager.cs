@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class RaycastManager : MonoSingleton<RaycastManager>
 {
@@ -9,6 +10,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     #endregion
 
     #region Variables
+    [Header("INFO DU RAYCAST")]
     //Les layer qui sont détectés par le raycast
     [SerializeField] private LayerMask _layerM;
 
@@ -40,7 +42,9 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     [SerializeField] private GameObject _actualUnitSelected;
     public GameObject ActualUnitSelected => _actualUnitSelected;
 
-
+    [Header("PANNEAU DES BOUTONS QUAND CLIC SUR UNITE")]
+    //Menu a activer quand clic sur unité
+    [SerializeField] private GameObject _menuForUnit = null;
 
     //Est ce que les joueurs peuvent jouer
     bool _isInTurn = false;
@@ -95,7 +99,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         }
 
         //Lorsque le joueur clique sur le plateau
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if(Input.GetKeyDown(KeyCode.Mouse0) && !Input.GetKey(KeyCode.LeftShift))
         {
             Select();
         }
@@ -115,9 +119,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                 {
                     _actualTileSelected = _tile;
                     _actualUnitSelected = _actualTileSelected.GetComponent<TileScript>().Unit;
-
-                    Mouvement.Instance.Selected = true;
-                    Mouvement.Instance.ShowActivationPanel();
+                    _menuForUnit.GetComponent<MenuActionUnite>().ShowPanel();
                 }
             }
         }
@@ -134,17 +136,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                 else
                 {
                     Mouvement.Instance.StopMouvement(true);
-                }
-            }
-            else
-            {
-                if(_tile != null)
-                {
-                    _actualTileSelected = _tile;
-                    _actualUnitSelected = null;
-
-                    Mouvement.Instance.Selected = false;
-                    Mouvement.Instance.CloseActivationPanel();
+                    UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
                 }
             }
         }
