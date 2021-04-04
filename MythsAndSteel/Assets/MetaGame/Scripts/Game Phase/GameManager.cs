@@ -52,9 +52,6 @@ public class GameManager : MonoSingleton<GameManager>{
     GameObject actualSwitchPhasePanel = null;
 
     [Header("REFERENCES DES SCRIPTABLE")]
-    //UI Manager
-    [SerializeField] private UIManager _uiManager = null;
-    public UIManager UIManager => _uiManager;
     //Event Manager
     [SerializeField] private EventCardClass _eventCardSO = null;
     public EventCardClass EventCardSO => _eventCardSO;

@@ -241,6 +241,8 @@ public class PhaseActivation : MonoBehaviour{
 
         RedPlayerPanel.SetActive(false);
         BluePlayerPanel.SetActive(false);
+
+        UIInstance.Instance.ActivateNextPhaseButton();
     }
 
     /// <summary>
@@ -253,5 +255,6 @@ public class PhaseActivation : MonoBehaviour{
     public void ActivateActivationPhase()
     {
         UIInstance.Instance.CanvasActivation.SetActive(true);
+        UIInstance.Instance.DesactivateNextPhaseButton();
     }
 }

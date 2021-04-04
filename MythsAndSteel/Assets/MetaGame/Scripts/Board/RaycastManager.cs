@@ -69,7 +69,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             //Si le joueur a utilisé le Shift puis leclick, le joueur est considéré comme click et on applique les fonctions propres au bouton des panneaux. De plus, le mouseOver est désactivé.
             if (_mouseCommand.CheckIfPlayerAsClic == true)
             {
-                _mouseCommand.buttonAction(UIInstance.Instance.ButtonId);
+                _mouseCommand.buttonAction(UIInstance.Instance.PageButton);
                 _mouseCommand.MouseExitWithoutClick();
             }
             else
