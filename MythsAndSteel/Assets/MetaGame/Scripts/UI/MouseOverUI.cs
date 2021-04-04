@@ -16,6 +16,7 @@ public class MouseOverUI : MonoBehaviour
     /// Quand la souris passe sur l'UI
     /// </summary>
     public void StartOver(){
+        if(!_objectToSpawn.activeSelf)
         StartCoroutine(ShowObject());
     }
 

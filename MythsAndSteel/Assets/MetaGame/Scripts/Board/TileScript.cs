@@ -80,6 +80,7 @@ public class TileScript : MonoBehaviour
                 }
 
             }
+
             if(add)
             {       
                 if(Child.Count > 0)
@@ -91,5 +92,9 @@ public class TileScript : MonoBehaviour
                 Child.Add(R);
             }
         }
+    }
+
+    public void RemoveChild(){
+        Child.Clear();
     }
 }
