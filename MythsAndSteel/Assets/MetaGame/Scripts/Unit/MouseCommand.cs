@@ -41,25 +41,25 @@ public class MouseCommand : MonoBehaviour
     {
         //Statistique pour le MouseOver.
         UIInstance.Instance.TitlePanelMouseOver.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.UnitName;
-        UIInstance.Instance.MouseOverStats[0].GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().Life.ToString();
-        UIInstance.Instance.MouseOverStats[1].GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().AttackRange.ToString();
-        UIInstance.Instance.MouseOverStats[2].GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().MoveSpeed.ToString();
+        UIInstance.Instance.MouseOverStats._lifeGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().Life.ToString();
+        UIInstance.Instance.MouseOverStats._rangeGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().AttackRange.ToString();
+        UIInstance.Instance.MouseOverStats._moveGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().MoveSpeed.ToString();
 
         //Statistique de la Page 1 du Carnet.
         //Synchronise le texte du titre.
         UIInstance.Instance.TitlePanelShiftClicPage1.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.UnitName;
         //Synchronise le texte de la vie avec l'emplacement d'UI.
-        UIInstance.Instance.MiddleStatistique[0].GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().Life.ToString();
+        UIInstance.Instance.PageUnitStat._lifeGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().Life.ToString();
         //Synchronise le texte de la valeur de la distance d'attaque de l'unité avec l'emplacement d'UI.
-        UIInstance.Instance.MiddleStatistique[1].GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().AttackRange.ToString();
+        UIInstance.Instance.PageUnitStat._rangeGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().AttackRange.ToString();
         //Synchronise le texte de la valeur de la vitesse de l'unité avec l'emplacement d'UI.
-        UIInstance.Instance.MiddleStatistique[2].GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().MoveSpeed.ToString();
+        UIInstance.Instance.PageUnitStat._moveGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().MoveSpeed.ToString();
 
         //Synchronise le texte de l'UI de la avec l'emplacement d'UI.
-        UIInstance.Instance.BasseStatistique[0].GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMin.x.ToString() + " - " + RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMin.y.ToString();
-        UIInstance.Instance.BasseStatistique[1].GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMax.x.ToString() + " - " + RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMax.y.ToString();
-        UIInstance.Instance.BasseStatistique[2].GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().DamageMinimum.ToString();
-        UIInstance.Instance.BasseStatistique[3].GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().DamageMaximum.ToString();
+        UIInstance.Instance.AttackStat._rangeMinDamageGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMin.x.ToString() + " - " + RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMin.y.ToString();
+        UIInstance.Instance.AttackStat._rangeMaxDamageGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMax.x.ToString() + " - " + RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMax.y.ToString();
+        UIInstance.Instance.AttackStat._minDamageValueGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().DamageMinimum.ToString();
+        UIInstance.Instance.AttackStat._maxDamageValueGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().DamageMaximum.ToString();
 
         //Statistique de la Page 2 du Carnet.  
         //Compléter avec les Images des Tiles.
@@ -204,13 +204,13 @@ public class MouseCommand : MonoBehaviour
     /// JE prends une liste de boutton, a chaque bouton j'assigne un index. 
     /// </summary>
     /// <param name="button"></param>
-    public void buttonAction(List<Button> button)
+    public void buttonAction(StatMenuButton button)
     {
         //0 et  1 sont pour les boutons quitter, 2 et 3 sont pour switch entre la Page 1 et la Page 2
-        button[0].onClick.AddListener(clickQuit);
-        button[1].onClick.AddListener(clickQuit);
-        button[2].onClick.AddListener(switchWindows1);
-        button[3].onClick.AddListener(switchWindows2);
+        button._quitMenuPage1.onClick.AddListener(clickQuit);
+        button._quitMenuPage1.onClick.AddListener(clickQuit);
+        button._rightArrowPage1.onClick.AddListener(switchWindows1);
+        button._leftArrowPage2.onClick.AddListener(switchWindows2);
 
         //Fonction qui permet de cacher les Pages 1 et 2 du carnet.
         void clickQuit()
