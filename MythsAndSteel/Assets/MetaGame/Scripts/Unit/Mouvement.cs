@@ -234,17 +234,14 @@ public class Mouvement : MonoSingleton<Mouvement>
     {
         foreach (int Neighbour in newNeighbourId) // Supprime toutes les tiles.
         {
-            TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>().AddChildRender(_emptySprite); // Assigne un sprite empty à toutes les anciennes cases "neighbour".
+            TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>().RemoveChild();
+            Destroy(TilesManager.Instance.TileList[Neighbour].transform.GetChild(0).gameObject);
         }
-        if (RaycastManager.Instance.ActualTileSelected != null) // Si une case était séléctionnée.
-        {
-            //Tiles.Instance._actualTileSelected.GetComponent<TileScript>().Unit.GetComponent<UnitScript>().DemandMenu.enabled = false;
-            //Tiles.Instance._actualTileSelected.GetComponent<TileScript>().Unit.GetComponent<UnitScript>().Menu.enabled = false;
-        }
+
         foreach (int NeighbourSelect in selectedTileId) // Si un path de mvmt était séléctionné.
         {
-            TilesManager.Instance.TileList[NeighbourSelect].GetComponent<TileScript>().AddChildRender(_emptySprite);
-            TilesManager.Instance.TileList[NeighbourSelect].GetComponent<TileScript>()._Child[0].GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
+            TilesManager.Instance.TileList[NeighbourSelect].GetComponent<TileScript>().RemoveChild();
+            Destroy(TilesManager.Instance.TileList[NeighbourSelect].transform.GetChild(0).gameObject);
         }
         // Clear de toutes les listes et stats.
         selectedTileId.Clear();
@@ -315,7 +312,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                                 check = true;
                                 mUnit.GetComponent<UnitScript>().MoveLeft -= 2; // sup 2 mvmt.
                                 selectedTileId.Add(tileId);
-                                TilesManager.Instance.TileList[tileId].GetComponent<SpriteRenderer>().sprite = _tileSprite;
+                                TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().AddChildRender(_tileSprite);
                             }
                             else
                             {
@@ -342,19 +339,19 @@ public class Mouvement : MonoSingleton<Mouvement>
                             Debug.Log("La tile d'ID : " + tileId + " est une foret ou un mont.");
                         }
                     }
-                    if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Rivière_Est, tileId) && PlayerStatic.CheckDirection(tileId, selectedTileId[selectedTileId.Count - 1]) == "Est")
+                    if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Rivière_Est, tileId) && PlayerStatic.CheckDirection(tileId, selectedTileId[selectedTileId.Count - 1]) == "Est" && !PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Pont_Est, tileId))
                     {
                         Debug.Log("La tile d'ID : " + tileId + " est séparée par une rivière de la tile d'ID :" + selectedTileId[selectedTileId.Count - 1]);
                     }
-                    else if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Rivière_Nord, tileId) && PlayerStatic.CheckDirection(tileId, selectedTileId[selectedTileId.Count - 1]) == "Nord")
+                    else if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Rivière_Nord, tileId) && PlayerStatic.CheckDirection(tileId, selectedTileId[selectedTileId.Count - 1]) == "Nord" && !PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Pont_Nord, tileId))
                     {
                         Debug.Log("La tile d'ID : " + tileId + " est séparée par une rivière de la tile d'ID :" + selectedTileId[selectedTileId.Count - 1]);
                     }
-                    else if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Rivière_Sud, tileId) && PlayerStatic.CheckDirection(tileId, selectedTileId[selectedTileId.Count - 1]) == "Sud")
+                    else if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Rivière_Sud, tileId) && PlayerStatic.CheckDirection(tileId, selectedTileId[selectedTileId.Count - 1]) == "Sud" && !PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Pont_Sud, tileId))
                     {
                         Debug.Log("La tile d'ID : " + tileId + " est séparée par une rivière de la tile d'ID :" + selectedTileId[selectedTileId.Count - 1]);
                     }
-                    else if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Rivière_Ouest, tileId) && PlayerStatic.CheckDirection(tileId, selectedTileId[selectedTileId.Count - 1]) == "Ouest")
+                    else if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Rivière_Ouest, tileId) && PlayerStatic.CheckDirection(tileId, selectedTileId[selectedTileId.Count - 1]) == "Ouest" && !PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Pont_Ouest, tileId))
                     {
                         Debug.Log("La tile d'ID : " + tileId + " est séparée par une rivière de la tile d'ID :" + selectedTileId[selectedTileId.Count - 1]);
                     }
