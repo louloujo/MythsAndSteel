@@ -23,6 +23,9 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private GameObject _canvasTurnPhase = null;
     public GameObject CanvasTurnPhase => _canvasTurnPhase;
 
+    [SerializeField] private GameObject _buttonNextPhase = null;
+    public GameObject ButtonNextPhase => _buttonNextPhase;
+
 
     [Header("PANNEAU D'ACTIVATION D'UNE UNITE")]
     [SerializeField] private GameObject _activationUnitPanel = null;
@@ -111,8 +114,17 @@ public class UIInstance : MonoSingleton<UIInstance>
     [Header("ENFANTS CASE DU PLATEAU")]
     [SerializeField] private GameObject _mouvementTilePrefab;
     public GameObject MouvementTilePrefab => _mouvementTilePrefab;
+
+    public void DesactivateNextPhaseButton(){
+        _buttonNextPhase.SetActive(false);
+    }
+
+    public void ActivateNextPhaseButton(){
+        _buttonNextPhase.SetActive(true);
+    }
 }
 
+#region ClassToRangeList
 /// <summary>
 /// Class pour les boutons pour les cartes events
 /// </summary>
@@ -159,3 +171,4 @@ public class AttackStat
     public GameObject _minDamageValueGam = null;
     public GameObject _maxDamageValueGam = null;
 }
+#endregion ClassToRangeList
