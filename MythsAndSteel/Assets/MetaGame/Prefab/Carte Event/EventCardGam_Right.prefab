@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5249351300956634737, guid: 7b4e07eb63565d04b8e25cd06fad29ca, type: 3}
       propertyPath: m_Name
-      value: EventCardGam_Left Variant
+      value: EventCardGam_Right
       objectReference: {fileID: 0}
     - target: {fileID: 5249351300956634742, guid: 7b4e07eb63565d04b8e25cd06fad29ca, type: 3}
       propertyPath: m_Pivot.x
@@ -93,6 +93,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5249351300956634742, guid: 7b4e07eb63565d04b8e25cd06fad29ca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6635448644605777751, guid: 7b4e07eb63565d04b8e25cd06fad29ca, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6635448644605777751, guid: 7b4e07eb63565d04b8e25cd06fad29ca, type: 3}
+      propertyPath: m_Color.g
+      value: 0.47969294
+      objectReference: {fileID: 0}
+    - target: {fileID: 6635448644605777751, guid: 7b4e07eb63565d04b8e25cd06fad29ca, type: 3}
+      propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6725172486396141303, guid: 7b4e07eb63565d04b8e25cd06fad29ca, type: 3}
