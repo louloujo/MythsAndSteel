@@ -37,6 +37,12 @@ public class TileScript : MonoBehaviour
     [SerializeField] private List<MYthsAndSteel_Enum.TerrainType> _terrainEffectList = new List<MYthsAndSteel_Enum.TerrainType>();
     public List<MYthsAndSteel_Enum.TerrainType> TerrainEffectList => _terrainEffectList;
 
+    [Header("VARIABLES EFFET DE TERRAIN")]
+    [SerializeField] MYthsAndSteel_Enum.Owner _owner = MYthsAndSteel_Enum.Owner.neutral;
+    public MYthsAndSteel_Enum.Owner owner => _owner;
+
+    [SerializeField] int _resourcesCounter = 0;
+    public int ResourcesCounter => _resourcesCounter;
 
     private void Start(){
         //Met l'unité à la bonne position
@@ -60,6 +66,11 @@ public class TileScript : MonoBehaviour
         _unit = null;
     }
 
+    /// <summary>
+    /// Ajout un enfant a la tile
+    /// </summary>
+    /// <param name="Rendu"></param>
+    /// <param name="Type"></param>
     public void AddChildRender(Sprite Rendu = null, MYthsAndSteel_Enum.TerrainType Type = MYthsAndSteel_Enum.TerrainType.Sol)
     {
         bool add = true;
@@ -94,7 +105,26 @@ public class TileScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Clear les enfants de la tile
+    /// </summary>
     public void RemoveChild(){
         Child.Clear();
+    }
+
+    /// <summary>
+    /// Change le joueur qui possède le drapeau
+    /// </summary>
+    /// <param name="own"></param>
+    public void ChangePlayerObj(MYthsAndSteel_Enum.Owner own){
+        _owner = own;
+    }
+
+    /// <summary>
+    /// Enleve des ressources à la case
+    /// </summary>
+    /// <param name="value"></param>
+    public void RemoveRessources(int value){
+        _resourcesCounter -= value;
     }
 }
