@@ -37,6 +37,8 @@ public class MouseCommand : MonoBehaviour
     [SerializeField] private float _offsetXStatPlus;
     [SerializeField] private float _offsetYStatPlus;
     [Space]
+    [SerializeField] private Vector2 _xOffsetMin;
+    [SerializeField] private Vector2 _yOffsetMin;
     [SerializeField] private Vector2 _xOffset;
     [SerializeField] private Vector2 _yOffset;
     [SerializeField] private Vector2 _xOffsetMax;
@@ -112,88 +114,122 @@ public class MouseCommand : MonoBehaviour
         StopAllCoroutines();
 
         //Menu d'activation d'une unité
-        if(activationMenu){
-            if(hit.transform.position.x >= _xOffset.y){
-                if(hit.transform.position.x >= _xOffsetMax.y){
-                    if(hit.transform.position.y >= _yOffset.y){
-                        if(hit.transform.position.y >= _yOffsetMax.y){
-                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y - _offsetYActivationMenu, hit.transform.position.z));
+        if(activationMenu)
+        {
+            if(hit.transform.position.x >= _xOffset.y)
+            {
+                if(hit.transform.position.x >= _xOffsetMax.y)
+                {
+                    if(hit.transform.position.y >= _yOffset.y)
+                    {
+                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y - _offsetYActivationMenu + .5f, hit.transform.position.z));
                         }
-                        else{
-                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
-                        }                        
-                    }
-                    else if(hit.transform.position.y <= _yOffset.x){
-                        if(hit.transform.position.y <= _yOffsetMax.x){
-                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y + _offsetYActivationMenu, hit.transform.position.z));
-                        }
-                        else{
+                        else
+                        {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
                         }
                     }
-                    else{
+                    else if(hit.transform.position.y <= _yOffset.x)
+                    {
+                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y + _offsetYActivationMenu - .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
+                        }
+                    }
+                    else
+                    {
                         pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
                     }
                 }
-                else{
-                    if(hit.transform.position.y >= _yOffset.y){
-                        if(hit.transform.position.y >= _yOffsetMax.y){
-                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y - _offsetYActivationMenu, hit.transform.position.z));
+                else
+                {
+                    if(hit.transform.position.y >= _yOffset.y)
+                    {
+                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y - _offsetYActivationMenu + .5f, hit.transform.position.z));
                         }
-                        else{
+                        else
+                        {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
                         }
                     }
-                    else if(hit.transform.position.y <= _yOffset.x){
-                        if(hit.transform.position.y <= _yOffsetMax.x){
-                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y + _offsetYActivationMenu, hit.transform.position.z));
+                    else if(hit.transform.position.y <= _yOffset.x)
+                    {
+                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y + _offsetYActivationMenu - .5f, hit.transform.position.z));
                         }
-                        else{
-                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
                         }
                     }
-                    else{
+                    else
+                    {
                         pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
                     }
                 }
             }
 
-            else if(hit.transform.position.x <= _xOffset.x){
-                if(hit.transform.position.x <= _xOffsetMax.x){
-                    if(hit.transform.position.y >= _yOffset.y){
-                        if(hit.transform.position.y >= _yOffsetMax.y){
-                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y - _offsetYActivationMenu, hit.transform.position.z));
+            else if(hit.transform.position.x <= _xOffset.x)
+            {
+                if(hit.transform.position.x <= _xOffsetMax.x)
+                {
+                    if(hit.transform.position.y >= _yOffset.y)
+                    {
+                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y - _offsetYActivationMenu + .5f, hit.transform.position.z));
                         }
-                        else{
+                        else
+                        {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
                         }
                     }
-                    else if(hit.transform.position.y <= _yOffset.x){
-                        if(hit.transform.position.y <= _yOffsetMax.x){
-                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y + _offsetYActivationMenu, hit.transform.position.z));
+                    else if(hit.transform.position.y <= _yOffset.x)
+                    {
+                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y + _offsetYActivationMenu - .5f, hit.transform.position.z));
                         }
-                        else{
+                        else
+                        {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
                         }
                     }
-                    else{
+                    else
+                    {
                         pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
                     }
                 }
-                else{
-                    if(hit.transform.position.y >= _yOffset.y){
-                        if(hit.transform.position.y >= _yOffsetMax.y){
-                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y - _offsetYActivationMenu, hit.transform.position.z));
+                else
+                {
+                    if(hit.transform.position.y >= _yOffset.y)
+                    {
+                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y - _offsetYActivationMenu + .5f, hit.transform.position.z));
                         }
-                        else{
+                        else
+                        {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
                         }
                     }
-                    else if(hit.transform.position.y <= _yOffset.x){
-                        if(hit.transform.position.y <= _yOffsetMax.x){
-                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y + _offsetYActivationMenu, hit.transform.position.z));
+                    else if(hit.transform.position.y <= _yOffset.x)
+                    {
+                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y + _offsetYActivationMenu - .5f, hit.transform.position.z));
                         }
-                        else{
+                        else
+                        {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
                         }
                     }
@@ -203,174 +239,378 @@ public class MouseCommand : MonoBehaviour
                     }
                 }
             }
-            else{
-                if(hit.transform.position.y >= _yOffsetMax.y){
+            else
+            {
+                if(hit.transform.position.y >= _yOffsetMax.y)
+                {
                     pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y - _offsetYActivationMenu, hit.transform.position.z));
                 }
-                else if(hit.transform.position.y <= _yOffsetMax.x){
+                else if(hit.transform.position.y <= _yOffsetMax.x)
+                {
                     pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y + _offsetYActivationMenu, hit.transform.position.z));
                 }
-                else{
+                else
+                {
                     pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
                 }
             }
         }
-        else
+
+        //Menu mouseOver
+        else if(mouseOver)
         {
-            //Gros menus des stats qui change de page
-            if(switchPage){
-                pos = new Vector3(lastPosX, lastPosY, ShiftUI[0].transform.position.z);
-            }
-            //Autre Menu
-            else{}
-
-            if(mouseOver){
-                pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y, hit.transform.position.z));
-
-                if(hit.transform.position.x >= _xOffset.y){
-                    if(hit.transform.position.y >= _yOffset.y){
-                        pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver, hit.transform.position.z));
-                    }
-                    else if(hit.transform.position.y <= _yOffset.x){
-                        pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y + _offsetYMouseOver, hit.transform.position.z));
-                    }
-                    else{
-                        pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y, hit.transform.position.z));
-                    }
-                }
-                else if(hit.transform.position.x <= _xOffset.x){
-                    if(hit.transform.position.y >= _yOffset.y){
-                        pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - 0.5f, hit.transform.position.y - _offsetYMouseOver, hit.transform.position.z));
-                    }
-                    else if(hit.transform.position.y <= _yOffset.x){
-                        pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - 0.5f, hit.transform.position.y + _offsetYMouseOver, hit.transform.position.z));
-                    }
-                    else{
-                        pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - 0.5f, hit.transform.position.y + _offsetYMouseOver, hit.transform.position.z));
-                    }
-                }
-                else{
-                    if(hit.transform.position.y >= _yOffset.y){
-                       
-                    }
-                    else if(hit.transform.position.y <= _yOffset.x){
-                        
-                    }
-                    else{
-                        
-                    }
-                }
-            }
-
-            else if(bigStat){
-                if(hit.transform.position.x >= _xOffset.y)
-                {
-                    if(hit.transform.position.y >= _yOffset.y)
-                    {
-
-                    }
-                    else if(hit.transform.position.y <= _yOffset.x)
-                    {
-
-                    }
-                    else
-                    {
-
-                    }
-                }
-                else if(hit.transform.position.x <= _xOffset.x)
-                {
-                    if(hit.transform.position.y >= _yOffset.y)
-                    {
-
-                    }
-                    else if(hit.transform.position.y <= _yOffset.x)
-                    {
-
-                    }
-                    else
-                    {
-
-                    }
-                }
-                else
-                {
-                    if(hit.transform.position.y >= _yOffset.y)
-                    {
-
-                    }
-                    else if(hit.transform.position.y <= _yOffset.x)
-                    {
-
-                    }
-                    else
-                    {
-
-                    }
-                }
-            }
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-        //Si le joueur change de Page.
-        if (!switchPage)
-        {
-            //Permet de repositionner la position de l'UI en fonction du raycastHit
-
-            if (hit.transform.position.x >= _xOffset.y)
+            if(hit.transform.position.x >= _xOffset.y)
             {
-                if(hit.transform.position.y >= _yOffset.y)
+                if(hit.transform.position.x >= _xOffsetMax.y)
                 {
-                    pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x , hit.transform.position.y - 2, hit.transform.position.z));
-                }
-                else if(hit.transform.position.y <= _yOffset.x)
-                {
-                    pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y + 2, hit.transform.position.z));
+                    if(hit.transform.position.y >= _yOffsetMin.y)
+                    {
+                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - 1, hit.transform.position.z));
+                        }
+                        else if(hit.transform.position.y <= _yOffsetMax.y && hit.transform.position.y >= _yOffset.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
+                        }
+                    }
+                    else if(hit.transform.position.y <= _yOffsetMin.x)
+                    {
+                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver, hit.transform.position.y + _offsetYMouseOver + 1, hit.transform.position.z));
+                        }
+                        else if(hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver, hit.transform.position.y + _offsetYMouseOver + .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver, hit.transform.position.y + _offsetYMouseOver + .5f, hit.transform.position.z));
+                        }
+                    }
+                    else
+                    {
+                        pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
+                    }
                 }
                 else
                 {
-                    pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + (Mathf.Abs(offSetX) * -1), hit.transform.position.y + offSetY, hit.transform.position.z));
-                }
-
-
-                pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - offSetX, hit.transform.position.y + offSetY, hit.transform.position.z));
-                if (hit.transform.position.y >= _xOffset.y)
-                {
-                    
+                    if(hit.transform.position.y >= _yOffsetMin.y)
+                    {
+                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYMouseOver - 1, hit.transform.position.z));
+                        }
+                        else if(hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
+                        }
+                    }
+                    else if(hit.transform.position.y <= _yOffsetMin.x)
+                    {
+                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y + _offsetYMouseOver + 1, hit.transform.position.z));
+                        }
+                        else if(hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y + _offsetYMouseOver + .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y + _offsetYMouseOver + .5f, hit.transform.position.z));
+                        }
+                    }
+                    else
+                    {
+                        pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
+                    }
                 }
             }
+
             else if(hit.transform.position.x <= _xOffset.x)
             {
-
+                if(hit.transform.position.x <= _xOffsetMax.x)
+                {
+                    if(hit.transform.position.y >= _yOffsetMin.y)
+                    {
+                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - 1, hit.transform.position.z));
+                        }
+                        else if(hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
+                        }
+                    }
+                    else if(hit.transform.position.y <= _yOffsetMin.x)
+                    {
+                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y + _offsetYMouseOver + 1, hit.transform.position.z));
+                        }
+                        else if(hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y + _offsetYMouseOver + .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y + _offsetYMouseOver + .5f, hit.transform.position.z));
+                        }
+                    }
+                    else
+                    {
+                        pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
+                    }
+                }
+                else
+                {
+                    if(hit.transform.position.y >= _yOffsetMin.y)
+                    {
+                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - 1, hit.transform.position.z));
+                        }
+                        else if(hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
+                        }
+                    }
+                    else if(hit.transform.position.y <= _yOffsetMin.x)
+                    {
+                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y + _offsetYMouseOver + 1, hit.transform.position.z));
+                        }
+                        else if(hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y + _offsetYMouseOver + .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y + _offsetYMouseOver + .5f, hit.transform.position.z));
+                        }
+                    }
+                    else
+                    {
+                        pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
+                    }
+                }
             }
             else
             {
-                //pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + offSetX, hit.transform.position.y + offSetY, hit.transform.position.z));
+                if(hit.transform.position.y >= _yOffsetMax.y)
+                {
+                    pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver / 2, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
+                }
+                else if(hit.transform.position.y <= _yOffsetMax.x)
+                {
+                    pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver / 2, hit.transform.position.y + _offsetYMouseOver + .5f, hit.transform.position.z));
+                }
+                else
+                {
+                    pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver * 2.5f, hit.transform.position.y, hit.transform.position.z));
+                }
             }
         }
 
-        //Je détermine une position de référence dans l'espace (pour que la position de l'UI soit par rapport au Canvas et non à l'objet).
-        else
+        //Menu avec toutes les stats
+        else if(bigStat)
         {
-            pos = new Vector3(offSetX, offSetY, ShiftUI[0].transform.position.z);
-        }*/
+            if(hit.transform.position.x >= _xOffset.y)
+            {
+                if(hit.transform.position.x >= _xOffsetMax.y)
+                {
+                    if(hit.transform.position.y >= _yOffsetMin.y)
+                    {
+                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - 1, hit.transform.position.z));
+                        }
+                        else if(hit.transform.position.y <= _yOffsetMax.y && hit.transform.position.y >= _yOffset.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
+                        }
+                    }
+                    else if(hit.transform.position.y <= _yOffsetMin.x)
+                    {
+                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus, hit.transform.position.y + _offsetYStatPlus + 1, hit.transform.position.z));
+                        }
+                        else if(hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus, hit.transform.position.y + _offsetYStatPlus + .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus, hit.transform.position.y + _offsetYStatPlus + .5f, hit.transform.position.z));
+                        }
+                    }
+                    else
+                    {
+                        pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
+                    }
+                }
+                else
+                {
+                    if(hit.transform.position.y >= _yOffsetMin.y)
+                    {
+                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYStatPlus - 1, hit.transform.position.z));
+                        }
+                        else if(hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
+                        }
+                    }
+                    else if(hit.transform.position.y <= _yOffsetMin.x)
+                    {
+                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y + _offsetYStatPlus + 1, hit.transform.position.z));
+                        }
+                        else if(hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y + _offsetYStatPlus + .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y + _offsetYStatPlus + .5f, hit.transform.position.z));
+                        }
+                    }
+                    else
+                    {
+                        pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
+                    }
+                }
+            }
+
+            else if(hit.transform.position.x <= _xOffset.x)
+            {
+                if(hit.transform.position.x <= _xOffsetMax.x)
+                {
+                    if(hit.transform.position.y >= _yOffsetMin.y)
+                    {
+                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - 1, hit.transform.position.z));
+                        }
+                        else if(hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
+                        }
+                    }
+                    else if(hit.transform.position.y <= _yOffsetMin.x)
+                    {
+                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y + _offsetYStatPlus + 1, hit.transform.position.z));
+                        }
+                        else if(hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y + _offsetYStatPlus + .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y + _offsetYStatPlus + .5f, hit.transform.position.z));
+                        }
+                    }
+                    else
+                    {
+                        pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
+                    }
+                }
+                else
+                {
+                    if(hit.transform.position.y >= _yOffsetMin.y)
+                    {
+                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - 1, hit.transform.position.z));
+                        }
+                        else if(hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
+                        }
+                    }
+                    else if(hit.transform.position.y <= _yOffsetMin.x)
+                    {
+                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y + _offsetYStatPlus + 1, hit.transform.position.z));
+                        }
+                        else if(hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y + _offsetYStatPlus + .5f, hit.transform.position.z));
+                        }
+                        else
+                        {
+                            pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y + _offsetYStatPlus + .5f, hit.transform.position.z));
+                        }
+                    }
+                    else
+                    {
+                        pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
+                    }
+                }
+            }
+            else
+            {
+                if(hit.transform.position.y >= _yOffsetMax.y)
+                {
+                    pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus / 2, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
+                }
+                else if(hit.transform.position.y <= _yOffsetMax.x)
+                {
+                    pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus / 2, hit.transform.position.y + _offsetYStatPlus + .5f, hit.transform.position.z));
+                }
+                else
+                {
+                    pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus * 2.5f, hit.transform.position.y, hit.transform.position.z));
+                }
+            }
+        }
+        else if(switchPage){
+            pos = new Vector3(lastPosX, lastPosY, ShiftUI[0].transform.position.z);
+        }
+        else{
+            Debug.LogError("Vous essayez de positionner un objet qui ne peut pas se positionner autour de l'unité");
+        }
 
         //Rendre l'élément visible.
         uiElements.SetActive(true);
