@@ -77,9 +77,6 @@ public class GameManagerSO : ScriptableObject
             case MYthsAndSteel_Enum.PhaseDeJeu.Strategie:
                 GoToStrategyPhase();
                 break;
-
         }
     }
-
-
 }
