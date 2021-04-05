@@ -55,13 +55,11 @@ public class GameManagerSO : ScriptableObject
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1:
-                GoToActionJ1Phase();
-
-                UnitScript[] unitList = GameObject.FindObjectsOfType<UnitScript>();
-                foreach(UnitScript unit in unitList)
-                {
-                    unit.ResetTurn();
+                foreach(GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance._unitListRedPlayer : PlayerScript.Instance._unitListBluePlayer){
+                    unit.GetComponent<UnitScript>().ResetTurn();
                 }
+
+                GoToActionJ1Phase();
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2:
@@ -69,21 +67,16 @@ public class GameManagerSO : ScriptableObject
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2:
-                GoToActionJ2Phase();
-
-                UnitScript[] unitList2 = GameObject.FindObjectsOfType<UnitScript>();
-                foreach(UnitScript unit in unitList2)
-                {
-                    unit.ResetTurn();
+                foreach(GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance._unitListRedPlayer : PlayerScript.Instance._unitListBluePlayer){
+                    unit.GetComponent<UnitScript>().ResetTurn();
                 }
+
+                GoToActionJ2Phase();
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.Strategie:
                 GoToStrategyPhase();
                 break;
-
         }
     }
-
-
 }
