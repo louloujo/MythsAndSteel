@@ -55,20 +55,11 @@ public class GameManagerSO : ScriptableObject
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1:
-                GoToActionJ1Phase();
-
-                List<GameObject> unitList = GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance._unitListRedPlayer : PlayerScript.Instance._unitListBluePlayer;
-
-                foreach(GameObject unit in unitList){
+                foreach(GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance._unitListRedPlayer : PlayerScript.Instance._unitListBluePlayer){
                     unit.GetComponent<UnitScript>().ResetTurn();
                 }
 
-                unitList = !GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance._unitListRedPlayer : PlayerScript.Instance._unitListBluePlayer;
-
-                foreach(GameObject unit in unitList)
-                {
-                    unit.GetComponent<UnitScript>().ResetOponentTurn();
-                }
+                GoToActionJ1Phase();
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2:
@@ -76,20 +67,11 @@ public class GameManagerSO : ScriptableObject
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2:
-                GoToActionJ2Phase();
-
-                List<GameObject> unitList2 = GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance._unitListRedPlayer : PlayerScript.Instance._unitListBluePlayer;
-
-                foreach(GameObject unit in unitList2){
+                foreach(GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance._unitListRedPlayer : PlayerScript.Instance._unitListBluePlayer){
                     unit.GetComponent<UnitScript>().ResetTurn();
                 }
 
-                unitList2 = !GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance._unitListRedPlayer : PlayerScript.Instance._unitListBluePlayer;
-
-                foreach(GameObject unit in unitList2)
-                {
-                    unit.GetComponent<UnitScript>().ResetOponentTurn();
-                }
+                GoToActionJ2Phase();
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.Strategie:

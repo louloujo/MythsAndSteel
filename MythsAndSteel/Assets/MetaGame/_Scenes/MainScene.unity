@@ -8749,7 +8749,7 @@ MonoBehaviour:
     inputCarteActivation: 109
   - valeurActivation: 3,7
     IndexCarteActivation: 8
-    inputCarteActivation: 63
+    inputCarteActivation: 44
   - valeurActivation: 4,2
     IndexCarteActivation: 9
     inputCarteActivation: 46
@@ -17568,6 +17568,16 @@ MonoBehaviour:
   _unitListRedPlayer:
   - {fileID: 108961818}
   - {fileID: 1691159585}
+  - {fileID: 1204031599}
+  - {fileID: 2024281191}
+  - {fileID: 1516314594}
+  - {fileID: 190853364}
+  - {fileID: 278045508}
+  - {fileID: 105639953}
+  - {fileID: 1908195816}
+  - {fileID: 1185216429}
+  - {fileID: 361879341}
+  - {fileID: 1917125302}
   _unitListBluePlayer:
   - {fileID: 549253556}
   DisactivateUnitType: 
@@ -19763,7 +19773,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2125945373
 RectTransform:
   m_ObjectHideFlags: 0

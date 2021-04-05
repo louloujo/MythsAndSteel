@@ -62,10 +62,13 @@ public class MenuActionUnite : MonoBehaviour
         {
             _powerBtn.gameObject.SetActive(false);
         }
+
         //Vérifie si l'unité a effectuer tout son déplacement si c'est le cas alors décale la position des boutons en supprimant le bouton de déplacement
-        if (unitscript.IsMoveDone == true)
-        {
+        if (unitscript.IsMoveDone == true){
             _moveBtn.gameObject.SetActive(false);
+        }
+        else{
+            _moveBtn.gameObject.SetActive(true);
         }
 
         // place le menu à coté de l'unité selectionnée

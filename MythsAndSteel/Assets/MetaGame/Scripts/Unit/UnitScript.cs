@@ -240,15 +240,6 @@ public class UnitScript : MonoBehaviour
         _usefullForOpponent = false;
     }
 
-    public virtual void ResetOponentTurn(){
-        _isActivationDone = false;
-        _isMoveDone = false;
-        _isActionDone = false;
-
-        _moveLeft = _unitSO.MoveSpeed;
-        _usefullForOpponent = false;
-    }
-
     public void checkMovementLeft()
     {
         if (_moveLeft == 0)
