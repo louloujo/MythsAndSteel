@@ -65,6 +65,14 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private Transform _bluePlayerEventtransf = null;
     public Transform BluePlayerEventtransf => _bluePlayerEventtransf;
 
+    //Transform de la carte event du joueur rouge le plus en bas
+    [SerializeField] private Transform _redEventDowntrans = null;
+    public Transform RedEventDowntrans => _redEventDowntrans;
+
+    //Transform de la carte event du joueur bleu le plus en bas
+    [SerializeField] private Transform _blueEventDowntrans = null;
+    public Transform BlueEventDowntrans => _blueEventDowntrans;
+
     [Header("LISTES DES BOUTONS D ACTIONS")]
     [Tooltip("0 et  1 sont pour les boutons quitter, 2 et 3 sont pour switch entre la Page 1 et la Page 2")]
     //Les premiers chiffres (pour le moment 0 et 1 déterminent les bouttons à quitter les menus), les derniers déterminent les buttons des switch de menu.
@@ -114,6 +122,10 @@ public class UIInstance : MonoSingleton<UIInstance>
     [Header("ENFANTS CASE DU PLATEAU")]
     [SerializeField] private GameObject _mouvementTilePrefab;
     public GameObject MouvementTilePrefab => _mouvementTilePrefab;
+
+    [Header("STAT DU JEU")]
+    [SerializeField] private TextMeshProUGUI _fpsText = null;
+    public TextMeshProUGUI FpsText => _fpsText;
 
     public void DesactivateNextPhaseButton(){
         _buttonNextPhase.SetActive(false);

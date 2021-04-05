@@ -69,7 +69,7 @@ public class MenuActionUnite : MonoBehaviour
         }
 
         // place le menu à coté de l'unité selectionnée
-        MouseCommand.ActivateUI(UIMenuActionUnite, 0.5f, 3, false);
+        MouseCommand.ActivateUI(UIMenuActionUnite, 0.5f, 3, false, true);
     }
     public void déplacement()
     {

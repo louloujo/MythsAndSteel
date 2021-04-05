@@ -82,6 +82,7 @@ public class GameManager : MonoSingleton<GameManager>{
     public delegate void EventToCallAfterChoose();
     public EventToCallAfterChoose _eventCardCall;
 
+    float deltaTimeX = 0f;
     #endregion Variables
 
     /// <summary>
@@ -99,6 +100,12 @@ public class GameManager : MonoSingleton<GameManager>{
         _managerSO.GoToOrgoneJ1Phase += DetermineWhichPlayerplay;
         _managerSO.GoToOrgoneJ2Phase += DetermineWhichPlayerplay;
         _isInTurn = true;
+    }
+
+    private void Update(){
+        deltaTimeX += Time.deltaTime;
+        deltaTimeX /= 2;
+        UIInstance.Instance.FpsText.text = ((int) (1 / deltaTimeX)).ToString();
     }
 
     /// <summary>

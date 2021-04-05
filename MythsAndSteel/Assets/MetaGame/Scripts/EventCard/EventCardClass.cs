@@ -72,7 +72,7 @@ public class EventCardClass : ScriptableObject{
         }
         else if(player == 2)
         {
-            if(PlayerScript.Instance.EventCardList._eventCardRedPlayer.Count <= 3){
+            if(PlayerScript.Instance.EventCardList._eventCardBluePlayer.Count <= 3){
                 ResetEventParentPos(2);
 
                 UpdateEventList(gam, player);
@@ -98,7 +98,7 @@ public class EventCardClass : ScriptableObject{
         if(player == 1){
             if(_redPlayerPos == 0){
                 //Déplace les events à leurs bonnes positions
-                gam[0].transform.position = player == 1 ? new Vector3(300, 540 - _spaceBetweenTwoEvents, 0) : new Vector3(1620, 540 - _spaceBetweenTwoEvents, 0);
+                gam[0].transform.position = UIInstance.Instance.RedEventDowntrans.position;
 
                 if(gam.Count > 1){
                     for(int i = 1; i < gam.Count; i++){
@@ -122,7 +122,7 @@ public class EventCardClass : ScriptableObject{
         else if(player == 2){
             if(_bluePlayerPos == 0){
                 //Déplace les events à leurs bonnes positions
-                gam[0].transform.position = player == 1 ? new Vector3(300, 540 - _spaceBetweenTwoEvents, 0) : new Vector3(1620, 540 - _spaceBetweenTwoEvents, 0);
+                gam[0].transform.position = UIInstance.Instance.BlueEventDowntrans.position;
 
                 if(gam.Count > 1){
                     for(int i = 1; i < gam.Count; i++){

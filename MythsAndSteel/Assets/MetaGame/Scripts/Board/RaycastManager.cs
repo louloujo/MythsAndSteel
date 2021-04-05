@@ -174,8 +174,6 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         }
     }
 
-
-
     /// <summary>
     /// Est ce que l'unité qui a été cliquée fait partie de l'armée
     /// </summary>
