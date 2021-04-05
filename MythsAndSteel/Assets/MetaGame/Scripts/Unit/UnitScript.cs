@@ -13,7 +13,6 @@ public class UnitScript : MonoBehaviour
     [SerializeField] Unit_SO _unitSO;
     public Unit_SO UnitSO => _unitSO;
 
-
     [Header("Stats en jeu de l'unité")]
     //Vie actuelle
     [SerializeField] int _life;
@@ -23,18 +22,24 @@ public class UnitScript : MonoBehaviour
     [SerializeField] int _shield;
     public int Shield => _shield;
 
+    [Space]
     //Portée
     [SerializeField] int _attackRange;
     public int AttackRange => _attackRange;
+    public int AttackRangeBonus = 0;
 
+    [Space]
     //Vitesse de déplacement
     [SerializeField] int _moveSpeed;
     public int MoveSpeed => _moveSpeed;
+    public int MoveSpeedBonus = 0;
 
+    [Space]
     // Coût de création
     [SerializeField] int _creationCost;
     public int CreationCost => _creationCost;
 
+    [Space]
     //Dégats minimum infligé
     [SerializeField] Vector2 _NumberRangeMin;
     public Vector2 NumberRangeMin => _NumberRangeMin;
@@ -48,7 +53,7 @@ public class UnitScript : MonoBehaviour
     [SerializeField] int _DamageMaximum;
     public int DamageMaximum => _DamageMaximum;
 
-
+    public int DiceBonus = 0;
 
 
     [Header("Stats non nécéssaire")]
@@ -96,10 +101,6 @@ public class UnitScript : MonoBehaviour
     [SerializeField] bool _isActivationDone;
     public bool IsActivationDone => _isActivationDone;
 
-    //est ce que cette unité est utilisable par l'adversaire
-    bool _usefullForOpponent;
-    public bool UsefullForOpponent => _usefullForOpponent;
-
     //est ce que l'unité peut prendre des dégâts (carte event "Cessez le feu")
     bool _canTakeDamage;
     public bool CanTakeDamage => _canTakeDamage;
@@ -124,6 +125,10 @@ public class UnitScript : MonoBehaviour
     //list qui va chercher les text enfant dans la hiérarchie pour l'UI
     Text[] allchildren;
 
+    [Header("Effet de cartes events")]
+    //est ce que cette unité est utilisable par l'adversaire
+    public bool _usefullForOpponent;
+
     #endregion Variables
 
     private void Update()
@@ -147,6 +152,11 @@ public class UnitScript : MonoBehaviour
     public virtual void GiveLife(int Lifeadd)
     {
         _life += Lifeadd;
+        if(_life > UnitSO.LifeMax){
+            int shieldPlus = _life - UnitSO.LifeMax;
+            _life = UnitSO.LifeMax;
+            _shield += shieldPlus;
+        }
     }
 
     /// <summary>
@@ -155,8 +165,16 @@ public class UnitScript : MonoBehaviour
     /// <param name="Damage"></param>
     public virtual void TakeDamage(int Damage)
     {
-        _life -= Damage;
-        CheckLife();
+        if(_shield > 0){
+            _shield -= Damage;
+            _life += _shield;
+            CheckLife();
+        }
+        else
+        {
+            _life -= Damage;
+            CheckLife();
+        }
     }
 
     /// <summary>
@@ -210,10 +228,16 @@ public class UnitScript : MonoBehaviour
     /// <summary>
     /// Reset les valeurs nécéssaires pour un nouveau tour
     /// </summary>
-    public virtual void ResetTurn()
-    {
-        _moveLeft = _unitSO.MoveSpeed;
+    public virtual void ResetTurn(){
+        _isActivationDone = false;
         _isMoveDone = false;
+        _isActionDone = false;
+
+        MoveSpeedBonus = 0;
+        AttackRangeBonus = 0;
+
+        _moveLeft = _unitSO.MoveSpeed;
+        _usefullForOpponent = false;
     }
 
     public void checkMovementLeft()

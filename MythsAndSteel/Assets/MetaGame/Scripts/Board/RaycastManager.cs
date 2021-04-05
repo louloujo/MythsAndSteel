@@ -110,39 +110,69 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     /// </summary>
     public void Select()
     {
-        //Si le mouvement n'a pas été lancé
-        if (!Mouvement.Instance.Selected)
+        if(GameManager.Instance.ChooseUnitForEvent)
         {
             if(_unitInTile != null)
             {
-                if(CanUseUnitWhenClic(_unitInTile.GetComponent<UnitScript>()))
+                if(GameManager.Instance.UnitChooseList.Contains(_unitInTile))
                 {
-                    _actualTileSelected = _tile;
-                    _actualUnitSelected = _actualTileSelected.GetComponent<TileScript>().Unit;
-                    _menuForUnit.GetComponent<MenuActionUnite>().ShowPanel();
-                }
-            }
-        }
-
-        //Si le mouvement a été lancé
-        else
-        {
-            if (Mouvement.Instance.IsInMouvement && !Mouvement.Instance.MvmtRunning)
-            {
-                if (_tile != _actualTileSelected)
-                {
-                    Mouvement.Instance.AddMouvement(TilesManager.Instance.TileList.IndexOf(_tile));
+                    GameManager.Instance.UnitChooseList.Remove(_unitInTile);
                 }
                 else
                 {
-                    Mouvement.Instance.StopMouvement(true);
-                    UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
+                    if(_unitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy == GameManager.Instance.IsPlayerRedTurn && GameManager.Instance.ChooseArmyUnit == true)
+                    {
+                        GameManager.Instance.AddUnitToList(_unitInTile);
+                    }
+                    else if(_unitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy != GameManager.Instance.IsPlayerRedTurn && GameManager.Instance.ChooseOponentUnit == true)
+                    {
+                        GameManager.Instance.AddUnitToList(_unitInTile);
+                    }
+                    else if(!_unitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy != GameManager.Instance.IsPlayerRedTurn && GameManager.Instance.ChooseArmyUnit == true)
+                    {
+                        GameManager.Instance.AddUnitToList(_unitInTile);
+                    }
+                    else if(!_unitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy == GameManager.Instance.IsPlayerRedTurn && GameManager.Instance.ChooseOponentUnit == true)
+                    {
+                        GameManager.Instance.AddUnitToList(_unitInTile);
+                    }
+                }
+            }
+        }
+        else
+        {
+            //Si le mouvement n'a pas été lancé
+            if(!Mouvement.Instance.Selected)
+            {
+                if(_unitInTile != null)
+                {
+                    if(CanUseUnitWhenClic(_unitInTile.GetComponent<UnitScript>()))
+                    {
+                        _actualTileSelected = _tile;
+                        _actualUnitSelected = _actualTileSelected.GetComponent<TileScript>().Unit;
+                        _menuForUnit.GetComponent<MenuActionUnite>().ShowPanel();
+                    }
+                }
+            }
+
+            //Si le mouvement a été lancé
+            else
+            {
+                if(Mouvement.Instance.IsInMouvement && !Mouvement.Instance.MvmtRunning)
+                {
+                    if(_tile != _actualTileSelected)
+                    {
+                        Mouvement.Instance.AddMouvement(TilesManager.Instance.TileList.IndexOf(_tile));
+                    }
+                    else
+                    {
+                        Mouvement.Instance.StopMouvement(true);
+                        UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
+                    }
                 }
             }
         }
     }
-
-
 
     /// <summary>
     /// Est ce que l'unité qui a été cliquée fait partie de l'armée
@@ -155,14 +185,14 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         {
             if(GameManager.Instance.IsPlayerRedTurn)
             {
-                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, true))
+                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, true) && !uniTouch._usefullForOpponent)
                 {
                     return false;
                 }
             }
             else
             {
-                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, false))
+                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, false) && !uniTouch._usefullForOpponent)
                 {
                     return false;
                 }
@@ -197,7 +227,6 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             return false;
         }
     }
-
 
     /// <summary>
     /// Permet d'obtenir les objets touchés par le raycast

@@ -59,5 +59,18 @@ public class TileSelectionMovement : MonoBehaviour{
             _spritRender.enabled = false;
             _isVisble = false;
         }
+
+        if(RaycastManager.Instance.UnitInTile != null && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)){
+            if(RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy == GameManager.Instance.IsPlayerRedTurn){
+                GetComponent<Animator>().SetBool("HasUnit",  true);
+            }
+            else{
+                GetComponent<Animator>().SetBool("HasUnit", false);
+            }
+        }
+        else{
+            GetComponent<Animator>().SetBool("HasUnit", false);
+        }
+
     }
 }
