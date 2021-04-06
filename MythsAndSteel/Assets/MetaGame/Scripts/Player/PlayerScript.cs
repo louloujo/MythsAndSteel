@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoSingleton<PlayerScript>
 {
+    [SerializeField] private Player _redPlayerInfos = new Player();
+    [SerializeField] private Player _bluePlayerInfos = new Player();
+    [Space]
     //Liste des Unités
     public List<GameObject> _unitListRedPlayer = new List<GameObject>();
     public List<GameObject> _unitListBluePlayer = new List<GameObject>();
@@ -77,10 +80,10 @@ public class PlayerScript : MonoSingleton<PlayerScript>
     void AddEventCard(int player, MYthsAndSteel_Enum.EventCard card)
     {
         if(player == 1){
-            EventCardList._eventCardRedPlayer.Add(card);
+            EventCardList._eventCardRedPlayer.Insert(1, card);
         }
         else if(player == 2){
-            EventCardList._eventCardBluePlayer.Add(card);
+            EventCardList._eventCardBluePlayer.Insert(1, card);
         }
         else{
             Debug.LogError("vous essayez d'ajouter une carte event a un joueur qui n'existe pas");
@@ -111,11 +114,11 @@ public class PlayerScript : MonoSingleton<PlayerScript>
         AddEventToButton(card, newCard);
 
         if(player == 1){
-            EventCardList._eventGamRedPlayer.Add(newCard);
+            EventCardList._eventGamRedPlayer.Insert(1, newCard);
             _eventCardList._eventSO.UpdateVisualUI(EventCardList._eventGamRedPlayer, 1);
         }
         else if(player == 2){
-            EventCardList._eventGamBluePlayer.Add(newCard);
+            EventCardList._eventGamBluePlayer.Insert(1, newCard);
             _eventCardList._eventSO.UpdateVisualUI(EventCardList._eventGamBluePlayer, 2);
         }
         else{
