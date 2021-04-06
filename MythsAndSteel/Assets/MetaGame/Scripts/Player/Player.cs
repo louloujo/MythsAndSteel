@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Player
 {
     List<GameObject> ArmyUnitsList; //Liste de toutes les unités de l'armée
@@ -40,8 +41,7 @@ public class Player
 
     public bool HasMoveOrgoneArea; //Est que le joueur a déjà bougé la zone d'orgone
 
-    public bool OrgoneExplose()
-    {
+    public bool OrgoneExplose(){
         return OrgoneValue > 5 ? true : false;
     }
 
@@ -49,8 +49,7 @@ public class Player
     /// Change la valeur (pos/neg) de la jauge d'orgone.
     /// </summary>
     /// <param name="Value">Valeur positive ou négative.</param>
-    public void ChangeOrgone(int Value)
-    {
+    public void ChangeOrgone(int Value){
         OrgoneValue += Value;
         Debug.Log(OrgoneValue);
     }
@@ -58,16 +57,14 @@ public class Player
     /// <summary>
     /// Update l'UI de la jauge d'orgone en fonction du nombre de charge
     /// </summary>
-    public void UpdateOrgoneUI()
-    {
+    public void UpdateOrgoneUI(){
         // oskour Paul !
     }
 
     /// <summary>
     /// Appelle l'explosion d'orgone
     /// </summary>
-    public void MakeOrgoneExplosion()
-    {
+    public void MakeOrgoneExplosion(){
         // oskour Paul !
     } 
 }

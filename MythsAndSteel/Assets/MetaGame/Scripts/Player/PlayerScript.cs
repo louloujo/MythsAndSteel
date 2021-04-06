@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoSingleton<PlayerScript>
 {
+    [SerializeField] private Player _redPlayerInfos = new Player();
+    [SerializeField] private Player _bluePlayerInfos = new Player();
+
     //Liste des Unités
     public List<GameObject> _unitListRedPlayer = new List<GameObject>();
     public List<GameObject> _unitListBluePlayer = new List<GameObject>();
