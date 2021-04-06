@@ -223,11 +223,12 @@ public class EventCardClass : ScriptableObject{
     /// Update la position du parent des cartes events d'un joueur
     /// </summary>
     void UpdateEventsParentPos(int player){
+        float multiplier = 1.17f;
         if(player == 1){
-            UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition = new Vector3(UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition.x, -_spaceBetweenTwoEvents * _redPlayerPos, UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition.z);
+            UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition = new Vector3(UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition.x, -_spaceBetweenTwoEvents * _redPlayerPos / multiplier, UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition.z);
         }
         else if(player == 2){
-            UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition = new Vector3(UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition.x, -_spaceBetweenTwoEvents * _bluePlayerPos, UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition.z);
+            UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition = new Vector3(UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition.x, -_spaceBetweenTwoEvents * _bluePlayerPos / multiplier, UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition.z);
         }
         else{
             Debug.LogError("vous essayez de déplacer les cartes events d'un joueur qui n'existe pas");
