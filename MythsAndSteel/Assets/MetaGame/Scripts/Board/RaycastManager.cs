@@ -16,6 +16,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     //tile qui se trouve sous le raycast
     [SerializeField] private GameObject _tile;
     public GameObject Tile => _tile;
+
     //Dernière tile en mémoire par ce script
     GameObject _lastTile = null;
 

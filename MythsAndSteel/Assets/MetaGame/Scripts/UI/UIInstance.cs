@@ -137,23 +137,21 @@ public class UIInstance : MonoSingleton<UIInstance>
 
     #region UITile
     [Header("Tile's infos update")]
-    [SerializeField] private TextMeshProUGUI Title;
-    [SerializeField] private TextMeshProUGUI Desc;
-    [SerializeField] private Image Rendu;
-    [SerializeField] private TextMeshProUGUI Ressources;
-    [SerializeField] private Animator UITile;
+    [SerializeField] private TileTypeClass _typeTileList;
+
     //Variable du Scriptable.
     public TerrainTypeClass Terrain;
+
     public void CallUpdateUI(GameObject Tile)
     {
         if (Tile == null)
         {
-            UITile.SetBool("open", false); return;
+            _typeTileList.UiTiles.SetBool("open", false); return;
         }
         else if (Tile.TryGetComponent(out TileScript T))
         {
-            Terrain.Synch(Tile.GetComponent<TileScript>(), Title, Desc, Ressources, Rendu); // Affiche les nouvelles informations à propos de la tile séléctionnée.  
-            UITile.SetBool("open", true);
+            Terrain.Synch(Tile.GetComponent<TileScript>(), _typeTileList.Tile, _typeTileList.Desc, _typeTileList.Ressources, _typeTileList.Rendu); // Affiche les nouvelles informations à propos de la tile séléctionnée.  
+            _typeTileList.UiTiles.SetBool("open", true);
         }
     }
     #endregion
@@ -205,5 +203,23 @@ public class AttackStat
 
     public GameObject _minDamageValueGam = null;
     public GameObject _maxDamageValueGam = null;
+}
+
+/// <summary>
+/// Liste pour tous les objets pour l'affichage du type de terrain sur chaque case
+/// </summary>
+[System.Serializable]
+public class TileTypeClass
+{
+    [SerializeField] private TextMeshProUGUI _title;
+    public TextMeshProUGUI Tile => _title;
+    [SerializeField] private TextMeshProUGUI _desc;
+    public TextMeshProUGUI Desc => _desc;
+    [SerializeField] private Image _rendu;
+    public Image Rendu => _rendu;
+    [SerializeField] private TextMeshProUGUI _ressources;
+    public TextMeshProUGUI Ressources => _ressources;
+    [SerializeField] private Animator _uiTiles;
+    public Animator UiTiles => _uiTiles;
 }
 #endregion ClassToRangeList
