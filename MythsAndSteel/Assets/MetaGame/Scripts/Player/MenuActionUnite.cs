@@ -82,7 +82,8 @@ public class MenuActionUnite : MonoBehaviour
     }
     public void attaque()
     {
-        Debug.Log("attaque");
+        Attaque.Instance.StartAttackSelectionUnit();
+        Attaque.Instance.Selected = true;
         closePanel();
     }
 
