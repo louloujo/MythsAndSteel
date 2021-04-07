@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -726,13 +726,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _actualTurnNumber: 0
-  _isPlayer1Starting: 0
-  _isPlayer1Turn: 0
+  _isPlayerRedStarting: 0
+  _isPlayerRedTurn: 0
   _isInTurn: 0
   _actualTurnPhase: 0
-  _phaseActivationObj: {fileID: 915835423}
-  _uiManager: {fileID: 0}
   _eventCardSO: {fileID: 0}
+  _managerSO: {fileID: 0}
+  _chooseUnitForEvent: 0
+  _chooseOponnentUnit: 0
+  _chooseArmyUnit: 0
+  _redPlayerUseEvent: 0
+  _unitChooseList: []
+  _numberOfUnitToChoose: 0
 --- !u!1001 &97333944
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -947,18 +952,22 @@ MonoBehaviour:
   _life: 3
   _shield: 2
   _attackRange: 3
+  AttackRangeBonus: 0
   _moveSpeed: 3
+  MoveSpeedBonus: 0
   _creationCost: 2
   _NumberRangeMin: {x: 0, y: 0}
   _DamageMinimum: 0
   _NumberRangeMax: {x: 0, y: 0}
   _DamageMaximum: 0
+  DiceBonus: 0
   _moveLeft: 3
   _actualTileld: 50
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
   _pathtomake: 
+  _usefullForOpponent: 0
 --- !u!212 &108961821
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4881,18 +4890,22 @@ MonoBehaviour:
   _life: 3
   _shield: 2
   _attackRange: 3
+  AttackRangeBonus: 0
   _moveSpeed: 3
+  MoveSpeedBonus: 0
   _creationCost: 2
   _NumberRangeMin: {x: 0, y: 0}
   _DamageMinimum: 0
   _NumberRangeMax: {x: 0, y: 0}
   _DamageMaximum: 0
+  DiceBonus: 0
   _moveLeft: 3
   _actualTileld: 50
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
   _pathtomake: 
+  _usefullForOpponent: 0
 --- !u!212 &549253559
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8933,7 +8946,7 @@ MonoBehaviour:
   - valeurActivation: 4,6
     IndexCarteActivation: 11
     inputCarteActivation: 33
-  J1Panel: {fileID: 954388457}
+  RedPlayerPanel: {fileID: 0}
   RedCartesActivation:
   - valeurActivation: 2,1
     IndexCarteActivation: 0
@@ -8971,7 +8984,7 @@ MonoBehaviour:
   - valeurActivation: 4,9
     IndexCarteActivation: 11
     inputCarteActivation: 118
-  J2Panel: {fileID: 1658831362}
+  BluePlayerPanel: {fileID: 0}
   _result: {fileID: 1584021893}
 --- !u!1001 &919755069
 PrefabInstance:
@@ -12864,6 +12877,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71bae339681e18459bc66653862a06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  neighbourValue: 
+  newNeighbourId: 
+  selectedTileId: 
+  _isInAttack: 0
+  _selected: 0
+  _attackRange: 0
+  _damageMinimum: 0
+  _numberRangeMin: {x: 0, y: 0}
+  _damageMaximum: 0
+  _numberRangeMax: {x: 0, y: 0}
 --- !u!4 &1328676681
 Transform:
   m_ObjectHideFlags: 0
@@ -17313,6 +17336,8 @@ MonoBehaviour:
   _tile: {fileID: 0}
   _unitInTile: {fileID: 0}
   _actualTileSelected: {fileID: 0}
+  _actualUnitSelected: {fileID: 0}
+  _menuForUnit: {fileID: 0}
 --- !u!1 &1806476082
 GameObject:
   m_ObjectHideFlags: 0
@@ -17727,21 +17752,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1129ac21bcf02f742b54eb48f71a9ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiManager: {fileID: 11400000, guid: 10a49bba6254aed429b2fac2cbf6887f, type: 2}
-  _canvasTurnPhase: {fileID: 1658327341}
   _switchPhaseObject: {fileID: 4950479300666342195, guid: 111b4523566bf904e984f7c9843eb641, type: 3}
   _canvasActivation: {fileID: 2125945372}
-  _eventCardObject: {fileID: 0}
-  _buttonID: []
+  _canvasTurnPhase: {fileID: 1658327341}
+  _buttonNextPhase: {fileID: 0}
+  _activationUnitPanel: {fileID: 0}
+  _eventCardObjectRed: {fileID: 0}
+  _eventCardObjectBlue: {fileID: 0}
+  _activateButtonSprite: {fileID: 0}
+  _desactivateButtonSprite: {fileID: 0}
+  _buttonEventRedPlayer:
+    _upButton: {fileID: 0}
+    _downButton: {fileID: 0}
+  _buttonEventBluePlayer:
+    _upButton: {fileID: 0}
+    _downButton: {fileID: 0}
+  _redPlayerEventtransf: {fileID: 0}
+  _bluePlayerEventtransf: {fileID: 0}
+  _redEventDowntrans: {fileID: 0}
+  _blueEventDowntrans: {fileID: 0}
+  _pageButton:
+    _quitMenuPage1: {fileID: 0}
+    _quitMenuPage2: {fileID: 0}
+    _rightArrowPage1: {fileID: 0}
+    _leftArrowPage2: {fileID: 0}
   _titlePanelMouseOver: {fileID: 0}
-  _mouseOverStats: []
+  _mouseOverStats:
+    _lifeGam: {fileID: 0}
+    _rangeGam: {fileID: 0}
+    _moveGam: {fileID: 0}
   _titlePanelShiftClicPage1: {fileID: 0}
-  _middleStatistiques: []
-  _middleImage: []
-  _basseStatistique: []
+  _pageUnitStat:
+    _lifeGam: {fileID: 0}
+    _rangeGam: {fileID: 0}
+    _moveGam: {fileID: 0}
+  _attackStat:
+    _rangeMinDamageGam: {fileID: 0}
+    _rangeMaxDamageGam: {fileID: 0}
+    _minDamageValueGam: {fileID: 0}
+    _maxDamageValueGam: {fileID: 0}
   _titlePanelShiftClicPage2: {fileID: 0}
   _middleImageTerrain: []
   _middleTextTerrain: []
+  _mouvementTilePrefab: {fileID: 0}
+  _fpsText: {fileID: 0}
 --- !u!1001 &1888545682
 PrefabInstance:
   m_ObjectHideFlags: 0
