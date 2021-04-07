@@ -9,7 +9,7 @@ public class TilesManager : MonoSingleton<TilesManager>
     [SerializeField] private List<GameObject> _tileList;
     public List<GameObject> TileList => _tileList;
 
-    private List<GameObject> _resourcesList = new List<GameObject>();
+    [SerializeField] private List<GameObject> _resourcesList = new List<GameObject>();
     public List<GameObject> ResourcesList => _resourcesList;
 
 

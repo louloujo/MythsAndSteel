@@ -29,20 +29,23 @@ public class MYthsAndSteel_Enum : MonoBehaviour
     }
 
     /// <summary>
-    /// Les différentes stats modifiables
-    /// </summary>
-    public enum Stat{
-        Attaque, vie, portee
-    }
-
-    /// <summary>
     /// Tous les types de terrain
     /// </summary>
     public enum TerrainType{
         Sol, Forêt, Bosquet, Plage, Colline, Haute_colline, Mont, Ravin, Eau, Boue, Rivière_Nord, Rivière_Sud, Rivière_Est, Rivière_Ouest, Fleuve, Ruisseau, Pont_Nord, Pont_Sud, Pont_Est, Pont_Ouest, Route, Rails, Maison, Immeuble, Ruines, Usine, Point_de_ressource, Gare, Bunker, Cabane_Isatabu, Point_Objectif
     }
 
+    /// <summary>
+    /// Enum pour savoir qui possède un objectif
+    /// </summary>
     public enum Owner{
         neutral, blue, red
+    }
+
+    /// <summary>
+    /// Status obtenable par une unité
+    /// </summary>
+    public enum Statut{
+        ArmeEpidemiologique, Paralysie, Immobilisation, Réanimé, Possédé, Invincible, PeutPasCombattre, PeutPasPrendreDesObjectifs 
     }
 }

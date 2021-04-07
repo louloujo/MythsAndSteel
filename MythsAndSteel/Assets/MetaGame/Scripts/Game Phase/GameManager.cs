@@ -125,9 +125,11 @@ public class GameManager : MonoSingleton<GameManager>{
     }
 
     private void Update(){
+        #region FPSCounter
         deltaTimeX += Time.deltaTime;
         deltaTimeX /= 2;
         UIInstance.Instance.FpsText.text = ((int) (1 / deltaTimeX)).ToString();
+        #endregion FPSCounter
     }
 
     /// <summary>
@@ -268,7 +270,7 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <summary>
     /// Arrete le choix d'unité
     /// </summary>
-    void StopEventModeUnit(){
+    public void StopEventModeUnit(){
         _numberOfUnitToChoose = 0;
         _chooseUnitForEvent = false;
 
@@ -298,6 +300,7 @@ public class GameManager : MonoSingleton<GameManager>{
         UIInstance.Instance.ButtonEventBluePlayer._downButton.SetActive(true);
 
         _eventCardCall = null;
+        IllusionStratégique = false;
     }
 
     /// <summary>
@@ -329,6 +332,10 @@ public class GameManager : MonoSingleton<GameManager>{
         }
     }
 
+    /// <summary>
+    /// Enleve une unité de la liste
+    /// </summary>
+    /// <param name="unit"></param>
     public void RemoveUnitToList(GameObject unit){
         _unitChooseList.Remove(unit);
 
@@ -348,7 +355,6 @@ public class GameManager : MonoSingleton<GameManager>{
                 child.tag = "SelectableTile";
             }
         }
-
     }
 
     /// <summary>
@@ -368,13 +374,21 @@ public class GameManager : MonoSingleton<GameManager>{
             child.tag = "SelectableTile";
         }
 
+        UIInstance.Instance.RedPlayerEventtransf.gameObject.SetActive(false);
+        UIInstance.Instance.BluePlayerEventtransf.gameObject.SetActive(false);
+        UIInstance.Instance.ButtonNextPhase.SetActive(false);
+        UIInstance.Instance.ButtonEventRedPlayer._upButton.SetActive(false);
+        UIInstance.Instance.ButtonEventRedPlayer._downButton.SetActive(false);
+        UIInstance.Instance.ButtonEventBluePlayer._upButton.SetActive(false);
+        UIInstance.Instance.ButtonEventBluePlayer._downButton.SetActive(false);
+
         _eventCardCall += StopEventModeTile;
     }
 
     /// <summary>
     /// Arrete le choix de case
     /// </summary>
-    void StopEventModeTile(){
+    public void StopEventModeTile(){
         _chooseTileForEvent = false;
 
         foreach(GameObject gam in _selectableTiles){
@@ -388,7 +402,18 @@ public class GameManager : MonoSingleton<GameManager>{
             gam.GetComponent<TileScript>().RemoveChild();
         }
 
+        UIInstance.Instance.RedPlayerEventtransf.gameObject.SetActive(true);
+        UIInstance.Instance.BluePlayerEventtransf.gameObject.SetActive(true);
+        UIInstance.Instance.ButtonNextPhase.SetActive(true);
+        UIInstance.Instance.ButtonEventRedPlayer._upButton.SetActive(true);
+        UIInstance.Instance.ButtonEventRedPlayer._downButton.SetActive(true);
+        UIInstance.Instance.ButtonEventBluePlayer._upButton.SetActive(true);
+        UIInstance.Instance.ButtonEventBluePlayer._downButton.SetActive(true);
+
         _selectableTiles.Clear();
+        _redPlayerUseEvent = false;
+        _eventCardCall = null;
+        IllusionStratégique = false;
     }
 
     /// <summary>

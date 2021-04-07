@@ -339,9 +339,6 @@ public class EventCardClass : ScriptableObject{
     #endregion Reprogrammation
 
     #region IllusionStratégique
-    /// <summary>
-    /// Carte event du déplacement accéléré
-    /// </summary>
     public void IllusionStratégique()
     {
         int firstTileId = GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().ActualTiledId;
@@ -360,8 +357,30 @@ public class EventCardClass : ScriptableObject{
     {
         int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Illusion_stratégique);
         List<GameObject> unitList = new List<GameObject>();
-        unitList.AddRange(PlayerScript.Instance.UnitRef.UnitListRedPlayer);
-        unitList.AddRange(PlayerScript.Instance.UnitRef.UnitListBluePlayer);
+
+        if(player == 1){
+            foreach(GameObject gam in PlayerScript.Instance.UnitRef.UnitListRedPlayer)
+            {
+                if(gam.GetComponent<UnitScript>().IsActivationDone == true)
+                {
+                    unitList.Add(gam);
+                }
+            }
+
+            unitList.AddRange(PlayerScript.Instance.UnitRef.UnitListBluePlayer);
+        }
+        else{
+            foreach(GameObject gam in PlayerScript.Instance.UnitRef.UnitListBluePlayer)
+            {
+                if(gam.GetComponent<UnitScript>().IsActivationDone == true)
+                {
+                    unitList.Add(gam);
+                }
+            }
+
+            unitList.AddRange(PlayerScript.Instance.UnitRef.UnitListRedPlayer);
+        }
+
 
         GameManager.Instance.IllusionStratégique = true;
 
@@ -377,9 +396,6 @@ public class EventCardClass : ScriptableObject{
     #endregion IllusionStratégique
 
     #region OptimisationOrgone
-    /// <summary>
-    /// Carte event du déplacement accéléré
-    /// </summary>
     public void OptimisationOrgone()
     {
         int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Illusion_stratégique);
@@ -407,9 +423,6 @@ public class EventCardClass : ScriptableObject{
     #endregion OptimisationOrgone
 
     #region PillageOrgone
-    /// <summary>
-    /// Carte event du déplacement accéléré
-    /// </summary>
     public void PillageOrgone()
     {
         int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Pillage_orgone);
@@ -429,21 +442,113 @@ public class EventCardClass : ScriptableObject{
         int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Pillage_orgone);
         
         List<GameObject> tileList = new List<GameObject>();
-        tileList.AddRange(PlayerScript.Instance.UnitRef.UnitListRedPlayer);
-
-        GameManager.Instance.IllusionStratégique = true;
+        tileList.AddRange(TilesManager.Instance.ResourcesList);
 
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEventUnit(2, player == 1 ? true : false, tileList);
-            GameManager.Instance._eventCardCall += IllusionStratégique;
+            LaunchEventTile(2, player == 1 ? true : false, tileList);
+            GameManager.Instance._eventCardCall += PillageOrgone;
         }
 
         tileList.Clear();
     }
     #endregion PillageOrgone
 
+    #region PointeursLaser
+    /// <summary>
+    /// Carte event du pointeur laser
+    /// </summary>
+    public void PointeursLaserOptimisés()
+    {
+        foreach(GameObject unit in GameManager.Instance.UnitChooseList)
+        {
+            unit.GetComponent<UnitScript>().AttackRangeBonus += 1;
+        }
+
+        GameManager.Instance.UnitChooseList.Clear();
+
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Pointeurs_laser_optimisés);
+    }
+
+    public void LaunchPointeursLaserOptimisés()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Pointeurs_laser_optimisés);
+
+        List<GameObject> unitList = new List<GameObject>();
+
+        unitList.AddRange(player == 2 ? PlayerScript.Instance.UnitRef.UnitListBluePlayer : PlayerScript.Instance.UnitRef.UnitListRedPlayer);
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+            LaunchEventUnit(2, player == 1 ? true : false, unitList);
+            GameManager.Instance._eventCardCall += PointeursLaserOptimisés;
+        }
+
+        unitList.Clear();
+    }
+    #endregion PointeursLaser
+
+    #region ArmeEpidemiologique
+    public void ArmeEpidemiologique()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Arme_épidémiologique);
+
+        GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.Statut.ArmeEpidemiologique);
+
+        GameManager.Instance.UnitChooseList.Clear();
+
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Arme_épidémiologique);
+    }
+
+    public void LaunchArmeEpidemiologique()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Arme_épidémiologique);
+
+        List<GameObject> unitList = new List<GameObject>();
+        unitList.AddRange(player == 1? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer);
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+            LaunchEventUnit(1, player == 1 ? true : false, unitList);
+            GameManager.Instance._eventCardCall += ArmeEpidemiologique;
+        }
+
+        unitList.Clear();
+    }
+    #endregion ArmeEpidemiologique
+
+    #region ManeouvreStratégique
+    public void ManoeuvreStratégique()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Manoeuvre_stratégique);
+        
+        if(player == 1){
+            PlayerScript.Instance.RedPlayerInfos.ActivationLeft++;
+        }
+        else{
+            PlayerScript.Instance.BluePlayerInfos.ActivationLeft++;
+        }
+
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Manoeuvre_stratégique);
+    }
+
+    public void LaunchManoeuvreStratégique()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Manoeuvre_stratégique);
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+            GameManager.Instance._eventCardCall += ManoeuvreStratégique;
+        }
+    }
+    #endregion ManeouvreStratégique
 
     #region Reprogrammation
     /// <summary>
@@ -451,7 +556,7 @@ public class EventCardClass : ScriptableObject{
     /// </summary>
     public void Reproggramation(){
         foreach(GameObject unit in GameManager.Instance.UnitChooseList){
-            unit.GetComponent<UnitScript>()._usefullForOpponent = true;
+            unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.Statut.Possédé);
             unit.GetComponent<UnitScript>().DiceBonus -= 4;
         }
 
@@ -513,42 +618,6 @@ public class EventCardClass : ScriptableObject{
         unitList.Clear();
     }
     #endregion SerumExpérimental
-
-    #region PointeursLaser
-    /// <summary>
-    /// Carte event du pointeur laser
-    /// </summary>
-    public void PointeursLaserOptimisés()
-    {
-        foreach(GameObject unit in GameManager.Instance.UnitChooseList)
-        {
-            unit.GetComponent<UnitScript>().AttackRangeBonus += 1;
-        }
-
-        GameManager.Instance.UnitChooseList.Clear();
-
-        //Remove la carte event chez le bon joueur
-        RemoveEvents(MYthsAndSteel_Enum.EventCard.Pointeurs_laser_optimisés);
-    }
-
-    public void LaunchPointeursLaserOptimisés()
-    {
-        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Pointeurs_laser_optimisés);
-
-        List<GameObject> unitList = new List<GameObject>();
-
-        unitList.AddRange(player == 2 ? PlayerScript.Instance.UnitRef.UnitListBluePlayer : PlayerScript.Instance.UnitRef.UnitListRedPlayer);
-
-        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
-            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
-        {
-            LaunchEventUnit(2, player == 1 ? true : false, unitList);
-            GameManager.Instance._eventCardCall += PointeursLaserOptimisés;
-        }
-
-        unitList.Clear();
-    }
-    #endregion PointeursLaser
 
     #region Réapprovisionnement
     /// <summary>
@@ -645,4 +714,5 @@ public class EventCard {
     public int _eventCost = 0;
     public bool _isEventInFinalGame = true;
     public Sprite _eventSprite = null;
+    public GameObject _effectToSpawn = null;
 }

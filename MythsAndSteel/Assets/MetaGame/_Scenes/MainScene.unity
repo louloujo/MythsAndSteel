@@ -1337,13 +1337,13 @@ MonoBehaviour:
   _shield: 2
   _attackRange: 1
   AttackRangeBonus: 0
-  _moveSpeed: 3
-  MoveSpeedBonus: 0
-  _creationCost: 4
   _NumberRangeMin: {x: 3, y: 7}
   _DamageMinimum: 1
   _NumberRangeMax: {x: 8, y: 12}
   _DamageMaximum: 2
+  _moveSpeed: 3
+  MoveSpeedBonus: 0
+  _creationCost: 4
   DiceBonus: 0
   _moveLeft: 3
   _actualTileld: 50
@@ -1351,7 +1351,7 @@ MonoBehaviour:
   _isActionDone: 0
   _isActivationDone: 0
   _pathtomake: 
-  _usefullForOpponent: 0
+  _unitStatus: 
 --- !u!212 &108961821
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2623,6 +2623,7 @@ MonoBehaviour:
   - {fileID: 926605380}
   - {fileID: 1820935911}
   - {fileID: 939313036}
+  _resourcesList: []
 --- !u!1001 &229945941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4578,13 +4579,13 @@ MonoBehaviour:
   _shield: 2
   _attackRange: 3
   AttackRangeBonus: 0
-  _moveSpeed: 4
-  MoveSpeedBonus: 0
-  _creationCost: 2
   _NumberRangeMin: {x: 3, y: 7}
   _DamageMinimum: 1
   _NumberRangeMax: {x: 8, y: 12}
   _DamageMaximum: 2
+  _moveSpeed: 4
+  MoveSpeedBonus: 0
+  _creationCost: 2
   DiceBonus: 0
   _moveLeft: 4
   _actualTileld: 11
@@ -4592,7 +4593,7 @@ MonoBehaviour:
   _isActionDone: 0
   _isActivationDone: 0
   _pathtomake: 
-  _usefullForOpponent: 0
+  _unitStatus: 
 --- !u!212 &549253559
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6485,6 +6486,50 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &722833885
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 722833886}
+  - component: {fileID: 722833887}
+  m_Layer: 0
+  m_Name: InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &722833886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722833885}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.1234376, y: 1.4684954, z: -7.4406796}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1439771733}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &722833887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722833885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7643df403c3e3b04fb9ebcd27fbc9957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  escapeEvent: 27
 --- !u!1 &724474768
 GameObject:
   m_ObjectHideFlags: 0
@@ -7929,13 +7974,13 @@ MonoBehaviour:
   _shield: 2
   _attackRange: 1
   AttackRangeBonus: 0
-  _moveSpeed: 3
-  MoveSpeedBonus: 0
-  _creationCost: 4
   _NumberRangeMin: {x: 3, y: 7}
   _DamageMinimum: 1
   _NumberRangeMax: {x: 8, y: 12}
   _DamageMaximum: 2
+  _moveSpeed: 3
+  MoveSpeedBonus: 0
+  _creationCost: 4
   DiceBonus: 0
   _moveLeft: 3
   _actualTileld: 50
@@ -7943,7 +7988,7 @@ MonoBehaviour:
   _isActionDone: 0
   _isActivationDone: 0
   _pathtomake: 
-  _usefullForOpponent: 0
+  _unitStatus: 
 --- !u!212 &827471368
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10589,6 +10634,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 125267669}
     m_Modifications:
+    - target: {fileID: 2040012347, guid: 7b4e07eb63565d04b8e25cd06fad29ca, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2040012347, guid: 7b4e07eb63565d04b8e25cd06fad29ca, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5249351300832772906, guid: 7b4e07eb63565d04b8e25cd06fad29ca, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -10709,7 +10762,8 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9160866567231576157, guid: 7b4e07eb63565d04b8e25cd06fad29ca, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7b4e07eb63565d04b8e25cd06fad29ca, type: 3}
 --- !u!224 &1144938841 stripped
 RectTransform:
@@ -10958,13 +11012,13 @@ MonoBehaviour:
   _shield: 2
   _attackRange: 1
   AttackRangeBonus: 0
-  _moveSpeed: 3
-  MoveSpeedBonus: 0
-  _creationCost: 4
   _NumberRangeMin: {x: 3, y: 7}
   _DamageMinimum: 1
   _NumberRangeMax: {x: 8, y: 12}
   _DamageMaximum: 2
+  _moveSpeed: 3
+  MoveSpeedBonus: 0
+  _creationCost: 4
   DiceBonus: 0
   _moveLeft: 3
   _actualTileld: 50
@@ -10972,7 +11026,7 @@ MonoBehaviour:
   _isActionDone: 0
   _isActivationDone: 0
   _pathtomake: 
-  _usefullForOpponent: 0
+  _unitStatus: 
 --- !u!212 &1204031602
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12025,13 +12079,13 @@ MonoBehaviour:
   _shield: 2
   _attackRange: 1
   AttackRangeBonus: 0
-  _moveSpeed: 3
-  MoveSpeedBonus: 0
-  _creationCost: 4
   _NumberRangeMin: {x: 3, y: 7}
   _DamageMinimum: 1
   _NumberRangeMax: {x: 8, y: 12}
   _DamageMaximum: 2
+  _moveSpeed: 3
+  MoveSpeedBonus: 0
+  _creationCost: 4
   DiceBonus: 0
   _moveLeft: 3
   _actualTileld: 50
@@ -12039,7 +12093,7 @@ MonoBehaviour:
   _isActionDone: 0
   _isActivationDone: 0
   _pathtomake: 
-  _usefullForOpponent: 0
+  _unitStatus: 
 --- !u!212 &1264806019
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13202,6 +13256,7 @@ Transform:
   - {fileID: 1805710520}
   - {fileID: 1870703325}
   - {fileID: 96260004}
+  - {fileID: 722833886}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16235,13 +16290,13 @@ MonoBehaviour:
   _shield: 2
   _attackRange: 1
   AttackRangeBonus: 0
-  _moveSpeed: 3
-  MoveSpeedBonus: 0
-  _creationCost: 4
   _NumberRangeMin: {x: 3, y: 7}
   _DamageMinimum: 1
   _NumberRangeMax: {x: 8, y: 12}
   _DamageMaximum: 2
+  _moveSpeed: 3
+  MoveSpeedBonus: 0
+  _creationCost: 4
   DiceBonus: 0
   _moveLeft: 3
   _actualTileld: 50
@@ -16249,7 +16304,7 @@ MonoBehaviour:
   _isActionDone: 0
   _isActivationDone: 0
   _pathtomake: 
-  _usefullForOpponent: 0
+  _unitStatus: 
 --- !u!212 &1691159588
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16351,13 +16406,13 @@ MonoBehaviour:
   _shield: 2
   _attackRange: 1
   AttackRangeBonus: 0
-  _moveSpeed: 3
-  MoveSpeedBonus: 0
-  _creationCost: 4
   _NumberRangeMin: {x: 3, y: 7}
   _DamageMinimum: 1
   _NumberRangeMax: {x: 8, y: 12}
   _DamageMaximum: 2
+  _moveSpeed: 3
+  MoveSpeedBonus: 0
+  _creationCost: 4
   DiceBonus: 0
   _moveLeft: 3
   _actualTileld: 50
@@ -16365,7 +16420,7 @@ MonoBehaviour:
   _isActionDone: 0
   _isActivationDone: 0
   _pathtomake: 
-  _usefullForOpponent: 0
+  _unitStatus: 
 --- !u!212 &1710207927
 SpriteRenderer:
   m_ObjectHideFlags: 0

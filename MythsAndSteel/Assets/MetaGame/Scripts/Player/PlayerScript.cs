@@ -143,6 +143,10 @@ public class PlayerScript : MonoSingleton<PlayerScript>
             case MYthsAndSteel_Enum.EventCard.Armes_perforantes:
                 break;
 
+            case MYthsAndSteel_Enum.EventCard.Arme_épidémiologique:
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchArmeEpidemiologique);
+                break;
+
             case MYthsAndSteel_Enum.EventCard.Bombardement_aérien:
                 break;
 
@@ -167,6 +171,7 @@ public class PlayerScript : MonoSingleton<PlayerScript>
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Manoeuvre_stratégique:
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.ManoeuvreStratégique);
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Optimisation_de_l_orgone:
@@ -177,6 +182,7 @@ public class PlayerScript : MonoSingleton<PlayerScript>
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Pillage_orgone:
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchPillageOrgone);
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Pointeurs_laser_optimisés:

@@ -65,24 +65,18 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         _unitInTile = _tile != null ? _tile.GetComponent<TileScript>().Unit != null ? _tile.GetComponent<TileScript>().Unit : null : null;
 
         //Permet de combiner le Shift et le click gauche de la souris.
-        if (_unitInTile == true)
-        {
-            //Si il il y a une unité sur la tile, le joueur peut utiliser ShiftClick.
-            _mouseCommand.ShiftClick();
-
+        if (_unitInTile == true){
             //Si le joueur a utilisé le Shift puis leclick, le joueur est considéré comme click et on applique les fonctions propres au bouton des panneaux. De plus, le mouseOver est désactivé.
-            if (_mouseCommand.CheckIfPlayerAsClic == true)
+            if (_mouseCommand._checkIfPlayerAsClic == true && _mouseCommand._hasCheckUnit == false)
             {
-                _mouseCommand.buttonAction(UIInstance.Instance.PageButton);
-                _mouseCommand.MouseExitWithoutClick();
+                _mouseCommand.ShiftClick();
+                CallMouseCommand();
             }
-            else
+            else if(_mouseCommand._checkIfPlayerAsClic == false)
             {
                 //Si le joueur n'a pas continué sa combinaison d'action( Shif+clic), alors quand ma souris reste sur une case sans cliqué, l'interface résumé des statistiques s'active.
                 _mouseCommand.MouseOverWithoutClick();
             }
-
-            //Lorsque le joueur clic sur une unité
         }
         else
         {
@@ -96,12 +90,6 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             _isInTurn = GameManager.Instance.IsInTurn;
             _lastTile = _tile;
             OnTileChanged();
-        }
-
-        //Lorsque le joueur clique sur le plateau
-        if(Input.GetKeyDown(KeyCode.Mouse0) && !Input.GetKey(KeyCode.LeftShift))
-        {
-            Select();
         }
     }
 
@@ -185,14 +173,14 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         {
             if(GameManager.Instance.IsPlayerRedTurn)
             {
-                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, true) && !uniTouch._usefullForOpponent)
+                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, true) && !uniTouch.UnitStatus.Contains(MYthsAndSteel_Enum.Statut.Possédé))
                 {
                     return false;
                 }
             }
             else
             {
-                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, false) && !uniTouch._usefullForOpponent)
+                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, false) && !uniTouch.UnitStatus.Contains(MYthsAndSteel_Enum.Statut.Possédé))
                 {
                     return false;
                 }
@@ -237,5 +225,10 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         Vector2 mouseDirection = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         Ray2D ray = new Ray2D(Camera.main.ScreenToWorldPoint(Input.mousePosition), mouseDirection);
         return Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, _layerM);
+    }
+
+    public void CallMouseCommand(){
+        _mouseCommand.buttonAction(UIInstance.Instance.PageButton);
+        _mouseCommand.MouseExitWithoutClick();
     }
 }

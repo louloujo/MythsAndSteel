@@ -44,12 +44,12 @@ public class EndTurn : MonoBehaviour
                 if(S.Unit != null)
                 {
                     UnitScript US = S.Unit.GetComponent<UnitScript>();
-                    if(US.UnitSO.IsInRedArmy && US.CanTakeGoal)
+                    if(US.UnitSO.IsInRedArmy && !US.UnitStatus.Contains(MYthsAndSteel_Enum.Statut.PeutPasPrendreDesObjectifs))
                     {
                         Debug.Log("Objectif dans le camp rouge.");
                         ChangeOwner(S, true);
                     }
-                    else if(!US.UnitSO.IsInRedArmy && US.CanTakeGoal)
+                    else if(!US.UnitSO.IsInRedArmy && !US.UnitStatus.Contains(MYthsAndSteel_Enum.Statut.PeutPasPrendreDesObjectifs))
                     {
                         Debug.Log("Objectif dans le camp bleu.");
                         ChangeOwner(S, false);
@@ -57,7 +57,11 @@ public class EndTurn : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Objectif neutre");
+                    UnitScript US = S.Unit.GetComponent<UnitScript>();
+                    if(!US.UnitStatus.Contains(MYthsAndSteel_Enum.Statut.PeutPasPrendreDesObjectifs))
+                    {
+                        Debug.Log("Objectif neutre");
+                    }
                 }
             }
         }
