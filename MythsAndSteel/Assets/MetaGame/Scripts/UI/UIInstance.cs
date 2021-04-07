@@ -134,6 +134,29 @@ public class UIInstance : MonoSingleton<UIInstance>
     public void ActivateNextPhaseButton(){
         _buttonNextPhase.SetActive(true);
     }
+
+    #region UITile
+    [Header("Tile's infos update")]
+    [SerializeField] private TextMeshProUGUI Title;
+    [SerializeField] private TextMeshProUGUI Desc;
+    [SerializeField] private Image Rendu;
+    [SerializeField] private TextMeshProUGUI Ressources;
+    [SerializeField] private Animator UITile;
+    //Variable du Scriptable.
+    public TerrainTypeClass Terrain;
+    public void CallUpdateUI(GameObject Tile)
+    {
+        if (Tile == null)
+        {
+            UITile.SetBool("open", false); return;
+        }
+        else if (Tile.TryGetComponent(out TileScript T))
+        {
+            Terrain.Synch(Tile.GetComponent<TileScript>(), Title, Desc, Ressources, Rendu); // Affiche les nouvelles informations à propos de la tile séléctionnée.  
+            UITile.SetBool("open", true);
+        }
+    }
+    #endregion
 }
 
 #region ClassToRangeList

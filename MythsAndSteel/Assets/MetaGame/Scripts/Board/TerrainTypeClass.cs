@@ -7,11 +7,6 @@ using TMPro;
 [CreateAssetMenu(fileName ="Terrain Scriptable")]
 public class TerrainTypeClass : ScriptableObject
 {
-    [SerializeField] private TextMeshProUGUI Title;
-    [SerializeField] private TextMeshProUGUI Desc;
-    [SerializeField] private SpriteRenderer Rendu;
-    [SerializeField] private TextMeshProUGUI Ressources;
-
     [SerializeField] private TerrainType[] _EffetDeTerrain;
     public TerrainType[] EffetDeTerrain
     {
@@ -21,7 +16,7 @@ public class TerrainTypeClass : ScriptableObject
         }
     }
 
-    public void Synch(TileScript tile)
+    public void Synch(TileScript tile, TextMeshProUGUI Title, TextMeshProUGUI Desc, TextMeshProUGUI Ressources, Image Rendu)
     {
         TerrainType Saved = FindEffect(tile.TerrainEffectList[0]);
         Title.text = Saved._terrainName;
@@ -29,8 +24,7 @@ public class TerrainTypeClass : ScriptableObject
         Rendu.sprite = Saved.render;
         if (tile.TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Point_de_ressource))
         {
-            int i = 0; // Temp valeur de ressource.
-            Ressources.text = i <= 0 ?  "" : "Ressources sur la case: " + i;
+            Ressources.text = tile.ResourcesCounter <= 0 ?  "" : "Ressources sur la case: " + tile.ResourcesCounter;
         }
         else { Ressources.text = ""; }
     }

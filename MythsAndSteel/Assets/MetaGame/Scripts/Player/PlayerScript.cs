@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class PlayerScript : MonoSingleton<PlayerScript>
@@ -193,6 +194,9 @@ public class PlayerScript : MonoSingleton<PlayerScript>
     }
 
     #endregion CarteEvent
+
+
+
 
     /// <summary>
     /// Est ce qu'il reste des unités dans l'armée du joueur
