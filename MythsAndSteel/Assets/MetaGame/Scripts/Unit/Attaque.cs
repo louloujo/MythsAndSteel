@@ -78,10 +78,6 @@ public class Attaque : MonoSingleton<Attaque>
 
     #endregion Variables
 
-    void Start()
-    {
-        
-    }
 
     void Randomdice()
     {
@@ -170,7 +166,6 @@ public class Attaque : MonoSingleton<Attaque>
                     {
                         newNeighbourId.Add(ID);
                     }
-                    Debug.Log("Classic: " + ID + "R: " + Range);
                     Highlight(ID, Range - 1);
                 }
             }
@@ -237,19 +232,4 @@ public class Attaque : MonoSingleton<Attaque>
         o = 0f;
         p = 0f;
     }
-    /*
-    public void Attack(int tileId)
-    {
-        if (_isInAttack)
-        {
-            if (newNeighbourId.Contains(tileId))
-            {
-                if (selectedTileId.Contains(tileId))
-                {
-
-                }
-            }
-        }
-    }
-    */
 }
