@@ -38,8 +38,8 @@ public class TileScript : MonoBehaviour
     public List<MYthsAndSteel_Enum.TerrainType> TerrainEffectList => _terrainEffectList;
 
     [Header("VARIABLES EFFET DE TERRAIN")]
-    [SerializeField] MYthsAndSteel_Enum.Owner _owner = MYthsAndSteel_Enum.Owner.neutral;
-    public MYthsAndSteel_Enum.Owner owner => _owner;
+    [SerializeField] MYthsAndSteel_Enum.Owner _ownerObjectiv = MYthsAndSteel_Enum.Owner.neutral;
+    public MYthsAndSteel_Enum.Owner OwnerObjectiv => _ownerObjectiv;
 
     [SerializeField] int _resourcesCounter = 0;
     public int ResourcesCounter => _resourcesCounter;
@@ -48,6 +48,7 @@ public class TileScript : MonoBehaviour
         //Met l'unité à la bonne position
         if(_unit != null){
             _unit.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, _unit.transform.position.z);
+            _unit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(this.gameObject);
         }
     }
 
@@ -57,6 +58,8 @@ public class TileScript : MonoBehaviour
     /// <param name="unit"></param>
     public void AddUnitToTile(GameObject unit){
         _unit = unit;
+        _unit.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, _unit.transform.position.z);
+        _unit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(this.gameObject);
     }
 
     /// <summary>
@@ -71,12 +74,14 @@ public class TileScript : MonoBehaviour
     /// </summary>
     /// <param name="Rendu"></param>
     /// <param name="Type"></param>
-    public void AddChildRender(Sprite Rendu = null, MYthsAndSteel_Enum.TerrainType Type = MYthsAndSteel_Enum.TerrainType.Sol)
+    public GameObject AddChildRender(Sprite Rendu = null, MYthsAndSteel_Enum.TerrainType Type = MYthsAndSteel_Enum.TerrainType.Sol)
     {
         bool add = true;
+        GameObject R = null;
+
         if(Rendu != null)
         {
-            GameObject R = Instantiate(UIInstance.Instance.MouvementTilePrefab, transform.position, Quaternion.identity);
+            R = Instantiate(UIInstance.Instance.MouvementTilePrefab, transform.position, Quaternion.identity);
             R.transform.parent = this.transform;
             R.name = Rendu.name;
             R.GetComponent<SpriteRenderer>().sprite = Rendu;
@@ -103,6 +108,8 @@ public class TileScript : MonoBehaviour
                 Child.Add(R);
             }
         }
+
+        return R;
     }
 
     /// <summary>
@@ -117,14 +124,35 @@ public class TileScript : MonoBehaviour
     /// </summary>
     /// <param name="own"></param>
     public void ChangePlayerObj(MYthsAndSteel_Enum.Owner own){
-        _owner = own;
+        _ownerObjectiv = own;
     }
 
     /// <summary>
     /// Enleve des ressources à la case
     /// </summary>
     /// <param name="value"></param>
-    public void RemoveRessources(int value){
-        _resourcesCounter -= value;
+    public void RemoveRessources(int value, int player){
+        if(_resourcesCounter - value >= 0){
+            _resourcesCounter -= value;
+
+            if(player == 1)
+            {
+                PlayerScript.Instance.RedPlayerInfos.Ressource += value;
+            }
+            else
+            {
+                PlayerScript.Instance.BluePlayerInfos.Ressource += value;
+            }
+        }
+        else{
+            int ressourceToGice = value - (_resourcesCounter - value);
+
+            if(player == 1){
+                PlayerScript.Instance.RedPlayerInfos.Ressource += value;
+            }
+            else{
+                PlayerScript.Instance.BluePlayerInfos.Ressource += value;
+            }
+        }
     }
 }
