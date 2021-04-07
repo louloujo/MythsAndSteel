@@ -398,7 +398,7 @@ public class EventCardClass : ScriptableObject{
     #region OptimisationOrgone
     public void OptimisationOrgone()
     {
-        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Illusion_stratégique);
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Optimisation_de_l_orgone);
         if(player == 1){
             PlayerScript.Instance.RedPlayerInfos.OrgonePowerLeft++;
         }
@@ -550,39 +550,6 @@ public class EventCardClass : ScriptableObject{
     }
     #endregion ManeouvreStratégique
 
-    #region Reprogrammation
-    /// <summary>
-    /// Carte event du pointeur optimisé
-    /// </summary>
-    public void Reproggramation(){
-        foreach(GameObject unit in GameManager.Instance.UnitChooseList){
-            unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.Statut.Possédé);
-            unit.GetComponent<UnitScript>().DiceBonus -= 4;
-        }
-
-        GameManager.Instance.UnitChooseList.Clear();
-
-        //Remove la carte event chez le bon joueur
-        RemoveEvents(MYthsAndSteel_Enum.EventCard.Reprogrammation);
-    }
-
-    public void LaunchReproggramation(){
-        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Reprogrammation);
-        List<GameObject> unitList = new List<GameObject>();
-
-        unitList.AddRange(player == 1 ? PlayerScript.Instance.UnitRef.UnitListBluePlayer : PlayerScript.Instance.UnitRef.UnitListRedPlayer);
-
-        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
-            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
-        {
-            LaunchEventUnit(1, player == 1? true : false, unitList);
-            GameManager.Instance._eventCardCall += Reproggramation;
-        }
-
-        unitList.Clear();
-    }
-    #endregion Reprogrammation
-
     #region SerumExpérimental
     /// <summary>
     /// Carte event du sérum expérimental
@@ -618,6 +585,167 @@ public class EventCardClass : ScriptableObject{
         unitList.Clear();
     }
     #endregion SerumExpérimental
+
+    #region ActivationDeNodus
+    public void ActivationDeNodus()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Activation_de_nodus);
+        if(player == 1){
+            PlayerScript.Instance.RedPlayerInfos.OrgonePowerLeft++;
+        }
+        else{
+            PlayerScript.Instance.BluePlayerInfos.OrgonePowerLeft++;
+        }
+
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Activation_de_nodus);
+    }
+
+    public void LaunchActivationDeNodus()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Activation_de_nodus);
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+            GameManager.Instance._eventCardCall += ActivationDeNodus;
+        }
+    }
+    #endregion ActivationDeNodus
+
+    #region BombardementAerien
+
+    /// <summary>
+    /// Carte event du pointeur optimisé
+    /// </summary>
+    public void BombardementAerien()
+    {
+        GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().TakeDamage(1);       
+
+        LaunchDeplacementBombardement(GameManager.Instance.UnitChooseList[0]);
+    }
+
+    public void MoveUnitBombardement(){
+        while(GameManager.Instance.UnitChooseList[0].transform.position != GameManager.Instance.TileChooseList[0].transform.position){
+            GameManager.Instance.UnitChooseList[0].transform.position = Vector3.MoveTowards(GameManager.Instance.UnitChooseList[0].transform.position, GameManager.Instance.TileChooseList[0].transform.position, .7f);
+            GameManager.Instance._waitEvent -= MoveUnitBombardement;
+            GameManager.Instance._waitEvent += MoveUnitBombardement;
+            GameManager.Instance.WaitToMove(.025f);
+            return;
+        }
+        GameManager.Instance._waitEvent -= MoveUnitBombardement;
+        TilesManager.Instance.TileList[GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().RemoveUnitFromTile();
+        GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().AddUnitToTile(GameManager.Instance.UnitChooseList[0]);
+
+        GameManager.Instance.TileChooseList.Clear();
+        GameManager.Instance.UnitChooseList.Clear();
+
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Bombardement_aérien);
+    }
+
+    public void LaunchBombardementAerien()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Bombardement_aérien);
+        List<GameObject> unitList = new List<GameObject>();
+
+        unitList.AddRange(player == 1 ? PlayerScript.Instance.UnitRef.UnitListBluePlayer : PlayerScript.Instance.UnitRef.UnitListRedPlayer);
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+            LaunchEventUnit(1, player == 1 ? true : false, unitList);
+            GameManager.Instance._eventCardCall += BombardementAerien;
+        }
+
+        unitList.Clear();
+    }
+
+    void LaunchDeplacementBombardement(GameObject unit){
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Bombardement_aérien);
+        List<GameObject> tileList = new List<GameObject>();
+
+        List<int> unitNeigh = PlayerStatic.GetNeighbourDiag(unit.GetComponent<UnitScript>().ActualTiledId, TilesManager.Instance.TileList[unit.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().Line, false);
+        foreach(int i in unitNeigh){
+            tileList.Add(TilesManager.Instance.TileList[i]);
+        }
+
+        LaunchEventTile(1, player == 1 ? true : false, tileList);
+        GameManager.Instance._eventCardCall += MoveUnitBombardement;
+
+        tileList.Clear();
+    }
+    #endregion Reprogrammation
+
+    #region Reprogrammation
+    /// <summary>
+    /// Carte event du pointeur optimisé
+    /// </summary>
+    public void Reproggramation(){
+        foreach(GameObject unit in GameManager.Instance.UnitChooseList){
+            unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.Statut.Possédé);
+            unit.GetComponent<UnitScript>().DiceBonus -= 4;
+        }
+
+        GameManager.Instance.UnitChooseList.Clear();
+
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Reprogrammation);
+    }
+
+    public void LaunchReproggramation(){
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Reprogrammation);
+        List<GameObject> unitList = new List<GameObject>();
+
+        unitList.AddRange(player == 1 ? PlayerScript.Instance.UnitRef.UnitListBluePlayer : PlayerScript.Instance.UnitRef.UnitListRedPlayer);
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+            LaunchEventUnit(1, player == 1? true : false, unitList);
+            GameManager.Instance._eventCardCall += Reproggramation;
+        }
+
+        unitList.Clear();
+    }
+    #endregion Reprogrammation
+
+    #region CessezLeFeu
+    /// <summary>
+    /// Carte event du pointeur optimisé
+    /// </summary>
+    public void CessezLeFeu()
+    {
+        foreach(GameObject unit in GameManager.Instance.UnitChooseList)
+        {
+            unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.Statut.PeutPasCombattre);
+            unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.Statut.Invincible);
+            unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.Statut.PeutPasPrendreDesObjectifs);
+        }
+
+        GameManager.Instance.UnitChooseList.Clear();
+
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Cessez_le_feu);
+    }
+
+    public void LaunchCessezLeFeu()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Cessez_le_feu);
+        List<GameObject> unitList = new List<GameObject>();
+
+        unitList.AddRange(PlayerScript.Instance.UnitRef.UnitListBluePlayer);
+        unitList.AddRange(PlayerScript.Instance.UnitRef.UnitListRedPlayer);
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+            LaunchEventUnit(1, player == 1 ? true : false, unitList);
+            GameManager.Instance._eventCardCall += CessezLeFeu;
+        }
+
+        unitList.Clear();
+    }
+    #endregion Reprogrammation
 
     #region Réapprovisionnement
     /// <summary>
@@ -700,7 +828,6 @@ public class EventCardClass : ScriptableObject{
         return 0;
     }
     #endregion Evenement
-
 }
 
 /// <summary>

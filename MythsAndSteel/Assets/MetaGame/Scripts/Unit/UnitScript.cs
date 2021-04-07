@@ -111,10 +111,6 @@ public class UnitScript : MonoBehaviour
     [SerializeField] List<int> _pathtomake;
     public List<int> Pathtomake => _pathtomake;
 
-    //A CHANGER AU BON ENDROIT QUAND CE SERA FAIT
-    //list qui va chercher les text enfant dans la hiérarchie pour l'UI
-    Text[] allchildren;
-
     [Header("------------------- STAUT DE L'UNITE -------------------")]
     //Statut que possède l'unité
     [SerializeField] private List<MYthsAndSteel_Enum.Statut> _unitStatus = new List<MYthsAndSteel_Enum.Statut>();

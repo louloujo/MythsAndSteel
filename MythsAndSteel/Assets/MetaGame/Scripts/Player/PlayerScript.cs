@@ -138,6 +138,7 @@ public class PlayerScript : MonoSingleton<PlayerScript>
         switch(card)
         {
             case MYthsAndSteel_Enum.EventCard.Activation_de_nodus:
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchActivationDeNodus);
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Armes_perforantes:
@@ -148,9 +149,11 @@ public class PlayerScript : MonoSingleton<PlayerScript>
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Bombardement_aérien:
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchBombardementAerien);
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Cessez_le_feu:
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchCessezLeFeu);
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Déploiement_accéléré:

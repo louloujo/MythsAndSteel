@@ -103,6 +103,7 @@ public class GameManager : MonoSingleton<GameManager>{
     //Fonctions à appeler après que le joueur ait choisit les unités
     public delegate void EventToCallAfterChoose();
     public EventToCallAfterChoose _eventCardCall;
+    public EventToCallAfterChoose _waitEvent;
 
     float deltaTimeX = 0f;
     #endregion Variables
@@ -427,6 +428,22 @@ public class GameManager : MonoSingleton<GameManager>{
             if(_tileChooseList.Count == _numberOfTilesToChoose){
                 _eventCardCall();
             }
+        }
+    }
+    
+    /// <summary>
+    /// Fonction qui permet d'attendre avant de relancer une autre fonction
+    /// </summary>
+    /// <param name="t"></param>
+    public void WaitToMove(float t){
+        StartCoroutine(waitToCall(t));
+    }
+
+    IEnumerator waitToCall(float t){
+        yield return new WaitForSeconds(t);
+        if(_waitEvent != null)
+        {
+            _waitEvent();
         }
     }
     #endregion EventMode
