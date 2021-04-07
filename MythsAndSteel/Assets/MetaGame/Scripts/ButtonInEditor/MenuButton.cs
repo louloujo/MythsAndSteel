@@ -7,7 +7,7 @@ public class MenuButton : MonoBehaviour
 {
     [SerializeField] int SceneToLoad;
     [SerializeField] GameObject CanvasToLoad;
-    [SerializeField] Canvas CanvasParent;
+    [SerializeField] GameObject CanvasParent;
     public void ChangeScene()
     {
         SceneManager.LoadScene(SceneToLoad);
@@ -21,7 +21,7 @@ public class MenuButton : MonoBehaviour
     public void LoadCanvas()
     {
         CanvasToLoad.SetActive(true);
-        CanvasParent.enabled = false;
+        CanvasParent.SetActive(false);
         
     }
 
