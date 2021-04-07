@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class RaycastManager : MonoSingleton<RaycastManager>
 {
+    #region Appel de Script
+    public MouseCommand _mouseCommand;
+    #endregion
+
     #region Variables
-    //Les layer qui sont d�tect�s par le raycast
-    [SerializeField] private LayerMask layerM;
+    [Header("INFO DU RAYCAST")]
+    //Les layer qui sont détectés par le raycast
+    [SerializeField] private LayerMask _layerM;
 
     //tile qui se trouve sous le raycast
     [SerializeField] private GameObject _tile;
     public GameObject Tile => _tile;
-    //Derni�re tile en m�moire par ce script
+    //Dernière tile en mémoire par ce script
     GameObject _lastTile = null;
 
     //tile qui se trouve sous le raycast
@@ -32,81 +38,204 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         }
     }
 
+    //Lorsque le joueur clique sur une tile et qu'il y a une unité
+    [SerializeField] private GameObject _actualUnitSelected;
+    public GameObject ActualUnitSelected => _actualUnitSelected;
+
+    [Header("PANNEAU DES BOUTONS QUAND CLIC SUR UNITE")]
+    //Menu a activer quand clic sur unité
+    [SerializeField] private GameObject _menuForUnit = null;
+
     //Est ce que les joueurs peuvent jouer
     bool _isInTurn = false;
 
-    //Event pour quand le joueur clique sur un bouton pour passer � la phase suivante
+    //Event pour quand le joueur clique sur un bouton pour passer à la phase suivante
     public delegate void TileRaycastChange();
     public event TileRaycastChange OnTileChanged;
     #endregion Variables
 
-    void Update()
-    {
-        //obtient le premier objet touch� par le raycast
+    void Update(){
+        //obtient le premier objet touché par le raycast
         RaycastHit2D hit = GetRaycastHit();
 
         //Remplace le gameObject Tile pour avoir en avoir une sauvegarde
         _tile = hit.collider != null ? hit.collider.gameObject : null;
 
-        //Assigne l'unit� si la tile qui est s�lectionn�e poss�de une unit�
+        //Assigne l'unité si la tile qui est sélectionnée possède une unité
         _unitInTile = _tile != null ? _tile.GetComponent<TileScript>().Unit != null ? _tile.GetComponent<TileScript>().Unit : null : null;
 
-        //Si la tile en dessous de la souris change
-        if(_tile != _lastTile || _isInTurn != GameManager.Instance.IsInTurn)
+        //Permet de combiner le Shift et le click gauche de la souris.
+        if (_unitInTile == true)
+        {
+            //Si il il y a une unité sur la tile, le joueur peut utiliser ShiftClick.
+            _mouseCommand.ShiftClick();
+
+            //Si le joueur a utilisé le Shift puis leclick, le joueur est considéré comme click et on applique les fonctions propres au bouton des panneaux. De plus, le mouseOver est désactivé.
+            if (_mouseCommand.CheckIfPlayerAsClic == true)
+            {
+                _mouseCommand.buttonAction(UIInstance.Instance.PageButton);
+                _mouseCommand.MouseExitWithoutClick();
+            }
+            else
+            {
+                //Si le joueur n'a pas continué sa combinaison d'action( Shif+clic), alors quand ma souris reste sur une case sans cliqué, l'interface résumé des statistiques s'active.
+                _mouseCommand.MouseOverWithoutClick();
+            }
+
+            //Lorsque le joueur clic sur une unité
+        }
+        else
+        {
+            //Si la case ne comporte pas d'unité alors le MouseOver ne s'active pas et n'affiche par l'interface résumé des statistiques.
+            _mouseCommand.MouseExitWithoutClick();
+        }
+
+        //Si la tile change
+        if (_tile != _lastTile || _isInTurn != GameManager.Instance.IsInTurn)
         {
             _isInTurn = GameManager.Instance.IsInTurn;
             _lastTile = _tile;
             OnTileChanged();
         }
 
-        //Lorsque le joueur appui sur la souris
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        //Lorsque le joueur clique sur le plateau
+        if(Input.GetKeyDown(KeyCode.Mouse0) && !Input.GetKey(KeyCode.LeftShift))
         {
-            if(_tile != null)
-            {
-                Select();
-            }
+            Select();
         }
     }
 
     /// <summary>
-    /// Permet d'obtenir les objets touch�s par le raycast
-    /// </summary>
-    /// <returns></returns>
-    RaycastHit2D GetRaycastHit()
-    {
-        Vector2 mouseDirection = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        Ray2D ray = new Ray2D(Camera.main.ScreenToWorldPoint(Input.mousePosition), mouseDirection);
-        return Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, layerM);
-    }
-
-    /// <summary>
-    /// Quand tu cliques sur une unit�
+    /// Quand tu cliques sur une unité
     /// </summary>
     public void Select()
     {
-        if(!Mouvement.Instance.Selected)
+        if(GameManager.Instance.ChooseUnitForEvent)
         {
-            if(_tile.GetComponent<TileScript>().Unit != null)
+            if(_unitInTile != null)
             {
-                Mouvement.Instance.Selected = true;
-                _actualTileSelected = _tile;
-            }
-        }
-
-        else
-        {
-            if(Mouvement.Instance.IsInMouvement && !Mouvement.Instance.MvmtRunning)
-            {
-                if(_tile != _actualTileSelected)
+                if(GameManager.Instance.UnitChooseList.Contains(_unitInTile))
                 {
-                    Mouvement.Instance.AddMouvement(TilesManager.Instance.TileList.IndexOf(_tile));
+                    GameManager.Instance.UnitChooseList.Remove(_unitInTile);
                 }
                 else
                 {
-                    Mouvement.Instance.StopMouvement(true);
+                    if(_unitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy == GameManager.Instance.IsPlayerRedTurn && GameManager.Instance.ChooseArmyUnit == true)
+                    {
+                        GameManager.Instance.AddUnitToList(_unitInTile);
+                    }
+                    else if(_unitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy != GameManager.Instance.IsPlayerRedTurn && GameManager.Instance.ChooseOponentUnit == true)
+                    {
+                        GameManager.Instance.AddUnitToList(_unitInTile);
+                    }
+                    else if(!_unitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy != GameManager.Instance.IsPlayerRedTurn && GameManager.Instance.ChooseArmyUnit == true)
+                    {
+                        GameManager.Instance.AddUnitToList(_unitInTile);
+                    }
+                    else if(!_unitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy == GameManager.Instance.IsPlayerRedTurn && GameManager.Instance.ChooseOponentUnit == true)
+                    {
+                        GameManager.Instance.AddUnitToList(_unitInTile);
+                    }
                 }
             }
         }
+        else
+        {
+            //Si le mouvement n'a pas été lancé
+            if(!Mouvement.Instance.Selected)
+            {
+                if(_unitInTile != null)
+                {
+                    if(CanUseUnitWhenClic(_unitInTile.GetComponent<UnitScript>()))
+                    {
+                        _actualTileSelected = _tile;
+                        _actualUnitSelected = _actualTileSelected.GetComponent<TileScript>().Unit;
+                        _menuForUnit.GetComponent<MenuActionUnite>().ShowPanel();
+                    }
+                }
+            }
+
+            //Si le mouvement a été lancé
+            else
+            {
+                if(Mouvement.Instance.IsInMouvement && !Mouvement.Instance.MvmtRunning)
+                {
+                    if(_tile != _actualTileSelected)
+                    {
+                        Mouvement.Instance.AddMouvement(TilesManager.Instance.TileList.IndexOf(_tile));
+                    }
+                    else
+                    {
+                        Mouvement.Instance.StopMouvement(true);
+                        UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
+                    }
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Est ce que l'unité qui a été cliquée fait partie de l'armée
+    /// </summary>
+    /// <param name="uniTouch"></param>
+    /// <returns></returns>
+    bool CanUseUnitWhenClic(UnitScript uniTouch)
+    {
+        if(uniTouch.IsActivationDone == false)
+        {
+            if(GameManager.Instance.IsPlayerRedTurn)
+            {
+                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, true) && !uniTouch._usefullForOpponent)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, false) && !uniTouch._usefullForOpponent)
+                {
+                    return false;
+                }
+            }
+
+
+            if(GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
+            {
+                return false;
+            }
+
+            bool isDeactivate = false;
+            foreach(MYthsAndSteel_Enum.TypeUnite type in PlayerScript.Instance.DisactivateUnitType)
+            {
+                if(uniTouch.UnitSO.typeUnite == type)
+                {
+                    isDeactivate = true;
+                }
+            }
+
+            if(isDeactivate)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Permet d'obtenir les objets touchés par le raycast
+    /// </summary>
+    /// <returns></returns>
+    public RaycastHit2D GetRaycastHit()
+    {
+        Vector2 mouseDirection = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        Ray2D ray = new Ray2D(Camera.main.ScreenToWorldPoint(Input.mousePosition), mouseDirection);
+        return Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, _layerM);
     }
 }
