@@ -8,7 +8,6 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     #region Appel de Script
     public MouseCommand _mouseCommand;
     #endregion
-
     #region Variables
     [Header("INFO DU RAYCAST")]
     //Les layer qui sont détectés par le raycast
@@ -53,6 +52,16 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     public delegate void TileRaycastChange();
     public event TileRaycastChange OnTileChanged;
     #endregion Variables
+
+    private void Start()
+    {
+        OnTileChanged += RaycastManager_OnTileChanged;
+    }
+
+    private void RaycastManager_OnTileChanged()
+    {
+        UIInstance.Instance.CallUpdateUI(_lastTile);
+    }
 
     void Update(){
         //obtient le premier objet touché par le raycast

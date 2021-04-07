@@ -116,6 +116,10 @@ public class TileScript : MonoBehaviour
     /// Clear les enfants de la tile
     /// </summary>
     public void RemoveChild(){
+        if(Child.Count != 0)
+        {
+            Destroy(Child[0]);
+        }
         Child.Clear();
     }
 
