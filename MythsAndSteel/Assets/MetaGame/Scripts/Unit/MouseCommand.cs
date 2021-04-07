@@ -12,8 +12,9 @@ using TMPro;
 public class MouseCommand : MonoBehaviour
 {
     #region Variables
-    [SerializeField] private bool _checkIfPlayerAsClic;
-    public bool CheckIfPlayerAsClic => _checkIfPlayerAsClic;
+    public bool _checkIfPlayerAsClic;
+
+    public bool _hasCheckUnit = false;
 
     [Header("UI STATIQUE UNITE")]
     //Le panneau à afficher lorsqu'on souhaite voir les statistiques de l'unité en cliquant.
@@ -626,20 +627,10 @@ public class MouseCommand : MonoBehaviour
     /// <summary>
     /// Permet de déterminer quand le joueur appuie sur le Shift puis le clic Gauche de la souris.
     /// </summary>
-    public void ShiftClick()
-    {
-        //Si le joueur appuie sur la touche Shift Gauche (Attention, il y a 2 shifts sur un clavier !)
-        if (Input.GetKey("left shift"))
-        {
-            //Si le joueur appuie sur le click gauche de sa souris.
-            if (Input.GetMouseButtonDown(0))
-            {
-                //Si le joueur a éxécuté les actions précédentes, il est considéré comme quoi le joueur a cliqué donc on active le premier panneau.
-                _checkIfPlayerAsClic = true;
-                ActivateUI(ShiftUI[0], 0, 0, false, false, false, true);
-                UpdateUIStats();
-            }
-        }
+    public void ShiftClick(){
+        ActivateUI(ShiftUI[0], 0, 0, false, false, false, true);
+        UpdateUIStats();
+        _hasCheckUnit = true;
     }
 
     /// <summary>
@@ -697,32 +688,33 @@ public class MouseCommand : MonoBehaviour
         button._quitMenuPage2.onClick.AddListener(clickQuit);
         button._rightArrowPage1.onClick.AddListener(switchWindows1);
         button._leftArrowPage2.onClick.AddListener(switchWindows2);
+    }
 
-        //Fonction qui permet de cacher les Pages 1 et 2 du carnet.
-        void clickQuit()
-        {
-            //Je retourne la valeur comme quoi il a clické à false car il a fini son action de Shift+Clic et désactive les 2 pages.
-            _checkIfPlayerAsClic = false;
-            ShiftUI[0].SetActive(false);
-            ShiftUI[1].SetActive(false);
-        }
+    //Fonction qui permet de cacher les Pages 1 et 2 du carnet.
+    public void clickQuit()
+    {
+        //Je retourne la valeur comme quoi il a clické à false car il a fini son action de Shift+Clic et désactive les 2 pages.
+        _checkIfPlayerAsClic = false;
+        _hasCheckUnit = false;
+        ShiftUI[0].SetActive(false);
+        ShiftUI[1].SetActive(false);
+    }
 
-        //Change de page lorsque le joueur regarde les statistiques avancées
-        //Switch entre la page 1 et la page 2.
-        void switchWindows1()
-        {
-            //J'active le Panneau 2 car le joueur a cliqué sur le bouton permettant de transitionner de la page 1 à la page 2. De plus, je masque la page 1.
-            ActivateUI(ShiftUI[1], ShiftUI[0].transform.position.x, ShiftUI[0].transform.position.y, true);
-            ShiftUI[0].SetActive(false);
-        }
+    //Change de page lorsque le joueur regarde les statistiques avancées
+    //Switch entre la page 1 et la page 2.
+    void switchWindows1()
+    {
+        //J'active le Panneau 2 car le joueur a cliqué sur le bouton permettant de transitionner de la page 1 à la page 2. De plus, je masque la page 1.
+        ActivateUI(ShiftUI[1], ShiftUI[0].transform.position.x, ShiftUI[0].transform.position.y, true);
+        ShiftUI[0].SetActive(false);
+    }
 
-        //Switch entre la page 2 et la page 1.
-        void switchWindows2()
-        {
-            //J'active le Panneau 1 car le joueur a cliqué sur le bouton permettant de transitionner de la page 2 à la page 1. De plus, je masque la page 2.
-            ActivateUI(ShiftUI[0], ShiftUI[1].transform.position.x, ShiftUI[1].transform.position.y, true);
-            ShiftUI[1].SetActive(false);
-        }
+    //Switch entre la page 2 et la page 1.
+    void switchWindows2()
+    {
+        //J'active le Panneau 1 car le joueur a cliqué sur le bouton permettant de transitionner de la page 2 à la page 1. De plus, je masque la page 2.
+        ActivateUI(ShiftUI[0], ShiftUI[1].transform.position.x, ShiftUI[1].transform.position.y, true);
+        ShiftUI[1].SetActive(false);
     }
     #endregion SwitchPages
 }
