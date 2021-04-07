@@ -1084,17 +1084,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actualTurnNumber: 0
   _isPlayerRedStarting: 0
-  _isPlayerRedTurn: 0
+  _isPlayerRedTurn: 1
   _isInTurn: 0
-  _actualTurnPhase: 0
+  _actualTurnPhase: 3
   _eventCardSO: {fileID: 11400000, guid: 955303dc40a1fa54984cef9072aef4ad, type: 2}
   _managerSO: {fileID: 11400000, guid: 915a645e0a8638b4d8f4a6522da5cc44, type: 2}
   _chooseUnitForEvent: 0
-  _chooseOponnentUnit: 0
-  _chooseArmyUnit: 0
-  _redPlayerUseEvent: 0
+  _selectableUnit: []
   _unitChooseList: []
   _numberOfUnitToChoose: 0
+  _chooseTileForEvent: 0
+  _selectableTiles: []
+  _numberOfTilesToChoose: 0
+  _tileChooseList: []
+  _redPlayerUseEvent: 0
+  "IllusionStrat\xE9gique": 0
 --- !u!1 &99837085
 GameObject:
   m_ObjectHideFlags: 0
@@ -18291,6 +18295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1890824751}
   - component: {fileID: 1890824752}
+  - component: {fileID: 1890824753}
   m_Layer: 0
   m_Name: PlayerInstance
   m_TagString: Untagged
@@ -18324,15 +18329,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 224d2e037979b9b4db202c5ca6dc3fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitListRedPlayer:
-  - {fileID: 108961818}
-  - {fileID: 1691159585}
-  - {fileID: 1204031599}
-  - {fileID: 827471365}
-  - {fileID: 1264806016}
-  - {fileID: 1710207924}
-  _unitListBluePlayer:
-  - {fileID: 549253556}
+  _cardObtain: 
+  _redPlayerInfos:
+    EventsCardNumberLeft: 0
+    OrgoneValue: 0
+    Ressource: 0
+    ActivationLeft: 0
+    ActivationCardValue: 0
+    GoalCapturePointsNumber: 0
+    OrgonePowerLeft: 0
+    LastKnownOrgoneValue: 0
+    TileCentreZoneOrgone: {fileID: 0}
+    ArmyName: 
+    HasCreateUnit: 0
+    ActivationCardChoose: 0
+    IsMovingOrgoneArea: 0
+    HasMoveOrgoneArea: 0
+  _bluePlayerInfos:
+    EventsCardNumberLeft: 0
+    OrgoneValue: 0
+    Ressource: 0
+    ActivationLeft: 0
+    ActivationCardValue: 0
+    GoalCapturePointsNumber: 0
+    OrgonePowerLeft: 0
+    LastKnownOrgoneValue: 0
+    TileCentreZoneOrgone: {fileID: 0}
+    ArmyName: 
+    HasCreateUnit: 0
+    ActivationCardChoose: 0
+    IsMovingOrgoneArea: 0
+    HasMoveOrgoneArea: 0
+  _unitRef: {fileID: 1890824753}
   DisactivateUnitType: 
   _ArmyRedWinAtTheEnd: 0
   _eventCardList:
@@ -18347,6 +18375,31 @@ MonoBehaviour:
     - {fileID: 983939200}
     - {fileID: 985862569}
     - {fileID: 748241877}
+--- !u!114 &1890824753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890824750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 090903e2fd643a6499073e70b9b28e48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitListRedPlayer:
+  - {fileID: 108961818}
+  - {fileID: 1691159585}
+  - {fileID: 1204031599}
+  - {fileID: 1710207924}
+  - {fileID: 1264806016}
+  - {fileID: 827471365}
+  _unitListBluePlayer:
+  - {fileID: 549253556}
+  _unitClassListRedPlayer:
+  - {fileID: 11400000, guid: de7341a724493fc4b8ef2f7b5fad5c81, type: 2}
+  _unitClassListBluePlayer:
+  - {fileID: 11400000, guid: 2378c437940554d4a8df8fe602444812, type: 2}
 --- !u!1 &1913429448 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1518746230139058980, guid: 02a10ec39c416db4ab8ed64726ea5939, type: 3}

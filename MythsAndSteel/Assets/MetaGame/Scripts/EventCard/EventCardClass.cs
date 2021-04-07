@@ -29,30 +29,57 @@ public class EventCardClass : ScriptableObject{
         _numberOfEventCard = number;
     }
 
+    #region RemoveEvent
     /// <summary>
-    /// Lorsqu'un événement est utilisé il faut le retirer
+    /// Eneleve la carte event d'un joueur
     /// </summary>
-    public void RemoveEventsAfterUse(){
-        //Joueur rouge
-        //Cherche si une carte event n'a pas été utilisée
-        foreach(GameObject gam in PlayerScript.Instance.EventCardList._eventGamRedPlayer){
-            bool hasFindEvent = false;
+    /// <param name="ev"></param>
+    void RemoveEvents(MYthsAndSteel_Enum.EventCard ev){
+        if(PlayerScript.Instance.EventCardList._eventCardRedPlayer.Contains(ev)){
+            PlayerScript.Instance.EventCardList._eventCardRedPlayer.Remove(ev);
 
-            foreach(MYthsAndSteel_Enum.EventCard ev in PlayerScript.Instance.EventCardList._eventCardRedPlayer){
-                if(ev == gam.GetComponent<EventCardContainer>().EventCardInfo._eventType){
-                    hasFindEvent = true;
+            foreach(GameObject gam in PlayerScript.Instance.EventCardList._eventGamRedPlayer){
+                if(gam.GetComponent<EventCardContainer>().EventCardInfo._eventType == ev){
+                    RemoveEventGam(gam, 1);
+                    break;
                 }
             }
+        }
+        else{
+            PlayerScript.Instance.EventCardList._eventCardBluePlayer.Remove(ev);
 
-            //Si l'événement n'a pas été trouvé
-            if(!hasFindEvent){
-                RemoveEventGam(gam, 1);
+            foreach(GameObject gam in PlayerScript.Instance.EventCardList._eventGamBluePlayer){
+                if(gam.GetComponent<EventCardContainer>().EventCardInfo._eventType == ev){
+                    RemoveEventGam(gam, 2);
+                    break;
+                }
             }
-
-            UpdateVisualUI(PlayerScript.Instance.EventCardList._eventGamRedPlayer, 1);
-        }            
+        }
     }
 
+    /// <summary>
+    /// détruit une carte event
+    /// </summary>
+    /// <param name="gam"></param>
+    void RemoveEventGam(GameObject gam, int player){
+        if(player == 1){
+            PlayerScript.Instance.EventCardList._eventGamRedPlayer.Remove(gam);
+            Destroy(gam);
+        }
+        else if(player == 2){
+            PlayerScript.Instance.EventCardList._eventGamBluePlayer.Remove(gam);
+            Destroy(gam);
+        }
+        else{
+            Debug.LogError("Vous essayez d'enlever une carte event a un joueur qui n'existe pas");
+        }
+
+        UpdateVisualUI(PlayerScript.Instance.EventCardList._eventGamRedPlayer, 1);
+        UpdateVisualUI(PlayerScript.Instance.EventCardList._eventGamBluePlayer, 2);
+    }
+    #endregion RemoveEvent
+
+    #region UpdateEventUI
     /// <summary>
     /// Met a jour la position des cartes events dans l'interface
     /// </summary>
@@ -158,27 +185,49 @@ public class EventCardClass : ScriptableObject{
     }
 
     /// <summary>
-    /// détruit une carte event
+    /// Update la position du parent des cartes events d'un joueur
     /// </summary>
-    /// <param name="gam"></param>
-    void RemoveEventGam(GameObject gam, int player){
-        if(player == 1){
-            PlayerScript.Instance.EventCardList._eventGamRedPlayer.Remove(gam);
-            PlayerScript.Instance.EventCardList._eventCardRedPlayer.Remove(gam.GetComponent<EventCardContainer>().EventCardInfo._eventType);
+    void UpdateEventsParentPos(int player)
+    {
+        float multiplier = 1.17f;
+        if(player == 1)
+        {
+            UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition = new Vector3(UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition.x, -_spaceBetweenTwoEvents * _redPlayerPos / multiplier, UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition.z);
         }
-        else if(player == 2){
-            PlayerScript.Instance.EventCardList._eventGamBluePlayer.Remove(gam);
-            PlayerScript.Instance.EventCardList._eventCardBluePlayer.Remove(gam.GetComponent<EventCardContainer>().EventCardInfo._eventType);
+        else if(player == 2)
+        {
+            UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition = new Vector3(UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition.x, -_spaceBetweenTwoEvents * _bluePlayerPos / multiplier, UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition.z);
         }
-        else{
-            Debug.LogError("Vous essayez d'enlever une carte event a un joueur qui n'existe pas");
+        else
+        {
+            Debug.LogError("vous essayez de déplacer les cartes events d'un joueur qui n'existe pas");
         }
-        Destroy(gam);
-
-        UpdateVisualUI(PlayerScript.Instance.EventCardList._eventGamRedPlayer, 1);
-        UpdateVisualUI(PlayerScript.Instance.EventCardList._eventGamBluePlayer, 2);
     }
 
+    /// <summary>
+    /// Reset la position du parent des cartes events d'un joueur
+    /// </summary>
+    /// <param name="player"></param>
+    void ResetEventParentPos(int player)
+    {
+        if(player == 1)
+        {
+            _redPlayerPos = 0;
+            UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition = Vector3.zero;
+        }
+        else if(player == 2)
+        {
+            _bluePlayerPos = 0;
+            UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition = Vector3.zero;
+        }
+        else
+        {
+            Debug.LogError("vous essayez de déplacer les cartes events d'un joueur qui n'existe pas");
+        }
+    }
+    #endregion UpdateEventUI
+
+    #region ButtonInput
     /// <summary>
     /// Quand le joueur appuie sur le bouton pour monter dans la liste des cartes events
     /// </summary>
@@ -218,42 +267,183 @@ public class EventCardClass : ScriptableObject{
             Debug.LogError("vous essayez de déplacer les cartes events d'un joueur qui n'existe pas");
         }
     }
-
-    /// <summary>
-    /// Update la position du parent des cartes events d'un joueur
-    /// </summary>
-    void UpdateEventsParentPos(int player){
-        float multiplier = 1.17f;
-        if(player == 1){
-            UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition = new Vector3(UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition.x, -_spaceBetweenTwoEvents * _redPlayerPos / multiplier, UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition.z);
-        }
-        else if(player == 2){
-            UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition = new Vector3(UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition.x, -_spaceBetweenTwoEvents * _bluePlayerPos / multiplier, UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition.z);
-        }
-        else{
-            Debug.LogError("vous essayez de déplacer les cartes events d'un joueur qui n'existe pas");
-        }
-    }
-
-    /// <summary>
-    /// Reset la position du parent des cartes events d'un joueur
-    /// </summary>
-    /// <param name="player"></param>
-    void ResetEventParentPos(int player){
-        if(player == 1){
-            _redPlayerPos =0;
-            UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition = Vector3.zero;
-        }
-        else if(player == 2){
-            _bluePlayerPos =0;
-            UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition = Vector3.zero;
-        }
-        else{
-            Debug.LogError("vous essayez de déplacer les cartes events d'un joueur qui n'existe pas");
-        }
-    }
+    #endregion ButtonInput
 
     #region Evenement
+
+    //A finir dès qu'on peut ajouter une unité
+    #region Déploiement Accéléré
+    /// <summary>
+    /// Carte event du déplacement accéléré
+    /// </summary>
+    public void DéploiementAccéléré()
+    {
+        foreach(GameObject tile in GameManager.Instance.TileChooseList){
+            Debug.Log("Le jeu ajoute une infante");
+        }
+
+        GameManager.Instance.TileChooseList.Clear();
+
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Déploiement_accéléré);
+    }
+
+    public void LaunchDéploiementAccéléré(){
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Déploiement_accéléré);
+        List<GameObject> gamList = new List<GameObject>();
+        
+        //obtien les cases voisines pour chaque unité de l'armée
+        foreach(GameObject unit in player == 1? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer){
+            List<int> neighTile = PlayerStatic.GetNeighbourDiag(unit.GetComponent<UnitScript>().ActualTiledId, TilesManager.Instance.TileList[unit.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().Line, false);
+
+            //Check les effets de terrain pour voir si il doit ajouter la tile à la liste
+            foreach(int i in neighTile){
+                //Obtient la direction de la case par rapport à l'unité
+                string dir = PlayerStatic.CheckDirection(unit.GetComponent<UnitScript>().ActualTiledId, i);
+
+                if(TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Ravin) || TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Eau)) {
+                    //La tile n'est pas ajoutée
+                }
+                else { 
+                    switch(dir){
+                        case "Nord":
+                            if(!TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Sud)){
+                                gamList.Add(TilesManager.Instance.TileList[i]);
+                            }
+                            break;
+                        case "Sud":
+                            if(!TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Nord)){
+                                gamList.Add(TilesManager.Instance.TileList[i]);
+                            }
+                            break;
+                        case "Est":
+                            if(!TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Ouest)){
+                                gamList.Add(TilesManager.Instance.TileList[i]);
+                            }
+                            break;
+                        case "Ouest":
+                            if(!TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Est)){
+                                gamList.Add(TilesManager.Instance.TileList[i]);
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && 
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn))){
+            LaunchEventTile(1, player == 1 ? true : false, gamList);
+            GameManager.Instance._eventCardCall += DéploiementAccéléré;
+        }
+    }
+    #endregion Reprogrammation
+
+    #region IllusionStratégique
+    /// <summary>
+    /// Carte event du déplacement accéléré
+    /// </summary>
+    public void IllusionStratégique()
+    {
+        int firstTileId = GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().ActualTiledId;
+
+        TilesManager.Instance.TileList[GameManager.Instance.UnitChooseList[1].GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().AddUnitToTile(GameManager.Instance.UnitChooseList[0].gameObject);
+        TilesManager.Instance.TileList[firstTileId].GetComponent<TileScript>().AddUnitToTile(GameManager.Instance.UnitChooseList[1].gameObject);
+
+        GameManager.Instance.UnitChooseList.Clear();
+        GameManager.Instance.IllusionStratégique = false;
+
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Illusion_stratégique);
+    }
+
+    public void LaunchIllusionStratégique()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Illusion_stratégique);
+        List<GameObject> unitList = new List<GameObject>();
+        unitList.AddRange(PlayerScript.Instance.UnitRef.UnitListRedPlayer);
+        unitList.AddRange(PlayerScript.Instance.UnitRef.UnitListBluePlayer);
+
+        GameManager.Instance.IllusionStratégique = true;
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+            LaunchEventUnit(2, player == 1 ? true : false, unitList);
+            GameManager.Instance._eventCardCall += IllusionStratégique;
+        }
+
+        unitList.Clear();
+    }
+    #endregion IllusionStratégique
+
+    #region OptimisationOrgone
+    /// <summary>
+    /// Carte event du déplacement accéléré
+    /// </summary>
+    public void OptimisationOrgone()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Illusion_stratégique);
+        if(player == 1){
+            PlayerScript.Instance.RedPlayerInfos.OrgonePowerLeft++;
+        }
+        else{
+            PlayerScript.Instance.BluePlayerInfos.OrgonePowerLeft++;
+        }
+
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Optimisation_de_l_orgone);
+    }
+
+    public void LaunchOptimisationOrgone()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Optimisation_de_l_orgone);
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+            GameManager.Instance._eventCardCall += IllusionStratégique;
+        }
+    }
+    #endregion OptimisationOrgone
+
+    #region PillageOrgone
+    /// <summary>
+    /// Carte event du déplacement accéléré
+    /// </summary>
+    public void PillageOrgone()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Pillage_orgone);
+
+        foreach(GameObject gam in GameManager.Instance.TileChooseList){
+            gam.GetComponent<TileScript>().RemoveRessources(1, player);
+        }
+
+        GameManager.Instance.TileChooseList.Clear();
+
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Pillage_orgone);
+    }
+
+    public void LaunchPillageOrgone()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Pillage_orgone);
+        
+        List<GameObject> tileList = new List<GameObject>();
+        tileList.AddRange(PlayerScript.Instance.UnitRef.UnitListRedPlayer);
+
+        GameManager.Instance.IllusionStratégique = true;
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+            LaunchEventUnit(2, player == 1 ? true : false, tileList);
+            GameManager.Instance._eventCardCall += IllusionStratégique;
+        }
+
+        tileList.Clear();
+    }
+    #endregion PillageOrgone
+
 
     #region Reprogrammation
     /// <summary>
@@ -266,16 +456,25 @@ public class EventCardClass : ScriptableObject{
         }
 
         GameManager.Instance.UnitChooseList.Clear();
+
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Reprogrammation);
     }
 
     public void LaunchReproggramation(){
         int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Reprogrammation);
-        
-        if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
+        List<GameObject> unitList = new List<GameObject>();
+
+        unitList.AddRange(player == 1 ? PlayerScript.Instance.UnitRef.UnitListBluePlayer : PlayerScript.Instance.UnitRef.UnitListRedPlayer);
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEvent(1, true, false, player == 1? true : false);
+            LaunchEventUnit(1, player == 1? true : false, unitList);
             GameManager.Instance._eventCardCall += Reproggramation;
         }
+
+        unitList.Clear();
     }
     #endregion Reprogrammation
 
@@ -291,17 +490,27 @@ public class EventCardClass : ScriptableObject{
         }
 
         GameManager.Instance.UnitChooseList.Clear();
+
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Sérum_expérimental);
     }
 
     public void LaunchSerumExperimental()
     {
         int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Sérum_expérimental);
-        
-        if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
+
+        List<GameObject> unitList = new List<GameObject>();
+
+        unitList.AddRange(player == 2 ? PlayerScript.Instance.UnitRef.UnitListBluePlayer : PlayerScript.Instance.UnitRef.UnitListRedPlayer);
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEvent(2, false, true, player == 1 ? true : false);
+            LaunchEventUnit(2, player == 1 ? true : false, unitList);
             GameManager.Instance._eventCardCall += SerumExperimental;
         }
+
+        unitList.Clear();
     }
     #endregion SerumExpérimental
 
@@ -317,17 +526,27 @@ public class EventCardClass : ScriptableObject{
         }
 
         GameManager.Instance.UnitChooseList.Clear();
+
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Pointeurs_laser_optimisés);
     }
 
     public void LaunchPointeursLaserOptimisés()
     {
         int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Pointeurs_laser_optimisés);
 
-        if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
+        List<GameObject> unitList = new List<GameObject>();
+
+        unitList.AddRange(player == 2 ? PlayerScript.Instance.UnitRef.UnitListBluePlayer : PlayerScript.Instance.UnitRef.UnitListRedPlayer);
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEvent(2, false, true, player == 1 ? true : false);
+            LaunchEventUnit(2, player == 1 ? true : false, unitList);
             GameManager.Instance._eventCardCall += PointeursLaserOptimisés;
         }
+
+        unitList.Clear();
     }
     #endregion PointeursLaser
 
@@ -343,29 +562,50 @@ public class EventCardClass : ScriptableObject{
         }
 
         GameManager.Instance.UnitChooseList.Clear();
+
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Réapprovisionnement);
     }
 
     public void LaunchReapprovisionnement()
     {
         int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Réapprovisionnement);
 
-        if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
+        List<GameObject> unitList = new List<GameObject>();
+
+        unitList.AddRange(player == 2 ? PlayerScript.Instance.UnitRef.UnitListBluePlayer : PlayerScript.Instance.UnitRef.UnitListRedPlayer);
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEvent(2, false, true, player == 1 ? true : false);
+            LaunchEventUnit(2, player == 1 ? true : false, unitList);
             GameManager.Instance._eventCardCall += Reapprovisionnement;
         }
+
+        unitList.Clear();
     }
     #endregion Réapprovisionnement
 
     /// <summary>
-    /// Lance un événement en appellant la fonction dans le gameManager
+    /// Lance un événement en appellant la fonction dans le gameManager pour choisir une unité
     /// </summary>
     /// <param name="unitNumber"></param>
     /// <param name="opponent"></param>
     /// <param name="army"></param>
     /// <param name="redPlayer"></param>
-    void LaunchEvent(int unitNumber, bool opponent, bool army, bool redPlayer){
-        GameManager.Instance.StartEventMode(unitNumber, opponent, army, redPlayer);
+    void LaunchEventUnit(int unitNumber, bool redPlayer, List<GameObject> unitList)
+    {
+        GameManager.Instance.StartEventModeUnit(unitNumber, redPlayer, unitList);
+    }
+
+    /// <summary>
+    /// Lance un événement en appellant la fonction dans le gameManager pour choisir une ou plusieurs cases du plateau
+    /// </summary>
+    /// <param name="numberOfTiles"></param>
+    /// <param name="redPlayer"></param>
+    /// <param name="gamList"></param>
+    void LaunchEventTile(int numberOfTiles, bool redPlayer, List<GameObject> gamList){
+        GameManager.Instance.StartEventModeTiles(numberOfTiles, redPlayer, gamList);
     }
 
     /// <summary>

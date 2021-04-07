@@ -60,9 +60,37 @@ public class TileSelectionMovement : MonoBehaviour{
             _isVisble = false;
         }
 
-        if(RaycastManager.Instance.UnitInTile != null && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)){
-            if(RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy == GameManager.Instance.IsPlayerRedTurn){
+        //Si le joueur survole le plateau
+        if(RaycastManager.Instance.UnitInTile != null && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) 
+           && GameManager.Instance.ChooseUnitForEvent == false && GameManager.Instance.ChooseTileForEvent == false)
+        {
+            if(RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy == GameManager.Instance.IsPlayerRedTurn || RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>()._usefullForOpponent == true){
                 GetComponent<Animator>().SetBool("HasUnit",  true);
+            }
+            else{
+                GetComponent<Animator>().SetBool("HasUnit", false);
+            }
+        }
+        //Si le joueur doit choisir une unité
+        else if(GameManager.Instance.ChooseUnitForEvent == true){
+            if(RaycastManager.Instance.UnitInTile != null){
+
+                if(GameManager.Instance.SelectableUnit.Contains(RaycastManager.Instance.UnitInTile)){
+                    GetComponent<Animator>().SetBool("HasUnit", true);
+                }
+                else
+                {
+                    GetComponent<Animator>().SetBool("HasUnit", false);
+                }
+            }
+            else{
+                GetComponent<Animator>().SetBool("HasUnit", false);
+            }
+        }
+        //Si le joueur doit choisir une case
+        else if(GameManager.Instance.ChooseTileForEvent == true){
+            if(GameManager.Instance._selectableTiles.Contains(RaycastManager.Instance.Tile)){
+                GetComponent<Animator>().SetBool("HasUnit", true);
             }
             else{
                 GetComponent<Animator>().SetBool("HasUnit", false);

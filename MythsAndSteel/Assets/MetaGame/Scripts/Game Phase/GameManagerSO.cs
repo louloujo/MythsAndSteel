@@ -55,7 +55,7 @@ public class GameManagerSO : ScriptableObject
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1:
-                foreach(GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance._unitListRedPlayer : PlayerScript.Instance._unitListBluePlayer){
+                foreach(GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer){
                     unit.GetComponent<UnitScript>().ResetTurn();
                 }
 
@@ -67,7 +67,7 @@ public class GameManagerSO : ScriptableObject
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2:
-                foreach(GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance._unitListRedPlayer : PlayerScript.Instance._unitListBluePlayer){
+                foreach(GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer){
                     unit.GetComponent<UnitScript>().ResetTurn();
                 }
 

@@ -6,12 +6,17 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoSingleton<PlayerScript>
 {
+    [SerializeField] List<MYthsAndSteel_Enum.EventCard> _cardObtain = new List<MYthsAndSteel_Enum.EventCard>();
+
     [SerializeField] private Player _redPlayerInfos = new Player();
+    public Player RedPlayerInfos => _redPlayerInfos;
     [SerializeField] private Player _bluePlayerInfos = new Player();
+    public Player BluePlayerInfos => _bluePlayerInfos;
     [Space]
-    //Liste des Unités
-    public List<GameObject> _unitListRedPlayer = new List<GameObject>();
-    public List<GameObject> _unitListBluePlayer = new List<GameObject>();
+
+    [SerializeField] private UnitReference _unitRef = null;
+    public UnitReference UnitRef => _unitRef;
+    [Space]
 
     //Liste des unités désactivées
     public List<MYthsAndSteel_Enum.TypeUnite> DisactivateUnitType = new List<MYthsAndSteel_Enum.TypeUnite>();
@@ -56,20 +61,23 @@ public class PlayerScript : MonoSingleton<PlayerScript>
     [EasyButtons.Button]
     public void GiveEventCard(int player)
     {
-        List<MYthsAndSteel_Enum.EventCard> combineEventCards = new List<MYthsAndSteel_Enum.EventCard>();
-        combineEventCards.AddRange(EventCardList._eventCardRedPlayer);
-        combineEventCards.AddRange(EventCardList._eventCardBluePlayer);
+        if(_cardObtain.Count < EventCardList._eventSO.NumberOfEventCard){
+            int randomCard = UnityEngine.Random.Range(0, EventCardList._eventSO.NumberOfEventCard);
 
-        int randomCard = UnityEngine.Random.Range(0, EventCardList._eventSO.NumberOfEventCard);
+            MYthsAndSteel_Enum.EventCard newCard = EventCardList._eventSO.EventCardList[randomCard]._eventType;
 
-        MYthsAndSteel_Enum.EventCard newCard = EventCardList._eventSO.EventCardList[randomCard]._eventType;
+            if(_cardObtain.Contains(newCard))
+            {
+                GiveEventCard(player);
+                return;
+            }
 
-        if(combineEventCards.Contains(newCard)){
-            GiveEventCard(player);
-            return;
+            AddEventCard(player, newCard);
+            _cardObtain.Add(newCard);
         }
-
-        AddEventCard(player, newCard);
+        else{
+            Debug.Log("Il n'y a plus de cartes events");
+        }
     }
 
     /// <summary>
@@ -142,6 +150,7 @@ public class PlayerScript : MonoSingleton<PlayerScript>
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Déploiement_accéléré:
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchDéploiementAccéléré);
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Détonation_d_orgone:
@@ -154,12 +163,14 @@ public class PlayerScript : MonoSingleton<PlayerScript>
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Illusion_stratégique:
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchIllusionStratégique);
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Manoeuvre_stratégique:
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Optimisation_de_l_orgone:
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.OptimisationOrgone);
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Paralysie:

@@ -108,46 +108,50 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     /// <summary>
     /// Quand tu cliques sur une unité
     /// </summary>
-    public void Select()
-    {
-        if(GameManager.Instance.ChooseUnitForEvent)
-        {
-            if(_unitInTile != null)
-            {
-                if(GameManager.Instance.UnitChooseList.Contains(_unitInTile))
-                {
-                    GameManager.Instance.UnitChooseList.Remove(_unitInTile);
+    public void Select(){
+        //Lorsque le joueur choisit une unité
+        if(GameManager.Instance.ChooseUnitForEvent){
+            if(_unitInTile != null){
+                if(GameManager.Instance.UnitChooseList.Contains(_unitInTile)){
+                    GameManager.Instance.RemoveUnitToList(_unitInTile);
                 }
-                else
-                {
-                    if(_unitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy == GameManager.Instance.IsPlayerRedTurn && GameManager.Instance.ChooseArmyUnit == true)
-                    {
-                        GameManager.Instance.AddUnitToList(_unitInTile);
-                    }
-                    else if(_unitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy != GameManager.Instance.IsPlayerRedTurn && GameManager.Instance.ChooseOponentUnit == true)
-                    {
-                        GameManager.Instance.AddUnitToList(_unitInTile);
-                    }
-                    else if(!_unitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy != GameManager.Instance.IsPlayerRedTurn && GameManager.Instance.ChooseArmyUnit == true)
-                    {
-                        GameManager.Instance.AddUnitToList(_unitInTile);
-                    }
-                    else if(!_unitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy == GameManager.Instance.IsPlayerRedTurn && GameManager.Instance.ChooseOponentUnit == true)
-                    {
-                        GameManager.Instance.AddUnitToList(_unitInTile);
+                else{
+                    if(GameManager.Instance.SelectableUnit.Contains(UnitInTile)){
+                        if(!GameManager.Instance.IllusionStratégique){ 
+                            GameManager.Instance.AddUnitToList(_unitInTile);
+                        }
+
+                        //Pour la carte événement Illusion Stratégique
+                        else{
+                            if(GameManager.Instance.UnitChooseList.Count > 0){
+                                //est ce qu'il y avait déjà une unité dans la liste
+                                if(GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().UnitSO.IsInRedArmy == _unitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy){
+                                    GameManager.Instance.AddUnitToList(_unitInTile);
+                                }
+                                else { }
+                            }
+                            else{
+                                GameManager.Instance.AddUnitToList(_unitInTile);
+                            }
+                        }
                     }
                 }
             }
         }
-        else
-        {
+
+        //lorsque le joueur choisit une case
+        else if(GameManager.Instance.ChooseTileForEvent){
+            if(_tile != null){
+                GameManager.Instance.AddTileToList(_tile);
+            }
+        }
+
+        //lorsque le joueur peut cliquer sur les unités normalement
+        else{
             //Si le mouvement n'a pas été lancé
-            if(!Mouvement.Instance.Selected)
-            {
-                if(_unitInTile != null)
-                {
-                    if(CanUseUnitWhenClic(_unitInTile.GetComponent<UnitScript>()))
-                    {
+            if(!Mouvement.Instance.Selected){
+                if(_unitInTile != null){
+                    if(CanUseUnitWhenClic(_unitInTile.GetComponent<UnitScript>())){
                         _actualTileSelected = _tile;
                         _actualUnitSelected = _actualTileSelected.GetComponent<TileScript>().Unit;
                         _menuForUnit.GetComponent<MenuActionUnite>().ShowPanel();
@@ -156,16 +160,12 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             }
 
             //Si le mouvement a été lancé
-            else
-            {
-                if(Mouvement.Instance.IsInMouvement && !Mouvement.Instance.MvmtRunning)
-                {
-                    if(_tile != _actualTileSelected)
-                    {
+            else{
+                if(Mouvement.Instance.IsInMouvement && !Mouvement.Instance.MvmtRunning){
+                    if(_tile != _actualTileSelected){
                         Mouvement.Instance.AddMouvement(TilesManager.Instance.TileList.IndexOf(_tile));
                     }
-                    else
-                    {
+                    else{
                         Mouvement.Instance.StopMouvement(true);
                         UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
                     }
