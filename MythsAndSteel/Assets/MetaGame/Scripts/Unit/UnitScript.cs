@@ -31,17 +31,26 @@ public class UnitScript : MonoBehaviour
 
     [Space]
     //Dégats minimum infligé
-    [SerializeField] Vector2 _NumberRangeMin;
-    public Vector2 NumberRangeMin => _NumberRangeMin;
-    [SerializeField] int _DamageMinimum;
-    public int DamageMinimum => _DamageMinimum;
+    [SerializeField] Vector2 _numberRangeMin;
+    public Vector2 NumberRangeMin => _numberRangeMin;
+    [SerializeField] int _damageMinimum;
+    public int DamageMinimum => _damageMinimum;
 
     [Space]
     //Dégats maximum infligé
-    [SerializeField] Vector2 _NumberRangeMax;
-    public Vector2 NumberRangeMax => _NumberRangeMax;
-    [SerializeField] int _DamageMaximum;
-    public int DamageMaximum => _DamageMaximum;
+    [SerializeField] Vector2 _numberRangeMax;
+    public Vector2 NumberRangeMax => _numberRangeMax;
+    [SerializeField] int _damageMaximum;
+    public int DamageMaximum => _damageMaximum;
+
+    //Dégât bonus
+    [SerializeField] int _damageBonus;
+    public int DamageBonus => _damageBonus;
+
+    //Bonus aux lancés de dé
+    [SerializeField] private int _diceBonus = 0;
+    public int DiceBonus => _diceBonus;
+
 
     [Header("------------------- DEPLACEMENT -------------------")]
     //Vitesse de déplacement
@@ -53,11 +62,6 @@ public class UnitScript : MonoBehaviour
     // Coût de création
     [SerializeField] int _creationCost;
     public int CreationCost => _creationCost;
-
-
-
-    public int DiceBonus = 0;
-
 
     [Header("------------------- DEPLACEMENT RESTANT -------------------")]
     // Déplacement réstant de l'unité durant cette activation
@@ -174,8 +178,6 @@ public class UnitScript : MonoBehaviour
             Death();
         }
     }
-    #endregion LifeMethods
-
 
     /// <summary>
     /// Tue l'unité
@@ -185,6 +187,7 @@ public class UnitScript : MonoBehaviour
         Destroy(gameObject);
         Debug.Log("Unité Détruite");
     }
+    #endregion LifeMethods
 
     #region Statut
     public void AddStatutToUnit(MYthsAndSteel_Enum.Statut stat){
@@ -193,7 +196,23 @@ public class UnitScript : MonoBehaviour
 
     #endregion Statut
 
+    #region ChangementStat
+    /// <summary>
+    /// Ajoute des dégâts supplémentaires aux unités
+    /// </summary>
+    /// <param name="value"></param>
+    public void AddDamageToUnit(int value){
+        _damageBonus += value;
+    }
 
+    /// <summary>
+    /// Ajout une valeur aux lancés de dés de l'unité
+    /// </summary>
+    /// <param name="value"></param>
+    public void AddDiceToUnit(int value){
+        _diceBonus += value;
+    }
+    #endregion ChangementStat
     [Button]
     /// <summary>
     /// Update les stats de l'unité avec les stats de base
@@ -209,10 +228,10 @@ public class UnitScript : MonoBehaviour
         _attackRange = _unitSO.AttackRange;
         _moveSpeed = _unitSO.MoveSpeed;
         _creationCost = _unitSO.CreationCost;
-        _DamageMinimum = _unitSO.DamageMinimum;
-        _DamageMaximum = _unitSO.DamageMaximum;
-        _NumberRangeMax = _unitSO.NumberRangeMax;
-        _NumberRangeMin = _unitSO.NumberRangeMin;
+        _damageMinimum = _unitSO.DamageMinimum;
+        _damageMaximum = _unitSO.DamageMaximum;
+        _numberRangeMax = _unitSO.NumberRangeMax;
+        _numberRangeMin = _unitSO.NumberRangeMin;
 
         //Assigne le sprite de l'unité
         GetComponent<SpriteRenderer>().sprite = _unitSO.Sprite;

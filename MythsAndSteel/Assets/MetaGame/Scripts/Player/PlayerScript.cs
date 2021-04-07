@@ -142,6 +142,7 @@ public class PlayerScript : MonoSingleton<PlayerScript>
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Armes_perforantes:
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchArmesPerforantes);
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Arme_épidémiologique:
@@ -164,6 +165,7 @@ public class PlayerScript : MonoSingleton<PlayerScript>
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Entraînement_rigoureux:
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchEntrainementRigoureux);
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Fil_barbelé:

@@ -273,9 +273,6 @@ public class EventCardClass : ScriptableObject{
 
     //A finir dès qu'on peut ajouter une unité
     #region Déploiement Accéléré
-    /// <summary>
-    /// Carte event du déplacement accéléré
-    /// </summary>
     public void DéploiementAccéléré()
     {
         foreach(GameObject tile in GameManager.Instance.TileChooseList){
@@ -456,9 +453,6 @@ public class EventCardClass : ScriptableObject{
     #endregion PillageOrgone
 
     #region PointeursLaser
-    /// <summary>
-    /// Carte event du pointeur laser
-    /// </summary>
     public void PointeursLaserOptimisés()
     {
         foreach(GameObject unit in GameManager.Instance.UnitChooseList)
@@ -551,9 +545,6 @@ public class EventCardClass : ScriptableObject{
     #endregion ManeouvreStratégique
 
     #region SerumExpérimental
-    /// <summary>
-    /// Carte event du sérum expérimental
-    /// </summary>
     public void SerumExperimental()
     {
         foreach(GameObject unit in GameManager.Instance.UnitChooseList)
@@ -614,10 +605,6 @@ public class EventCardClass : ScriptableObject{
     #endregion ActivationDeNodus
 
     #region BombardementAerien
-
-    /// <summary>
-    /// Carte event du pointeur optimisé
-    /// </summary>
     public void BombardementAerien()
     {
         GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().TakeDamage(1);       
@@ -677,13 +664,10 @@ public class EventCardClass : ScriptableObject{
     #endregion Reprogrammation
 
     #region Reprogrammation
-    /// <summary>
-    /// Carte event du pointeur optimisé
-    /// </summary>
     public void Reproggramation(){
         foreach(GameObject unit in GameManager.Instance.UnitChooseList){
             unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.Statut.Possédé);
-            unit.GetComponent<UnitScript>().DiceBonus -= 4;
+            unit.GetComponent<UnitScript>().AddDiceToUnit(-4);
         }
 
         GameManager.Instance.UnitChooseList.Clear();
@@ -710,9 +694,6 @@ public class EventCardClass : ScriptableObject{
     #endregion Reprogrammation
 
     #region CessezLeFeu
-    /// <summary>
-    /// Carte event du pointeur optimisé
-    /// </summary>
     public void CessezLeFeu()
     {
         foreach(GameObject unit in GameManager.Instance.UnitChooseList)
@@ -748,9 +729,6 @@ public class EventCardClass : ScriptableObject{
     #endregion Reprogrammation
 
     #region Réapprovisionnement
-    /// <summary>
-    /// Carte event du réapprovisionnement
-    /// </summary>
     public void Reapprovisionnement()
     {
         foreach(GameObject unit in GameManager.Instance.UnitChooseList)
@@ -782,6 +760,72 @@ public class EventCardClass : ScriptableObject{
         unitList.Clear();
     }
     #endregion Réapprovisionnement
+
+    #region ArmesPerforantes
+    public void ArmesPerforantes()
+    {
+        foreach(GameObject unit in GameManager.Instance.UnitChooseList)
+        {
+            unit.GetComponent<UnitScript>().AddDamageToUnit(1);
+        }
+
+        GameManager.Instance.UnitChooseList.Clear();
+
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Armes_perforantes);
+    }
+
+    public void LaunchArmesPerforantes()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Armes_perforantes);
+
+        List<GameObject> unitList = new List<GameObject>();
+
+        unitList.AddRange(player == 1 ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer);
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+            LaunchEventUnit(2, player == 1 ? true : false, unitList);
+            GameManager.Instance._eventCardCall += ArmesPerforantes;
+        }
+
+        unitList.Clear();
+    }
+    #endregion ArmesPerforantes
+
+    #region EntrainementRigoureux
+    public void EntrainementRigoureux()
+    {
+        foreach(GameObject unit in GameManager.Instance.UnitChooseList)
+        {
+            unit.GetComponent<UnitScript>().AddDiceToUnit(3);
+        }
+
+        GameManager.Instance.UnitChooseList.Clear();
+
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Entraînement_rigoureux);
+    }
+
+    public void LaunchEntrainementRigoureux()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Entraînement_rigoureux);
+
+        List<GameObject> unitList = new List<GameObject>();
+
+        unitList.AddRange(player == 1 ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer);
+
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+            LaunchEventUnit(1, player == 1 ? true : false, unitList);
+            GameManager.Instance._eventCardCall += EntrainementRigoureux;
+        }
+
+        unitList.Clear();
+    }
+    #endregion EntrainementRigoureux
 
     /// <summary>
     /// Lance un événement en appellant la fonction dans le gameManager pour choisir une unité
