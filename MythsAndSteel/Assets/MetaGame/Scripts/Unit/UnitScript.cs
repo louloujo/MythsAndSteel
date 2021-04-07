@@ -8,12 +8,13 @@ using EasyButtons;
 public class UnitScript : MonoBehaviour
 {
     #region Variables
-    [Header("Stats de base de l'unité")]
+    [Header("--------------- STATS DE BASE DE L'UNITE ---------------")]
     //Scriptable qui contient les stats de base de l'unité
     [SerializeField] Unit_SO _unitSO;
     public Unit_SO UnitSO => _unitSO;
 
-    [Header("Stats en jeu de l'unité")]
+    [Header("------------------- VIE -------------------")]
+    [Header("------------------- STAT EN JEU -------------------")]
     //Vie actuelle
     [SerializeField] int _life;
     public int Life => _life;
@@ -22,41 +23,47 @@ public class UnitScript : MonoBehaviour
     [SerializeField] int _shield;
     public int Shield => _shield;
 
-    [Space]
+    [Header("-------------------- ATTAQUE -------------------")]
     //Portée
     [SerializeField] int _attackRange;
     public int AttackRange => _attackRange;
     public int AttackRangeBonus = 0;
 
     [Space]
+    //Dégats minimum infligé
+    [SerializeField] Vector2 _numberRangeMin;
+    public Vector2 NumberRangeMin => _numberRangeMin;
+    [SerializeField] int _damageMinimum;
+    public int DamageMinimum => _damageMinimum;
+
+    [Space]
+    //Dégats maximum infligé
+    [SerializeField] Vector2 _numberRangeMax;
+    public Vector2 NumberRangeMax => _numberRangeMax;
+    [SerializeField] int _damageMaximum;
+    public int DamageMaximum => _damageMaximum;
+
+    //Dégât bonus
+    [SerializeField] int _damageBonus;
+    public int DamageBonus => _damageBonus;
+
+    //Bonus aux lancés de dé
+    [SerializeField] private int _diceBonus = 0;
+    public int DiceBonus => _diceBonus;
+
+
+    [Header("------------------- DEPLACEMENT -------------------")]
     //Vitesse de déplacement
     [SerializeField] int _moveSpeed;
     public int MoveSpeed => _moveSpeed;
     public int MoveSpeedBonus = 0;
 
-    [Space]
+    [Header("------------------- COUT DE CREATION -------------------" )]
     // Coût de création
     [SerializeField] int _creationCost;
     public int CreationCost => _creationCost;
 
-    [Space]
-    //Dégats minimum infligé
-    [SerializeField] Vector2 _NumberRangeMin;
-    public Vector2 NumberRangeMin => _NumberRangeMin;
-    [SerializeField] int _DamageMinimum;
-    public int DamageMinimum => _DamageMinimum;
-
-
-    //Dégats maximum infligé
-    [SerializeField] Vector2 _NumberRangeMax;
-    public Vector2 NumberRangeMax => _NumberRangeMax;
-    [SerializeField] int _DamageMaximum;
-    public int DamageMaximum => _DamageMaximum;
-
-    public int DiceBonus = 0;
-
-
-    [Header("Stats non nécéssaire")]
+    [Header("------------------- DEPLACEMENT RESTANT -------------------")]
     // Déplacement réstant de l'unité durant cette activation
     [SerializeField] int _moveLeft;
     public int MoveLeft
@@ -71,6 +78,7 @@ public class UnitScript : MonoBehaviour
         }
     }
 
+    [Header("------------------- CASE DE L'UNITE -------------------")]
     //Valeur (id) de la case sur laquelle se trouve l'unité
     [SerializeField] int _actualTileld;
     public int ActualTiledId
@@ -89,6 +97,7 @@ public class UnitScript : MonoBehaviour
     int _i;
     public int i => _i;
 
+    [Header("------------------- ACTIVATION UNITE -------------------")]
     //lorsque le joueur a fini d'utiliser tous ses points de déplacement
     [SerializeField] bool _isMoveDone;
     public bool IsMoveDone => _isMoveDone;
@@ -101,33 +110,15 @@ public class UnitScript : MonoBehaviour
     [SerializeField] bool _isActivationDone;
     public bool IsActivationDone => _isActivationDone;
 
-    //est ce que l'unité peut prendre des dégâts (carte event "Cessez le feu")
-    bool _canTakeDamage;
-    public bool CanTakeDamage => _canTakeDamage;
-
-    //est ce que l'unité peut attaquer (carte event "Cessez le feu")
-    bool _canFight;
-    public bool CanFight => _canFight;
-
-    //est ce que l'unité peut prendre des objectifs (carte event "Cessez le feu")
-    bool _canTakeGoal;
-    public bool CanTakeGoal => _canTakeGoal;
-
-    //Est-ce que l'unité est en vie ?
-    bool _isLiving;
-    public bool isLiving => _isLiving;
-
+    [Header("------------------- CHEMIN DE DEPLACEMENT -------------------")]
     //Chemin que l'unité va emprunter
     [SerializeField] List<int> _pathtomake;
     public List<int> Pathtomake => _pathtomake;
 
-    //A CHANGER AU BON ENDROIT QUAND CE SERA FAIT
-    //list qui va chercher les text enfant dans la hiérarchie pour l'UI
-    Text[] allchildren;
-
-    [Header("Effet de cartes events")]
-    //est ce que cette unité est utilisable par l'adversaire
-    public bool _usefullForOpponent;
+    [Header("------------------- STAUT DE L'UNITE -------------------")]
+    //Statut que possède l'unité
+    [SerializeField] private List<MYthsAndSteel_Enum.Statut> _unitStatus = new List<MYthsAndSteel_Enum.Statut>();
+    public List<MYthsAndSteel_Enum.Statut> UnitStatus => _unitStatus;
 
     #endregion Variables
 
@@ -184,11 +175,9 @@ public class UnitScript : MonoBehaviour
     {
         if (_life <= 0)
         {
-            _isLiving = false; //A voir si c'est nécéssaire
             Death();
         }
     }
-    #endregion LifeMethods
 
     /// <summary>
     /// Tue l'unité
@@ -198,7 +187,32 @@ public class UnitScript : MonoBehaviour
         Destroy(gameObject);
         Debug.Log("Unité Détruite");
     }
+    #endregion LifeMethods
 
+    #region Statut
+    public void AddStatutToUnit(MYthsAndSteel_Enum.Statut stat){
+        _unitStatus.Add(stat);
+    }
+
+    #endregion Statut
+
+    #region ChangementStat
+    /// <summary>
+    /// Ajoute des dégâts supplémentaires aux unités
+    /// </summary>
+    /// <param name="value"></param>
+    public void AddDamageToUnit(int value){
+        _damageBonus += value;
+    }
+
+    /// <summary>
+    /// Ajout une valeur aux lancés de dés de l'unité
+    /// </summary>
+    /// <param name="value"></param>
+    public void AddDiceToUnit(int value){
+        _diceBonus += value;
+    }
+    #endregion ChangementStat
     [Button]
     /// <summary>
     /// Update les stats de l'unité avec les stats de base
@@ -214,10 +228,10 @@ public class UnitScript : MonoBehaviour
         _attackRange = _unitSO.AttackRange;
         _moveSpeed = _unitSO.MoveSpeed;
         _creationCost = _unitSO.CreationCost;
-        _DamageMinimum = _unitSO.DamageMinimum;
-        _DamageMaximum = _unitSO.DamageMaximum;
-        _NumberRangeMax = _unitSO.NumberRangeMax;
-        _NumberRangeMin = _unitSO.NumberRangeMin;
+        _damageMinimum = _unitSO.DamageMinimum;
+        _damageMaximum = _unitSO.DamageMaximum;
+        _numberRangeMax = _unitSO.NumberRangeMax;
+        _numberRangeMin = _unitSO.NumberRangeMin;
 
         //Assigne le sprite de l'unité
         GetComponent<SpriteRenderer>().sprite = _unitSO.Sprite;
@@ -237,7 +251,6 @@ public class UnitScript : MonoBehaviour
         AttackRangeBonus = 0;
 
         _moveLeft = _unitSO.MoveSpeed;
-        _usefullForOpponent = false;
     }
 
     public void checkMovementLeft()
