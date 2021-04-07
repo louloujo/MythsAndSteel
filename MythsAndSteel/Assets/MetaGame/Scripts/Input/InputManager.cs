@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class InputManager : MonoBehaviour
             GameManager.Instance.StopEventModeUnit();
         }
 
+        //Quand on shiftclic  sur le plateau
         if(Input.GetMouseButtonDown(0) && Input.GetKey(MoreInfoUnit)){
             RaycastManager.Instance._mouseCommand.clickQuit();
             RaycastManager.Instance._mouseCommand._checkIfPlayerAsClic = false;
@@ -23,7 +25,9 @@ public class InputManager : MonoBehaviour
 
         //Clic sur le plateau ou une unité
         if(Input.GetKeyDown(KeyCode.Mouse0) && !Input.GetKey(KeyCode.LeftShift)){
-            RaycastManager.Instance.Select();
+            if(EventSystem.current.IsPointerOverGameObject() == false){
+                RaycastManager.Instance.Select();
+            }
         }
     }
 }
