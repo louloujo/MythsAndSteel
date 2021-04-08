@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Mouvement : MonoSingleton<Mouvement>
 {
-    #region Variables
+    #region ListeTile&Id
     [Header("LISTES DES CASES")]
     [SerializeField] private int[] neighbourValue; // +1 +9 +10...
 
@@ -14,14 +14,19 @@ public class Mouvement : MonoSingleton<Mouvement>
 
     [SerializeField] private List<int> selectedTileId = new List<int>(); // Cases selectionnées par le joueur.
     public List<int> _newNeighbourId => newNeighbourId;
+    private List<int> temp = new List<int>(); //
 
+    #endregion
+    #region RenduDeplacement
     [SerializeField] private float speed = 1; // Speed de déplacement de l'unité 
-
+    float speed1; // speed de base.
     private GameObject mStart; // mT Start. 
     private GameObject mEnd; // mT End.
     private GameObject mUnit; // mT Unité.
-
-    private List<int> temp = new List<int>(); //
+    int MvmtIndex = 1; // Numéro du mvmt actuel dans la liste selectedTileId;
+    [SerializeField] bool Launch = false; // Evite les répétitions dans updatingmove();
+    #endregion
+    #region InfoUnit
 
     //Déplacement restant de l'unité au départ
     int MoveLeftBase = 0;
@@ -54,11 +59,13 @@ public class Mouvement : MonoSingleton<Mouvement>
             _selected = value;
         }
     }
-
+    private bool RouteBonus = false; // Le bonus de route a-t-il été séléctionné ?
+    private bool check = false; // Si une condition bloquant le mvmt de l'unité a été détéctée.
     // Mouvement en cours de traitement ?
     [SerializeField] private bool _mvmtRunning = false;
     public bool MvmtRunning => _mvmtRunning;
-
+    #endregion InfoUnit
+    #region RenduSpriteTile
     [Header("SPRITES POUR LES CASES")]
     [SerializeField] private Sprite _tileSprite = null;
     [SerializeField] private Sprite _selectedSprite = null;
@@ -71,7 +78,7 @@ public class Mouvement : MonoSingleton<Mouvement>
     }
     [SerializeField] private List<MYthsAndSteel_Enum.TerrainType> EffectToCheck;
 
-    #endregion Variables
+    #endregion RenduSpriteTile
 
     private void Update()
     {
@@ -84,12 +91,13 @@ public class Mouvement : MonoSingleton<Mouvement>
     /// </summary>
     /// <param name="tileId">Tile centrale</param>
     /// <param name="Range">Range de l'unité</param>
-    public void Highlight(int tileId, int Range)
+    public void Highlight(int tileId, int Range, int lasttileId)
     {
         if (Range > 0)
         {
             foreach (int ID in PlayerStatic.GetNeighbourDiag(tileId, TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().Line, false))
             {
+                if(ID == lasttileId) { continue; }
                 TileScript TileSc = TilesManager.Instance.TileList[ID].GetComponent<TileScript>();
                 bool i = false;
                 if (GameManager.Instance.IsPlayerRedTurn)
@@ -159,7 +167,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                                 {
                                     newNeighbourId.Add(ID);
                                 }
-                                Highlight(ID, Range - 2);
+                                Highlight(ID, Range - 2, tileId);
                                 break;
                             }
                             else
@@ -170,7 +178,6 @@ public class Mouvement : MonoSingleton<Mouvement>
                         }
                     }
                 }
-
                 if (!i)
                 {
                     TilesManager.Instance.TileList[ID].GetComponent<TileScript>().AddChildRender(_selectedSprite);
@@ -178,9 +185,8 @@ public class Mouvement : MonoSingleton<Mouvement>
                     {
                         newNeighbourId.Add(ID);
                     }                        
-                    Highlight(ID, Range - 1);
+                    Highlight(ID, Range - 1, tileId);
                 }
-
             }
         }
         // Si il s'agit d'une route et que la range est de 0.
@@ -188,6 +194,7 @@ public class Mouvement : MonoSingleton<Mouvement>
         {
             foreach (int ID in PlayerStatic.GetNeighbourDiag(tileId, TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().Line, false))
             {
+                if (ID == lasttileId) { continue; }
                 TileScript TileSc = TilesManager.Instance.TileList[ID].GetComponent<TileScript>();
                 bool i = false;
                 if (TilesManager.Instance.TileList[ID].GetComponent<TileScript>().Unit != null)
@@ -236,7 +243,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                     {
                         newNeighbourId.Add(ID);
                     }
-                    Highlight(ID, -1);
+                    Highlight(ID, -1, tileId);
                 }
             }
         }
@@ -245,6 +252,7 @@ public class Mouvement : MonoSingleton<Mouvement>
         {
             foreach (int ID in PlayerStatic.GetNeighbourDiag(tileId, TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().Line, false))
             {
+                if (ID == lasttileId) { continue; }
                 TileScript TileSc = TilesManager.Instance.TileList[ID].GetComponent<TileScript>();
                 bool i = false;
                 if (TilesManager.Instance.TileList[ID].GetComponent<TileScript>().Unit != null)
@@ -289,7 +297,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                     {
                         newNeighbourId.Add(ID);
                     }
-                    Highlight(ID, -1);
+                    Highlight(ID, -1, lasttileId);
                 }
             }
         }
@@ -338,7 +346,7 @@ public class Mouvement : MonoSingleton<Mouvement>
             ID.Add(tileId);
 
             // Lance l'highlight des cases dans la range.
-            Highlight(tileId, Range);
+            Highlight(tileId, Range, tileId);
             UIInstance.Instance.DesactivateNextPhaseButton();
         }
     }
@@ -403,9 +411,6 @@ public class Mouvement : MonoSingleton<Mouvement>
     /// Ajoute la tile à TileSelected. Pour le mvmt du joueur => Check egalement toutes les conditions de déplacement.
     /// </summary>
     /// <param name="tileId">Tile</param>
-
-    public bool RouteBonus = false; // Le bonus de route a-t-il été séléctionné ?
-    public bool check = false; // Si une condition bloquant le mvmt a été détéctée.
     public void AddMouvement(int tileId)
     {
         check = false;
@@ -582,10 +587,9 @@ public class Mouvement : MonoSingleton<Mouvement>
         }
     }
 
-    int MvmtIndex = 1; // Numéro du mvmt actuel dans la liste selectedTileId;
-    [SerializeField] bool Launch = false; // Evite les répétitions dans updatingmove();
-
-
+    /// <summary>
+    /// Détruit les enfants qui ne sont pas dans la liste de déplacement.
+    /// </summary>
     public void DeleteChildWhenMove(){
         foreach(int Neighbour in newNeighbourId) // Supprime toutes les tiles.
         {
@@ -637,7 +641,7 @@ public class Mouvement : MonoSingleton<Mouvement>
     /// Coroutine d'attente entre chaque case. Probablement pendant ce temps que l'on devra appliquer les effets de case.
     /// </summary>
     /// <returns>Temps à définir</returns>
-    IEnumerator MvmtEnd()
+    private IEnumerator MvmtEnd()
     {
         mEnd.GetComponent<TileScript>().RemoveChild(); // La case dépassée redevient une "empty"
         mEnd.GetComponent<TileScript>().AddUnitToTile(mStart.GetComponent<TileScript>().Unit); // L'unité de la case d'arrivée devient celle de la case de départ.
@@ -668,8 +672,7 @@ public class Mouvement : MonoSingleton<Mouvement>
     /// <param name="Unit">The unit gameobject.</param>
     /// <param name="StartPos">start position tile</param>
     /// <param name="EndPos">end position tile</param>
-    float speed1; // speed de base.
-    void UpdatingMove(GameObject Unit, GameObject StartPos, GameObject EndPos)
+    private void UpdatingMove(GameObject Unit, GameObject StartPos, GameObject EndPos)
     {    
         if (Unit != null && StartPos != null && EndPos != null)
         {
