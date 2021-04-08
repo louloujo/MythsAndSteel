@@ -1131,9 +1131,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actualTurnNumber: 0
   _isPlayerRedStarting: 0
-  _isPlayerRedTurn: 1
+  _isPlayerRedTurn: 0
   _isInTurn: 0
-  _actualTurnPhase: 3
+  _actualTurnPhase: 0
   _eventCardSO: {fileID: 11400000, guid: 955303dc40a1fa54984cef9072aef4ad, type: 2}
   _managerSO: {fileID: 11400000, guid: 915a645e0a8638b4d8f4a6522da5cc44, type: 2}
   _chooseUnitForEvent: 0
@@ -1396,9 +1396,9 @@ MonoBehaviour:
   _damageBonus: 0
   _diceBonus: 0
   _moveSpeed: 3
-  MoveSpeedBonus: 0
+  MoveSpeedBonus: 7
   _creationCost: 4
-  _moveLeft: 8
+  _moveLeft: 3
   _actualTileld: 50
   _isMoveDone: 0
   _isActionDone: 0
