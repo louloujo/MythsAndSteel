@@ -604,6 +604,7 @@ public class EventCardClass : ScriptableObject{
     }
     #endregion ActivationDeNodus
 
+
     #region BombardementAerien
     public void BombardementAerien()
     {
@@ -620,6 +621,7 @@ public class EventCardClass : ScriptableObject{
             GameManager.Instance.WaitToMove(.025f);
             return;
         }
+
         GameManager.Instance._waitEvent -= MoveUnitBombardement;
         TilesManager.Instance.TileList[GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().RemoveUnitFromTile();
         GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().AddUnitToTile(GameManager.Instance.UnitChooseList[0]);

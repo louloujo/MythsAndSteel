@@ -19,26 +19,34 @@ public class GameManagerSO : ScriptableObject
     /// Aller à la phase de jeu renseigner en paramètre
     /// </summary>
     /// <param name="phaseToGoTo"></param>
-    public void GoToPhase()
+    public void GoToPhase(MYthsAndSteel_Enum.PhaseDeJeu phase = MYthsAndSteel_Enum.PhaseDeJeu.Debut, bool randomPhase = false)
     {
-        int phaseSuivante = ((int)GameManager.Instance.ActualTurnPhase) + 1;
+        int phaseSuivante = 0;
+        MYthsAndSteel_Enum.PhaseDeJeu nextPhase = MYthsAndSteel_Enum.PhaseDeJeu.Debut;
 
-        if(phaseSuivante > 6)
-        {
-            if(GameManager.Instance.ActualTurnNumber > 11)
-            {
-                GameManager.Instance.VictoryForArmy(1);
-                return;
-            }
-            else
-            {
-                phaseSuivante = 0;
-                GameManager.Instance.ActualTurnNumber++;
-            }
+        if(randomPhase){
+            nextPhase = phase;
         }
+        else{
+            phaseSuivante = ((int)GameManager.Instance.ActualTurnPhase) + 1;
 
-        MYthsAndSteel_Enum.PhaseDeJeu nextPhase = (MYthsAndSteel_Enum.PhaseDeJeu) phaseSuivante;
+            if(phaseSuivante > 6)
+            {
+                if(GameManager.Instance.ActualTurnNumber > 11)
+                {
+                    GameManager.Instance.VictoryForArmy(1);
+                    return;
+                }
+                else
+                {
+                    phaseSuivante = 0;
+                    GameManager.Instance.ActualTurnNumber++;
+                }
+            }
 
+            nextPhase = (MYthsAndSteel_Enum.PhaseDeJeu)phaseSuivante;
+        }
+         
         //Selon la phase effectue certaines actions
         switch(nextPhase)
         {
