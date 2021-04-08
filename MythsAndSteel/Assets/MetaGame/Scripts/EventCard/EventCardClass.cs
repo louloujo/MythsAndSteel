@@ -490,7 +490,7 @@ public class EventCardClass : ScriptableObject{
     {
         int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Arme_épidémiologique);
 
-        GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.Statut.ArmeEpidemiologique);
+        GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.ArmeEpidemiologique);
 
         GameManager.Instance.UnitChooseList.Clear();
 
@@ -668,7 +668,7 @@ public class EventCardClass : ScriptableObject{
     #region Reprogrammation
     public void Reproggramation(){
         foreach(GameObject unit in GameManager.Instance.UnitChooseList){
-            unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.Statut.Possédé);
+            unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Possédé);
             unit.GetComponent<UnitScript>().AddDiceToUnit(-4);
         }
 
@@ -700,9 +700,9 @@ public class EventCardClass : ScriptableObject{
     {
         foreach(GameObject unit in GameManager.Instance.UnitChooseList)
         {
-            unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.Statut.PeutPasCombattre);
-            unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.Statut.Invincible);
-            unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.Statut.PeutPasPrendreDesObjectifs);
+            unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre);
+            unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Invincible);
+            unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.PeutPasPrendreDesObjectifs);
         }
 
         GameManager.Instance.UnitChooseList.Clear();

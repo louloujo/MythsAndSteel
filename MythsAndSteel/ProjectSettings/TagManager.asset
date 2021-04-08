@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Tile
   - SelectableTile
+  - MoveSelectable
+  - AttackSelectable
   layers:
   - Default
   - TransparentFX

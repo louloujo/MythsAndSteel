@@ -45,7 +45,15 @@ public class MYthsAndSteel_Enum : MonoBehaviour
     /// <summary>
     /// Status obtenable par une unité
     /// </summary>
-    public enum Statut{
+    public enum UnitStatut{
         ArmeEpidemiologique, Paralysie, Immobilisation, Réanimé, Possédé, Invincible, PeutPasCombattre, PeutPasPrendreDesObjectifs 
+    }
+
+    /// <summary>
+    /// Les types d'enfant obtenable sur une tile
+    /// </summary>
+    public enum ChildTileType
+    {
+        AttackSelect, MoveSelect, EventSelect
     }
 }

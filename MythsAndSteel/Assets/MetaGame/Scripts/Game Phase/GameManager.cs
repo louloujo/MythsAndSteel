@@ -255,8 +255,7 @@ public class GameManager : MonoSingleton<GameManager>{
         _redPlayerUseEvent = redPlayer;
 
         foreach(GameObject gam in _selectableUnit){
-            GameObject child = TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().AddChildRender(Mouvement.Instance.selectedSprite);
-            child.tag = "SelectableTile";
+            TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
         }
 
         UIInstance.Instance.RedPlayerEventtransf.gameObject.SetActive(false);
@@ -282,14 +281,7 @@ public class GameManager : MonoSingleton<GameManager>{
         foreach(GameObject gam in _selectableUnit){
             //Détruit l'enfant avec le tag selectable tile
             GameObject tile = TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId];
-            for(int i = 0; i < tile.transform.childCount; i++){
-                if(tile.transform.GetChild(i).tag == "SelectableTile")
-                {
-                    Destroy(tile.transform.GetChild(i).gameObject);
-                }
-            }
-
-            tile.GetComponent<TileScript>().RemoveChild();
+            tile.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
         }
 
         _selectableUnit.Clear();
@@ -320,14 +312,7 @@ public class GameManager : MonoSingleton<GameManager>{
             foreach(GameObject gam in _selectableUnit){
                 if(gam.GetComponent<UnitScript>().UnitSO.IsInRedArmy != unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy){
                     GameObject tile = TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].gameObject;
-
-                    for(int i = 0; i < tile.transform.childCount; i++){
-                        if(tile.transform.GetChild(i).tag == "SelectableTile"){
-                            Destroy(tile.transform.GetChild(i).gameObject);
-                        }
-                    }
-
-                    tile.GetComponent<TileScript>().RemoveChild();
+                    tile.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
                 }
             }
         }
@@ -347,17 +332,8 @@ public class GameManager : MonoSingleton<GameManager>{
         if(IllusionStratégique){
             foreach(GameObject gam in _selectableUnit){
                 GameObject tile = TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].gameObject;
-                for(int i = 0; i < tile.transform.childCount; i++)
-                {
-                    if(tile.transform.GetChild(i).tag == "SelectableTile")
-                    {
-                        Destroy(tile.transform.GetChild(i).gameObject);
-                    }
-                }
-                tile.GetComponent<TileScript>().RemoveChild();
-
-                GameObject child = TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().AddChildRender(Mouvement.Instance.selectedSprite);
-                child.tag = "SelectableTile";
+                tile.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
+                tile.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
             }
         }
     }
@@ -377,8 +353,7 @@ public class GameManager : MonoSingleton<GameManager>{
         _selectableTiles.AddRange(_tileSelectable);
 
         foreach(GameObject gam in _selectableTiles){
-            GameObject child = gam.GetComponent<TileScript>().AddChildRender(Mouvement.Instance.selectedSprite);
-            child.tag = "SelectableTile";
+            gam.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
         }
 
         UIInstance.Instance.RedPlayerEventtransf.gameObject.SetActive(false);
@@ -401,14 +376,7 @@ public class GameManager : MonoSingleton<GameManager>{
         _chooseTileForEvent = false;
 
         foreach(GameObject gam in _selectableTiles){
-            //Détruit l'enfant avec le tag selectable tile
-            for(int i = 0; i < gam.transform.childCount; i++){
-                if(gam.transform.GetChild(i).tag == "SelectableTile"){
-                    Destroy(gam.transform.GetChild(i).gameObject);
-                }
-            }
-
-            gam.GetComponent<TileScript>().RemoveChild();
+            gam.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
         }
 
         UIInstance.Instance.RedPlayerEventtransf.gameObject.SetActive(true);

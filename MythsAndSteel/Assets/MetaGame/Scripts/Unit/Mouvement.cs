@@ -162,7 +162,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                             if (Range >= 2 && !i)
                             {
                                 i = true;
-                                TilesManager.Instance.TileList[ID].GetComponent<TileScript>().AddChildRender(_selectedSprite);
+                                TilesManager.Instance.TileList[ID].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect ,_selectedSprite);
                                 if (!newNeighbourId.Contains(ID))
                                 {
                                     newNeighbourId.Add(ID);
@@ -180,7 +180,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                 }
                 if (!i)
                 {
-                    TilesManager.Instance.TileList[ID].GetComponent<TileScript>().AddChildRender(_selectedSprite);
+                    TilesManager.Instance.TileList[ID].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, _selectedSprite);
                     if (!newNeighbourId.Contains(ID))
                     {
                         newNeighbourId.Add(ID);
@@ -238,7 +238,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                 }
                 if (!i)
                 {
-                    TilesManager.Instance.TileList[ID].GetComponent<TileScript>().AddChildRender(_selectedSprite);
+                    TilesManager.Instance.TileList[ID].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, _selectedSprite);
                     if (!newNeighbourId.Contains(ID))
                     {
                         newNeighbourId.Add(ID);
@@ -292,7 +292,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                 }
                 if (!i)
                 {
-                    TilesManager.Instance.TileList[ID].GetComponent<TileScript>().AddChildRender(_selectedSprite);
+                    TilesManager.Instance.TileList[ID].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, _selectedSprite);
                     if (!newNeighbourId.Contains(ID))
                     {
                         newNeighbourId.Add(ID);
@@ -362,11 +362,7 @@ public class Mouvement : MonoSingleton<Mouvement>
             {
                 if(TilesManager.Instance.TileList[Neighbour] != null && TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>()._Child.Count != 0)
                 {
-                    TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>().RemoveChild();
-
-                    if(TilesManager.Instance.TileList[Neighbour].transform.GetChild(0).gameObject != null){
-                        Destroy(TilesManager.Instance.TileList[Neighbour].transform.GetChild(0).gameObject);
-                    }
+                    TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect);
                 }
             }
         }
@@ -377,11 +373,7 @@ public class Mouvement : MonoSingleton<Mouvement>
             {
                 if(TilesManager.Instance.TileList[NeighbourSelect] != null)
                 {
-                    TilesManager.Instance.TileList[NeighbourSelect].GetComponent<TileScript>().RemoveChild();
-
-                    if(TilesManager.Instance.TileList[NeighbourSelect].transform.GetChild(0).gameObject != null){
-                        Destroy(TilesManager.Instance.TileList[NeighbourSelect].transform.GetChild(0).gameObject);
-                    }
+                    TilesManager.Instance.TileList[NeighbourSelect].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect);
                 }
             }
         }
@@ -453,7 +445,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                             }
 
                             temp.Add(selectedTileId[i]);
-                            TilesManager.Instance.TileList[selectedTileId[i]].GetComponent<TileScript>().AddChildRender(_selectedSprite); // Repasse les sprites en apparence "séléctionnable".
+                            TilesManager.Instance.TileList[selectedTileId[i]].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect ,_selectedSprite); // Repasse les sprites en apparence "séléctionnable".
                         }
                         else
                         {
@@ -477,7 +469,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                             }
 
                             temp.Add(selectedTileId[i]);
-                            TilesManager.Instance.TileList[selectedTileId[i]].GetComponent<TileScript>().AddChildRender(_selectedSprite); // Repasse les sprites en apparence "séléctionnable".
+                            TilesManager.Instance.TileList[selectedTileId[i]].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, _selectedSprite); // Repasse les sprites en apparence "séléctionnable".
                         }
                     }
                     foreach (int i in temp)
@@ -513,7 +505,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                             check = true;
                             mUnit.GetComponent<UnitScript>().MoveLeft -= 2; // sup 2 mvmt.
                             selectedTileId.Add(tileId);
-                            TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().AddChildRender(_tileSprite);
+                            TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, _tileSprite);
                         }
                         else if (mUnit.GetComponent<UnitScript>().MoveLeft + mUnit.GetComponent<UnitScript>().MoveSpeedBonus >= 2 && !check)
                         {
@@ -535,7 +527,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                                 mUnit.GetComponent<UnitScript>().MoveSpeedBonus--;
                             }
                             selectedTileId.Add(tileId);
-                            TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().AddChildRender(_tileSprite);
+                            TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, _tileSprite);
                         }
                         else
                         {
@@ -548,7 +540,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                         RouteBonus = true;
                         check = true;
                         selectedTileId.Add(tileId);
-                        TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().AddChildRender(_tileSprite);
+                        TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, _tileSprite);
                     }
                     if (!check)
                     {
@@ -556,13 +548,13 @@ public class Mouvement : MonoSingleton<Mouvement>
                         {
                             mUnit.GetComponent<UnitScript>().MoveLeft--; // sup 1 mvmt.
                             selectedTileId.Add(tileId);
-                            TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().AddChildRender(_tileSprite);
+                            TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, _tileSprite);
                         }
                         else if (mUnit.GetComponent<UnitScript>().MoveSpeedBonus > 0)
                         {
                             mUnit.GetComponent<UnitScript>().MoveSpeedBonus--; // sup 1 mvmt.
                             selectedTileId.Add(tileId);
-                            TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().AddChildRender(_tileSprite);
+                            TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, _tileSprite);
                         }
                     }
                 } // Sinon, si cette case est bien voisine de l'ancienne selection. 
@@ -595,8 +587,7 @@ public class Mouvement : MonoSingleton<Mouvement>
         {
             if(TilesManager.Instance.TileList[Neighbour] != null && !_selectedTileId.Contains(Neighbour))
             {
-                TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>().RemoveChild();
-                Destroy(TilesManager.Instance.TileList[Neighbour].transform.GetChild(0).gameObject);
+                TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect);
             }
         }
     }
@@ -631,7 +622,7 @@ public class Mouvement : MonoSingleton<Mouvement>
             {
                 if (!selectedTileId.Contains(Neighbour))
                 {
-                    TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>().RemoveChild(); // Assigne un sprite empty à toutes les anciennes cases "neighbour"
+                    TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect); // Assigne un sprite empty à toutes les anciennes cases "neighbour"
                 }
             }
         }
@@ -643,7 +634,7 @@ public class Mouvement : MonoSingleton<Mouvement>
     /// <returns>Temps à définir</returns>
     private IEnumerator MvmtEnd()
     {
-        mEnd.GetComponent<TileScript>().RemoveChild(); // La case dépassée redevient une "empty"
+        mEnd.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect); // La case dépassée redevient une "empty"
         mEnd.GetComponent<TileScript>().AddUnitToTile(mStart.GetComponent<TileScript>().Unit); // L'unité de la case d'arrivée devient celle de la case de départ.
         mStart.GetComponent<TileScript>().RemoveUnitFromTile(); // L'ancienne case n'a plus d'unité.
         mUnit = mEnd.GetComponent<TileScript>().Unit;

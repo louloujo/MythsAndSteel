@@ -198,14 +198,14 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         {
             if(GameManager.Instance.IsPlayerRedTurn)
             {
-                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, true) && !uniTouch.UnitStatus.Contains(MYthsAndSteel_Enum.Statut.Possédé))
+                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, true) && !uniTouch.UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
                 {
                     return false;
                 }
             }
             else
             {
-                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, false) && !uniTouch.UnitStatus.Contains(MYthsAndSteel_Enum.Statut.Possédé))
+                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, false) && !uniTouch.UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
                 {
                     return false;
                 }
