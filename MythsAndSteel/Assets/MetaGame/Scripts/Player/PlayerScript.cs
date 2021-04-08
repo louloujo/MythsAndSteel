@@ -25,6 +25,8 @@ public class PlayerScript : MonoSingleton<PlayerScript>
     [SerializeField] bool _ArmyRedWinAtTheEnd;
     public bool ArmyRedWinAtTheEnd => _ArmyRedWinAtTheEnd;
 
+
+   
     [Header("Cartes events")]
     [SerializeField] private EventCardList _eventCardList = null;
     public EventCardList EventCardList => _eventCardList;
