@@ -65,8 +65,6 @@ public class Attaque : MonoSingleton<Attaque>
     GameObject selectedUnit;
 
     [Header("SPRITES POUR LES CASES")]
-    [SerializeField] private Sprite _tileSprite = null;
-    [SerializeField] private Sprite _emptySprite = null;
     [SerializeField] private Sprite _selectedSprite = null;
     public Sprite selectedSprite
     {

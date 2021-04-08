@@ -21,7 +21,7 @@ public class TileSelectionMovement : MonoBehaviour{
 
     private void Start(){
         RaycastManager.Instance.OnTileChanged += TileChange;
-        _spritRender.enabled = false;
+        GetComponent<Animator>().SetInteger("Fade", 1);
         _isVisble = false;
     }
 
@@ -37,7 +37,6 @@ public class TileSelectionMovement : MonoBehaviour{
                 else{
                     transform.position = RaycastManager.Instance.Tile.transform.position;
                 }
-
             }
         }
     }
@@ -46,17 +45,13 @@ public class TileSelectionMovement : MonoBehaviour{
         //Change l'objet de tiles où il doit se déplacer
         if(RaycastManager.Instance.Tile != null && GameManager.Instance.IsInTurn && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation){
             //Est ce que l'objet est visible
-            if(_spritRender.isVisible == false){
-                _spritRender.enabled = true;
-            }
-            else{
-                _isVisble = true;
-            }
+            _isVisble = true;
+            GetComponent<Animator>().SetInteger("Fade", 2);
 
             _hasMakeMovement = false;
         }
-        else { 
-            _spritRender.enabled = false;
+        else {
+            GetComponent<Animator>().SetInteger("Fade", 1);
             _isVisble = false;
         }
 
