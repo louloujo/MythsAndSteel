@@ -88,10 +88,12 @@ public class MenuActionUnite : MonoBehaviour
 
     public void capacité()
     {
+      
         Debug.Log("pouvoir");
         closePanel();
     }
-
+  
+    
 
 
     public void ShowMovementPanel(){
