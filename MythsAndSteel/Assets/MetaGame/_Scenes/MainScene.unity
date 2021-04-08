@@ -1841,8 +1841,6 @@ MonoBehaviour:
   _numberRangeMin: {x: 0, y: 0}
   _damageMaximum: 0
   _numberRangeMax: {x: 0, y: 0}
-  _tileSprite: {fileID: 21300000, guid: 11abac58d8e168a41bc71c5024f82eca, type: 3}
-  _emptySprite: {fileID: 21300000, guid: 10fe0b0f972768b488ecd6188288670b, type: 3}
   _selectedSprite: {fileID: 21300000, guid: 47181d684d4ff18448f7329b069b20f0, type: 3}
 --- !u!1001 &144114180
 PrefabInstance:
@@ -5081,7 +5079,6 @@ MonoBehaviour:
   _selected: 0
   _mvmtRunning: 0
   _tileSprite: {fileID: 21300000, guid: 11abac58d8e168a41bc71c5024f82eca, type: 3}
-  _emptySprite: {fileID: 21300000, guid: 10fe0b0f972768b488ecd6188288670b, type: 3}
   _selectedSprite: {fileID: 21300000, guid: 77b08518472808f4a81cb0cdfa06b5ec, type: 3}
   EffectToCheck: 07000000080000000a0000000b0000000c0000000d0000000100000006000000
   RouteBonus: 0
@@ -5515,6 +5512,18 @@ MonoBehaviour:
       - m_Target: {fileID: 554525474}
         m_TargetAssemblyTypeName: Mouvement, Assembly-CSharp
         m_MethodName: ApplyMouvement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 554525474}
+        m_TargetAssemblyTypeName: Mouvement, Assembly-CSharp
+        m_MethodName: DeleteChildWhenMove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

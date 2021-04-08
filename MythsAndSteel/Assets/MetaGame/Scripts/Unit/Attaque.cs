@@ -133,33 +133,22 @@ public class Attaque : MonoSingleton<Attaque>
     {
         if (Range > 0)
         {
-            foreach (int ID in PlayerStatic.GetNeighbourDiag(tileId, TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().Line, false))
+            foreach(int ID in PlayerStatic.GetNeighbourDiag(tileId, TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().Line, false))
             {
                 TileScript TileSc = TilesManager.Instance.TileList[ID].GetComponent<TileScript>();
                 bool i = false;
-                if (GameManager.Instance.IsPlayerRedTurn)
+
+                if(TileSc.Unit != null)
                 {
-                    if (TilesManager.Instance.TileList[ID].GetComponent<TileScript>().Unit != null)
+                    if(GameManager.Instance.IsPlayerRedTurn == TileSc.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy)
                     {
-                        if (!TilesManager.Instance.TileList[ID].GetComponent<TileScript>().Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy)
-                        {
-                            i = true;
-                        }
+                        i = true;
                     }
                 }
-                if (!GameManager.Instance.IsPlayerRedTurn)
-                {
-                    if (TilesManager.Instance.TileList[ID].GetComponent<TileScript>().Unit != null)
-                    {
-                        if (TilesManager.Instance.TileList[ID].GetComponent<TileScript>().Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy)
-                        {
-                            i = true;
-                        }
-                    }
-                }
+
                 if (!i)
                 {
-                    TilesManager.Instance.TileList[ID].GetComponent<TileScript>().AddChildRender(_selectedSprite);
+                    TileSc.AddChildRender(_selectedSprite);
                     if (!newNeighbourId.Contains(ID))
                     {
                         newNeighbourId.Add(ID);
@@ -209,17 +198,15 @@ public class Attaque : MonoSingleton<Attaque>
 
     public void StopAttack() // Arrête l'attaque de l'unité select (UI + possibilité d'attaquer) 
     {
-        if(selectedUnit.GetComponent<UnitScript>().IsActionDone)
+        foreach(int Neighbour in newNeighbourId) // Supprime toutes les tiles.
         {
-            foreach (int Neighbour in newNeighbourId) // Supprime toutes les tiles.
+            if(TilesManager.Instance.TileList[Neighbour] != null)
             {
-                if (TilesManager.Instance.TileList[Neighbour] != null)
-                {
-                    TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>().RemoveChild();
-                    Destroy(TilesManager.Instance.TileList[Neighbour].transform.GetChild(0).gameObject);
-                }
+                TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>().RemoveChild();
+                Destroy(TilesManager.Instance.TileList[Neighbour].transform.GetChild(0).gameObject);
             }
         }
+
 
         // Clear de toutes les listes et stats
         selectedTileId.Clear();
