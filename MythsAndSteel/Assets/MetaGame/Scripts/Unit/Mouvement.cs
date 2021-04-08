@@ -339,6 +339,7 @@ public class Mouvement : MonoSingleton<Mouvement>
 
             // Lance l'highlight des cases dans la range.
             Highlight(tileId, Range);
+            UIInstance.Instance.DesactivateNextPhaseButton();
         }
     }
 
@@ -388,6 +389,8 @@ public class Mouvement : MonoSingleton<Mouvement>
         mUnit = null;
 
         RaycastManager.Instance.ActualTileSelected = null;
+
+        UIInstance.Instance.ActivateNextPhaseButton();
 
         _mvmtRunning = false;
     }
