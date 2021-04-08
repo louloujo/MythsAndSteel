@@ -1078,15 +1078,19 @@ MonoBehaviour:
   _isPlayerRedStarting: 0
   _isPlayerRedTurn: 0
   _isInTurn: 0
-  _actualTurnPhase: 0
+  _actualTurnPhase: 2
   _eventCardSO: {fileID: 11400000, guid: 955303dc40a1fa54984cef9072aef4ad, type: 2}
   _managerSO: {fileID: 11400000, guid: 915a645e0a8638b4d8f4a6522da5cc44, type: 2}
   _chooseUnitForEvent: 0
-  _chooseOponnentUnit: 0
-  _chooseArmyUnit: 0
-  _redPlayerUseEvent: 0
+  _selectableUnit: []
   _unitChooseList: []
   _numberOfUnitToChoose: 0
+  _chooseTileForEvent: 0
+  _selectableTiles: []
+  _numberOfTilesToChoose: 0
+  _tileChooseList: []
+  _redPlayerUseEvent: 0
+  "IllusionStrat\xE9gique": 0
 --- !u!1 &99837085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,21 +1329,22 @@ MonoBehaviour:
   _shield: 0
   _attackRange: 1
   AttackRangeBonus: 0
+  _numberRangeMin: {x: 0, y: 0}
+  _damageMinimum: 0
+  _numberRangeMax: {x: 0, y: 0}
+  _damageMaximum: 0
+  _damageBonus: 0
+  _diceBonus: 0
   _moveSpeed: 3
   MoveSpeedBonus: 0
   _creationCost: 4
-  _NumberRangeMin: {x: 3, y: 7}
-  _DamageMinimum: 1
-  _NumberRangeMax: {x: 8, y: 12}
-  _DamageMaximum: 2
-  DiceBonus: 0
   _moveLeft: 3
   _actualTileld: 50
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
   _pathtomake: 
-  _usefullForOpponent: 0
+  _unitStatus: 
 --- !u!212 &108961821
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2832,6 +2837,7 @@ MonoBehaviour:
   - {fileID: 926605380}
   - {fileID: 1820935911}
   - {fileID: 939313036}
+  _resourcesList: []
 --- !u!1001 &229945941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5047,21 +5053,22 @@ MonoBehaviour:
   _shield: 0
   _attackRange: 3
   AttackRangeBonus: 0
+  _numberRangeMin: {x: 0, y: 0}
+  _damageMinimum: 0
+  _numberRangeMax: {x: 0, y: 0}
+  _damageMaximum: 0
+  _damageBonus: 0
+  _diceBonus: 0
   _moveSpeed: 4
   MoveSpeedBonus: 0
   _creationCost: 2
-  _NumberRangeMin: {x: 0, y: 0}
-  _DamageMinimum: 0
-  _NumberRangeMax: {x: 0, y: 0}
-  _DamageMaximum: 0
-  DiceBonus: 0
   _moveLeft: 4
   _actualTileld: 11
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
   _pathtomake: 
-  _usefullForOpponent: 0
+  _unitStatus: 
 --- !u!212 &549253559
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5280,14 +5287,13 @@ MonoBehaviour:
   newNeighbourId: 
   selectedTileId: 
   speed: 5
+  Launch: 0
   _isInMouvement: 0
   _selected: 0
   _mvmtRunning: 0
   _tileSprite: {fileID: 21300000, guid: 11abac58d8e168a41bc71c5024f82eca, type: 3}
-  _emptySprite: {fileID: 21300000, guid: 10fe0b0f972768b488ecd6188288670b, type: 3}
   _selectedSprite: {fileID: 21300000, guid: 77b08518472808f4a81cb0cdfa06b5ec, type: 3}
   EffectToCheck: 07000000080000000a0000000b0000000c0000000d0000000100000006000000
-  Launch: 0
 --- !u!4 &554525475
 Transform:
   m_ObjectHideFlags: 0
@@ -12125,21 +12131,22 @@ MonoBehaviour:
   _shield: 0
   _attackRange: 1
   AttackRangeBonus: 0
+  _numberRangeMin: {x: 0, y: 0}
+  _damageMinimum: 0
+  _numberRangeMax: {x: 0, y: 0}
+  _damageMaximum: 0
+  _damageBonus: 0
+  _diceBonus: 0
   _moveSpeed: 3
   MoveSpeedBonus: 0
   _creationCost: 4
-  _NumberRangeMin: {x: 3, y: 7}
-  _DamageMinimum: 1
-  _NumberRangeMax: {x: 8, y: 12}
-  _DamageMaximum: 2
-  DiceBonus: 0
   _moveLeft: 3
   _actualTileld: 50
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
   _pathtomake: 
-  _usefullForOpponent: 0
+  _unitStatus: 
 --- !u!212 &1204031602
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -17804,21 +17811,22 @@ MonoBehaviour:
   _shield: 0
   _attackRange: 1
   AttackRangeBonus: 0
+  _numberRangeMin: {x: 0, y: 0}
+  _damageMinimum: 0
+  _numberRangeMax: {x: 0, y: 0}
+  _damageMaximum: 0
+  _damageBonus: 0
+  _diceBonus: 0
   _moveSpeed: 3
   MoveSpeedBonus: 0
   _creationCost: 4
-  _NumberRangeMin: {x: 3, y: 7}
-  _DamageMinimum: 1
-  _NumberRangeMax: {x: 8, y: 12}
-  _DamageMaximum: 2
-  DiceBonus: 0
   _moveLeft: 3
   _actualTileld: 50
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
   _pathtomake: 
-  _usefullForOpponent: 0
+  _unitStatus: 
 --- !u!212 &1691159588
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -20014,6 +20022,13 @@ MonoBehaviour:
   - {fileID: 880218715}
   _mouvementTilePrefab: {fileID: 5418695048351900630, guid: fb0b1478d0b2d3d41a6a69566fbf7ccf, type: 3}
   _fpsText: {fileID: 1225771830}
+  _typeTileList:
+    _title: {fileID: 0}
+    _desc: {fileID: 0}
+    _rendu: {fileID: 0}
+    _ressources: {fileID: 0}
+    _uiTiles: {fileID: 0}
+  Terrain: {fileID: 0}
 --- !u!114 &1870703327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20027,6 +20042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _checkIfPlayerAsClic: 0
+  _hasCheckUnit: 0
   _mouseOverUI: {fileID: 761334532}
   _shiftUI:
   - {fileID: 316731139}
@@ -20153,21 +20169,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 224d2e037979b9b4db202c5ca6dc3fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitListRedPlayer:
-  - {fileID: 108961818}
-  - {fileID: 1691159585}
-  - {fileID: 1204031599}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _unitListBluePlayer:
-  - {fileID: 549253556}
+  _cardObtain: 
+  _redPlayerInfos:
+    EventsCardNumberLeft: 0
+    OrgoneValue: 0
+    Ressource: 0
+    ActivationLeft: 0
+    ActivationCardValue: 0
+    GoalCapturePointsNumber: 0
+    OrgonePowerLeft: 0
+    LastKnownOrgoneValue: 0
+    TileCentreZoneOrgone: {fileID: 0}
+    ArmyName: 
+    HasCreateUnit: 0
+    ActivationCardChoose: 0
+    IsMovingOrgoneArea: 0
+    HasMoveOrgoneArea: 0
+  _bluePlayerInfos:
+    EventsCardNumberLeft: 0
+    OrgoneValue: 0
+    Ressource: 0
+    ActivationLeft: 0
+    ActivationCardValue: 0
+    GoalCapturePointsNumber: 0
+    OrgonePowerLeft: 0
+    LastKnownOrgoneValue: 0
+    TileCentreZoneOrgone: {fileID: 0}
+    ArmyName: 
+    HasCreateUnit: 0
+    ActivationCardChoose: 0
+    IsMovingOrgoneArea: 0
+    HasMoveOrgoneArea: 0
+  _unitRef: {fileID: 0}
   DisactivateUnitType: 
   _ArmyRedWinAtTheEnd: 0
   _eventCardList:
