@@ -604,7 +604,7 @@ public class EventCardClass : ScriptableObject{
     }
     #endregion ActivationDeNodus
 
-
+    //Check si l'unité peut aller sur la case sinon faire un dégât à l'unité
     #region BombardementAerien
     public void BombardementAerien()
     {

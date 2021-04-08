@@ -129,7 +129,7 @@ public class GameManager : MonoSingleton<GameManager>{
         #region FPSCounter
         deltaTimeX += Time.deltaTime;
         deltaTimeX /= 2;
-        UIInstance.Instance.FpsText.text = ((int) (1 / deltaTimeX)).ToString();
+        UIInstance.Instance.FpsText.text = "FPS : " +((int) (1 / deltaTimeX)).ToString();
         #endregion FPSCounter
     }
 

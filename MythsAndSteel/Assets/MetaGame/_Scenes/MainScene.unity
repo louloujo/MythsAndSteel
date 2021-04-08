@@ -1380,7 +1380,7 @@ MonoBehaviour:
   _moveSpeed: 3
   MoveSpeedBonus: 0
   _creationCost: 4
-  _moveLeft: 3
+  _moveLeft: 8
   _actualTileld: 50
   _isMoveDone: 0
   _isActionDone: 0
