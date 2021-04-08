@@ -130,7 +130,7 @@ public class EventCardClass : ScriptableObject{
                 if(gam.Count > 1){
                     for(int i = 1; i < gam.Count; i++){
                         gam[i].transform.position = new Vector3(gam[i - 1].transform.position.x,
-                                                                gam[i - 1].transform.position.y + _spaceBetweenTwoEvents,
+                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents,
                                                                 gam[i - 1].transform.position.z);
                     }
                 }
@@ -139,7 +139,7 @@ public class EventCardClass : ScriptableObject{
                 if(gam.Count > 1){
                     for(int i = 1; i < gam.Count; i++){
                         gam[i].transform.position = new Vector3(gam[i - 1].transform.position.x,
-                                                                gam[i - 1].transform.position.y + _spaceBetweenTwoEvents,
+                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents,
                                                                 gam[i - 1].transform.position.z);
                     }
                 }
@@ -154,7 +154,7 @@ public class EventCardClass : ScriptableObject{
                 if(gam.Count > 1){
                     for(int i = 1; i < gam.Count; i++){
                         gam[i].transform.position = new Vector3(gam[i - 1].transform.position.x,
-                                                                gam[i - 1].transform.position.y + _spaceBetweenTwoEvents,
+                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents,
                                                                 gam[i - 1].transform.position.z);
                     }
                 }
@@ -163,7 +163,7 @@ public class EventCardClass : ScriptableObject{
                 if(gam.Count > 1){
                     for(int i = 1; i < gam.Count; i++){
                         gam[i].transform.position = new Vector3(gam[i - 1].transform.position.x,
-                                                                gam[i - 1].transform.position.y + _spaceBetweenTwoEvents,
+                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents,
                                                                 gam[i - 1].transform.position.z);
                     }
                 }
@@ -178,10 +178,10 @@ public class EventCardClass : ScriptableObject{
     /// <param name="downButton"></param>
     /// <param name="active"></param>
     void UpdateButtonPlayer(GameObject upButton, GameObject downButton, bool active, int numberOfCard, int pos){
-        upButton.GetComponent<Image>().sprite = active ? pos == numberOfCard - 3? UIInstance.Instance.DesactivateButtonSprite : UIInstance.Instance.ActivateButtonSprite : UIInstance.Instance.DesactivateButtonSprite;
-        upButton.GetComponent<Button>().interactable = pos == numberOfCard - 3 ? false : active;
-        downButton.GetComponent<Image>().sprite = active ? pos == 0 ? UIInstance.Instance.DesactivateButtonSprite : UIInstance.Instance.ActivateButtonSprite : UIInstance.Instance.DesactivateButtonSprite;
-        downButton.GetComponent<Button>().interactable = pos == 0 ? false : active;
+        downButton.GetComponent<Image>().sprite = active ? pos == numberOfCard - 3? UIInstance.Instance.DesactivateButtonSprite : UIInstance.Instance.ActivateButtonSprite : UIInstance.Instance.DesactivateButtonSprite;
+        downButton.GetComponent<Button>().interactable = pos == numberOfCard - 3 ? false : active;
+        upButton.GetComponent<Image>().sprite = active ? pos == 0 ? UIInstance.Instance.DesactivateButtonSprite : UIInstance.Instance.ActivateButtonSprite : UIInstance.Instance.DesactivateButtonSprite;
+        upButton.GetComponent<Button>().interactable = pos == 0 ? false : active;
     }
 
     /// <summary>
@@ -192,11 +192,11 @@ public class EventCardClass : ScriptableObject{
         float multiplier = 1.17f;
         if(player == 1)
         {
-            UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition = new Vector3(UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition.x, -_spaceBetweenTwoEvents * _redPlayerPos / multiplier, UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition.z);
+            UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition = new Vector3(UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition.x, +_spaceBetweenTwoEvents * _redPlayerPos / multiplier, UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition.z);
         }
         else if(player == 2)
         {
-            UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition = new Vector3(UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition.x, -_spaceBetweenTwoEvents * _bluePlayerPos / multiplier, UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition.z);
+            UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition = new Vector3(UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition.x, +_spaceBetweenTwoEvents * _bluePlayerPos / multiplier, UIInstance.Instance.BluePlayerEventtransf.GetChild(0).localPosition.z);
         }
         else
         {
@@ -234,12 +234,12 @@ public class EventCardClass : ScriptableObject{
     /// <param name="player"></param>
     public void GoUp(int player){
         if(player == 1){
-            _redPlayerPos++;
+            _redPlayerPos--;
             UpdateEventsParentPos(1);
             UpdateButtonPlayer(UIInstance.Instance.ButtonEventRedPlayer._upButton, UIInstance.Instance.ButtonEventRedPlayer._downButton, true, PlayerScript.Instance.EventCardList._eventGamRedPlayer.Count, _redPlayerPos);
         }
         else if(player == 2){
-            _bluePlayerPos++;
+            _bluePlayerPos--;
             UpdateEventsParentPos(2);
             UpdateButtonPlayer(UIInstance.Instance.ButtonEventBluePlayer._upButton, UIInstance.Instance.ButtonEventBluePlayer._downButton, true, PlayerScript.Instance.EventCardList._eventGamBluePlayer.Count, _bluePlayerPos);
         }
@@ -254,12 +254,12 @@ public class EventCardClass : ScriptableObject{
     /// <param name="player"></param>
     public void GoDown(int player){
         if(player == 1){
-            _redPlayerPos--;
+            _redPlayerPos++;
             UpdateEventsParentPos(1);
             UpdateButtonPlayer(UIInstance.Instance.ButtonEventRedPlayer._upButton, UIInstance.Instance.ButtonEventRedPlayer._downButton, true, PlayerScript.Instance.EventCardList._eventGamRedPlayer.Count, _redPlayerPos);
         }
         else if(player == 2){
-            _bluePlayerPos--;
+            _bluePlayerPos++;
             UpdateEventsParentPos(2);
             UpdateButtonPlayer(UIInstance.Instance.ButtonEventBluePlayer._upButton, UIInstance.Instance.ButtonEventBluePlayer._downButton, true, PlayerScript.Instance.EventCardList._eventGamBluePlayer.Count, _bluePlayerPos);
         }
@@ -604,6 +604,7 @@ public class EventCardClass : ScriptableObject{
     }
     #endregion ActivationDeNodus
 
+
     #region BombardementAerien
     public void BombardementAerien()
     {
@@ -620,6 +621,7 @@ public class EventCardClass : ScriptableObject{
             GameManager.Instance.WaitToMove(.025f);
             return;
         }
+
         GameManager.Instance._waitEvent -= MoveUnitBombardement;
         TilesManager.Instance.TileList[GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().RemoveUnitFromTile();
         GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().AddUnitToTile(GameManager.Instance.UnitChooseList[0]);

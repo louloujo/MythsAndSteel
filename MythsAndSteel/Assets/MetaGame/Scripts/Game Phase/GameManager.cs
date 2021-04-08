@@ -247,6 +247,8 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <param name="opponentUnit"></param>
     /// <param name="armyUnit"></param>
     public void StartEventModeUnit(int numberUnit, bool redPlayer, List<GameObject> _unitSelectable){
+        UIInstance.Instance.DesactivateNextPhaseButton();
+
         _numberOfUnitToChoose = numberUnit;
         _chooseUnitForEvent = true;
         _selectableUnit.AddRange(_unitSelectable);
@@ -272,6 +274,8 @@ public class GameManager : MonoSingleton<GameManager>{
     /// Arrete le choix d'unité
     /// </summary>
     public void StopEventModeUnit(){
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         _numberOfUnitToChoose = 0;
         _chooseUnitForEvent = false;
 
@@ -365,6 +369,8 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <param name="redPlayer"></param>
     /// <param name="_tileSelectable"></param>
     public void StartEventModeTiles(int numberOfTile, bool redPlayer, List<GameObject> _tileSelectable){
+        UIInstance.Instance.DesactivateNextPhaseButton();
+
         _chooseTileForEvent = true;
         _redPlayerUseEvent = redPlayer;
         _numberOfTilesToChoose = numberOfTile;
@@ -390,6 +396,8 @@ public class GameManager : MonoSingleton<GameManager>{
     /// Arrete le choix de case
     /// </summary>
     public void StopEventModeTile(){
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         _chooseTileForEvent = false;
 
         foreach(GameObject gam in _selectableTiles){

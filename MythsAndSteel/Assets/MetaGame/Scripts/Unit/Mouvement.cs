@@ -339,6 +339,7 @@ public class Mouvement : MonoSingleton<Mouvement>
 
             // Lance l'highlight des cases dans la range.
             Highlight(tileId, Range);
+            UIInstance.Instance.DesactivateNextPhaseButton();
         }
     }
 
@@ -369,6 +370,10 @@ public class Mouvement : MonoSingleton<Mouvement>
                 if(TilesManager.Instance.TileList[NeighbourSelect] != null)
                 {
                     TilesManager.Instance.TileList[NeighbourSelect].GetComponent<TileScript>().RemoveChild();
+
+                    if(TilesManager.Instance.TileList[NeighbourSelect].transform.GetChild(0).gameObject != null){
+                        Destroy(TilesManager.Instance.TileList[NeighbourSelect].transform.GetChild(0).gameObject);
+                    }
                 }
             }
         }
@@ -388,6 +393,8 @@ public class Mouvement : MonoSingleton<Mouvement>
         mUnit = null;
 
         RaycastManager.Instance.ActualTileSelected = null;
+
+        UIInstance.Instance.ActivateNextPhaseButton();
 
         _mvmtRunning = false;
     }
