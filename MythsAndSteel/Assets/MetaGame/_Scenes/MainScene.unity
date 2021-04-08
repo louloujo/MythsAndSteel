@@ -1102,7 +1102,7 @@ Transform:
   m_Children:
   - {fileID: 915835424}
   m_Father: {fileID: 1439771733}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &96260005
 MonoBehaviour:
@@ -1369,12 +1369,12 @@ MonoBehaviour:
   _unitSO: {fileID: 11400000, guid: de7341a724493fc4b8ef2f7b5fad5c81, type: 2}
   _life: 5
   _shield: 2
-  _attackRange: 1
+  _attackRange: 3
   AttackRangeBonus: 0
-  _numberRangeMin: {x: 0, y: 0}
-  _damageMinimum: 0
-  _numberRangeMax: {x: 0, y: 0}
-  _damageMaximum: 0
+  _numberRangeMin: {x: 3, y: 7}
+  _damageMinimum: 1
+  _numberRangeMax: {x: 8, y: 12}
+  _damageMaximum: 2
   _damageBonus: 0
   _diceBonus: 0
   _moveSpeed: 3
@@ -1788,6 +1788,60 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5249351300956634737, guid: 7b4e07eb63565d04b8e25cd06fad29ca, type: 3}
   m_PrefabInstance: {fileID: 1144938840}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &138174387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 138174388}
+  - component: {fileID: 138174389}
+  m_Layer: 0
+  m_Name: Attaque
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &138174388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138174387}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1601198697}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &138174389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138174387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 155591c59aaf5df44bd2bb424e989f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neighbourValue: 
+  newNeighbourId: 
+  selectedTileId: 
+  _isInAttack: 0
+  _selected: 0
+  _attackRange: 0
+  _damageMinimum: 0
+  _numberRangeMin: {x: 0, y: 0}
+  _damageMaximum: 0
+  _numberRangeMax: {x: 0, y: 0}
+  _selectedSprite: {fileID: 21300000, guid: 47181d684d4ff18448f7329b069b20f0, type: 3}
 --- !u!1001 &144114180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5025,7 +5079,6 @@ MonoBehaviour:
   _selected: 0
   _mvmtRunning: 0
   _tileSprite: {fileID: 21300000, guid: 11abac58d8e168a41bc71c5024f82eca, type: 3}
-  _emptySprite: {fileID: 21300000, guid: 10fe0b0f972768b488ecd6188288670b, type: 3}
   _selectedSprite: {fileID: 21300000, guid: 77b08518472808f4a81cb0cdfa06b5ec, type: 3}
   EffectToCheck: 07000000080000000a0000000b0000000c0000000d0000000100000006000000
   RouteBonus: 0
@@ -5039,10 +5092,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554525473}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.275571, y: 3.8439898, z: -6.6547093}
+  m_LocalPosition: {x: -1187.3386, y: -415.56982, z: 615.0089}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1439771733}
+  m_Father: {fileID: 1601198697}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &554947702
@@ -5459,6 +5512,18 @@ MonoBehaviour:
       - m_Target: {fileID: 554525474}
         m_TargetAssemblyTypeName: Mouvement, Assembly-CSharp
         m_MethodName: ApplyMouvement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 554525474}
+        m_TargetAssemblyTypeName: Mouvement, Assembly-CSharp
+        m_MethodName: DeleteChildWhenMove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6734,7 +6799,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1439771733}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &722833887
 MonoBehaviour:
@@ -8279,12 +8344,12 @@ MonoBehaviour:
   _unitSO: {fileID: 11400000, guid: de7341a724493fc4b8ef2f7b5fad5c81, type: 2}
   _life: 5
   _shield: 2
-  _attackRange: 1
+  _attackRange: 3
   AttackRangeBonus: 0
-  _numberRangeMin: {x: 0, y: 0}
-  _damageMinimum: 0
-  _numberRangeMax: {x: 0, y: 0}
-  _damageMaximum: 0
+  _numberRangeMin: {x: 3, y: 7}
+  _damageMinimum: 1
+  _numberRangeMax: {x: 8, y: 12}
+  _damageMaximum: 2
   _damageBonus: 0
   _diceBonus: 0
   _moveSpeed: 3
@@ -11764,12 +11829,12 @@ MonoBehaviour:
   _unitSO: {fileID: 11400000, guid: de7341a724493fc4b8ef2f7b5fad5c81, type: 2}
   _life: 5
   _shield: 2
-  _attackRange: 1
+  _attackRange: 3
   AttackRangeBonus: 0
-  _numberRangeMin: {x: 0, y: 0}
-  _damageMinimum: 0
-  _numberRangeMax: {x: 0, y: 0}
-  _damageMaximum: 0
+  _numberRangeMin: {x: 3, y: 7}
+  _damageMinimum: 1
+  _numberRangeMax: {x: 8, y: 12}
+  _damageMaximum: 2
   _damageBonus: 0
   _diceBonus: 0
   _moveSpeed: 3
@@ -12832,12 +12897,12 @@ MonoBehaviour:
   _unitSO: {fileID: 11400000, guid: de7341a724493fc4b8ef2f7b5fad5c81, type: 2}
   _life: 5
   _shield: 2
-  _attackRange: 1
+  _attackRange: 3
   AttackRangeBonus: 0
-  _numberRangeMin: {x: 0, y: 0}
-  _damageMinimum: 0
-  _numberRangeMax: {x: 0, y: 0}
-  _damageMaximum: 0
+  _numberRangeMin: {x: 3, y: 7}
+  _damageMinimum: 1
+  _numberRangeMax: {x: 8, y: 12}
+  _damageMaximum: 2
   _damageBonus: 0
   _diceBonus: 0
   _moveSpeed: 3
@@ -14150,11 +14215,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1890824751}
-  - {fileID: 554525475}
+  - {fileID: 722833886}
+  - {fileID: 1601198697}
   - {fileID: 1805710520}
   - {fileID: 1870703325}
   - {fileID: 96260004}
-  - {fileID: 722833886}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15511,7 +15576,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1645117453}
         m_TargetAssemblyTypeName: MenuActionUnite, Assembly-CSharp
-        m_MethodName: "d\xE9placement"
+        m_MethodName: attaque
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15947,6 +16012,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1590561990}
   m_CullTransparentMesh: 1
+--- !u!1 &1601198696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1601198697}
+  m_Layer: 0
+  m_Name: ======UNIT======
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1601198697
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601198696}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1191.6141, y: 419.41382, z: -621.66364}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 138174388}
+  - {fileID: 554525475}
+  m_Father: {fileID: 1439771733}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1601503557
 GameObject:
   m_ObjectHideFlags: 0
@@ -17205,12 +17302,12 @@ MonoBehaviour:
   _unitSO: {fileID: 11400000, guid: de7341a724493fc4b8ef2f7b5fad5c81, type: 2}
   _life: 5
   _shield: 2
-  _attackRange: 1
+  _attackRange: 3
   AttackRangeBonus: 0
-  _numberRangeMin: {x: 0, y: 0}
-  _damageMinimum: 0
-  _numberRangeMax: {x: 0, y: 0}
-  _damageMaximum: 0
+  _numberRangeMin: {x: 3, y: 7}
+  _damageMinimum: 1
+  _numberRangeMax: {x: 8, y: 12}
+  _damageMaximum: 2
   _damageBonus: 0
   _diceBonus: 0
   _moveSpeed: 3
@@ -17322,12 +17419,12 @@ MonoBehaviour:
   _unitSO: {fileID: 11400000, guid: de7341a724493fc4b8ef2f7b5fad5c81, type: 2}
   _life: 5
   _shield: 2
-  _attackRange: 1
+  _attackRange: 3
   AttackRangeBonus: 0
-  _numberRangeMin: {x: 0, y: 0}
-  _damageMinimum: 0
-  _numberRangeMax: {x: 0, y: 0}
-  _damageMaximum: 0
+  _numberRangeMin: {x: 3, y: 7}
+  _damageMinimum: 1
+  _numberRangeMax: {x: 8, y: 12}
+  _damageMaximum: 2
   _damageBonus: 0
   _diceBonus: 0
   _moveSpeed: 3
@@ -18503,7 +18600,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1439771733}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1805710521
 MonoBehaviour:
@@ -19105,7 +19202,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1439771733}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1870703326
 MonoBehaviour:

@@ -61,7 +61,6 @@ public class Mouvement : MonoSingleton<Mouvement>
 
     [Header("SPRITES POUR LES CASES")]
     [SerializeField] private Sprite _tileSprite = null;
-    [SerializeField] private Sprite _emptySprite = null;
     [SerializeField] private Sprite _selectedSprite = null;
     public Sprite selectedSprite
     {
@@ -352,9 +351,13 @@ public class Mouvement : MonoSingleton<Mouvement>
         {
             foreach(int Neighbour in newNeighbourId) // Supprime toutes les tiles.
             {
-                if(TilesManager.Instance.TileList[Neighbour] != null)
+                if(TilesManager.Instance.TileList[Neighbour] != null && TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>()._Child.Count != 0)
                 {
                     TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>().RemoveChild();
+
+                    if(TilesManager.Instance.TileList[Neighbour].transform.GetChild(0).gameObject != null){
+                        Destroy(TilesManager.Instance.TileList[Neighbour].transform.GetChild(0).gameObject);
+                    }
                 }
             }
         }
@@ -574,6 +577,18 @@ public class Mouvement : MonoSingleton<Mouvement>
 
     int MvmtIndex = 1; // Numéro du mvmt actuel dans la liste selectedTileId;
     [SerializeField] bool Launch = false; // Evite les répétitions dans updatingmove();
+
+
+    public void DeleteChildWhenMove(){
+        foreach(int Neighbour in newNeighbourId) // Supprime toutes les tiles.
+        {
+            if(TilesManager.Instance.TileList[Neighbour] != null && !_selectedTileId.Contains(Neighbour))
+            {
+                TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>().RemoveChild();
+                Destroy(TilesManager.Instance.TileList[Neighbour].transform.GetChild(0).gameObject);
+            }
+        }
+    }
 
     /// <summary>
     /// Assigne le prochain mouvement demandé à l'unité. Change les stats de l'ancienne et de la nouvelle case. Actualise les informations de position de l'unité.
