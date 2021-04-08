@@ -370,6 +370,10 @@ public class Mouvement : MonoSingleton<Mouvement>
                 if(TilesManager.Instance.TileList[NeighbourSelect] != null)
                 {
                     TilesManager.Instance.TileList[NeighbourSelect].GetComponent<TileScript>().RemoveChild();
+
+                    if(TilesManager.Instance.TileList[NeighbourSelect].transform.GetChild(0).gameObject != null){
+                        Destroy(TilesManager.Instance.TileList[NeighbourSelect].transform.GetChild(0).gameObject);
+                    }
                 }
             }
         }

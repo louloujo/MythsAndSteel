@@ -89,10 +89,10 @@ public class PlayerScript : MonoSingleton<PlayerScript>
     void AddEventCard(int player, MYthsAndSteel_Enum.EventCard card)
     {
         if(player == 1){
-            EventCardList._eventCardRedPlayer.Insert(1, card);
+            EventCardList._eventCardRedPlayer.Insert(0, card);
         }
         else if(player == 2){
-            EventCardList._eventCardBluePlayer.Insert(1, card);
+            EventCardList._eventCardBluePlayer.Insert(0, card);
         }
         else{
             Debug.LogError("vous essayez d'ajouter une carte event a un joueur qui n'existe pas");
@@ -216,9 +216,6 @@ public class PlayerScript : MonoSingleton<PlayerScript>
     }
 
     #endregion CarteEvent
-
-
-
 
     /// <summary>
     /// Est ce qu'il reste des unités dans l'armée du joueur
