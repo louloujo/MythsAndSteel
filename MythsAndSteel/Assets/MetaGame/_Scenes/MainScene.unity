@@ -1131,9 +1131,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actualTurnNumber: 0
   _isPlayerRedStarting: 0
-  _isPlayerRedTurn: 1
+  _isPlayerRedTurn: 0
   _isInTurn: 0
-  _actualTurnPhase: 2
+  _actualTurnPhase: 0
   _eventCardSO: {fileID: 11400000, guid: 955303dc40a1fa54984cef9072aef4ad, type: 2}
   _managerSO: {fileID: 11400000, guid: 915a645e0a8638b4d8f4a6522da5cc44, type: 2}
   _chooseUnitForEvent: 0
@@ -2401,7 +2401,7 @@ Transform:
   m_GameObject: {fileID: 181898282}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.2397, y: -6.6803, z: -2.8692002}
-  m_LocalScale: {x: 12.974343, y: 12.974343, z: 12.974343}
+  m_LocalScale: {x: 11.42, y: 11.42, z: 12.974343}
   m_Children:
   - {fileID: 1438950984}
   m_Father: {fileID: 2110358727}
@@ -9709,78 +9709,82 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BlueCartesActivation:
-  - valeurActivation: 2,2
+  - valeurActivation: 22
     IndexCarteActivation: 0
     inputCarteActivation: 117
-  - valeurActivation: 2,3
+  - valeurActivation: 23
     IndexCarteActivation: 1
     inputCarteActivation: 105
-  - valeurActivation: 2,6
+  - valeurActivation: 26
     IndexCarteActivation: 2
     inputCarteActivation: 111
-  - valeurActivation: 2,8
+  - valeurActivation: 28
     IndexCarteActivation: 3
     inputCarteActivation: 112
-  - valeurActivation: 2,9
+  - valeurActivation: 29
     IndexCarteActivation: 4
     inputCarteActivation: 106
-  - valeurActivation: 3,1
+  - valeurActivation: 30
     IndexCarteActivation: 5
     inputCarteActivation: 107
-  - valeurActivation: 3,4
+  - valeurActivation: 34
     IndexCarteActivation: 6
     inputCarteActivation: 108
-  - valeurActivation: 3,5
+  - valeurActivation: 35
     IndexCarteActivation: 7
     inputCarteActivation: 109
-  - valeurActivation: 3,7
+  - valeurActivation: 37
     IndexCarteActivation: 8
     inputCarteActivation: 44
-  - valeurActivation: 4,2
+  - valeurActivation: 42
     IndexCarteActivation: 9
     inputCarteActivation: 46
-  - valeurActivation: 4.3
+  - valeurActivation: 43
     IndexCarteActivation: 10
     inputCarteActivation: 47
-  - valeurActivation: 4,6
+  - valeurActivation: 46
     IndexCarteActivation: 11
     inputCarteActivation: 33
   RedPlayerPanel: {fileID: 954388457}
+  J1CarteVerif:
+    valeurActivation: 
+    IndexCarteActivation: 0
+    inputCarteActivation: 0
   RedCartesActivation:
-  - valeurActivation: 2,1
+  - valeurActivation: 21
     IndexCarteActivation: 0
     inputCarteActivation: 97
-  - valeurActivation: 2,4
+  - valeurActivation: 24
     IndexCarteActivation: 1
     inputCarteActivation: 122
-  - valeurActivation: 2,5
+  - valeurActivation: 25
     IndexCarteActivation: 2
     inputCarteActivation: 101
-  - valeurActivation: 2,7
+  - valeurActivation: 27
     IndexCarteActivation: 3
     inputCarteActivation: 114
-  - valeurActivation: 3,2
+  - valeurActivation: 32
     IndexCarteActivation: 4
     inputCarteActivation: 113
-  - valeurActivation: 3,3
+  - valeurActivation: 33
     IndexCarteActivation: 5
     inputCarteActivation: 115
-  - valeurActivation: 3,6
+  - valeurActivation: 36
     IndexCarteActivation: 6
     inputCarteActivation: 100
-  - valeurActivation: 3,8
+  - valeurActivation: 38
     IndexCarteActivation: 7
     inputCarteActivation: 102
-  - valeurActivation: 4,1
+  - valeurActivation: 39
     IndexCarteActivation: 8
     inputCarteActivation: 119
-  - valeurActivation: 4,4
+  - valeurActivation: 41
     IndexCarteActivation: 9
     inputCarteActivation: 120
-  - valeurActivation: 4,5
+  - valeurActivation: 44
     IndexCarteActivation: 10
     inputCarteActivation: 99
-  - valeurActivation: 4,9
+  - valeurActivation: 45
     IndexCarteActivation: 11
     inputCarteActivation: 118
   BluePlayerPanel: {fileID: 1658831362}
@@ -15758,7 +15762,7 @@ Transform:
   m_GameObject: {fileID: 1467254372}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.212, y: 6.629, z: -2.8692002}
-  m_LocalScale: {x: 12.974343, y: 12.974343, z: 12.974343}
+  m_LocalScale: {x: 11.42, y: 11.42, z: 12.974343}
   m_Children:
   - {fileID: 1542706728}
   m_Father: {fileID: 2110358727}
@@ -23205,7 +23209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2110358727}
   m_Layer: 0
-  m_Name: Orgone
+  m_Name: ZoneOrgone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -187,10 +187,14 @@ public class UIInstance : MonoSingleton<UIInstance>
         {
             _typeTileList.UiTiles.SetBool("open", false); return;
         }
-        else if (Tile.TryGetComponent(out TileScript T))
+        else if (Tile.TryGetComponent(out TileScript T) && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation)
         {
             Terrain.Synch(Tile.GetComponent<TileScript>(), _typeTileList.Tile, _typeTileList.Desc, _typeTileList.Ressources, _typeTileList.Rendu); // Affiche les nouvelles informations à propos de la tile séléctionnée.  
             _typeTileList.UiTiles.SetBool("open", true);
+        }
+        else
+        {
+            _typeTileList.UiTiles.SetBool("open", false);
         }
     }
     #endregion

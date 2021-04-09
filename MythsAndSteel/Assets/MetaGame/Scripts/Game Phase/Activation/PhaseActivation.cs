@@ -23,7 +23,7 @@ public class PhaseActivation : MonoBehaviour{
 
     bool J1Choix = true;
     bool J1Verif = false;
-    CarteActivation J1CarteVerif = null;
+    [SerializeField] CarteActivation J1CarteVerif = null;
     List<CarteActivation> J1CartesNonVerif = new List<CarteActivation>();
     private float J1DernièreValeurActivation;
     
@@ -49,7 +49,7 @@ public class PhaseActivation : MonoBehaviour{
 
     [SerializeField] private GameObject _result = null;
 
-
+    bool _canChooseCard = false;
 
     private void Start(){
         UIInstance.Instance.CanvasActivation.SetActive(false);
@@ -61,7 +61,8 @@ public class PhaseActivation : MonoBehaviour{
 
 
     void Update(){
-        if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Activation){
+        if(_canChooseCard)
+        {
             //Joueur 1
             if(!J1CarteChoisie){
                 //On vérifie si le joueur 1 choisit sa carte
@@ -70,7 +71,7 @@ public class PhaseActivation : MonoBehaviour{
                         RedPlayerPanel.transform.GetChild(Carteactivations.IndexCarteActivation).GetComponent<Image>().color = new Color(0f, 0f, 1f, 1f);
                     }
 
-                    J1DernièreValeurActivation = float.Parse(J1CarteVerif.valeurActivation);
+                    J1DernièreValeurActivation = float.Parse(J1CarteVerif.valeurActivation) / 10;
                     CarteActivationUtilisée.Add(J1CarteVerif);
                     BlueCartesActivation.Clear();
 
@@ -87,13 +88,19 @@ public class PhaseActivation : MonoBehaviour{
                 }
 
                 else if(J1Verif){
-                    foreach(CarteActivation Carteactivation in J1CartesNonVerif){
-                        if(Input.GetKeyDown(Carteactivation.inputCarteActivation)){
-                            foreach(CarteActivation Carteactivations in BlueCartesActivation){
-                                RedPlayerPanel.transform.GetChild(Carteactivations.IndexCarteActivation).GetComponent<Image>().color = new Color(0f, 0f, 1f, 1f);
+                    if(Input.anyKeyDown)
+                    {
+                        foreach(CarteActivation Carteactivation in J1CartesNonVerif)
+                        {
+                            if(Input.GetKeyDown(Carteactivation.inputCarteActivation))
+                            {
+                                foreach(CarteActivation Carteactivations in BlueCartesActivation)
+                                {
+                                    RedPlayerPanel.transform.GetChild(Carteactivations.IndexCarteActivation).GetComponent<Image>().color = new Color(0f, 0f, 1f, 1f);
+                                }
+                                J1Choix = true;
+                                J1Verif = false;
                             }
-                            J1Choix = true;
-                            J1Verif = false;
                         }
                     }
                 }
@@ -105,19 +112,26 @@ public class PhaseActivation : MonoBehaviour{
                     J1CarteVerif = null;
                     J1CartesNonVerif.Clear();
 
-                    foreach(CarteActivation carteactivation in BlueCartesActivation){
-                        if(Input.GetKeyDown(carteactivation.inputCarteActivation)){
-                            foreach(CarteActivation carteactivations in BlueCartesActivation){
-                                Image image = RedPlayerPanel.transform.GetChild(carteactivations.IndexCarteActivation).GetComponent<Image>();
-                                image.color = new Color(0f, 1f, 0f, 1f);
-                                J1CarteVerif = carteactivation;
-                                if(carteactivations == J1CarteVerif){ }
-                                else if(carteactivations != J1CarteVerif){
-                                    J1CartesNonVerif.Add(carteactivations);
+                    if(Input.anyKey)
+                    {
+                        foreach(CarteActivation carteactivation in BlueCartesActivation)
+                        {
+                            if(Input.GetKeyDown(carteactivation.inputCarteActivation))
+                            {
+                                foreach(CarteActivation carteactivations in BlueCartesActivation)
+                                {
+                                    Image image = RedPlayerPanel.transform.GetChild(carteactivations.IndexCarteActivation).GetComponent<Image>();
+                                    image.color = new Color(0f, 1f, 0f, 1f);
+                                    J1CarteVerif = carteactivation;
+                                    if(carteactivations == J1CarteVerif) { }
+                                    else if(carteactivations != J1CarteVerif)
+                                    {
+                                        J1CartesNonVerif.Add(carteactivations);
+                                    }
                                 }
+                                J1Verif = true;
+                                J1Choix = false;
                             }
-                            J1Verif = true;
-                            J1Choix = false;
                         }
                     }
                 }
@@ -130,7 +144,7 @@ public class PhaseActivation : MonoBehaviour{
                         BluePlayerPanel.transform.GetChild(Carteactivations.IndexCarteActivation).GetComponent<Image>().color = new Color(1f, 0f, 0f, 1f);
                     }
 
-                    J2DernièreValeurActivation = float.Parse(J2CarteVerif.valeurActivation);
+                    J2DernièreValeurActivation = float.Parse(J2CarteVerif.valeurActivation) / 10;
                     CarteActivationUtilisée.Add(J2CarteVerif);
                     RedCartesActivation.Clear();
 
@@ -250,11 +264,13 @@ public class PhaseActivation : MonoBehaviour{
     /// </summary>
     public void DesactivateActivationPhase(){
         UIInstance.Instance.CanvasActivation.SetActive(false);
+        _canChooseCard = false;
     }
 
     public void ActivateActivationPhase()
     {
         UIInstance.Instance.CanvasActivation.SetActive(true);
         UIInstance.Instance.DesactivateNextPhaseButton();
+        _canChooseCard = true;
     }
 }

@@ -103,7 +103,7 @@ public class ZoneOrgone : MonoBehaviour
             if(_tilesInRange.Contains(_targetTile)){
                 GameManager.Instance._eventCall += WhenValidate;
                 GameManager.Instance._eventCallCancel += CancelValidation;
-                UIInstance.Instance.ShowValidationPanel("Zone d'orgone", "Êtes-vous sur de vouloir déplacer votre zone d'orgone à cette position?");
+                UIInstance.Instance.ShowValidationPanel("Zone d'orgone", "Êtes-vous sur de vouloir déplacer votre zone d'orgone sur cette case? Toutes unités qui prend des dégâts ou perde de la vie dans cette zone vous fera gagner de l'orgone!");
             }
             else{
                 transform.position = _centerOrgoneArea.transform.position;
@@ -142,7 +142,6 @@ public class ZoneOrgone : MonoBehaviour
         //A bouger la zone d'orgone
         _hasMoveOrgoneArea = true;
         _tilesInRange.Clear();
-        Debug.Log("tu as déplacé ta zone d'orgone");
     }
 
     /// <summary>
