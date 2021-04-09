@@ -100,9 +100,13 @@ public class GameManager : MonoSingleton<GameManager>{
 
     public bool IllusionStratégique = false;
 
+    string _titleValidation = "";
+    string _descriptionValidation = "";
+
     //Fonctions à appeler après que le joueur ait choisit les unités
     public delegate void EventToCallAfterChoose();
-    public EventToCallAfterChoose _eventCardCall;
+    public EventToCallAfterChoose _eventCall;
+    public EventToCallAfterChoose _eventCallCancel;
     public EventToCallAfterChoose _waitEvent;
 
     float deltaTimeX = 0f;
@@ -246,8 +250,11 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <param name="numberUnit"></param>
     /// <param name="opponentUnit"></param>
     /// <param name="armyUnit"></param>
-    public void StartEventModeUnit(int numberUnit, bool redPlayer, List<GameObject> _unitSelectable){
+    public void StartEventModeUnit(int numberUnit, bool redPlayer, List<GameObject> _unitSelectable, string title, string description){
         UIInstance.Instance.DesactivateNextPhaseButton();
+
+        _titleValidation = title;
+        _descriptionValidation = description;
 
         _numberOfUnitToChoose = numberUnit;
         _chooseUnitForEvent = true;
@@ -258,23 +265,13 @@ public class GameManager : MonoSingleton<GameManager>{
             TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
         }
 
-        UIInstance.Instance.RedPlayerEventtransf.gameObject.SetActive(false);
-        UIInstance.Instance.BluePlayerEventtransf.gameObject.SetActive(false);
-        UIInstance.Instance.ButtonNextPhase.SetActive(false);
-        UIInstance.Instance.ButtonEventRedPlayer._upButton.SetActive(false);
-        UIInstance.Instance.ButtonEventRedPlayer._downButton.SetActive(false);
-        UIInstance.Instance.ButtonEventBluePlayer._upButton.SetActive(false);
-        UIInstance.Instance.ButtonEventBluePlayer._downButton.SetActive(false);
-
-        _eventCardCall += StopEventModeUnit;
+        _eventCall += StopEventModeUnit;
     }
 
     /// <summary>
     /// Arrete le choix d'unité
     /// </summary>
     public void StopEventModeUnit(){
-        UIInstance.Instance.ActivateNextPhaseButton();
-
         _numberOfUnitToChoose = 0;
         _chooseUnitForEvent = false;
 
@@ -296,7 +293,7 @@ public class GameManager : MonoSingleton<GameManager>{
         UIInstance.Instance.ButtonEventBluePlayer._upButton.SetActive(true);
         UIInstance.Instance.ButtonEventBluePlayer._downButton.SetActive(true);
 
-        _eventCardCall = null;
+        _eventCall = null;
         IllusionStratégique = false;
     }
 
@@ -305,20 +302,28 @@ public class GameManager : MonoSingleton<GameManager>{
     /// </summary>
     /// <param name="unit"></param>
     public void AddUnitToList(GameObject unit){
-        _unitChooseList.Add(unit);
+        if(unit != null){
+            _unitChooseList.Add(unit);
 
-        //Pour la carte événement illusion stratégique
-        if(IllusionStratégique){
-            foreach(GameObject gam in _selectableUnit){
-                if(gam.GetComponent<UnitScript>().UnitSO.IsInRedArmy != unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy){
-                    GameObject tile = TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].gameObject;
-                    tile.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
+            //Pour la carte événement illusion stratégique
+            if(IllusionStratégique)
+            {
+                foreach(GameObject gam in _selectableUnit)
+                {
+                    if(gam.GetComponent<UnitScript>().UnitSO.IsInRedArmy != unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy)
+                    {
+                        GameObject tile = TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].gameObject;
+                        tile.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
+                    }
                 }
             }
-        }
+            else { }
 
-        if(_unitChooseList.Count == _numberOfUnitToChoose){
-            _eventCardCall();
+            if(_unitChooseList.Count == _numberOfUnitToChoose)
+            {
+                _chooseUnitForEvent = false;
+                UIInstance.Instance.ShowValidationPanel(_titleValidation, _descriptionValidation);
+            }
         }
     }
 
@@ -344,8 +349,11 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <param name="numberOfTile"></param>
     /// <param name="redPlayer"></param>
     /// <param name="_tileSelectable"></param>
-    public void StartEventModeTiles(int numberOfTile, bool redPlayer, List<GameObject> _tileSelectable){
+    public void StartEventModeTiles(int numberOfTile, bool redPlayer, List<GameObject> _tileSelectable, string title, string description){
         UIInstance.Instance.DesactivateNextPhaseButton();
+
+        _titleValidation = title;
+        _descriptionValidation = description;
 
         _chooseTileForEvent = true;
         _redPlayerUseEvent = redPlayer;
@@ -356,23 +364,13 @@ public class GameManager : MonoSingleton<GameManager>{
             gam.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
         }
 
-        UIInstance.Instance.RedPlayerEventtransf.gameObject.SetActive(false);
-        UIInstance.Instance.BluePlayerEventtransf.gameObject.SetActive(false);
-        UIInstance.Instance.ButtonNextPhase.SetActive(false);
-        UIInstance.Instance.ButtonEventRedPlayer._upButton.SetActive(false);
-        UIInstance.Instance.ButtonEventRedPlayer._downButton.SetActive(false);
-        UIInstance.Instance.ButtonEventBluePlayer._upButton.SetActive(false);
-        UIInstance.Instance.ButtonEventBluePlayer._downButton.SetActive(false);
-
-        _eventCardCall += StopEventModeTile;
+        _eventCall += StopEventModeTile;
     }
 
     /// <summary>
     /// Arrete le choix de case
     /// </summary>
     public void StopEventModeTile(){
-        UIInstance.Instance.ActivateNextPhaseButton();
-
         _chooseTileForEvent = false;
 
         foreach(GameObject gam in _selectableTiles){
@@ -389,7 +387,7 @@ public class GameManager : MonoSingleton<GameManager>{
 
         _selectableTiles.Clear();
         _redPlayerUseEvent = false;
-        _eventCardCall = null;
+        _eventCall = null;
         IllusionStratégique = false;
     }
 
@@ -398,11 +396,17 @@ public class GameManager : MonoSingleton<GameManager>{
     /// </summary>
     /// <param name="tile"></param>
     public void AddTileToList(GameObject tile){
-        if(_selectableTiles.Contains(tile)){
-            _tileChooseList.Add(tile);
+        if(tile != null)
+        {
+            if(_selectableTiles.Contains(tile))
+            {
+                _tileChooseList.Add(tile);
 
-            if(_tileChooseList.Count == _numberOfTilesToChoose){
-                _eventCardCall();
+                if(_tileChooseList.Count == _numberOfTilesToChoose)
+                {
+                    _chooseTileForEvent = false;
+                    UIInstance.Instance.ShowValidationPanel(_titleValidation, _descriptionValidation);
+                }
             }
         }
     }
@@ -421,6 +425,16 @@ public class GameManager : MonoSingleton<GameManager>{
         {
             _waitEvent();
         }
+    }
+
+    public void CallEvent(){
+        _eventCall();
+    }
+
+    public void CancelEvent(){
+        StopEventModeTile();
+        StopEventModeUnit();
+        _eventCallCancel();
     }
     #endregion EventMode
 }

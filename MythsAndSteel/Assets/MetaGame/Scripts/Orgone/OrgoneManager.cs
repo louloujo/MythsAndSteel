@@ -10,30 +10,52 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
 {
     #region Variables
     [Header("PARENT JAUGE D'ORGONE")]
-    //Panneau de validation d'un pouvoir
+    //Jauge d'orgone joueur rouge
     [SerializeField] private GameObject _redPlayerPanelOrgone = null;
     public GameObject RedPlayerPanelOrgone => _redPlayerPanelOrgone;
 
-    //Panneau de validation d'un pouvoir
+    //Jauge d'orgone joueur bleu
     [SerializeField] private GameObject _bluePlayerPanelOrgone = null;
     public GameObject BluePlayerPanelOrgone => _bluePlayerPanelOrgone;
 
-    [Header("VALIDATION ORGONE")]
-    //Panneau de validation d'un pouvoir
-    [SerializeField] private GameObject _validationPanel = null;
-    public GameObject ValidationPanel => _validationPanel;
+    [Header("ZONE ORGONE")]
+    //Est ce qu'une jauge d'orgone est sélectionnée
+    [SerializeField] private bool _selected = false;
+    public bool Selected => _selected;
 
+    //Zone d'orgone joueur rouge
+    [SerializeField] private GameObject _redPlayerZone = null;
+    public GameObject RedPlayerZone => _redPlayerZone;
+
+    //Zone d'orgone joueur bleu
+    [SerializeField] private GameObject _bluePlayerZone = null;
+    public GameObject BluePlayerZone => _bluePlayerZone;
 
     #endregion Variables
 
-    /// <summary>
-    /// Affiche le panneau de validation de pouvoir
-    /// </summary>
-    public void ShowValidationPanel(){
+    public void ReleaseZone(){
+        if(GameManager.Instance.IsPlayerRedTurn){
+            _redPlayerZone.GetComponent<ZoneOrgone>().ReleaseZone();
+        }
+        else{
+            _bluePlayerZone.GetComponent<ZoneOrgone>().ReleaseZone();
+        }
 
+        _selected = false;
     }
 
-
+    public void StartToMoveZone(){
+        if(GameManager.Instance.IsPlayerRedTurn && !_redPlayerZone.GetComponent<ZoneOrgone>().HasMoveOrgoneArea)
+        {
+            _redPlayerZone.GetComponent<ZoneOrgone>().AddOrgoneAtRange();
+            _selected = true;
+        }
+        else if(!GameManager.Instance.IsPlayerRedTurn && !_bluePlayerZone.GetComponent<ZoneOrgone>().HasMoveOrgoneArea)
+        {
+            _bluePlayerZone.GetComponent<ZoneOrgone>().AddOrgoneAtRange();
+            _selected = true;
+        }
+    }
 
     /// <summary>
     /// Permet de connaitre la nouvelle valeur de la jauge d'orgone en fonction d'un variation positif ou négatif
