@@ -14,6 +14,7 @@ public class EventCardClass : ScriptableObject{
     public List<EventCard> EventCardList => _eventCardList;
 
     [SerializeField] private float _spaceBetweenTwoEvents = 0f;
+    [SerializeField] private Vector2 _baseResolution = new Vector2(1920, 1080);
 
     int _redPlayerPos = 0;
     int _bluePlayerPos = 0;
@@ -130,7 +131,7 @@ public class EventCardClass : ScriptableObject{
                 if(gam.Count > 1){
                     for(int i = 1; i < gam.Count; i++){
                         gam[i].transform.position = new Vector3(gam[i - 1].transform.position.x,
-                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents,
+                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents * (Screen.height / _baseResolution.y),
                                                                 gam[i - 1].transform.position.z);
                     }
                 }
@@ -139,7 +140,7 @@ public class EventCardClass : ScriptableObject{
                 if(gam.Count > 1){
                     for(int i = 1; i < gam.Count; i++){
                         gam[i].transform.position = new Vector3(gam[i - 1].transform.position.x,
-                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents,
+                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents * (Screen.height / _baseResolution.y),
                                                                 gam[i - 1].transform.position.z);
                     }
                 }
@@ -154,7 +155,7 @@ public class EventCardClass : ScriptableObject{
                 if(gam.Count > 1){
                     for(int i = 1; i < gam.Count; i++){
                         gam[i].transform.position = new Vector3(gam[i - 1].transform.position.x,
-                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents,
+                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents * (Screen.height / _baseResolution.y),
                                                                 gam[i - 1].transform.position.z);
                     }
                 }
@@ -163,7 +164,7 @@ public class EventCardClass : ScriptableObject{
                 if(gam.Count > 1){
                     for(int i = 1; i < gam.Count; i++){
                         gam[i].transform.position = new Vector3(gam[i - 1].transform.position.x,
-                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents,
+                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents * (Screen.height / _baseResolution.y),
                                                                 gam[i - 1].transform.position.z);
                     }
                 }
