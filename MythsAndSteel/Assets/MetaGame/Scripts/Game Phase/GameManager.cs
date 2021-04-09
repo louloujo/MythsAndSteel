@@ -100,9 +100,13 @@ public class GameManager : MonoSingleton<GameManager>{
 
     public bool IllusionStratégique = false;
 
+    string _titleValidation = "";
+    string _descriptionValidation = "";
+
     //Fonctions à appeler après que le joueur ait choisit les unités
     public delegate void EventToCallAfterChoose();
-    public EventToCallAfterChoose _eventCardCall;
+    public EventToCallAfterChoose _eventCall;
+    public EventToCallAfterChoose _eventCallCancel;
     public EventToCallAfterChoose _waitEvent;
 
     float deltaTimeX = 0f;
@@ -129,7 +133,7 @@ public class GameManager : MonoSingleton<GameManager>{
         #region FPSCounter
         deltaTimeX += Time.deltaTime;
         deltaTimeX /= 2;
-        UIInstance.Instance.FpsText.text = ((int) (1 / deltaTimeX)).ToString();
+        UIInstance.Instance.FpsText.text = "FPS : " +((int) (1 / deltaTimeX)).ToString();
         #endregion FPSCounter
     }
 
@@ -246,8 +250,11 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <param name="numberUnit"></param>
     /// <param name="opponentUnit"></param>
     /// <param name="armyUnit"></param>
-    public void StartEventModeUnit(int numberUnit, bool redPlayer, List<GameObject> _unitSelectable){
+    public void StartEventModeUnit(int numberUnit, bool redPlayer, List<GameObject> _unitSelectable, string title, string description){
         UIInstance.Instance.DesactivateNextPhaseButton();
+
+        _titleValidation = title;
+        _descriptionValidation = description;
 
         _numberOfUnitToChoose = numberUnit;
         _chooseUnitForEvent = true;
@@ -255,41 +262,23 @@ public class GameManager : MonoSingleton<GameManager>{
         _redPlayerUseEvent = redPlayer;
 
         foreach(GameObject gam in _selectableUnit){
-            GameObject child = TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().AddChildRender(Mouvement.Instance.selectedSprite);
-            child.tag = "SelectableTile";
+            TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
         }
 
-        UIInstance.Instance.RedPlayerEventtransf.gameObject.SetActive(false);
-        UIInstance.Instance.BluePlayerEventtransf.gameObject.SetActive(false);
-        UIInstance.Instance.ButtonNextPhase.SetActive(false);
-        UIInstance.Instance.ButtonEventRedPlayer._upButton.SetActive(false);
-        UIInstance.Instance.ButtonEventRedPlayer._downButton.SetActive(false);
-        UIInstance.Instance.ButtonEventBluePlayer._upButton.SetActive(false);
-        UIInstance.Instance.ButtonEventBluePlayer._downButton.SetActive(false);
-
-        _eventCardCall += StopEventModeUnit;
+        _eventCall += StopEventModeUnit;
     }
 
     /// <summary>
     /// Arrete le choix d'unité
     /// </summary>
     public void StopEventModeUnit(){
-        UIInstance.Instance.ActivateNextPhaseButton();
-
         _numberOfUnitToChoose = 0;
         _chooseUnitForEvent = false;
 
         foreach(GameObject gam in _selectableUnit){
             //Détruit l'enfant avec le tag selectable tile
             GameObject tile = TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId];
-            for(int i = 0; i < tile.transform.childCount; i++){
-                if(tile.transform.GetChild(i).tag == "SelectableTile")
-                {
-                    Destroy(tile.transform.GetChild(i).gameObject);
-                }
-            }
-
-            tile.GetComponent<TileScript>().RemoveChild();
+            tile.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
         }
 
         _selectableUnit.Clear();
@@ -304,7 +293,7 @@ public class GameManager : MonoSingleton<GameManager>{
         UIInstance.Instance.ButtonEventBluePlayer._upButton.SetActive(true);
         UIInstance.Instance.ButtonEventBluePlayer._downButton.SetActive(true);
 
-        _eventCardCall = null;
+        _eventCall = null;
         IllusionStratégique = false;
     }
 
@@ -313,27 +302,28 @@ public class GameManager : MonoSingleton<GameManager>{
     /// </summary>
     /// <param name="unit"></param>
     public void AddUnitToList(GameObject unit){
-        _unitChooseList.Add(unit);
+        if(unit != null){
+            _unitChooseList.Add(unit);
 
-        //Pour la carte événement illusion stratégique
-        if(IllusionStratégique){
-            foreach(GameObject gam in _selectableUnit){
-                if(gam.GetComponent<UnitScript>().UnitSO.IsInRedArmy != unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy){
-                    GameObject tile = TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].gameObject;
-
-                    for(int i = 0; i < tile.transform.childCount; i++){
-                        if(tile.transform.GetChild(i).tag == "SelectableTile"){
-                            Destroy(tile.transform.GetChild(i).gameObject);
-                        }
+            //Pour la carte événement illusion stratégique
+            if(IllusionStratégique)
+            {
+                foreach(GameObject gam in _selectableUnit)
+                {
+                    if(gam.GetComponent<UnitScript>().UnitSO.IsInRedArmy != unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy)
+                    {
+                        GameObject tile = TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].gameObject;
+                        tile.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
                     }
-
-                    tile.GetComponent<TileScript>().RemoveChild();
                 }
             }
-        }
+            else { }
 
-        if(_unitChooseList.Count == _numberOfUnitToChoose){
-            _eventCardCall();
+            if(_unitChooseList.Count == _numberOfUnitToChoose)
+            {
+                _chooseUnitForEvent = false;
+                UIInstance.Instance.ShowValidationPanel(_titleValidation, _descriptionValidation);
+            }
         }
     }
 
@@ -347,17 +337,8 @@ public class GameManager : MonoSingleton<GameManager>{
         if(IllusionStratégique){
             foreach(GameObject gam in _selectableUnit){
                 GameObject tile = TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].gameObject;
-                for(int i = 0; i < tile.transform.childCount; i++)
-                {
-                    if(tile.transform.GetChild(i).tag == "SelectableTile")
-                    {
-                        Destroy(tile.transform.GetChild(i).gameObject);
-                    }
-                }
-                tile.GetComponent<TileScript>().RemoveChild();
-
-                GameObject child = TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().AddChildRender(Mouvement.Instance.selectedSprite);
-                child.tag = "SelectableTile";
+                tile.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
+                tile.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
             }
         }
     }
@@ -368,8 +349,11 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <param name="numberOfTile"></param>
     /// <param name="redPlayer"></param>
     /// <param name="_tileSelectable"></param>
-    public void StartEventModeTiles(int numberOfTile, bool redPlayer, List<GameObject> _tileSelectable){
+    public void StartEventModeTiles(int numberOfTile, bool redPlayer, List<GameObject> _tileSelectable, string title, string description){
         UIInstance.Instance.DesactivateNextPhaseButton();
+
+        _titleValidation = title;
+        _descriptionValidation = description;
 
         _chooseTileForEvent = true;
         _redPlayerUseEvent = redPlayer;
@@ -377,38 +361,20 @@ public class GameManager : MonoSingleton<GameManager>{
         _selectableTiles.AddRange(_tileSelectable);
 
         foreach(GameObject gam in _selectableTiles){
-            GameObject child = gam.GetComponent<TileScript>().AddChildRender(Mouvement.Instance.selectedSprite);
-            child.tag = "SelectableTile";
+            gam.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
         }
 
-        UIInstance.Instance.RedPlayerEventtransf.gameObject.SetActive(false);
-        UIInstance.Instance.BluePlayerEventtransf.gameObject.SetActive(false);
-        UIInstance.Instance.ButtonNextPhase.SetActive(false);
-        UIInstance.Instance.ButtonEventRedPlayer._upButton.SetActive(false);
-        UIInstance.Instance.ButtonEventRedPlayer._downButton.SetActive(false);
-        UIInstance.Instance.ButtonEventBluePlayer._upButton.SetActive(false);
-        UIInstance.Instance.ButtonEventBluePlayer._downButton.SetActive(false);
-
-        _eventCardCall += StopEventModeTile;
+        _eventCall += StopEventModeTile;
     }
 
     /// <summary>
     /// Arrete le choix de case
     /// </summary>
     public void StopEventModeTile(){
-        UIInstance.Instance.ActivateNextPhaseButton();
-
         _chooseTileForEvent = false;
 
         foreach(GameObject gam in _selectableTiles){
-            //Détruit l'enfant avec le tag selectable tile
-            for(int i = 0; i < gam.transform.childCount; i++){
-                if(gam.transform.GetChild(i).tag == "SelectableTile"){
-                    Destroy(gam.transform.GetChild(i).gameObject);
-                }
-            }
-
-            gam.GetComponent<TileScript>().RemoveChild();
+            gam.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
         }
 
         UIInstance.Instance.RedPlayerEventtransf.gameObject.SetActive(true);
@@ -421,7 +387,7 @@ public class GameManager : MonoSingleton<GameManager>{
 
         _selectableTiles.Clear();
         _redPlayerUseEvent = false;
-        _eventCardCall = null;
+        _eventCall = null;
         IllusionStratégique = false;
     }
 
@@ -430,11 +396,17 @@ public class GameManager : MonoSingleton<GameManager>{
     /// </summary>
     /// <param name="tile"></param>
     public void AddTileToList(GameObject tile){
-        if(_selectableTiles.Contains(tile)){
-            _tileChooseList.Add(tile);
+        if(tile != null)
+        {
+            if(_selectableTiles.Contains(tile))
+            {
+                _tileChooseList.Add(tile);
 
-            if(_tileChooseList.Count == _numberOfTilesToChoose){
-                _eventCardCall();
+                if(_tileChooseList.Count == _numberOfTilesToChoose)
+                {
+                    _chooseTileForEvent = false;
+                    UIInstance.Instance.ShowValidationPanel(_titleValidation, _descriptionValidation);
+                }
             }
         }
     }
@@ -453,6 +425,16 @@ public class GameManager : MonoSingleton<GameManager>{
         {
             _waitEvent();
         }
+    }
+
+    public void CallEvent(){
+        _eventCall();
+    }
+
+    public void CancelEvent(){
+        StopEventModeTile();
+        StopEventModeUnit();
+        _eventCallCancel();
     }
     #endregion EventMode
 }

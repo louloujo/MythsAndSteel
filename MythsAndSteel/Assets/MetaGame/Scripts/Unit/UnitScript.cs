@@ -117,8 +117,8 @@ public class UnitScript : MonoBehaviour
 
     [Header("------------------- STAUT DE L'UNITE -------------------")]
     //Statut que possède l'unité
-    [SerializeField] private List<MYthsAndSteel_Enum.Statut> _unitStatus = new List<MYthsAndSteel_Enum.Statut>();
-    public List<MYthsAndSteel_Enum.Statut> UnitStatus => _unitStatus;
+    [SerializeField] private List<MYthsAndSteel_Enum.UnitStatut> _unitStatus = new List<MYthsAndSteel_Enum.UnitStatut>();
+    public List<MYthsAndSteel_Enum.UnitStatut> UnitStatus => _unitStatus;
 
     #endregion Variables
 
@@ -190,7 +190,7 @@ public class UnitScript : MonoBehaviour
     #endregion LifeMethods
 
     #region Statut
-    public void AddStatutToUnit(MYthsAndSteel_Enum.Statut stat){
+    public void AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut stat){
         _unitStatus.Add(stat);
     }
 
