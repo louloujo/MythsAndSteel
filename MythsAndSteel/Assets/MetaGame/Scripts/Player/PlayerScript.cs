@@ -179,11 +179,11 @@ public class PlayerScript : MonoSingleton<PlayerScript>
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Manoeuvre_stratégique:
-                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.ManoeuvreStratégique);
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchManoeuvreStratégique);
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Optimisation_de_l_orgone:
-                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.OptimisationOrgone);
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchOptimisationOrgone);
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Paralysie:

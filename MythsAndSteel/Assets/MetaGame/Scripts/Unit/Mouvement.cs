@@ -669,17 +669,21 @@ public class Mouvement : MonoSingleton<Mouvement>
         {
             Unit.transform.position = Vector2.MoveTowards(Unit.transform.position, EndPos.transform.position, speed1); // Application du mvmt.
             speed1 = Mathf.Abs((Vector2.Distance(mUnit.transform.position, mEnd.transform.position) * speed * Time.deltaTime)); // Régulation de la vitesse. (effet de ralentissement) 
-            if (Vector2.Distance(mUnit.transform.position, mEnd.transform.position) <= 0.05f && Launch == false) // Si l'unité est arrivée.
+            if(Vector2.Distance(mUnit.transform.position, mEnd.transform.position) <= 0.05f && Launch == false) // Si l'unité est arrivée.
             {
                 Launch = true;
                 StartCoroutine(MvmtEnd()); // Lancer le prochain mvmt avec délai. 
             }
             else // Sinon appliqué l'opacité à la case d'arrivée en fonction de la distance unité - arrivée.
             {
-                if (mEnd.GetComponent<TileScript>()._Child.Count != 0)
+                for(int i = 0; i < mEnd.GetComponent<TileScript>()._Child.Count; i++)
                 {
-                    mEnd.GetComponent<TileScript>()._Child[0].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, Vector2.Distance(mUnit.transform.position, mEnd.transform.position));
+                    if(mEnd.GetComponent<TileScript>()._Child[i].tag == "Moveselectable")
+                    {
+                        mEnd.GetComponent<TileScript>()._Child[i].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, Vector2.Distance(mUnit.transform.position, mEnd.transform.position));
+                    }
                 }
+
             }
         }
     }

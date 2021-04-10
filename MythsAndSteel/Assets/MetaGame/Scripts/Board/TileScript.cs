@@ -106,6 +106,7 @@ public class TileScript : MonoBehaviour
             if(gam.tag == tag){
                 child = gam;
                 child.GetComponent<SpriteRenderer>().enabled = true;
+                child.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
                 if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
             }
         }

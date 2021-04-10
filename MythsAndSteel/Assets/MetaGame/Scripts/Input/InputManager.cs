@@ -25,10 +25,15 @@ public class InputManager : MonoBehaviour
         }
 
         //Clic sur le plateau ou une unité
-        if(Input.GetKeyDown(KeyCode.Mouse0) && !Input.GetKey(KeyCode.LeftShift)){
+        if(Input.GetMouseButtonDown(0) && !Input.GetKey(KeyCode.LeftShift)){
             if(EventSystem.current.IsPointerOverGameObject() == false){
                 RaycastManager.Instance.Select();
             }
+        }
+
+        //Poser la zone d'orgone à sa nouvelle position
+        if(Input.GetMouseButtonUp(0) && OrgoneManager.Instance.Selected){
+            OrgoneManager.Instance.ReleaseZone();
         }
 
         //Quand le joueur clic sur entrée pour valider une action

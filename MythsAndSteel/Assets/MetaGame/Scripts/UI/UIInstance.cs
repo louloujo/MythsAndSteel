@@ -123,16 +123,55 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private GameObject _mouvementTilePrefab;
     public GameObject MouvementTilePrefab => _mouvementTilePrefab;
 
+    [Header("PANNEAU DE VALIDATION")]
+    //Le panneau de validation
+    [SerializeField] private GameObject _validationPanel;
+    public GameObject ValidationPanel => _validationPanel;
+
+    //texte pour le titre de la validation
+    [SerializeField] private TextMeshProUGUI _titleValidationTxt;
+    public TextMeshProUGUI TitleValidationTxt => _titleValidationTxt;
+
+    //texte pour la description de la validation
+    [SerializeField] private TextMeshProUGUI _descriptionValidationTxt;
+    public TextMeshProUGUI DescriptionValidationTxt => _descriptionValidationTxt;
+
     [Header("STAT DU JEU")]
     [SerializeField] private TextMeshProUGUI _fpsText = null;
     public TextMeshProUGUI FpsText => _fpsText;
+
+    private void Start(){
+        QuitValidationPanel();
+    }
 
     public void DesactivateNextPhaseButton(){
         _buttonNextPhase.SetActive(false);
     }
 
+    /// <summary>
+    /// Affiche le bouton pour passer à la phase suivante
+    /// </summary>
     public void ActivateNextPhaseButton(){
         _buttonNextPhase.SetActive(true);
+    }
+
+    /// <summary>
+    /// Affiche le panneau de validation
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="description"></param>
+    public void ShowValidationPanel(string title, string description){
+        _validationPanel.SetActive(true);
+        _titleValidationTxt.text = title;
+        _descriptionValidationTxt.text = description;
+    }
+
+    /// <summary>
+    /// Cache le panneau de validation
+    /// </summary>
+    public void QuitValidationPanel(){
+        _validationPanel.SetActive(false);
+        ActivateNextPhaseButton();
     }
 
     #region UITile
@@ -148,10 +187,14 @@ public class UIInstance : MonoSingleton<UIInstance>
         {
             _typeTileList.UiTiles.SetBool("open", false); return;
         }
-        else if (Tile.TryGetComponent(out TileScript T))
+        else if (Tile.TryGetComponent(out TileScript T) && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation)
         {
             Terrain.Synch(Tile.GetComponent<TileScript>(), _typeTileList.Tile, _typeTileList.Desc, _typeTileList.Ressources, _typeTileList.Rendu); // Affiche les nouvelles informations à propos de la tile séléctionnée.  
             _typeTileList.UiTiles.SetBool("open", true);
+        }
+        else
+        {
+            _typeTileList.UiTiles.SetBool("open", false);
         }
     }
     #endregion

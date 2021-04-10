@@ -14,6 +14,7 @@ public class EventCardClass : ScriptableObject{
     public List<EventCard> EventCardList => _eventCardList;
 
     [SerializeField] private float _spaceBetweenTwoEvents = 0f;
+    [SerializeField] private Vector2 _baseResolution = new Vector2(1920, 1080);
 
     int _redPlayerPos = 0;
     int _bluePlayerPos = 0;
@@ -130,7 +131,7 @@ public class EventCardClass : ScriptableObject{
                 if(gam.Count > 1){
                     for(int i = 1; i < gam.Count; i++){
                         gam[i].transform.position = new Vector3(gam[i - 1].transform.position.x,
-                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents,
+                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents * (Screen.height / _baseResolution.y),
                                                                 gam[i - 1].transform.position.z);
                     }
                 }
@@ -139,7 +140,7 @@ public class EventCardClass : ScriptableObject{
                 if(gam.Count > 1){
                     for(int i = 1; i < gam.Count; i++){
                         gam[i].transform.position = new Vector3(gam[i - 1].transform.position.x,
-                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents,
+                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents * (Screen.height / _baseResolution.y),
                                                                 gam[i - 1].transform.position.z);
                     }
                 }
@@ -154,7 +155,7 @@ public class EventCardClass : ScriptableObject{
                 if(gam.Count > 1){
                     for(int i = 1; i < gam.Count; i++){
                         gam[i].transform.position = new Vector3(gam[i - 1].transform.position.x,
-                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents,
+                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents * (Screen.height / _baseResolution.y),
                                                                 gam[i - 1].transform.position.z);
                     }
                 }
@@ -163,7 +164,7 @@ public class EventCardClass : ScriptableObject{
                 if(gam.Count > 1){
                     for(int i = 1; i < gam.Count; i++){
                         gam[i].transform.position = new Vector3(gam[i - 1].transform.position.x,
-                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents,
+                                                                gam[i - 1].transform.position.y - _spaceBetweenTwoEvents * (Screen.height / _baseResolution.y),
                                                                 gam[i - 1].transform.position.z);
                     }
                 }
@@ -329,8 +330,8 @@ public class EventCardClass : ScriptableObject{
 
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && 
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn))){
-            LaunchEventTile(1, player == 1 ? true : false, gamList);
-            GameManager.Instance._eventCardCall += DéploiementAccéléré;
+            LaunchEventTile(1, player == 1 ? true : false, gamList, "Déploiement accéléré", "Êtes-vous sur de vouloir créer une unité d'infanterie sur cette case?");
+            GameManager.Instance._eventCall += DéploiementAccéléré;
         }
     }
     #endregion Reprogrammation
@@ -384,8 +385,8 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEventUnit(2, player == 1 ? true : false, unitList);
-            GameManager.Instance._eventCardCall += IllusionStratégique;
+            LaunchEventUnit(2, player == 1 ? true : false, unitList, "Illusion Stratégique", "Êtes-vous sur de vouloir échanger la position de ces deux unités sur le plateau?");
+            GameManager.Instance._eventCall += IllusionStratégique;
         }
 
         unitList.Clear();
@@ -414,7 +415,8 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            GameManager.Instance._eventCardCall += IllusionStratégique;
+            GameManager.Instance._eventCall += OptimisationOrgone;
+            UIInstance.Instance.ShowValidationPanel("Optimisation de l'orgone", "Êtes-vous sur de vouloir augmenter votre nombre d'utilisation de charge d'orgones de ");
         }
     }
     #endregion OptimisationOrgone
@@ -444,8 +446,8 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEventTile(2, player == 1 ? true : false, tileList);
-            GameManager.Instance._eventCardCall += PillageOrgone;
+            LaunchEventTile(2, player == 1 ? true : false, tileList, "Pillage d'orgone", "Êtes-vous sur de vouloir voler deux Ressources sur ces cases?");
+            GameManager.Instance._eventCall += PillageOrgone;
         }
 
         tileList.Clear();
@@ -477,8 +479,8 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEventUnit(2, player == 1 ? true : false, unitList);
-            GameManager.Instance._eventCardCall += PointeursLaserOptimisés;
+            LaunchEventUnit(2, player == 1 ? true : false, unitList, "Pointeurs Laser Optimisé", "Êtes-vous sur de vouloir augmenter de 1 la portée de ces 2 unités?");
+            GameManager.Instance._eventCall += PointeursLaserOptimisés;
         }
 
         unitList.Clear();
@@ -508,8 +510,8 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEventUnit(1, player == 1 ? true : false, unitList);
-            GameManager.Instance._eventCardCall += ArmeEpidemiologique;
+            LaunchEventUnit(1, player == 1 ? true : false, unitList, "Arme épidémiologique", "Êtes-vous sur de vouloir Infliger l'effet à cette unité? Toutes unités adjacentes à cette unité se verra perdre un point de vie à la fin du tour");
+            GameManager.Instance._eventCall += ArmeEpidemiologique;
         }
 
         unitList.Clear();
@@ -539,7 +541,9 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            GameManager.Instance._eventCardCall += ManoeuvreStratégique;
+            GameManager.Instance._eventCall += ManoeuvreStratégique;
+
+            UIInstance.Instance.ShowValidationPanel("Manoeuvre stratégique", "Êtes-vous sur de vouloir activer une unité supplémentaire durant ce tour?");
         }
     }
     #endregion ManeouvreStratégique
@@ -569,8 +573,8 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEventUnit(2, player == 1 ? true : false, unitList);
-            GameManager.Instance._eventCardCall += SerumExperimental;
+            LaunchEventUnit(2, player == 1 ? true : false, unitList, "Sérum Expérimental", "Êtes-vous sur de vouloir augmenter d'1 point le déplacement de ces deux unités?");
+            GameManager.Instance._eventCall += SerumExperimental;
         }
 
         unitList.Clear();
@@ -599,7 +603,8 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            GameManager.Instance._eventCardCall += ActivationDeNodus;
+            GameManager.Instance._eventCall += ActivationDeNodus;
+            UIInstance.Instance.ShowValidationPanel("Activation de Nodus", "Êtes-vous sur de vouloir utiliser un pouvoir orgonique durant votre phase d'action?");
         }
     }
     #endregion ActivationDeNodus
@@ -608,12 +613,19 @@ public class EventCardClass : ScriptableObject{
     #region BombardementAerien
     public void BombardementAerien()
     {
-        GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().TakeDamage(1);       
-
         LaunchDeplacementBombardement(GameManager.Instance.UnitChooseList[0]);
+        GameManager.Instance._eventCall -= BombardementAerien;
+        GameManager.Instance._eventCall += MakeDamageBombardement;
+    }
+
+    public void MakeDamageBombardement(){
+        GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().TakeDamage(1);
+        GameManager.Instance._eventCall -= MakeDamageBombardement;
     }
 
     public void MoveUnitBombardement(){
+        GameManager.Instance._eventCall = null;
+
         while(GameManager.Instance.UnitChooseList[0].transform.position != GameManager.Instance.TileChooseList[0].transform.position){
             GameManager.Instance.UnitChooseList[0].transform.position = Vector3.MoveTowards(GameManager.Instance.UnitChooseList[0].transform.position, GameManager.Instance.TileChooseList[0].transform.position, .7f);
             GameManager.Instance._waitEvent -= MoveUnitBombardement;
@@ -642,8 +654,8 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEventUnit(1, player == 1 ? true : false, unitList);
-            GameManager.Instance._eventCardCall += BombardementAerien;
+            LaunchEventUnit(1, player == 1 ? true : false, unitList, "Bombardement Aérien", "Êtes-vous sur de vouloir infliger des dégâts à cette unité?");
+            GameManager.Instance._eventCall += BombardementAerien;
         }
 
         unitList.Clear();
@@ -658,8 +670,8 @@ public class EventCardClass : ScriptableObject{
             tileList.Add(TilesManager.Instance.TileList[i]);
         }
 
-        LaunchEventTile(1, player == 1 ? true : false, tileList);
-        GameManager.Instance._eventCardCall += MoveUnitBombardement;
+        LaunchEventTile(1, player == 1 ? true : false, tileList, "Bombardement Aérien", "Êtes-vous sur de vouloir déplacer l'unité attaquée sur cette case?");
+        GameManager.Instance._eventCall += MoveUnitBombardement;
 
         tileList.Clear();
     }
@@ -687,8 +699,8 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEventUnit(1, player == 1? true : false, unitList);
-            GameManager.Instance._eventCardCall += Reproggramation;
+            LaunchEventUnit(1, player == 1? true : false, unitList, "Reproggramation", "Êtes-vous sur de vouloir activer cette unité adverse durant ce tour?");
+            GameManager.Instance._eventCall += Reproggramation;
         }
 
         unitList.Clear();
@@ -722,8 +734,8 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEventUnit(1, player == 1 ? true : false, unitList);
-            GameManager.Instance._eventCardCall += CessezLeFeu;
+            LaunchEventUnit(1, player == 1 ? true : false, unitList, "Cessez le feu!", "Êtes-vous sur de vouloir empêcher cette unité de prendre des dégâts, capturer un objectif et d'attaquer durant ce tour?");
+            GameManager.Instance._eventCall += CessezLeFeu;
         }
 
         unitList.Clear();
@@ -755,8 +767,8 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEventUnit(2, player == 1 ? true : false, unitList);
-            GameManager.Instance._eventCardCall += Reapprovisionnement;
+            LaunchEventUnit(2, player == 1 ? true : false, unitList, "Réapprovisionnement", "Êtes-vous sur de vouloir soigner ces deux unités de 1 point de vie?");
+            GameManager.Instance._eventCall += Reapprovisionnement;
         }
 
         unitList.Clear();
@@ -788,8 +800,8 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEventUnit(2, player == 1 ? true : false, unitList);
-            GameManager.Instance._eventCardCall += ArmesPerforantes;
+            LaunchEventUnit(2, player == 1 ? true : false, unitList, "Armes perforantes", "Êtes-vous sur de vouloir augmenter d'1 les dégâts de ces deux unités?");
+            GameManager.Instance._eventCall += ArmesPerforantes;
         }
 
         unitList.Clear();
@@ -821,8 +833,8 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEventUnit(1, player == 1 ? true : false, unitList);
-            GameManager.Instance._eventCardCall += EntrainementRigoureux;
+            LaunchEventUnit(1, player == 1 ? true : false, unitList, "Entraînement rigoureux", "Êtes-vous sur de vouloir donner un bonus de 3 aux chances d'attaques de cette unité?");
+            GameManager.Instance._eventCall += EntrainementRigoureux;
         }
 
         unitList.Clear();
@@ -836,9 +848,9 @@ public class EventCardClass : ScriptableObject{
     /// <param name="opponent"></param>
     /// <param name="army"></param>
     /// <param name="redPlayer"></param>
-    void LaunchEventUnit(int unitNumber, bool redPlayer, List<GameObject> unitList)
+    void LaunchEventUnit(int unitNumber, bool redPlayer, List<GameObject> unitList, string titleValidation, string descriptionValidation)
     {
-        GameManager.Instance.StartEventModeUnit(unitNumber, redPlayer, unitList);
+        GameManager.Instance.StartEventModeUnit(unitNumber, redPlayer, unitList, titleValidation, descriptionValidation);
     }
 
     /// <summary>
@@ -847,8 +859,8 @@ public class EventCardClass : ScriptableObject{
     /// <param name="numberOfTiles"></param>
     /// <param name="redPlayer"></param>
     /// <param name="gamList"></param>
-    void LaunchEventTile(int numberOfTiles, bool redPlayer, List<GameObject> gamList){
-        GameManager.Instance.StartEventModeTiles(numberOfTiles, redPlayer, gamList);
+    void LaunchEventTile(int numberOfTiles, bool redPlayer, List<GameObject> gamList, string titleValidation, string descriptionValidation){
+        GameManager.Instance.StartEventModeTiles(numberOfTiles, redPlayer, gamList, titleValidation, descriptionValidation);
     }
 
     /// <summary>

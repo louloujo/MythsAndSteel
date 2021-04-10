@@ -115,7 +115,8 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                 }
                 else{
                     if(GameManager.Instance.SelectableUnit.Contains(UnitInTile)){
-                        if(!GameManager.Instance.IllusionStratégique){ 
+                        if(!GameManager.Instance.IllusionStratégique){
+                            Debug.Log("je suis passé par la");
                             GameManager.Instance.AddUnitToList(_unitInTile);
                         }
 
@@ -147,41 +148,60 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         //lorsque le joueur peut cliquer sur les unités normalement
         else{
             //Si le mouvement n'a pas été lancé
-            if(!Mouvement.Instance.Selected && !Attaque.Instance.Selected){
-                if(_unitInTile != null){
-                    if(CanUseUnitWhenClic(_unitInTile.GetComponent<UnitScript>())){
-                        _actualTileSelected = _tile;
-                        _actualUnitSelected = _actualTileSelected.GetComponent<TileScript>().Unit;
-                        _menuForUnit.GetComponent<MenuActionUnite>().ShowPanel();
-                    }
-                }
-            }
-
-            //Si le mouvement a été lancé
-            else if(Mouvement.Instance.Selected)
+            if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
             {
-                if(Mouvement.Instance.IsInMouvement && !Mouvement.Instance.MvmtRunning){
-                    if(_tile != _actualTileSelected){
-                        Mouvement.Instance.AddMouvement(TilesManager.Instance.TileList.IndexOf(_tile));
-                    }
-                    else{
-                        Mouvement.Instance.StopMouvement(true);
-                        UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
-                    }
-                }
-            }
-            else if(Attaque.Instance.Selected)
-            {
-                if(Attaque.Instance.IsInAttack)
+                if(!Mouvement.Instance.Selected && !Attaque.Instance.Selected)
                 {
-                    if(_tile != _actualTileSelected)
+                    if(_unitInTile != null)
                     {
-                        //Clique sur une unité
+                        if(CanUseUnitWhenClic(_unitInTile.GetComponent<UnitScript>()))
+                        {
+                            _actualTileSelected = _tile;
+                            _actualUnitSelected = _actualTileSelected.GetComponent<TileScript>().Unit;
+                            _menuForUnit.GetComponent<MenuActionUnite>().ShowPanel();
+                        }
                     }
-                    else
+                }
+
+                //Si le mouvement a été lancé
+                else if(Mouvement.Instance.Selected)
+                {
+                    if(Mouvement.Instance.IsInMouvement && !Mouvement.Instance.MvmtRunning)
                     {
-                        Attaque.Instance.StopAttack();
+                        if(_tile != _actualTileSelected)
+                        {
+                            Mouvement.Instance.AddMouvement(TilesManager.Instance.TileList.IndexOf(_tile));
+                        }
+                        else
+                        {
+                            Mouvement.Instance.StopMouvement(true);
+                            UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
+                        }
                     }
+                }
+                else if(Attaque.Instance.Selected)
+                {
+                    if(Attaque.Instance.IsInAttack)
+                    {
+                        if(_tile != _actualTileSelected)
+                        {
+                            //Clique sur une unité
+                        }
+                        else
+                        {
+                            Attaque.Instance.StopAttack();
+                        }
+                    }
+                }
+            }
+            else if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2){
+                if(GameManager.Instance.IsPlayerRedTurn && _tile == PlayerScript.Instance.RedPlayerInfos.TileCentreZoneOrgone)
+                {
+                    OrgoneManager.Instance.StartToMoveZone();
+                }
+                else if(!GameManager.Instance.IsPlayerRedTurn && _tile == PlayerScript.Instance.BluePlayerInfos.TileCentreZoneOrgone)
+                {
+                    OrgoneManager.Instance.StartToMoveZone();
                 }
             }
         }
