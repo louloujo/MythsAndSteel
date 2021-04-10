@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using System;
 
 public class Attaque : MonoSingleton<Attaque>
 {
@@ -94,11 +95,13 @@ public class Attaque : MonoSingleton<Attaque>
     {
         if (x >= _numberRangeMin.x && x <= _numberRangeMin.y)
         {
+            // UnitScript d = new TakeDamage(_damageMinimum);
             Debug.Log("Damage : " + _damageMinimum);
         }
         if (x < _numberRangeMin.x)
         {
             Debug.Log("Damage : " + null);
+            // UnitScript.TakeDamage(0);
         }
     }
 
@@ -106,14 +109,17 @@ public class Attaque : MonoSingleton<Attaque>
     {
         if (x >= _numberRangeMin.x && x <= _numberRangeMin.y)
         {
+           // UnitScript.TakeDamage(_damageMinimum);
             Debug.Log("Damage : " + _damageMinimum);
         }
         if (x >= _numberRangeMax.x && x <= _numberRangeMax.y)
         {
+           // UnitScript.TakeDamage(_damageMaximum);
             Debug.Log("Damage : " + _damageMaximum);
         }
         if (x < _numberRangeMin.x)
         {
+           // UnitScript.TakeDamage(0);
             Debug.Log("Damage : " + null);
         }
     }
