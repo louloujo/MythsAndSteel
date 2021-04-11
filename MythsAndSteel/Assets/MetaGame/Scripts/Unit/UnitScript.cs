@@ -122,6 +122,8 @@ public class UnitScript : MonoBehaviour
     [SerializeField] private List<MYthsAndSteel_Enum.UnitStatut> _unitStatus = new List<MYthsAndSteel_Enum.UnitStatut>();
     public List<MYthsAndSteel_Enum.UnitStatut> UnitStatus => _unitStatus;
 
+    bool hasUseActivation = false;
+
     #endregion Variables
 
     private void Update()
@@ -272,6 +274,7 @@ public class UnitScript : MonoBehaviour
         MoveSpeedBonus = 0;
         AttackRangeBonus = 0;
 
+        hasUseActivation = false;
         _moveLeft = _unitSO.MoveSpeed;
         _hasStartMove = false;
     }
@@ -281,8 +284,17 @@ public class UnitScript : MonoBehaviour
     /// </summary>
     public void checkMovementLeft()
     {
-        if(UnitSO.IsInRedArmy) PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
-        else PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
+        if(UnitSO.IsInRedArmy && !hasUseActivation)
+        {
+            hasUseActivation = true;
+            PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
+        }
+        else
+        {
+            hasUseActivation = true;
+            PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
+        }
+         
         UIInstance.Instance.UpdateActivationLeft();
 
         if (_moveLeft == 0)
