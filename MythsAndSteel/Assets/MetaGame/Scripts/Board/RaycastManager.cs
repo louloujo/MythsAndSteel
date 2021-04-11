@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -185,7 +186,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                     {
                         if(_tile != _actualTileSelected)
                         {
-                            //Clique sur une unité
+                            Attaque.Instance.Attack(Tile.GetComponent<TileScript>().TileId);
                         }
                         else
                         {
