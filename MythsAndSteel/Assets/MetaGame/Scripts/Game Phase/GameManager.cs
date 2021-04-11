@@ -195,12 +195,11 @@ public class GameManager : MonoSingleton<GameManager>{
 
         //Détruit le panneau de changement de phase
         SwitchPhaseObjectUI(true);
+    }
 
-        int newPhase = (int)_actualTurnPhase + 1;
-
-        if(newPhase > 6) newPhase = 0;
-
-        _actualTurnPhase = (MYthsAndSteel_Enum.PhaseDeJeu)newPhase;
+    public void GoPhase(MYthsAndSteel_Enum.PhaseDeJeu phase)
+    {
+        _actualTurnPhase = phase;
     }
 
     #region UIFunction
