@@ -145,6 +145,8 @@ public class GameManager : MonoSingleton<GameManager>{
     {
         //Affiche le panneau de transition d'UI
         SwitchPhaseObjectUI(false);
+
+        UIInstance.Instance.ActivationUnitPanel.closePanel();
     }
 
     /// <summary>

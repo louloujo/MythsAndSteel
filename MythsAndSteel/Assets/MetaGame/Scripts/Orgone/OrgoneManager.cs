@@ -50,12 +50,12 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
     }
 
     public void StartToMoveZone(){
-        if(GameManager.Instance.IsPlayerRedTurn && !_redPlayerZone.GetComponent<ZoneOrgone>().HasMoveOrgoneArea)
+        if(GameManager.Instance.IsPlayerRedTurn && !_redPlayerZone.GetComponent<ZoneOrgone>().HasMoveOrgoneArea && !_redPlayerZone.GetComponent<ZoneOrgone>().IsInValidation)
         {
             _redPlayerZone.GetComponent<ZoneOrgone>().AddOrgoneAtRange();
             _selected = true;
         }
-        else if(!GameManager.Instance.IsPlayerRedTurn && !_bluePlayerZone.GetComponent<ZoneOrgone>().HasMoveOrgoneArea)
+        else if(!GameManager.Instance.IsPlayerRedTurn && !_bluePlayerZone.GetComponent<ZoneOrgone>().HasMoveOrgoneArea && !_bluePlayerZone.GetComponent<ZoneOrgone>().IsInValidation)
         {
             _bluePlayerZone.GetComponent<ZoneOrgone>().AddOrgoneAtRange();
             _selected = true;

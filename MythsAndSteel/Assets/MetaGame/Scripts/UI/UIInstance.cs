@@ -167,6 +167,7 @@ public class UIInstance : MonoSingleton<UIInstance>
         _validationPanel.SetActive(true);
         _titleValidationTxt.text = title;
         _descriptionValidationTxt.text = description;
+        DesactivateNextPhaseButton();
     }
 
     /// <summary>
