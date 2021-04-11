@@ -103,8 +103,7 @@ public class UnitScript : MonoBehaviour
     public bool IsMoveDone => _isMoveDone;
 
     //lorsque le joueur a effectué soit une attaque soit un pouvoir actif
-    [SerializeField] bool _isActionDone;
-    public bool IsActionDone => _isActionDone;
+    public bool _isActionDone;
 
     //lorsque l'activation a totalement été finie
     [SerializeField] bool _isActivationDone;
@@ -259,6 +258,14 @@ public class UnitScript : MonoBehaviour
         if (_moveLeft == 0)
         {
             _isMoveDone = true;
+        }
+    }
+
+    public void checkActivation()
+    {
+        if (_isActionDone)
+        {
+            _isActivationDone = true;
         }
     }
 }
