@@ -253,6 +253,9 @@ public class UnitScript : MonoBehaviour
         _moveLeft = _unitSO.MoveSpeed;
     }
 
+    /// <summary>
+    /// Check si l'unité peut encore se déplacer
+    /// </summary>
     public void checkMovementLeft()
     {
         if (_moveLeft == 0)
@@ -261,11 +264,25 @@ public class UnitScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check si l'unité peut encore être activée
+    /// </summary>
     public void checkActivation()
     {
-        if (_isActionDone)
-        {
+        if (_isActionDone){
             _isActivationDone = true;
+
+            //Réduit le nombre d'activation restante
+            if(_unitSO.IsInRedArmy || (!_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
+            {
+                PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
+                UIInstance.Instance.UpdateActivationLeft();
+            }
+            else if(!_unitSO.IsInRedArmy || (_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
+            {
+                PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
+                UIInstance.Instance.UpdateActivationLeft();
+            }
         }
     }
 }

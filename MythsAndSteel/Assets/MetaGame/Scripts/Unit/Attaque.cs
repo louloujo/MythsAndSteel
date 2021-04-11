@@ -90,7 +90,6 @@ public class Attaque : MonoSingleton<Attaque>
 
     #endregion Variables
 
-    
     void Randomdice()
     {
         firstDiceFloat = Random.Range(1f, 6f);
@@ -133,7 +132,6 @@ public class Attaque : MonoSingleton<Attaque>
             Debug.Log("Damage : " + null);
         }
     }
-
 
     void ChooseAttackType(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, int xDiceResult)
     {
@@ -187,7 +185,7 @@ public class Attaque : MonoSingleton<Attaque>
             selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
             if (!selectedUnit.GetComponent<UnitScript>()._isActionDone)
             {
-                Attaque.Instance.Selected = true;
+                _selected = true;
                 GetStats();
                 StartAttack(TilesManager.Instance.TileList.IndexOf(tileSelected), selectedUnit.GetComponent<UnitScript>().AttackRange + selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
             }
@@ -229,8 +227,10 @@ public class Attaque : MonoSingleton<Attaque>
         // Clear de toutes les listes et stats
         selectedTileId.Clear();
         newNeighbourId.Clear();
+
         _isInAttack = false;
         _selected = false;
+
         DiceResult = 0;
         firstDiceFloat = 0f;
         secondDiceFloat = 0f;
@@ -243,9 +243,8 @@ public class Attaque : MonoSingleton<Attaque>
         _numberRangeMin.y = 0;
         _numberRangeMax.x = 0;
         _numberRangeMax.y = 0;
-        RaycastManager.Instance.ActualTileSelected = null;
 
-        selectedUnit.GetComponent<UnitScript>().checkActivation();
+        RaycastManager.Instance.ActualTileSelected = null;
 
         Debug.Log("Attaque Stop");
     }
@@ -296,6 +295,8 @@ public class Attaque : MonoSingleton<Attaque>
         ChooseAttackType(_numberRangeMin, _damageMinimum, _numberRangeMax, _damageMaximum, DiceResult);
         StopAttack();
         IsInAttack = false;
+
         selectedUnit.GetComponent<UnitScript>()._isActionDone = true;
+        selectedUnit.GetComponent<UnitScript>().checkActivation();
     }
 }

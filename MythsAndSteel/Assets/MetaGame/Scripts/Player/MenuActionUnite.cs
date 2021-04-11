@@ -20,7 +20,7 @@ public class MenuActionUnite : MonoBehaviour
 
     [SerializeField] private GameObject _movePanel = null;
 
-    private bool _isOpen = false;
+    [SerializeField] private bool _isOpen = false;
     public bool IsOpen => _isOpen;
 
     private void Start(){
@@ -32,11 +32,12 @@ public class MenuActionUnite : MonoBehaviour
     /// Affiche le panneau avec les boutons
     /// </summary>
     public void ShowPanel(){
-        if(PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0 && GameManager.Instance.IsPlayerRedTurn){
+        if(PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0 && GameManager.Instance.IsPlayerRedTurn && _isOpen == false){
             menuaffichage(RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>(), pouvoiractif);
             _isOpen = true;
         }
-        else if(PlayerScript.Instance.BluePlayerInfos.ActivationLeft > 0 && !GameManager.Instance.IsPlayerRedTurn){
+        else if(PlayerScript.Instance.BluePlayerInfos.ActivationLeft > 0 && !GameManager.Instance.IsPlayerRedTurn && _isOpen == false)
+        {
             menuaffichage(RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>(), pouvoiractif);
             _isOpen = true;
         }

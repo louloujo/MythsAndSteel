@@ -6,10 +6,7 @@ using TMPro;
 
 public class UIInstance : MonoSingleton<UIInstance>
 {
-    #region AppelDeScript
-    MouseCommand mouseCommand;
-    #endregion
-
+    #region PhaseDeJeu
     [Header("PHASE DE JEU")]
     //Le panneau à afficher lorsque l'on change de phase
     [SerializeField] private GameObject _switchPhaseObject = null;
@@ -25,13 +22,13 @@ public class UIInstance : MonoSingleton<UIInstance>
 
     [SerializeField] private GameObject _buttonNextPhase = null;
     public GameObject ButtonNextPhase => _buttonNextPhase;
-
+    #endregion PhaseDeJeu
 
     [Header("PANNEAU D'ACTIVATION D'UNE UNITE")]
     [SerializeField] private MenuActionUnite _activationUnitPanel = null;
     public MenuActionUnite ActivationUnitPanel => _activationUnitPanel;
 
-
+    #region CarteEvenement
     [Header("CARTES EVENEMENTS")]
     //L'objet d'event à afficher lorsqu'une nouvelle carte event est piochée pour le joueur rouge
     [SerializeField] private GameObject _eventCardObjectRed = null;
@@ -72,6 +69,7 @@ public class UIInstance : MonoSingleton<UIInstance>
     //Transform de la carte event du joueur bleu le plus en bas
     [SerializeField] private Transform _blueEventDowntrans = null;
     public Transform BlueEventDowntrans => _blueEventDowntrans;
+    #endregion CarteEvenement
 
     [Header("LISTES DES BOUTONS D ACTIONS")]
     [Tooltip("0 et  1 sont pour les boutons quitter, 2 et 3 sont pour switch entre la Page 1 et la Page 2")]
@@ -89,7 +87,8 @@ public class UIInstance : MonoSingleton<UIInstance>
     public TextStatUnit MouseOverStats => _mouseOverStats;
     
     [Space]
-    
+
+    #region ShiftClicPanelP1
     [Header("LISTES DES ELEMENTS UI POUR LE SHIFT CLIC DE LA PAGE 1")]
     [Tooltip("Tous les éléments qui composent l'UI pour le Shift Clic de la Page 1")]
     
@@ -104,9 +103,9 @@ public class UIInstance : MonoSingleton<UIInstance>
     //Ordre : 0 => Valeur Min entre deux valeurs, 1 => Valeur Max entre deux valeurs, 2 => Degats Min et 3 Degats Max
     [SerializeField] private AttackStat _attackStat;
     public AttackStat AttackStat => _attackStat;
+    #endregion ShiftClicPanelP1
 
-    
-
+    #region ShiftClicPanelP2
     [Header("LISTES DES ELEMENTS UI POUR LE SHIFT CLIC DE LA PAGE 2")]
     [Tooltip("Tous les éléments qui composent l'UI pour le Shift Clic de la Page 2")]
     //Texte qui indique le nom de l'unité.
@@ -118,11 +117,14 @@ public class UIInstance : MonoSingleton<UIInstance>
 
     [SerializeField] private List<GameObject> _middleTextTerrain;
     public List<GameObject> MiddleTextTerrain => _middleTextTerrain;
+    #endregion ShiftClicPanelP2
 
+    
     [Header("ENFANTS CASE DU PLATEAU")]
     [SerializeField] private GameObject _mouvementTilePrefab;
     public GameObject MouvementTilePrefab => _mouvementTilePrefab;
 
+    #region ValidationPanel
     [Header("PANNEAU DE VALIDATION")]
     //Le panneau de validation
     [SerializeField] private GameObject _validationPanel;
@@ -135,6 +137,7 @@ public class UIInstance : MonoSingleton<UIInstance>
     //texte pour la description de la validation
     [SerializeField] private TextMeshProUGUI _descriptionValidationTxt;
     public TextMeshProUGUI DescriptionValidationTxt => _descriptionValidationTxt;
+    #endregion ValidationPanel
 
     [Header("STAT DU JEU")]
     [SerializeField] private TextMeshProUGUI _fpsText = null;
@@ -198,6 +201,19 @@ public class UIInstance : MonoSingleton<UIInstance>
         }
     }
     #endregion
+
+    [Header("PLAYER ACTIVATION")]
+    //nombre d'activation restante pour le joueur rouge
+    [SerializeField] private TextMeshProUGUI _activationLeftTxtRP = null;
+    public TextMeshProUGUI ActivationLeftTxtRP => _activationLeftTxtRP;
+    //nombre d'activation restante pour le joueur bleu
+    [SerializeField] private TextMeshProUGUI _activationLeftTxtBP = null;
+    public TextMeshProUGUI ActivationLeftTxtBP => _activationLeftTxtBP;
+
+    public void UpdateActivationLeft(){
+        _activationLeftTxtRP.text = PlayerScript.Instance.RedPlayerInfos.ActivationLeft.ToString();
+        _activationLeftTxtBP.text = PlayerScript.Instance.BluePlayerInfos.ActivationLeft.ToString();
+    }
 }
 
 #region ClassToRangeList

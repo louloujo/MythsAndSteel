@@ -15,6 +15,7 @@ public class GameManagerSO : ScriptableObject
     public event ClickButtonSwitchPhase GoToActionJ2Phase;
     public event ClickButtonSwitchPhase GoToStrategyPhase;
 
+
     /// <summary>
     /// Aller à la phase de jeu renseigner en paramètre
     /// </summary>
@@ -44,7 +45,7 @@ public class GameManagerSO : ScriptableObject
                 }
             }
 
-            nextPhase = (MYthsAndSteel_Enum.PhaseDeJeu)phaseSuivante;
+            nextPhase = (MYthsAndSteel_Enum.PhaseDeJeu) phaseSuivante;
         }
          
         //Selon la phase effectue certaines actions
@@ -89,7 +90,7 @@ public class GameManagerSO : ScriptableObject
     }
 
     /// <summary>
-    /// Aller à la phase de jeu renseigner en paramètre
+    /// Aller à la phase de jeu renseigner en paramètre POUR LE BOUTON
     /// </summary>
     /// <param name="phaseToGoTo"></param>
     public void GoToPhase()
@@ -114,7 +115,7 @@ public class GameManagerSO : ScriptableObject
             }
 
             nextPhase = (MYthsAndSteel_Enum.PhaseDeJeu)phaseSuivante;
-        
+
         //Selon la phase effectue certaines actions
         switch(nextPhase)
         {
