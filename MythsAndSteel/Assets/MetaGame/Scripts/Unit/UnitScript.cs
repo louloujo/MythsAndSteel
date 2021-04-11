@@ -224,7 +224,7 @@ public class UnitScript : MonoBehaviour
 
         //Assigne les stats
         _life = _unitSO.LifeMax;
-        _shield = _unitSO.ShieldMax;
+        _shield = 0;
         _attackRange = _unitSO.AttackRange;
         _moveSpeed = _unitSO.MoveSpeed;
         _creationCost = _unitSO.CreationCost;

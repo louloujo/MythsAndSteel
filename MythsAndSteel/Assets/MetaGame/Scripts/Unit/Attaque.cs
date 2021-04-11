@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -80,7 +79,6 @@ public class Attaque : MonoSingleton<Attaque>
 
     [Header("SPRITES POUR LES CASES")]
     [SerializeField] private Sprite _selectedSprite = null;
-    [SerializeField] private Sprite _tileSprite = null;
 
     public Sprite selectedSprite
     {
@@ -121,7 +119,7 @@ public class Attaque : MonoSingleton<Attaque>
     {
         if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
         {
-            selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
+            selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
             Debug.Log("Damage : " + _damageMinimum);
         }
         if (DiceResult >= _numberRangeMax.x && DiceResult <= _numberRangeMax.y)
@@ -189,6 +187,7 @@ public class Attaque : MonoSingleton<Attaque>
             selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
             if (!selectedUnit.GetComponent<UnitScript>()._isActionDone)
             {
+                Attaque.Instance.Selected = true;
                 GetStats();
                 StartAttack(TilesManager.Instance.TileList.IndexOf(tileSelected), selectedUnit.GetComponent<UnitScript>().AttackRange + selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
             }
