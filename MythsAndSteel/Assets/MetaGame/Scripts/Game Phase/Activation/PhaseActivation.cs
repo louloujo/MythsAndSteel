@@ -220,6 +220,8 @@ public class PhaseActivation : MonoBehaviour{
         J2DernièreValeurActivation = 0f;
         J2CarteChoisie = false;
 
+        UIInstance.Instance.BackgroundActivation.SetActive(true);
+
         _result.SetActive(false);
     }
 
@@ -237,6 +239,8 @@ public class PhaseActivation : MonoBehaviour{
     /// Lorsque les joueurs vont cliquer sur le bouton pour aller à la phase suivante
     /// </summary>
     public void ShowResult(){
+        UIInstance.Instance.BackgroundActivation.SetActive(false);
+
         float InitiativeValeur = J1DernièreValeurActivation - J2DernièreValeurActivation;
         if(InitiativeValeur < 0){
             GameManager.Instance.SetPlayerStart(false);

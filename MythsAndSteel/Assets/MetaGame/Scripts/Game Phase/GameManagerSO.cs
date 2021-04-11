@@ -22,6 +22,7 @@ public class GameManagerSO : ScriptableObject
     /// <param name="phaseToGoTo"></param>
     public void GoToPhase(MYthsAndSteel_Enum.PhaseDeJeu phase = MYthsAndSteel_Enum.PhaseDeJeu.Debut, bool randomPhase = false)
     {
+        UIInstance.Instance.ActivateNextPhaseButton();
         int phaseSuivante = 0;
         MYthsAndSteel_Enum.PhaseDeJeu nextPhase = MYthsAndSteel_Enum.PhaseDeJeu.Debut;
 
@@ -95,6 +96,8 @@ public class GameManagerSO : ScriptableObject
     /// <param name="phaseToGoTo"></param>
     public void GoToPhase()
     {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         int phaseSuivante = 0;
         MYthsAndSteel_Enum.PhaseDeJeu nextPhase = MYthsAndSteel_Enum.PhaseDeJeu.Debut;
 

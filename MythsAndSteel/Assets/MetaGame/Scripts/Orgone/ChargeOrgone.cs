@@ -13,6 +13,7 @@ public class ChargeOrgone : ScriptableObject
     /// </summary>
     /// <param name="cost"></param>
     public virtual void ChargeOrgone1(int cost){
+        Debug.Log("Charge 1");
         if(!MythsAndSteel.Orgone.OrgoneCheck.CanUseOrgonePower(cost, _isRedOrgonePower? 1 : 2)) return;
     }
 
@@ -21,6 +22,7 @@ public class ChargeOrgone : ScriptableObject
     /// </summary>
     /// <param name="cost"></param>
     public virtual void ChargeOrgone2(int cost){
+        Debug.Log("Charge 2");
         if(!MythsAndSteel.Orgone.OrgoneCheck.CanUseOrgonePower(cost, _isRedOrgonePower ? 1 : 2)) return;
     }
 
@@ -29,6 +31,7 @@ public class ChargeOrgone : ScriptableObject
     /// </summary>
     /// <param name="cost"></param>
     public virtual void ChargeOrgone3(int cost){
+        Debug.Log("Charge 3");
         if(!MythsAndSteel.Orgone.OrgoneCheck.CanUseOrgonePower(cost, _isRedOrgonePower ? 1 : 2)) return;
     }
 
@@ -37,6 +40,7 @@ public class ChargeOrgone : ScriptableObject
     /// </summary>
     /// <param name="cost"></param>
     public virtual void ChargeOrgone4(int cost){
+        Debug.Log("Charge 4");
         if(!MythsAndSteel.Orgone.OrgoneCheck.CanUseOrgonePower(cost, _isRedOrgonePower ? 1 : 2)) return;
     }
 
@@ -45,6 +49,7 @@ public class ChargeOrgone : ScriptableObject
     /// </summary>
     /// <param name="cost"></param>
     public virtual void ChargeOrgone5(int cost){
+        Debug.Log("Charge 5");
         if(!MythsAndSteel.Orgone.OrgoneCheck.CanUseOrgonePower(cost, _isRedOrgonePower ? 1 : 2)) return;
     }
 }

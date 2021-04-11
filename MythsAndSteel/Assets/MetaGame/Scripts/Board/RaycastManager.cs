@@ -75,7 +75,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         _unitInTile = _tile != null ? _tile.GetComponent<TileScript>().Unit != null ? _tile.GetComponent<TileScript>().Unit : null : null;
 
         //Permet de combiner le Shift et le click gauche de la souris.
-        if (_unitInTile == true){
+        if (_unitInTile == true && GameManager.Instance.IsInTurn && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation){
             //Si le joueur a utilisé le Shift puis leclick, le joueur est considéré comme click et on applique les fonctions propres au bouton des panneaux. De plus, le mouseOver est désactivé.
             if (_mouseCommand._checkIfPlayerAsClic == true && _mouseCommand._hasCheckUnit == false)
             {
@@ -92,6 +92,11 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         {
             //Si la case ne comporte pas d'unité alors le MouseOver ne s'active pas et n'affiche par l'interface résumé des statistiques.
             _mouseCommand.MouseExitWithoutClick();
+            if(GameManager.Instance.IsInTurn == false || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Activation)
+            {
+            _mouseCommand.clickQuit();
+            }
+
         }
 
         //Si la tile change

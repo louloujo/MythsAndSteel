@@ -165,6 +165,14 @@ public class UnitScript : MonoBehaviour
             _life -= Damage;
             CheckLife();
         }
+
+        if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneRed)){
+            PlayerScript.Instance.AddOrgone(1, 1);
+        }
+        else if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneBlue)){
+            PlayerScript.Instance.AddOrgone(1, 2);
+        }
+        else { }
     }
 
     /// <summary>
@@ -183,6 +191,17 @@ public class UnitScript : MonoBehaviour
     /// </summary>
     public virtual void Death()
     {
+        if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneRed)){
+            PlayerScript.Instance.AddOrgone(1, 1);
+        }
+        else if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneBlue)){
+            PlayerScript.Instance.AddOrgone(1, 2);
+        }
+        else { }
+        
+        if(UnitSO.IsInRedArmy) PlayerScript.Instance.UnitRef.UnitListRedPlayer.Remove(this.gameObject);
+        else PlayerScript.Instance.UnitRef.UnitListBluePlayer.Remove(this.gameObject);
+
         Destroy(gameObject);
         Debug.Log("Unité Détruite");
     }
