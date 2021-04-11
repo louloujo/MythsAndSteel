@@ -213,6 +213,7 @@ public class UnitScript : MonoBehaviour
         _diceBonus += value;
     }
     #endregion ChangementStat
+
     [Button]
     /// <summary>
     /// Update les stats de l'unité avec les stats de base

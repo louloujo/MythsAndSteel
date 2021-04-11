@@ -33,6 +33,11 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
 
     #endregion Variables
 
+    private void Start(){
+        GameManager.Instance.ManagerSO.GoToOrgoneJ1Phase += ActivateOrgoneArea;
+        GameManager.Instance.ManagerSO.GoToOrgoneJ2Phase += ActivateOrgoneArea;
+    }
+
     public void ReleaseZone(){
         if(GameManager.Instance.IsPlayerRedTurn){
             _redPlayerZone.GetComponent<ZoneOrgone>().ReleaseZone();
@@ -79,6 +84,15 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
         on aurait du coup un valeur spécifique temporaire qui corresponderait à la valeur actuelle qui se baisse au fur et à mesure pour comptabiliser le nombre d'animation qui reste à faire
         
          */
+    }
+
+    public void ActivateOrgoneArea(){
+        if(GameManager.Instance.IsPlayerRedTurn){
+            _redPlayerZone.GetComponent<ZoneOrgone>().ActivationArea();
+        }
+        else{
+            _bluePlayerZone.GetComponent<ZoneOrgone>().ActivationArea();
+        }
     }
 }
 

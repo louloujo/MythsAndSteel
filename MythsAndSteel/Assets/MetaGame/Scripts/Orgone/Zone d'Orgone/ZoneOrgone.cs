@@ -127,7 +127,9 @@ public class ZoneOrgone : MonoBehaviour
             TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Remove(_redPlayerZone? MYthsAndSteel_Enum.TerrainType.OrgoneRed : MYthsAndSteel_Enum.TerrainType.OrgoneBlue);
         }
 
-        PlayerScript.Instance.RedPlayerInfos.TileCentreZoneOrgone = _targetTile;
+        if(GameManager.Instance.IsPlayerRedTurn) PlayerScript.Instance.RedPlayerInfos.TileCentreZoneOrgone = _targetTile;
+        else PlayerScript.Instance.BluePlayerInfos.TileCentreZoneOrgone = _targetTile;
+
         _centerOrgoneArea = _targetTile;
         _targetTile = null;
 
@@ -138,6 +140,9 @@ public class ZoneOrgone : MonoBehaviour
         {
             TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Add(_redPlayerZone ? MYthsAndSteel_Enum.TerrainType.OrgoneRed : MYthsAndSteel_Enum.TerrainType.OrgoneBlue);
         }
+
+        newNeighZone.Clear();
+
         GameManager.Instance._eventCall -= WhenValidate;
         //A bouger la zone d'orgone
         _hasMoveOrgoneArea = true;
@@ -158,6 +163,10 @@ public class ZoneOrgone : MonoBehaviour
 
         _tilesInRange.Clear();
         _targetTile = null;
+    }
+
+    public void ActivationArea(){
+        _hasMoveOrgoneArea = false;
     }
 }
 
