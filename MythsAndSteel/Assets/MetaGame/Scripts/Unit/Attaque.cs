@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using Random = UnityEngine.Random;
-using System;
 
 public class Attaque : MonoSingleton<Attaque>
 {
@@ -66,7 +66,13 @@ public class Attaque : MonoSingleton<Attaque>
     // Range d'attaque (+) 
     [SerializeField] Vector2 _numberRangeMax;
     public Vector2 NumberRangeMax => _numberRangeMax;
+
+    // Range d'attaque (+) 
+    [SerializeField] bool _isActionDone;
+    public bool IsActionDone => _isActionDone;
+
     float o, p, x;
+
     GameObject selectedUnit;
     GameObject selectedUnitEnnemy;
 
@@ -82,7 +88,7 @@ public class Attaque : MonoSingleton<Attaque>
 
     #endregion Variables
 
-
+    
     void Randomdice()
     {
         o = Random.Range(1f, 6f);
@@ -95,13 +101,13 @@ public class Attaque : MonoSingleton<Attaque>
     {
         if (x >= _numberRangeMin.x && x <= _numberRangeMin.y)
         {
-            // UnitScript d = new TakeDamage(_damageMinimum);
+            selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
             Debug.Log("Damage : " + _damageMinimum);
         }
         if (x < _numberRangeMin.x)
         {
             Debug.Log("Damage : " + null);
-            // UnitScript.TakeDamage(0);
+            selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
         }
     }
 
@@ -109,17 +115,17 @@ public class Attaque : MonoSingleton<Attaque>
     {
         if (x >= _numberRangeMin.x && x <= _numberRangeMin.y)
         {
-           // UnitScript.TakeDamage(_damageMinimum);
+            selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
             Debug.Log("Damage : " + _damageMinimum);
         }
         if (x >= _numberRangeMax.x && x <= _numberRangeMax.y)
         {
-           // UnitScript.TakeDamage(_damageMaximum);
+            selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMaximum);
             Debug.Log("Damage : " + _damageMaximum);
         }
         if (x < _numberRangeMin.x)
         {
-           // UnitScript.TakeDamage(0);
+            selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
             Debug.Log("Damage : " + null);
         }
     }
@@ -127,7 +133,6 @@ public class Attaque : MonoSingleton<Attaque>
 
     void ChooseAttackType(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, float x)
     {
-        Randomdice();
         if (_numberRangeMax.x == 0 && _numberRangeMax.y == 0)
         {
             UnitAttackOneRange(_numberRangeMin, _damageMinimum, x);
@@ -240,18 +245,14 @@ public class Attaque : MonoSingleton<Attaque>
 
     public void Attack(int tileId)
     {
-        Debug.Log("Error0");
-        GameObject TileSelectedForAttack = RaycastManager.Instance.ActualTileSelected;
+        GameObject TileSelectedForAttack = TilesManager.Instance.TileList[tileId];
         if (_isInAttack)
         {
-            Debug.Log("Error1");
-            if (TileSelectedForAttack != null && selectedTileId.Contains(tileId))
+            if (TileSelectedForAttack != null)
             {
-                Debug.Log("Error2");
                 selectedUnitEnnemy = TileSelectedForAttack.GetComponent<TileScript>().Unit;
                 _EnnemyLife = selectedUnitEnnemy.GetComponent<UnitScript>().Life;
                 ApplyAttack();
-
             }
             else
             {
@@ -262,13 +263,10 @@ public class Attaque : MonoSingleton<Attaque>
         {
             StopAttack();
         }
-
-
     }
 
     public void GetStats()
     {
-        Debug.Log("Error3");
         _attackRange = selectedUnit.GetComponent<UnitScript>().AttackRange; // Récupération de la Portée
         _damageMinimum = selectedUnit.GetComponent<UnitScript>().DamageMinimum; // Récupération des Dégats Maximum
         _damageMaximum = selectedUnit.GetComponent<UnitScript>().DamageMaximum; // Dégats Minimums
@@ -280,9 +278,9 @@ public class Attaque : MonoSingleton<Attaque>
 
     public void ApplyAttack()
     {
-        Debug.Log("Error4");
         Randomdice();
         ChooseAttackType(_numberRangeMin, _damageMinimum, _numberRangeMax, _damageMaximum, x);
         StopAttack();
+        IsInAttack = false;
     }
 }
