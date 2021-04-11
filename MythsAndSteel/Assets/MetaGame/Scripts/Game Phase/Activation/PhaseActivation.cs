@@ -52,6 +52,7 @@ public class PhaseActivation : MonoBehaviour{
     bool _canChooseCard = false;
 
     private void Start(){
+        UIInstance.Instance.UpdateActivationLeft();
         UIInstance.Instance.CanvasActivation.SetActive(false);
         GameManager.Instance.ManagerSO.GoToActivationPhase += ActivateActivationPhase;
         GameManager.Instance.ManagerSO.GoToActivationPhase += ResetPhaseActivation;
@@ -261,6 +262,7 @@ public class PhaseActivation : MonoBehaviour{
 
         PlayerScript.Instance.RedPlayerInfos.ActivationLeft = (int) J1DernièreValeurActivation;
         PlayerScript.Instance.BluePlayerInfos.ActivationLeft = (int) J2DernièreValeurActivation;
+        UIInstance.Instance.UpdateActivationLeft();
 
         UIInstance.Instance.ActivateNextPhaseButton();
     }
