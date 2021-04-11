@@ -51,19 +51,26 @@ public class GameManagerSO : ScriptableObject
         switch(nextPhase)
         {
             case MYthsAndSteel_Enum.PhaseDeJeu.Debut:
+                GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.Debut);
                 GoToDebutPhase();
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.Activation:
+                GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.Activation);
+
                 GoToActivationPhase();
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1:
+                GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1);
+
                 GoToOrgoneJ1Phase();
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1:
-                foreach(GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer){
+                GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1);
+
+                foreach (GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer){
                     unit.GetComponent<UnitScript>().ResetTurn();
                 }
 
@@ -71,11 +78,15 @@ public class GameManagerSO : ScriptableObject
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2:
+                GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2);
+
                 GoToOrgoneJ2Phase();
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2:
-                foreach(GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer){
+                GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2);
+
+                foreach (GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer){
                     unit.GetComponent<UnitScript>().ResetTurn();
                 }
 
@@ -83,6 +94,8 @@ public class GameManagerSO : ScriptableObject
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.Strategie:
+                GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.Strategie);
+
                 GoToStrategyPhase();
                 break;
         }
