@@ -145,7 +145,7 @@ public class GameManager : MonoSingleton<GameManager>{
     {
         //Affiche le panneau de transition d'UI
         SwitchPhaseObjectUI(false);
-
+        _isInTurn = false;
         UIInstance.Instance.ActivationUnitPanel.closePanel();
     }
 
@@ -195,12 +195,11 @@ public class GameManager : MonoSingleton<GameManager>{
 
         //Détruit le panneau de changement de phase
         SwitchPhaseObjectUI(true);
+    }
 
-        int newPhase = (int)_actualTurnPhase + 1;
-
-        if(newPhase > 6) newPhase = 0;
-
-        _actualTurnPhase = (MYthsAndSteel_Enum.PhaseDeJeu)newPhase;
+    public void GoPhase(MYthsAndSteel_Enum.PhaseDeJeu phase)
+    {
+        _actualTurnPhase = phase;
     }
 
     #region UIFunction
@@ -436,7 +435,7 @@ public class GameManager : MonoSingleton<GameManager>{
     public void CancelEvent(){
         StopEventModeTile();
         StopEventModeUnit();
-        _eventCallCancel();
+        if(_eventCallCancel != null) _eventCallCancel();
     }
     #endregion EventMode
 }

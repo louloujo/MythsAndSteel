@@ -7,10 +7,13 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoSingleton<PlayerScript>
 {
-    [SerializeField] List<MYthsAndSteel_Enum.EventCard> _cardObtain = new List<MYthsAndSteel_Enum.EventCard>();
+    [SerializeField] bool _ArmyRedWinAtTheEnd;
+    public bool ArmyRedWinAtTheEnd => _ArmyRedWinAtTheEnd;
 
+    [Header("STAT JOUEUR ROUGE")]
     [SerializeField] private Player _redPlayerInfos = new Player();
     public Player RedPlayerInfos => _redPlayerInfos;
+    [Header("STAT JOUEUR BLEU")]
     [SerializeField] private Player _bluePlayerInfos = new Player();
     public Player BluePlayerInfos => _bluePlayerInfos;
     [Space]
@@ -21,19 +24,19 @@ public class PlayerScript : MonoSingleton<PlayerScript>
 
     //Liste des unités désactivées
     public List<MYthsAndSteel_Enum.TypeUnite> DisactivateUnitType = new List<MYthsAndSteel_Enum.TypeUnite>();
-    
-    [SerializeField] bool _ArmyRedWinAtTheEnd;
-    public bool ArmyRedWinAtTheEnd => _ArmyRedWinAtTheEnd;
-
 
    
     [Header("Cartes events")]
     [SerializeField] private EventCardList _eventCardList = null;
     public EventCardList EventCardList => _eventCardList;
 
+    List<MYthsAndSteel_Enum.EventCard> _cardObtain = new List<MYthsAndSteel_Enum.EventCard>();
+
     private void Start(){
         EventCardList._eventSO.UpdateVisualUI(_eventCardList._eventGamBluePlayer, 2);
         EventCardList._eventSO.UpdateVisualUI(_eventCardList._eventGamRedPlayer, 1);
+        RedPlayerInfos.UpdateOrgoneUI(1);
+        BluePlayerInfos.UpdateOrgoneUI(2);
     }
 
     #region DesactivationUnitType
@@ -45,7 +48,6 @@ public class PlayerScript : MonoSingleton<PlayerScript>
     {
         DisactivateUnitType.Add(DesactiveUnit);
     }
-
 
     /// <summary>
     /// active tous les types d'unités
@@ -61,7 +63,6 @@ public class PlayerScript : MonoSingleton<PlayerScript>
     /// Ajoute une carte event random au joueur
     /// </summary>
     /// <param name="player"></param>
-    [EasyButtons.Button]
     public void GiveEventCard(int player)
     {
         if(_cardObtain.Count < EventCardList._eventSO.NumberOfEventCard){
@@ -218,6 +219,36 @@ public class PlayerScript : MonoSingleton<PlayerScript>
     }
 
     #endregion CarteEvent
+
+    #region Orgone
+    /// <summary>
+    /// Quand un joueur gagne de l'orgone
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="player"></param>
+    public void AddOrgone(int value, int player){
+        if(player == 1){
+            RedPlayerInfos.ChangeOrgone(value, player);
+        }
+        else{
+            BluePlayerInfos.ChangeOrgone(value, player);
+        }
+    }
+
+    /// <summary>
+    /// Quand un joueur utilise de l'orgone
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="player"></param>
+    public void UseOrgone(int value, int player){
+        if(player == 1){
+            RedPlayerInfos.ChangeOrgone(value, player);
+        }
+        else{
+            BluePlayerInfos.ChangeOrgone(value, player);
+        }
+    }
+    #endregion Orgone
 
     /// <summary>
     /// Est ce qu'il reste des unités dans l'armée du joueur
