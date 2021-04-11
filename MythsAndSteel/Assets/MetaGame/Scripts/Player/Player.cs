@@ -84,5 +84,8 @@ public class Player
     /// </summary>
     public void MakeOrgoneExplosion(){
         // oskour Paul !
-    } 
+    }
+
+    //AV
+    [HideInInspector] public bool dontTouchThis = false;
 }

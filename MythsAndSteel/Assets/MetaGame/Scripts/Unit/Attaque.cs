@@ -90,13 +90,18 @@ public class Attaque : MonoSingleton<Attaque>
 
     #endregion Variables
 
+    [EasyButtons.Button]
     void Randomdice()
     {
-        firstDiceFloat = Random.Range(1f, 6f);
-        secondDiceFloat = Random.Range(1f, 6f);
+        firstDiceFloat = Random.Range(1f, 7f);
+        secondDiceFloat = Random.Range(1f, 7f);
         firstDiceInt = (int)firstDiceFloat;
         secondDiceInt = (int)secondDiceFloat;
-        DiceResult = firstDiceInt + secondDiceInt + selectedUnit.GetComponent<UnitScript>().DiceBonus;
+        //DiceResult = firstDiceInt + secondDiceInt + selectedUnit.GetComponent<UnitScript>().DiceBonus;
+        DiceResult = firstDiceInt + secondDiceInt;
+
+        RandomMore();
+
         Debug.Log("Dice Result : " + DiceResult);
     }
 
@@ -177,6 +182,22 @@ public class Attaque : MonoSingleton<Attaque>
                     }
                     Highlight(ID, Range - 1);
                 }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Ajoute plus d'aléatoire aux lancés de dé
+    /// </summary>
+    private void RandomMore()
+    {
+        if((GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.dontTouchThis) ||
+        (!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.dontTouchThis))
+        {
+            DiceResult += 3;
+            if(DiceResult > 12)
+            {
+                DiceResult = 12;
             }
         }
     }

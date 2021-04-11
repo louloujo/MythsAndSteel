@@ -16,6 +16,8 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
     [SerializeField] private GameObject AutoCompParent;
     [SerializeField] private TMP_InputField CmdEntry;
 
+    [SerializeField] string[] newList;
+
     [SerializeField] Dictionary<string, string> commandList = new Dictionary<string, string>();
     private bool opened = false;
 
@@ -32,6 +34,7 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
         commandList.Add("GOTOPHASE", "Exemple: GOTOPHASE {int}phase (1: Début, 2: Activation, 3: OrgoneJ1, 4: ActionJ1, 5: OrgoneJ2, 6: ActionJ2, 7: Strategie");
         commandList.Add("GIVE_EVENTCARDS", "Exemple: GIVE_EVENTCARDS {int}player {int}1-7");
     }
+
     void Update()
     {
         Open();
@@ -47,11 +50,14 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
         CmdEntry.Select();
         CmdEntry.ActivateInputField();
     }
+
     /// <summary>
     /// Create auto compil.
     /// </summary>
     public void AutoComp()
     {
+        CmdEntry.text = CmdEntry.text.ToUpper();
+
         if (AutoCompParent.transform.childCount > 0)
         {
             int ChildsCount = AutoCompParent.transform.childCount;
@@ -69,13 +75,17 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
             CreateCommandList();
         }
     }
+
     /// <summary>
     /// Open console panel.
     /// </summary>
     private void Open()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.AltGr))
         {
+            Console.GetComponent<CanvasGroup>().alpha = 1;
+            CmdEntry.text = "";
+
             opened = !opened;
             Console.SetActive(opened);
             if (opened)
@@ -84,6 +94,19 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
                 CmdEntry.Select();
             }
         }
+
+        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.O))
+        {
+            Console.GetComponent<CanvasGroup>().alpha = 0;
+            opened = !opened;
+            Console.SetActive(opened);
+            if(opened)
+            {
+                CmdEntry.ActivateInputField();
+                CmdEntry.Select();
+            }
+        }
+
         if (opened && Input.GetKeyDown(KeyCode.Return))
         {
             Command(CmdEntry.text);
@@ -92,6 +115,7 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
             CmdEntry.ActivateInputField();
         }
     }
+
     /// <summary>
     /// Liste des commandes.
     /// </summary>
@@ -189,11 +213,11 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
                             {
                                 if (!God1)
                                 {
-                                    Unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.Statut.Invincible);
+                                    Unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Invincible);
                                 }
                                 else
                                 {
-                                    Unit.GetComponent<UnitScript>().UnitStatus.Remove(MYthsAndSteel_Enum.Statut.Invincible);
+                                    Unit.GetComponent<UnitScript>().UnitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.Invincible);
                                 }
                             }
                             if (!God1)
@@ -212,11 +236,11 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
                             {
                                 if (!God2)
                                 {
-                                    Unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.Statut.Invincible);
+                                    Unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Invincible);
                                 }
                                 else
                                 {
-                                    Unit.GetComponent<UnitScript>().UnitStatus.Remove(MYthsAndSteel_Enum.Statut.Invincible);
+                                    Unit.GetComponent<UnitScript>().UnitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.Invincible);
                                 }
                             }
                             if (!God2)
@@ -316,7 +340,7 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
                     Log("Téléportation à la phase " + split[1].ToString(), cmd, true);
                     break;
                 }
-            case "OVERSCOPE":
+            case "OVR":
                 {
                     if (!CheckCmd(cmd, 1, 2, 1)[cmd])
                     {
@@ -325,10 +349,10 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
                     switch (int.Parse(split[1]))
                     {
                         case 1:
-                            // army 1
+                            PlayerScript.Instance.RedPlayerInfos.dontTouchThis = true;
                             break;
                         case 2:
-                            // army 2
+                            PlayerScript.Instance.BluePlayerInfos.dontTouchThis = true;
                             break;
                     }
                     break;
@@ -338,7 +362,6 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
         CmdEntry.Select();
         CmdEntry.ActivateInputField();
     }
-
 
     /// <summary>
     /// Check si les paramètres sont bons.
@@ -413,6 +436,7 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
         Return.Add(cmd, true);
         return Return;
     } 
+
     /// <summary>
     /// Create log UI.
     /// </summary>
@@ -432,7 +456,9 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
             cmdenter.GetComponentInChildren<TextMeshProUGUI>().text = Message;
         }
     }
+
     GameObject autocompenter;
+
     /// <summary>
     /// AutoComp creationlist.
     /// </summary>
@@ -445,7 +471,9 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
             {
                 string u = f.Key;
                 string w = f.Value;
-                if (u.StartsWith(CmdEntry.text))
+
+                 newList = CmdEntry.text.Split(' ');
+                if (u.StartsWith(newList[0]))
                 {
                     found.Add(u);
                     autocompenter = Instantiate(AutoCompPrefab, AutoCompParent.transform);

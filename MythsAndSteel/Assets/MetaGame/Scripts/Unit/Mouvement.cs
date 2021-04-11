@@ -618,6 +618,8 @@ public class Mouvement : MonoSingleton<Mouvement>
             mStart = tileSelected; // Assignation du nouveau départ.
             mEnd = TilesManager.Instance.TileList[selectedTileId[MvmtIndex]];  // Assignation du nouvel arrirée.
 
+            mUnit.GetComponent<UnitScript>()._hasStartMove = true;
+
             foreach (int Neighbour in newNeighbourId) // Désactive toutes les cases selectionnées par la fonction Highlight.
             {
                 if (!selectedTileId.Contains(Neighbour))

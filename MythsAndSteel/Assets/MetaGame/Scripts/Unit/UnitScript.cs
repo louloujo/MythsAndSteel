@@ -98,6 +98,9 @@ public class UnitScript : MonoBehaviour
     public int i => _i;
 
     [Header("------------------- ACTIVATION UNITE -------------------")]
+    //A commencer à se déplacer
+    public bool _hasStartMove = false;
+
     //lorsque le joueur a fini d'utiliser tous ses points de déplacement
     [SerializeField] bool _isMoveDone;
     public bool IsMoveDone => _isMoveDone;
@@ -270,6 +273,7 @@ public class UnitScript : MonoBehaviour
         AttackRangeBonus = 0;
 
         _moveLeft = _unitSO.MoveSpeed;
+        _hasStartMove = false;
     }
 
     /// <summary>
@@ -277,6 +281,10 @@ public class UnitScript : MonoBehaviour
     /// </summary>
     public void checkMovementLeft()
     {
+        if(UnitSO.IsInRedArmy) PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
+        else PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
+        UIInstance.Instance.UpdateActivationLeft();
+
         if (_moveLeft == 0)
         {
             _isMoveDone = true;
@@ -294,12 +302,12 @@ public class UnitScript : MonoBehaviour
             //Réduit le nombre d'activation restante
             if(_unitSO.IsInRedArmy || (!_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
             {
-                PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
+                if(!_hasStartMove) PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
                 UIInstance.Instance.UpdateActivationLeft();
             }
             else if(!_unitSO.IsInRedArmy || (_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
             {
-                PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
+                if(!_hasStartMove) PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
                 UIInstance.Instance.UpdateActivationLeft();
             }
         }
