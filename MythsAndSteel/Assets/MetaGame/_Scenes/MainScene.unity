@@ -1215,7 +1215,7 @@ MonoBehaviour:
   _isPlayerRedStarting: 0
   _isPlayerRedTurn: 1
   _isInTurn: 0
-  _actualTurnPhase: 0
+  _actualTurnPhase: 2
   _eventCardSO: {fileID: 11400000, guid: 955303dc40a1fa54984cef9072aef4ad, type: 2}
   _managerSO: {fileID: 11400000, guid: 915a645e0a8638b4d8f4a6522da5cc44, type: 2}
   _chooseUnitForEvent: 0
@@ -2560,6 +2560,7 @@ MonoBehaviour:
   _targetTile: {fileID: 0}
   _redPlayerZone: 1
   _hasMoveOrgoneArea: 0
+  _isInValidation: 0
   _childGam: {fileID: 35471671}
 --- !u!1001 &188076899
 PrefabInstance:
@@ -15901,6 +15902,7 @@ MonoBehaviour:
   _targetTile: {fileID: 0}
   _redPlayerZone: 0
   _hasMoveOrgoneArea: 0
+  _isInValidation: 0
   _childGam: {fileID: 324786646}
 --- !u!212 &1467254374
 SpriteRenderer:

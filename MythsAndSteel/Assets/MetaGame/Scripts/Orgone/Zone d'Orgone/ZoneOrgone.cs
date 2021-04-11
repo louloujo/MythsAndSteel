@@ -23,6 +23,8 @@ public class ZoneOrgone : MonoBehaviour
     [SerializeField] bool _redPlayerZone;
     [SerializeField] bool _hasMoveOrgoneArea;
     public bool HasMoveOrgoneArea => _hasMoveOrgoneArea;
+    [SerializeField] bool _isInValidation = false;
+    public bool IsInValidation => _isInValidation;
 
     [SerializeField] GameObject _childGam = null;
 
@@ -36,26 +38,30 @@ public class ZoneOrgone : MonoBehaviour
     }
 
     private void Update(){
-        //Déplace la zone si il est dans la bonne phase
-        if(OrgoneManager.Instance.Selected && GameManager.Instance.IsPlayerRedTurn == _redPlayerZone && RaycastManager.Instance.Tile != null && !_hasMoveOrgoneArea)
+        if(_isInValidation == false && _redPlayerZone == GameManager.Instance.IsPlayerRedTurn)
         {
-            if(_tilesInRange.Contains(RaycastManager.Instance.Tile))
+            //Déplace la zone si il est dans la bonne phase
+            if(OrgoneManager.Instance.Selected && GameManager.Instance.IsPlayerRedTurn == _redPlayerZone && RaycastManager.Instance.Tile != null && !_hasMoveOrgoneArea)
             {
-                _lastTileInRange = RaycastManager.Instance.Tile;
-                //Déplace la zone à la position
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(RaycastManager.Instance.Tile.transform.position.x, RaycastManager.Instance.Tile.transform.position.y, transform.position.z),
-                                     _speedTiles * Vector2.Distance(transform.position, RaycastManager.Instance.Tile.transform.position) * Time.deltaTime);
+                if(_tilesInRange.Contains(RaycastManager.Instance.Tile))
+                {
+                    _lastTileInRange = RaycastManager.Instance.Tile;
+                    //Déplace la zone à la position
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(RaycastManager.Instance.Tile.transform.position.x, RaycastManager.Instance.Tile.transform.position.y, transform.position.z),
+                                         _speedTiles * Vector2.Distance(transform.position, RaycastManager.Instance.Tile.transform.position) * Time.deltaTime);
+                }
+                else if(_lastTileInRange != null)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(_lastTileInRange.transform.position.x, _lastTileInRange.transform.position.y, transform.position.z),
+                                         _speedTiles * Vector2.Distance(transform.position, _lastTileInRange.transform.position) * Time.deltaTime);
+                }
             }
-            else if(_lastTileInRange != null)
+            else if(RaycastManager.Instance.Tile == null)
             {
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(_lastTileInRange.transform.position.x, _lastTileInRange.transform.position.y, transform.position.z),
-                                     _speedTiles * Vector2.Distance(transform.position, _lastTileInRange.transform.position) * Time.deltaTime);
+                OrgoneManager.Instance.ReleaseZone();
             }
         }
-        else if(RaycastManager.Instance.Tile == null)
-        {
-            OrgoneManager.Instance.ReleaseZone();
-        }
+        else { }
     }
 
     /// <summary>
@@ -117,6 +123,7 @@ public class ZoneOrgone : MonoBehaviour
 
             //Checks si la case est dans la liste des cases atteignables par la zone
             if(_tilesInRange.Contains(_targetTile)){
+                _isInValidation = true;
                 GameManager.Instance._eventCall += WhenValidate;
                 GameManager.Instance._eventCallCancel += CancelValidation;
                 UIInstance.Instance.ShowValidationPanel("Zone d'orgone", "Êtes-vous sur de vouloir déplacer votre zone d'orgone sur cette case? Toutes unités qui prend des dégâts ou perde de la vie dans cette zone vous fera gagner de l'orgone!");
@@ -165,6 +172,7 @@ public class ZoneOrgone : MonoBehaviour
         _hasMoveOrgoneArea = true;
         _tilesInRange.Clear();
 
+        _isInValidation = false;
         HideChild();
     }
 
@@ -179,7 +187,6 @@ public class ZoneOrgone : MonoBehaviour
         {
             gam.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
         }
-
         _tilesInRange.Clear();
         _targetTile = null;
     }
