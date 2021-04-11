@@ -71,13 +71,17 @@ public class Attaque : MonoSingleton<Attaque>
     [SerializeField] bool _isActionDone;
     public bool IsActionDone => _isActionDone;
 
-    float o, p, x;
+
+    float firstDiceFloat, secondDiceFloat;
+    int firstDiceInt, secondDiceInt, DiceResult;
 
     GameObject selectedUnit;
     GameObject selectedUnitEnnemy;
 
     [Header("SPRITES POUR LES CASES")]
     [SerializeField] private Sprite _selectedSprite = null;
+    [SerializeField] private Sprite _tileSprite = null;
+
     public Sprite selectedSprite
     {
         get
@@ -91,39 +95,41 @@ public class Attaque : MonoSingleton<Attaque>
     
     void Randomdice()
     {
-        o = Random.Range(1f, 6f);
-        p = Random.Range(1f, 6f);
-        x = o + p;
-        Debug.Log("Dice Result : " + x);
+        firstDiceFloat = Random.Range(1f, 6f);
+        secondDiceFloat = Random.Range(1f, 6f);
+        firstDiceInt = (int)firstDiceFloat;
+        secondDiceInt = (int)secondDiceFloat;
+        DiceResult = firstDiceInt + secondDiceInt + selectedUnit.GetComponent<UnitScript>().DiceBonus;
+        Debug.Log("Dice Result : " + DiceResult);
     }
 
-    void UnitAttackOneRange(Vector2 _numberRangeMin, int _damageMinimum, float x)
+    void UnitAttackOneRange(Vector2 _numberRangeMin, int _damageMinimum, int DiceResult)
     {
-        if (x >= _numberRangeMin.x && x <= _numberRangeMin.y)
+        if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
         {
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
             Debug.Log("Damage : " + _damageMinimum);
         }
-        if (x < _numberRangeMin.x)
+        if (DiceResult < _numberRangeMin.x)
         {
             Debug.Log("Damage : " + null);
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
         }
     }
 
-    void UnitAttackTwoRanges(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, float x)
+    void UnitAttackTwoRanges(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, int DiceResult)
     {
-        if (x >= _numberRangeMin.x && x <= _numberRangeMin.y)
+        if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
         {
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
             Debug.Log("Damage : " + _damageMinimum);
         }
-        if (x >= _numberRangeMax.x && x <= _numberRangeMax.y)
+        if (DiceResult >= _numberRangeMax.x && DiceResult <= _numberRangeMax.y)
         {
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMaximum);
             Debug.Log("Damage : " + _damageMaximum);
         }
-        if (x < _numberRangeMin.x)
+        if (DiceResult < _numberRangeMin.x)
         {
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
             Debug.Log("Damage : " + null);
@@ -131,18 +137,16 @@ public class Attaque : MonoSingleton<Attaque>
     }
 
 
-    void ChooseAttackType(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, float x)
+    void ChooseAttackType(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, int xDiceResult)
     {
         if (_numberRangeMax.x == 0 && _numberRangeMax.y == 0)
         {
-            UnitAttackOneRange(_numberRangeMin, _damageMinimum, x);
-            Debug.Log("Une range de dégats");
+            UnitAttackOneRange(_numberRangeMin, _damageMinimum, DiceResult);
         }
 
         else
         {
-            UnitAttackTwoRanges(_numberRangeMin, _damageMinimum, _numberRangeMax, _damageMaximum, x);
-            Debug.Log("Deux ranges de dégats");
+            UnitAttackTwoRanges(_numberRangeMin, _damageMinimum, _numberRangeMax, _damageMaximum, DiceResult);
         }
     }
 
@@ -183,7 +187,7 @@ public class Attaque : MonoSingleton<Attaque>
         if (tileSelected != null)
         {
             selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
-            if (!selectedUnit.GetComponent<UnitScript>().IsActionDone)
+            if (!selectedUnit.GetComponent<UnitScript>()._isActionDone)
             {
                 GetStats();
                 StartAttack(TilesManager.Instance.TileList.IndexOf(tileSelected), selectedUnit.GetComponent<UnitScript>().AttackRange + selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
@@ -228,9 +232,11 @@ public class Attaque : MonoSingleton<Attaque>
         newNeighbourId.Clear();
         _isInAttack = false;
         _selected = false;
-        x = 0f;
-        o = 0f;
-        p = 0f;
+        DiceResult = 0;
+        firstDiceFloat = 0f;
+        secondDiceFloat = 0f;
+        firstDiceInt = 0;
+        secondDiceInt = 0;
         _attackRange = 0;
         _damageMinimum = 0;
         _damageMaximum = 0;
@@ -240,7 +246,9 @@ public class Attaque : MonoSingleton<Attaque>
         _numberRangeMax.y = 0;
         RaycastManager.Instance.ActualTileSelected = null;
 
-        Debug.Log("Attaque annulé");
+        selectedUnit.GetComponent<UnitScript>().checkActivation();
+
+        Debug.Log("Attaque Stop");
     }
 
     public void Attack(int tileId)
@@ -251,8 +259,15 @@ public class Attaque : MonoSingleton<Attaque>
             if (TileSelectedForAttack != null)
             {
                 selectedUnitEnnemy = TileSelectedForAttack.GetComponent<TileScript>().Unit;
-                _EnnemyLife = selectedUnitEnnemy.GetComponent<UnitScript>().Life;
-                ApplyAttack();
+                if (selectedUnitEnnemy != null)
+                {
+                    _EnnemyLife = selectedUnitEnnemy.GetComponent<UnitScript>().Life;
+                    ApplyAttack();
+                }
+                else
+                {
+                    StopAttack();
+                }
             }
             else
             {
@@ -279,8 +294,9 @@ public class Attaque : MonoSingleton<Attaque>
     public void ApplyAttack()
     {
         Randomdice();
-        ChooseAttackType(_numberRangeMin, _damageMinimum, _numberRangeMax, _damageMaximum, x);
+        ChooseAttackType(_numberRangeMin, _damageMinimum, _numberRangeMax, _damageMaximum, DiceResult);
         StopAttack();
         IsInAttack = false;
+        selectedUnit.GetComponent<UnitScript>()._isActionDone = true;
     }
 }
