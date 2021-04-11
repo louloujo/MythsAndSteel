@@ -59,7 +59,6 @@ public class PhaseActivation : MonoBehaviour{
         _result.SetActive(false);
     }
 
-
     void Update(){
         if(_canChooseCard)
         {
@@ -255,6 +254,9 @@ public class PhaseActivation : MonoBehaviour{
 
         RedPlayerPanel.SetActive(false);
         BluePlayerPanel.SetActive(false);
+
+        PlayerScript.Instance.RedPlayerInfos.ActivationLeft = (int) J1DernièreValeurActivation;
+        PlayerScript.Instance.BluePlayerInfos.ActivationLeft = (int) J2DernièreValeurActivation;
 
         UIInstance.Instance.ActivateNextPhaseButton();
     }

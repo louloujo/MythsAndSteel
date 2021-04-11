@@ -23,7 +23,17 @@ public class ZoneOrgone : MonoBehaviour
     [SerializeField] bool _redPlayerZone;
     [SerializeField] bool _hasMoveOrgoneArea;
     public bool HasMoveOrgoneArea => _hasMoveOrgoneArea;
+
+    [SerializeField] GameObject _childGam = null;
+
+    GameObject _lastTileInRange = null;
     #endregion
+    private void Start()
+    {
+        HideChild();
+        GameManager.Instance.ManagerSO.GoToActionJ1Phase += HideChild;
+        GameManager.Instance.ManagerSO.GoToActionJ2Phase += HideChild;
+    }
 
     private void Update(){
         //Déplace la zone si il est dans la bonne phase
@@ -31,9 +41,15 @@ public class ZoneOrgone : MonoBehaviour
         {
             if(_tilesInRange.Contains(RaycastManager.Instance.Tile))
             {
+                _lastTileInRange = RaycastManager.Instance.Tile;
                 //Déplace la zone à la position
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(RaycastManager.Instance.Tile.transform.position.x, RaycastManager.Instance.Tile.transform.position.y, transform.position.z),
                                      _speedTiles * Vector2.Distance(transform.position, RaycastManager.Instance.Tile.transform.position) * Time.deltaTime);
+            }
+            else if(_lastTileInRange != null)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(_lastTileInRange.transform.position.x, _lastTileInRange.transform.position.y, transform.position.z),
+                                     _speedTiles * Vector2.Distance(transform.position, _lastTileInRange.transform.position) * Time.deltaTime);
             }
         }
         else if(RaycastManager.Instance.Tile == null)
@@ -127,21 +143,29 @@ public class ZoneOrgone : MonoBehaviour
             TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Remove(_redPlayerZone? MYthsAndSteel_Enum.TerrainType.OrgoneRed : MYthsAndSteel_Enum.TerrainType.OrgoneBlue);
         }
 
-        PlayerScript.Instance.RedPlayerInfos.TileCentreZoneOrgone = _targetTile;
+        if(GameManager.Instance.IsPlayerRedTurn) PlayerScript.Instance.RedPlayerInfos.TileCentreZoneOrgone = _targetTile;
+        else PlayerScript.Instance.BluePlayerInfos.TileCentreZoneOrgone = _targetTile;
+
         _centerOrgoneArea = _targetTile;
         _targetTile = null;
 
         //Chercher les voisins de la case
         List<int> newNeighZone = PlayerStatic.GetNeighbourDiag(_centerOrgoneArea.GetComponent<TileScript>().TileId, _centerOrgoneArea.GetComponent<TileScript>().Line, true);
+        newNeighZone.Add(_centerOrgoneArea.GetComponent<TileScript>().TileId);
 
         foreach(int i in newNeighZone)
         {
             TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Add(_redPlayerZone ? MYthsAndSteel_Enum.TerrainType.OrgoneRed : MYthsAndSteel_Enum.TerrainType.OrgoneBlue);
         }
+
+        newNeighZone.Clear();
+
         GameManager.Instance._eventCall -= WhenValidate;
         //A bouger la zone d'orgone
         _hasMoveOrgoneArea = true;
         _tilesInRange.Clear();
+
+        HideChild();
     }
 
     /// <summary>
@@ -159,5 +183,19 @@ public class ZoneOrgone : MonoBehaviour
         _tilesInRange.Clear();
         _targetTile = null;
     }
-}
 
+    /// <summary>
+    /// Active la zone d'orgone au début de la phase d'orgone
+    /// </summary>
+    public void ActivationArea(){
+        _hasMoveOrgoneArea = false;
+        _childGam.SetActive(true);
+    }
+    
+    /// <summary>
+    /// Rend invisible l'enfant qui permet de comprendre qu'il faut bouger la zone
+    /// </summary>
+    public void HideChild(){
+        _childGam.SetActive(false);
+    }
+}

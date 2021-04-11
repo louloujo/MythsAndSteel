@@ -10,10 +10,6 @@ public class MenuActionUnite : MonoBehaviour
     [SerializeField] private MouseCommand _mousecommand;
     public MouseCommand MouseCommand => _mousecommand;
     
-    //PlayerScripts
-    private bool J1aEncorePointsActivation = true;
-    private bool J2aEncorePointsActivation = true;
-
     // a rajoutter dans le playerscriptunite
     [SerializeField] bool pouvoiractif = true;
     [SerializeField] private GameObject UIMenuActionUnite;
@@ -24,6 +20,9 @@ public class MenuActionUnite : MonoBehaviour
 
     [SerializeField] private GameObject _movePanel = null;
 
+    [SerializeField] private bool _isOpen = false;
+    public bool IsOpen => _isOpen;
+
     private void Start(){
         _movePanel.SetActive(false);
         UIMenuActionUnite.SetActive(false);
@@ -33,11 +32,14 @@ public class MenuActionUnite : MonoBehaviour
     /// Affiche le panneau avec les boutons
     /// </summary>
     public void ShowPanel(){
-        if(J1aEncorePointsActivation && GameManager.Instance.IsPlayerRedTurn){
+        if(PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0 && GameManager.Instance.IsPlayerRedTurn && _isOpen == false){
             menuaffichage(RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>(), pouvoiractif);
+            _isOpen = true;
         }
-        else if(J2aEncorePointsActivation && !GameManager.Instance.IsPlayerRedTurn){
+        else if(PlayerScript.Instance.BluePlayerInfos.ActivationLeft > 0 && !GameManager.Instance.IsPlayerRedTurn && _isOpen == false)
+        {
             menuaffichage(RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>(), pouvoiractif);
+            _isOpen = true;
         }
     }
 
@@ -45,6 +47,7 @@ public class MenuActionUnite : MonoBehaviour
     /// Ferme le panneau avec les boutons
     /// </summary>
     public void closePanel(){
+        _isOpen = false;
         UIMenuActionUnite.SetActive(false);
         _moveBtn.gameObject.GetComponent<MouseOverUI>().StopOver();
         _atkBtn.gameObject.GetComponent<MouseOverUI>().StopOver();
@@ -57,6 +60,7 @@ public class MenuActionUnite : MonoBehaviour
     /// </summary>
     void menuaffichage(UnitScript unitscript, bool capaActive)
     {
+        int numberOfButtonHide = 0;
       //Vérifie que l'unité à une capacité active et désactive le bouton si elle en a pas
         if (capaActive == false)
         {
@@ -66,27 +70,53 @@ public class MenuActionUnite : MonoBehaviour
         //Vérifie si l'unité a effectuer tout son déplacement si c'est le cas alors décale la position des boutons en supprimant le bouton de déplacement
         if (unitscript.IsMoveDone == true){
             _moveBtn.gameObject.SetActive(false);
+            numberOfButtonHide++;
         }
         else{
             _moveBtn.gameObject.SetActive(true);
         }
 
+        //Vérifie si l'unité a effectuer tout son déplacement si c'est le cas alors décale la position des boutons en supprimant le bouton de déplacement
+        if(unitscript._isActionDone == true)
+        {
+            _atkBtn.gameObject.SetActive(false);
+            _powerBtn.gameObject.SetActive(false);
+            numberOfButtonHide += 2;
+        }
+        else
+        {
+            _atkBtn.gameObject.SetActive(true);
+            _powerBtn.gameObject.SetActive(true);
+        }
+
+        UIMenuActionUnite.GetComponent<RectTransform>().sizeDelta = new Vector2(117.7325f, 90 - (17 * numberOfButtonHide));
+
         // place le menu à coté de l'unité selectionnée
         MouseCommand.ActivateUI(UIMenuActionUnite, 0.5f, 3, false, true);
     }
+
+    /// <summary>
+    /// Pour le bouton déplacement
+    /// </summary>
     public void déplacement()
     {
         Mouvement.Instance.StartMvmtForSelectedUnit();
         Mouvement.Instance.Selected = true;
         closePanel();
     }
+
+    /// <summary>
+    /// Pour le bouton attaque
+    /// </summary>
     public void attaque()
     {
         Attaque.Instance.StartAttackSelectionUnit();
-        Attaque.Instance.Selected = true;
         closePanel();
     }
 
+    /// <summary>
+    /// Pour le bouton pouvoir
+    /// </summary>
     public void capacité()
     {
       
@@ -94,13 +124,16 @@ public class MenuActionUnite : MonoBehaviour
         closePanel();
     }
   
-    
-
-
+    /// <summary>
+    /// Affiche le bouton pour se déplacer
+    /// </summary>
     public void ShowMovementPanel(){
         _movePanel.SetActive(true);
     }
 
+    /// <summary>
+    /// Affiche le bouton pour se déplacer
+    /// </summary>
     public void CloseMovementPanel(){
         _movePanel.SetActive(false);
     }

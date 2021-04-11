@@ -185,7 +185,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                     {
                         if(_tile != _actualTileSelected)
                         {
-                            //Clique sur une unité
+                            Attaque.Instance.Attack(Tile.GetComponent<TileScript>().TileId);
                         }
                         else
                         {

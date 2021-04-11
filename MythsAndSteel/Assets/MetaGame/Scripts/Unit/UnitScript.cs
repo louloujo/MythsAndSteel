@@ -103,8 +103,7 @@ public class UnitScript : MonoBehaviour
     public bool IsMoveDone => _isMoveDone;
 
     //lorsque le joueur a effectué soit une attaque soit un pouvoir actif
-    [SerializeField] bool _isActionDone;
-    public bool IsActionDone => _isActionDone;
+    public bool _isActionDone;
 
     //lorsque l'activation a totalement été finie
     [SerializeField] bool _isActivationDone;
@@ -213,6 +212,7 @@ public class UnitScript : MonoBehaviour
         _diceBonus += value;
     }
     #endregion ChangementStat
+
     [Button]
     /// <summary>
     /// Update les stats de l'unité avec les stats de base
@@ -224,7 +224,7 @@ public class UnitScript : MonoBehaviour
 
         //Assigne les stats
         _life = _unitSO.LifeMax;
-        _shield = _unitSO.ShieldMax;
+        _shield = 0;
         _attackRange = _unitSO.AttackRange;
         _moveSpeed = _unitSO.MoveSpeed;
         _creationCost = _unitSO.CreationCost;
@@ -253,11 +253,36 @@ public class UnitScript : MonoBehaviour
         _moveLeft = _unitSO.MoveSpeed;
     }
 
+    /// <summary>
+    /// Check si l'unité peut encore se déplacer
+    /// </summary>
     public void checkMovementLeft()
     {
         if (_moveLeft == 0)
         {
             _isMoveDone = true;
+        }
+    }
+
+    /// <summary>
+    /// Check si l'unité peut encore être activée
+    /// </summary>
+    public void checkActivation()
+    {
+        if (_isActionDone){
+            _isActivationDone = true;
+
+            //Réduit le nombre d'activation restante
+            if(_unitSO.IsInRedArmy || (!_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
+            {
+                PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
+                UIInstance.Instance.UpdateActivationLeft();
+            }
+            else if(!_unitSO.IsInRedArmy || (_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
+            {
+                PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
+                UIInstance.Instance.UpdateActivationLeft();
+            }
         }
     }
 }
