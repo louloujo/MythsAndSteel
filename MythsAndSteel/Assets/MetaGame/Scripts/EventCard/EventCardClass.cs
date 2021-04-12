@@ -276,6 +276,8 @@ public class EventCardClass : ScriptableObject{
     #region Déploiement Accéléré
     public void DéploiementAccéléré()
     {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         foreach(GameObject tile in GameManager.Instance.TileChooseList){
             Debug.Log("Le jeu ajoute une infante");
         }
@@ -286,6 +288,8 @@ public class EventCardClass : ScriptableObject{
     }
 
     public void LaunchDéploiementAccéléré(){
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Déploiement_accéléré);
         List<GameObject> gamList = new List<GameObject>();
         
@@ -339,6 +343,8 @@ public class EventCardClass : ScriptableObject{
     #region IllusionStratégique
     public void IllusionStratégique()
     {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         int firstTileId = GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().ActualTiledId;
 
         TilesManager.Instance.TileList[GameManager.Instance.UnitChooseList[1].GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().AddUnitToTile(GameManager.Instance.UnitChooseList[0].gameObject);
@@ -396,6 +402,8 @@ public class EventCardClass : ScriptableObject{
     #region OptimisationOrgone
     public void OptimisationOrgone()
     {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Optimisation_de_l_orgone);
         if(player == 1){
             PlayerScript.Instance.RedPlayerInfos.OrgonePowerLeft++;
@@ -424,6 +432,8 @@ public class EventCardClass : ScriptableObject{
     #region PillageOrgone
     public void PillageOrgone()
     {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Pillage_orgone);
 
         foreach(GameObject gam in GameManager.Instance.TileChooseList){
@@ -457,6 +467,8 @@ public class EventCardClass : ScriptableObject{
     #region PointeursLaser
     public void PointeursLaserOptimisés()
     {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         foreach(GameObject unit in GameManager.Instance.UnitChooseList)
         {
             unit.GetComponent<UnitScript>().AttackRangeBonus += 1;
@@ -490,6 +502,8 @@ public class EventCardClass : ScriptableObject{
     #region ArmeEpidemiologique
     public void ArmeEpidemiologique()
     {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Arme_épidémiologique);
 
         GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.ArmeEpidemiologique);
@@ -521,6 +535,8 @@ public class EventCardClass : ScriptableObject{
     #region ManeouvreStratégique
     public void ManoeuvreStratégique()
     {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Manoeuvre_stratégique);
         
         if(player == 1){
@@ -551,6 +567,8 @@ public class EventCardClass : ScriptableObject{
     #region SerumExpérimental
     public void SerumExperimental()
     {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         foreach(GameObject unit in GameManager.Instance.UnitChooseList)
         {
             unit.GetComponent<UnitScript>().MoveSpeedBonus++;
@@ -584,6 +602,8 @@ public class EventCardClass : ScriptableObject{
     #region ActivationDeNodus
     public void ActivationDeNodus()
     {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Activation_de_nodus);
         if(player == 1){
             PlayerScript.Instance.RedPlayerInfos.OrgonePowerLeft++;
@@ -621,6 +641,8 @@ public class EventCardClass : ScriptableObject{
     public void MakeDamageBombardement(){
         GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().TakeDamage(1);
         GameManager.Instance._eventCall -= MakeDamageBombardement;
+
+        UIInstance.Instance.ActivateNextPhaseButton();
     }
 
     public void MoveUnitBombardement(){
@@ -679,6 +701,8 @@ public class EventCardClass : ScriptableObject{
 
     #region Reprogrammation
     public void Reproggramation(){
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         foreach(GameObject unit in GameManager.Instance.UnitChooseList){
             unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Possédé);
             unit.GetComponent<UnitScript>().AddDiceToUnit(-4);
@@ -710,6 +734,8 @@ public class EventCardClass : ScriptableObject{
     #region CessezLeFeu
     public void CessezLeFeu()
     {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         foreach(GameObject unit in GameManager.Instance.UnitChooseList)
         {
             unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre);
@@ -745,6 +771,8 @@ public class EventCardClass : ScriptableObject{
     #region Réapprovisionnement
     public void Reapprovisionnement()
     {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         foreach(GameObject unit in GameManager.Instance.UnitChooseList)
         {
             unit.GetComponent<UnitScript>().GiveLife(1);
@@ -778,6 +806,8 @@ public class EventCardClass : ScriptableObject{
     #region ArmesPerforantes
     public void ArmesPerforantes()
     {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         foreach(GameObject unit in GameManager.Instance.UnitChooseList)
         {
             unit.GetComponent<UnitScript>().AddDamageToUnit(1);
@@ -811,6 +841,8 @@ public class EventCardClass : ScriptableObject{
     #region EntrainementRigoureux
     public void EntrainementRigoureux()
     {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
         foreach(GameObject unit in GameManager.Instance.UnitChooseList)
         {
             unit.GetComponent<UnitScript>().AddDiceToUnit(3);

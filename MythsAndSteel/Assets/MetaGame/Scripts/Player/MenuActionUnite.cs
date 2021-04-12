@@ -32,11 +32,12 @@ public class MenuActionUnite : MonoBehaviour
     /// Affiche le panneau avec les boutons
     /// </summary>
     public void ShowPanel(){
-        if(PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0 && GameManager.Instance.IsPlayerRedTurn && _isOpen == false){
+        UnitScript unit = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>();
+        if((PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0 || (unit.MoveLeft + unit.MoveSpeedBonus > 0 && unit._hasStartMove) || (unit.IsMoveDone && !unit._isActionDone)) && GameManager.Instance.IsPlayerRedTurn && _isOpen == false){
             menuaffichage(RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>(), pouvoiractif);
             _isOpen = true;
         }
-        else if(PlayerScript.Instance.BluePlayerInfos.ActivationLeft > 0 && !GameManager.Instance.IsPlayerRedTurn && _isOpen == false)
+        else if((PlayerScript.Instance.BluePlayerInfos.ActivationLeft > 0 || (unit.MoveLeft + unit.MoveSpeedBonus > 0 && unit._hasStartMove) || (unit.IsMoveDone && !unit._isActionDone)) && !GameManager.Instance.IsPlayerRedTurn && _isOpen == false)
         {
             menuaffichage(RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>(), pouvoiractif);
             _isOpen = true;

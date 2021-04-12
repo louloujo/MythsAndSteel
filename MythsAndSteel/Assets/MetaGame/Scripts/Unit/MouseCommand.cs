@@ -690,7 +690,9 @@ public class MouseCommand : MonoBehaviour
         button._leftArrowPage2.onClick.AddListener(switchWindows2);
     }
 
-    //Fonction qui permet de cacher les Pages 1 et 2 du carnet.
+    /// <summary>
+    /// Fonction qui permet de cacher les Pages 1 et 2 du carnet.
+    /// </summary>
     public void clickQuit()
     {
         //Je retourne la valeur comme quoi il a clické à false car il a fini son action de Shift+Clic et désactive les 2 pages.
@@ -700,8 +702,9 @@ public class MouseCommand : MonoBehaviour
         ShiftUI[1].SetActive(false);
     }
 
-    //Change de page lorsque le joueur regarde les statistiques avancées
-    //Switch entre la page 1 et la page 2.
+    /// <summary>
+    /// Permet de switch entre la page 1 et la page 2
+    /// </summary>
     void switchWindows1()
     {
         //J'active le Panneau 2 car le joueur a cliqué sur le bouton permettant de transitionner de la page 1 à la page 2. De plus, je masque la page 1.
@@ -709,7 +712,9 @@ public class MouseCommand : MonoBehaviour
         ShiftUI[0].SetActive(false);
     }
 
-    //Switch entre la page 2 et la page 1.
+    /// <summary>
+    /// Switch entre la page 2 et la page 1.
+    /// </summary>
     void switchWindows2()
     {
         //J'active le Panneau 1 car le joueur a cliqué sur le bouton permettant de transitionner de la page 2 à la page 1. De plus, je masque la page 2.

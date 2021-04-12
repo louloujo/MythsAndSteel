@@ -89,13 +89,18 @@ public class Attaque : MonoSingleton<Attaque>
 
     #endregion Variables
 
+    [EasyButtons.Button]
     void Randomdice()
     {
-        firstDiceFloat = Random.Range(1f, 6f);
-        secondDiceFloat = Random.Range(1f, 6f);
+        firstDiceFloat = Random.Range(1f, 7f);
+        secondDiceFloat = Random.Range(1f, 7f);
         firstDiceInt = (int)firstDiceFloat;
         secondDiceInt = (int)secondDiceFloat;
-        DiceResult = firstDiceInt + secondDiceInt + selectedUnit.GetComponent<UnitScript>().DiceBonus;
+        //DiceResult = firstDiceInt + secondDiceInt + selectedUnit.GetComponent<UnitScript>().DiceBonus;
+        DiceResult = firstDiceInt + secondDiceInt;
+
+        RandomMore();
+
         Debug.Log("Dice Result : " + DiceResult);
     }
 
@@ -145,7 +150,12 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
-    public void Highlight(int tileId, int Range) // Highlight des cases dans la range d'attaque de l'unité
+    /// <summary>
+    /// Highlight des cases dans la range d'attaque de l'unité
+    /// </summary>
+    /// <param name="tileId"></param>
+    /// <param name="Range"></param>
+    public void Highlight(int tileId, int Range) 
     {
         if (Range > 0)
         {
@@ -175,7 +185,26 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
-    public void StartAttackSelectionUnit() // Vérifie si l'unité selectionné peut attaqué + récupère la portée de l'unité
+    /// <summary>
+    /// Ajoute plus d'aléatoire aux lancés de dé
+    /// </summary>
+    private void RandomMore()
+    {
+        if((GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.dontTouchThis) ||
+        (!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.dontTouchThis))
+        {
+            DiceResult += 3;
+            if(DiceResult > 12)
+            {
+                DiceResult = 12;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Vérifie si l'unité selectionné peut attaqué + récupère la portée de l'unité
+    /// </summary>
+    public void StartAttackSelectionUnit()  
     {
         GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
 
@@ -199,7 +228,12 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
-    public void StartAttack(int tileId, int Range) // Prépare l'Highlight des tiles ciblables & passe le statut de l'unité en -> _isInAttack
+    /// <summary>
+    /// Prépare l'Highlight des tiles ciblables & passe le statut de l'unité en -> _isInAttack
+    /// </summary>
+    /// <param name="tileId"></param>
+    /// <param name="Range"></param>
+    public void StartAttack(int tileId, int Range) 
     {
         if (!_isInAttack)
         {
@@ -213,7 +247,10 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
-    public void StopAttack() // Arrête l'attaque de l'unité select (UI + possibilité d'attaquer) 
+    /// <summary>
+    /// Arrête l'attaque de l'unité select (UI + possibilité d'attaquer
+    /// </summary>
+    public void StopAttack()  
     {
         foreach (int Neighbour in newNeighbourId) // Supprime toutes les tiles.
         {
@@ -244,8 +281,6 @@ public class Attaque : MonoSingleton<Attaque>
         _numberRangeMax.y = 0;
 
         RaycastManager.Instance.ActualTileSelected = null;
-
-        Debug.Log("Attaque Stop");
     }
 
     public void Attack(int tileId)

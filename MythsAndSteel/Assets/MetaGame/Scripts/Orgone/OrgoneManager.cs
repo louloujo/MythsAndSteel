@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
 Ce Script va gérer l'utilisation des charges d'orgones. Tous les scripts des charges d'orgone dérive de ce dernier. 
@@ -17,6 +18,16 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
     //Jauge d'orgone joueur bleu
     [SerializeField] private GameObject _bluePlayerPanelOrgone = null;
     public GameObject BluePlayerPanelOrgone => _bluePlayerPanelOrgone;
+
+    [Space]
+    //Liste des enfants de la jauge d'orgone du joueur rouge
+    [SerializeField] private List<Image> _redPlayerCharge = new List<Image>();
+    public List<Image> RedPlayerCharge => _redPlayerCharge;
+
+    //Liste des enfants de la jauge d'orgone du joueur bleu
+    [SerializeField] private List<Image> _bluePlayerCharge = new List<Image>();
+    public List<Image> BluePlayerCharge => _bluePlayerCharge;
+
 
     [Header("ZONE ORGONE")]
     //Est ce qu'une jauge d'orgone est sélectionnée

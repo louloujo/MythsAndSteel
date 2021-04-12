@@ -16,6 +16,14 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private GameObject _canvasActivation = null;
     public GameObject CanvasActivation => _canvasActivation;
 
+    //Le canvas en jeu pour la phase d'activation
+    [SerializeField] private Image _skipPhaseImage = null;
+    public Image SkipPhaseImage => _skipPhaseImage;
+
+    //Le canvas en jeu pour la phase d'activation
+    [SerializeField] private GameObject _backgroundActivation = null;
+    public GameObject BackgroundActivation => _backgroundActivation;
+
     //Le canvas en jeu pour afficher des menus
     [SerializeField] private GameObject _canvasTurnPhase = null;
     public GameObject CanvasTurnPhase => _canvasTurnPhase;
@@ -175,7 +183,6 @@ public class UIInstance : MonoSingleton<UIInstance>
     /// </summary>
     public void QuitValidationPanel(){
         _validationPanel.SetActive(false);
-        ActivateNextPhaseButton();
     }
 
     #region UITile

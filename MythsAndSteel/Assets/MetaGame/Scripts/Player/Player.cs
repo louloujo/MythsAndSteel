@@ -1,46 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Player
 {
-    List<GameObject> ArmyUnitsList; //Liste de toutes les unités de l'armée
+    [Header("ARMY INFO")]
+    //nom de l'armée
+    public string ArmyName;
 
-    List<GameObject> CreatorPointsUnits; //Liste des unités qui permettent de créer des unités autour d'elle
+    [Header("ACTIVATION")]
+    //Nombre d'activation restante
+    public int ActivationLeft; 
+    //Valeur de la carte activation posée
+    public int ActivationCardValue; 
 
-    List<Unit_SO> CreableUnits; //Liste des unités créables grâce au menu renfort
+    [Header("ORGONE")]
+    //Nombre de charges d'orgone actuel
+    public int OrgoneValue; 
+    //Nombre de pouvoirs d'orgone encore activable
+    public int OrgonePowerLeft; 
+    //Permet de se souvenir de la dernière valeur d'orgone avant Update
+    public int LastKnownOrgoneValue; 
+    //Tile qui correspond au centre de la zone d'Orgone
+    public GameObject TileCentreZoneOrgone; 
 
-    List<EventCard> EventCardInHand; //liste des cartes event dans la main du joueur
+    [Header("RESSOURCE")]
+    //Nombre de Ressources actuel
+    public int Ressource;
 
-    public int EventsCardNumberLeft; //Nombre de cartes événements restantes
-
-    public int OrgoneValue; //Nombre de charges d'orgone actuel
-
-    public int Ressource; //Nombre de Ressources actuel
-
-    public int ActivationLeft; //Nombre d'activation restante
-
-    public int ActivationCardValue; //Valeur de la carte activation posée
-
-    public int GoalCapturePointsNumber; //Nombre d'objectif actuellement capturé
-
-    public int OrgonePowerLeft; //Nombre de pouvoirs d'orgone encore activable
-
-    public int LastKnownOrgoneValue; //Permet de se souvenir de la dernière valeur d'orgone avant Update
-
-    public GameObject TileCentreZoneOrgone; //Tile qui correspond au centre de la zone d'Orgone
-
-    public string ArmyName; //nom de l'armée
+    [Header("OBJECTIF")]
+    //Nombre d'objectif actuellement capturé
+    public int GoalCapturePointsNumber; 
 
     public bool HasCreateUnit; //est ce que le joueur a créer une unité durant sont tour
 
-    public bool ActivationCardChoose;//Est ce que le joueur a choisit une carte activation
-
-    public bool IsMovingOrgoneArea; //Est ce que le joueur est en train de bouger la zone d'orgone
-
-    public bool HasMoveOrgoneArea; //Est que le joueur a déjà bougé la zone d'orgone
-
+    /// <summary>
+    /// Check si l'orgone va exploser
+    /// </summary>
+    /// <returns></returns>
     public bool OrgoneExplose(){
         return OrgoneValue > 5 ? true : false;
     }
@@ -49,16 +48,35 @@ public class Player
     /// Change la valeur (pos/neg) de la jauge d'orgone.
     /// </summary>
     /// <param name="Value">Valeur positive ou négative.</param>
-    public void ChangeOrgone(int Value){
+    public void ChangeOrgone(int Value, int player){
         OrgoneValue += Value;
-        Debug.Log(OrgoneValue);
+        UpdateOrgoneUI(player);
     }
 
     /// <summary>
     /// Update l'UI de la jauge d'orgone en fonction du nombre de charge
     /// </summary>
-    public void UpdateOrgoneUI(){
-        // oskour Paul !
+    public void UpdateOrgoneUI(int player){
+        if(player == 1){
+            foreach(Image img in OrgoneManager.Instance.RedPlayerCharge){
+                img.enabled = false;
+            }
+
+            for(int i = 0; i < OrgoneValue; i++){
+                OrgoneManager.Instance.RedPlayerCharge[i].enabled = true;
+            }
+        }
+        else{
+            foreach(Image img in OrgoneManager.Instance.BluePlayerCharge)
+            {
+                img.enabled = false;
+            }
+
+            for(int i = 0; i < OrgoneValue; i++)
+            {
+                OrgoneManager.Instance.BluePlayerCharge[i].enabled = true;
+            }
+        }
     }
 
     /// <summary>
@@ -66,5 +84,8 @@ public class Player
     /// </summary>
     public void MakeOrgoneExplosion(){
         // oskour Paul !
-    } 
+    }
+
+    //AV
+    [HideInInspector] public bool dontTouchThis = false;
 }
