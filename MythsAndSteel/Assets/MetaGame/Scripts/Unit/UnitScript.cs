@@ -98,6 +98,9 @@ public class UnitScript : MonoBehaviour
     public int i => _i;
 
     [Header("------------------- ACTIVATION UNITE -------------------")]
+    //A commencer à se déplacer
+    public bool _hasStartMove = false;
+
     //lorsque le joueur a fini d'utiliser tous ses points de déplacement
     [SerializeField] bool _isMoveDone;
     public bool IsMoveDone => _isMoveDone;
@@ -118,6 +121,8 @@ public class UnitScript : MonoBehaviour
     //Statut que possède l'unité
     [SerializeField] private List<MYthsAndSteel_Enum.UnitStatut> _unitStatus = new List<MYthsAndSteel_Enum.UnitStatut>();
     public List<MYthsAndSteel_Enum.UnitStatut> UnitStatus => _unitStatus;
+
+    bool hasUseActivation = false;
 
     #endregion Variables
 
@@ -165,6 +170,14 @@ public class UnitScript : MonoBehaviour
             _life -= Damage;
             CheckLife();
         }
+
+        if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneRed)){
+            PlayerScript.Instance.AddOrgone(1, 1);
+        }
+        else if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneBlue)){
+            PlayerScript.Instance.AddOrgone(1, 2);
+        }
+        else { }
     }
 
     /// <summary>
@@ -183,6 +196,17 @@ public class UnitScript : MonoBehaviour
     /// </summary>
     public virtual void Death()
     {
+        if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneRed)){
+            PlayerScript.Instance.AddOrgone(1, 1);
+        }
+        else if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneBlue)){
+            PlayerScript.Instance.AddOrgone(1, 2);
+        }
+        else { }
+        
+        if(UnitSO.IsInRedArmy) PlayerScript.Instance.UnitRef.UnitListRedPlayer.Remove(this.gameObject);
+        else PlayerScript.Instance.UnitRef.UnitListBluePlayer.Remove(this.gameObject);
+
         Destroy(gameObject);
         Debug.Log("Unité Détruite");
     }
@@ -250,7 +274,9 @@ public class UnitScript : MonoBehaviour
         MoveSpeedBonus = 0;
         AttackRangeBonus = 0;
 
+        hasUseActivation = false;
         _moveLeft = _unitSO.MoveSpeed;
+        _hasStartMove = false;
     }
 
     /// <summary>
@@ -258,6 +284,19 @@ public class UnitScript : MonoBehaviour
     /// </summary>
     public void checkMovementLeft()
     {
+        if(UnitSO.IsInRedArmy && !hasUseActivation)
+        {
+            hasUseActivation = true;
+            PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
+        }
+        else if(!UnitSO.IsInRedArmy && !hasUseActivation)
+        {
+            hasUseActivation = true;
+            PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
+        }
+         
+        UIInstance.Instance.UpdateActivationLeft();
+
         if (_moveLeft == 0)
         {
             _isMoveDone = true;
@@ -275,12 +314,12 @@ public class UnitScript : MonoBehaviour
             //Réduit le nombre d'activation restante
             if(_unitSO.IsInRedArmy || (!_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
             {
-                PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
+                if(!_hasStartMove) PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
                 UIInstance.Instance.UpdateActivationLeft();
             }
             else if(!_unitSO.IsInRedArmy || (_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
             {
-                PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
+                if(!_hasStartMove) PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
                 UIInstance.Instance.UpdateActivationLeft();
             }
         }

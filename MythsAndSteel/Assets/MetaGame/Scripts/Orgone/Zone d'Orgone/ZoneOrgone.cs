@@ -35,6 +35,13 @@ public class ZoneOrgone : MonoBehaviour
         HideChild();
         GameManager.Instance.ManagerSO.GoToActionJ1Phase += HideChild;
         GameManager.Instance.ManagerSO.GoToActionJ2Phase += HideChild;
+
+        if(_redPlayerZone){
+            PlayerScript.Instance.RedPlayerInfos.TileCentreZoneOrgone = _centerOrgoneArea;
+        }
+        else{
+            PlayerScript.Instance.BluePlayerInfos.TileCentreZoneOrgone = _centerOrgoneArea;
+        }
     }
 
     private void Update(){
@@ -56,10 +63,15 @@ public class ZoneOrgone : MonoBehaviour
                                          _speedTiles * Vector2.Distance(transform.position, _lastTileInRange.transform.position) * Time.deltaTime);
                 }
             }
-            else if(RaycastManager.Instance.Tile == null)
+            else
             {
-                OrgoneManager.Instance.ReleaseZone();
+                if(_lastTileInRange != null)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(_lastTileInRange.transform.position.x, _lastTileInRange.transform.position.y, transform.position.z),
+                                         _speedTiles * Vector2.Distance(transform.position, _lastTileInRange.transform.position) * Time.deltaTime);
+                }
             }
+
         }
         else { }
     }
@@ -174,6 +186,8 @@ public class ZoneOrgone : MonoBehaviour
 
         _isInValidation = false;
         HideChild();
+
+        UIInstance.Instance.ActivateNextPhaseButton();
     }
 
     /// <summary>
@@ -181,6 +195,7 @@ public class ZoneOrgone : MonoBehaviour
     /// </summary>
     public void CancelValidation(){
         transform.position = _centerOrgoneArea.transform.position;
+        _lastTileInRange = null;
         GameManager.Instance._eventCallCancel -= CancelValidation;
 
         foreach(GameObject gam in _tilesInRange)
@@ -189,6 +204,7 @@ public class ZoneOrgone : MonoBehaviour
         }
         _tilesInRange.Clear();
         _targetTile = null;
+        _isInValidation = false;
     }
 
     /// <summary>
