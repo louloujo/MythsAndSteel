@@ -56,11 +56,4 @@ public class MYthsAndSteel_Enum : MonoBehaviour
     {
         AttackSelect, MoveSelect, EventSelect
     }
-
-    /// <summary>
-    /// Tous les types de terrain
-    /// </summary>
-    public enum TerrainType{
-        Sol, Forêt, Bosquet, Plage, Colline, Haute_colline, Mont, Ravin, Boue, Rivière, Fleuve, Ruisseau, Pont, Route, Rails, Maison, Immeuble, Ruines, Usine, Point_de_ressource, Gare, Bunker, Cabane_Isatabu, Point_Objectif
-    }
 }
