@@ -23006,14 +23006,19 @@ MonoBehaviour:
   _activationUnitPanel: {fileID: 1645117453}
   _eventCardObjectRed: {fileID: 5249351300956634737, guid: 7b4e07eb63565d04b8e25cd06fad29ca, type: 3}
   _eventCardObjectBlue: {fileID: 8817809928786969543, guid: 3b5accca611a0e54a95baa847cfbd3dd, type: 3}
-  _activateButtonSprite: {fileID: 21300000, guid: b5e858f3874632047b780f629987714d, type: 3}
-  _desactivateButtonSprite: {fileID: 21300000, guid: 5acbf39bacaea364ba40283a7670d705, type: 3}
-  _buttonEventRedPlayer:
-    _upButton: {fileID: 1601503557}
-    _downButton: {fileID: 1785683546}
+  _flecheSpriteRef:
+    _redArrowUp: {fileID: 21300000, guid: 8cebf809470bb6d4eb090c3267bc51f8, type: 3}
+    _redArrowDown: {fileID: 21300000, guid: 2102bf759da0a084797f8a09ad9cca70, type: 3}
+    _blueArrowUp: {fileID: 21300000, guid: 1ec510790d352ab439381c62d23a02e1, type: 3}
+    _blueArrowDown: {fileID: 21300000, guid: 1ae046eeffebd44478fe41c9ff1ebe9b, type: 3}
+    _grisArrowUp: {fileID: 21300000, guid: d8998de639d437643a9a550aa494e9d8, type: 3}
+    _grisArrowDown: {fileID: 21300000, guid: af4b8f00a230b8e4bb7b182480878b79, type: 3}
   _buttonEventBluePlayer:
     _upButton: {fileID: 824706299}
     _downButton: {fileID: 2117515735}
+  _buttonEventRedPlayer:
+    _upButton: {fileID: 1601503557}
+    _downButton: {fileID: 1785683546}
   _redPlayerEventtransf: {fileID: 1583412802}
   _bluePlayerEventtransf: {fileID: 1857560385}
   _redEventDowntrans: {fileID: 1820718439}
