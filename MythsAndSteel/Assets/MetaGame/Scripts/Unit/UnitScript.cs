@@ -123,6 +123,8 @@ public class UnitScript : MonoBehaviour
     public List<MYthsAndSteel_Enum.UnitStatut> UnitStatus => _unitStatus;
 
     bool hasUseActivation = false;
+    [SerializeField] private Animator _Animation;
+    public Animator Animation => _Animation;
 
     #endregion Variables
 

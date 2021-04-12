@@ -669,10 +669,13 @@ public class Mouvement : MonoSingleton<Mouvement>
     {    
         if (Unit != null && StartPos != null && EndPos != null)
         {
+            AnimationUpdate(Unit, EndPos);
             Unit.transform.position = Vector2.MoveTowards(Unit.transform.position, EndPos.transform.position, speed1); // Application du mvmt.
             speed1 = Mathf.Abs((Vector2.Distance(mUnit.transform.position, mEnd.transform.position) * speed * Time.deltaTime)); // Régulation de la vitesse. (effet de ralentissement) 
             if(Vector2.Distance(mUnit.transform.position, mEnd.transform.position) <= 0.05f && Launch == false) // Si l'unité est arrivée.
             {
+                Unit.GetComponent<UnitScript>().Animation.SetFloat("X", 0);
+                Unit.GetComponent<UnitScript>().Animation.SetFloat("Y", 0);
                 Launch = true;
                 StartCoroutine(MvmtEnd()); // Lancer le prochain mvmt avec délai. 
             }
@@ -688,5 +691,12 @@ public class Mouvement : MonoSingleton<Mouvement>
 
             }
         }
+    }
+
+    private void AnimationUpdate(GameObject Unit, GameObject EndPos)
+    {
+        Unit.GetComponent<UnitScript>().Animation.SetFloat("X", EndPos.transform.position.x - Unit.transform.position.x);
+        Unit.GetComponent<UnitScript>().Animation.SetFloat("Y", EndPos.transform.position.y - Unit.transform.position.y);
+        Unit.GetComponent<SpriteRenderer>().flipX = Unit.GetComponent<UnitScript>().Animation.GetFloat("X") > 0;
     }
 }
