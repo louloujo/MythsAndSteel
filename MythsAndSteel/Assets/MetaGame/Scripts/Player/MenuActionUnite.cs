@@ -43,7 +43,7 @@ public class MenuActionUnite : MonoBehaviour
             _isOpen = true;
         }
     }
-
+    
     /// <summary>
     /// Ferme le panneau avec les boutons
     /// </summary>
