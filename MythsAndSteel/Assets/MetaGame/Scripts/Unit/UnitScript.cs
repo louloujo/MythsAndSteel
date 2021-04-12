@@ -48,7 +48,7 @@ public class UnitScript : MonoBehaviour
     public int DamageBonus => _damageBonus;
 
     //Bonus aux lancés de dé
-    [SerializeField] private int _diceBonus = 0;
+    [SerializeField] public int _diceBonus = 0;
     public int DiceBonus => _diceBonus;
 
 
@@ -286,4 +286,3 @@ public class UnitScript : MonoBehaviour
         }
     }
 }
-
