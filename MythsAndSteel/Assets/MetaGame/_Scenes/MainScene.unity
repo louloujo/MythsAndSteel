@@ -1520,6 +1520,7 @@ GameObject:
   - component: {fileID: 108961819}
   - component: {fileID: 108961821}
   - component: {fileID: 108961820}
+  - component: {fileID: 108961822}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9)"
   m_TagString: Untagged
@@ -1576,6 +1577,7 @@ MonoBehaviour:
   _isActivationDone: 0
   _pathtomake: 
   _unitStatus: 
+  _Animation: {fileID: 108961822}
 --- !u!212 &108961821
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1616,7 +1618,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 4db7ba87ae2244b48ae7d001e0ec4f84, type: 3}
+  m_Sprite: {fileID: 5601724313049997956, guid: a50948e13bd96eb4099118ef8c1813aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1627,6 +1629,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &108961822
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108961818}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d997174087e14547ababba79fce4f45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &109066898
 GameObject:
   m_ObjectHideFlags: 0
@@ -5998,6 +6019,7 @@ MonoBehaviour:
   _isActivationDone: 0
   _pathtomake: 
   _unitStatus: 
+  _Animation: {fileID: 0}
 --- !u!212 &549253559
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10352,6 +10374,7 @@ GameObject:
   - component: {fileID: 827471366}
   - component: {fileID: 827471368}
   - component: {fileID: 827471367}
+  - component: {fileID: 827471369}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9) 4"
   m_TagString: Untagged
@@ -10408,6 +10431,7 @@ MonoBehaviour:
   _isActivationDone: 0
   _pathtomake: 
   _unitStatus: 
+  _Animation: {fileID: 827471369}
 --- !u!212 &827471368
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10448,7 +10472,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 4db7ba87ae2244b48ae7d001e0ec4f84, type: 3}
+  m_Sprite: {fileID: 5601724313049997956, guid: a50948e13bd96eb4099118ef8c1813aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -10459,6 +10483,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &827471369
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827471365}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d997174087e14547ababba79fce4f45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &839524621
 GameObject:
   m_ObjectHideFlags: 0
@@ -14229,6 +14272,7 @@ GameObject:
   - component: {fileID: 1204031600}
   - component: {fileID: 1204031602}
   - component: {fileID: 1204031601}
+  - component: {fileID: 1204031603}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9) 3"
   m_TagString: Untagged
@@ -14285,6 +14329,7 @@ MonoBehaviour:
   _isActivationDone: 0
   _pathtomake: 
   _unitStatus: 
+  _Animation: {fileID: 1204031603}
 --- !u!212 &1204031602
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14325,7 +14370,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 4db7ba87ae2244b48ae7d001e0ec4f84, type: 3}
+  m_Sprite: {fileID: 5601724313049997956, guid: a50948e13bd96eb4099118ef8c1813aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -14336,6 +14381,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1204031603
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204031599}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d997174087e14547ababba79fce4f45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1206416263
 GameObject:
   m_ObjectHideFlags: 0
@@ -15651,6 +15715,7 @@ GameObject:
   - component: {fileID: 1264806017}
   - component: {fileID: 1264806019}
   - component: {fileID: 1264806018}
+  - component: {fileID: 1264806020}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9) 5"
   m_TagString: Untagged
@@ -15707,6 +15772,7 @@ MonoBehaviour:
   _isActivationDone: 0
   _pathtomake: 
   _unitStatus: 
+  _Animation: {fileID: 1264806020}
 --- !u!212 &1264806019
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15747,7 +15813,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 4db7ba87ae2244b48ae7d001e0ec4f84, type: 3}
+  m_Sprite: {fileID: 5601724313049997956, guid: a50948e13bd96eb4099118ef8c1813aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -15758,6 +15824,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1264806020
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264806016}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d997174087e14547ababba79fce4f45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1289587992
 GameObject:
   m_ObjectHideFlags: 0
@@ -20775,6 +20860,7 @@ GameObject:
   - component: {fileID: 1691159586}
   - component: {fileID: 1691159588}
   - component: {fileID: 1691159587}
+  - component: {fileID: 1691159589}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9) 2"
   m_TagString: Untagged
@@ -20831,6 +20917,7 @@ MonoBehaviour:
   _isActivationDone: 0
   _pathtomake: 
   _unitStatus: 
+  _Animation: {fileID: 1691159589}
 --- !u!212 &1691159588
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -20871,7 +20958,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 4db7ba87ae2244b48ae7d001e0ec4f84, type: 3}
+  m_Sprite: {fileID: 5601724313049997956, guid: a50948e13bd96eb4099118ef8c1813aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -20882,6 +20969,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1691159589
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691159585}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d997174087e14547ababba79fce4f45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1710207924
 GameObject:
   m_ObjectHideFlags: 0
@@ -20893,6 +20999,7 @@ GameObject:
   - component: {fileID: 1710207925}
   - component: {fileID: 1710207927}
   - component: {fileID: 1710207926}
+  - component: {fileID: 1710207928}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9) 6"
   m_TagString: Untagged
@@ -20949,6 +21056,7 @@ MonoBehaviour:
   _isActivationDone: 0
   _pathtomake: 
   _unitStatus: 
+  _Animation: {fileID: 1710207928}
 --- !u!212 &1710207927
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -20989,7 +21097,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 4db7ba87ae2244b48ae7d001e0ec4f84, type: 3}
+  m_Sprite: {fileID: 5601724313049997956, guid: a50948e13bd96eb4099118ef8c1813aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -21000,6 +21108,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1710207928
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710207924}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d997174087e14547ababba79fce4f45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1714259869
 PrefabInstance:
   m_ObjectHideFlags: 0

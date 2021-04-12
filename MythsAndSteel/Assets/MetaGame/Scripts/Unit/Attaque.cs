@@ -141,7 +141,6 @@ public class Attaque : MonoSingleton<Attaque>
     }
     void AnimationUpdate()
     {
-        Debug.Log("anim");
         GameObject ActualUnit = RaycastManager.Instance.ActualUnitSelected;
         GameObject ActualEnemy = selectedUnitEnnemy;
 

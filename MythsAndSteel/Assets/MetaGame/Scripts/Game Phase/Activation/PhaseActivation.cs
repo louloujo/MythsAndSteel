@@ -69,7 +69,7 @@ public class PhaseActivation : MonoBehaviour{
                 //On vérifie si le joueur 1 choisit sa carte
                 if(J1Verif && Input.GetKeyDown(J1CarteVerif.inputCarteActivation)){
                     foreach(CarteActivation Carteactivations in RedCartesActivation){
-                        RedPlayerPanel.transform.GetChild(Carteactivations.IndexCarteActivation).GetComponent<Image>().color = new Color(0f, 0f, 1f, 1f);
+                        RedPlayerPanel.transform.GetChild(Carteactivations.IndexCarteActivation).GetComponent<Image>().color = new Color(1f, 0f, 0f, 1f);
                     }
 
                     J1DernièreValeurActivation = float.Parse(J1CarteVerif.valeurActivation) / 10;
@@ -97,7 +97,7 @@ public class PhaseActivation : MonoBehaviour{
                             {
                                 foreach(CarteActivation Carteactivations in RedCartesActivation)
                                 {
-                                    RedPlayerPanel.transform.GetChild(Carteactivations.IndexCarteActivation).GetComponent<Image>().color = new Color(0f, 0f, 1f, 1f);
+                                    RedPlayerPanel.transform.GetChild(Carteactivations.IndexCarteActivation).GetComponent<Image>().color = new Color(1f, 0f, 0f, 1f);
                                 }
                                 J1Choix = true;
                                 J1Verif = false;
@@ -142,7 +142,7 @@ public class PhaseActivation : MonoBehaviour{
             if(!J2CarteChoisie){
                 if(J2Verif && Input.GetKeyDown(J2CarteVerif.inputCarteActivation)){
                     foreach(CarteActivation Carteactivations in BlueCartesActivation){
-                        BluePlayerPanel.transform.GetChild(Carteactivations.IndexCarteActivation).GetComponent<Image>().color = new Color(1f, 0f, 0f, 1f);
+                        BluePlayerPanel.transform.GetChild(Carteactivations.IndexCarteActivation).GetComponent<Image>().color = new Color(0f, 0f, 1f, 1f);
                     }
 
                     J2DernièreValeurActivation = float.Parse(J2CarteVerif.valeurActivation) / 10;
@@ -165,7 +165,7 @@ public class PhaseActivation : MonoBehaviour{
                         if(Input.GetKeyDown(Carteactivation.inputCarteActivation)){
                             foreach(CarteActivation Carteactivations in BlueCartesActivation)
                             {
-                                BluePlayerPanel.transform.GetChild(Carteactivations.IndexCarteActivation).GetComponent<Image>().color = new Color(1f, 0f, 0f, 1f);
+                                BluePlayerPanel.transform.GetChild(Carteactivations.IndexCarteActivation).GetComponent<Image>().color = new Color(0f, 0f, 1f, 1f);
                             }
                             J2Choix = true;
                             J2Verif = false;
