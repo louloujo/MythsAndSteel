@@ -16,14 +16,15 @@ Ce script renvoie comme principals informations :
 public class PhaseActivation : MonoBehaviour{
     //Variables pour le joueur avec les cartes bleu
     //Carte du joueur 1
-    [SerializeField] List<CarteActivation> BlueCartesActivation = new List<CarteActivation>();
-    
+    [SerializeField] private List<CarteActivation> RedCartesActivation = new List<CarteActivation>();
+
     //Panel qui contient les cartes Activation Bleu
     [SerializeField] private GameObject RedPlayerPanel;
 
     bool J1Choix = true;
     bool J1Verif = false;
-    [SerializeField] CarteActivation J1CarteVerif = null;
+    CarteActivation J1CarteVerif = null;
+
     List<CarteActivation> J1CartesNonVerif = new List<CarteActivation>();
     private float J1DernièreValeurActivation;
     
@@ -31,8 +32,8 @@ public class PhaseActivation : MonoBehaviour{
 
     //Variables pour le joueur 2
     //Carte du joueur 2
-    [SerializeField] private List<CarteActivation> RedCartesActivation = new List<CarteActivation>();
-
+    [SerializeField] List<CarteActivation> BlueCartesActivation = new List<CarteActivation>();
+    
     //Panel qui contient les cartes Activation Rouge
     [SerializeField] private GameObject BluePlayerPanel;
 
@@ -67,16 +68,16 @@ public class PhaseActivation : MonoBehaviour{
             if(!J1CarteChoisie){
                 //On vérifie si le joueur 1 choisit sa carte
                 if(J1Verif && Input.GetKeyDown(J1CarteVerif.inputCarteActivation)){
-                    foreach(CarteActivation Carteactivations in BlueCartesActivation){
+                    foreach(CarteActivation Carteactivations in RedCartesActivation){
                         RedPlayerPanel.transform.GetChild(Carteactivations.IndexCarteActivation).GetComponent<Image>().color = new Color(0f, 0f, 1f, 1f);
                     }
 
                     J1DernièreValeurActivation = float.Parse(J1CarteVerif.valeurActivation) / 10;
                     CarteActivationUtilisée.Add(J1CarteVerif);
-                    BlueCartesActivation.Clear();
+                    RedCartesActivation.Clear();
 
                     foreach(CarteActivation carteactivations in J1CartesNonVerif){
-                        BlueCartesActivation.Add(carteactivations);
+                        RedCartesActivation.Add(carteactivations);
                     }
 
                     //Le joueur 1 a choisit sa carte
