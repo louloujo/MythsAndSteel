@@ -39,5 +39,5 @@ public class Unit_SO : ScriptableObject{
     [Tooltip("Est ce que si cette unité est tuée elle permet à l'adversaire de gagner?")]
     public bool UsefullToWin = false;
     [Tooltip("Est ce que cette unité fait parti de l'armée 1?")]
-    public bool IsInArmy1 = true;
+    public bool IsInRedArmy = true;
 }

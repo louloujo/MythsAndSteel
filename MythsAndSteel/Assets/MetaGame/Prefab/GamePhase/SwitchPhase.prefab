@@ -293,9 +293,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 10a49bba6254aed429b2fac2cbf6887f, type: 2}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ClicToNextPhase
+      - m_Target: {fileID: 11400000, guid: 915a645e0a8638b4d8f4a6522da5cc44, type: 2}
+        m_TargetAssemblyTypeName: GameManagerSO, Assembly-CSharp
+        m_MethodName: GoToPhase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
