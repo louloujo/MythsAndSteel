@@ -12,8 +12,7 @@ public class Campagne : MonoBehaviour
     
     public Sprite[] SpriteMap; //Sprite des map de chaques plateau
         
-    public int numberMaxOfUnlock; //nombre max de niveaux a débloqué
-    public int Unlocked;//Nombre actuelle de niveau débloqué
+    [SerializeField] int Unlocked;//Nombre actuelle de niveau débloqué
 
     [Header("Assignations")]
     public Image ImageScenario; //Affiche La map du scénario actuelle
@@ -24,7 +23,6 @@ public class Campagne : MonoBehaviour
     private void Start()
     {
         //Assigne les valeur de dévérouillage des scénario
-        Unlockslider.maxValue = numberMaxOfUnlock;
         Unlockslider.value = Unlocked;
     }
 
