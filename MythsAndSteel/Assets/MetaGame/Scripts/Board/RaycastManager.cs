@@ -9,6 +9,10 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     public MouseCommand _mouseCommand;
     #endregion
 
+    #region A Supprimer => RenfortTest
+    public RenfortPhase _renfortPhase;
+    #endregion
+
     #region Variables
     [Header("INFO DU RAYCAST")]
     //Les layer qui sont détectés par le raycast
@@ -54,7 +58,8 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     public event TileRaycastChange OnTileChanged;
     #endregion Variables
 
-    void Update(){
+    void Update()
+    {
         //obtient le premier objet touché par le raycast
         RaycastHit2D hit = GetRaycastHit();
 
@@ -63,6 +68,33 @@ public class RaycastManager : MonoSingleton<RaycastManager>
 
         //Assigne l'unité si la tile qui est sélectionnée possède une unité
         _unitInTile = _tile != null ? _tile.GetComponent<TileScript>().Unit != null ? _tile.GetComponent<TileScript>().Unit : null : null;
+
+
+        #region A Supprimer => RenfortTest
+        #endregion
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            //Si l'usine de l'Armée Bleu est sélectionnée et c'est le tour du joueur de l'Armée Bleu.
+            if (_tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineJ1) &&
+                !GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
+                || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2))
+            {
+                Debug.Log("c'est moi ?");
+                _mouseCommand.MenuRenfortUI();
+                _renfortPhase.CreateRenfort();
+            }
+
+            //Si l'usine de l'Armée Rouge est sélectionnée et c'est le tour du joueur de l'Armée Rouge.
+            if (_tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineJ2)
+                && GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
+                || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2))
+            {
+                Debug.Log("c'est toi  ?");
+                _mouseCommand.MenuRenfortUI();
+                _renfortPhase.CreateRenfort();
+            }
+        }
 
         //Permet de combiner le Shift et le click gauche de la souris.
         if (_unitInTile == true)
@@ -99,11 +131,12 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         }
 
         //Lorsque le joueur clique sur le plateau
-        if(Input.GetKeyDown(KeyCode.Mouse0) && !Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !Input.GetKey(KeyCode.LeftShift))
         {
             Select();
         }
     }
+
 
     /// <summary>
     /// Quand tu cliques sur une unité
@@ -113,9 +146,9 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         //Si le mouvement n'a pas été lancé
         if (!Mouvement.Instance.Selected)
         {
-            if(_unitInTile != null)
+            if (_unitInTile != null)
             {
-                if(CanUseUnitWhenClic(_unitInTile.GetComponent<UnitScript>()))
+                if (CanUseUnitWhenClic(_unitInTile.GetComponent<UnitScript>()))
                 {
                     _actualTileSelected = _tile;
                     _actualUnitSelected = _actualTileSelected.GetComponent<TileScript>().Unit;
@@ -151,39 +184,39 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     /// <returns></returns>
     bool CanUseUnitWhenClic(UnitScript uniTouch)
     {
-        if(uniTouch.IsActivationDone == false)
+        if (uniTouch.IsActivationDone == false)
         {
-            if(GameManager.Instance.IsPlayerRedTurn)
+            if (GameManager.Instance.IsPlayerRedTurn)
             {
-                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, true))
+                if (!PlayerStatic.CheckIsUnitArmy(uniTouch, true))
                 {
                     return false;
                 }
             }
             else
             {
-                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, false))
+                if (!PlayerStatic.CheckIsUnitArmy(uniTouch, false))
                 {
                     return false;
                 }
             }
 
 
-            if(GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
+            if (GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
             {
                 return false;
             }
 
             bool isDeactivate = false;
-            foreach(MYthsAndSteel_Enum.TypeUnite type in PlayerScript.Instance.DisactivateUnitType)
+            foreach (MYthsAndSteel_Enum.TypeUnite type in PlayerScript.Instance.DisactivateUnitType)
             {
-                if(uniTouch.UnitSO.typeUnite == type)
+                if (uniTouch.UnitSO.typeUnite == type)
                 {
                     isDeactivate = true;
                 }
             }
 
-            if(isDeactivate)
+            if (isDeactivate)
             {
                 return false;
             }

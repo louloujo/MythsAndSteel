@@ -13,7 +13,6 @@ public class UnitScript : MonoBehaviour
     [SerializeField] Unit_SO _unitSO;
     public Unit_SO UnitSO => _unitSO;
 
-
     [Header("Stats en jeu de l'unité")]
     //Vie actuelle
     [SerializeField] int _life;
@@ -48,8 +47,8 @@ public class UnitScript : MonoBehaviour
     [SerializeField] int _DamageMaximum;
     public int DamageMaximum => _DamageMaximum;
 
-
-
+    [SerializeField] private List<MYthsAndSteel_Enum.TypeUnite> _typeUnite;
+    public List<MYthsAndSteel_Enum.TypeUnite> TypeUnite => _typeUnite;
 
     [Header("Stats non nécéssaire")]
     // Déplacement réstant de l'unité durant cette activation
@@ -119,6 +118,8 @@ public class UnitScript : MonoBehaviour
     //Chemin que l'unité va emprunter
     [SerializeField] List<int> _pathtomake;
     public List<int> Pathtomake => _pathtomake;
+
+
 
     //A CHANGER AU BON ENDROIT QUAND CE SERA FAIT
     //list qui va chercher les text enfant dans la hiérarchie pour l'UI

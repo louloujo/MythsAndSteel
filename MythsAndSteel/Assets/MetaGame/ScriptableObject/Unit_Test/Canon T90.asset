@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnitName: Canon T90
   Description: Cette unite ne sert a rien
-  typeUnite: 2
+  typeUnite: 4
   LifeMax: 5
   ShieldMax: 2
   AttackRange: 1

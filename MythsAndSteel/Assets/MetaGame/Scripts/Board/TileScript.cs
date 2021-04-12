@@ -35,7 +35,11 @@ public class TileScript : MonoBehaviour
 
     //Liste des effets de terrain sur chaque tile
     [SerializeField] private List<MYthsAndSteel_Enum.TerrainType> _terrainEffectList = new List<MYthsAndSteel_Enum.TerrainType>();
-    public List<MYthsAndSteel_Enum.TerrainType> TerrainEffectList => _terrainEffectList;
+    public List<MYthsAndSteel_Enum.TerrainType> TerrainEffectList => _terrainEffectList;    
+    
+    //Liste des effets de terrain sur chaque tile
+    [SerializeField] private List<MYthsAndSteel_Enum.EffetProg> _effetProg = new List<MYthsAndSteel_Enum.EffetProg>();
+    public List<MYthsAndSteel_Enum.EffetProg> EffetProg => _effetProg;
 
 
     private void Start(){

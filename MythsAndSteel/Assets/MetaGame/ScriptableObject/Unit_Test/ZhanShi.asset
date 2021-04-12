@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnitName: Zhan Shi
   Description: Cette unite ne sert a rien
-  typeUnite: 0
+  typeUnite: 4
   LifeMax: 3
   ShieldMax: 2
   AttackRange: 3
