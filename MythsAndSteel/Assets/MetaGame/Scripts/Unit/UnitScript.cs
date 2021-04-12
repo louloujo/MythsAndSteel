@@ -291,7 +291,7 @@ public class UnitScript : MonoBehaviour
             hasUseActivation = true;
             PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
         }
-        else
+        else if(!UnitSO.IsInRedArmy && !hasUseActivation)
         {
             hasUseActivation = true;
             PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
