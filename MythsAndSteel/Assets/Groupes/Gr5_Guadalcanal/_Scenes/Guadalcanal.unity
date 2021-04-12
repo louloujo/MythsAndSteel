@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1293,11 +1293,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d0ccbd34f43674f86c1fc4019bd7f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _actualTurnNumber: 0
+  _actualTurnNumber: 1
   _isPlayerRedStarting: 0
   _isPlayerRedTurn: 1
   _isInTurn: 0
-  _actualTurnPhase: 2
+  _actualTurnPhase: 0
   _eventCardSO: {fileID: 11400000, guid: 955303dc40a1fa54984cef9072aef4ad, type: 2}
   _managerSO: {fileID: 11400000, guid: 915a645e0a8638b4d8f4a6522da5cc44, type: 2}
   _chooseUnitForEvent: 0
@@ -1564,6 +1564,7 @@ MonoBehaviour:
   _creationCost: 2
   _moveLeft: 2
   _actualTileld: 1
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
@@ -5093,6 +5094,7 @@ MonoBehaviour:
   _creationCost: 0
   _moveLeft: 2
   _actualTileld: 52
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
@@ -5294,6 +5296,7 @@ MonoBehaviour:
   _creationCost: 0
   _moveLeft: 2
   _actualTileld: 79
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
@@ -5804,6 +5807,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _redPlayerPanelOrgone: {fileID: 193625373}
   _bluePlayerPanelOrgone: {fileID: 2013598115}
+  _redPlayerCharge: []
+  _bluePlayerCharge: []
   _selected: 0
   _redPlayerZone: {fileID: 181898282}
   _bluePlayerZone: {fileID: 1467254372}
@@ -5987,6 +5992,7 @@ MonoBehaviour:
   _creationCost: 0
   _moveLeft: 2
   _actualTileld: 43
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
@@ -6104,6 +6110,7 @@ MonoBehaviour:
   _creationCost: 0
   _moveLeft: 2
   _actualTileld: 71
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
@@ -6251,6 +6258,7 @@ MonoBehaviour:
   _creationCost: 0
   _moveLeft: 2
   _actualTileld: 7
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
@@ -8435,6 +8443,9 @@ MonoBehaviour:
   escapeEvent: 27
   MoreInfoUnit: 304
   MakeAction: 13
+  SkipPhase: 32
+  _timeToWaitForSkipPhase: 1
+  SkipPhaseStartWidth: 0
 --- !u!1 &724474768
 GameObject:
   m_ObjectHideFlags: 0
@@ -10549,48 +10560,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f146484afa44c864d8bf555687e6d9f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlueCartesActivation:
-  - valeurActivation: 22
-    IndexCarteActivation: 0
-    inputCarteActivation: 117
-  - valeurActivation: 23
-    IndexCarteActivation: 1
-    inputCarteActivation: 105
-  - valeurActivation: 26
-    IndexCarteActivation: 2
-    inputCarteActivation: 111
-  - valeurActivation: 28
-    IndexCarteActivation: 3
-    inputCarteActivation: 112
-  - valeurActivation: 29
-    IndexCarteActivation: 4
-    inputCarteActivation: 106
-  - valeurActivation: 30
-    IndexCarteActivation: 5
-    inputCarteActivation: 107
-  - valeurActivation: 34
-    IndexCarteActivation: 6
-    inputCarteActivation: 108
-  - valeurActivation: 35
-    IndexCarteActivation: 7
-    inputCarteActivation: 109
-  - valeurActivation: 37
-    IndexCarteActivation: 8
-    inputCarteActivation: 44
-  - valeurActivation: 42
-    IndexCarteActivation: 9
-    inputCarteActivation: 46
-  - valeurActivation: 43
-    IndexCarteActivation: 10
-    inputCarteActivation: 47
-  - valeurActivation: 46
-    IndexCarteActivation: 11
-    inputCarteActivation: 33
-  RedPlayerPanel: {fileID: 954388457}
-  J1CarteVerif:
-    valeurActivation: 
-    IndexCarteActivation: 0
-    inputCarteActivation: 0
   RedCartesActivation:
   - valeurActivation: 21
     IndexCarteActivation: 0
@@ -10628,7 +10597,45 @@ MonoBehaviour:
   - valeurActivation: 45
     IndexCarteActivation: 11
     inputCarteActivation: 118
-  BluePlayerPanel: {fileID: 1658831362}
+  RedPlayerPanel: {fileID: 1658831362}
+  BlueCartesActivation:
+  - valeurActivation: 22
+    IndexCarteActivation: 0
+    inputCarteActivation: 117
+  - valeurActivation: 23
+    IndexCarteActivation: 1
+    inputCarteActivation: 105
+  - valeurActivation: 26
+    IndexCarteActivation: 2
+    inputCarteActivation: 111
+  - valeurActivation: 28
+    IndexCarteActivation: 3
+    inputCarteActivation: 112
+  - valeurActivation: 29
+    IndexCarteActivation: 4
+    inputCarteActivation: 106
+  - valeurActivation: 30
+    IndexCarteActivation: 5
+    inputCarteActivation: 107
+  - valeurActivation: 34
+    IndexCarteActivation: 6
+    inputCarteActivation: 108
+  - valeurActivation: 35
+    IndexCarteActivation: 7
+    inputCarteActivation: 109
+  - valeurActivation: 37
+    IndexCarteActivation: 8
+    inputCarteActivation: 44
+  - valeurActivation: 42
+    IndexCarteActivation: 9
+    inputCarteActivation: 46
+  - valeurActivation: 43
+    IndexCarteActivation: 10
+    inputCarteActivation: 47
+  - valeurActivation: 46
+    IndexCarteActivation: 11
+    inputCarteActivation: 33
+  BluePlayerPanel: {fileID: 954388457}
   _result: {fileID: 1584021893}
 --- !u!114 &918848098 stripped
 MonoBehaviour:
@@ -11098,7 +11105,7 @@ GameObject:
   - component: {fileID: 954388458}
   - component: {fileID: 954388459}
   m_Layer: 5
-  m_Name: ActivationRedPlayer
+  m_Name: ActivationBluePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12463,6 +12470,7 @@ MonoBehaviour:
   _creationCost: 2
   _moveLeft: 2
   _actualTileld: 18
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
@@ -12917,6 +12925,7 @@ MonoBehaviour:
   _creationCost: 0
   _moveLeft: 2
   _actualTileld: 36
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
@@ -15213,6 +15222,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1775265082}
   - {fileID: 1511885960}
   m_Father: {fileID: 1658327342}
   m_RootOrder: 0
@@ -15554,6 +15564,7 @@ MonoBehaviour:
   _creationCost: 0
   _moveLeft: 2
   _actualTileld: 44
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
@@ -16931,8 +16942,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1507397948}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 14.751406, y: 14.751406, z: 14.751406}
+  m_LocalPosition: {x: -0.0387, y: 0.06, z: 0}
+  m_LocalScale: {x: 14.887397, y: 14.751406, z: 14.751406}
   m_Children: []
   m_Father: {fileID: 2131134513}
   m_RootOrder: 0
@@ -17018,7 +17029,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1318259197}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -17508,6 +17519,7 @@ MonoBehaviour:
   _creationCost: 0
   _moveLeft: 3
   _actualTileld: 45
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
@@ -18868,6 +18880,7 @@ MonoBehaviour:
   _creationCost: 0
   _moveLeft: 2
   _actualTileld: 63
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
@@ -19688,7 +19701,7 @@ GameObject:
   - component: {fileID: 1658831363}
   - component: {fileID: 1658831364}
   m_Layer: 5
-  m_Name: ActivationBluePlayer
+  m_Name: ActivationRedPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20454,6 +20467,7 @@ MonoBehaviour:
   _creationCost: 2
   _moveLeft: 2
   _actualTileld: 73
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
@@ -21207,6 +21221,7 @@ MonoBehaviour:
   _creationCost: 0
   _moveLeft: 2
   _actualTileld: 27
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
@@ -21263,6 +21278,81 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1775265081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1775265082}
+  - component: {fileID: 1775265084}
+  - component: {fileID: 1775265083}
+  m_Layer: 5
+  m_Name: Image (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1775265082
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775265081}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1318259197}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.00048828, y: -0.12543}
+  m_SizeDelta: {x: 242, y: 121.75}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1775265083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775265081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.57254905}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 3a2034a0c02cc7141bbd3147ee932ac3, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1775265084
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775265081}
+  m_CullTransparentMesh: 1
 --- !u!1 &1780806621
 GameObject:
   m_ObjectHideFlags: 0
@@ -22578,6 +22668,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _switchPhaseObject: {fileID: 4950479300666342195, guid: 111b4523566bf904e984f7c9843eb641, type: 3}
   _canvasActivation: {fileID: 2125945372}
+  _skipPhaseImage: {fileID: 1775265083}
+  _backgroundActivation: {fileID: 1964176526}
   _canvasTurnPhase: {fileID: 1658327341}
   _buttonNextPhase: {fileID: 1318259196}
   _activationUnitPanel: {fileID: 1645117453}
@@ -22789,40 +22881,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 224d2e037979b9b4db202c5ca6dc3fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardObtain: 
+  _ArmyRedWinAtTheEnd: 0
   _redPlayerInfos:
-    EventsCardNumberLeft: 0
-    OrgoneValue: 0
-    Ressource: 0
+    ArmyName: 
     ActivationLeft: 2
     ActivationCardValue: 0
-    GoalCapturePointsNumber: 0
+    OrgoneValue: 0
     OrgonePowerLeft: 0
     LastKnownOrgoneValue: 0
     TileCentreZoneOrgone: {fileID: 1786400988}
-    ArmyName: 
-    HasCreateUnit: 0
-    ActivationCardChoose: 0
-    IsMovingOrgoneArea: 0
-    HasMoveOrgoneArea: 0
-  _bluePlayerInfos:
-    EventsCardNumberLeft: 0
-    OrgoneValue: 0
     Ressource: 0
+    GoalCapturePointsNumber: 0
+    HasCreateUnit: 0
+    dontTouchThis: 0
+  _bluePlayerInfos:
+    ArmyName: 
     ActivationLeft: 0
     ActivationCardValue: 0
-    GoalCapturePointsNumber: 0
+    OrgoneValue: 0
     OrgonePowerLeft: 0
     LastKnownOrgoneValue: 0
     TileCentreZoneOrgone: {fileID: 1321010384}
-    ArmyName: 
+    Ressource: 0
+    GoalCapturePointsNumber: 0
     HasCreateUnit: 0
-    ActivationCardChoose: 0
-    IsMovingOrgoneArea: 0
-    HasMoveOrgoneArea: 0
+    dontTouchThis: 0
   _unitRef: {fileID: 1890824753}
   DisactivateUnitType: 
-  _ArmyRedWinAtTheEnd: 0
   _eventCardList:
     _eventSO: {fileID: 11400000, guid: 955303dc40a1fa54984cef9072aef4ad, type: 2}
     _eventCardRedPlayer: 150000001600000017000000
@@ -24947,6 +25032,7 @@ MonoBehaviour:
   _creationCost: 2
   _moveLeft: 2
   _actualTileld: 28
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
@@ -25262,6 +25348,7 @@ MonoBehaviour:
   _creationCost: 0
   _moveLeft: 2
   _actualTileld: 9
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
@@ -25379,6 +25466,7 @@ MonoBehaviour:
   _creationCost: 0
   _moveLeft: 2
   _actualTileld: 53
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
@@ -25822,6 +25910,7 @@ MonoBehaviour:
   _creationCost: 0
   _moveLeft: 2
   _actualTileld: 26
+  _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
