@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -116,8 +117,8 @@ public class Attaque : MonoSingleton<Attaque>
             Debug.Log("Damage : " + null);
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
         }
+        AnimationUpdate();
     }
-
     void UnitAttackTwoRanges(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, int DiceResult)
     {
         if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
@@ -135,6 +136,62 @@ public class Attaque : MonoSingleton<Attaque>
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
             Debug.Log("Damage : " + null);
         }
+        AnimationUpdate();
+    }
+    void AnimationUpdate()
+    {
+        GameObject ActualUnit = RaycastManager.Instance.ActualUnitSelected;
+        GameObject ActualEnemy = selectedUnitEnnemy;
+
+        float X = ActualEnemy.transform.position.x - ActualUnit.transform.position.x; 
+        float Y = ActualEnemy.transform.position.y - ActualUnit.transform.position.y;
+
+        if (X >= 0)
+        {
+            if (Mathf.Abs(X) > Mathf.Abs(Y))
+            {
+                ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 1); //right
+                ActualUnit.GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else if (Mathf.Abs(X) <= Mathf.Abs(Y))
+            {
+                if (Y > 0)
+                {
+                    ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 2); // up
+                }
+                else if (Y < 0)
+                {
+                    ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 3); // down
+                }
+            }
+        }
+        if (X < 0)
+        {
+            if (Mathf.Abs(X) > Mathf.Abs(Y))
+            {
+                ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 1); // left
+                ActualUnit.GetComponent<SpriteRenderer>().flipX = false; 
+            }
+            else if (Mathf.Abs(X) <= Mathf.Abs(Y))
+            {
+                if (Y > 0)
+                {
+                    ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 2); // up
+                }
+                else if (Y < 0)
+                {
+                    ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 3); // down
+                }
+            }
+        }
+        ActualUnit.GetComponent<UnitScript>().Animation.SetBool("Attack", true);
+        StartCoroutine(AnimationWait(ActualUnit.GetComponent<UnitScript>().Animation, "Attack"));
+    }
+
+    public IEnumerator AnimationWait(Animator AnimToWait, string BoolName)
+    {
+        yield return new WaitForSeconds(AnimToWait.runtimeAnimatorController.animationClips[0].length);
+        AnimToWait.SetBool(BoolName, false);
     }
 
     void ChooseAttackType(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, int DiceResult)

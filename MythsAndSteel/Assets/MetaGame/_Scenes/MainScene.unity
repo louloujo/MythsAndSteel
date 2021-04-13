@@ -1264,6 +1264,8 @@ MonoBehaviour:
   _tileChooseList: []
   _redPlayerUseEvent: 0
   "IllusionStrat\xE9gique": 0
+  _activationPhase: {fileID: 915835425}
+  IsCheckingOrgone: 0
 --- !u!1 &99837085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1520,6 +1522,7 @@ GameObject:
   - component: {fileID: 108961819}
   - component: {fileID: 108961821}
   - component: {fileID: 108961820}
+  - component: {fileID: 108961822}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9)"
   m_TagString: Untagged
@@ -1576,6 +1579,7 @@ MonoBehaviour:
   _isActivationDone: 0
   _pathtomake: 
   _unitStatus: 
+  _Animation: {fileID: 108961822}
 --- !u!212 &108961821
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1616,7 +1620,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 4db7ba87ae2244b48ae7d001e0ec4f84, type: 3}
+  m_Sprite: {fileID: 5601724313049997956, guid: a50948e13bd96eb4099118ef8c1813aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1627,6 +1631,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &108961822
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108961818}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d997174087e14547ababba79fce4f45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &109066898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2779,7 +2802,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181898282}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.2397, y: -6.6803, z: -2.8692002}
+  m_LocalPosition: {x: -2.35, y: 2.17, z: -2.8692002}
   m_LocalScale: {x: 11.42, y: 11.42, z: 12.974343}
   m_Children:
   - {fileID: 35471672}
@@ -2851,7 +2874,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speedTiles: 29
   _tilesInRange: []
-  _centerOrgoneArea: {fileID: 1786400988}
+  _centerOrgoneArea: {fileID: 1546679381}
   _targetTile: {fileID: 0}
   _redPlayerZone: 1
   _hasMoveOrgoneArea: 0
@@ -3018,7 +3041,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3.7(?)
+  m_Text: 3.7(N)
 --- !u!222 &188362408
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3615,6 +3638,10 @@ PrefabInstance:
       propertyPath: _line
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: _unit
+      value: 
+      objectReference: {fileID: 549253556}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _tileId
       value: 41
@@ -5585,7 +5612,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 4.3(/)
+  m_Text: 4.3(.)
 --- !u!222 &483082259
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5957,7 +5984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 549253556}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.83, y: -6.32, z: 0}
+  m_LocalPosition: {x: -0.68, y: 0.3, z: 0}
   m_LocalScale: {x: 2.3996048, y: 2.3996048, z: 2.3996048}
   m_Children:
   - {fileID: 1936920259}
@@ -5991,13 +6018,14 @@ MonoBehaviour:
   MoveSpeedBonus: 0
   _creationCost: 2
   _moveLeft: 4
-  _actualTileld: 11
+  _actualTileld: 41
   _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
   _pathtomake: 
   _unitStatus: 
+  _Animation: {fileID: 0}
 --- !u!212 &549253559
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8001,8 +8029,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700260120}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.325, z: 0}
-  m_LocalScale: {x: 0.83, y: 0.39969686, z: 0.83}
+  m_LocalPosition: {x: 0.10400001, y: -0.4079996, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.25, z: 0.83}
   m_Children: []
   m_Father: {fileID: 827471366}
   m_RootOrder: 0
@@ -8424,7 +8452,7 @@ MonoBehaviour:
   MoreInfoUnit: 304
   MakeAction: 13
   SkipPhase: 32
-  _timeToWaitForSkipPhase: 0.375
+  _timeToWaitForSkipPhase: 0.275
   SkipPhaseStartWidth: 242
 --- !u!1 &724474768
 GameObject:
@@ -10352,6 +10380,7 @@ GameObject:
   - component: {fileID: 827471366}
   - component: {fileID: 827471368}
   - component: {fileID: 827471367}
+  - component: {fileID: 827471369}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9) 4"
   m_TagString: Untagged
@@ -10408,6 +10437,7 @@ MonoBehaviour:
   _isActivationDone: 0
   _pathtomake: 
   _unitStatus: 
+  _Animation: {fileID: 827471369}
 --- !u!212 &827471368
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10448,7 +10478,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 4db7ba87ae2244b48ae7d001e0ec4f84, type: 3}
+  m_Sprite: {fileID: 5601724313049997956, guid: a50948e13bd96eb4099118ef8c1813aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -10459,6 +10489,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &827471369
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827471365}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d997174087e14547ababba79fce4f45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &839524621
 GameObject:
   m_ObjectHideFlags: 0
@@ -10608,7 +10657,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 4.6(!)
+  m_Text: 4.6(/)
 --- !u!222 &839812786
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10879,8 +10928,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900559528}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.325, z: 0}
-  m_LocalScale: {x: 0.83, y: 0.39969686, z: 0.83}
+  m_LocalPosition: {x: 0.10400001, y: -0.4079996, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.25, z: 0.83}
   m_Children: []
   m_Father: {fileID: 1710207925}
   m_RootOrder: 0
@@ -11178,16 +11227,16 @@ MonoBehaviour:
     inputCarteActivation: 109
   - valeurActivation: 37
     IndexCarteActivation: 8
-    inputCarteActivation: 44
+    inputCarteActivation: 110
   - valeurActivation: 42
     IndexCarteActivation: 9
-    inputCarteActivation: 46
+    inputCarteActivation: 44
   - valeurActivation: 43
     IndexCarteActivation: 10
-    inputCarteActivation: 47
+    inputCarteActivation: 46
   - valeurActivation: 46
     IndexCarteActivation: 11
-    inputCarteActivation: 33
+    inputCarteActivation: 47
   BluePlayerPanel: {fileID: 954388457}
   _result: {fileID: 1584021893}
 --- !u!114 &918848098 stripped
@@ -14229,6 +14278,7 @@ GameObject:
   - component: {fileID: 1204031600}
   - component: {fileID: 1204031602}
   - component: {fileID: 1204031601}
+  - component: {fileID: 1204031603}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9) 3"
   m_TagString: Untagged
@@ -14285,6 +14335,7 @@ MonoBehaviour:
   _isActivationDone: 0
   _pathtomake: 
   _unitStatus: 
+  _Animation: {fileID: 1204031603}
 --- !u!212 &1204031602
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14325,7 +14376,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 4db7ba87ae2244b48ae7d001e0ec4f84, type: 3}
+  m_Sprite: {fileID: 5601724313049997956, guid: a50948e13bd96eb4099118ef8c1813aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -14336,6 +14387,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1204031603
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204031599}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d997174087e14547ababba79fce4f45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1206416263
 GameObject:
   m_ObjectHideFlags: 0
@@ -15280,8 +15350,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227325671}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.325, z: 0}
-  m_LocalScale: {x: 0.83, y: 0.39969686, z: 0.83}
+  m_LocalPosition: {x: 0.10400001, y: -0.4079996, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.25, z: 0.83}
   m_Children: []
   m_Father: {fileID: 1691159586}
   m_RootOrder: 0
@@ -15651,6 +15721,7 @@ GameObject:
   - component: {fileID: 1264806017}
   - component: {fileID: 1264806019}
   - component: {fileID: 1264806018}
+  - component: {fileID: 1264806020}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9) 5"
   m_TagString: Untagged
@@ -15707,6 +15778,7 @@ MonoBehaviour:
   _isActivationDone: 0
   _pathtomake: 
   _unitStatus: 
+  _Animation: {fileID: 1264806020}
 --- !u!212 &1264806019
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15747,7 +15819,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 4db7ba87ae2244b48ae7d001e0ec4f84, type: 3}
+  m_Sprite: {fileID: 5601724313049997956, guid: a50948e13bd96eb4099118ef8c1813aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -15758,6 +15830,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1264806020
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264806016}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d997174087e14547ababba79fce4f45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1289587992
 GameObject:
   m_ObjectHideFlags: 0
@@ -16133,7 +16224,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 96260005}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ChangePhase
+        m_MethodName: CliCToChangePhase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16254,7 +16345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.data[0]
@@ -16270,7 +16361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.data[3]
-      value: 18
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_Name
@@ -17229,8 +17320,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451984413}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.325, z: 0}
-  m_LocalScale: {x: 0.83, y: 0.39969686, z: 0.83}
+  m_LocalPosition: {x: 0.10400001, y: -0.408, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.25, z: 0.83}
   m_Children: []
   m_Father: {fileID: 1204031600}
   m_RootOrder: 0
@@ -18421,7 +18512,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.data[0]
@@ -18429,7 +18520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.data[1]
-      value: 23
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_Name
@@ -19005,6 +19096,10 @@ PrefabInstance:
       propertyPath: _line
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: _unit
+      value: 
+      objectReference: {fileID: 1691159585}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _tileId
       value: 58
@@ -20253,7 +20348,7 @@ PrefabInstance:
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _unit
       value: 
-      objectReference: {fileID: 549253556}
+      objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _tileId
       value: 16
@@ -20628,8 +20723,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683760936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.325, z: 0}
-  m_LocalScale: {x: 0.83, y: 0.39969686, z: 0.83}
+  m_LocalPosition: {x: 0.104, y: -0.408, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.25, z: 0.83}
   m_Children: []
   m_Father: {fileID: 108961819}
   m_RootOrder: 0
@@ -20755,7 +20850,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 4.2(;)
+  m_Text: 4.2(?)
 --- !u!222 &1685613487
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20775,6 +20870,7 @@ GameObject:
   - component: {fileID: 1691159586}
   - component: {fileID: 1691159588}
   - component: {fileID: 1691159587}
+  - component: {fileID: 1691159589}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9) 2"
   m_TagString: Untagged
@@ -20790,7 +20886,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691159585}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7, y: 2.58, z: 0}
+  m_LocalPosition: {x: -2.88, y: 4.89, z: 0}
   m_LocalScale: {x: 2.3996048, y: 2.3996048, z: 2.3996048}
   m_Children:
   - {fileID: 1227325672}
@@ -20824,13 +20920,14 @@ MonoBehaviour:
   MoveSpeedBonus: 0
   _creationCost: 4
   _moveLeft: 3
-  _actualTileld: 50
+  _actualTileld: 58
   _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
   _pathtomake: 
   _unitStatus: 
+  _Animation: {fileID: 1691159589}
 --- !u!212 &1691159588
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -20871,7 +20968,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 4db7ba87ae2244b48ae7d001e0ec4f84, type: 3}
+  m_Sprite: {fileID: 5601724313049997956, guid: a50948e13bd96eb4099118ef8c1813aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -20882,6 +20979,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1691159589
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691159585}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d997174087e14547ababba79fce4f45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1710207924
 GameObject:
   m_ObjectHideFlags: 0
@@ -20893,6 +21009,7 @@ GameObject:
   - component: {fileID: 1710207925}
   - component: {fileID: 1710207927}
   - component: {fileID: 1710207926}
+  - component: {fileID: 1710207928}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9) 6"
   m_TagString: Untagged
@@ -20949,6 +21066,7 @@ MonoBehaviour:
   _isActivationDone: 0
   _pathtomake: 
   _unitStatus: 
+  _Animation: {fileID: 1710207928}
 --- !u!212 &1710207927
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -20989,7 +21107,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 4db7ba87ae2244b48ae7d001e0ec4f84, type: 3}
+  m_Sprite: {fileID: 5601724313049997956, guid: a50948e13bd96eb4099118ef8c1813aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -21000,6 +21118,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1710207928
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710207924}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d997174087e14547ababba79fce4f45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1714259869
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21214,8 +21351,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742522269}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.325, z: 0}
-  m_LocalScale: {x: 0.83, y: 0.39969686, z: 0.83}
+  m_LocalPosition: {x: 0.10400001, y: -0.4079996, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.25, z: 0.83}
   m_Children: []
   m_Father: {fileID: 1264806017}
   m_RootOrder: 0
@@ -23006,14 +23143,19 @@ MonoBehaviour:
   _activationUnitPanel: {fileID: 1645117453}
   _eventCardObjectRed: {fileID: 5249351300956634737, guid: 7b4e07eb63565d04b8e25cd06fad29ca, type: 3}
   _eventCardObjectBlue: {fileID: 8817809928786969543, guid: 3b5accca611a0e54a95baa847cfbd3dd, type: 3}
-  _activateButtonSprite: {fileID: 21300000, guid: b5e858f3874632047b780f629987714d, type: 3}
-  _desactivateButtonSprite: {fileID: 21300000, guid: 5acbf39bacaea364ba40283a7670d705, type: 3}
-  _buttonEventRedPlayer:
-    _upButton: {fileID: 1601503557}
-    _downButton: {fileID: 1785683546}
+  _flecheSpriteRef:
+    _redArrowUp: {fileID: 21300000, guid: 8cebf809470bb6d4eb090c3267bc51f8, type: 3}
+    _redArrowDown: {fileID: 21300000, guid: 2102bf759da0a084797f8a09ad9cca70, type: 3}
+    _blueArrowUp: {fileID: 21300000, guid: 1ec510790d352ab439381c62d23a02e1, type: 3}
+    _blueArrowDown: {fileID: 21300000, guid: 1ae046eeffebd44478fe41c9ff1ebe9b, type: 3}
+    _grisArrowUp: {fileID: 21300000, guid: d8998de639d437643a9a550aa494e9d8, type: 3}
+    _grisArrowDown: {fileID: 21300000, guid: af4b8f00a230b8e4bb7b182480878b79, type: 3}
   _buttonEventBluePlayer:
     _upButton: {fileID: 824706299}
     _downButton: {fileID: 2117515735}
+  _buttonEventRedPlayer:
+    _upButton: {fileID: 1601503557}
+    _downButton: {fileID: 1785683546}
   _redPlayerEventtransf: {fileID: 1583412802}
   _bluePlayerEventtransf: {fileID: 1857560385}
   _redEventDowntrans: {fileID: 1820718439}
@@ -23081,7 +23223,7 @@ MonoBehaviour:
   _shiftUI:
   - {fileID: 316731139}
   - {fileID: 85159508}
-  _timeToWait: 0.5
+  _timeToWait: 0.25
   _offsetXActivationMenu: 2
   _offsetYActivationMenu: 0
   _offsetXMouseOver: 1.5
@@ -23217,10 +23359,10 @@ MonoBehaviour:
     ArmyName: JAPON
     ActivationLeft: 0
     ActivationCardValue: 0
-    OrgoneValue: 0
+    OrgoneValue: 4
     OrgonePowerLeft: 0
     LastKnownOrgoneValue: 0
-    TileCentreZoneOrgone: {fileID: 1786400988}
+    TileCentreZoneOrgone: {fileID: 1546679381}
     Ressource: 0
     GoalCapturePointsNumber: 0
     HasCreateUnit: 0
@@ -23229,7 +23371,7 @@ MonoBehaviour:
     ArmyName: CHINE
     ActivationLeft: 0
     ActivationCardValue: 0
-    OrgoneValue: 0
+    OrgoneValue: 4
     OrgonePowerLeft: 0
     LastKnownOrgoneValue: 0
     TileCentreZoneOrgone: {fileID: 1321010384}
@@ -23663,7 +23805,7 @@ PrefabInstance:
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _unit
       value: 
-      objectReference: {fileID: 1691159585}
+      objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _tileId
       value: 50
