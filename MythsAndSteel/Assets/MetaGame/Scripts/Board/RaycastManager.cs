@@ -8,11 +8,6 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     #region Appel de Script
     public MouseCommand _mouseCommand;
     #endregion
-
-    #region A Supprimer => RenfortTest
-    public RenfortPhase _renfortPhase;
-    #endregion
-
     #region Variables
     [Header("INFO DU RAYCAST")]
     //Les layer qui sont détectés par le raycast
@@ -59,7 +54,6 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     public event TileRaycastChange OnTileChanged;
     #endregion Variables
 
-
     private void Start()
     {
         OnTileChanged += RaycastManager_OnTileChanged;
@@ -79,33 +73,6 @@ public class RaycastManager : MonoSingleton<RaycastManager>
 
         //Assigne l'unité si la tile qui est sélectionnée possède une unité
         _unitInTile = _tile != null ? _tile.GetComponent<TileScript>().Unit != null ? _tile.GetComponent<TileScript>().Unit : null : null;
-
-
-        #region A Supprimer => RenfortTest
-        #endregion
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            //Si l'usine de l'Armée Bleu est sélectionnée et c'est le tour du joueur de l'Armée Bleu.
-            if (_tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineJ1) &&
-                !GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
-                || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2))
-            {
-                Debug.Log("c'est moi ?");
-                _mouseCommand.MenuRenfortUI();
-                _renfortPhase.CreateRenfort();
-            }
-
-            //Si l'usine de l'Armée Rouge est sélectionnée et c'est le tour du joueur de l'Armée Rouge.
-            if (_tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineJ2)
-                && GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
-                || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2))
-            {
-                Debug.Log("c'est toi  ?");
-                _mouseCommand.MenuRenfortUI();
-                _renfortPhase.CreateRenfort();
-            }
-        }
 
         //Permet de combiner le Shift et le click gauche de la souris.
         if (_unitInTile == true && GameManager.Instance.IsInTurn && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation){
@@ -140,7 +107,6 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             OnTileChanged();
         }
     }
-
 
     /// <summary>
     /// Quand tu cliques sur une unité
@@ -252,9 +218,9 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     /// <returns></returns>
     bool CanUseUnitWhenClic(UnitScript uniTouch)
     {
-        if (uniTouch.IsActivationDone == false)
+        if(uniTouch.IsActivationDone == false)
         {
-            if (GameManager.Instance.IsPlayerRedTurn)
+            if(GameManager.Instance.IsPlayerRedTurn)
             {
                 if(!PlayerStatic.CheckIsUnitArmy(uniTouch, true) && !uniTouch.UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
                 {
@@ -270,21 +236,21 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             }
 
 
-            if (GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
+            if(GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
             {
                 return false;
             }
 
             bool isDeactivate = false;
-            foreach (MYthsAndSteel_Enum.TypeUnite type in PlayerScript.Instance.DisactivateUnitType)
+            foreach(MYthsAndSteel_Enum.TypeUnite type in PlayerScript.Instance.DisactivateUnitType)
             {
-                if (uniTouch.UnitSO.typeUnite == type)
+                if(uniTouch.UnitSO.typeUnite == type)
                 {
                     isDeactivate = true;
                 }
             }
 
-            if (isDeactivate)
+            if(isDeactivate)
             {
                 return false;
             }

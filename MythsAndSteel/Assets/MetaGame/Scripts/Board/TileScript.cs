@@ -42,11 +42,7 @@ public class TileScript : MonoBehaviour
     [Space(20)]
     //Liste des effets de terrain sur chaque tile
     [SerializeField] private List<MYthsAndSteel_Enum.TerrainType> _terrainEffectList = new List<MYthsAndSteel_Enum.TerrainType>();
-    public List<MYthsAndSteel_Enum.TerrainType> TerrainEffectList => _terrainEffectList;    
-    
-    //Liste des effets de terrain sur chaque tile
-    [SerializeField] private List<MYthsAndSteel_Enum.EffetProg> _effetProg = new List<MYthsAndSteel_Enum.EffetProg>();
-    public List<MYthsAndSteel_Enum.EffetProg> EffetProg => _effetProg;
+    public List<MYthsAndSteel_Enum.TerrainType> TerrainEffectList => _terrainEffectList;
 
     [Header("VARIABLES EFFET DE TERRAIN")]
     [SerializeField] MYthsAndSteel_Enum.Owner _ownerObjectiv = MYthsAndSteel_Enum.Owner.neutral;
