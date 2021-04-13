@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -95,8 +96,8 @@ public class Attaque : MonoSingleton<Attaque>
     {
         firstDiceFloat = Random.Range(1f, 7f);
         secondDiceFloat = Random.Range(1f, 7f);
-        firstDiceInt = (int)firstDiceFloat;
-        secondDiceInt = (int)secondDiceFloat;
+        firstDiceInt = (int)Mathf.Round(firstDiceFloat);
+        secondDiceInt = (int)Mathf.Round(secondDiceInt);
         //DiceResult = firstDiceInt + secondDiceInt + selectedUnit.GetComponent<UnitScript>().DiceBonus;
         DiceResult = firstDiceInt + secondDiceInt;
 
@@ -386,13 +387,11 @@ public class Attaque : MonoSingleton<Attaque>
             _numberRangeMin.x += 1;
             _numberRangeMin.y += 1;
             _numberRangeMax.x += 1;
-            Debug.Log("Error");
         }
 
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
         {
             selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
-            Debug.Log("Error");
         }
 
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Plage, selectedUnit.GetComponent<UnitScript>().ActualTiledId) && selectedUnit.GetComponent<Unit_SO>().typeUnite == MYthsAndSteel_Enum.TypeUnite.Infanterie)
@@ -400,14 +399,20 @@ public class Attaque : MonoSingleton<Attaque>
             _numberRangeMin.x += -2;
             _numberRangeMin.y += -1;
             _numberRangeMax.x += -1;
-            Debug.Log("Error");
         }
 
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
         {
             selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
-            Debug.Log("Error");
         }
+        /*
+        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId) && !PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId) || !PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
+        {
+            _numberRangeMin.x += 2;
+            _numberRangeMin.y += 2;
+            _numberRangeMax.x += 2;
+        }
+        */
     }
 
     public void ApplyAttack()
