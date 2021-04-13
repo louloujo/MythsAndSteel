@@ -386,13 +386,11 @@ public class Attaque : MonoSingleton<Attaque>
             _numberRangeMin.x += 1;
             _numberRangeMin.y += 1;
             _numberRangeMax.x += 1;
-            Debug.Log("Error");
         }
 
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
         {
             selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
-            Debug.Log("Error");
         }
 
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Plage, selectedUnit.GetComponent<UnitScript>().ActualTiledId) && selectedUnit.GetComponent<Unit_SO>().typeUnite == MYthsAndSteel_Enum.TypeUnite.Infanterie)
@@ -400,13 +398,11 @@ public class Attaque : MonoSingleton<Attaque>
             _numberRangeMin.x += -2;
             _numberRangeMin.y += -1;
             _numberRangeMax.x += -1;
-            Debug.Log("Error");
         }
 
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
         {
             selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
-            Debug.Log("Error");
         }
     }
 
