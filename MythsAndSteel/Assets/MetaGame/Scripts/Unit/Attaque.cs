@@ -155,7 +155,7 @@ public class Attaque : MonoSingleton<Attaque>
     /// </summary>
     /// <param name="tileId"></param>
     /// <param name="Range"></param>
-    public void Highlight(int tileId, int Range) 
+    public void Highlight(int tileId, int Range)
     {
         if (Range > 0)
         {
@@ -190,11 +190,11 @@ public class Attaque : MonoSingleton<Attaque>
     /// </summary>
     private void RandomMore()
     {
-        if((GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.dontTouchThis) ||
+        if ((GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.dontTouchThis) ||
         (!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.dontTouchThis))
         {
             DiceResult += 3;
-            if(DiceResult > 12)
+            if (DiceResult > 12)
             {
                 DiceResult = 12;
             }
@@ -204,7 +204,7 @@ public class Attaque : MonoSingleton<Attaque>
     /// <summary>
     /// Vérifie si l'unité selectionné peut attaqué + récupère la portée de l'unité
     /// </summary>
-    public void StartAttackSelectionUnit()  
+    public void StartAttackSelectionUnit()
     {
         GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
 
@@ -213,6 +213,7 @@ public class Attaque : MonoSingleton<Attaque>
             selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
             if (!selectedUnit.GetComponent<UnitScript>()._isActionDone)
             {
+                Debug.Log(selectedUnit);
                 _selected = true;
                 GetStats();
                 StartAttack(TilesManager.Instance.TileList.IndexOf(tileSelected), selectedUnit.GetComponent<UnitScript>().AttackRange + selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
@@ -233,7 +234,7 @@ public class Attaque : MonoSingleton<Attaque>
     /// </summary>
     /// <param name="tileId"></param>
     /// <param name="Range"></param>
-    public void StartAttack(int tileId, int Range) 
+    public void StartAttack(int tileId, int Range)
     {
         if (!_isInAttack)
         {
@@ -250,7 +251,7 @@ public class Attaque : MonoSingleton<Attaque>
     /// <summary>
     /// Arrête l'attaque de l'unité select (UI + possibilité d'attaquer
     /// </summary>
-    public void StopAttack()  
+    public void StopAttack()
     {
         foreach (int Neighbour in newNeighbourId) // Supprime toutes les tiles.
         {
@@ -288,9 +289,8 @@ public class Attaque : MonoSingleton<Attaque>
         GameObject TileSelectedForAttack = TilesManager.Instance.TileList[tileId];
         if (_isInAttack)
         {
-            if (TileSelectedForAttack != null)
+            if (TileSelectedForAttack != null && newNeighbourId.Contains(tileId))
             {
-
                 selectedUnitEnnemy = TileSelectedForAttack.GetComponent<TileScript>().Unit;
                 if (selectedUnitEnnemy != null)
                 {
@@ -322,28 +322,36 @@ public class Attaque : MonoSingleton<Attaque>
         _numberRangeMin.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.y; // Récupération de la Range min - y 
         _numberRangeMax.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.x; // Récupération de la Range min - x
         _numberRangeMax.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.y; // Récupération de la Range min - y
-
+        /*
         // Applique les bonus/malus de terrains
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Bosquet, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
         {
             _numberRangeMin.x += 1;
             _numberRangeMin.y += 1;
             _numberRangeMax.x += 1;
+            Debug.Log("Error");
         }
+
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
         {
             selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
+            Debug.Log("Error");
         }
+
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Plage, selectedUnit.GetComponent<UnitScript>().ActualTiledId) && selectedUnit.GetComponent<Unit_SO>().typeUnite == MYthsAndSteel_Enum.TypeUnite.Infanterie)
         {
             _numberRangeMin.x += -2;
             _numberRangeMin.y += -1;
             _numberRangeMax.x += -1;
+            Debug.Log("Error");
         }
+
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
         {
             selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
+            Debug.Log("Error");
         }
+
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId))
         {
             if (!PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
@@ -353,13 +361,26 @@ public class Attaque : MonoSingleton<Attaque>
                     _numberRangeMin.x += 2;
                     _numberRangeMin.y += 2;
                     _numberRangeMax.x += 2;
+                    Debug.Log("Error");
+                }
+
+                else
+                {
+                    selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 0;
                 }
             }
+
+            else
+            {
+                selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 0;
+            }
         }
+
         else
         {
             selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 0;
         }
+        */
     }
 
     public void ApplyAttack()
