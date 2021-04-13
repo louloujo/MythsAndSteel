@@ -379,7 +379,7 @@ public class Attaque : MonoSingleton<Attaque>
         _numberRangeMin.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.y; // Récupération de la Range min - y 
         _numberRangeMax.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.x; // Récupération de la Range min - x
         _numberRangeMax.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.y; // Récupération de la Range min - y
-        /*
+
         // Applique les bonus/malus de terrains
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Bosquet, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
         {
@@ -408,36 +408,6 @@ public class Attaque : MonoSingleton<Attaque>
             selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
             Debug.Log("Error");
         }
-
-        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId))
-        {
-            if (!PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
-            {
-                if (!PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
-                {
-                    _numberRangeMin.x += 2;
-                    _numberRangeMin.y += 2;
-                    _numberRangeMax.x += 2;
-                    Debug.Log("Error");
-                }
-
-                else
-                {
-                    selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 0;
-                }
-            }
-
-            else
-            {
-                selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 0;
-            }
-        }
-
-        else
-        {
-            selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 0;
-        }
-        */
     }
 
     public void ApplyAttack()
