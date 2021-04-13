@@ -46,21 +46,17 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private GameObject _eventCardObjectBlue = null;
     public GameObject EventCardObjectBlue => _eventCardObjectBlue;
 
-    //Sprite du bouton activé
-    [SerializeField] private Sprite _activateButtonSprite = null;
-    public Sprite ActivateButtonSprite => _activateButtonSprite;
-
     //Sprite du bouton désactivé
-    [SerializeField] private Sprite _desactivateButtonSprite = null;
-    public Sprite DesactivateButtonSprite => _desactivateButtonSprite;
-
-    //Boutons des cartes events du joueur rouge
-    [SerializeField] private ButtonEvent _buttonEventRedPlayer = null;
-    public ButtonEvent ButtonEventRedPlayer => _buttonEventRedPlayer;
+    [SerializeField] private FlecheEvent _flecheSpriteRef = null;
+    public FlecheEvent FlecheSpriteRef => _flecheSpriteRef;
 
     //Boutons des cartes events du joueur bleu
     [SerializeField] private ButtonEvent _buttonEventBluePlayer = null;
     public ButtonEvent ButtonEventBluePlayer => _buttonEventBluePlayer;
+
+    //Boutons des cartes events du joueur bleu
+    [SerializeField] private ButtonEvent _buttonEventRedPlayer = null;
+    public ButtonEvent ButtonEventRedPlayer => _buttonEventRedPlayer;
 
     //Transform des cartes events du joueur rouge
     [SerializeField] private Transform _redPlayerEventtransf = null;
@@ -288,5 +284,19 @@ public class TileTypeClass
     public TextMeshProUGUI Ressources => _ressources;
     [SerializeField] private Animator _uiTiles;
     public Animator UiTiles => _uiTiles;
+}
+
+/// <summary>
+/// Liste des flèches pour les cartes events
+/// </summary>
+[System.Serializable]
+public class FlecheEvent
+{
+    public Sprite _redArrowUp = null;
+    public Sprite _redArrowDown = null;
+    public Sprite _blueArrowUp = null;
+    public Sprite _blueArrowDown = null;
+    public Sprite _grisArrowUp = null;
+    public Sprite _grisArrowDown = null;
 }
 #endregion ClassToRangeList

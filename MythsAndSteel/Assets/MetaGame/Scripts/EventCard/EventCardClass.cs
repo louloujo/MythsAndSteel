@@ -91,11 +91,11 @@ public class EventCardClass : ScriptableObject{
                 ResetEventParentPos(1);
 
                 UpdateEventList(gam, player);
-                UpdateButtonPlayer(UIInstance.Instance.ButtonEventRedPlayer._upButton, UIInstance.Instance.ButtonEventRedPlayer._downButton, false, PlayerScript.Instance.EventCardList._eventGamRedPlayer.Count, _redPlayerPos);
+                UpdateButtonPlayer(UIInstance.Instance.ButtonEventRedPlayer._upButton, UIInstance.Instance.ButtonEventRedPlayer._downButton, false, PlayerScript.Instance.EventCardList._eventGamRedPlayer.Count, _redPlayerPos, player);
             }
             else{
                 UpdateEventList(gam, player);
-                UpdateButtonPlayer(UIInstance.Instance.ButtonEventRedPlayer._upButton, UIInstance.Instance.ButtonEventRedPlayer._downButton, true, PlayerScript.Instance.EventCardList._eventGamRedPlayer.Count, _redPlayerPos);
+                UpdateButtonPlayer(UIInstance.Instance.ButtonEventRedPlayer._upButton, UIInstance.Instance.ButtonEventRedPlayer._downButton, true, PlayerScript.Instance.EventCardList._eventGamRedPlayer.Count, _redPlayerPos, player);
             }
         }
         else if(player == 2)
@@ -104,11 +104,11 @@ public class EventCardClass : ScriptableObject{
                 ResetEventParentPos(2);
 
                 UpdateEventList(gam, player);
-                UpdateButtonPlayer(UIInstance.Instance.ButtonEventBluePlayer._upButton, UIInstance.Instance.ButtonEventBluePlayer._downButton, false, PlayerScript.Instance.EventCardList._eventGamBluePlayer.Count, _bluePlayerPos);
+                UpdateButtonPlayer(UIInstance.Instance.ButtonEventBluePlayer._upButton, UIInstance.Instance.ButtonEventBluePlayer._downButton, false, PlayerScript.Instance.EventCardList._eventGamBluePlayer.Count, _bluePlayerPos, player);
             }
             else{
                 UpdateEventList(gam, player);
-                UpdateButtonPlayer(UIInstance.Instance.ButtonEventBluePlayer._upButton, UIInstance.Instance.ButtonEventBluePlayer._downButton, true, PlayerScript.Instance.EventCardList._eventGamBluePlayer.Count, _bluePlayerPos);
+                UpdateButtonPlayer(UIInstance.Instance.ButtonEventBluePlayer._upButton, UIInstance.Instance.ButtonEventBluePlayer._downButton, true, PlayerScript.Instance.EventCardList._eventGamBluePlayer.Count, _bluePlayerPos, player);
             }
         }
         else{
@@ -153,7 +153,7 @@ public class EventCardClass : ScriptableObject{
                 gam[0].transform.position = UIInstance.Instance.BlueEventDowntrans.position;
 
                 if(gam.Count > 1){
-                    for(int i = 1; i < gam.Count; i++){
+                    for(int i = 1; i < gam.Count; i++){ 
                         gam[i].transform.position = new Vector3(gam[i - 1].transform.position.x,
                                                                 gam[i - 1].transform.position.y - _spaceBetweenTwoEvents * (Screen.height / _baseResolution.y),
                                                                 gam[i - 1].transform.position.z);
@@ -178,10 +178,10 @@ public class EventCardClass : ScriptableObject{
     /// <param name="upButton"></param>
     /// <param name="downButton"></param>
     /// <param name="active"></param>
-    void UpdateButtonPlayer(GameObject upButton, GameObject downButton, bool active, int numberOfCard, int pos){
-        downButton.GetComponent<Image>().sprite = active ? pos == numberOfCard - 3? UIInstance.Instance.DesactivateButtonSprite : UIInstance.Instance.ActivateButtonSprite : UIInstance.Instance.DesactivateButtonSprite;
+    void UpdateButtonPlayer(GameObject upButton, GameObject downButton, bool active, int numberOfCard, int pos, int player){
+        downButton.GetComponent<Image>().sprite = active ? (pos == numberOfCard - 3?  UIInstance.Instance.FlecheSpriteRef._grisArrowDown : (player == 1 ? UIInstance.Instance.FlecheSpriteRef._redArrowDown : UIInstance.Instance.FlecheSpriteRef._blueArrowDown)) : UIInstance.Instance.FlecheSpriteRef._grisArrowDown;
         downButton.GetComponent<Button>().interactable = pos == numberOfCard - 3 ? false : active;
-        upButton.GetComponent<Image>().sprite = active ? pos == 0 ? UIInstance.Instance.DesactivateButtonSprite : UIInstance.Instance.ActivateButtonSprite : UIInstance.Instance.DesactivateButtonSprite;
+        upButton.GetComponent<Image>().sprite = active ? (pos == 0 ? UIInstance.Instance.FlecheSpriteRef._grisArrowUp : (player == 1 ? UIInstance.Instance.FlecheSpriteRef._redArrowUp : UIInstance.Instance.FlecheSpriteRef._blueArrowUp)) : UIInstance.Instance.FlecheSpriteRef._grisArrowUp;
         upButton.GetComponent<Button>().interactable = pos == 0 ? false : active;
     }
 
@@ -237,12 +237,12 @@ public class EventCardClass : ScriptableObject{
         if(player == 1){
             _redPlayerPos--;
             UpdateEventsParentPos(1);
-            UpdateButtonPlayer(UIInstance.Instance.ButtonEventRedPlayer._upButton, UIInstance.Instance.ButtonEventRedPlayer._downButton, true, PlayerScript.Instance.EventCardList._eventGamRedPlayer.Count, _redPlayerPos);
+            UpdateButtonPlayer(UIInstance.Instance.ButtonEventRedPlayer._upButton, UIInstance.Instance.ButtonEventRedPlayer._downButton, true, PlayerScript.Instance.EventCardList._eventGamRedPlayer.Count, _redPlayerPos, player);
         }
         else if(player == 2){
             _bluePlayerPos--;
             UpdateEventsParentPos(2);
-            UpdateButtonPlayer(UIInstance.Instance.ButtonEventBluePlayer._upButton, UIInstance.Instance.ButtonEventBluePlayer._downButton, true, PlayerScript.Instance.EventCardList._eventGamBluePlayer.Count, _bluePlayerPos);
+            UpdateButtonPlayer(UIInstance.Instance.ButtonEventBluePlayer._upButton, UIInstance.Instance.ButtonEventBluePlayer._downButton, true, PlayerScript.Instance.EventCardList._eventGamBluePlayer.Count, _bluePlayerPos, player);
         }
         else{
             Debug.LogError("vous essayez de déplacer les cartes events d'un joueur qui n'existe pas");
@@ -257,12 +257,12 @@ public class EventCardClass : ScriptableObject{
         if(player == 1){
             _redPlayerPos++;
             UpdateEventsParentPos(1);
-            UpdateButtonPlayer(UIInstance.Instance.ButtonEventRedPlayer._upButton, UIInstance.Instance.ButtonEventRedPlayer._downButton, true, PlayerScript.Instance.EventCardList._eventGamRedPlayer.Count, _redPlayerPos);
+            UpdateButtonPlayer(UIInstance.Instance.ButtonEventRedPlayer._upButton, UIInstance.Instance.ButtonEventRedPlayer._downButton, true, PlayerScript.Instance.EventCardList._eventGamRedPlayer.Count, _redPlayerPos, player);
         }
         else if(player == 2){
             _bluePlayerPos++;
             UpdateEventsParentPos(2);
-            UpdateButtonPlayer(UIInstance.Instance.ButtonEventBluePlayer._upButton, UIInstance.Instance.ButtonEventBluePlayer._downButton, true, PlayerScript.Instance.EventCardList._eventGamBluePlayer.Count, _bluePlayerPos);
+            UpdateButtonPlayer(UIInstance.Instance.ButtonEventBluePlayer._upButton, UIInstance.Instance.ButtonEventBluePlayer._downButton, true, PlayerScript.Instance.EventCardList._eventGamBluePlayer.Count, _bluePlayerPos, player);
         }
         else{
             Debug.LogError("vous essayez de déplacer les cartes events d'un joueur qui n'existe pas");

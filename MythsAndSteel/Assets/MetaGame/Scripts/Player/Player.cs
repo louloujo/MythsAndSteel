@@ -6,6 +6,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Player
 {
+    #region Variables
     [Header("ARMY INFO")]
     //nom de l'armée
     public string ArmyName;
@@ -35,6 +36,7 @@ public class Player
     public int GoalCapturePointsNumber; 
 
     public bool HasCreateUnit; //est ce que le joueur a créer une unité durant sont tour
+    #endregion Variables
 
     /// <summary>
     /// Check si l'orgone va exploser
@@ -43,14 +45,68 @@ public class Player
     public bool OrgoneExplose(){
         return OrgoneValue > 5 ? true : false;
     }
-
+    
     /// <summary>
     /// Change la valeur (pos/neg) de la jauge d'orgone.
     /// </summary>
     /// <param name="Value">Valeur positive ou négative.</param>
     public void ChangeOrgone(int Value, int player){
         OrgoneValue += Value;
+
         UpdateOrgoneUI(player);
+
+        Debug.Log(player);
+        
+        if(OrgoneValue >= 5)
+        {
+            List<GameObject> unitList = player == 1 ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer;
+            GameManager.Instance.StartEventModeUnit(4, player == 1 ? true : false, unitList, "Explosion d'orgone", "Êtes-vous sur de vouloir infliger des dégâts à ces unités?");
+            GameManager.Instance._eventCall += GiveDamageToUnitForOrgone;
+            GameManager.Instance._eventCallCancel += CancelOrgone;
+            unitList.Clear();
+        }
+        else
+        {
+            GameManager.Instance.IsCheckingOrgone = false;
+            if(GameManager.Instance._waitToCheckOrgone != null){
+                GameManager.Instance._waitToCheckOrgone();
+            }
+        }
+    }
+
+    /// <summary>
+    /// When Orgone explode
+    /// </summary>
+    void GiveDamageToUnitForOrgone(){
+        UIInstance.Instance.ActivateNextPhaseButton();
+
+        foreach(GameObject unit in GameManager.Instance.UnitChooseList)
+        {
+            unit.GetComponent<UnitScript>().TakeDamage(1);
+        }
+
+        GameManager.Instance.UnitChooseList.Clear();
+        GameManager.Instance._eventCall -= GiveDamageToUnitForOrgone;
+        GameManager.Instance._eventCallCancel -= CancelOrgone;
+
+        OrgoneValue -= 5;
+
+        UpdateOrgoneUI(GameManager.Instance.RedPlayerUseEvent? 1 : 2);
+
+        GameManager.Instance.IsCheckingOrgone = false;
+        if(GameManager.Instance._waitToCheckOrgone != null)
+        {
+            GameManager.Instance._waitToCheckOrgone();
+        }
+    }
+
+    /// <summary>
+    /// Si le joueur appuie sur le bouton annuler 
+    /// </summary>
+    void CancelOrgone(){
+        List<GameObject> unitList = GameManager.Instance.RedPlayerUseEvent? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer;
+        GameManager.Instance.StartEventModeUnit(4, GameManager.Instance.RedPlayerUseEvent, unitList, "Explosion d'orgone", "Êtes-vous sur de vouloir infliger des dégâts à ces unités?");
+        unitList.Clear();
     }
 
     /// <summary>
