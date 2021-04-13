@@ -63,7 +63,6 @@ public class UnitScript : MonoBehaviour
     [SerializeField] int _creationCost;
     public int CreationCost => _creationCost;
 
-
     [Header("------------------- DEPLACEMENT RESTANT -------------------")]
     // Déplacement réstant de l'unité durant cette activation
     [SerializeField] int _moveLeft;
@@ -118,7 +117,6 @@ public class UnitScript : MonoBehaviour
     [SerializeField] List<int> _pathtomake;
     public List<int> Pathtomake => _pathtomake;
 
-
     [Header("------------------- STAUT DE L'UNITE -------------------")]
     //Statut que possède l'unité
     [SerializeField] private List<MYthsAndSteel_Enum.UnitStatut> _unitStatus = new List<MYthsAndSteel_Enum.UnitStatut>();
@@ -127,7 +125,7 @@ public class UnitScript : MonoBehaviour
     bool hasUseActivation = false;
     [SerializeField] private Animator _Animation;
     public Animator Animation => _Animation;
-    
+
     #endregion Variables
 
     private void Update()
