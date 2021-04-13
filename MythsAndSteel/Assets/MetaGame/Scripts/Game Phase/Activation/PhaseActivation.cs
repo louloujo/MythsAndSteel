@@ -28,7 +28,8 @@ public class PhaseActivation : MonoBehaviour{
     List<CarteActivation> J1CartesNonVerif = new List<CarteActivation>();
     private float J1DernièreValeurActivation;
     
-    private bool J1CarteChoisie = false;
+    private bool _j1CarteChoisie = false;
+    public bool J1CarteChoisie => _j1CarteChoisie;
 
     //Variables pour le joueur 2
     //Carte du joueur 2
@@ -43,9 +44,10 @@ public class PhaseActivation : MonoBehaviour{
     List<CarteActivation> J2CartesNonVerif = new List<CarteActivation>();
     private float J2DernièreValeurActivation;
 
-    private bool J2CarteChoisie = false;
-    
-   //Variables communes
+    private bool _j2CarteChoisie = false;
+    public bool J2CarteChoisie => _j2CarteChoisie;
+
+    //Variables communes
     private List<CarteActivation> CarteActivationUtilisée = new List<CarteActivation>();
 
     [SerializeField] private GameObject _result = null;
@@ -65,7 +67,7 @@ public class PhaseActivation : MonoBehaviour{
         if(_canChooseCard)
         {
             //Joueur 1
-            if(!J1CarteChoisie){
+            if(!_j1CarteChoisie){
                 //On vérifie si le joueur 1 choisit sa carte
                 if(J1Verif && Input.GetKeyDown(J1CarteVerif.inputCarteActivation)){
                     foreach(CarteActivation Carteactivations in RedCartesActivation){
@@ -81,7 +83,7 @@ public class PhaseActivation : MonoBehaviour{
                     }
 
                     //Le joueur 1 a choisit sa carte
-                    J1CarteChoisie = true;
+                    _j1CarteChoisie = true;
                     if(CheckIfBothPlayerHasChoose()) ShowResult();
 
                     J1Verif = false;
@@ -139,7 +141,7 @@ public class PhaseActivation : MonoBehaviour{
             }
 
             //Meme principe que pour le joueur 1 mais avec les variables que le joueur 2
-            if(!J2CarteChoisie){
+            if(!_j2CarteChoisie){
                 if(J2Verif && Input.GetKeyDown(J2CarteVerif.inputCarteActivation)){
                     foreach(CarteActivation Carteactivations in BlueCartesActivation){
                         BluePlayerPanel.transform.GetChild(Carteactivations.IndexCarteActivation).GetComponent<Image>().color = new Color(0f, 0f, 1f, 1f);
@@ -154,7 +156,7 @@ public class PhaseActivation : MonoBehaviour{
                     }
 
                     //Le joueur 2 a choisit sa carte
-                    J2CarteChoisie = true;
+                    _j2CarteChoisie = true;
                     if(CheckIfBothPlayerHasChoose()) ShowResult();
 
                     J2Verif = false;
@@ -213,7 +215,7 @@ public class PhaseActivation : MonoBehaviour{
         J1Verif = false;
 
         J1DernièreValeurActivation = 0f;
-        J1CarteChoisie = false;
+        _j1CarteChoisie = false;
 
         //Variables pour le joueur 2
         J2CarteVerif = null;
@@ -223,7 +225,7 @@ public class PhaseActivation : MonoBehaviour{
         J2Verif = false;
 
         J2DernièreValeurActivation = 0f;
-        J2CarteChoisie = false;
+        _j2CarteChoisie = false;
 
         UIInstance.Instance.BackgroundActivation.SetActive(true);
 
@@ -236,7 +238,7 @@ public class PhaseActivation : MonoBehaviour{
     /// <returns></returns>
     public bool CheckIfBothPlayerHasChoose(){
         bool bothHasPlay = false;
-        bothHasPlay = J1CarteChoisie && J2CarteChoisie ? true : false;
+        bothHasPlay = _j1CarteChoisie && _j2CarteChoisie ? true : false;
         return bothHasPlay;
     }
 

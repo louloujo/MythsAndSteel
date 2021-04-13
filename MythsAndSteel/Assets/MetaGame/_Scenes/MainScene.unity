@@ -1264,6 +1264,7 @@ MonoBehaviour:
   _tileChooseList: []
   _redPlayerUseEvent: 0
   "IllusionStrat\xE9gique": 0
+  _activationPhase: {fileID: 915835425}
 --- !u!1 &99837085
 GameObject:
   m_ObjectHideFlags: 0
@@ -3039,7 +3040,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3.7(?)
+  m_Text: 3.7(N)
 --- !u!222 &188362408
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5606,7 +5607,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 4.3(/)
+  m_Text: 4.3(.)
 --- !u!222 &483082259
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10651,7 +10652,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 4.6(!)
+  m_Text: 4.6(/)
 --- !u!222 &839812786
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11221,16 +11222,16 @@ MonoBehaviour:
     inputCarteActivation: 109
   - valeurActivation: 37
     IndexCarteActivation: 8
-    inputCarteActivation: 44
+    inputCarteActivation: 110
   - valeurActivation: 42
     IndexCarteActivation: 9
-    inputCarteActivation: 46
+    inputCarteActivation: 44
   - valeurActivation: 43
     IndexCarteActivation: 10
-    inputCarteActivation: 47
+    inputCarteActivation: 46
   - valeurActivation: 46
     IndexCarteActivation: 11
-    inputCarteActivation: 33
+    inputCarteActivation: 47
   BluePlayerPanel: {fileID: 954388457}
   _result: {fileID: 1584021893}
 --- !u!114 &918848098 stripped
@@ -16218,7 +16219,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 96260005}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ChangePhase
+        m_MethodName: CliCToChangePhase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20840,7 +20841,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 4.2(;)
+  m_Text: 4.2(?)
 --- !u!222 &1685613487
 CanvasRenderer:
   m_ObjectHideFlags: 0

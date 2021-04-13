@@ -388,7 +388,8 @@ public class Mouvement : MonoSingleton<Mouvement>
         _selected = false;
 
         mUnit.GetComponent<UnitScript>().MoveLeft = forceStop ? MoveLeftBase : mUnit.GetComponent<UnitScript>().MoveLeft;
-        mUnit.GetComponent<UnitScript>().checkMovementLeft();
+
+        if(!forceStop) mUnit.GetComponent<UnitScript>().checkMovementLeft();
 
         mUnit = null;
 
@@ -693,6 +694,11 @@ public class Mouvement : MonoSingleton<Mouvement>
         }
     }
 
+    /// <summary>
+    /// Lance l'animation de déplacement de l'unité
+    /// </summary>
+    /// <param name="Unit"></param>
+    /// <param name="EndPos"></param>
     private void AnimationUpdate(GameObject Unit, GameObject EndPos)
     {
         Unit.GetComponent<UnitScript>().Animation.SetFloat("X", EndPos.transform.position.x - Unit.transform.position.x);

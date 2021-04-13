@@ -7,18 +7,19 @@ using UnityEngine.SceneManagement;
 
 public class Campagne : MonoBehaviour
 {
-    int SceneToLoad; //La scène que l'on veut charger (se référer au build settings dans l'onglet file)
-    public Scenario _Scenario; //Scénario Séléctionné et affiché
-    
-    public Sprite[] SpriteMap; //Sprite des map de chaques plateau
+    public MYthsAndSteel_Enum.Scenario _Scenario; //Scénario Séléctionné et affiché
+    [SerializeField] int ScenarioVal = 0;
+    [SerializeField] int spaceBetweenScenario = 0;
         
     [SerializeField] int Unlocked;//Nombre actuelle de niveau débloqué
 
     [Header("Assignations")]
-    public Image ImageScenario; //Affiche La map du scénario actuelle
-    public Text nomDeLaCampagne; //Affiche le nom de la campagne sur le bouton
     public Slider Unlockslider; // Slider qui lontre la progression de dévérouillage
-    public GameObject LockCanvas; //Canvas affiché lorsqu'un niveau n'est pas débloqué
+
+    [SerializeField] private GameObject _buttonLeft = null;
+    [SerializeField] private GameObject _buttonRight = null;
+    [SerializeField] private float _mapSpeed = 0f;
+    [SerializeField] private GameObject _mapTransform = null;
 
     private void Start()
     {
@@ -26,64 +27,77 @@ public class Campagne : MonoBehaviour
         Unlockslider.value = Unlocked;
     }
 
-
-
-    public enum Scenario
-    {
-        Rethel, Shanghai, Stalingrad, Husky, Guadalcanal, ElAlamein, Elsenborn
+    private void Update(){
+        _mapTransform.GetComponent<RectTransform>().localPosition = Vector2.MoveTowards(_mapTransform.GetComponent<RectTransform>().localPosition, new Vector2(-spaceBetweenScenario * (Screen.width / 1920) * ScenarioVal, _mapTransform.GetComponent<RectTransform>().localPosition.y), Time.deltaTime * _mapSpeed);
     }
 
-    public void ChangeScene()
+    /// <summary>
+    /// Permet d'aller à une scène quand on clique sur un bouton
+    /// </summary>
+    public void ChangeScene(int sceneID)
     {
-        if ((int)_Scenario <= Unlocked) //Check si le scénario est débloqué
-        {
-            SceneManager.LoadScene((int)_Scenario + 1);
-        }
-        
+            SceneManager.LoadScene(sceneID);
     }
 
-    public void Decrease() //Fonction boutton pour montrer le scénario précédent
+    /// <summary>
+    /// Fonction boutton pour montrer le scénario précédent
+    /// </summary>
+    public void Decrease() 
     {
-        if((int)_Scenario == 0)
+        int targetValue = ScenarioVal - 1;
+
+        if(targetValue > 0 && targetValue < 6)
         {
-            _Scenario = Scenario.Elsenborn;
-        }
-        else
-        {
+            _buttonRight.GetComponent<Button>().interactable = true;
+            _buttonLeft.GetComponent<Button>().interactable = true;
             _Scenario--;
+            ScenarioVal--;
         }
-
-        Actualise();
-        
+        else if(targetValue == 0)
+        {
+            _buttonRight.GetComponent<Button>().interactable = true;
+            _buttonLeft.GetComponent<Button>().interactable = false;
+            _Scenario--;
+            ScenarioVal--;
+        }
+        else if(targetValue < 0) { }
     }
 
-    public void Increase() //Fonction boutton pour montrer le scénario suivant
+    /// <summary>
+    /// Fonction boutton pour montrer le scénario suivant
+    /// </summary>
+    public void Increase()
     {
-        if ((int)_Scenario == 6)
+        int targetValue = ScenarioVal+1;
+
+        if(targetValue > 0 && targetValue < 6)
         {
-            _Scenario = Scenario.Rethel;
-        }
-        else
-        {
+            _buttonRight.GetComponent<Button>().interactable = true;
+            _buttonLeft.GetComponent<Button>().interactable = true;
             _Scenario++;
+            ScenarioVal++;
         }
+        else if(targetValue == 6)
+        {
+            _buttonRight.GetComponent<Button>().interactable = false;
+            _buttonLeft.GetComponent<Button>().interactable = true;
+            _Scenario++;
+            ScenarioVal++;
+        }
+        else if(targetValue > 6){}
 
-        Actualise();
+        if(ScenarioVal == targetValue){
+            if(ScenarioVal == Unlocked){
+                _buttonRight.GetComponent<Button>().interactable = false;
+            }
+        }
     }
 
-    void Actualise() //Anti-voidUpdate
-    {
-        if ((int)_Scenario <= Unlocked) //Active et désactive le Canvas pour les scénario bloqué
-        {
-            LockCanvas.SetActive(false);
-        }
-        else
-        {
-            LockCanvas.SetActive(true);
-        }
-        nomDeLaCampagne.text = _Scenario.ToString(); //Actualise le nom du scénario
-        ImageScenario.sprite = SpriteMap[(int)_Scenario];//Actualsie l'image de scénario
+    /// <summary>
+    /// Update the position of the slider
+    /// </summary>
+    [EasyButtons.Button]
+    public void UpdateSliderValue(){
+        Unlockslider.value = Unlocked;
     }
-
-
 }
