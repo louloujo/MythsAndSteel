@@ -29,7 +29,8 @@ public class ZoneOrgone : MonoBehaviour
     [SerializeField] GameObject _childGam = null;
 
     GameObject _lastTileInRange = null;
-    #endregion
+    #endregion Variables
+
     private void Start()
     {
         HideChild();

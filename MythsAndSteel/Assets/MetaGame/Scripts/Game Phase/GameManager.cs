@@ -96,7 +96,7 @@ public class GameManager : MonoSingleton<GameManager>{
     [SerializeField] bool _redPlayerUseEvent = false;
     public bool RedPlayerUseEvent => _redPlayerUseEvent;
 
-    public bool IllusionStratégique = false;
+    [HideInInspector] public bool IllusionStratégique = false;
 
     string _titleValidation = "";
     string _descriptionValidation = "";
@@ -113,6 +113,24 @@ public class GameManager : MonoSingleton<GameManager>{
     public PhaseActivation ActivationPhase => _activationPhase;
 
     float deltaTimeX = 0f;
+
+    #region CheckOrgone
+    //Check l'orgone pour éviter l'override
+    public bool IsCheckingOrgone = false;
+
+    //Event qui permet d'attendre pour donner de l'orgone à un joueur
+    public delegate void Checkorgone();
+    public Checkorgone _waitToCheckOrgone;
+
+    //Quel joueur attend de recevoir son orgone
+    private int _playerOrgone = 0;
+    public int PlayerOrgone => _playerOrgone;
+
+    //Quelle est la valeur a donner au joueur
+    private int _valueOrgone= 0;
+    public int ValueOrgone => _valueOrgone;
+    #endregion CheckOrgone
+
     #endregion Variables
 
     /// <summary>
@@ -454,6 +472,26 @@ public class GameManager : MonoSingleton<GameManager>{
         if(_eventCallCancel != null) _eventCallCancel();
     }
     #endregion EventMode
+
+    #region WaitOrgone
+    /// <summary>
+    /// Permet de lancer la fonction d'orgone
+    /// </summary>
+    /// <param name="player"></param>
+    /// <param name="value"></param>
+    public void LaunchOrgone(int player, int value){
+        _playerOrgone = player;
+        _valueOrgone = value;
+    }
+
+    /// <summary>
+    /// Quand l'orgone a été effectuée
+    /// </summary>
+    public void StopOrgone(){
+        _playerOrgone = 0;
+        _valueOrgone = 0;
+    }
+    #endregion WaitOrgone
 
     IEnumerator waitToChange(){
         yield return new WaitForSeconds(1.35f);

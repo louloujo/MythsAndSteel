@@ -121,7 +121,6 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                 else{
                     if(GameManager.Instance.SelectableUnit.Contains(UnitInTile)){
                         if(!GameManager.Instance.IllusionStratégique){
-                            Debug.Log("je suis passé par la");
                             GameManager.Instance.AddUnitToList(_unitInTile);
                         }
 
