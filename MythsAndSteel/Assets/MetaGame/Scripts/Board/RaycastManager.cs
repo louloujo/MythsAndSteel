@@ -21,6 +21,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     //tile qui se trouve sous le raycast
     [SerializeField] private GameObject _tile;
     public GameObject Tile => _tile;
+
     //Dernière tile en mémoire par ce script
     GameObject _lastTile = null;
 
@@ -58,8 +59,18 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     public event TileRaycastChange OnTileChanged;
     #endregion Variables
 
-    void Update()
+
+    private void Start()
     {
+        OnTileChanged += RaycastManager_OnTileChanged;
+    }
+
+    private void RaycastManager_OnTileChanged()
+    {
+        UIInstance.Instance.CallUpdateUI(_lastTile);
+    }
+
+    void Update(){
         //obtient le premier objet touché par le raycast
         RaycastHit2D hit = GetRaycastHit();
 
@@ -97,29 +108,28 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         }
 
         //Permet de combiner le Shift et le click gauche de la souris.
-        if (_unitInTile == true)
-        {
-            //Si il il y a une unité sur la tile, le joueur peut utiliser ShiftClick.
-            _mouseCommand.ShiftClick();
-
+        if (_unitInTile == true && GameManager.Instance.IsInTurn && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation){
             //Si le joueur a utilisé le Shift puis leclick, le joueur est considéré comme click et on applique les fonctions propres au bouton des panneaux. De plus, le mouseOver est désactivé.
-            if (_mouseCommand.CheckIfPlayerAsClic == true)
+            if (_mouseCommand._checkIfPlayerAsClic == true && _mouseCommand._hasCheckUnit == false)
             {
-                _mouseCommand.buttonAction(UIInstance.Instance.PageButton);
-                _mouseCommand.MouseExitWithoutClick();
+                _mouseCommand.ShiftClick();
+                CallMouseCommand();
             }
-            else
+            else if(_mouseCommand._checkIfPlayerAsClic == false)
             {
                 //Si le joueur n'a pas continué sa combinaison d'action( Shif+clic), alors quand ma souris reste sur une case sans cliqué, l'interface résumé des statistiques s'active.
                 _mouseCommand.MouseOverWithoutClick();
             }
-
-            //Lorsque le joueur clic sur une unité
         }
         else
         {
             //Si la case ne comporte pas d'unité alors le MouseOver ne s'active pas et n'affiche par l'interface résumé des statistiques.
             _mouseCommand.MouseExitWithoutClick();
+            if(GameManager.Instance.IsInTurn == false || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Activation)
+            {
+            _mouseCommand.clickQuit();
+            }
+
         }
 
         //Si la tile change
@@ -129,53 +139,111 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             _lastTile = _tile;
             OnTileChanged();
         }
-
-        //Lorsque le joueur clique sur le plateau
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !Input.GetKey(KeyCode.LeftShift))
-        {
-            Select();
-        }
     }
 
 
     /// <summary>
     /// Quand tu cliques sur une unité
     /// </summary>
-    public void Select()
-    {
-        //Si le mouvement n'a pas été lancé
-        if (!Mouvement.Instance.Selected)
-        {
-            if (_unitInTile != null)
-            {
-                if (CanUseUnitWhenClic(_unitInTile.GetComponent<UnitScript>()))
-                {
-                    _actualTileSelected = _tile;
-                    _actualUnitSelected = _actualTileSelected.GetComponent<TileScript>().Unit;
-                    _menuForUnit.GetComponent<MenuActionUnite>().ShowPanel();
+    public void Select(){
+        //Lorsque le joueur choisit une unité
+        if(GameManager.Instance.ChooseUnitForEvent){
+            if(_unitInTile != null){
+                if(GameManager.Instance.UnitChooseList.Contains(_unitInTile)){
+                    GameManager.Instance.RemoveUnitToList(_unitInTile);
+                }
+                else{
+                    if(GameManager.Instance.SelectableUnit.Contains(UnitInTile)){
+                        if(!GameManager.Instance.IllusionStratégique){
+                            GameManager.Instance.AddUnitToList(_unitInTile);
+                        }
+
+                        //Pour la carte événement Illusion Stratégique
+                        else{
+                            if(GameManager.Instance.UnitChooseList.Count > 0){
+                                //est ce qu'il y avait déjà une unité dans la liste
+                                if(GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().UnitSO.IsInRedArmy == _unitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy){
+                                    GameManager.Instance.AddUnitToList(_unitInTile);
+                                }
+                                else { }
+                            }
+                            else{
+                                GameManager.Instance.AddUnitToList(_unitInTile);
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        //Si le mouvement a été lancé
-        else
-        {
-            if (Mouvement.Instance.IsInMouvement && !Mouvement.Instance.MvmtRunning)
+        //lorsque le joueur choisit une case
+        else if(GameManager.Instance.ChooseTileForEvent){
+            if(_tile != null){
+                GameManager.Instance.AddTileToList(_tile);
+            }
+        }
+
+        //lorsque le joueur peut cliquer sur les unités normalement
+        else{
+            //Si le mouvement n'a pas été lancé
+            if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
             {
-                if (_tile != _actualTileSelected)
+                if(!Mouvement.Instance.Selected && !Attaque.Instance.Selected)
                 {
-                    Mouvement.Instance.AddMouvement(TilesManager.Instance.TileList.IndexOf(_tile));
+                    if(_unitInTile != null)
+                    {
+                        if(CanUseUnitWhenClic(_unitInTile.GetComponent<UnitScript>()))
+                        {
+                            _actualTileSelected = _tile;
+                            _actualUnitSelected = _actualTileSelected.GetComponent<TileScript>().Unit;
+                            _menuForUnit.GetComponent<MenuActionUnite>().ShowPanel();
+                        }
+                    }
                 }
-                else
+
+                //Si le mouvement a été lancé
+                else if(Mouvement.Instance.Selected)
                 {
-                    Mouvement.Instance.StopMouvement(true);
-                    UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
+                    if(Mouvement.Instance.IsInMouvement && !Mouvement.Instance.MvmtRunning)
+                    {
+                        if(_tile != _actualTileSelected)
+                        {
+                            Mouvement.Instance.AddMouvement(TilesManager.Instance.TileList.IndexOf(_tile));
+                        }
+                        else
+                        {
+                            Mouvement.Instance.StopMouvement(true);
+                            UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
+                        }
+                    }
+                }
+                else if(Attaque.Instance.Selected)
+                {
+                    if(Attaque.Instance.IsInAttack)
+                    {
+                        if(_tile != _actualTileSelected)
+                        {
+                            Attaque.Instance.Attack(Tile.GetComponent<TileScript>().TileId);
+                        }
+                        else
+                        {
+                            Attaque.Instance.StopAttack();
+                        }
+                    }
+                }
+            }
+            else if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2){
+                if(GameManager.Instance.IsPlayerRedTurn && _tile == PlayerScript.Instance.RedPlayerInfos.TileCentreZoneOrgone)
+                {
+                    OrgoneManager.Instance.StartToMoveZone();
+                }
+                else if(!GameManager.Instance.IsPlayerRedTurn && _tile == PlayerScript.Instance.BluePlayerInfos.TileCentreZoneOrgone)
+                {
+                    OrgoneManager.Instance.StartToMoveZone();
                 }
             }
         }
     }
-
-
 
     /// <summary>
     /// Est ce que l'unité qui a été cliquée fait partie de l'armée
@@ -188,14 +256,14 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         {
             if (GameManager.Instance.IsPlayerRedTurn)
             {
-                if (!PlayerStatic.CheckIsUnitArmy(uniTouch, true))
+                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, true) && !uniTouch.UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
                 {
                     return false;
                 }
             }
             else
             {
-                if (!PlayerStatic.CheckIsUnitArmy(uniTouch, false))
+                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, false) && !uniTouch.UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
                 {
                     return false;
                 }
@@ -231,7 +299,6 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         }
     }
 
-
     /// <summary>
     /// Permet d'obtenir les objets touchés par le raycast
     /// </summary>
@@ -241,5 +308,10 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         Vector2 mouseDirection = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         Ray2D ray = new Ray2D(Camera.main.ScreenToWorldPoint(Input.mousePosition), mouseDirection);
         return Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, _layerM);
+    }
+
+    public void CallMouseCommand(){
+        _mouseCommand.buttonAction(UIInstance.Instance.PageButton);
+        _mouseCommand.MouseExitWithoutClick();
     }
 }

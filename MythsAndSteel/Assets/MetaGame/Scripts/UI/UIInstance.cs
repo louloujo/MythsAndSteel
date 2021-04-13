@@ -9,11 +9,11 @@ public class UIInstance : MonoSingleton<UIInstance>
     #region AppelDeScript
     MouseCommand mouseCommand;
     UIInstance uIInstance;
-    #endregion
+    #endregion AppelDeScript
 
-
+    #region PhaseDeJeu
     [Header("PHASE DE JEU")]
-    //Le panneau ‡ afficher lorsque l'on change de phase
+    //Le panneau √† afficher lorsque l'on change de phase
     [SerializeField] private GameObject _switchPhaseObject = null;
     public GameObject SwitchPhaseObject => _switchPhaseObject;
 
@@ -21,43 +21,47 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private GameObject _canvasActivation = null;
     public GameObject CanvasActivation => _canvasActivation;
 
+    //Le canvas en jeu pour la phase d'activation
+    [SerializeField] private Image _skipPhaseImage = null;
+    public Image SkipPhaseImage => _skipPhaseImage;
+
+    //Le canvas en jeu pour la phase d'activation
+    [SerializeField] private GameObject _backgroundActivation = null;
+    public GameObject BackgroundActivation => _backgroundActivation;
+
     //Le canvas en jeu pour afficher des menus
     [SerializeField] private GameObject _canvasTurnPhase = null;
     public GameObject CanvasTurnPhase => _canvasTurnPhase;
 
     [SerializeField] private GameObject _buttonNextPhase = null;
     public GameObject ButtonNextPhase => _buttonNextPhase;
-
+    #endregion PhaseDeJeu
 
     [Header("PANNEAU D'ACTIVATION D'UNE UNITE")]
     [SerializeField] private MenuActionUnite _activationUnitPanel = null;
     public MenuActionUnite ActivationUnitPanel => _activationUnitPanel;
 
-
+    #region CarteEvenement
     [Header("CARTES EVENEMENTS")]
-    //L'objet d'event ‡ afficher lorsqu'une nouvelle carte event est piochÈe pour le joueur rouge
+    //L'objet d'event √† afficher lorsqu'une nouvelle carte event est pioch√©e pour le joueur rouge
     [SerializeField] private GameObject _eventCardObjectRed = null;
     public GameObject EventCardObjectRed => _eventCardObjectRed;
 
-    //L'objet d'event ‡ afficher lorsqu'une nouvelle carte event est piochÈe.
+    //L'objet d'event √† afficher lorsqu'une nouvelle carte event est pioch√©e.
     [SerializeField] private GameObject _eventCardObjectBlue = null;
     public GameObject EventCardObjectBlue => _eventCardObjectBlue;
 
-    //Sprite du bouton activÈ
-    [SerializeField] private Sprite _activateButtonSprite = null;
-    public Sprite ActivateButtonSprite => _activateButtonSprite;
-
-    //Sprite du bouton dÈsactivÈ
-    [SerializeField] private Sprite _desactivateButtonSprite = null;
-    public Sprite DesactivateButtonSprite => _desactivateButtonSprite;
-
-    //Boutons des cartes events du joueur rouge
-    [SerializeField] private ButtonEvent _buttonEventRedPlayer = null;
-    public ButtonEvent ButtonEventRedPlayer => _buttonEventRedPlayer;
+    //Sprite du bouton d√©sactiv√©
+    [SerializeField] private FlecheEvent _flecheSpriteRef = null;
+    public FlecheEvent FlecheSpriteRef => _flecheSpriteRef;
 
     //Boutons des cartes events du joueur bleu
     [SerializeField] private ButtonEvent _buttonEventBluePlayer = null;
     public ButtonEvent ButtonEventBluePlayer => _buttonEventBluePlayer;
+
+    //Boutons des cartes events du joueur bleu
+    [SerializeField] private ButtonEvent _buttonEventRedPlayer = null;
+    public ButtonEvent ButtonEventRedPlayer => _buttonEventRedPlayer;
 
     //Transform des cartes events du joueur rouge
     [SerializeField] private Transform _redPlayerEventtransf = null;
@@ -67,45 +71,55 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private Transform _bluePlayerEventtransf = null;
     public Transform BluePlayerEventtransf => _bluePlayerEventtransf;
 
+    //Transform de la carte event du joueur rouge le plus en bas
+    [SerializeField] private Transform _redEventDowntrans = null;
+    public Transform RedEventDowntrans => _redEventDowntrans;
+
+    //Transform de la carte event du joueur bleu le plus en bas
+    [SerializeField] private Transform _blueEventDowntrans = null;
+    public Transform BlueEventDowntrans => _blueEventDowntrans;
+    #endregion CarteEvenement
+
     [Header("LISTES DES BOUTONS D ACTIONS")]
     [Tooltip("0 et  1 sont pour les boutons quitter, 2 et 3 sont pour switch entre la Page 1 et la Page 2")]
-    //Les premiers chiffres (pour le moment 0 et 1 dÈterminent les bouttons ‡ quitter les menus), les derniers dÈterminent les buttons des switch de menu.
+    //Les premiers chiffres (pour le moment 0 et 1 d√©terminent les bouttons √† quitter les menus), les derniers d√©terminent les buttons des switch de menu.
     [SerializeField] private StatMenuButton _pageButton;
     public StatMenuButton PageButton => _pageButton;
 
     [Space]
 
     [Header("LISTES DES ELEMENTS UI POUR LE MOUSEOVER")]
-    [Tooltip("Tous les ÈlÈments qui composent l'UI dans le MOUSEOVER")]
-    //Texte qui indique le nom de l'unitÈ.
+    [Tooltip("Tous les √©l√©ments qui composent l'UI dans le MOUSEOVER")]
+    //Texte qui indique le nom de l'unit√©.
     [SerializeField] private GameObject _titlePanelMouseOver;
     public GameObject TitlePanelMouseOver => _titlePanelMouseOver;
-    //Ordre : 0 => Texte Vie, 1 => Texte PortÈe et 2 => Texte DÈplacement
+    //Ordre : 0 => Texte Vie, 1 => Texte Port√©e et 2 => Texte D√©placement
     [SerializeField] private TextStatUnit _mouseOverStats;
     public TextStatUnit MouseOverStats => _mouseOverStats;
 
     [Space]
 
+    #region ShiftClicPanelP1
     [Header("LISTES DES ELEMENTS UI POUR LE SHIFT CLIC DE LA PAGE 1")]
-    [Tooltip("Tous les ÈlÈments qui composent l'UI pour le Shift Clic de la Page 1")]
+    [Tooltip("Tous les √©l√©ments qui composent l'UI pour le Shift Clic de la Page 1")]
 
-    //Texte qui indique le nom de l'unitÈ.
+    //Texte qui indique le nom de l'unit√©.
     [SerializeField] private GameObject _titlePanelShiftClicPage1;
     public GameObject TitlePanelShiftClicPage1 => _titlePanelShiftClicPage1;
 
-    //Ordre : 0 => Texte Vie, 1 => Texte PortÈe et 2 => Texte DÈplacement
+    //Ordre : 0 => Texte Vie, 1 => Texte Port√©e et 2 => Texte D√©placement
     [SerializeField] private TextStatUnit _pageUnitStat;
     public TextStatUnit PageUnitStat => _pageUnitStat;
 
     //Ordre : 0 => Valeur Min entre deux valeurs, 1 => Valeur Max entre deux valeurs, 2 => Degats Min et 3 Degats Max
     [SerializeField] private AttackStat _attackStat;
     public AttackStat AttackStat => _attackStat;
+    #endregion ShiftClicPanelP1
 
-
-
+    #region ShiftClicPanelP2
     [Header("LISTES DES ELEMENTS UI POUR LE SHIFT CLIC DE LA PAGE 2")]
-    [Tooltip("Tous les ÈlÈments qui composent l'UI pour le Shift Clic de la Page 2")]
-    //Texte qui indique le nom de l'unitÈ.
+    [Tooltip("Tous les √©l√©ments qui composent l'UI pour le Shift Clic de la Page 2")]
+    //Texte qui indique le nom de l'unit√©.
     [SerializeField] private GameObject _titlePanelShiftClicPage2;
     public GameObject TitlePanelShiftClicPage2 => _titlePanelShiftClicPage2;
 
@@ -114,23 +128,12 @@ public class UIInstance : MonoSingleton<UIInstance>
 
     [SerializeField] private List<GameObject> _middleTextTerrain;
     public List<GameObject> MiddleTextTerrain => _middleTextTerrain;
+    #endregion ShiftClicPanelP2
 
+    
     [Header("ENFANTS CASE DU PLATEAU")]
     [SerializeField] private GameObject _mouvementTilePrefab;
     public GameObject MouvementTilePrefab => _mouvementTilePrefab;
-
-    public void DesactivateNextPhaseButton()
-    {
-        _buttonNextPhase.SetActive(false);
-    }
-
-    public void ActivateNextPhaseButton()
-    {
-        _buttonNextPhase.SetActive(true);
-    }
-
-
-
 
     [SerializeField] private List<GameObject> _indicatorRessourceCreationImage;
     public List<GameObject> IndicatorRessourceCreationImage => _indicatorRessourceCreationImage;
@@ -143,10 +146,10 @@ public class UIInstance : MonoSingleton<UIInstance>
 
     [Space]
 
-    [Header("Liste des Èlements pour le menu Renfort")]
+    [Header("Liste des √©lements pour le menu Renfort")]
     [Tooltip("ensemble des textes pour le menu Statistiques des renforts")]
-    [SerializeField] private TextRenfortMenu _pageUnitÈRenfort;
-    public TextRenfortMenu PageUnitÈRenfort => _pageUnitÈRenfort;
+    [SerializeField] private TextRenfortMenu _pageUnit√©Renfort;
+    public TextRenfortMenu PageUnit√©Renfort => _pageUnit√©Renfort;
 
     [Tooltip("Ensemble des Emplacements pour les images du menu Statistiques des renforts")]
     [SerializeField] private EmplacementImageMenuRenfort _emplacementImageMenuRenfort;
@@ -159,6 +162,96 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private AssignRessouceUnit _ressourceUnit_PasTouche;
     public AssignRessouceUnit RessourceUnit_PasTouche  => _ressourceUnit_PasTouche;
 
+    #region ValidationPanel
+    [Header("PANNEAU DE VALIDATION")]
+    //Le panneau de validation
+    [SerializeField] private GameObject _validationPanel;
+    public GameObject ValidationPanel => _validationPanel;
+
+    //texte pour le titre de la validation
+    [SerializeField] private TextMeshProUGUI _titleValidationTxt;
+    public TextMeshProUGUI TitleValidationTxt => _titleValidationTxt;
+
+    //texte pour la description de la validation
+    [SerializeField] private TextMeshProUGUI _descriptionValidationTxt;
+    public TextMeshProUGUI DescriptionValidationTxt => _descriptionValidationTxt;
+    #endregion ValidationPanel
+
+    [Header("STAT DU JEU")]
+    [SerializeField] private TextMeshProUGUI _fpsText = null;
+    public TextMeshProUGUI FpsText => _fpsText;
+
+    private void Start(){
+        QuitValidationPanel();
+    }
+
+    public void DesactivateNextPhaseButton(){
+        _buttonNextPhase.SetActive(false);
+    }
+
+    /// <summary>
+    /// Affiche le bouton pour passer √† la phase suivante
+    /// </summary>
+    public void ActivateNextPhaseButton(){
+        _buttonNextPhase.SetActive(true);
+    }
+
+    /// <summary>
+    /// Affiche le panneau de validation
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="description"></param>
+    public void ShowValidationPanel(string title, string description){
+        _validationPanel.SetActive(true);
+        _titleValidationTxt.text = title;
+        _descriptionValidationTxt.text = description;
+        DesactivateNextPhaseButton();
+    }
+
+    /// <summary>
+    /// Cache le panneau de validation
+    /// </summary>
+    public void QuitValidationPanel(){
+        _validationPanel.SetActive(false);
+    }
+
+    #region UITile
+    [Header("Tile's infos update")]
+    [SerializeField] private TileTypeClass _typeTileList;
+
+    //Variable du Scriptable.
+    public TerrainTypeClass Terrain;
+
+    public void CallUpdateUI(GameObject Tile)
+    {
+        if (Tile == null)
+        {
+            _typeTileList.UiTiles.SetBool("open", false); return;
+        }
+        else if (Tile.TryGetComponent(out TileScript T) && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation)
+        {
+            Terrain.Synch(Tile.GetComponent<TileScript>(), _typeTileList.Tile, _typeTileList.Desc, _typeTileList.Ressources, _typeTileList.Rendu); // Affiche les nouvelles informations √† propos de la tile s√©l√©ctionn√©e.  
+            _typeTileList.UiTiles.SetBool("open", true);
+        }
+        else
+        {
+            _typeTileList.UiTiles.SetBool("open", false);
+        }
+    }
+    #endregion
+
+    [Header("PLAYER ACTIVATION")]
+    //nombre d'activation restante pour le joueur rouge
+    [SerializeField] private TextMeshProUGUI _activationLeftTxtRP = null;
+    public TextMeshProUGUI ActivationLeftTxtRP => _activationLeftTxtRP;
+    //nombre d'activation restante pour le joueur bleu
+    [SerializeField] private TextMeshProUGUI _activationLeftTxtBP = null;
+    public TextMeshProUGUI ActivationLeftTxtBP => _activationLeftTxtBP;
+
+    public void UpdateActivationLeft(){
+        _activationLeftTxtRP.text = PlayerScript.Instance.RedPlayerInfos.ActivationLeft.ToString();
+        _activationLeftTxtBP.text = PlayerScript.Instance.BluePlayerInfos.ActivationLeft.ToString();
+    }
 }
 
 #region ClassToRangeList
@@ -216,9 +309,9 @@ public class StorageImageForUI
 
     [Space]
 
-    //A ComplÈter.
+    //A Compl√©ter.
     public Sprite _terrainEffectForet = null;
-    public List<Sprite> _riviËreDirection = null;
+    public List<Sprite> _rivi√®reDirection = null;
     public List<Sprite> _pont = null;
 
 }
@@ -226,7 +319,7 @@ public class StorageImageForUI
 
 
 /// <summary>
-/// GameObject qui comporte l'ensemble des donnÈes Ècrites correspondant aux statistiques de de vie, de portÈ, de dÈplacement et d'attque ainsi que le nom de l'unitÈ.
+/// GameObject qui comporte l'ensemble des donn√©es √©crites correspondant aux statistiques de de vie, de port√©, de d√©placement et d'attque ainsi que le nom de l'unit√©.
 /// </summary>
 [System.Serializable]
 public class TextRenfortMenu
@@ -236,7 +329,7 @@ public class TextRenfortMenu
 
     [Space(10)]
 
-    [Header("UnitÈ 1")]
+    [Header("Unit√© 1")]
     public GameObject _nameUnit1 = null;
     public GameObject _lifeValor1 = null;
     public GameObject _rangeValor1 = null;
@@ -245,7 +338,7 @@ public class TextRenfortMenu
 
     [Space(10)]
 
-    [Header("UnitÈ 2")]
+    [Header("Unit√© 2")]
     public GameObject _nameUnit2 = null;
 
     public GameObject _lifeValor2 = null;
@@ -255,7 +348,7 @@ public class TextRenfortMenu
 
     [Space(10)]
 
-    [Header("UnitÈ 3")]
+    [Header("Unit√© 3")]
     public GameObject _nameUnit3 = null;
 
     public GameObject _lifeValor3 = null;
@@ -265,7 +358,7 @@ public class TextRenfortMenu
 
     [Space(10)]
 
-    [Header("UnitÈ 4")]
+    [Header("Unit√© 4")]
     public GameObject _nameUnit4 = null;
 
     public GameObject _lifeValor4 = null;
@@ -275,7 +368,7 @@ public class TextRenfortMenu
 
     [Space(10)]
 
-    [Header("UnitÈ 5")]
+    [Header("Unit√© 5")]
     public GameObject _nameUnit5 = null;
 
     public GameObject _lifeValor5 = null;
@@ -285,7 +378,7 @@ public class TextRenfortMenu
 
     [Space(10)]
 
-    [Header("UnitÈ 6")]
+    [Header("Unit√© 6")]
     public GameObject _nameUnit6 = null;
 
     public GameObject _lifeValor6 = null;
@@ -299,16 +392,16 @@ public class TextRenfortMenu
 [System.Serializable]
 public class AssignRessouceUnit
 {
-    public List<GameObject> _unitÈ1Ressource;
-    public List<GameObject> _unitÈ2Ressource;
-    public List<GameObject> _unitÈ3Ressource;
-    public List<GameObject> _unitÈ4Ressource;
-    public List<GameObject> _unitÈ5Ressource;
-    public List<GameObject> _unitÈ6Ressource;
+    public List<GameObject> _unit√©1Ressource;
+    public List<GameObject> _unit√©2Ressource;
+    public List<GameObject> _unit√©3Ressource;
+    public List<GameObject> _unit√©4Ressource;
+    public List<GameObject> _unit√©5Ressource;
+    public List<GameObject> _unit√©6Ressource;
 }
 
 /// <summary>
-/// GameObject qui comprend l'ensemble des images pour le menuRenfort (les icones de vie, portÈe et dÈplacement ainsi qu les illustrations d'unitÈs).
+/// GameObject qui comprend l'ensemble des images pour le menuRenfort (les icones de vie, port√©e et d√©placement ainsi qu les illustrations d'unit√©s).
 /// </summary>
 [System.Serializable]
 public class EmplacementImageMenuRenfort
@@ -317,12 +410,12 @@ public class EmplacementImageMenuRenfort
 
     [Space(20)]
 
-    public GameObject _imageUnitÈ1 = null;
-    public GameObject _imageUnitÈ2 = null;
-    public GameObject _imageUnitÈ3 = null;
-    public GameObject _imageUnitÈ4 = null;
-    public GameObject _imageUnitÈ5 = null;
-    public GameObject _imageUnitÈ6 = null;
+    public GameObject _imageUnit√©1 = null;
+    public GameObject _imageUnit√©2 = null;
+    public GameObject _imageUnit√©3 = null;
+    public GameObject _imageUnit√©4 = null;
+    public GameObject _imageUnit√©5 = null;
+    public GameObject _imageUnit√©6 = null;
 
     [Space(20)]
 
@@ -338,17 +431,17 @@ public class BouttonMenuRenfort
 {
     public Button _quitMenuRenfort = null;
 
-    public Button _clicSurUnitÈ1 = null;
-    public Button _clicSurUnitÈ2 = null;
-    public Button _clicSurUnitÈ3 = null;
-    public Button _clicSurUnitÈ4 = null;
-    public Button _clicSurUnitÈ5 = null;
-    public Button _clicSurUnitÈ6 = null;
+    public Button _clicSurUnit√©1 = null;
+    public Button _clicSurUnit√©2 = null;
+    public Button _clicSurUnit√©3 = null;
+    public Button _clicSurUnit√©4 = null;
+    public Button _clicSurUnit√©5 = null;
+    public Button _clicSurUnit√©6 = null;
 }
 
 
 /// <summary>
-/// GameObject qui comprend la vie, la portÈe et la vitesse de dÈplacement
+/// GameObject qui comprend la vie, la port√©e et la vitesse de d√©placement
 /// </summary>
 [System.Serializable]
 public class TextStatUnit
@@ -369,5 +462,37 @@ public class AttackStat
 
     public GameObject _minDamageValueGam = null;
     public GameObject _maxDamageValueGam = null;
+}
+
+/// <summary>
+/// Liste pour tous les objets pour l'affichage du type de terrain sur chaque case
+/// </summary>
+[System.Serializable]
+public class TileTypeClass
+{
+    [SerializeField] private TextMeshProUGUI _title;
+    public TextMeshProUGUI Tile => _title;
+    [SerializeField] private TextMeshProUGUI _desc;
+    public TextMeshProUGUI Desc => _desc;
+    [SerializeField] private Image _rendu;
+    public Image Rendu => _rendu;
+    [SerializeField] private TextMeshProUGUI _ressources;
+    public TextMeshProUGUI Ressources => _ressources;
+    [SerializeField] private Animator _uiTiles;
+    public Animator UiTiles => _uiTiles;
+}
+
+/// <summary>
+/// Liste des fl√®ches pour les cartes events
+/// </summary>
+[System.Serializable]
+public class FlecheEvent
+{
+    public Sprite _redArrowUp = null;
+    public Sprite _redArrowDown = null;
+    public Sprite _blueArrowUp = null;
+    public Sprite _blueArrowDown = null;
+    public Sprite _grisArrowUp = null;
+    public Sprite _grisArrowDown = null;
 }
 #endregion ClassToRangeList

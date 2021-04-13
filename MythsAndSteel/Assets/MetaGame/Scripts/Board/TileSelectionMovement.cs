@@ -21,7 +21,7 @@ public class TileSelectionMovement : MonoBehaviour{
 
     private void Start(){
         RaycastManager.Instance.OnTileChanged += TileChange;
-        _spritRender.enabled = false;
+        GetComponent<Animator>().SetInteger("Fade", 1);
         _isVisble = false;
     }
 
@@ -37,7 +37,6 @@ public class TileSelectionMovement : MonoBehaviour{
                 else{
                     transform.position = RaycastManager.Instance.Tile.transform.position;
                 }
-
             }
         }
     }
@@ -46,18 +45,56 @@ public class TileSelectionMovement : MonoBehaviour{
         //Change l'objet de tiles où il doit se déplacer
         if(RaycastManager.Instance.Tile != null && GameManager.Instance.IsInTurn && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation){
             //Est ce que l'objet est visible
-            if(_spritRender.isVisible == false){
-                _spritRender.enabled = true;
-            }
-            else{
-                _isVisble = true;
-            }
+            _isVisble = true;
+            GetComponent<Animator>().SetInteger("Fade", 2);
 
             _hasMakeMovement = false;
         }
-        else { 
-            _spritRender.enabled = false;
+        else {
+            GetComponent<Animator>().SetInteger("Fade", 1);
             _isVisble = false;
         }
+
+        //Si le joueur survole le plateau
+        if(RaycastManager.Instance.UnitInTile != null && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) 
+           && GameManager.Instance.ChooseUnitForEvent == false && GameManager.Instance.ChooseTileForEvent == false)
+        {
+            if(RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy == GameManager.Instance.IsPlayerRedTurn || 
+               RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé) == true){
+                GetComponent<Animator>().SetBool("HasUnit",  true);
+            }
+            else{
+                GetComponent<Animator>().SetBool("HasUnit", false);
+            }
+        }
+        //Si le joueur doit choisir une unité
+        else if(GameManager.Instance.ChooseUnitForEvent == true){
+            if(RaycastManager.Instance.UnitInTile != null){
+
+                if(GameManager.Instance.SelectableUnit.Contains(RaycastManager.Instance.UnitInTile)){
+                    GetComponent<Animator>().SetBool("HasUnit", true);
+                }
+                else
+                {
+                    GetComponent<Animator>().SetBool("HasUnit", false);
+                }
+            }
+            else{
+                GetComponent<Animator>().SetBool("HasUnit", false);
+            }
+        }
+        //Si le joueur doit choisir une case
+        else if(GameManager.Instance.ChooseTileForEvent == true){
+            if(GameManager.Instance._selectableTiles.Contains(RaycastManager.Instance.Tile)){
+                GetComponent<Animator>().SetBool("HasUnit", true);
+            }
+            else{
+                GetComponent<Animator>().SetBool("HasUnit", false);
+            }
+        }
+        else{
+            GetComponent<Animator>().SetBool("HasUnit", false);
+        }
+
     }
 }

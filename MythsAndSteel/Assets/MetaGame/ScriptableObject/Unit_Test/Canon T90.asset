@@ -17,16 +17,16 @@ MonoBehaviour:
   typeUnite: 4
   LifeMax: 5
   ShieldMax: 2
-  AttackRange: 1
+  AttackRange: 3
   MoveSpeed: 3
   CreationCost: 4
-  DamageMinimum: 0
-  NumberRangeMin: {x: 0, y: 0}
-  DamageMaximum: 0
-  NumberRangeMax: {x: 0, y: 0}
+  DamageMinimum: 1
+  NumberRangeMin: {x: 3, y: 7}
+  DamageMaximum: 2
+  NumberRangeMax: {x: 8, y: 12}
   Son1: {fileID: 0}
   Son2: {fileID: 0}
-  Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  CanAttackEmptyTile: 1
+  Sprite: {fileID: 5601724313049997956, guid: a50948e13bd96eb4099118ef8c1813aa, type: 3}
+  CanAttackEmptyTile: 0
   UsefullToWin: 0
   IsInRedArmy: 1

@@ -32,23 +32,47 @@ public class MYthsAndSteel_Enum : MonoBehaviour
     }
 
     /// <summary>
-    /// Les différentes stats modifiables
+    /// Tous les types de terrain
     /// </summary>
-    public enum Stat
-    {
-        Attaque, vie, portee
+    public enum TerrainType{
+        Sol, Forêt, Bosquet, Plage, Colline, Haute_colline, Mont, Ravin, Eau, Boue, Rivière_Nord, Rivière_Sud, Rivière_Est, Rivière_Ouest, Fleuve, Ruisseau, Pont_Nord, Pont_Sud, Pont_Est, Pont_Ouest, Route, Rails, Maison, Immeuble, Ruines, Usine, Point_de_ressource, Gare, Bunker, Cabane_Isatabu, Point_Objectif, OrgoneBlue, OrgoneRed,
     }
 
     /// <summary>
-    /// Tous les types de terrain
+    /// Enum pour savoir qui possède un objectif
     /// </summary>
-    public enum TerrainType
-    {
-        Sol, Forêt, Bosquet, Plage, Colline, Haute_colline, Mont, Ravin, Eau, Boue, Rivière_Nord, Rivière_Sud, Rivière_Est, Rivière_Ouest, Fleuve, Ruisseau, Pont_Nord, Pont_Sud, Pont_Est, Pont_Ouest, Route, Rails, Maison, Immeuble, Ruines, UsineJ1, UsineJ2, Point_de_ressource, Gare, Bunker, Cabane_Isatabu, Point_Objectif
+    public enum Owner{
+        neutral, blue, red
     }
 
+    /// <summary>
+    /// Enum des effets de terrain uniquement lié à la prog
+    /// </summary>
     public enum EffetProg
     {
         Zone_creable
+    }
+    
+    /// <summary>
+    /// Status obtenable par une unité
+    /// </summary>
+    public enum UnitStatut{
+        ArmeEpidemiologique, Paralysie, Immobilisation, Réanimé, Possédé, Invincible, PeutPasCombattre, PeutPasPrendreDesObjectifs 
+    }
+
+    /// <summary>
+    /// Les types d'enfant obtenable sur une tile
+    /// </summary>
+    public enum ChildTileType
+    {
+        AttackSelect, MoveSelect, EventSelect
+    }
+
+    /// <summary>
+    /// Liste des Scénarios du jeu
+    /// </summary>
+    public enum Scenario
+    {
+        Rethel, Shanghai, Stalingrad, Husky, Guadalcanal, ElAlamein, Elsenborn
     }
 }
