@@ -13,12 +13,13 @@ public class UnitScript : MonoBehaviour
     [SerializeField] Unit_SO _unitSO;
     public Unit_SO UnitSO => _unitSO;
 
-    [Header("------------------- VIE -------------------")]
+    [Header("------------------- UI VIE -------------------")]
+    [SerializeField] SpriteRenderer CurrentSpriteLifeHeartUI;
     [Header("------------------- STAT EN JEU -------------------")]
     //Vie actuelle
     [SerializeField] int _life;
     public int Life => _life;
-
+    
     // Bouclier actuelle
     [SerializeField] int _shield;
     public int Shield => _shield;
@@ -48,7 +49,7 @@ public class UnitScript : MonoBehaviour
     public int DamageBonus => _damageBonus;
 
     //Bonus aux lancés de dé
-    [SerializeField] private int _diceBonus = 0;
+    [SerializeField] public int _diceBonus = 0;
     public int DiceBonus => _diceBonus;
 
 
@@ -128,6 +129,23 @@ public class UnitScript : MonoBehaviour
 
     #endregion Variables
 
+    private void Start()
+    {
+        // On instancie l'object qui possède le sprite correspondant à l'UI au point de vie et de bouclier de l'unité.
+        GameObject LifeHeartUI = Instantiate(UIInstance.Instance.LifeHeartPrefab, gameObject.transform);
+
+
+        CurrentSpriteLifeHeartUI = LifeHeartUI.GetComponent<SpriteRenderer>();
+        if(_shield > 0)
+        {
+            UpdateLifeHeartShieldUI(UIInstance.Instance.ShieldSprite, _life + _shield - 1);
+        }
+        else
+        {
+            UpdateLifeHeartShieldUI(UIInstance.Instance.LifeHeartSprite, _life);
+        }
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -149,10 +167,26 @@ public class UnitScript : MonoBehaviour
     public virtual void GiveLife(int Lifeadd)
     {
         _life += Lifeadd;
-        if(_life > UnitSO.LifeMax){
+        if(_shield > 0)
+        {
+            UpdateLifeHeartShieldUI(UIInstance.Instance.ShieldSprite, _life + _shield - 1);
+        }
+        else
+        {
+            UpdateLifeHeartShieldUI(UIInstance.Instance.LifeHeartSprite, _life);
+        }
+        if (_life > UnitSO.LifeMax){
             int shieldPlus = _life - UnitSO.LifeMax;
             _life = UnitSO.LifeMax;
             _shield += shieldPlus;
+            if(_shield > 0)
+            {
+                UpdateLifeHeartShieldUI(UIInstance.Instance.ShieldSprite, _life + _shield - 1);
+            }
+            else
+            {
+                UpdateLifeHeartShieldUI(UIInstance.Instance.LifeHeartSprite, _life);
+            }
         }
     }
 
@@ -164,12 +198,29 @@ public class UnitScript : MonoBehaviour
     {
         if(_shield > 0){
             _shield -= Damage;
-            _life += _shield;
+
+            if(_shield > 0)
+            {
+                UpdateLifeHeartShieldUI(UIInstance.Instance.ShieldSprite, _life + _shield - 1);
+            }
+            else
+            {
+                UpdateLifeHeartShieldUI(UIInstance.Instance.LifeHeartSprite, _life);
+            }
             CheckLife();
         }
         else
         {
             _life -= Damage;
+            if(_shield > 0)
+            {
+                UpdateLifeHeartShieldUI(UIInstance.Instance.ShieldSprite, _life + _shield - 1);
+            }
+            else
+            {
+                UpdateLifeHeartShieldUI(UIInstance.Instance.LifeHeartSprite, _life);
+            }
+
             CheckLife();
         }
 
@@ -233,6 +284,14 @@ public class UnitScript : MonoBehaviour
 
         Destroy(gameObject);
         Debug.Log("Unité Détruite");
+    }
+
+    /// <summary>
+    /// Cette fonction va permettre de mettre un sprite d'une liste trouvé à partir d'un index à un objet. C'est la fonction qui met à jour l'affichage des boucliers et des points de vie. 
+    /// </summary>
+    public void UpdateLifeHeartShieldUI(Sprite[] listSprite, int life)
+    {
+        CurrentSpriteLifeHeartUI.sprite = listSprite[life];
     }
     #endregion LifeMethods
 
@@ -349,4 +408,3 @@ public class UnitScript : MonoBehaviour
         }
     }
 }
-

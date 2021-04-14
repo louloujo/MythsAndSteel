@@ -218,6 +218,35 @@ public class UIInstance : MonoSingleton<UIInstance>
         _activationLeftTxtRP.text = PlayerScript.Instance.RedPlayerInfos.ActivationLeft.ToString();
         _activationLeftTxtBP.text = PlayerScript.Instance.BluePlayerInfos.ActivationLeft.ToString();
     }
+
+    #region MenuRenfort
+    [Header("LISTE DES ELEMENTS POUR LE MENU RENFORT")]
+    [Tooltip("ensemble des textes pour le menu Statistiques des renforts")]
+    [SerializeField] private TextRenfortMenu _pageUnitéRenfort;
+    public TextRenfortMenu PageUnitéRenfort => _pageUnitéRenfort;
+
+    [Tooltip("Ensemble des Emplacements pour les images du menu Statistiques des renforts")]
+    [SerializeField] private EmplacementImageMenuRenfort _emplacementImageMenuRenfort;
+    public EmplacementImageMenuRenfort EmplacementImageMenuRenfort => _emplacementImageMenuRenfort;
+
+    [Tooltip("Ensemble des Images pour le menu Statistiques des renforts")]
+    [SerializeField] private StorageImageForUI _stockageImage;
+    public StorageImageForUI StockageImage => _stockageImage;
+
+    [SerializeField] private AssignRessouceUnit _ressourceUnit_PasTouche;
+    public AssignRessouceUnit RessourceUnit_PasTouche => _ressourceUnit_PasTouche;
+    #endregion MenuRenfort
+
+    #region VieUnité
+    [SerializeField] private GameObject _lifeHeartPrefab;
+    public GameObject LifeHeartPrefab => _lifeHeartPrefab;
+
+    [SerializeField] private Sprite[] _shieldSprite;
+    public Sprite[] ShieldSprite => _shieldSprite;
+
+    [SerializeField] private Sprite[] _lifeHeartSprite;
+    public Sprite[] LifeHeartSprite => _lifeHeartSprite;
+    #endregion VieUnité
 }
 
 #region ClassToRangeList
@@ -237,8 +266,7 @@ public class ButtonEvent
 [System.Serializable]
 public class StatMenuButton
 {
-    public Button _quitMenuPage1 = null;
-    public Button _quitMenuPage2 = null;
+    [Space]
 
     public Button _rightArrowPage1 = null;
     public Button _leftArrowPage2 = null;
@@ -298,5 +326,151 @@ public class FlecheEvent
     public Sprite _blueArrowDown = null;
     public Sprite _grisArrowUp = null;
     public Sprite _grisArrowDown = null;
+}
+
+
+[System.Serializable]
+public class StorageImageForUI
+{
+    public List<Sprite> _drapeauJoueur = null;
+
+    [Space]
+
+    public List<Sprite> _imageUnit1 = null;
+    public List<Sprite> _imageUnit2 = null;
+    public List<Sprite> _imageUnit3 = null;
+    public List<Sprite> _imageUnit4 = null;
+    public List<Sprite> _imageUnit5 = null;
+    public List<Sprite> _imageUnit6 = null;
+
+    [Space]
+
+    //A Compléter.
+    public Sprite _terrainEffectForet = null;
+    public List<Sprite> _rivièreDirection = null;
+    public List<Sprite> _pont = null;
+
+}
+
+
+/// <summary>
+/// GameObject qui comporte l'ensemble des données écrites correspondant aux statistiques de de vie, de porté, de déplacement et d'attque ainsi que le nom de l'unité.
+/// </summary>
+[System.Serializable]
+public class TextRenfortMenu
+{
+    public GameObject _ressourceJoueur = null;
+    public GameObject _ressourceText = null;
+
+    [Space(10)]
+
+    [Header("Unité 1")]
+    public GameObject _nameUnit1 = null;
+    public GameObject _lifeValor1 = null;
+    public GameObject _rangeValor1 = null;
+    public GameObject _moveValor1 = null;
+    public GameObject _damageValor1 = null;
+
+    [Space(10)]
+
+    [Header("Unité 2")]
+    public GameObject _nameUnit2 = null;
+
+    public GameObject _lifeValor2 = null;
+    public GameObject _rangeValor2 = null;
+    public GameObject _moveValor2 = null;
+    public GameObject _damageValor2 = null;
+
+    [Space(10)]
+
+    [Header("Unité 3")]
+    public GameObject _nameUnit3 = null;
+
+    public GameObject _lifeValor3 = null;
+    public GameObject _rangeValor3 = null;
+    public GameObject _moveValor3 = null;
+    public GameObject _damageValor3 = null;
+
+    [Space(10)]
+
+    [Header("Unité 4")]
+    public GameObject _nameUnit4 = null;
+
+    public GameObject _lifeValor4 = null;
+    public GameObject _rangeValor4 = null;
+    public GameObject _moveValor4 = null;
+    public GameObject _damageValor4 = null;
+
+    [Space(10)]
+
+    [Header("Unité 5")]
+    public GameObject _nameUnit5 = null;
+
+    public GameObject _lifeValor5 = null;
+    public GameObject _rangeValor5 = null;
+    public GameObject _moveValor5 = null;
+    public GameObject _damageValor5 = null;
+
+    [Space(10)]
+
+    [Header("Unité 6")]
+    public GameObject _nameUnit6 = null;
+
+    public GameObject _lifeValor6 = null;
+    public GameObject _rangeValor6 = null;
+    public GameObject _moveValor6 = null;
+    public GameObject _damageValor6 = null;
+
+
+}
+
+[System.Serializable]
+public class AssignRessouceUnit
+{
+    public List<GameObject> _unité1Ressource;
+    public List<GameObject> _unité2Ressource;
+    public List<GameObject> _unité3Ressource;
+    public List<GameObject> _unité4Ressource;
+    public List<GameObject> _unité5Ressource;
+    public List<GameObject> _unité6Ressource;
+}
+
+/// <summary>
+/// GameObject qui comprend l'ensemble des images pour le menuRenfort (les icones de vie, portée et déplacement ainsi qu les illustrations d'unités).
+/// </summary>
+[System.Serializable]
+public class EmplacementImageMenuRenfort
+{
+    public GameObject _drapeauDuJoueur = null;
+
+    [Space(20)]
+
+    public GameObject _imageUnité1 = null;
+    public GameObject _imageUnité2 = null;
+    public GameObject _imageUnité3 = null;
+    public GameObject _imageUnité4 = null;
+    public GameObject _imageUnité5 = null;
+    public GameObject _imageUnité6 = null;
+
+    [Space(20)]
+
+    public GameObject _imageLifeValor = null;
+    public GameObject _imageRangeValor = null;
+    public GameObject _imageMovementValor = null;
+    public GameObject _imageAttaqueValor = null;
+    public GameObject _imageRessource = null;
+}
+
+[System.Serializable]
+public class BouttonMenuRenfort
+{
+    public Button _quitMenuRenfort = null;
+
+    public Button _clicSurUnité1 = null;
+    public Button _clicSurUnité2 = null;
+    public Button _clicSurUnité3 = null;
+    public Button _clicSurUnité4 = null;
+    public Button _clicSurUnité5 = null;
+    public Button _clicSurUnité6 = null;
 }
 #endregion ClassToRangeList
