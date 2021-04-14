@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using EasyButtons;
+using UnityEditor;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class UnitScript : MonoBehaviour
@@ -13,8 +14,7 @@ public class UnitScript : MonoBehaviour
     [SerializeField] Unit_SO _unitSO;
     public Unit_SO UnitSO => _unitSO;
 
-    [Header("------------------- UI VIE -------------------")]
-    [SerializeField] SpriteRenderer CurrentSpriteLifeHeartUI;
+    [Header("------------------- VIE -------------------")]
     [Header("------------------- STAT EN JEU -------------------")]
     //Vie actuelle
     [SerializeField] int _life;
@@ -23,6 +23,9 @@ public class UnitScript : MonoBehaviour
     // Bouclier actuelle
     [SerializeField] int _shield;
     public int Shield => _shield;
+
+    //UI de la vie de l'unité
+    SpriteRenderer CurrentSpriteLifeHeartUI;
 
     [Header("-------------------- ATTAQUE -------------------")]
     //Portée
@@ -53,18 +56,12 @@ public class UnitScript : MonoBehaviour
     public int DiceBonus => _diceBonus;
 
 
-    [Header("------------------- DEPLACEMENT -------------------")]
+    [Header("------------------- MOUVEMENT -------------------")]
     //Vitesse de déplacement
     [SerializeField] int _moveSpeed;
     public int MoveSpeed => _moveSpeed;
     public int MoveSpeedBonus = 0;
 
-    [Header("------------------- COUT DE CREATION -------------------" )]
-    // Coût de création
-    [SerializeField] int _creationCost;
-    public int CreationCost => _creationCost;
-
-    [Header("------------------- DEPLACEMENT RESTANT -------------------")]
     // Déplacement réstant de l'unité durant cette activation
     [SerializeField] int _moveLeft;
     public int MoveLeft
@@ -78,6 +75,11 @@ public class UnitScript : MonoBehaviour
             _moveLeft = value;
         }
     }
+
+    [Header("------------------- COUT DE CREATION -------------------" )]
+    // Coût de création
+    [SerializeField] int _creationCost;
+    public int CreationCost => _creationCost;
 
     [Header("------------------- CASE DE L'UNITE -------------------")]
     //Valeur (id) de la case sur laquelle se trouve l'unité
@@ -93,6 +95,21 @@ public class UnitScript : MonoBehaviour
             _actualTileld = value;
         }
     }
+
+    [HideInInspector] int lastTileId = 0;
+
+#if UNITY_EDITOR
+    public void AddTileUnderUnit(){
+        if(lastTileId != ActualTiledId)
+        {
+            FindObjectOfType<TilesManager>().TileList[lastTileId].GetComponent<TileScript>().RemoveUnitFromTile();
+            lastTileId = ActualTiledId;
+        }
+
+        FindObjectOfType<TilesManager>().TileList[_actualTileld].GetComponent<TileScript>().AddUnitToTile(this.gameObject, true);
+    }
+#endif
+
 
     //déplacement actuel de l'unité pour la fonction "MoveWithPath"
     int _i;
@@ -113,9 +130,8 @@ public class UnitScript : MonoBehaviour
     [SerializeField] bool _isActivationDone;
     public bool IsActivationDone => _isActivationDone;
 
-    [Header("------------------- CHEMIN DE DEPLACEMENT -------------------")]
     //Chemin que l'unité va emprunter
-    [SerializeField] List<int> _pathtomake;
+    List<int> _pathtomake;
     public List<int> Pathtomake => _pathtomake;
 
     [Header("------------------- STAUT DE L'UNITE -------------------")]
@@ -320,7 +336,6 @@ public class UnitScript : MonoBehaviour
     }
     #endregion ChangementStat
 
-    [Button]
     /// <summary>
     /// Update les stats de l'unité avec les stats de base
     /// </summary>

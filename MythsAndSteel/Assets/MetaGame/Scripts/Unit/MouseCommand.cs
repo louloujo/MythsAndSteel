@@ -741,36 +741,11 @@ public class MouseCommand : MonoBehaviour
     }
 
     /// <summary>
-    /// Permet de créer une unité
+    /// Update les stats du menu renfort
     /// </summary>
-    public void craftUnit(int unitId)
-    {
-        //Insérer la fonction magique permettant de sélectionner les cases pour intanstier les troupes.
-        //Les troupes sont en référance dans la liste de UnitRéférence _unitClassCreableListRedPlayer et _unitClassCreableListBluePlayer
-        if(GameManager.Instance.IsPlayerRedTurn){
-            for(int i = 0; i < unitReference.UnitClassCreableListRedPlayer.Count; i++){
-                List<GameObject> tileList = new List<GameObject>();
-                tileList.AddRange(GameManager.Instance.RenfortPhase.CreateLeader1);
-                tileList.AddRange(GameManager.Instance.RenfortPhase.CreateTileJ1);
-
-                GameManager.Instance.StartEventModeTiles(1, true, tileList, "Création d'unité", "Êtes-vous sur de vouloir créer une unité sur cette case");
-            }
-        }
-
-        if(!GameManager.Instance.IsPlayerRedTurn){
-            for(int i = 0; i < unitReference.UnitClassCreableListBluePlayer.Count; i++){
-                List<GameObject> tileList = new List<GameObject>();
-                tileList.AddRange(GameManager.Instance.RenfortPhase.CreateLeader2);
-                tileList.AddRange(GameManager.Instance.RenfortPhase.CreateTileJ2);
-
-                GameManager.Instance.StartEventModeTiles(1, false, tileList, "Création d'unité", "Êtes-vous sur de vouloir créer une unité sur cette case");
-            }
-        }
-    }
-
     void UpdateStatsMenuRenforts()
     {
-        if(GameManager.Instance.IsPlayerRedTurn)
+        if(GameManager.Instance.IsPlayerRedTurn && !PlayerScript.Instance.RedPlayerInfos.HasCreateUnit)
         {
             //A modifier si inversement au niveau des usines (J1 et J2)  = > changer le ActionJ2 en ActionJ1.
             if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1)
@@ -981,7 +956,7 @@ public class MouseCommand : MonoBehaviour
             }
         }
 
-        else if(!GameManager.Instance.IsPlayerRedTurn)
+        else if(!GameManager.Instance.IsPlayerRedTurn && !PlayerScript.Instance.BluePlayerInfos.HasCreateUnit)
         {
             //A modifier si inversement au niveau des usines (J1 et J2) = > changer le ActionJ1 en ActionJ2.
             if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1)
