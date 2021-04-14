@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoSingleton<PlayerScript>
 {
+
     [SerializeField] bool _ArmyRedWinAtTheEnd;
     public bool ArmyRedWinAtTheEnd => _ArmyRedWinAtTheEnd;
 
