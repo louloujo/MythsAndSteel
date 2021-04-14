@@ -236,6 +236,17 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private AssignRessouceUnit _ressourceUnit_PasTouche;
     public AssignRessouceUnit RessourceUnit_PasTouche => _ressourceUnit_PasTouche;
     #endregion MenuRenfort
+
+    #region VieUnité
+    [SerializeField] private GameObject _lifeHeartPrefab;
+    public GameObject LifeHeartPrefab => _lifeHeartPrefab;
+
+    [SerializeField] private Sprite[] _shieldSprite;
+    public Sprite[] ShieldSprite => _shieldSprite;
+
+    [SerializeField] private Sprite[] _lifeHeartSprite;
+    public Sprite[] LifeHeartSprite => _lifeHeartSprite;
+    #endregion VieUnité
 }
 
 #region ClassToRangeList

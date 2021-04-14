@@ -1559,8 +1559,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitSO: {fileID: 11400000, guid: de7341a724493fc4b8ef2f7b5fad5c81, type: 2}
+  CurrentSpriteLifeHeartUI: {fileID: 0}
   _life: 5
-  _shield: 0
+  _shield: 2
   _attackRange: 3
   AttackRangeBonus: 0
   _numberRangeMin: {x: 3, y: 7}
@@ -4948,7 +4949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2443697204554867582, guid: 7bbc409cd689e724181e7247346a3e4b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4.1096992
+      value: 4.109699
       objectReference: {fileID: 0}
     - target: {fileID: 2443697204554867582, guid: 7bbc409cd689e724181e7247346a3e4b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6061,6 +6062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitSO: {fileID: 11400000, guid: 2378c437940554d4a8df8fe602444812, type: 2}
+  CurrentSpriteLifeHeartUI: {fileID: 0}
   _life: 3
   _shield: 0
   _attackRange: 3
@@ -10463,6 +10465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitSO: {fileID: 11400000, guid: de7341a724493fc4b8ef2f7b5fad5c81, type: 2}
+  CurrentSpriteLifeHeartUI: {fileID: 0}
   _life: 5
   _shield: 0
   _attackRange: 3
@@ -14361,6 +14364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitSO: {fileID: 11400000, guid: de7341a724493fc4b8ef2f7b5fad5c81, type: 2}
+  CurrentSpriteLifeHeartUI: {fileID: 0}
   _life: 5
   _shield: 0
   _attackRange: 3
@@ -15793,6 +15797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitSO: {fileID: 11400000, guid: de7341a724493fc4b8ef2f7b5fad5c81, type: 2}
+  CurrentSpriteLifeHeartUI: {fileID: 0}
   _life: 5
   _shield: 0
   _attackRange: 3
@@ -20992,6 +20997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitSO: {fileID: 11400000, guid: de7341a724493fc4b8ef2f7b5fad5c81, type: 2}
+  CurrentSpriteLifeHeartUI: {fileID: 0}
   _life: 5
   _shield: 0
   _attackRange: 3
@@ -21131,6 +21137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitSO: {fileID: 11400000, guid: de7341a724493fc4b8ef2f7b5fad5c81, type: 2}
+  CurrentSpriteLifeHeartUI: {fileID: 0}
   _life: 5
   _shield: 0
   _attackRange: 3
@@ -23528,6 +23535,30 @@ MonoBehaviour:
     - {fileID: 2086137321}
     - {fileID: 2086137320}
     - {fileID: 2086137319}
+  _lifeHeartPrefab: {fileID: 173392163849239963, guid: f995a6ed1892ee8439d628c36a76c6ff, type: 3}
+  _shieldSprite:
+  - {fileID: 3631486068606487904, guid: cf0a4f14231f3084dbaa83c3706b5a15, type: 3}
+  - {fileID: -2259256194075632979, guid: cf0a4f14231f3084dbaa83c3706b5a15, type: 3}
+  - {fileID: -8991825283878873797, guid: cf0a4f14231f3084dbaa83c3706b5a15, type: 3}
+  - {fileID: -4005642935271954631, guid: cf0a4f14231f3084dbaa83c3706b5a15, type: 3}
+  - {fileID: -3545743971019556356, guid: cf0a4f14231f3084dbaa83c3706b5a15, type: 3}
+  - {fileID: 3196917948635293437, guid: cf0a4f14231f3084dbaa83c3706b5a15, type: 3}
+  - {fileID: 6004310029958645857, guid: cf0a4f14231f3084dbaa83c3706b5a15, type: 3}
+  - {fileID: -1571715390308101163, guid: cf0a4f14231f3084dbaa83c3706b5a15, type: 3}
+  - {fileID: -4204531711718730956, guid: cf0a4f14231f3084dbaa83c3706b5a15, type: 3}
+  - {fileID: 6222823821224107078, guid: cf0a4f14231f3084dbaa83c3706b5a15, type: 3}
+  _lifeHeartSprite:
+  - {fileID: 21300000, guid: a32203ebbbcd7f84bb6eda4f4cdd742c, type: 3}
+  - {fileID: 21300000, guid: 0a7a70f758aab614dbea845bf11fb7c3, type: 3}
+  - {fileID: 21300000, guid: 0f8475cba7531214aa71c0dff50e0325, type: 3}
+  - {fileID: 21300000, guid: 125c1038e22e7934db6591418bb0583a, type: 3}
+  - {fileID: 21300000, guid: 9038c4d5f8cc8b74b9390b18cce0cc0a, type: 3}
+  - {fileID: 21300000, guid: 4012f12b1d81a6d42a8425fea62f9f93, type: 3}
+  - {fileID: 21300000, guid: 222194acebe0b964ca4c5ffed0a0ad7a, type: 3}
+  - {fileID: 21300000, guid: 87ec8f9a21805f1479742c58d7c31873, type: 3}
+  - {fileID: 21300000, guid: 2fb116c16111b5b43adee9fa5cc9ddfa, type: 3}
+  - {fileID: 21300000, guid: 32a51d1cffc9e114d81e7106e88b786c, type: 3}
+  - {fileID: 21300000, guid: bd2f76bd2b5e80a4e8ba6d432f2abcbc, type: 3}
 --- !u!114 &1870703327
 MonoBehaviour:
   m_ObjectHideFlags: 0
