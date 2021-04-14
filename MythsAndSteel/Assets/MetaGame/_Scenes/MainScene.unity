@@ -3398,7 +3398,7 @@ GameObject:
   - component: {fileID: 206205582}
   - component: {fileID: 206205583}
   m_Layer: 0
-  m_Name: TileHandler
+  m_Name: TilesList_Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
