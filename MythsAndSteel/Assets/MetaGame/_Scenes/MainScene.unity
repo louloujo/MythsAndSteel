@@ -260,7 +260,7 @@ PrefabInstance:
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _unit
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 409550974}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _tileId
       value: 22
