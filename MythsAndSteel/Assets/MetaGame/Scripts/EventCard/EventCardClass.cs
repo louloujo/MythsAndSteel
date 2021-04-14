@@ -300,29 +300,29 @@ public class EventCardClass : ScriptableObject{
             //Check les effets de terrain pour voir si il doit ajouter la tile à la liste
             foreach(int i in neighTile){
                 //Obtient la direction de la case par rapport à l'unité
-                string dir = PlayerStatic.CheckDirection(unit.GetComponent<UnitScript>().ActualTiledId, i);
+                MYthsAndSteel_Enum.Direction dir = PlayerStatic.CheckDirection(unit.GetComponent<UnitScript>().ActualTiledId, i);
 
                 if(TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Ravin) || TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Eau)) {
                     //La tile n'est pas ajoutée
                 }
                 else { 
                     switch(dir){
-                        case "Nord":
+                        case MYthsAndSteel_Enum.Direction.Nord:
                             if(!TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Sud)){
                                 gamList.Add(TilesManager.Instance.TileList[i]);
                             }
                             break;
-                        case "Sud":
+                        case MYthsAndSteel_Enum.Direction.Sud:
                             if(!TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Nord)){
                                 gamList.Add(TilesManager.Instance.TileList[i]);
                             }
                             break;
-                        case "Est":
+                        case MYthsAndSteel_Enum.Direction.Est:
                             if(!TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Ouest)){
                                 gamList.Add(TilesManager.Instance.TileList[i]);
                             }
                             break;
-                        case "Ouest":
+                        case MYthsAndSteel_Enum.Direction.Ouest:
                             if(!TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Est)){
                                 gamList.Add(TilesManager.Instance.TileList[i]);
                             }

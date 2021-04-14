@@ -12,6 +12,19 @@ public class EndTurn : MonoBehaviour
     [SerializeField] private int ObjOwnedByRed;
     [SerializeField] private int ObjOwnedByBlue;
 
+    List<GameObject> goalTileList = new List<GameObject>();
+
+    private void Start()
+    {
+        foreach(GameObject Tile in TilesManager.Instance.TileList)
+        {
+            if(Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Point_Objectif))
+            {
+                goalTileList.Add(Tile);
+            }
+        }
+    }
+
     /// <summary>
     /// Check si des ressources doivent être distribuées.
     /// </summary>
