@@ -56,4 +56,12 @@ public class MYthsAndSteel_Enum : MonoBehaviour
     {
         AttackSelect, MoveSelect, EventSelect
     }
+
+    /// <summary>
+    /// Liste des Scénarios du jeu
+    /// </summary>
+    public enum Scenario
+    {
+        Rethel, Shanghai, Stalingrad, Husky, Guadalcanal, ElAlamein, Elsenborn
+    }
 }

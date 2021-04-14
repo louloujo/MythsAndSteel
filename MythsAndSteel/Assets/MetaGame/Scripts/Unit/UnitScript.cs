@@ -54,7 +54,7 @@ public class UnitScript : MonoBehaviour
     public int DamageBonus => _damageBonus;
 
     //Bonus aux lancés de dé
-    [SerializeField] private int _diceBonus = 0;
+    [SerializeField] public int _diceBonus = 0;
     public int DiceBonus => _diceBonus;
 
 
@@ -129,6 +129,8 @@ public class UnitScript : MonoBehaviour
     public List<MYthsAndSteel_Enum.UnitStatut> UnitStatus => _unitStatus;
 
     bool hasUseActivation = false;
+    [SerializeField] private Animator _Animation;
+    public Animator Animation => _Animation;
 
     #endregion Variables
     private void Start()
@@ -201,12 +203,34 @@ public class UnitScript : MonoBehaviour
         }
 
         if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneRed)){
-            PlayerScript.Instance.AddOrgone(1, 1);
+            if(!GameManager.Instance.IsCheckingOrgone){
+                PlayerScript.Instance.AddOrgone(1, 1);
+                GameManager.Instance.IsCheckingOrgone = true;
+            }
+            else{
+                GameManager.Instance.LaunchOrgone(1, 1);
+                GameManager.Instance._waitToCheckOrgone += AddOrgoneToPlayer;
+            }
         }
-        else if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneBlue)){
-            PlayerScript.Instance.AddOrgone(1, 2);
+        
+        if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneBlue)){
+            if(!GameManager.Instance.IsCheckingOrgone)
+            {
+                PlayerScript.Instance.AddOrgone(1, 2);
+                GameManager.Instance.IsCheckingOrgone = true;
+            }
+            else
+            {
+                GameManager.Instance.LaunchOrgone(2, 1);
+                GameManager.Instance._waitToCheckOrgone += AddOrgoneToPlayer;
+            }
         }
-        else { }
+    }
+
+    void AddOrgoneToPlayer(){
+        PlayerScript.Instance.AddOrgone(GameManager.Instance.ValueOrgone, GameManager.Instance.PlayerOrgone);
+        GameManager.Instance._waitToCheckOrgone -= AddOrgoneToPlayer;
+        GameManager.Instance.StopOrgone();
     }
 
     /// <summary>
@@ -318,7 +342,7 @@ public class UnitScript : MonoBehaviour
             hasUseActivation = true;
             PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
         }
-        else
+        else if(!UnitSO.IsInRedArmy && !hasUseActivation)
         {
             hasUseActivation = true;
             PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
@@ -354,4 +378,3 @@ public class UnitScript : MonoBehaviour
         }
     }
 }
-

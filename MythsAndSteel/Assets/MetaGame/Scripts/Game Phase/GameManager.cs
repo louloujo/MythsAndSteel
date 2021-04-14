@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
 
 /*
     Ce script est le Game Manager. Il va gérer toutes les phases du jeu, les différents tours de jeu, ...
@@ -47,9 +48,6 @@ public class GameManager : MonoSingleton<GameManager>{
     //Correspond à la phase actuelle durant le tour
     [SerializeField] private MYthsAndSteel_Enum.PhaseDeJeu _actualTurnPhase = MYthsAndSteel_Enum.PhaseDeJeu.Debut;
     public MYthsAndSteel_Enum.PhaseDeJeu ActualTurnPhase => _actualTurnPhase;
-
-    //Le panneau qui est affiché sur l'écran du joueur
-    GameObject actualSwitchPhasePanel = null;
 
     [Header("REFERENCES DES SCRIPTABLE")]
     //Event Manager
@@ -98,7 +96,7 @@ public class GameManager : MonoSingleton<GameManager>{
     [SerializeField] bool _redPlayerUseEvent = false;
     public bool RedPlayerUseEvent => _redPlayerUseEvent;
 
-    public bool IllusionStratégique = false;
+    [HideInInspector] public bool IllusionStratégique = false;
 
     string _titleValidation = "";
     string _descriptionValidation = "";
@@ -109,7 +107,30 @@ public class GameManager : MonoSingleton<GameManager>{
     public EventToCallAfterChoose _eventCallCancel;
     public EventToCallAfterChoose _waitEvent;
 
+    [Header("ACTIVATION")]
+    //Est ce que le joueur est en train de choisir des unités
+    [SerializeField] private PhaseActivation _activationPhase = null;
+    public PhaseActivation ActivationPhase => _activationPhase;
+
     float deltaTimeX = 0f;
+
+    #region CheckOrgone
+    //Check l'orgone pour éviter l'override
+    public bool IsCheckingOrgone = false;
+
+    //Event qui permet d'attendre pour donner de l'orgone à un joueur
+    public delegate void Checkorgone();
+    public Checkorgone _waitToCheckOrgone;
+
+    //Quel joueur attend de recevoir son orgone
+    private int _playerOrgone = 0;
+    public int PlayerOrgone => _playerOrgone;
+
+    //Quelle est la valeur a donner au joueur
+    private int _valueOrgone= 0;
+    public int ValueOrgone => _valueOrgone;
+    #endregion CheckOrgone
+
     #endregion Variables
 
     /// <summary>
@@ -138,15 +159,32 @@ public class GameManager : MonoSingleton<GameManager>{
     }
 
     /// <summary>
+    /// Quand le joueur clic pour passer à la phase suivante
+    /// </summary>
+    public void CliCToChangePhase(){
+        UIInstance.Instance.ShowValidationPanel("Passer à la phase suivante", "Êtes-vous sur de vouloir passer à la phase suivante? En passant la phase vous n'aurez pas la possibilité de revenir en arrière.");
+        _eventCall += ChangePhase;
+        _eventCallCancel += CancelSkipPhase;
+    }
+
+    /// <summary>
+    /// Quand le joueur annule le fait de passer une phase
+    /// </summary>
+    void CancelSkipPhase()
+    {
+        _eventCallCancel -= CancelSkipPhase;
+        UIInstance.Instance.ActivateNextPhaseButton();
+    }
+
+    /// <summary>
     /// Aller à la phase de jeu renseigner en paramètre
     /// </summary>
     /// <param name="phaseToGoTo"></param>
     public void ChangePhase()
     {
         //Affiche le panneau de transition d'UI
-        SwitchPhaseObjectUI(false);
         _isInTurn = false;
-        UIInstance.Instance.ActivationUnitPanel.closePanel();
+        SwitchPhaseObjectUI();
     }
 
     /// <summary>
@@ -192,9 +230,6 @@ public class GameManager : MonoSingleton<GameManager>{
     public void OnclickedEvent(){
         //Les joueurs peuvent à nouveau jouer
         _isInTurn = true;
-
-        //Détruit le panneau de changement de phase
-        SwitchPhaseObjectUI(true);
     }
 
     public void GoPhase(MYthsAndSteel_Enum.PhaseDeJeu phase)
@@ -206,32 +241,25 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <summary>
     /// Affiche le panneau d'indication de changement de phase. Les joueurs doivent cliquer sur un bouton pour passer la phase
     /// </summary>
-    public void SwitchPhaseObjectUI(bool destroy){
+    public void SwitchPhaseObjectUI()
+    {
         //Ajoute le menu où il faut cliquer
-        if(!destroy) {
-            //Instantie le panneau de transition entre deux phases et le garde en mémoire
-            GameObject phaseObj = Instantiate(UIInstance.Instance.SwitchPhaseObject, UIInstance.Instance.CanvasTurnPhase.transform.position, 
-                                              Quaternion.identity, UIInstance.Instance.CanvasTurnPhase.transform);
-            actualSwitchPhasePanel = phaseObj;
+        //Instantie le panneau de transition entre deux phases et le garde en mémoire
+        GameObject phaseObj = Instantiate(UIInstance.Instance.SwitchPhaseObject, UIInstance.Instance.CanvasTurnPhase.transform.position,
+                                          Quaternion.identity, UIInstance.Instance.CanvasTurnPhase.transform);
 
-            //Variable qui permet d'avoir le texte à afficher au début de la phase
-            string textForSwitch = "";
-            MYthsAndSteel_Enum.PhaseDeJeu nextPhase = (MYthsAndSteel_Enum.PhaseDeJeu)((int)_actualTurnPhase + 1) > (MYthsAndSteel_Enum.PhaseDeJeu)6 ? 0 : (MYthsAndSteel_Enum.PhaseDeJeu)((int)_actualTurnPhase + 1);
+        //Variable qui permet d'avoir le texte à afficher au début de la phase
+        string textForSwitch = "";
+        int nextPhase = (int)ActualTurnPhase + 1 > 6 ? 0 : (int) ActualTurnPhase + 1;
+        textForSwitch = "Phase " + ((MYthsAndSteel_Enum.PhaseDeJeu) nextPhase).ToString();
 
-            if(ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Debut) textForSwitch = "Tour suivant : Vous passez à la phase" + " " + nextPhase.ToString();
-            else textForSwitch = "Vous passez à la phase" + " " + nextPhase.ToString();
-
-            //Change le texte en jeu
-            phaseObj.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = textForSwitch;
-
-            EventSystem.current.SetSelectedGameObject(phaseObj);
+        phaseObj.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = textForSwitch;
+        Destroy(phaseObj, 1.25f);      
+        if(ActualTurnPhase + 1 == MYthsAndSteel_Enum.PhaseDeJeu.Activation){
+            StartCoroutine(waitToChange());
         }
-
-        //Supprime le menu où il faut cliquer
-        else {
-            if(actualSwitchPhasePanel != null){
-                Destroy(actualSwitchPhasePanel);
-            }
+        else{
+            ManagerSO.GoToPhase();
         }
     }
     #endregion UIFunction
@@ -428,14 +456,46 @@ public class GameManager : MonoSingleton<GameManager>{
         }
     }
 
+    /// <summary>
+    /// Call the event of validation panel
+    /// </summary>
     public void CallEvent(){
         _eventCall();
     }
 
+    /// <summary>
+    /// Call the event cancel on the validation panel
+    /// </summary>
     public void CancelEvent(){
         StopEventModeTile();
         StopEventModeUnit();
         if(_eventCallCancel != null) _eventCallCancel();
     }
     #endregion EventMode
+
+    #region WaitOrgone
+    /// <summary>
+    /// Permet de lancer la fonction d'orgone
+    /// </summary>
+    /// <param name="player"></param>
+    /// <param name="value"></param>
+    public void LaunchOrgone(int player, int value){
+        _playerOrgone = player;
+        _valueOrgone = value;
+    }
+
+    /// <summary>
+    /// Quand l'orgone a été effectuée
+    /// </summary>
+    public void StopOrgone(){
+        _playerOrgone = 0;
+        _valueOrgone = 0;
+    }
+    #endregion WaitOrgone
+
+    IEnumerator waitToChange(){
+        yield return new WaitForSeconds(1.35f);
+        ManagerSO.GoToPhase();
+        _isInTurn = true;
+    }
 }

@@ -74,20 +74,16 @@ public class InputManager : MonoBehaviour
             }
             if(Input.GetKey(SkipPhase) && !hasShowPanel && !Attaque.Instance.Selected && !Mouvement.Instance.Selected && !OrgoneManager.Instance.Selected)
             {
-                if((GameManager.Instance.IsPlayerRedTurn && !OrgoneManager.Instance.RedPlayerZone.GetComponent<ZoneOrgone>().IsInValidation) ||
-                   (!GameManager.Instance.IsPlayerRedTurn && !OrgoneManager.Instance.BluePlayerZone.GetComponent<ZoneOrgone>().IsInValidation))
+                if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Activation)
                 {
-                    t += Time.deltaTime;
-                    UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta = new Vector2(SkipPhaseStartWidth * (t / _timeToWaitForSkipPhase), UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta.y);
-                    if(t > _timeToWaitForSkipPhase)
+                    if(GameManager.Instance.ActivationPhase.J1CarteChoisie && GameManager.Instance.ActivationPhase.J2CarteChoisie)
                     {
-                        UIInstance.Instance.ShowValidationPanel("Passer à la phase suivante", "Êtes-vous sur de vouloir passer à la phase suivante? En passant la phase vous n'aurez pas la possibilité de revenir en arrière.");
-                        GameManager.Instance._eventCall += SkipPhaseFunc;
-                        GameManager.Instance._eventCallCancel += CancelSkipPhase;
-                        hasShowPanel = true;
-                        t = 0;
-                        UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta.y);
+                        ClicToSkipPhase();
                     }
+                }
+                else
+                {
+                    ClicToSkipPhase();
                 }
             }
             if(Input.GetKeyUp(SkipPhase))
@@ -98,9 +94,31 @@ public class InputManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Quand le joueur peut changer de phase
+    /// </summary>
+    void ClicToSkipPhase()
+    {
+        if((GameManager.Instance.IsPlayerRedTurn && !OrgoneManager.Instance.RedPlayerZone.GetComponent<ZoneOrgone>().IsInValidation) ||
+                           (!GameManager.Instance.IsPlayerRedTurn && !OrgoneManager.Instance.BluePlayerZone.GetComponent<ZoneOrgone>().IsInValidation))
+        {
+            t += Time.deltaTime;
+            UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta = new Vector2(SkipPhaseStartWidth * (t / _timeToWaitForSkipPhase), UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta.y);
+            if(t > _timeToWaitForSkipPhase)
+            {
+                UIInstance.Instance.ShowValidationPanel("Passer à la phase suivante", "Êtes-vous sur de vouloir passer à la phase suivante? En passant la phase vous n'aurez pas la possibilité de revenir en arrière.");
+                GameManager.Instance._eventCall += SkipPhaseFunc;
+                GameManager.Instance._eventCallCancel += CancelSkipPhase;
+                hasShowPanel = true;
+                t = 0;
+                UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta.y);
+            }
+        }
+    }
+
+    /// <summary>
     /// Quand le joueur accepte de changer de phase
     /// </summary>
-    public void SkipPhaseFunc(){
+    void SkipPhaseFunc(){
         GameManager.Instance.ChangePhase();
         GameManager.Instance._eventCall -= SkipPhaseFunc;
         hasShowPanel = false;
@@ -109,7 +127,7 @@ public class InputManager : MonoBehaviour
     /// <summary>
     /// Quand le joueur annule le changement de phase
     /// </summary>
-    public void CancelSkipPhase(){
+    void CancelSkipPhase(){
         hasShowPanel = false;
         t = 0;
         GameManager.Instance._eventCallCancel -= CancelSkipPhase;
