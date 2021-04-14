@@ -14,11 +14,17 @@ public class UnitScript : MonoBehaviour
     public Unit_SO UnitSO => _unitSO;
 
     [Header("------------------- VIE -------------------")]
+    //Représentation du bouclier de l'unité dans le jeu
+    [SerializeField]
+    SpriteRenderer CurrentSpriteShieldUI;
+    //Représentation de la vie de l'unité dans le jeu
+    [SerializeField]
+    SpriteRenderer CurrentSpriteLifeHeartUI;
     [Header("------------------- STAT EN JEU -------------------")]
     //Vie actuelle
     [SerializeField] int _life;
     public int Life => _life;
-
+    
     // Bouclier actuelle
     [SerializeField] int _shield;
     public int Shield => _shield;
@@ -127,7 +133,21 @@ public class UnitScript : MonoBehaviour
     public Animator Animation => _Animation;
 
     #endregion Variables
+    private void Start()
+    {
+      // On instancie l'object qui possède le sprite correspondant à l'UI au point de vie et de bouclier de l'unité.
+      GameObject LifeHeartUI = Instantiate(LifeHeartShieldUI.Instance.LifeHeartPrefab, gameObject.transform);
+      GameObject ShieldUI = Instantiate(LifeHeartShieldUI.Instance.ShieldPrefab, gameObject.transform);
+     
+      CurrentSpriteLifeHeartUI = LifeHeartUI.GetComponent<SpriteRenderer>();
+      LifeHeartShieldUI.Instance.UpdateLifeHeartShieldUI(LifeHeartShieldUI.Instance.LifeHeartSprite, _life, CurrentSpriteLifeHeartUI);
+      CurrentSpriteShieldUI = ShieldUI.GetComponent<SpriteRenderer>();
+      LifeHeartShieldUI.Instance.UpdateLifeHeartShieldUI(LifeHeartShieldUI.Instance.ShieldSprite, _shield, CurrentSpriteShieldUI);
 
+
+
+
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -149,10 +169,13 @@ public class UnitScript : MonoBehaviour
     public virtual void GiveLife(int Lifeadd)
     {
         _life += Lifeadd;
-        if(_life > UnitSO.LifeMax){
+        LifeHeartShieldUI.Instance.UpdateLifeHeartShieldUI(LifeHeartShieldUI.Instance.LifeHeartSprite, _life, CurrentSpriteLifeHeartUI);
+        if (_life > UnitSO.LifeMax){
             int shieldPlus = _life - UnitSO.LifeMax;
             _life = UnitSO.LifeMax;
             _shield += shieldPlus;
+            LifeHeartShieldUI.Instance.UpdateLifeHeartShieldUI(LifeHeartShieldUI.Instance.LifeHeartSprite, _life, CurrentSpriteLifeHeartUI);
+            LifeHeartShieldUI.Instance.UpdateLifeHeartShieldUI(LifeHeartShieldUI.Instance.ShieldSprite, _shield, CurrentSpriteShieldUI);
         }
     }
 
@@ -164,12 +187,18 @@ public class UnitScript : MonoBehaviour
     {
         if(_shield > 0){
             _shield -= Damage;
-            _life += _shield;
+          
+            LifeHeartShieldUI.Instance.UpdateLifeHeartShieldUI(LifeHeartShieldUI.Instance.LifeHeartSprite, _life, CurrentSpriteLifeHeartUI);
+            LifeHeartShieldUI.Instance.UpdateLifeHeartShieldUI(LifeHeartShieldUI.Instance.ShieldSprite, _shield, CurrentSpriteShieldUI);
             CheckLife();
+          
+               
         }
         else
         {
             _life -= Damage;
+            LifeHeartShieldUI.Instance.UpdateLifeHeartShieldUI(LifeHeartShieldUI.Instance.LifeHeartSprite, _life, CurrentSpriteLifeHeartUI);
+           
             CheckLife();
         }
 
