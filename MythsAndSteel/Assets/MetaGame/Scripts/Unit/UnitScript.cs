@@ -58,6 +58,9 @@ public class UnitScript : MonoBehaviour
     public int MoveSpeed => _moveSpeed;
     public int MoveSpeedBonus = 0;
 
+    [Header("------------------- CAPACITES -------------------")]
+    public Capacity[] ListeDesCapacites;
+
     [Header("------------------- COUT DE CREATION -------------------" )]
     // Coût de création
     [SerializeField] int _creationCost;

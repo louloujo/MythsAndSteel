@@ -10,6 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e671042ac8899c24498058383ee3f9c1, type: 3}
-  m_Name: New Capacity Class
+  m_Name: superpuissance
   m_EditorClassIdentifier: 
-  test: 0
+  CapacityName: superpuissance
+  Description: "il gange +5 au d\xE9 d'attaque"
+  _ActiveCapacity: 1
+  _CapacityCost: 2
+  capacite: {fileID: 0}
