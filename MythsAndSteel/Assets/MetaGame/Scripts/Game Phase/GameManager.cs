@@ -53,9 +53,14 @@ public class GameManager : MonoSingleton<GameManager>{
     //Event Manager
     [SerializeField] private EventCardClass _eventCardSO = null;
     public EventCardClass EventCardSO => _eventCardSO;
+
     //Game Manager avec tous les event
     [SerializeField] private GameManagerSO _managerSO = null;
     public GameManagerSO ManagerSO => _managerSO;
+
+    //Option manager pour ouvrir le menu d'option
+    [SerializeField] private GameManagerSO _optionSO = null;
+    public GameManagerSO OptionSO => _optionSO;
 
     [Header("RENFORT PHASE SCRIPT")]
     [SerializeField] RenfortPhase _renfortPhase = null;
