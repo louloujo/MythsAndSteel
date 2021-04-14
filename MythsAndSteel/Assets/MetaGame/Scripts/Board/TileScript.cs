@@ -61,7 +61,6 @@ public class TileScript : MonoBehaviour
         //Met l'unité à la bonne position
         if(_unit != null){
             _unit.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, _unit.transform.position.z);
-            _unit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(this.gameObject);
         }
 
         for(int i = 0; i < transform.childCount; i++){
@@ -73,10 +72,11 @@ public class TileScript : MonoBehaviour
     /// Ajoute une unité à cette case
     /// </summary>
     /// <param name="unit"></param>
-    public void AddUnitToTile(GameObject unit){
+    public void AddUnitToTile(GameObject unit, bool inEditor = false){
         _unit = unit;
         _unit.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, _unit.transform.position.z);
-        _unit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(this.gameObject);
+
+        if(!inEditor) _unit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(this.gameObject);
     }
 
     /// <summary>

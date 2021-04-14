@@ -8,10 +8,12 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     #region Appel de Script
     public MouseCommand _mouseCommand;
     #endregion
+
     #region Variables
     [Header("INFO DU RAYCAST")]
     //Les layer qui sont détectés par le raycast
     [SerializeField] private LayerMask _layerM;
+    public LayerMask LayerM => _layerM;
 
     //tile qui se trouve sous le raycast
     [SerializeField] private GameObject _tile;
