@@ -59,8 +59,8 @@ public class GameManager : MonoSingleton<GameManager>{
     public GameManagerSO ManagerSO => _managerSO;
 
     //Option manager pour ouvrir le menu d'option
-    [SerializeField] private GameManagerSO _optionSO = null;
-    public GameManagerSO OptionSO => _optionSO;
+    [SerializeField] private MenuOption _optionSO = null;
+    public MenuOption OptionSO => _optionSO;
 
     [Header("RENFORT PHASE SCRIPT")]
     [SerializeField] RenfortPhase _renfortPhase = null;

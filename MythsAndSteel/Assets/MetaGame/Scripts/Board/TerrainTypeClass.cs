@@ -32,10 +32,17 @@ public class TerrainTypeClass : ScriptableObject
     public GameObject ReturnInfo(GameObject PrefabEffetDeTerrain, MYthsAndSteel_Enum.TerrainType TR)
     {
         TerrainType Saved = FindEffect(TR);
-        PrefabEffetDeTerrain.transform.GetChild(0).GetComponent<Image>().sprite = Saved.render;
-        PrefabEffetDeTerrain.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Saved._terrainName;
-        PrefabEffetDeTerrain.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = Saved._description;
-        return PrefabEffetDeTerrain;
+        if(Saved != null)
+        {
+            if(Saved.render != null)
+            {
+                PrefabEffetDeTerrain.transform.GetChild(0).GetComponent<Image>().sprite = Saved.render;
+            }
+            PrefabEffetDeTerrain.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Saved._terrainName;
+            PrefabEffetDeTerrain.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = Saved._description;
+            return PrefabEffetDeTerrain;
+        }
+        return null;
     }
 
     protected TerrainType FindEffect(MYthsAndSteel_Enum.TerrainType Type)

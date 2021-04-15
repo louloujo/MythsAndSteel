@@ -96,12 +96,16 @@ public class MouseCommand : MonoBehaviour
             Destroy(UI.effetDeTerrain[UI.effetDeTerrain.Count - 1]);
             UI.effetDeTerrain.RemoveAt(UI.effetDeTerrain.Count - 1);
         }
+
+        UI.parentSlotEffetDeTerrain.transform.parent.parent.GetComponent<ScrollRect>().verticalScrollbar.value = 1;
         foreach(MYthsAndSteel_Enum.TerrainType Terrain in RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList)
-        {        
+        {
             GameObject Effet = Instantiate(UI.Terrain.ReturnInfo(UI.prefabSlotEffetDeTerrain, Terrain), UI.parentSlotEffetDeTerrain.transform.position, Quaternion.identity);
             Effet.transform.SetParent(UI.parentSlotEffetDeTerrain.transform);
             Effet.transform.localScale = new Vector3(.9f, .9f, .9f);
             UI.effetDeTerrain.Add(Effet);
+
+            UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta.x, 212 * UI.effetDeTerrain.Count);
         }
     }
     #endregion UpdateStats
