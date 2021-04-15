@@ -43,11 +43,7 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
-    // Vie de l'ennemi cibl√© 
-    [SerializeField] int _EnnemyLife;
-    public int Life => _EnnemyLife;
-
-    //Port√©e d'attaque
+    //PortÈe d'attaque
     [SerializeField] int _attackRange;
     public int AttackRange => _attackRange;
 
@@ -76,7 +72,7 @@ public class Attaque : MonoSingleton<Attaque>
     int firstDiceInt, secondDiceInt, DiceResult;
 
     GameObject selectedUnit;
-    GameObject selectedUnitEnnemy;
+    [SerializeField] GameObject selectedUnitEnnemy;
 
     [Header("SPRITES POUR LES CASES")]
     [SerializeField] private Sprite _selectedSprite = null;
@@ -91,7 +87,9 @@ public class Attaque : MonoSingleton<Attaque>
 
     #endregion Variables
 
-    [EasyButtons.Button]
+    /// <summary>
+    /// Fait un lancÈ de dÈ
+    /// </summary>
     void Randomdice()
     {
         firstDiceFloat = Random.Range(1f, 7f);
@@ -106,6 +104,12 @@ public class Attaque : MonoSingleton<Attaque>
         Debug.Log("Dice Result : " + DiceResult);
     }
 
+    /// <summary>
+    /// Attaque d'une unitÈ avec un range d'attaque
+    /// </summary>
+    /// <param name="_numberRangeMin"></param>
+    /// <param name="_damageMinimum"></param>
+    /// <param name="DiceResult"></param>
     void UnitAttackOneRange(Vector2 _numberRangeMin, int _damageMinimum, int DiceResult)
     {
         if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
@@ -122,6 +126,14 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
+    /// <summary>
+    /// Attaque d'une unitÈ avec deux ranges d'attaque
+    /// </summary>
+    /// <param name="_numberRangeMin"></param>
+    /// <param name="_damageMinimum"></param>
+    /// <param name="_numberRangeMax"></param>
+    /// <param name="_damageMaximum"></param>
+    /// <param name="DiceResult"></param>
     void UnitAttackTwoRanges(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, int DiceResult)
     {
         if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
@@ -142,6 +154,10 @@ public class Attaque : MonoSingleton<Attaque>
             Debug.Log("Damage : " + null);
         }
     }
+
+    /// <summary>
+    /// Lance l'animation d'attaque
+    /// </summary>
     void AnimationUpdate()
     {
         GameObject ActualUnit = RaycastManager.Instance.ActualUnitSelected;
@@ -380,13 +396,12 @@ public class Attaque : MonoSingleton<Attaque>
     {
         _attackRange = selectedUnit.GetComponent<UnitScript>().AttackRange; // R√©cup√©ration de la Port√©e
         
-        _damageMinimum = selectedUnit.GetComponent<UnitScript>().DamageMinimum; // R√©cup√©ration des D√©gats Maximum
-        _damageMaximum = selectedUnit.GetComponent<UnitScript>().DamageMaximum; // D√©gats Minimums
-        _numberRangeMin.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.x; // R√©cup√©ration de la Range min - x
-        _numberRangeMin.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.y; // R√©cup√©ration de la Range min - y 
-        _numberRangeMax.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.x; // R√©cup√©ration de la Range min - x
-        _numberRangeMax.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.y; // R√©cup√©ration de la Range min - y
-        _EnnemyLife = selectedUnitEnnemy.GetComponent<UnitScript>().Life; // R√©cup√©ration de la vie de l'unit√© attaqu√©e
+        _damageMinimum = selectedUnit.GetComponent<UnitScript>().DamageMinimum; // RÈcupÈration des DÈgats Maximum
+        _damageMaximum = selectedUnit.GetComponent<UnitScript>().DamageMaximum; // DÈgats Minimums
+        _numberRangeMin.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.x; // RÈcupÈration de la Range min - x
+        _numberRangeMin.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.y; // RÈcupÈration de la Range min - y 
+        _numberRangeMax.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.x; // RÈcupÈration de la Range min - x
+        _numberRangeMax.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.y; // RÈcupÈration de la Range min - y
     }
 
     public void ApplyAttack()
