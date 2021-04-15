@@ -354,6 +354,16 @@ public class Attaque : MonoSingleton<Attaque>
                 {
                     _EnnemyLife = selectedUnitEnnemy.GetComponent<UnitScript>().Life;
                     ApplyAttack();
+
+                    if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId))
+                    {
+                        if (!PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId) || !PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
+                        {
+                            _numberRangeMin.x += 2;
+                            _numberRangeMin.y += 2;
+                            _numberRangeMax.x += 2;
+                        }
+                    }
                 }
                 else
                 {
@@ -405,14 +415,6 @@ public class Attaque : MonoSingleton<Attaque>
         {
             selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
         }
-        /*
-        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId) && !PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId) || !PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
-        {
-            _numberRangeMin.x += 2;
-            _numberRangeMin.y += 2;
-            _numberRangeMax.x += 2;
-        }
-        */
     }
 
     public void ApplyAttack()
