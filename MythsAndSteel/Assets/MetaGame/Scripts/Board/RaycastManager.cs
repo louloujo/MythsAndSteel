@@ -8,10 +8,12 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     #region Appel de Script
     public MouseCommand _mouseCommand;
     #endregion
+
     #region Variables
     [Header("INFO DU RAYCAST")]
     //Les layer qui sont détectés par le raycast
     [SerializeField] private LayerMask _layerM;
+    public LayerMask LayerM => _layerM;
 
     //tile qui se trouve sous le raycast
     [SerializeField] private GameObject _tile;
@@ -80,7 +82,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             if (_mouseCommand._checkIfPlayerAsClic == true && _mouseCommand._hasCheckUnit == false)
             {
                 _mouseCommand.ShiftClick();
-                CallMouseCommand();
+                _mouseCommand.MouseExitWithoutClick();
             }
             else if(_mouseCommand._checkIfPlayerAsClic == false)
             {
@@ -94,7 +96,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             _mouseCommand.MouseExitWithoutClick();
             if(GameManager.Instance.IsInTurn == false || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Activation)
             {
-            _mouseCommand.clickQuit();
+            _mouseCommand.QuitShiftPanel();
             }
 
         }
@@ -274,10 +276,5 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         Vector2 mouseDirection = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         Ray2D ray = new Ray2D(Camera.main.ScreenToWorldPoint(Input.mousePosition), mouseDirection);
         return Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, _layerM);
-    }
-
-    public void CallMouseCommand(){
-        _mouseCommand.buttonAction(UIInstance.Instance.PageButton);
-        _mouseCommand.MouseExitWithoutClick();
     }
 }

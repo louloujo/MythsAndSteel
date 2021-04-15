@@ -18,6 +18,9 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] float SkipPhaseStartWidth = 0;
 
+    [Header("RENFORT PHASE SCRIPT")]
+    [SerializeField] RenfortPhase _renfortPhase = null;
+
     private void Start()
     {
         UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta.y);
@@ -34,7 +37,7 @@ public class InputManager : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && Input.GetKey(MoreInfoUnit)){
             if(GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation)
             {
-                RaycastManager.Instance._mouseCommand.clickQuit();
+                RaycastManager.Instance._mouseCommand.QuitShiftPanel();
                 RaycastManager.Instance._mouseCommand._checkIfPlayerAsClic = false;
                 RaycastManager.Instance._mouseCommand._hasCheckUnit = false;
                 RaycastManager.Instance._mouseCommand._checkIfPlayerAsClic = true;
@@ -89,6 +92,29 @@ public class InputManager : MonoBehaviour
             if(Input.GetKeyUp(SkipPhase))
             {
                 UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta.y);
+            }
+        }
+
+        //Quand tu cliques sur une case
+        if(Input.GetMouseButtonDown(1)){
+            //Si l'usine de l'Armée Bleu est sélectionnée et c'est le tour du joueur de l'Armée Bleu.
+            if(RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineBleu) &&
+                !GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
+                || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2))
+            {
+                Debug.Log("usine bleu");
+                RaycastManager.Instance._mouseCommand.MenuRenfortUI();
+                _renfortPhase.CreateRenfort();
+            }
+
+            //Si l'usine de l'Armée Rouge est sélectionnée et c'est le tour du joueur de l'Armée Rouge.
+            if(RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineRouge)
+                && GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
+                || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2))
+            {
+                Debug.Log("usine rouge");
+                RaycastManager.Instance._mouseCommand.MenuRenfortUI();
+                _renfortPhase.CreateRenfort();
             }
         }
     }

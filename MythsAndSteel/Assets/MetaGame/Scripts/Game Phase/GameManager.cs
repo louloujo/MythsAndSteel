@@ -57,6 +57,10 @@ public class GameManager : MonoSingleton<GameManager>{
     [SerializeField] private GameManagerSO _managerSO = null;
     public GameManagerSO ManagerSO => _managerSO;
 
+    [Header("RENFORT PHASE SCRIPT")]
+    [SerializeField] RenfortPhase _renfortPhase = null;
+    public RenfortPhase RenfortPhase => _renfortPhase;
+
     [Header("SELECTION UNITE")]
     [Header("MODE EVENEMENT")]
     [Space]

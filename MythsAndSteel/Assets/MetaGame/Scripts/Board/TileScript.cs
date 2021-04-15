@@ -44,6 +44,12 @@ public class TileScript : MonoBehaviour
     [SerializeField] private List<MYthsAndSteel_Enum.TerrainType> _terrainEffectList = new List<MYthsAndSteel_Enum.TerrainType>();
     public List<MYthsAndSteel_Enum.TerrainType> TerrainEffectList => _terrainEffectList;
 
+
+    //Liste des effets de terrain sur chaque tile
+    [SerializeField] private List<MYthsAndSteel_Enum.EffetProg> _effetProg = new List<MYthsAndSteel_Enum.EffetProg>();
+    public List<MYthsAndSteel_Enum.EffetProg> EffetProg => _effetProg;
+
+
     [Header("VARIABLES EFFET DE TERRAIN")]
     [SerializeField] MYthsAndSteel_Enum.Owner _ownerObjectiv = MYthsAndSteel_Enum.Owner.neutral;
     public MYthsAndSteel_Enum.Owner OwnerObjectiv => _ownerObjectiv;
@@ -55,7 +61,6 @@ public class TileScript : MonoBehaviour
         //Met l'unité à la bonne position
         if(_unit != null){
             _unit.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, _unit.transform.position.z);
-            _unit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(this.gameObject);
         }
 
         for(int i = 0; i < transform.childCount; i++){
@@ -67,10 +72,11 @@ public class TileScript : MonoBehaviour
     /// Ajoute une unité à cette case
     /// </summary>
     /// <param name="unit"></param>
-    public void AddUnitToTile(GameObject unit){
+    public void AddUnitToTile(GameObject unit, bool inEditor = false){
         _unit = unit;
         _unit.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, _unit.transform.position.z);
-        _unit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(this.gameObject);
+
+        if(!inEditor) _unit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(this.gameObject);
     }
 
     /// <summary>

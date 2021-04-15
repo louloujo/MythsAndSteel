@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using EasyButtons;
+using UnityEditor;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class UnitScript : MonoBehaviour
@@ -18,10 +19,13 @@ public class UnitScript : MonoBehaviour
     //Vie actuelle
     [SerializeField] int _life;
     public int Life => _life;
-
+    
     // Bouclier actuelle
     [SerializeField] int _shield;
     public int Shield => _shield;
+
+    //UI de la vie de l'unité
+    SpriteRenderer CurrentSpriteLifeHeartUI;
 
     [Header("-------------------- ATTAQUE -------------------")]
     //Portée
@@ -52,18 +56,12 @@ public class UnitScript : MonoBehaviour
     public int DiceBonus => _diceBonus;
 
 
-    [Header("------------------- DEPLACEMENT -------------------")]
+    [Header("------------------- MOUVEMENT -------------------")]
     //Vitesse de déplacement
     [SerializeField] int _moveSpeed;
     public int MoveSpeed => _moveSpeed;
     public int MoveSpeedBonus = 0;
 
-    [Header("------------------- COUT DE CREATION -------------------" )]
-    // Coût de création
-    [SerializeField] int _creationCost;
-    public int CreationCost => _creationCost;
-
-    [Header("------------------- DEPLACEMENT RESTANT -------------------")]
     // Déplacement réstant de l'unité durant cette activation
     [SerializeField] int _moveLeft;
     public int MoveLeft
@@ -77,6 +75,11 @@ public class UnitScript : MonoBehaviour
             _moveLeft = value;
         }
     }
+
+    [Header("------------------- COUT DE CREATION -------------------" )]
+    // Coût de création
+    [SerializeField] int _creationCost;
+    public int CreationCost => _creationCost;
 
     [Header("------------------- CASE DE L'UNITE -------------------")]
     //Valeur (id) de la case sur laquelle se trouve l'unité
@@ -92,6 +95,21 @@ public class UnitScript : MonoBehaviour
             _actualTileld = value;
         }
     }
+
+    [HideInInspector] int lastTileId = 0;
+
+#if UNITY_EDITOR
+    public void AddTileUnderUnit(){
+        if(lastTileId != ActualTiledId)
+        {
+            FindObjectOfType<TilesManager>().TileList[lastTileId].GetComponent<TileScript>().RemoveUnitFromTile();
+            lastTileId = ActualTiledId;
+        }
+
+        FindObjectOfType<TilesManager>().TileList[_actualTileld].GetComponent<TileScript>().AddUnitToTile(this.gameObject, true);
+    }
+#endif
+
 
     //déplacement actuel de l'unité pour la fonction "MoveWithPath"
     int _i;
@@ -112,9 +130,8 @@ public class UnitScript : MonoBehaviour
     [SerializeField] bool _isActivationDone;
     public bool IsActivationDone => _isActivationDone;
 
-    [Header("------------------- CHEMIN DE DEPLACEMENT -------------------")]
     //Chemin que l'unité va emprunter
-    [SerializeField] List<int> _pathtomake;
+    List<int> _pathtomake;
     public List<int> Pathtomake => _pathtomake;
 
     [Header("------------------- STAUT DE L'UNITE -------------------")]
@@ -127,6 +144,23 @@ public class UnitScript : MonoBehaviour
     public Animator Animation => _Animation;
 
     #endregion Variables
+
+    private void Start()
+    {
+        // On instancie l'object qui possède le sprite correspondant à l'UI au point de vie et de bouclier de l'unité.
+        GameObject LifeHeartUI = Instantiate(UIInstance.Instance.LifeHeartPrefab, gameObject.transform);
+
+
+        CurrentSpriteLifeHeartUI = LifeHeartUI.GetComponent<SpriteRenderer>();
+        if(_shield > 0)
+        {
+            UpdateLifeHeartShieldUI(UIInstance.Instance.ShieldSprite, _life + _shield - 1);
+        }
+        else
+        {
+            UpdateLifeHeartShieldUI(UIInstance.Instance.LifeHeartSprite, _life);
+        }
+    }
 
     private void Update()
     {
@@ -149,10 +183,26 @@ public class UnitScript : MonoBehaviour
     public virtual void GiveLife(int Lifeadd)
     {
         _life += Lifeadd;
-        if(_life > UnitSO.LifeMax){
+        if(_shield > 0)
+        {
+            UpdateLifeHeartShieldUI(UIInstance.Instance.ShieldSprite, _life + _shield - 1);
+        }
+        else
+        {
+            UpdateLifeHeartShieldUI(UIInstance.Instance.LifeHeartSprite, _life);
+        }
+        if (_life > UnitSO.LifeMax){
             int shieldPlus = _life - UnitSO.LifeMax;
             _life = UnitSO.LifeMax;
             _shield += shieldPlus;
+            if(_shield > 0)
+            {
+                UpdateLifeHeartShieldUI(UIInstance.Instance.ShieldSprite, _life + _shield - 1);
+            }
+            else
+            {
+                UpdateLifeHeartShieldUI(UIInstance.Instance.LifeHeartSprite, _life);
+            }
         }
     }
 
@@ -164,12 +214,29 @@ public class UnitScript : MonoBehaviour
     {
         if(_shield > 0){
             _shield -= Damage;
-            _life += _shield;
+
+            if(_shield > 0)
+            {
+                UpdateLifeHeartShieldUI(UIInstance.Instance.ShieldSprite, _life + _shield - 1);
+            }
+            else
+            {
+                UpdateLifeHeartShieldUI(UIInstance.Instance.LifeHeartSprite, _life);
+            }
             CheckLife();
         }
         else
         {
             _life -= Damage;
+            if(_shield > 0)
+            {
+                UpdateLifeHeartShieldUI(UIInstance.Instance.ShieldSprite, _life + _shield - 1);
+            }
+            else
+            {
+                UpdateLifeHeartShieldUI(UIInstance.Instance.LifeHeartSprite, _life);
+            }
+
             CheckLife();
         }
 
@@ -234,6 +301,14 @@ public class UnitScript : MonoBehaviour
         Destroy(gameObject);
         Debug.Log("Unité Détruite");
     }
+
+    /// <summary>
+    /// Cette fonction va permettre de mettre un sprite d'une liste trouvé à partir d'un index à un objet. C'est la fonction qui met à jour l'affichage des boucliers et des points de vie. 
+    /// </summary>
+    public void UpdateLifeHeartShieldUI(Sprite[] listSprite, int life)
+    {
+        CurrentSpriteLifeHeartUI.sprite = listSprite[life];
+    }
     #endregion LifeMethods
 
     #region Statut
@@ -261,7 +336,6 @@ public class UnitScript : MonoBehaviour
     }
     #endregion ChangementStat
 
-    [Button]
     /// <summary>
     /// Update les stats de l'unité avec les stats de base
     /// </summary>

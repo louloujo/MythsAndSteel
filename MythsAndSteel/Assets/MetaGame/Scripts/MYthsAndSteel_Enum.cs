@@ -32,7 +32,7 @@ public class MYthsAndSteel_Enum : MonoBehaviour
     /// Tous les types de terrain
     /// </summary>
     public enum TerrainType{
-        Sol, Forêt, Bosquet, Plage, Colline, Haute_colline, Mont, Ravin, Eau, Boue, Rivière_Nord, Rivière_Sud, Rivière_Est, Rivière_Ouest, Fleuve, Ruisseau, Pont_Nord, Pont_Sud, Pont_Est, Pont_Ouest, Route, Rails, Maison, Immeuble, Ruines, Usine, Point_de_ressource, Gare, Bunker, Cabane_Isatabu, Point_Objectif, OrgoneBlue, OrgoneRed,
+        Sol, Forêt, Bosquet, Plage, Colline, Haute_colline, Mont, Ravin, Eau, Boue, Rivière_Nord, Rivière_Sud, Rivière_Est, Rivière_Ouest, Fleuve, Ruisseau, Pont_Nord, Pont_Sud, Pont_Est, Pont_Ouest, Route, Rails, Maison, Immeuble, Ruines, UsineRouge, UsineBleu, Point_de_ressource, Gare, Bunker, Cabane_Isatabu, Point_Objectif, OrgoneBlue, OrgoneRed,
     }
 
     /// <summary>
@@ -63,5 +63,21 @@ public class MYthsAndSteel_Enum : MonoBehaviour
     public enum Scenario
     {
         Rethel, Shanghai, Stalingrad, Husky, Guadalcanal, ElAlamein, Elsenborn
+    }
+
+    /// <summary>
+    /// Effet de terrain lié à la prog
+    /// </summary>
+    public enum EffetProg
+    {
+        Zone_creable
+    }
+
+    /// <summary>
+    /// Effet de terrain lié à la prog
+    /// </summary>
+    public enum Direction
+    {
+        Nord, Sud, Est, Ouest, None
     }
 }
