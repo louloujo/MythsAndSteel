@@ -3,29 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu (menuName = "Capacité")]
+
 public class Capacity : MonoBehaviour
 {
-    public string CapacityName = "";
+    //----------------------------Capacité 1--------------------------------------
+    [Header("-----------------Capacité 1-----------------")]
+    [SerializeField] string _Capacity1Name = "";
+    public string Capacity1Name => _Capacity1Name;
+
     [TextArea]
-    public string Description = "";
+    [SerializeField] string _Capacity1Description = "";
+    public string Capacity1Description => _Capacity1Description;
 
-    [SerializeField] bool _ActiveCapacity;
-    public bool IsActive => _ActiveCapacity;
+    [SerializeField] int _Capacity1Cost;
+    public int Capacity1Cost => _Capacity1Cost;
 
-    [SerializeField] int _CapacityCost;
-    public int CapacityCost => _CapacityCost;
-
-    public void SoulevementDesMarees()
+    virtual public void Capacite1()
     {
-        Debug.Log("Active de la capacité Soulevement Des Marées");
+        Debug.Log("Active La capacité 1");
+
     }
 
-    public void SoulevementDesTerres()
-    {
-        Debug.Log("Active de la capacité Soulevement Des Terres");
-    }
 
-    public Capacity capacite ;
+    [Header("-----------------Capacité 2-----------------")]
+    //----------------------------Capacité 2--------------------------------------
+    [SerializeField] bool _isCapacity2Exist;
+    public bool isCapacity2Exist => _isCapacity2Exist;
+
+    [SerializeField] string _Capacity2Name = "";
+    public string Capacity2Name => _Capacity1Name;
+
+    [TextArea]
+    [SerializeField] string _Capacity2Description = "";
+    public string Capacity2Description => _Capacity1Description;
+
+    [SerializeField] int _Capacity2Cost;
+    public int Capacity2Cost => _Capacity2Cost;
+    public virtual void Capacite2()
+    {
+        Debug.Log("Active La capacité 2");
+    }
 
 }

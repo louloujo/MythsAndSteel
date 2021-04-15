@@ -118,13 +118,20 @@ public class MenuActionUnite : MonoBehaviour
     /// <summary>
     /// Pour le bouton pouvoir
     /// </summary>
-    public void capacité()
+    public void capacite1()
     {
-      
-        Debug.Log("pouvoir");
+
+        RaycastManager.Instance.ActualUnitSelected.GetComponent<Capacity>().Capacite1();
         closePanel();
     }
-  
+
+    public void capacite2()
+    {
+
+        RaycastManager.Instance.ActualUnitSelected.GetComponent<Capacity>().Capacite2();
+        closePanel();
+    }
+
     /// <summary>
     /// Affiche le bouton pour se déplacer
     /// </summary>

@@ -1520,6 +1520,7 @@ GameObject:
   - component: {fileID: 108961819}
   - component: {fileID: 108961821}
   - component: {fileID: 108961820}
+  - component: {fileID: 108961822}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9)"
   m_TagString: Untagged
@@ -1631,6 +1632,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &108961822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108961818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df02c3dbb45d51499d62b3e58ad30a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Capacity1Name: 
+  _Capacity1Description: 
+  _Capacity1Cost: 0
+  _isCapacity2Exist: 0
+  _Capacity2Name: 
+  _Capacity2Description: 
+  _Capacity2Cost: 0
 --- !u!1 &109066898
 GameObject:
   m_ObjectHideFlags: 0
@@ -5639,11 +5659,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e671042ac8899c24498058383ee3f9c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CapacityName: 
-  Description: 
-  _ActiveCapacity: 0
-  _CapacityCost: 0
-  capacite: {fileID: 0}
+  _Capacity1Name: 
+  _Capacity1Description: 
+  _Capacity1Cost: 0
+  _isCapacity2Exist: 0
+  _Capacity2Name: 
+  _Capacity2Description: 
+  _Capacity2Cost: 0
 --- !u!114 &462431347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5747,9 +5769,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 462431346}
-        m_TargetAssemblyTypeName: Capacity, Assembly-CSharp
-        m_MethodName: SoulevementDesMarees
+      - m_Target: {fileID: 1645117453}
+        m_TargetAssemblyTypeName: MenuActionUnite, Assembly-CSharp
+        m_MethodName: capacite1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22291,9 +22313,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1782310156}
-        m_TargetAssemblyTypeName: Capacity, Assembly-CSharp
-        m_MethodName: SoulevementDesTerres
+      - m_Target: {fileID: 1645117453}
+        m_TargetAssemblyTypeName: MenuActionUnite, Assembly-CSharp
+        m_MethodName: capacite2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22353,11 +22375,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e671042ac8899c24498058383ee3f9c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CapacityName: 
-  Description: 
-  _ActiveCapacity: 0
-  _CapacityCost: 0
-  capacite: {fileID: 0}
+  _Capacity1Name: 
+  _Capacity1Description: 
+  _Capacity1Cost: 0
+  _isCapacity2Exist: 0
+  _Capacity2Name: 
+  _Capacity2Description: 
+  _Capacity2Cost: 0
 --- !u!1 &1782601321
 GameObject:
   m_ObjectHideFlags: 0
