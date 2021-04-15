@@ -43,6 +43,22 @@ public class ZoneOrgone : MonoBehaviour
         else{
             PlayerScript.Instance.BluePlayerInfos.TileCentreZoneOrgone = _centerOrgoneArea;
         }
+
+        List<int> neighZone = PlayerStatic.GetNeighbourDiag(_centerOrgoneArea.GetComponent<TileScript>().TileId, _centerOrgoneArea.GetComponent<TileScript>().Line, true);
+        _centerOrgoneArea.GetComponent<TileScript>().TerrainEffectList.Remove(_redPlayerZone ? MYthsAndSteel_Enum.TerrainType.OrgoneRed : MYthsAndSteel_Enum.TerrainType.OrgoneBlue);
+
+        foreach(int i in neighZone)
+        {
+            TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Remove(_redPlayerZone ? MYthsAndSteel_Enum.TerrainType.OrgoneRed : MYthsAndSteel_Enum.TerrainType.OrgoneBlue);
+        }
+
+        List<int> newNeighZone = PlayerStatic.GetNeighbourDiag(_centerOrgoneArea.GetComponent<TileScript>().TileId, _centerOrgoneArea.GetComponent<TileScript>().Line, true);
+        newNeighZone.Add(_centerOrgoneArea.GetComponent<TileScript>().TileId);
+
+        foreach(int i in newNeighZone)
+        {
+            TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Add(_redPlayerZone ? MYthsAndSteel_Enum.TerrainType.OrgoneRed : MYthsAndSteel_Enum.TerrainType.OrgoneBlue);
+        }
     }
 
     private void Update(){

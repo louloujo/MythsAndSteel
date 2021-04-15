@@ -623,6 +623,7 @@ public class MouseCommand : MonoBehaviour
 
         //Rendre l'élément visible.
         uiElements.SetActive(true);
+
         //Si la position de l'UI est différente de celle de la position de référence alors tu prends cette position comme référence.
         if (uiElements.transform.position != pos)
         {

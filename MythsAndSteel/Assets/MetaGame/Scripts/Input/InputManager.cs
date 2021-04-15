@@ -29,8 +29,7 @@ public class InputManager : MonoBehaviour
     void Update(){
         //Pour quitter la phase d'événement qui permet de choisir une case ou une unité
         if(Input.GetKeyDown(escapeEvent) && (GameManager.Instance.ChooseUnitForEvent || GameManager.Instance.ChooseTileForEvent)){
-            GameManager.Instance.StopEventModeTile();
-            GameManager.Instance.StopEventModeUnit();
+            GameManager.Instance.CancelEvent();
         }
 
         //Quand on shiftclic  sur le plateau
@@ -63,13 +62,16 @@ public class InputManager : MonoBehaviour
         //Quand le joueur clic sur entrée pour valider une action
         if(Input.GetKeyDown(MakeAction)){
             if(Mouvement.Instance.IsInMouvement && Mouvement.Instance._selectedTileId.Count > 1){
-                Mouvement.Instance.ApplyMouvement();
-                Mouvement.Instance.DeleteChildWhenMove();
+                if(TilesManager.Instance.TileList[Mouvement.Instance._selectedTileId[Mouvement.Instance._selectedTileId.Count - 1]].GetComponent<TileScript>().Unit == null)
+                {
+                    Mouvement.Instance.ApplyMouvement();
+                    Mouvement.Instance.DeleteChildWhenMove();
+                }
             }
         }
 
         //Pour passer une phase rapidement
-        if(GameManager.Instance.IsInTurn)
+        if(GameManager.Instance.IsInTurn && !GameManager.Instance.ChooseTileForEvent && !GameManager.Instance.ChooseUnitForEvent)
         {
             if(Input.GetKeyDown(SkipPhase))
             {
@@ -95,26 +97,32 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        //Quand tu cliques sur une case
-        if(Input.GetMouseButtonDown(1)){
-            //Si l'usine de l'Armée Bleu est sélectionnée et c'est le tour du joueur de l'Armée Bleu.
-            if(RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineBleu) &&
-                !GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
-                || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2))
+        //Quand tu cliques ur une case
+        if(Input.GetMouseButtonDown(1) && RaycastManager.Instance.Tile != null)
+        {
+            if(!GameManager.Instance.ChooseTileForEvent && !GameManager.Instance.ChooseUnitForEvent)
             {
-                Debug.Log("usine bleu");
-                RaycastManager.Instance._mouseCommand.MenuRenfortUI();
-                _renfortPhase.CreateRenfort();
-            }
+                //Si l'usine de l'Armée Bleu est sélectionnée et c'est le tour du joueur de l'Armée Bleu.
+                if(RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineBleu) &&
+                    !GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
+                    || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && !PlayerScript.Instance.BluePlayerInfos.HasCreateUnit)
+                {
+                    RaycastManager.Instance._mouseCommand.MenuRenfortUI();
+                    _renfortPhase.CreateRenfort();
+                }
 
-            //Si l'usine de l'Armée Rouge est sélectionnée et c'est le tour du joueur de l'Armée Rouge.
-            if(RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineRouge)
-                && GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
-                || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2))
+                //Si l'usine de l'Armée Rouge est sélectionnée et c'est le tour du joueur de l'Armée Rouge.
+                if(RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineRouge)
+                    && GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
+                    || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && !PlayerScript.Instance.RedPlayerInfos.HasCreateUnit)
+                {
+                    RaycastManager.Instance._mouseCommand.MenuRenfortUI();
+                    _renfortPhase.CreateRenfort();
+                }
+            }
+            else
             {
-                Debug.Log("usine rouge");
-                RaycastManager.Instance._mouseCommand.MenuRenfortUI();
-                _renfortPhase.CreateRenfort();
+                RaycastManager.Instance.Deselect();
             }
         }
     }
@@ -146,7 +154,6 @@ public class InputManager : MonoBehaviour
     /// </summary>
     void SkipPhaseFunc(){
         GameManager.Instance.ChangePhase();
-        GameManager.Instance._eventCall -= SkipPhaseFunc;
         hasShowPanel = false;
     }
 
@@ -156,7 +163,7 @@ public class InputManager : MonoBehaviour
     void CancelSkipPhase(){
         hasShowPanel = false;
         t = 0;
-        GameManager.Instance._eventCallCancel -= CancelSkipPhase;
+        GameManager.Instance._eventCallCancel = null;
         UIInstance.Instance.ActivateNextPhaseButton();
     }
 }
