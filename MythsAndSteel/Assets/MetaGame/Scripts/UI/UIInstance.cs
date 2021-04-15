@@ -107,8 +107,38 @@ public class UIInstance : MonoSingleton<UIInstance>
     //Ordre : 0 => Valeur Min entre deux valeurs, 1 => Valeur Max entre deux valeurs, 2 => Degats Min et 3 Degats Max
     [SerializeField] private AttackStat _attackStat;
     public AttackStat AttackStat => _attackStat;
-    #endregion ShiftClicPanelP1
 
+  
+    //Comporte les descriptions et sprites pour chaque Attribut. 
+    //Si vous changez la taille ou le positionnement des élements de l'Array il faut absolument que la position dans l'Arraye de Chaque ObjectsAttributs correspondent à l'ID de son enum.
+    public TextSpriteAttributUnit[] textSpriteAttributUnit = new TextSpriteAttributUnit[11];
+    //Array comportant les ObjectsAttributs. A ne pas modifier !
+    public ObjectsAttributs[] objectsAttributs = new ObjectsAttributs[3];
+    [System.Serializable]
+    
+    /// <summary>
+    /// Contient le texte et le sprite pour un attribut
+    /// </summary>
+    public class TextSpriteAttributUnit
+    {
+        [TextArea]
+        public string TextAttributUnit;
+        public Sprite SpriteAttributUnit;
+    }
+    /// <summary>
+    /// Objet dont le sprite va changer en fonction de l'attribut, Objet dont le texte va changer en fonction de l'attribut. 
+    /// </summary>
+  
+    [System.Serializable]
+    public class ObjectsAttributs
+    {
+
+        public GameObject MainObjects;
+        public GameObject Description;
+    }
+
+
+    #endregion
     #region ShiftClicPanelP2
     [Header("LISTES DES ELEMENTS UI POUR LE SHIFT CLIC DE LA PAGE 2")]
     [Tooltip("Tous les éléments qui composent l'UI pour le Shift Clic de la Page 2")]
