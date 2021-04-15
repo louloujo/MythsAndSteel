@@ -10,12 +10,12 @@ public class Attaque : MonoSingleton<Attaque>
     [SerializeField] private int[] neighbourValue; // +1 +9 +10...
 
     public List<int> _newNeighbourId => newNeighbourId;
-    [SerializeField] private List<int> newNeighbourId = new List<int>(); // Voisins atteignables avec le range de l'unité.
+    [SerializeField] private List<int> newNeighbourId = new List<int>(); // Voisins atteignables avec le range de l'unitÃ©.
 
     public List<int> _selectedTileId => selectedTileId;
-    [SerializeField] private List<int> selectedTileId = new List<int>(); // Cases selectionnées par le joueur.
+    [SerializeField] private List<int> selectedTileId = new List<int>(); // Cases selectionnÃ©es par le joueur.
 
-    //Est ce que l'unité a commencé à choisir son déplacement ?
+    //Est ce que l'unitÃ© a commencÃ© Ã  choisir son dÃ©placement ?
     [SerializeField] private bool _isInAttack;
     public bool IsInAttack
     {
@@ -29,7 +29,7 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
-    //Est ce qu'une unité est sélectionnée ?
+    //Est ce qu'une unitÃ© est sÃ©lectionnÃ©e ?
     [SerializeField] private bool _selected;
     public bool Selected
     {
@@ -43,15 +43,15 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
-    // Vie de l'ennemi ciblé 
+    // Vie de l'ennemi ciblÃ© 
     [SerializeField] int _EnnemyLife;
     public int Life => _EnnemyLife;
 
-    //Portée d'attaque
+    //PortÃ©e d'attaque
     [SerializeField] int _attackRange;
     public int AttackRange => _attackRange;
 
-    //Dégats minimum infligés 
+    //DÃ©gats minimum infligÃ©s 
     [SerializeField] int _damageMinimum;
     public int DamageMinimum => _damageMinimum;
 
@@ -59,7 +59,7 @@ public class Attaque : MonoSingleton<Attaque>
     [SerializeField] Vector2 _numberRangeMin;
     public Vector2 NumberRangeMin => _numberRangeMin;
 
-    // Dégats maximum infligés
+    // DÃ©gats maximum infligÃ©s
     [SerializeField] int _damageMaximum;
     public int DamageMaximum => _damageMaximum;
 
@@ -109,8 +109,8 @@ public class Attaque : MonoSingleton<Attaque>
     void UnitAttackOneRange(Vector2 _numberRangeMin, int _damageMinimum, int DiceResult)
     {
         if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
-        {
-
+        {        
+            AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
             Debug.Log("Damage : " + _damageMinimum);
         }
@@ -120,18 +120,19 @@ public class Attaque : MonoSingleton<Attaque>
             Debug.Log("Damage : " + null);
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
         }
-        AnimationUpdate();
     }
 
     void UnitAttackTwoRanges(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, int DiceResult)
     {
         if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
         {
+            AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
             Debug.Log("Damage : " + _damageMinimum);
         }
         if (DiceResult >= _numberRangeMax.x && DiceResult <= _numberRangeMax.y)
-        {
+        {        
+            AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMaximum);
             Debug.Log("Damage : " + _damageMaximum);
         }
@@ -140,7 +141,6 @@ public class Attaque : MonoSingleton<Attaque>
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
             Debug.Log("Damage : " + null);
         }
-        AnimationUpdate();
     }
     void AnimationUpdate()
     {
@@ -215,7 +215,7 @@ public class Attaque : MonoSingleton<Attaque>
     }
 
     /// <summary>
-    /// Highlight des cases dans la range d'attaque de l'unité
+    /// Highlight des cases dans la range d'attaque de l'unitÃ©
     /// </summary>
     /// <param name="tileId"></param>
     /// <param name="Range"></param>
@@ -250,7 +250,7 @@ public class Attaque : MonoSingleton<Attaque>
     }
 
     /// <summary>
-    /// Ajoute plus d'aléatoire aux lancés de dé
+    /// Ajoute plus d'alÃ©atoire aux lancÃ©s de dÃ©
     /// </summary>
     private void RandomMore()
     {
@@ -266,7 +266,7 @@ public class Attaque : MonoSingleton<Attaque>
     }
 
     /// <summary>
-    /// Vérifie si l'unité selectionné peut attaqué + récupère la portée de l'unité
+    /// VÃ©rifie si l'unitÃ© selectionnÃ© peut attaquÃ© + rÃ©cupÃ¨re la portÃ©e de l'unitÃ©
     /// </summary>
     public void StartAttackSelectionUnit()
     {
@@ -294,7 +294,7 @@ public class Attaque : MonoSingleton<Attaque>
     }
 
     /// <summary>
-    /// Prépare l'Highlight des tiles ciblables & passe le statut de l'unité en -> _isInAttack
+    /// PrÃ©pare l'Highlight des tiles ciblables & passe le statut de l'unitÃ© en -> _isInAttack
     /// </summary>
     /// <param name="tileId"></param>
     /// <param name="Range"></param>
@@ -307,13 +307,13 @@ public class Attaque : MonoSingleton<Attaque>
             List<int> ID = new List<int>();
             ID.Add(tileId);
 
-            // Lance l'highlight des cases dans la range de l'unité.
+            // Lance l'highlight des cases dans la range de l'unitÃ©.
             Highlight(tileId, Range); 
         }
     }
 
     /// <summary>
-    /// Arrête l'attaque de l'unité select (UI + possibilité d'attaquer
+    /// ArrÃªte l'attaque de l'unitÃ© select (UI + possibilitÃ© d'attaquer
     /// </summary>
     public void StopAttack()
     {
@@ -378,15 +378,15 @@ public class Attaque : MonoSingleton<Attaque>
 
     public void GetStats()
     {
-        _attackRange = selectedUnit.GetComponent<UnitScript>().AttackRange; // Récupération de la Portée
+        _attackRange = selectedUnit.GetComponent<UnitScript>().AttackRange; // RÃ©cupÃ©ration de la PortÃ©e
         
-        _damageMinimum = selectedUnit.GetComponent<UnitScript>().DamageMinimum; // Récupération des Dégats Maximum
-        _damageMaximum = selectedUnit.GetComponent<UnitScript>().DamageMaximum; // Dégats Minimums
-        _numberRangeMin.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.x; // Récupération de la Range min - x
-        _numberRangeMin.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.y; // Récupération de la Range min - y 
-        _numberRangeMax.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.x; // Récupération de la Range min - x
-        _numberRangeMax.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.y; // Récupération de la Range min - y
-        _EnnemyLife = selectedUnitEnnemy.GetComponent<UnitScript>().Life; // Récupération de la vie de l'unité attaquée
+        _damageMinimum = selectedUnit.GetComponent<UnitScript>().DamageMinimum; // RÃ©cupÃ©ration des DÃ©gats Maximum
+        _damageMaximum = selectedUnit.GetComponent<UnitScript>().DamageMaximum; // DÃ©gats Minimums
+        _numberRangeMin.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.x; // RÃ©cupÃ©ration de la Range min - x
+        _numberRangeMin.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.y; // RÃ©cupÃ©ration de la Range min - y 
+        _numberRangeMax.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.x; // RÃ©cupÃ©ration de la Range min - x
+        _numberRangeMax.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.y; // RÃ©cupÃ©ration de la Range min - y
+        _EnnemyLife = selectedUnitEnnemy.GetComponent<UnitScript>().Life; // RÃ©cupÃ©ration de la vie de l'unitÃ© attaquÃ©e
     }
 
     public void ApplyAttack()
