@@ -190,7 +190,7 @@ public class Attaque : MonoSingleton<Attaque>
 
     public IEnumerator AnimationWait(Animator AnimToWait, string BoolName)
     {
-        if(AnimToWait.runtimeAnimatorController.animationClips[0] != null)
+        if(AnimToWait.runtimeAnimatorController != null)
         {
             yield return new WaitForSeconds(AnimToWait.runtimeAnimatorController.animationClips[0].length);
             AnimToWait.SetBool(BoolName, false);

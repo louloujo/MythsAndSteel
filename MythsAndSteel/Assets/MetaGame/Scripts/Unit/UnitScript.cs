@@ -214,16 +214,14 @@ public class UnitScript : MonoBehaviour
     {
         if(_shield > 0){
             _shield -= Damage;
+            _life += _shield;
 
-            if(_shield > 0)
-            {
+            if(_shield > 0){
                 UpdateLifeHeartShieldUI(UIInstance.Instance.ShieldSprite, _life + _shield - 1);
             }
-            else
-            {
+            else{
                 UpdateLifeHeartShieldUI(UIInstance.Instance.LifeHeartSprite, _life);
             }
-            CheckLife();
         }
         else
         {
@@ -234,20 +232,21 @@ public class UnitScript : MonoBehaviour
             }
             else
             {
-                UpdateLifeHeartShieldUI(UIInstance.Instance.LifeHeartSprite, _life);
+                if(_life > 0)
+                {
+                    UpdateLifeHeartShieldUI(UIInstance.Instance.LifeHeartSprite, _life);
+                }
             }
-
-            CheckLife();
         }
 
         if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneRed)){
             if(!GameManager.Instance.IsCheckingOrgone){
                 PlayerScript.Instance.AddOrgone(1, 1);
-                GameManager.Instance.IsCheckingOrgone = true;
+                PlayerScript.Instance.RedPlayerInfos.CheckOrgone(1);
             }
             else{
-                GameManager.Instance.LaunchOrgone(1, 1);
-                GameManager.Instance._waitToCheckOrgone += AddOrgoneToPlayer;
+                PlayerScript.Instance.AddOrgone(1, 1);
+                if(GameManager.Instance._waitToCheckOrgone != null) GameManager.Instance._waitToCheckOrgone += AddOrgoneToPlayer;
             }
         }
         
@@ -255,20 +254,26 @@ public class UnitScript : MonoBehaviour
             if(!GameManager.Instance.IsCheckingOrgone)
             {
                 PlayerScript.Instance.AddOrgone(1, 2);
-                GameManager.Instance.IsCheckingOrgone = true;
+                PlayerScript.Instance.BluePlayerInfos.CheckOrgone(2);
             }
             else
             {
-                GameManager.Instance.LaunchOrgone(2, 1);
-                GameManager.Instance._waitToCheckOrgone += AddOrgoneToPlayer;
+                PlayerScript.Instance.AddOrgone(1, 2);
+                if(GameManager.Instance._waitToCheckOrgone != null) GameManager.Instance._waitToCheckOrgone += AddOrgoneToPlayer;
             }
         }
+
+        CheckLife();
     }
 
+    /// <summary>
+    /// Check si l'orgone a redépassé le joueur
+    /// </summary>
     void AddOrgoneToPlayer(){
-        PlayerScript.Instance.AddOrgone(GameManager.Instance.ValueOrgone, GameManager.Instance.PlayerOrgone);
-        GameManager.Instance._waitToCheckOrgone -= AddOrgoneToPlayer;
-        GameManager.Instance.StopOrgone();
+        PlayerScript.Instance.RedPlayerInfos.CheckOrgone(1);
+        PlayerScript.Instance.BluePlayerInfos.CheckOrgone(2);
+
+        GameManager.Instance._waitToCheckOrgone = null;
     }
 
     /// <summary>
@@ -289,9 +294,11 @@ public class UnitScript : MonoBehaviour
     {
         if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneRed)){
             PlayerScript.Instance.AddOrgone(1, 1);
+            PlayerScript.Instance.RedPlayerInfos.CheckOrgone(1);
         }
         else if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneBlue)){
             PlayerScript.Instance.AddOrgone(1, 2);
+            PlayerScript.Instance.BluePlayerInfos.CheckOrgone(2);
         }
         else { }
         
