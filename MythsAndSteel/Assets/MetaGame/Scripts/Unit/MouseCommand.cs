@@ -56,6 +56,7 @@ public class MouseCommand : MonoBehaviour
 
     [SerializeField] private List<GameObject> _elementMenuRenfort = null;
     public List<GameObject> ElementOfMenuRenfort => _elementMenuRenfort;
+
     #endregion Variables
 
     #region UpdateStats
@@ -89,23 +90,18 @@ public class MouseCommand : MonoBehaviour
         //UIInstance.Instance.MiddleImageTerrain[1].GetComponent<Image>().sprite = RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList[1].Image;
 
         //Si la tile ne contient pas d'effet de terrain, on n'affiche pas d'information. Si la tile contient 1 effet, on affiche et met à jour l'effet de la case. Si la tile contient 2 effets, on affiche les 2 Effets.
-        if (RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Count == 0)
+        UIInstance UI = UIInstance.Instance;
+        for(int i = UI.effetDeTerrain.Count - 1; i >= 0; i--)
         {
-            UIInstance.Instance.MiddleTextTerrain[4].SetActive(false);
-            UIInstance.Instance.MiddleTextTerrain[5].SetActive(false);
+            Destroy(UI.effetDeTerrain[UI.effetDeTerrain.Count - 1]);
+            UI.effetDeTerrain.RemoveAt(UI.effetDeTerrain.Count - 1);
         }
-        //Si la tile contient 1 effet, on affiche et met à jour l'effet de la case.
-        else if (RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Count == 1)
-        {
-            UIInstance.Instance.MiddleTextTerrain[4].SetActive(true);
-            UIInstance.Instance.MiddleTextTerrain[0].GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList[0].ToString();
-            UIInstance.Instance.MiddleTextTerrain[2].GetComponent<TextMeshProUGUI>().text = "A l'attention des métacogneurs, les effets sont en progs comme les images";
-            //Si la tile contient 2 effets, on affiche les 2 Effets.
-            if (RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Count > 1)
-            {
-                UIInstance.Instance.MiddleTextTerrain[5].SetActive(true);
-                UIInstance.Instance.MiddleTextTerrain[1].GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList[1].ToString();
-            }
+        foreach(MYthsAndSteel_Enum.TerrainType Terrain in RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList)
+        {        
+            GameObject Effet = Instantiate(UI.Terrain.ReturnInfo(UI.prefabSlotEffetDeTerrain, Terrain), UI.parentSlotEffetDeTerrain.transform.position, Quaternion.identity);
+            Effet.transform.SetParent(UI.parentSlotEffetDeTerrain.transform);
+            Effet.transform.localScale = new Vector3(.9f, .9f, .9f);
+            UI.effetDeTerrain.Add(Effet);
         }
     }
     #endregion UpdateStats
