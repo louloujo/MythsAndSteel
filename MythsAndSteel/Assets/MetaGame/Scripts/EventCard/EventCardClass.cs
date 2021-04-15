@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName ="Event Scriptable")]
+[CreateAssetMenu(menuName = "META/Event Scriptable")]
 public class EventCardClass : ScriptableObject{
     //Nombre de cartes events
     [SerializeField] private int _numberOfEventCard = 0;

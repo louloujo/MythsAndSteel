@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Game Manager")]
+[CreateAssetMenu(menuName = "META/Game Manager")]
 public class GameManagerSO : ScriptableObject
 {
     //Event pour quand le joueur clique sur un bouton pour passer à la phase en question

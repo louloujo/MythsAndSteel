@@ -190,8 +190,11 @@ public class Attaque : MonoSingleton<Attaque>
 
     public IEnumerator AnimationWait(Animator AnimToWait, string BoolName)
     {
-        yield return new WaitForSeconds(AnimToWait.runtimeAnimatorController.animationClips[0].length);
-        AnimToWait.SetBool(BoolName, false);
+        if(AnimToWait.runtimeAnimatorController != null)
+        {
+            yield return new WaitForSeconds(AnimToWait.runtimeAnimatorController.animationClips[0].length);
+            AnimToWait.SetBool(BoolName, false);
+        }
     }
 
     void ChooseAttackType(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, int DiceResult)

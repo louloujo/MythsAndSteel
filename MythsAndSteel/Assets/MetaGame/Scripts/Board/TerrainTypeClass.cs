@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-[CreateAssetMenu(fileName ="Terrain Scriptable")]
+[CreateAssetMenu(menuName = "META/Terrain Scriptable")]
 public class TerrainTypeClass : ScriptableObject
 {
     [SerializeField] private TerrainType[] _EffetDeTerrain;

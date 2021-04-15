@@ -14,9 +14,8 @@ public static class HierarchyIcon
 
     static void HandleHierarchyWindowItemOnGUI(int instanceID, Rect selectionRect)
     {
-        var content = EditorGUIUtility.ObjectContent(EditorUtility.InstanceIDToObject(instanceID), null);
-
-        if(content.image != null && !IgnoreIcons.Contains(content.image.name) && content.image.name != "d_GameObject Icon" && content.image.name!= "d_Prefab Icon") 
+        var content = EditorGUIUtility.ObjectContent(EditorUtility.InstanceIDToObject(instanceID), null); 
+        if(content.image != null && !IgnoreIcons.Contains(content.image.name) && content.image.name != "d_GameObject Icon" && content.image.name!= "d_Prefab Icon" && content.image.name != "d_PrefabVariant Icon") 
             GUI.DrawTexture(new Rect(selectionRect.xMax - 16, selectionRect.yMin, 16, 16), content.image);
     }
 }
