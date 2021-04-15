@@ -12,6 +12,22 @@ public class MYthsAndSteel_Enum : MonoBehaviour
     }
 
     /// <summary>
+    /// Status obtenable par une unité
+    /// </summary>
+    public enum UnitStatut
+    {
+        ArmeEpidemiologique, Paralysie, Immobilisation, Réanimé, Possédé, Invincible, PeutPasCombattre, PeutPasPrendreDesObjectifs
+    }
+
+    /// <summary>
+    /// Les types d'enfant obtenable sur une tile
+    /// </summary>
+    public enum ChildTileType
+    {
+        AttackSelect, MoveSelect, EventSelect
+    }
+
+    /// <summary>
     /// Enum pour els phases du jeu
     /// </summary>
     public enum PhaseDeJeu{
@@ -42,20 +58,9 @@ public class MYthsAndSteel_Enum : MonoBehaviour
         neutral, blue, red
     }
 
-    /// <summary>
-    /// Status obtenable par une unité
-    /// </summary>
-    public enum UnitStatut{
-        ArmeEpidemiologique, Paralysie, Immobilisation, Réanimé, Possédé, Invincible, PeutPasCombattre, PeutPasPrendreDesObjectifs 
-    }
 
-    /// <summary>
-    /// Les types d'enfant obtenable sur une tile
-    /// </summary>
-    public enum ChildTileType
-    {
-        AttackSelect, MoveSelect, EventSelect
-    }
+
+
 
     /// <summary>
     /// Liste des Scénarios du jeu

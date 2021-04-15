@@ -142,18 +142,19 @@ public class UIInstance : MonoSingleton<UIInstance>
     #region ShiftClicPanelP2
     [Header("LISTES DES ELEMENTS UI POUR LE SHIFT CLIC DE LA PAGE 2")]
     [Tooltip("Tous les éléments qui composent l'UI pour le Shift Clic de la Page 2")]
-    //Texte qui indique le nom de l'unité.
-    [SerializeField] private GameObject _titlePanelShiftClicPage2;
-    public GameObject TitlePanelShiftClicPage2 => _titlePanelShiftClicPage2;    
-    
-    [SerializeField] private List<GameObject> _middleImageTerrain;
-    public List<GameObject> MiddleImageTerrain => _middleImageTerrain;
 
-    [SerializeField] private List<GameObject> _middleTextTerrain;
-    public List<GameObject> MiddleTextTerrain => _middleTextTerrain;
+    [SerializeField] private GameObject _prefabSlotEffetDeTerrain;
+    public GameObject prefabSlotEffetDeTerrain => _prefabSlotEffetDeTerrain;
+
+    [SerializeField] private GameObject _parentSlotEffetDeTerrain;
+    public GameObject parentSlotEffetDeTerrain => _parentSlotEffetDeTerrain;
+
+    [SerializeField] private List<GameObject> _effetDeTerrain;
+    public List<GameObject> effetDeTerrain => _effetDeTerrain;
+
     #endregion ShiftClicPanelP2
 
-    
+
     [Header("ENFANTS CASE DU PLATEAU")]
     [SerializeField] private GameObject _mouvementTilePrefab;
     public GameObject MouvementTilePrefab => _mouvementTilePrefab;

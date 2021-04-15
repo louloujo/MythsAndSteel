@@ -117,27 +117,28 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         //Lorsque le joueur choisit une unité
         if(GameManager.Instance.ChooseUnitForEvent){
             if(_unitInTile != null){
-                if(GameManager.Instance.UnitChooseList.Contains(_unitInTile)){
-                    GameManager.Instance.RemoveUnitToList(_unitInTile);
-                }
-                else{
-                    if(GameManager.Instance.SelectableUnit.Contains(UnitInTile)){
-                        if(!GameManager.Instance.IllusionStratégique){
-                            GameManager.Instance.AddUnitToList(_unitInTile);
-                        }
+                if(GameManager.Instance.SelectableUnit.Contains(UnitInTile))
+                {
+                    if(!GameManager.Instance.IllusionStratégique)
+                    {
+                        GameManager.Instance.AddUnitToList(_unitInTile);
+                    }
 
-                        //Pour la carte événement Illusion Stratégique
-                        else{
-                            if(GameManager.Instance.UnitChooseList.Count > 0){
-                                //est ce qu'il y avait déjà une unité dans la liste
-                                if(GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().UnitSO.IsInRedArmy == _unitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy){
-                                    GameManager.Instance.AddUnitToList(_unitInTile);
-                                }
-                                else { }
-                            }
-                            else{
+                    //Pour la carte événement Illusion Stratégique
+                    else
+                    {
+                        if(GameManager.Instance.UnitChooseList.Count > 0)
+                        {
+                            //est ce qu'il y avait déjà une unité dans la liste
+                            if(GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().UnitSO.IsInRedArmy == _unitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy)
+                            {
                                 GameManager.Instance.AddUnitToList(_unitInTile);
                             }
+                            else { }
+                        }
+                        else
+                        {
+                            GameManager.Instance.AddUnitToList(_unitInTile);
                         }
                     }
                 }
@@ -210,6 +211,20 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                     OrgoneManager.Instance.StartToMoveZone();
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// Déselectionne un élément (case ou unité)
+    /// </summary>
+    public void Deselect(){
+        if(GameManager.Instance.ChooseUnitForEvent && _unitInTile != null)
+        {
+            GameManager.Instance.RemoveUnitToList(_unitInTile);
+        }
+        else if(GameManager.Instance.ChooseTileForEvent)
+        {
+            GameManager.Instance.RemoveUnitToList(_tile);
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-[CreateAssetMenu(fileName ="Terrain Scriptable")]
+[CreateAssetMenu(menuName = "META/Terrain Scriptable")]
 public class TerrainTypeClass : ScriptableObject
 {
     [SerializeField] private TerrainType[] _EffetDeTerrain;
@@ -27,6 +27,15 @@ public class TerrainTypeClass : ScriptableObject
             Ressources.text = tile.ResourcesCounter <= 0 ?  "" : "Ressources sur la case: " + tile.ResourcesCounter;
         }
         else { Ressources.text = ""; }
+    }
+
+    public GameObject ReturnInfo(GameObject PrefabEffetDeTerrain, MYthsAndSteel_Enum.TerrainType TR)
+    {
+        TerrainType Saved = FindEffect(TR);
+        PrefabEffetDeTerrain.transform.GetChild(0).GetComponent<Image>().sprite = Saved.render;
+        PrefabEffetDeTerrain.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Saved._terrainName;
+        PrefabEffetDeTerrain.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = Saved._description;
+        return PrefabEffetDeTerrain;
     }
 
     protected TerrainType FindEffect(MYthsAndSteel_Enum.TerrainType Type)
