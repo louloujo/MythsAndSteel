@@ -52,23 +52,28 @@ public class Player
     /// <param name="Value">Valeur positive ou négative.</param>
     public void ChangeOrgone(int Value, int player){
         OrgoneValue += Value;
-
         UpdateOrgoneUI(player);
+    }
 
-        Debug.Log(player);
-        
-        if(OrgoneValue >= 5)
+    public void CheckOrgone(int player){
+        GameManager.Instance.IsCheckingOrgone = true;
+
+        if(OrgoneExplose() && !GameManager.Instance.ChooseUnitForEvent)
         {
             List<GameObject> unitList = player == 1 ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer;
-            GameManager.Instance.StartEventModeUnit(4, player == 1 ? true : false, unitList, "Explosion d'orgone", "Êtes-vous sur de vouloir infliger des dégâts à ces unités?");
+            GameManager.Instance.StartEventModeUnit(4, player == 1 ? true : false, unitList, "Explosion d'orgone", "Êtes-vous sur de vouloir infliger des dégâts à ces unités?", true);
             GameManager.Instance._eventCall += GiveDamageToUnitForOrgone;
-            GameManager.Instance._eventCallCancel += CancelOrgone;
+            if(player == 1) GameManager.Instance._eventCallCancel += CancelOrgoneP1;
+            else GameManager.Instance._eventCallCancel += CancelOrgoneP2;
             unitList.Clear();
         }
         else
         {
+            UpdateOrgoneUI(player);
+
             GameManager.Instance.IsCheckingOrgone = false;
-            if(GameManager.Instance._waitToCheckOrgone != null){
+            if(GameManager.Instance._waitToCheckOrgone != null)
+            {
                 GameManager.Instance._waitToCheckOrgone();
             }
         }
@@ -80,33 +85,53 @@ public class Player
     void GiveDamageToUnitForOrgone(){
         UIInstance.Instance.ActivateNextPhaseButton();
 
-        foreach(GameObject unit in GameManager.Instance.UnitChooseList)
+        i = 0;
+
+        GameManager.Instance._waitEvent += DealDamageToUnit;
+        GameManager.Instance.WaitToMove(0);
+
+        OrgoneValue -= 6;
+    }
+
+    int i = 0;
+    public void DealDamageToUnit(){
+        if(GameManager.Instance.UnitChooseList.Count > i)
         {
-            unit.GetComponent<UnitScript>().TakeDamage(1);
+            GameManager.Instance.UnitChooseList[i].GetComponent<UnitScript>().TakeDamage(1);
+            i++;
+            GameManager.Instance._waitEvent -= DealDamageToUnit;
+            GameManager.Instance._waitEvent += DealDamageToUnit;
+            GameManager.Instance.WaitToMove(.035f);
         }
-
-        GameManager.Instance.UnitChooseList.Clear();
-        GameManager.Instance._eventCall -= GiveDamageToUnitForOrgone;
-        GameManager.Instance._eventCallCancel -= CancelOrgone;
-
-        OrgoneValue -= 5;
-
-        UpdateOrgoneUI(GameManager.Instance.RedPlayerUseEvent? 1 : 2);
-
-        GameManager.Instance.IsCheckingOrgone = false;
-        if(GameManager.Instance._waitToCheckOrgone != null)
+        else
         {
-            GameManager.Instance._waitToCheckOrgone();
+            GameManager.Instance._waitEvent -= DealDamageToUnit;
+
+            GameManager.Instance.UnitChooseList.Clear();
+
+            GameManager.Instance.IsCheckingOrgone = false;
+
+            if(GameManager.Instance._waitToCheckOrgone != null)
+            {
+                GameManager.Instance._waitToCheckOrgone();
+                Debug.Log("mais non");
+            }
         }
     }
 
     /// <summary>
     /// Si le joueur appuie sur le bouton annuler 
     /// </summary>
-    void CancelOrgone(){
-        List<GameObject> unitList = GameManager.Instance.RedPlayerUseEvent? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer;
-        GameManager.Instance.StartEventModeUnit(4, GameManager.Instance.RedPlayerUseEvent, unitList, "Explosion d'orgone", "Êtes-vous sur de vouloir infliger des dégâts à ces unités?");
-        unitList.Clear();
+    void CancelOrgoneP1(){
+        CheckOrgone(1);
+    }
+
+    /// <summary>
+    /// Si le joueur appuie sur le bouton annuler 
+    /// </summary>
+    void CancelOrgoneP2()
+    {
+        CheckOrgone(2);
     }
 
     /// <summary>
@@ -119,7 +144,10 @@ public class Player
             }
 
             for(int i = 0; i < OrgoneValue; i++){
-                OrgoneManager.Instance.RedPlayerCharge[i].enabled = true;
+                if(i < 5)
+                {
+                    OrgoneManager.Instance.RedPlayerCharge[i].enabled = true;
+                }
             }
         }
         else{
@@ -130,16 +158,12 @@ public class Player
 
             for(int i = 0; i < OrgoneValue; i++)
             {
-                OrgoneManager.Instance.BluePlayerCharge[i].enabled = true;
+                if(i < 5)
+                {
+                    OrgoneManager.Instance.BluePlayerCharge[i].enabled = true;
+                }
             }
         }
-    }
-
-    /// <summary>
-    /// Appelle l'explosion d'orgone
-    /// </summary>
-    public void MakeOrgoneExplosion(){
-        // oskour Paul !
     }
 
     //AV

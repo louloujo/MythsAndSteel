@@ -12,6 +12,22 @@ public class MYthsAndSteel_Enum : MonoBehaviour
     }
 
     /// <summary>
+    /// Status obtenable par une unité
+    /// </summary>
+    public enum UnitStatut
+    {
+        ArmeEpidemiologique, Paralysie, Immobilisation, Réanimé, Possédé, Invincible, PeutPasCombattre, PeutPasPrendreDesObjectifs
+    }
+
+    /// <summary>
+    /// Les types d'enfant obtenable sur une tile
+    /// </summary>
+    public enum ChildTileType
+    {
+        AttackSelect, MoveSelect, EventSelect
+    }
+
+    /// <summary>
     /// Enum pour els phases du jeu
     /// </summary>
     public enum PhaseDeJeu{
@@ -42,20 +58,9 @@ public class MYthsAndSteel_Enum : MonoBehaviour
         neutral, blue, red
     }
 
-    /// <summary>
-    /// Status obtenable par une unité
-    /// </summary>
-    public enum UnitStatut{
-        ArmeEpidemiologique, Paralysie, Immobilisation, Réanimé, Possédé, Invincible, PeutPasCombattre, PeutPasPrendreDesObjectifs 
-    }
 
-    /// <summary>
-    /// Les types d'enfant obtenable sur une tile
-    /// </summary>
-    public enum ChildTileType
-    {
-        AttackSelect, MoveSelect, EventSelect
-    }
+
+
 
     /// <summary>
     /// Liste des Scénarios du jeu
@@ -79,5 +84,9 @@ public class MYthsAndSteel_Enum : MonoBehaviour
     public enum Direction
     {
         Nord, Sud, Est, Ouest, None
+    }
+    public enum Attributs
+    {
+       Aucun = 0, Déviation = 1, RésistanceAuFroid = 2, RésistanceAuFeu = 3, AppelDeRenforts = 4, ToutTerrain = 5, PasseMuraille = 6, Perforant = 7, Amphibie = 8, Démineur = 9, RestreintAuxRails = 10 
     }
 }
