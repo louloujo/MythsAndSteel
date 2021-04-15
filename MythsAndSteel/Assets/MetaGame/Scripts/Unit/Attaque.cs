@@ -110,11 +110,13 @@ public class Attaque : MonoSingleton<Attaque>
     {
         if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
         {
+
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
             Debug.Log("Damage : " + _damageMinimum);
         }
         if (DiceResult < _numberRangeMin.x)
         {
+
             Debug.Log("Damage : " + null);
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
         }
@@ -352,18 +354,7 @@ public class Attaque : MonoSingleton<Attaque>
                 selectedUnitEnnemy = TileSelectedForAttack.GetComponent<TileScript>().Unit;
                 if (selectedUnitEnnemy != null)
                 {
-                    _EnnemyLife = selectedUnitEnnemy.GetComponent<UnitScript>().Life;
                     ApplyAttack();
-
-                    if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId))
-                    {
-                        if (!PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId) || !PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
-                        {
-                            _numberRangeMin.x += 2;
-                            _numberRangeMin.y += 2;
-                            _numberRangeMax.x += 2;
-                        }
-                    }
                 }
                 else
                 {
@@ -384,47 +375,73 @@ public class Attaque : MonoSingleton<Attaque>
     public void GetStats()
     {
         _attackRange = selectedUnit.GetComponent<UnitScript>().AttackRange; // Récupération de la Portée
+        
         _damageMinimum = selectedUnit.GetComponent<UnitScript>().DamageMinimum; // Récupération des Dégats Maximum
         _damageMaximum = selectedUnit.GetComponent<UnitScript>().DamageMaximum; // Dégats Minimums
         _numberRangeMin.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.x; // Récupération de la Range min - x
         _numberRangeMin.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.y; // Récupération de la Range min - y 
         _numberRangeMax.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.x; // Récupération de la Range min - x
         _numberRangeMax.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.y; // Récupération de la Range min - y
-
-        // Applique les bonus/malus de terrains
-        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Bosquet, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
-        {
-            _numberRangeMin.x += 1;
-            _numberRangeMin.y += 1;
-            _numberRangeMax.x += 1;
-        }
-
-        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
-        {
-            selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
-        }
-
-        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Plage, selectedUnit.GetComponent<UnitScript>().ActualTiledId) && selectedUnit.GetComponent<Unit_SO>().typeUnite == MYthsAndSteel_Enum.TypeUnite.Infanterie)
-        {
-            _numberRangeMin.x += -2;
-            _numberRangeMin.y += -1;
-            _numberRangeMax.x += -1;
-        }
-
-        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
-        {
-            selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
-        }
+        _EnnemyLife = selectedUnitEnnemy.GetComponent<UnitScript>().Life; // Récupération de la vie de l'unité attaquée
     }
 
     public void ApplyAttack()
     {
         Randomdice();
         ChooseAttackType(_numberRangeMin, _damageMinimum, _numberRangeMax, _damageMaximum, DiceResult);
-        StopAttack();
         IsInAttack = false;
-
         selectedUnit.GetComponent<UnitScript>()._isActionDone = true;
         selectedUnit.GetComponent<UnitScript>().checkActivation();
+
+
+        StopAttack();
+    }
+
+
+    public void ChangeStat()
+    {
+        // Applique les bonus/malus de terrains
+        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Bosquet, selectedUnit.GetComponent<UnitScript>().ActualTiledId)) // Bosquet
+        {
+            _numberRangeMin.x += 1;
+            _numberRangeMin.y += 1;
+            _numberRangeMax.x += 1;
+        }
+
+        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId)) // Colline
+        {
+            selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
+        }
+
+        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Plage, selectedUnit.GetComponent<UnitScript>().ActualTiledId) && selectedUnit.GetComponent<Unit_SO>().typeUnite == MYthsAndSteel_Enum.TypeUnite.Infanterie) // Plage
+        {
+            _numberRangeMin.x += -2;
+            _numberRangeMin.y += -1;
+            _numberRangeMax.x += -1;
+        }
+
+        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId)) // Haute colline 1
+        {
+            selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
+        }
+
+        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId)) // Haute colline 2
+        {
+            if (!PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId) || !PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
+            {
+                _numberRangeMin.x += 2;
+                _numberRangeMin.y += 2;
+                _numberRangeMax.x += 2;
+            }
+        }
+
+        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Maison, selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId)) // Maison
+        {
+            _damageMinimum -= 1;
+            _damageMaximum -= 1;
+
+        }
+
+
     }
 }
