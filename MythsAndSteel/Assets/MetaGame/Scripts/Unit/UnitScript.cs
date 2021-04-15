@@ -325,6 +325,7 @@ public class UnitScript : MonoBehaviour
 
     #endregion Statut
 
+
     #region ChangementStat
     /// <summary>
     /// Ajoute des dégâts supplémentaires aux unités
