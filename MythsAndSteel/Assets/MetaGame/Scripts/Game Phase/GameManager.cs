@@ -150,14 +150,6 @@ public class GameManager : MonoSingleton<GameManager>{
     /// Permet d'initialiser le script
     /// </summary>
     private void Start(){
-        _managerSO.GoToDebutPhase += OnclickedEvent;
-        _managerSO.GoToActivationPhase += OnclickedEvent;
-        _managerSO.GoToOrgoneJ1Phase += OnclickedEvent;
-        _managerSO.GoToActionJ1Phase += OnclickedEvent;
-        _managerSO.GoToOrgoneJ2Phase += OnclickedEvent;
-        _managerSO.GoToActionJ2Phase += OnclickedEvent;
-        _managerSO.GoToStrategyPhase += OnclickedEvent;
-
         _managerSO.GoToOrgoneJ1Phase += DetermineWhichPlayerplay;
         _managerSO.GoToOrgoneJ2Phase += DetermineWhichPlayerplay;
         _isInTurn = true;
@@ -185,7 +177,8 @@ public class GameManager : MonoSingleton<GameManager>{
     /// </summary>
     void CancelSkipPhase()
     {
-        _eventCallCancel -= CancelSkipPhase;
+        _eventCall = null;
+        _eventCallCancel = null;
         UIInstance.Instance.ActivateNextPhaseButton();
     }
 
@@ -197,7 +190,9 @@ public class GameManager : MonoSingleton<GameManager>{
     {
         //Affiche le panneau de transition d'UI
         _isInTurn = false;
-        SwitchPhaseObjectUI();
+        _eventCall = null;
+        _eventCallCancel = null;
+        OnclickedEvent();
     }
 
     /// <summary>
@@ -240,8 +235,11 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <summary>
     /// Fonction qui est appellée lorsque l'event est appellé (event lors du clic sur le bouton pour passer à la phase suivante)
     /// </summary>
-    public void OnclickedEvent(){
-        _isInTurn = true;
+    void OnclickedEvent(){
+        SwitchPhaseObjectUI();
+        if(ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Debut){
+            _isInTurn = true;
+        }
     }
 
     public void GoPhase(MYthsAndSteel_Enum.PhaseDeJeu phase)
@@ -255,24 +253,41 @@ public class GameManager : MonoSingleton<GameManager>{
     /// </summary>
     void SwitchPhaseObjectUI()
     {
-        //Ajoute le menu où il faut cliquer
-        //Instantie le panneau de transition entre deux phases et le garde en mémoire
-        GameObject phaseObj = Instantiate(UIInstance.Instance.SwitchPhaseObject, UIInstance.Instance.CanvasTurnPhase.transform.position,
-                                          Quaternion.identity, UIInstance.Instance.CanvasTurnPhase.transform);
+        int nextPhase = (int)_actualTurnPhase + 1 > 6? 0 : (int)_actualTurnPhase + 1;
+        if((MYthsAndSteel_Enum.PhaseDeJeu) nextPhase != MYthsAndSteel_Enum.PhaseDeJeu.Debut){
+            createPanel(1);
+        }
+        else if((MYthsAndSteel_Enum.PhaseDeJeu) nextPhase == MYthsAndSteel_Enum.PhaseDeJeu.Debut && !ManagerSO.GetDebutFunction())
+        {
+            createPanel(2);
+        }
+        else
+        {
+            createPanel(1);
+        }
+    
 
-        //Variable qui permet d'avoir le texte à afficher au début de la phase
-        string textForSwitch = "";
-        int nextPhase = (int)ActualTurnPhase + 1 > 6 ? 0 : (int) ActualTurnPhase + 1;
-        textForSwitch = "Phase " + ((MYthsAndSteel_Enum.PhaseDeJeu) nextPhase).ToString();
-
-        phaseObj.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = textForSwitch;
-        Destroy(phaseObj, 1.25f);      
         if(ActualTurnPhase + 1 == MYthsAndSteel_Enum.PhaseDeJeu.Activation){
             StartCoroutine(waitToChange());
         }
         else{
             ManagerSO.GoToPhase();
         }
+    }
+
+    void createPanel(int i)
+    {
+        //Ajoute le menu où il faut cliquer
+        //Instantie le panneau de transition entre deux phases et le garde en mémoire
+        GameObject phaseObj = Instantiate(UIInstance.Instance.SwitchPhaseObject, UIInstance.Instance.CanvasTurnPhase.transform.position,
+                                          Quaternion.identity, UIInstance.Instance.CanvasTurnPhase.transform);
+
+        //Variable qui permet d'avoir le texte à afficher au début de la phase
+        int nextPhase = (int)ActualTurnPhase + i > 6 ? 0 + i - 1: (int)ActualTurnPhase + 1;
+        string textForSwitch = "Phase " + ((MYthsAndSteel_Enum.PhaseDeJeu)nextPhase).ToString();
+
+        phaseObj.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = textForSwitch;
+        Destroy(phaseObj, 1.25f);
     }
     #endregion UIFunction
 

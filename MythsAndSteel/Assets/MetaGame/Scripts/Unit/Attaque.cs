@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +10,12 @@ public class Attaque : MonoSingleton<Attaque>
     [SerializeField] private int[] neighbourValue; // +1 +9 +10...
 
     public List<int> _newNeighbourId => newNeighbourId;
-    [SerializeField] private List<int> newNeighbourId = new List<int>(); // Voisins atteignables avec le range de l'unitÈ.
+    [SerializeField] private List<int> newNeighbourId = new List<int>(); // Voisins atteignables avec le range de l'unit√©.
 
     public List<int> _selectedTileId => selectedTileId;
-    [SerializeField] private List<int> selectedTileId = new List<int>(); // Cases selectionnÈes par le joueur.
+    [SerializeField] private List<int> selectedTileId = new List<int>(); // Cases selectionn√©es par le joueur.
 
-    //Est ce que l'unitÈ a commencÈ ‡ choisir son dÈplacement ?
+    //Est ce que l'unit√© a commenc√© √† choisir son d√©placement ?
     [SerializeField] private bool _isInAttack;
     public bool IsInAttack
     {
@@ -28,7 +29,7 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
-    //Est ce qu'une unitÈ est sÈlectionnÈe ?
+    //Est ce qu'une unit√© est s√©lectionn√©e ?
     [SerializeField] private bool _selected;
     public bool Selected
     {
@@ -42,15 +43,15 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
-    // Vie de l'ennemi ciblÈ 
+    // Vie de l'ennemi cibl√© 
     [SerializeField] int _EnnemyLife;
     public int Life => _EnnemyLife;
 
-    //PortÈe d'attaque
+    //Port√©e d'attaque
     [SerializeField] int _attackRange;
     public int AttackRange => _attackRange;
 
-    //DÈgats minimum infligÈs 
+    //D√©gats minimum inflig√©s 
     [SerializeField] int _damageMinimum;
     public int DamageMinimum => _damageMinimum;
 
@@ -58,7 +59,7 @@ public class Attaque : MonoSingleton<Attaque>
     [SerializeField] Vector2 _numberRangeMin;
     public Vector2 NumberRangeMin => _numberRangeMin;
 
-    // DÈgats maximum infligÈs
+    // D√©gats maximum inflig√©s
     [SerializeField] int _damageMaximum;
     public int DamageMaximum => _damageMaximum;
 
@@ -95,8 +96,8 @@ public class Attaque : MonoSingleton<Attaque>
     {
         firstDiceFloat = Random.Range(1f, 7f);
         secondDiceFloat = Random.Range(1f, 7f);
-        firstDiceInt = (int)firstDiceFloat;
-        secondDiceInt = (int)secondDiceFloat;
+        firstDiceInt = (int)Mathf.Round(firstDiceFloat);
+        secondDiceInt = (int)Mathf.Round(secondDiceInt);
         //DiceResult = firstDiceInt + secondDiceInt + selectedUnit.GetComponent<UnitScript>().DiceBonus;
         DiceResult = firstDiceInt + secondDiceInt;
 
@@ -115,6 +116,7 @@ public class Attaque : MonoSingleton<Attaque>
         }
         if (DiceResult < _numberRangeMin.x)
         {
+
             Debug.Log("Damage : " + null);
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
         }
@@ -213,7 +215,7 @@ public class Attaque : MonoSingleton<Attaque>
     }
 
     /// <summary>
-    /// Highlight des cases dans la range d'attaque de l'unitÈ
+    /// Highlight des cases dans la range d'attaque de l'unit√©
     /// </summary>
     /// <param name="tileId"></param>
     /// <param name="Range"></param>
@@ -248,7 +250,7 @@ public class Attaque : MonoSingleton<Attaque>
     }
 
     /// <summary>
-    /// Ajoute plus d'alÈatoire aux lancÈs de dÈ
+    /// Ajoute plus d'al√©atoire aux lanc√©s de d√©
     /// </summary>
     private void RandomMore()
     {
@@ -264,7 +266,7 @@ public class Attaque : MonoSingleton<Attaque>
     }
 
     /// <summary>
-    /// VÈrifie si l'unitÈ selectionnÈ peut attaquÈ + rÈcupËre la portÈe de l'unitÈ
+    /// V√©rifie si l'unit√© selectionn√© peut attaqu√© + r√©cup√®re la port√©e de l'unit√©
     /// </summary>
     public void StartAttackSelectionUnit()
     {
@@ -292,7 +294,7 @@ public class Attaque : MonoSingleton<Attaque>
     }
 
     /// <summary>
-    /// PrÈpare l'Highlight des tiles ciblables & passe le statut de l'unitÈ en -> _isInAttack
+    /// Pr√©pare l'Highlight des tiles ciblables & passe le statut de l'unit√© en -> _isInAttack
     /// </summary>
     /// <param name="tileId"></param>
     /// <param name="Range"></param>
@@ -305,13 +307,13 @@ public class Attaque : MonoSingleton<Attaque>
             List<int> ID = new List<int>();
             ID.Add(tileId);
 
-            // Lance l'highlight des cases dans la range de l'unitÈ.
+            // Lance l'highlight des cases dans la range de l'unit√©.
             Highlight(tileId, Range); 
         }
     }
 
     /// <summary>
-    /// ArrÍte l'attaque de l'unitÈ select (UI + possibilitÈ d'attaquer
+    /// Arr√™te l'attaque de l'unit√© select (UI + possibilit√© d'attaquer
     /// </summary>
     public void StopAttack()
     {
@@ -356,7 +358,6 @@ public class Attaque : MonoSingleton<Attaque>
                 selectedUnitEnnemy = TileSelectedForAttack.GetComponent<TileScript>().Unit;
                 if (selectedUnitEnnemy != null)
                 {
-                    _EnnemyLife = selectedUnitEnnemy.GetComponent<UnitScript>().Life;
                     ApplyAttack();
                 }
                 else
@@ -377,52 +378,74 @@ public class Attaque : MonoSingleton<Attaque>
 
     public void GetStats()
     {
-        _attackRange = selectedUnit.GetComponent<UnitScript>().AttackRange; // RÈcupÈration de la PortÈe
-        _damageMinimum = selectedUnit.GetComponent<UnitScript>().DamageMinimum; // RÈcupÈration des DÈgats Maximum
-        _damageMaximum = selectedUnit.GetComponent<UnitScript>().DamageMaximum; // DÈgats Minimums
-        _numberRangeMin.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.x; // RÈcupÈration de la Range min - x
-        _numberRangeMin.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.y; // RÈcupÈration de la Range min - y 
-        _numberRangeMax.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.x; // RÈcupÈration de la Range min - x
-        _numberRangeMax.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.y; // RÈcupÈration de la Range min - y
-
-        // Applique les bonus/malus de terrains
-        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Bosquet, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
-        {
-            _numberRangeMin.x += 1;
-            _numberRangeMin.y += 1;
-            _numberRangeMax.x += 1;
-            Debug.Log("Error");
-        }
-
-        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
-        {
-            selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
-            Debug.Log("Error");
-        }
-
-        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Plage, selectedUnit.GetComponent<UnitScript>().ActualTiledId) && selectedUnit.GetComponent<Unit_SO>().typeUnite == MYthsAndSteel_Enum.TypeUnite.Infanterie)
-        {
-            _numberRangeMin.x += -2;
-            _numberRangeMin.y += -1;
-            _numberRangeMax.x += -1;
-            Debug.Log("Error");
-        }
-
-        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
-        {
-            selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
-            Debug.Log("Error");
-        }
+        _attackRange = selectedUnit.GetComponent<UnitScript>().AttackRange; // R√©cup√©ration de la Port√©e
+        
+        _damageMinimum = selectedUnit.GetComponent<UnitScript>().DamageMinimum; // R√©cup√©ration des D√©gats Maximum
+        _damageMaximum = selectedUnit.GetComponent<UnitScript>().DamageMaximum; // D√©gats Minimums
+        _numberRangeMin.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.x; // R√©cup√©ration de la Range min - x
+        _numberRangeMin.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.y; // R√©cup√©ration de la Range min - y 
+        _numberRangeMax.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.x; // R√©cup√©ration de la Range min - x
+        _numberRangeMax.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.y; // R√©cup√©ration de la Range min - y
+        _EnnemyLife = selectedUnitEnnemy.GetComponent<UnitScript>().Life; // R√©cup√©ration de la vie de l'unit√© attaqu√©e
     }
 
     public void ApplyAttack()
     {
         Randomdice();
         ChooseAttackType(_numberRangeMin, _damageMinimum, _numberRangeMax, _damageMaximum, DiceResult);
-        StopAttack();
         IsInAttack = false;
-
         selectedUnit.GetComponent<UnitScript>()._isActionDone = true;
         selectedUnit.GetComponent<UnitScript>().checkActivation();
+
+
+        StopAttack();
+    }
+
+
+    public void ChangeStat()
+    {
+        // Applique les bonus/malus de terrains
+        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Bosquet, selectedUnit.GetComponent<UnitScript>().ActualTiledId)) // Bosquet
+        {
+            _numberRangeMin.x += 1;
+            _numberRangeMin.y += 1;
+            _numberRangeMax.x += 1;
+        }
+
+        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId)) // Colline
+        {
+            selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
+        }
+
+        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Plage, selectedUnit.GetComponent<UnitScript>().ActualTiledId) && selectedUnit.GetComponent<Unit_SO>().typeUnite == MYthsAndSteel_Enum.TypeUnite.Infanterie) // Plage
+        {
+            _numberRangeMin.x += -2;
+            _numberRangeMin.y += -1;
+            _numberRangeMax.x += -1;
+        }
+
+        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId)) // Haute colline 1
+        {
+            selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
+        }
+
+        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId)) // Haute colline 2
+        {
+            if (!PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId) || !PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId))
+            {
+                _numberRangeMin.x += 2;
+                _numberRangeMin.y += 2;
+                _numberRangeMax.x += 2;
+            }
+        }
+
+        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Maison, selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId)) // Maison
+        {
+            _damageMinimum -= 1;
+            _damageMaximum -= 1;
+
+        }
+
+
     }
 }

@@ -570,7 +570,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                 Debug.Log("La tile d'ID : " + tileId + " est trop loin de la tile d'ID: " + selectedTileId[selectedTileId.Count - 1]);
             }
         }
-        if(selectedTileId.Count > 1)
+        if(selectedTileId.Count > 1 && TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 1]].GetComponent<TileScript>().Unit == null)
         {
             UIInstance.Instance.ActivationUnitPanel.ShowMovementPanel();
         }
