@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -110,14 +109,13 @@ public class Attaque : MonoSingleton<Attaque>
     {
         if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
         {
-
+            ChangeStat();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
             Debug.Log("Damage : " + _damageMinimum);
         }
         if (DiceResult < _numberRangeMin.x)
         {
-
-            Debug.Log("Damage : " + null);
+            ChangeStat();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
         }
         AnimationUpdate();
@@ -126,16 +124,19 @@ public class Attaque : MonoSingleton<Attaque>
     {
         if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
         {
+            ChangeStat();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
             Debug.Log("Damage : " + _damageMinimum);
         }
         if (DiceResult >= _numberRangeMax.x && DiceResult <= _numberRangeMax.y)
         {
+            ChangeStat();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMaximum);
             Debug.Log("Damage : " + _damageMaximum);
         }
         if (DiceResult < _numberRangeMin.x)
         {
+            ChangeStat();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
             Debug.Log("Damage : " + null);
         }
@@ -146,7 +147,7 @@ public class Attaque : MonoSingleton<Attaque>
         GameObject ActualUnit = RaycastManager.Instance.ActualUnitSelected;
         GameObject ActualEnemy = selectedUnitEnnemy;
 
-        float X = ActualEnemy.transform.position.x - ActualUnit.transform.position.x; 
+        float X = ActualEnemy.transform.position.x - ActualUnit.transform.position.x;
         float Y = ActualEnemy.transform.position.y - ActualUnit.transform.position.y;
 
         if (X >= 0)
@@ -173,7 +174,7 @@ public class Attaque : MonoSingleton<Attaque>
             if (Mathf.Abs(X) > Mathf.Abs(Y))
             {
                 ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 1); // left
-                ActualUnit.GetComponent<SpriteRenderer>().flipX = false; 
+                ActualUnit.GetComponent<SpriteRenderer>().flipX = false;
             }
             else if (Mathf.Abs(X) <= Mathf.Abs(Y))
             {
@@ -352,6 +353,7 @@ public class Attaque : MonoSingleton<Attaque>
             if (TileSelectedForAttack != null && newNeighbourId.Contains(tileId))
             {
                 selectedUnitEnnemy = TileSelectedForAttack.GetComponent<TileScript>().Unit;
+                _EnnemyLife = selectedUnitEnnemy.GetComponent<UnitScript>().Life; // Récupération de la vie de l'unité attaquée
                 if (selectedUnitEnnemy != null)
                 {
                     ApplyAttack();
@@ -374,15 +376,13 @@ public class Attaque : MonoSingleton<Attaque>
 
     public void GetStats()
     {
-        _attackRange = selectedUnit.GetComponent<UnitScript>().AttackRange; // Récupération de la Portée
-        
+        _attackRange = selectedUnit.GetComponent<UnitScript>().AttackRange; // Récupération de la Portée        
         _damageMinimum = selectedUnit.GetComponent<UnitScript>().DamageMinimum; // Récupération des Dégats Maximum
         _damageMaximum = selectedUnit.GetComponent<UnitScript>().DamageMaximum; // Dégats Minimums
         _numberRangeMin.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.x; // Récupération de la Range min - x
         _numberRangeMin.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.y; // Récupération de la Range min - y 
         _numberRangeMax.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.x; // Récupération de la Range min - x
         _numberRangeMax.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.y; // Récupération de la Range min - y
-        _EnnemyLife = selectedUnitEnnemy.GetComponent<UnitScript>().Life; // Récupération de la vie de l'unité attaquée
     }
 
     public void ApplyAttack()
@@ -406,11 +406,13 @@ public class Attaque : MonoSingleton<Attaque>
             _numberRangeMin.x += 1;
             _numberRangeMin.y += 1;
             _numberRangeMax.x += 1;
+            Debug.Log("BosquetEffectApplyed");
         }
 
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId)) // Colline
         {
             selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
+            Debug.Log("CollineEffectApplyed");
         }
 
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Plage, selectedUnit.GetComponent<UnitScript>().ActualTiledId) && selectedUnit.GetComponent<Unit_SO>().typeUnite == MYthsAndSteel_Enum.TypeUnite.Infanterie) // Plage
@@ -418,11 +420,13 @@ public class Attaque : MonoSingleton<Attaque>
             _numberRangeMin.x += -2;
             _numberRangeMin.y += -1;
             _numberRangeMax.x += -1;
+            Debug.Log("PlayaEffectApplyed");
         }
 
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnit.GetComponent<UnitScript>().ActualTiledId)) // Haute colline 1
         {
             selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
+            Debug.Log("Haute collineEffectApplyed");
         }
 
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId)) // Haute colline 2
@@ -432,6 +436,8 @@ public class Attaque : MonoSingleton<Attaque>
                 _numberRangeMin.x += 2;
                 _numberRangeMin.y += 2;
                 _numberRangeMax.x += 2;
+                Debug.Log("HautecollinesamerelapEffectApplyed");
+
             }
         }
 
@@ -439,9 +445,20 @@ public class Attaque : MonoSingleton<Attaque>
         {
             _damageMinimum -= 1;
             _damageMaximum -= 1;
-
+            Debug.Log("Dégats Reduits");
+            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Remove(MYthsAndSteel_Enum.TerrainType.Maison);
+            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Ruines);
+            Debug.Log("IkeaEffectApplyed");
         }
 
-
+        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Immeuble, selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId)) // Immeubles
+        {
+            _damageMinimum = 0;
+            _damageMaximum = 0;
+            Debug.Log("Annulés");
+            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Remove(MYthsAndSteel_Enum.TerrainType.Immeuble);
+            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Ruines);
+            Debug.Log("BigBoumIkeaEffectApplyed");
+        }
     }
 }
