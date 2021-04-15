@@ -68,7 +68,7 @@ public class InputManager : MonoBehaviour
         }
 
         //Pour passer une phase rapidement
-        if(GameManager.Instance.IsInTurn)
+        if(GameManager.Instance.IsInTurn && !GameManager.Instance.ChooseTileForEvent && !GameManager.Instance.ChooseUnitForEvent)
         {
             if(Input.GetKeyDown(SkipPhase))
             {
