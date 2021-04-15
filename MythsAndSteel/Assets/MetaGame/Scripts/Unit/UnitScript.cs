@@ -305,6 +305,17 @@ public class UnitScript : MonoBehaviour
         if(UnitSO.IsInRedArmy) PlayerScript.Instance.UnitRef.UnitListRedPlayer.Remove(this.gameObject);
         else PlayerScript.Instance.UnitRef.UnitListBluePlayer.Remove(this.gameObject);
 
+        StartCoroutine(DeathAnimation()); ///
+    }
+
+    /// <summary>
+    /// Lance l'animation de mort et attend la fin de l'animation avant de détuire l'unité.
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator DeathAnimation()
+    {
+        Animation.SetBool("Dead", true); Debug.Log(Animation.runtimeAnimatorController.animationClips[0].length);
+        yield return new WaitForSeconds(Animation.runtimeAnimatorController.animationClips[0].length);
         Destroy(gameObject);
         Debug.Log("Unité Détruite");
     }

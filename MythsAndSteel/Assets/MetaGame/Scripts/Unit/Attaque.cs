@@ -108,7 +108,8 @@ public class Attaque : MonoSingleton<Attaque>
     void UnitAttackOneRange(Vector2 _numberRangeMin, int _damageMinimum, int DiceResult)
     {
         if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
-        {
+        {        
+            AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
             Debug.Log("Damage : " + _damageMinimum);
         }
@@ -117,18 +118,19 @@ public class Attaque : MonoSingleton<Attaque>
             Debug.Log("Damage : " + null);
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
         }
-        AnimationUpdate();
     }
 
     void UnitAttackTwoRanges(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, int DiceResult)
     {
         if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
         {
+            AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
             Debug.Log("Damage : " + _damageMinimum);
         }
         if (DiceResult >= _numberRangeMax.x && DiceResult <= _numberRangeMax.y)
-        {
+        {        
+            AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMaximum);
             Debug.Log("Damage : " + _damageMaximum);
         }
@@ -137,7 +139,6 @@ public class Attaque : MonoSingleton<Attaque>
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
             Debug.Log("Damage : " + null);
         }
-        AnimationUpdate();
     }
     void AnimationUpdate()
     {
