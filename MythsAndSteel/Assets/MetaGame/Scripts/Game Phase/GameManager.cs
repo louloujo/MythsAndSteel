@@ -150,14 +150,6 @@ public class GameManager : MonoSingleton<GameManager>{
     /// Permet d'initialiser le script
     /// </summary>
     private void Start(){
-        _managerSO.GoToDebutPhase += OnclickedEvent;
-        _managerSO.GoToActivationPhase += OnclickedEvent;
-        _managerSO.GoToOrgoneJ1Phase += OnclickedEvent;
-        _managerSO.GoToActionJ1Phase += OnclickedEvent;
-        _managerSO.GoToOrgoneJ2Phase += OnclickedEvent;
-        _managerSO.GoToActionJ2Phase += OnclickedEvent;
-        _managerSO.GoToStrategyPhase += OnclickedEvent;
-
         _managerSO.GoToOrgoneJ1Phase += DetermineWhichPlayerplay;
         _managerSO.GoToOrgoneJ2Phase += DetermineWhichPlayerplay;
         _isInTurn = true;
@@ -185,7 +177,8 @@ public class GameManager : MonoSingleton<GameManager>{
     /// </summary>
     void CancelSkipPhase()
     {
-        _eventCallCancel -= CancelSkipPhase;
+        _eventCall = null;
+        _eventCallCancel = null;
         UIInstance.Instance.ActivateNextPhaseButton();
     }
 
@@ -197,7 +190,9 @@ public class GameManager : MonoSingleton<GameManager>{
     {
         //Affiche le panneau de transition d'UI
         _isInTurn = false;
-        SwitchPhaseObjectUI();
+        _eventCall = null;
+        _eventCallCancel = null;
+        OnclickedEvent();
     }
 
     /// <summary>
@@ -240,8 +235,11 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <summary>
     /// Fonction qui est appellée lorsque l'event est appellé (event lors du clic sur le bouton pour passer à la phase suivante)
     /// </summary>
-    public void OnclickedEvent(){
-        _isInTurn = true;
+    void OnclickedEvent(){
+        SwitchPhaseObjectUI();
+        if(ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Debut){
+            _isInTurn = true;
+        }
     }
 
     public void GoPhase(MYthsAndSteel_Enum.PhaseDeJeu phase)

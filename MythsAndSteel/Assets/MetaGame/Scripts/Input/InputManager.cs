@@ -62,8 +62,11 @@ public class InputManager : MonoBehaviour
         //Quand le joueur clic sur entrée pour valider une action
         if(Input.GetKeyDown(MakeAction)){
             if(Mouvement.Instance.IsInMouvement && Mouvement.Instance._selectedTileId.Count > 1){
-                Mouvement.Instance.ApplyMouvement();
-                Mouvement.Instance.DeleteChildWhenMove();
+                if(TilesManager.Instance.TileList[Mouvement.Instance._selectedTileId[Mouvement.Instance._selectedTileId.Count - 1]].GetComponent<TileScript>().Unit == null)
+                {
+                    Mouvement.Instance.ApplyMouvement();
+                    Mouvement.Instance.DeleteChildWhenMove();
+                }
             }
         }
 
@@ -151,7 +154,6 @@ public class InputManager : MonoBehaviour
     /// </summary>
     void SkipPhaseFunc(){
         GameManager.Instance.ChangePhase();
-        GameManager.Instance._eventCall -= SkipPhaseFunc;
         hasShowPanel = false;
     }
 
@@ -161,7 +163,7 @@ public class InputManager : MonoBehaviour
     void CancelSkipPhase(){
         hasShowPanel = false;
         t = 0;
-        GameManager.Instance._eventCallCancel -= CancelSkipPhase;
+        GameManager.Instance._eventCallCancel = null;
         UIInstance.Instance.ActivateNextPhaseButton();
     }
 }
