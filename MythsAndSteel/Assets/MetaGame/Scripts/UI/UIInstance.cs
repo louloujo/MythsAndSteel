@@ -114,31 +114,8 @@ public class UIInstance : MonoSingleton<UIInstance>
     public TextSpriteAttributUnit[] textSpriteAttributUnit = new TextSpriteAttributUnit[11];
     //Array comportant les ObjectsAttributs. A ne pas modifier !
     public ObjectsAttributs[] objectsAttributs = new ObjectsAttributs[3];
-    [System.Serializable]
+    #endregion ShiftClicPanelP1
     
-    /// <summary>
-    /// Contient le texte et le sprite pour un attribut
-    /// </summary>
-    public class TextSpriteAttributUnit
-    {
-        [TextArea]
-        public string TextAttributUnit;
-        public Sprite SpriteAttributUnit;
-    }
-    /// <summary>
-    /// Objet dont le sprite va changer en fonction de l'attribut, Objet dont le texte va changer en fonction de l'attribut. 
-    /// </summary>
-  
-    [System.Serializable]
-    public class ObjectsAttributs
-    {
-
-        public GameObject MainObjects;
-        public GameObject Description;
-    }
-
-
-    #endregion
     #region ShiftClicPanelP2
     [Header("LISTES DES ELEMENTS UI POUR LE SHIFT CLIC DE LA PAGE 2")]
     [Tooltip("Tous les éléments qui composent l'UI pour le Shift Clic de la Page 2")]
@@ -503,5 +480,28 @@ public class BouttonMenuRenfort
     public Button _clicSurUnité4 = null;
     public Button _clicSurUnité5 = null;
     public Button _clicSurUnité6 = null;
+}
+
+/// <summary>
+/// Contient le texte et le sprite pour un attribut
+/// </summary>
+[System.Serializable]
+public class TextSpriteAttributUnit
+{
+    [TextArea]
+    public string TextAttributUnit;
+    public Sprite SpriteAttributUnit;
+}
+
+/// <summary>
+/// Objet dont le sprite va changer en fonction de l'attribut, Objet dont le texte va changer en fonction de l'attribut. 
+/// </summary>
+
+[System.Serializable]
+public class ObjectsAttributs
+{
+
+    public GameObject MainObjects;
+    public GameObject Description;
 }
 #endregion ClassToRangeList

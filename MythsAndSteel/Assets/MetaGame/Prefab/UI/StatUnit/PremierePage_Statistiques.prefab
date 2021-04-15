@@ -278,7 +278,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -19.138916, y: 0, z: 0, w: 0}
+  m_margin: {x: 0.0063476562, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -860,8 +860,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -48.333344}
-  m_SizeDelta: {x: 200, y: 60}
+  m_AnchoredPosition: {x: 116.65918, y: -48.333344}
+  m_SizeDelta: {x: 206.6814, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2089404030015837078
 GameObject:
@@ -1106,8 +1106,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -114.16669}
-  m_SizeDelta: {x: 200, y: 80}
+  m_AnchoredPosition: {x: 114.173096, y: -114.16669}
+  m_SizeDelta: {x: 211.6538, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2649591274576692467
 GameObject:
@@ -1947,7 +1947,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6261975411731200437}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MouseCommand, Assembly-CSharp
+        m_MethodName: switchWindows1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5510987839410997844
 GameObject:
   m_ObjectHideFlags: 0
@@ -2232,8 +2244,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 120, y: -11.25}
-  m_SizeDelta: {x: 200, y: 22.5}
+  m_AnchoredPosition: {x: 110, y: -11.25}
+  m_SizeDelta: {x: 220, y: 22.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &445882644
 MonoBehaviour:
@@ -2248,15 +2260,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.37254903, b: 0.37254903, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 3a2034a0c02cc7141bbd3147ee932ac3, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3144,6 +3156,30 @@ PrefabInstance:
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 445882644}
+    - target: {fileID: 5033165009537970452, guid: 3ae661e8def954c43abe51b7ac380c3c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033165009537970452, guid: 3ae661e8def954c43abe51b7ac380c3c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033165009537970452, guid: 3ae661e8def954c43abe51b7ac380c3c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033165009537970452, guid: 3ae661e8def954c43abe51b7ac380c3c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitShiftPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033165009537970452, guid: 3ae661e8def954c43abe51b7ac380c3c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MouseCommand, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033165009537970452, guid: 3ae661e8def954c43abe51b7ac380c3c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 9202160769951856432, guid: 3ae661e8def954c43abe51b7ac380c3c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3174,11 +3210,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9202160769951856432, guid: 3ae661e8def954c43abe51b7ac380c3c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 9202160769951856432, guid: 3ae661e8def954c43abe51b7ac380c3c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 9202160769951856432, guid: 3ae661e8def954c43abe51b7ac380c3c, type: 3}
       propertyPath: m_LocalPosition.x

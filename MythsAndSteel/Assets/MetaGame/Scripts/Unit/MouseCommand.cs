@@ -107,27 +107,6 @@ public class MouseCommand : MonoBehaviour
 
             UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta.x, 212 * UI.effetDeTerrain.Count);
         }
-
-        //On récupère l'ensemble des attributs de l'unité selectionnée
-        MYthsAndSteel_Enum.Attributs[] _UnitAttributs = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.UnitAttributs;
-        //Pour chaque attribut on va lui appliquer son sprite et sa description correspondante
-        // Si l'unité a une enum "aucun" (pas d'attribut), alors on désactive l'objet comportant le sprite et la description de l'attribut.
-        for (int i = 0; i < _UnitAttributs.Length; i++)
-        {
-            
-            if (_UnitAttributs[i] == MYthsAndSteel_Enum.Attributs.Aucun)
-            {
-                UIInstance.Instance.objectsAttributs[i].MainObjects.SetActive(false);
-            }
-            else
-            {
-                UIInstance.Instance.objectsAttributs[i].MainObjects.SetActive(true);
-                UIInstance.Instance.objectsAttributs[i].MainObjects.GetComponent<Image>().sprite = UIInstance.Instance.textSpriteAttributUnit[(int)_UnitAttributs[i]].SpriteAttributUnit;
-
-          UIInstance.Instance.objectsAttributs[i].Description.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = UIInstance.Instance.textSpriteAttributUnit[(int)_UnitAttributs[i]].TextAttributUnit;
-        
-            }
-        }
     }
     #endregion UpdateStats
 
@@ -720,7 +699,6 @@ public class MouseCommand : MonoBehaviour
         _checkIfPlayerAsClic = false;
         ShiftUI[0].SetActive(false);
         ShiftUI[1].SetActive(false);
-
     }
 
     /// <summary>
@@ -730,11 +708,6 @@ public class MouseCommand : MonoBehaviour
     {
         //J'active le Panneau 2 car le joueur a cliqué sur le bouton permettant de transitionner de la page 1 à la page 2. De plus, je masque la page 1.
         ActivateUI(ShiftUI[1], ShiftUI[0].transform.position.x, ShiftUI[0].transform.position.y, true);
-
- 
-       
-        
-        
         ShiftUI[0].SetActive(false);
     }
 
@@ -746,7 +719,6 @@ public class MouseCommand : MonoBehaviour
         //J'active le Panneau 1 car le joueur a cliqué sur le bouton permettant de transitionner de la page 2 à la page 1. De plus, je masque la page 2.
         ActivateUI(ShiftUI[0], ShiftUI[1].transform.position.x, ShiftUI[1].transform.position.y, true);
         ShiftUI[1].SetActive(false);
-
     }
     #endregion SwitchPages
 
