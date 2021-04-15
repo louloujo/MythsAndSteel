@@ -374,7 +374,6 @@ public class Attaque : MonoSingleton<Attaque>
             if (TileSelectedForAttack != null && newNeighbourId.Contains(tileId))
             {
                 selectedUnitEnnemy = TileSelectedForAttack.GetComponent<TileScript>().Unit;
-                _EnnemyLife = selectedUnitEnnemy.GetComponent<UnitScript>().Life; // Récupération de la vie de l'unité attaquée
                 if (selectedUnitEnnemy != null)
                 {
                     ApplyAttack();
