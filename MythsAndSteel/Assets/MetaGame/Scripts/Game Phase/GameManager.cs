@@ -360,6 +360,7 @@ public class GameManager : MonoSingleton<GameManager>{
             if(_canSelectMultiples)
             {
                 _unitChooseList.Add(unit);
+                TilesManager.Instance.TileList[unit.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _selectedTileSprite);
             }
             else if(!_canSelectMultiples && !_unitChooseList.Contains(unit))
             {
@@ -393,7 +394,9 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <param name="unit"></param>
     public void RemoveUnitToList(GameObject unit){
         _unitChooseList.Remove(unit);
-        TilesManager.Instance.TileList[unit.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
+        if(!_unitChooseList.Contains(unit)){
+            TilesManager.Instance.TileList[unit.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _normalEventSprite);
+        }
 
         if(IllusionStratégique){
             foreach(GameObject gam in _selectableUnit){
@@ -464,7 +467,8 @@ public class GameManager : MonoSingleton<GameManager>{
             {
                 if(_canSelectMultiples)
                 {
-                _tileChooseList.Add(tile);
+                    _tileChooseList.Add(tile);
+                    tile.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _selectedTileSprite);
                 }
                 else if(!_tileChooseList.Contains(tile) && !_canSelectMultiples)
                 {
@@ -487,7 +491,10 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <param name="tile"></param>
     public void RemoveTileToList(GameObject tile){
         _tileChooseList.Remove(tile);
-        tile.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _normalEventSprite);
+        if(!_tileChooseList.Contains(tile))
+        {
+            tile.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _normalEventSprite);
+        }
     }
 
     /// <summary>
