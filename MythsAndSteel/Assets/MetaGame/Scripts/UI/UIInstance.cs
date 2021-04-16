@@ -249,11 +249,17 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private GameObject _lifeHeartPrefab;
     public GameObject LifeHeartPrefab => _lifeHeartPrefab;
 
-    [SerializeField] private Sprite[] _shieldSprite;
-    public Sprite[] ShieldSprite => _shieldSprite;
+    [SerializeField] private Sprite[] _redHeartSprite;
+    public Sprite[] RedHeartSprite => _redHeartSprite;
 
-    [SerializeField] private Sprite[] _lifeHeartSprite;
-    public Sprite[] LifeHeartSprite => _lifeHeartSprite;
+    [SerializeField] private Sprite[] _blueHeartSprite;
+    public Sprite[] BlueHeartSprite => _blueHeartSprite;
+
+    [SerializeField] private Sprite[] _redHeartShieldSprite;
+    public Sprite[] RedHeartShieldSprite => _redHeartShieldSprite;
+
+    [SerializeField] private Sprite[] _blueHeartShieldSprite;
+    public Sprite[] BlueHeartShieldSprite => _blueHeartShieldSprite;
     #endregion VieUnité
 }
 

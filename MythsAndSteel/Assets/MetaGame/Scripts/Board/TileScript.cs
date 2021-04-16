@@ -91,7 +91,7 @@ public class TileScript : MonoBehaviour
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    public GameObject ActiveChildObj(MYthsAndSteel_Enum.ChildTileType type, Sprite sprite = null){
+    public GameObject ActiveChildObj(MYthsAndSteel_Enum.ChildTileType type, Sprite sprite = null, float alpha = 1f){
         GameObject child = null;
 
         foreach(GameObject gam in _Child){ 
@@ -104,7 +104,6 @@ public class TileScript : MonoBehaviour
                     {
                         child = gam;
                         child.GetComponent<SpriteRenderer>().enabled = true;
-                        child.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
                         if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
                     }
                     break;
@@ -114,7 +113,6 @@ public class TileScript : MonoBehaviour
                     {
                         child = gam;
                         child.GetComponent<SpriteRenderer>().enabled = true;
-                        child.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .5f);
                         if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
                     }
                     break;
@@ -124,12 +122,12 @@ public class TileScript : MonoBehaviour
                     {
                         child = gam;
                         child.GetComponent<SpriteRenderer>().enabled = true;
-                        child.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
                         if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
                     }
                     break;
             }
         }
+        child.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alpha);
         return child;
     }
 

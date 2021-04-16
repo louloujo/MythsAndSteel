@@ -505,7 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectToSpawn: {fileID: 896081780609742645}
-  _timeToWait: 0.3
+  _timeToWait: 0
 --- !u!1 &6763498198633086487
 GameObject:
   m_ObjectHideFlags: 0

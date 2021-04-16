@@ -109,7 +109,26 @@ public class MouseCommand : MonoBehaviour
 
             UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta.x, 212 * UI.effetDeTerrain.Count);
         }
+        /*
+        MYthsAndSteel_Enum.Attributs[] _UnitAttributs = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.UnitAttributs;
+
+        for(int i = 0; i < _UnitAttributs.Length; i++)
+        {
+            if(_UnitAttributs[i] == MYthsAndSteel_Enum.Attributs.Aucun)
+            {
+                UIInstance.Instance.objectsAttributs[i].MainObjects.SetActive(false);
+            }
+            else
+            {
+                UIInstance.Instance.objectsAttributs[i].MainObjects.SetActive(true);
+                UIInstance.Instance.objectsAttributs[i].MainObjects.GetComponent<Image>().sprite = UIInstance.Instance.textSpriteAttributUnit[(int)_UnitAttributs[i]].SpriteAttributUnit;
+
+                UIInstance.Instance.objectsAttributs[i].Description.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = UIInstance.Instance.textSpriteAttributUnit[(int)_UnitAttributs[i]].TextAttributUnit;
+
+            }
+        }*/
     }
+
     #endregion UpdateStats
 
     #region ActivateUI
