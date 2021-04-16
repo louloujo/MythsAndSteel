@@ -59,8 +59,8 @@ public class GameManager : MonoSingleton<GameManager>{
     public GameManagerSO ManagerSO => _managerSO;
 
     //Option manager pour ouvrir le menu d'option
-    [SerializeField] private GameManagerSO _optionSO = null;
-    public GameManagerSO OptionSO => _optionSO;
+    [SerializeField] private MenuOption _optionSO = null;
+    public MenuOption OptionSO => _optionSO;
 
     [Header("RENFORT PHASE SCRIPT")]
     [SerializeField] RenfortPhase _renfortPhase = null;
@@ -253,24 +253,41 @@ public class GameManager : MonoSingleton<GameManager>{
     /// </summary>
     void SwitchPhaseObjectUI()
     {
-        //Ajoute le menu où il faut cliquer
-        //Instantie le panneau de transition entre deux phases et le garde en mémoire
-        GameObject phaseObj = Instantiate(UIInstance.Instance.SwitchPhaseObject, UIInstance.Instance.CanvasTurnPhase.transform.position,
-                                          Quaternion.identity, UIInstance.Instance.CanvasTurnPhase.transform);
+        int nextPhase = (int)_actualTurnPhase + 1 > 6? 0 : (int)_actualTurnPhase + 1;
+        if((MYthsAndSteel_Enum.PhaseDeJeu) nextPhase != MYthsAndSteel_Enum.PhaseDeJeu.Debut){
+            createPanel(1);
+        }
+        else if((MYthsAndSteel_Enum.PhaseDeJeu) nextPhase == MYthsAndSteel_Enum.PhaseDeJeu.Debut && !ManagerSO.GetDebutFunction())
+        {
+            createPanel(2);
+        }
+        else
+        {
+            createPanel(1);
+        }
+    
 
-        //Variable qui permet d'avoir le texte à afficher au début de la phase
-        string textForSwitch = "";
-        int nextPhase = (int)ActualTurnPhase + 1 > 6 ? 0 : (int) ActualTurnPhase + 1;
-        textForSwitch = "Phase " + ((MYthsAndSteel_Enum.PhaseDeJeu) nextPhase).ToString();
-
-        phaseObj.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = textForSwitch;
-        Destroy(phaseObj, 1.25f);      
         if(ActualTurnPhase + 1 == MYthsAndSteel_Enum.PhaseDeJeu.Activation){
             StartCoroutine(waitToChange());
         }
         else{
             ManagerSO.GoToPhase();
         }
+    }
+
+    void createPanel(int i)
+    {
+        //Ajoute le menu où il faut cliquer
+        //Instantie le panneau de transition entre deux phases et le garde en mémoire
+        GameObject phaseObj = Instantiate(UIInstance.Instance.SwitchPhaseObject, UIInstance.Instance.CanvasTurnPhase.transform.position,
+                                          Quaternion.identity, UIInstance.Instance.CanvasTurnPhase.transform);
+
+        //Variable qui permet d'avoir le texte à afficher au début de la phase
+        int nextPhase = (int)ActualTurnPhase + i > 6 ? 0 + i - 1: (int)ActualTurnPhase + 1;
+        string textForSwitch = "Phase " + ((MYthsAndSteel_Enum.PhaseDeJeu)nextPhase).ToString();
+
+        phaseObj.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = textForSwitch;
+        Destroy(phaseObj, 1.25f);
     }
     #endregion UIFunction
 
@@ -343,6 +360,7 @@ public class GameManager : MonoSingleton<GameManager>{
             if(_canSelectMultiples)
             {
                 _unitChooseList.Add(unit);
+                TilesManager.Instance.TileList[unit.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _selectedTileSprite);
             }
             else if(!_canSelectMultiples && !_unitChooseList.Contains(unit))
             {
@@ -376,7 +394,9 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <param name="unit"></param>
     public void RemoveUnitToList(GameObject unit){
         _unitChooseList.Remove(unit);
-        TilesManager.Instance.TileList[unit.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
+        if(!_unitChooseList.Contains(unit)){
+            TilesManager.Instance.TileList[unit.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _normalEventSprite);
+        }
 
         if(IllusionStratégique){
             foreach(GameObject gam in _selectableUnit){
@@ -447,7 +467,8 @@ public class GameManager : MonoSingleton<GameManager>{
             {
                 if(_canSelectMultiples)
                 {
-                _tileChooseList.Add(tile);
+                    _tileChooseList.Add(tile);
+                    tile.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _selectedTileSprite);
                 }
                 else if(!_tileChooseList.Contains(tile) && !_canSelectMultiples)
                 {
@@ -470,7 +491,10 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <param name="tile"></param>
     public void RemoveTileToList(GameObject tile){
         _tileChooseList.Remove(tile);
-        tile.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _normalEventSprite);
+        if(!_tileChooseList.Contains(tile))
+        {
+            tile.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _normalEventSprite);
+        }
     }
 
     /// <summary>

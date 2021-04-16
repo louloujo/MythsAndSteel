@@ -332,7 +332,7 @@ public class RenfortPhase : MonoBehaviour
             GameObject obj = Instantiate(PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[idCreate], GameManager.Instance.TileChooseList[0].transform.position, Quaternion.identity);
             GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().AddUnitToTile(obj);
             PlayerScript.Instance.BluePlayerInfos.HasCreateUnit = true;
-            PlayerScript.Instance.UnitRef.UnitListRedPlayer.Add(obj);
+            PlayerScript.Instance.UnitRef.UnitListBluePlayer.Add(obj);
         }
 
         GameManager.Instance.TileChooseList.Clear();

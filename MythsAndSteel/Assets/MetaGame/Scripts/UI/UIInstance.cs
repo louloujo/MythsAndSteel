@@ -107,23 +107,31 @@ public class UIInstance : MonoSingleton<UIInstance>
     //Ordre : 0 => Valeur Min entre deux valeurs, 1 => Valeur Max entre deux valeurs, 2 => Degats Min et 3 Degats Max
     [SerializeField] private AttackStat _attackStat;
     public AttackStat AttackStat => _attackStat;
-    #endregion ShiftClicPanelP1
 
+  
+    //Comporte les descriptions et sprites pour chaque Attribut. 
+    //Si vous changez la taille ou le positionnement des élements de l'Array il faut absolument que la position dans l'Arraye de Chaque ObjectsAttributs correspondent à l'ID de son enum.
+    public TextSpriteAttributUnit[] textSpriteAttributUnit = new TextSpriteAttributUnit[11];
+    //Array comportant les ObjectsAttributs. A ne pas modifier !
+    public ObjectsAttributs[] objectsAttributs = new ObjectsAttributs[3];
+    #endregion ShiftClicPanelP1
+    
     #region ShiftClicPanelP2
     [Header("LISTES DES ELEMENTS UI POUR LE SHIFT CLIC DE LA PAGE 2")]
     [Tooltip("Tous les éléments qui composent l'UI pour le Shift Clic de la Page 2")]
-    //Texte qui indique le nom de l'unité.
-    [SerializeField] private GameObject _titlePanelShiftClicPage2;
-    public GameObject TitlePanelShiftClicPage2 => _titlePanelShiftClicPage2;    
-    
-    [SerializeField] private List<GameObject> _middleImageTerrain;
-    public List<GameObject> MiddleImageTerrain => _middleImageTerrain;
 
-    [SerializeField] private List<GameObject> _middleTextTerrain;
-    public List<GameObject> MiddleTextTerrain => _middleTextTerrain;
+    [SerializeField] private GameObject _prefabSlotEffetDeTerrain;
+    public GameObject prefabSlotEffetDeTerrain => _prefabSlotEffetDeTerrain;
+
+    [SerializeField] private GameObject _parentSlotEffetDeTerrain;
+    public GameObject parentSlotEffetDeTerrain => _parentSlotEffetDeTerrain;
+
+    [SerializeField] private List<GameObject> _effetDeTerrain;
+    public List<GameObject> effetDeTerrain => _effetDeTerrain;
+
     #endregion ShiftClicPanelP2
 
-    
+
     [Header("ENFANTS CASE DU PLATEAU")]
     [SerializeField] private GameObject _mouvementTilePrefab;
     public GameObject MouvementTilePrefab => _mouvementTilePrefab;
@@ -472,5 +480,28 @@ public class BouttonMenuRenfort
     public Button _clicSurUnité4 = null;
     public Button _clicSurUnité5 = null;
     public Button _clicSurUnité6 = null;
+}
+
+/// <summary>
+/// Contient le texte et le sprite pour un attribut
+/// </summary>
+[System.Serializable]
+public class TextSpriteAttributUnit
+{
+    [TextArea]
+    public string TextAttributUnit;
+    public Sprite SpriteAttributUnit;
+}
+
+/// <summary>
+/// Objet dont le sprite va changer en fonction de l'attribut, Objet dont le texte va changer en fonction de l'attribut. 
+/// </summary>
+
+[System.Serializable]
+public class ObjectsAttributs
+{
+
+    public GameObject MainObjects;
+    public GameObject Description;
 }
 #endregion ClassToRangeList

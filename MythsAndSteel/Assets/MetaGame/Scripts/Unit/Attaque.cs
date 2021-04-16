@@ -9,12 +9,12 @@ public class Attaque : MonoSingleton<Attaque>
     [SerializeField] private int[] neighbourValue; // +1 +9 +10...
 
     public List<int> _newNeighbourId => newNeighbourId;
-    [SerializeField] private List<int> newNeighbourId = new List<int>(); // Voisins atteignables avec le range de l'unité.
+    [SerializeField] private List<int> newNeighbourId = new List<int>(); // Voisins atteignables avec le range de l'unitÃƒÂ©.
 
     public List<int> _selectedTileId => selectedTileId;
-    [SerializeField] private List<int> selectedTileId = new List<int>(); // Cases selectionnées par le joueur.
+    [SerializeField] private List<int> selectedTileId = new List<int>(); // Cases selectionnÃƒÂ©es par le joueur.
 
-    //Est ce que l'unité a commencé à choisir son déplacement ?
+    //Est ce que l'unitÃƒÂ© a commencÃƒÂ© ÃƒÂ  choisir son dÃƒÂ©placement ?
     [SerializeField] private bool _isInAttack;
     public bool IsInAttack
     {
@@ -28,7 +28,7 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
-    //Est ce qu'une unité est sélectionnée ?
+    //Est ce qu'une unitÃƒÂ© est sÃƒÂ©lectionnÃƒÂ©e ?
     [SerializeField] private bool _selected;
     public bool Selected
     {
@@ -42,15 +42,11 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
-    // Vie de l'ennemi ciblé 
-    [SerializeField] int _EnnemyLife;
-    public int Life => _EnnemyLife;
-
-    //Portée d'attaque
+    //PortÃ©e d'attaque
     [SerializeField] int _attackRange;
     public int AttackRange => _attackRange;
 
-    //Dégats minimum infligés 
+    //DÃƒÂ©gats minimum infligÃƒÂ©s 
     [SerializeField] int _damageMinimum;
     public int DamageMinimum => _damageMinimum;
 
@@ -58,7 +54,7 @@ public class Attaque : MonoSingleton<Attaque>
     [SerializeField] Vector2 _numberRangeMin;
     public Vector2 NumberRangeMin => _numberRangeMin;
 
-    // Dégats maximum infligés
+    // DÃƒÂ©gats maximum infligÃƒÂ©s
     [SerializeField] int _damageMaximum;
     public int DamageMaximum => _damageMaximum;
 
@@ -75,7 +71,7 @@ public class Attaque : MonoSingleton<Attaque>
     int firstDiceInt, secondDiceInt, DiceResult;
 
     GameObject selectedUnit;
-    GameObject selectedUnitEnnemy;
+    [SerializeField] GameObject selectedUnitEnnemy;
 
     [Header("SPRITES POUR LES CASES")]
     [SerializeField] private Sprite _selectedSprite = null;
@@ -90,7 +86,9 @@ public class Attaque : MonoSingleton<Attaque>
 
     #endregion Variables
 
-    [EasyButtons.Button]
+    /// <summary>
+    /// Fait un lancÃ© de dÃ©
+    /// </summary>
     void Randomdice()
     {
         firstDiceFloat = Random.Range(1f, 7f);
@@ -105,11 +103,18 @@ public class Attaque : MonoSingleton<Attaque>
         Debug.Log("Dice Result : " + DiceResult);
     }
 
+    /// <summary>
+    /// Attaque d'une unitÃ© avec un range d'attaque
+    /// </summary>
+    /// <param name="_numberRangeMin"></param>
+    /// <param name="_damageMinimum"></param>
+    /// <param name="DiceResult"></param>
     void UnitAttackOneRange(Vector2 _numberRangeMin, int _damageMinimum, int DiceResult)
     {
         if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
         {
-            ChangeStat();
+            ChangeStat();  
+            AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
             Debug.Log("Damage : " + _damageMinimum);
         }
@@ -118,20 +123,29 @@ public class Attaque : MonoSingleton<Attaque>
             ChangeStat();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
         }
-        AnimationUpdate();
     }
 
+    /// <summary>
+    /// Attaque d'une unitÃ© avec deux ranges d'attaque
+    /// </summary>
+    /// <param name="_numberRangeMin"></param>
+    /// <param name="_damageMinimum"></param>
+    /// <param name="_numberRangeMax"></param>
+    /// <param name="_damageMaximum"></param>
+    /// <param name="DiceResult"></param>
     void UnitAttackTwoRanges(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, int DiceResult)
     {
         if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
         {
             ChangeStat();
+            AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
             Debug.Log("Damage : " + _damageMinimum);
         }
         if (DiceResult >= _numberRangeMax.x && DiceResult <= _numberRangeMax.y)
         {
             ChangeStat();
+            AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMaximum);
             Debug.Log("Damage : " + _damageMaximum);
         }
@@ -141,8 +155,11 @@ public class Attaque : MonoSingleton<Attaque>
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
             Debug.Log("Damage : " + null);
         }
-        AnimationUpdate();
     }
+
+    /// <summary>
+    /// Lance l'animation d'attaque
+    /// </summary>
     void AnimationUpdate()
     {
         GameObject ActualUnit = RaycastManager.Instance.ActualUnitSelected;
@@ -216,7 +233,7 @@ public class Attaque : MonoSingleton<Attaque>
     }
 
     /// <summary>
-    /// Highlight des cases dans la range d'attaque de l'unité
+    /// Highlight des cases dans la range d'attaque de l'unitÃƒÂ©
     /// </summary>
     /// <param name="tileId"></param>
     /// <param name="Range"></param>
@@ -251,7 +268,7 @@ public class Attaque : MonoSingleton<Attaque>
     }
 
     /// <summary>
-    /// Ajoute plus d'aléatoire aux lancés de dé
+    /// Ajoute plus d'alÃƒÂ©atoire aux lancÃƒÂ©s de dÃƒÂ©
     /// </summary>
     private void RandomMore()
     {
@@ -267,7 +284,7 @@ public class Attaque : MonoSingleton<Attaque>
     }
 
     /// <summary>
-    /// Vérifie si l'unité selectionné peut attaqué + récupère la portée de l'unité
+    /// VÃƒÂ©rifie si l'unitÃƒÂ© selectionnÃƒÂ© peut attaquÃƒÂ© + rÃƒÂ©cupÃƒÂ¨re la portÃƒÂ©e de l'unitÃƒÂ©
     /// </summary>
     public void StartAttackSelectionUnit()
     {
@@ -295,7 +312,7 @@ public class Attaque : MonoSingleton<Attaque>
     }
 
     /// <summary>
-    /// Prépare l'Highlight des tiles ciblables & passe le statut de l'unité en -> _isInAttack
+    /// PrÃƒÂ©pare l'Highlight des tiles ciblables & passe le statut de l'unitÃƒÂ© en -> _isInAttack
     /// </summary>
     /// <param name="tileId"></param>
     /// <param name="Range"></param>
@@ -308,13 +325,13 @@ public class Attaque : MonoSingleton<Attaque>
             List<int> ID = new List<int>();
             ID.Add(tileId);
 
-            // Lance l'highlight des cases dans la range de l'unité.
+            // Lance l'highlight des cases dans la range de l'unitÃƒÂ©.
             Highlight(tileId, Range); 
         }
     }
 
     /// <summary>
-    /// Arrête l'attaque de l'unité select (UI + possibilité d'attaquer
+    /// ArrÃƒÂªte l'attaque de l'unitÃƒÂ© select (UI + possibilitÃƒÂ© d'attaquer
     /// </summary>
     public void StopAttack()
     {
@@ -357,7 +374,7 @@ public class Attaque : MonoSingleton<Attaque>
             if (TileSelectedForAttack != null && newNeighbourId.Contains(tileId))
             {
                 selectedUnitEnnemy = TileSelectedForAttack.GetComponent<TileScript>().Unit;
-                _EnnemyLife = selectedUnitEnnemy.GetComponent<UnitScript>().Life; // Récupération de la vie de l'unité attaquée
+                _EnnemyLife = selectedUnitEnnemy.GetComponent<UnitScript>().Life; // RÃ©cupÃ©ration de la vie de l'unitÃ© attaquÃ©e
                 if (selectedUnitEnnemy != null)
                 {
                     ApplyAttack();
@@ -380,13 +397,13 @@ public class Attaque : MonoSingleton<Attaque>
 
     public void GetStats()
     {
-        _attackRange = selectedUnit.GetComponent<UnitScript>().AttackRange; // Récupération de la Portée        
-        _damageMinimum = selectedUnit.GetComponent<UnitScript>().DamageMinimum; // Récupération des Dégats Maximum
-        _damageMaximum = selectedUnit.GetComponent<UnitScript>().DamageMaximum; // Dégats Minimums
-        _numberRangeMin.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.x; // Récupération de la Range min - x
-        _numberRangeMin.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.y; // Récupération de la Range min - y 
-        _numberRangeMax.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.x; // Récupération de la Range min - x
-        _numberRangeMax.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.y; // Récupération de la Range min - y
+        _attackRange = selectedUnit.GetComponent<UnitScript>().AttackRange; // RÃ©cupÃ©ration de la PortÃ©e        
+        _damageMinimum = selectedUnit.GetComponent<UnitScript>().DamageMinimum; // RÃ©cupÃ©ration des DÃ©gats Maximum
+        _damageMaximum = selectedUnit.GetComponent<UnitScript>().DamageMaximum; // DÃ©gats Minimums
+        _numberRangeMin.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.x; // RÃ©cupÃ©ration de la Range min - x
+        _numberRangeMin.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMin.y; // RÃ©cupÃ©ration de la Range min - y 
+        _numberRangeMax.x = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.x; // RÃ©cupÃ©ration de la Range min - x
+        _numberRangeMax.y = selectedUnit.GetComponent<UnitScript>().NumberRangeMax.y; // RÃ©cupÃ©ration de la Range min - y
     }
 
     public void ApplyAttack()
@@ -449,7 +466,7 @@ public class Attaque : MonoSingleton<Attaque>
         {
             _damageMinimum -= 1;
             _damageMaximum -= 1;
-            Debug.Log("Dégats Reduits");
+            Debug.Log("DÃ©gats Reduits");
             TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Remove(MYthsAndSteel_Enum.TerrainType.Maison);
             TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Ruines);
             Debug.Log("IkeaEffectApplyed");
@@ -459,7 +476,7 @@ public class Attaque : MonoSingleton<Attaque>
         {
             _damageMinimum = 0;
             _damageMaximum = 0;
-            Debug.Log("Annulés");
+            Debug.Log("AnnulÃ©s");
             TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Remove(MYthsAndSteel_Enum.TerrainType.Immeuble);
             TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Ruines);
             Debug.Log("BigBoumIkeaEffectApplyed");

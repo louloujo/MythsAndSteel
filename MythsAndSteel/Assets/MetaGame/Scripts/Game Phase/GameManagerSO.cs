@@ -153,4 +153,9 @@ public class GameManagerSO : ScriptableObject
                 break;
         }
     }
+
+    public bool GetDebutFunction(){
+        if(GoToDebutPhase != null) return true;
+        else return false;
+    }
 }
