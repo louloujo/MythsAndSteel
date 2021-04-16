@@ -14,6 +14,7 @@ public class EventCardClass : ScriptableObject{
     public List<EventCard> EventCardList => _eventCardList;
 
     [SerializeField] private float _spaceBetweenTwoEvents = 0f;
+    [SerializeField] private float multiplier = 0f;
     [SerializeField] private Vector2 _baseResolution = new Vector2(1920, 1080);
 
     int _redPlayerPos = 0;
@@ -190,7 +191,6 @@ public class EventCardClass : ScriptableObject{
     /// </summary>
     void UpdateEventsParentPos(int player)
     {
-        float multiplier = 1.17f;
         if(player == 1)
         {
             UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition = new Vector3(UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition.x, +_spaceBetweenTwoEvents * _redPlayerPos / multiplier, UIInstance.Instance.RedPlayerEventtransf.GetChild(0).localPosition.z);

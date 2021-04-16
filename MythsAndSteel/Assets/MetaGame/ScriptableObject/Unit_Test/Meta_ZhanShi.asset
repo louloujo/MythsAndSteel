@@ -20,6 +20,7 @@ MonoBehaviour:
   AttackRange: 3
   MoveSpeed: 4
   CreationCost: 2
+  numberOfUnitToAttack: 1
   DamageMinimum: 1
   NumberRangeMin: {x: 3, y: 7}
   DamageMaximum: 2
@@ -30,3 +31,4 @@ MonoBehaviour:
   CanAttackEmptyTile: 1
   UsefullToWin: 0
   IsInRedArmy: 0
+  UnitAttributs: 000000000000000000000000

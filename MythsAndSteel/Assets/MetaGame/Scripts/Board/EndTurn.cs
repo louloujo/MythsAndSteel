@@ -23,6 +23,9 @@ public class EndTurn : MonoBehaviour
                 goalTileList.Add(Tile);
             }
         }
+
+        GameManager.Instance.ManagerSO.GoToStrategyPhase += CheckResources;
+        GameManager.Instance.ManagerSO.GoToStrategyPhase += CheckOwner;
     }
 
     /// <summary>

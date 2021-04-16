@@ -100,20 +100,34 @@ public class TileScript : MonoBehaviour
             switch(type){
                 case MYthsAndSteel_Enum.ChildTileType.MoveSelect:
                     tag = "MoveSelectable";
+                    if(gam.tag == tag)
+                    {
+                        child = gam;
+                        child.GetComponent<SpriteRenderer>().enabled = true;
+                        child.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+                        if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
+                    }
                     break;
                 case MYthsAndSteel_Enum.ChildTileType.AttackSelect:
                     tag = "AttackSelectable";
+                    if(gam.tag == tag)
+                    {
+                        child = gam;
+                        child.GetComponent<SpriteRenderer>().enabled = true;
+                        child.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .5f);
+                        if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
+                    }
                     break;
                 case MYthsAndSteel_Enum.ChildTileType.EventSelect:
                     tag = "SelectableTile";
+                    if(gam.tag == tag)
+                    {
+                        child = gam;
+                        child.GetComponent<SpriteRenderer>().enabled = true;
+                        child.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+                        if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
+                    }
                     break;
-            }
-
-            if(gam.tag == tag){
-                child = gam;
-                child.GetComponent<SpriteRenderer>().enabled = true;
-                child.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
-                if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
             }
         }
         return child;

@@ -5,25 +5,40 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Unit/Basic Unit")]
 public class Unit_SO : ScriptableObject{
     [Header("Nom et Description")]
-    public string UnitName; //Nom de l'unité
-    public string Description; //Decritpion de l'unité
+    [Tooltip("Nom de l'unité")]
+    public string UnitName;
+    [Tooltip("Decritpion de l'unité")]
+    public string Description; 
 
     [Header("Type de l'unité")]
-    public MYthsAndSteel_Enum.TypeUnite typeUnite; //Type de l'unité
+    [Tooltip("Type de l'unité")]
+    public MYthsAndSteel_Enum.TypeUnite typeUnite;
 
     [Header("Stat de base de l'unité")]
-    public int LifeMax; //Vie de base de l'unité
-    public int ShieldMax; //Bouclier Max de l'unité
-    public int AttackRange; //Range d'attaque de l'unité
-    public int MoveSpeed; //Vitesse de déplacement de l'unité
-    public int CreationCost; //Cout de création de l'unité
+    [Tooltip("Vie de base de l'unité")]
+    public int LifeMax;
+    [Tooltip("Bouclier Max de l'unité")]
+    public int ShieldMax;
+    [Tooltip("Range d'attaque de l'unité")]
+    public int AttackRange;
+    [Tooltip("Vitesse de déplacement de l'unité")]
+    public int MoveSpeed;
+    [Tooltip("Cout de création de l'unité")]
+    public int CreationCost; 
 
     [Header("Attaque Minimum")]
-    public int DamageMinimum;//Dégats minimum infligé
+    [Tooltip("nombre d'unité à sélectionner pour effectuer l'attaque")]
+    public int numberOfUnitToAttack;
+    [Header("Attaque Minimum")]
+    [Tooltip("Dégats minimum infligé")]
+    public int DamageMinimum;
+    [Tooltip("Range des dés min")]
     public Vector2 NumberRangeMin;
 
     [Header("Attaque Maximum")]
-    public int DamageMaximum;//Dégats maximum infligé
+    [Tooltip("Dégats maximum infligé")]
+    public int DamageMaximum;
+    [Tooltip("Range des dés max")]
     public Vector2 NumberRangeMax;
 
     [Header("Son de l'unité")]
@@ -31,7 +46,8 @@ public class Unit_SO : ScriptableObject{
     public AudioClip Son2; //Son 2 de l'unité
 
     [Header("Sprite de l'unité")]
-    public Sprite Sprite; //Sprite de base de l'unité
+    [Tooltip("Sprite de base de l'unité")]
+    public Sprite Sprite; 
 
     [Header("Infos Supplémentaire")]
     [Tooltip("Est ce que l'unité peut attaquer des cases vide?")]
