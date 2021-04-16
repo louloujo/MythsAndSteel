@@ -325,7 +325,10 @@ public class UnitScript : MonoBehaviour
     /// <returns></returns>
     IEnumerator DeathAnimation()
     {
-        Animation.SetBool("Dead", true); Debug.Log(Animation.runtimeAnimatorController.animationClips[0].length);
+        if(Animation != null)
+        {
+            Animation.SetBool("Dead", true); Debug.Log(Animation.runtimeAnimatorController.animationClips[0].length);
+        }
         yield return new WaitForSeconds(Animation.runtimeAnimatorController.animationClips[0].length);
         Destroy(gameObject);
 
