@@ -63,10 +63,9 @@ public class Player
             List<GameObject> unitList = player == 1 ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer;
             GameManager.Instance.StartEventModeUnit(4, player == 1 ? true : false, unitList, "Explosion d'orgone", "Êtes-vous sur de vouloir infliger des dégâts à ces unités?", true);
             GameManager.Instance._eventCall += GiveDamageToUnitForOrgone;
-            GameManager.Instance._eventCallCancel += CancelOrgone;
+            if(player == 1) GameManager.Instance._eventCallCancel += CancelOrgoneP1;
+            else GameManager.Instance._eventCallCancel += CancelOrgoneP2;
             unitList.Clear();
-
-            OrgoneValue -= 6;
         }
         else
         {
@@ -90,6 +89,8 @@ public class Player
 
         GameManager.Instance._waitEvent += DealDamageToUnit;
         GameManager.Instance.WaitToMove(0);
+
+        OrgoneValue -= 6;
     }
 
     int i = 0;
@@ -100,7 +101,7 @@ public class Player
             i++;
             GameManager.Instance._waitEvent -= DealDamageToUnit;
             GameManager.Instance._waitEvent += DealDamageToUnit;
-            GameManager.Instance.WaitToMove(.05f);
+            GameManager.Instance.WaitToMove(.035f);
         }
         else
         {
@@ -121,10 +122,16 @@ public class Player
     /// <summary>
     /// Si le joueur appuie sur le bouton annuler 
     /// </summary>
-    void CancelOrgone(){
-        List<GameObject> unitList = GameManager.Instance.RedPlayerUseEvent? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer;
-        GameManager.Instance.StartEventModeUnit(4, GameManager.Instance.RedPlayerUseEvent, unitList, "Explosion d'orgone", "Êtes-vous sur de vouloir infliger des dégâts à ces unités?");
-        unitList.Clear();
+    void CancelOrgoneP1(){
+        CheckOrgone(1);
+    }
+
+    /// <summary>
+    /// Si le joueur appuie sur le bouton annuler 
+    /// </summary>
+    void CancelOrgoneP2()
+    {
+        CheckOrgone(2);
     }
 
     /// <summary>

@@ -17,6 +17,7 @@ public class Mouvement : MonoSingleton<Mouvement>
     private List<int> temp = new List<int>(); //
 
     #endregion
+
     #region RenduDeplacement
     [SerializeField] private float speed = 1; // Speed de déplacement de l'unité 
     float speed1; // speed de base.
@@ -26,6 +27,7 @@ public class Mouvement : MonoSingleton<Mouvement>
     int MvmtIndex = 1; // Numéro du mvmt actuel dans la liste selectedTileId;
     [SerializeField] bool Launch = false; // Evite les répétitions dans updatingmove();
     #endregion
+
     #region InfoUnit
 
     //Déplacement restant de l'unité au départ
@@ -65,6 +67,7 @@ public class Mouvement : MonoSingleton<Mouvement>
     [SerializeField] private bool _mvmtRunning = false;
     public bool MvmtRunning => _mvmtRunning;
     #endregion InfoUnit
+
     #region RenduSpriteTile
     [Header("SPRITES POUR LES CASES")]
     [SerializeField] private Sprite _tileSprite = null;
@@ -638,10 +641,10 @@ public class Mouvement : MonoSingleton<Mouvement>
     private IEnumerator MvmtEnd()
     {
         mEnd.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect); // La case dépassée redevient une "empty"
-        mEnd.GetComponent<TileScript>().AddUnitToTile(mStart.GetComponent<TileScript>().Unit); // L'unité de la case d'arrivée devient celle de la case de départ.
-        mStart.GetComponent<TileScript>().RemoveUnitFromTile(); // L'ancienne case n'a plus d'unité.
-        mUnit = mEnd.GetComponent<TileScript>().Unit;
+        if(MvmtIndex >= selectedTileId.Count - 1) mEnd.GetComponent<TileScript>().AddUnitToTile(mUnit); // L'unité de la case d'arrivée devient celle de la case de départ.
+        if(mStart.GetComponent<TileScript>().Unit == mUnit) mStart.GetComponent<TileScript>().RemoveUnitFromTile(); // L'ancienne case n'a plus d'unité.
         mUnit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(mEnd);
+        
         RaycastManager.Instance.ActualTileSelected = mEnd;
         mStart = mEnd;
         mEnd = null;
