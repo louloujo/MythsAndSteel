@@ -10,7 +10,7 @@ public class Capacity : MonoBehaviour
     [Header("-----------------Capacité 1-----------------")]
     [SerializeField] string _Capacity1Name = "";
     public string Capacity1Name => _Capacity1Name;
-
+    
     [TextArea]
     [SerializeField] string _Capacity1Description = "";
     public string Capacity1Description => _Capacity1Description;

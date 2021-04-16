@@ -123,6 +123,8 @@ public class MenuActionUnite : MonoBehaviour
 
         RaycastManager.Instance.ActualUnitSelected.GetComponent<Capacity>().Capacite1();
         closePanel();
+        RaycastManager.Instance.ActualUnitSelected.GetComponent<UnitScript>()._isActionDone = true;
+        RaycastManager.Instance.ActualUnitSelected.GetComponent<UnitScript>().checkActivation();
     }
 
     public void capacite2()
@@ -130,6 +132,8 @@ public class MenuActionUnite : MonoBehaviour
 
         RaycastManager.Instance.ActualUnitSelected.GetComponent<Capacity>().Capacite2();
         closePanel();
+        RaycastManager.Instance.ActualUnitSelected.GetComponent<UnitScript>()._isActionDone = true;
+        RaycastManager.Instance.ActualUnitSelected.GetComponent<UnitScript>().checkActivation();
     }
 
     /// <summary>
