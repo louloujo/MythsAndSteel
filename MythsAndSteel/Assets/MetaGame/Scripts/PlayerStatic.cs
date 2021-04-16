@@ -68,7 +68,7 @@ static class PlayerStatic{
             int rTopTile = idTile + 10;
 
             int lDownTile = idTile - 10;
-            int rDownTile = idTile + 8;
+            int rDownTile = idTile - 8;
 
             currentList.Add(lTopTile);
             currentList.Add(rTopTile);
@@ -147,17 +147,17 @@ static class PlayerStatic{
     /// <summary>
     /// obtiens la direction de la tile
     /// </summary>
-    public static string CheckDirection(int OriginTile, int NextTile)
+    public static MYthsAndSteel_Enum.Direction CheckDirection(int OriginTile, int NextTile)
     {
         int Result = NextTile - OriginTile;
         switch (Result)
         {
-            case 9: return "Nord";
-            case -9: return "Sud"; 
-            case -1: return "Ouest";
-            case 1: return "Est";
+            case 9: return MYthsAndSteel_Enum.Direction.Nord;
+            case -9: return MYthsAndSteel_Enum.Direction.Sud; 
+            case -1: return MYthsAndSteel_Enum.Direction.Ouest;
+            case 1: return MYthsAndSteel_Enum.Direction.Est;
         }
-        return "NotANeighbour";
+        return MYthsAndSteel_Enum.Direction.None;
     }
 }
 

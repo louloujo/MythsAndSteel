@@ -35,12 +35,12 @@ public class MenuActionUnite : MonoBehaviour
         UnitScript unit = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>();
         if((PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0 || (unit.MoveLeft + unit.MoveSpeedBonus > 0 && unit._hasStartMove) || (unit.IsMoveDone && !unit._isActionDone)) && GameManager.Instance.IsPlayerRedTurn && _isOpen == false){
             menuaffichage(RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>(), pouvoiractif);
-            _isOpen = true;
+            //_isOpen = true;
         }
         else if((PlayerScript.Instance.BluePlayerInfos.ActivationLeft > 0 || (unit.MoveLeft + unit.MoveSpeedBonus > 0 && unit._hasStartMove) || (unit.IsMoveDone && !unit._isActionDone)) && !GameManager.Instance.IsPlayerRedTurn && _isOpen == false)
         {
             menuaffichage(RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>(), pouvoiractif);
-            _isOpen = true;
+            //_isOpen = true;
         }
     }
 
