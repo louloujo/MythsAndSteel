@@ -327,9 +327,10 @@ public class UnitScript : MonoBehaviour
     {
         if(Animation != null)
         {
-            Animation.SetBool("Dead", true); Debug.Log(Animation.runtimeAnimatorController.animationClips[0].length);
+            Animation.SetBool("Dead", true); 
+            Debug.Log(Animation.runtimeAnimatorController.animationClips[0].length);
+            yield return new WaitForSeconds(Animation.runtimeAnimatorController.animationClips[0].length);
         }
-        yield return new WaitForSeconds(Animation.runtimeAnimatorController.animationClips[0].length);
         Destroy(gameObject);
 
         Debug.Log("Unité Détruite");
@@ -369,6 +370,7 @@ public class UnitScript : MonoBehaviour
     }
     #endregion ChangementStat
 
+    [EasyButtons.Button]
     /// <summary>
     /// Update les stats de l'unité avec les stats de base
     /// </summary>

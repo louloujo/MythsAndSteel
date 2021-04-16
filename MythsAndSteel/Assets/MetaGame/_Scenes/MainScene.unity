@@ -2078,7 +2078,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   neighbourValue: 
   newNeighbourId: 
-  _selectablesTileId: 
   _isInAttack: 0
   _selected: 0
   _attackRange: 0
@@ -29827,11 +29826,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4473479720353736804, guid: cab109d310ee2b743ba60a48e05bdebf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.1751
+      value: 1.1723216
       objectReference: {fileID: 0}
     - target: {fileID: 4473479720353736804, guid: cab109d310ee2b743ba60a48e05bdebf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.3079
+      value: 7.31199
       objectReference: {fileID: 0}
     - target: {fileID: 4473479720353736804, guid: cab109d310ee2b743ba60a48e05bdebf, type: 3}
       propertyPath: m_LocalPosition.z
