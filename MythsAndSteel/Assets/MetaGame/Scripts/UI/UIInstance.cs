@@ -295,6 +295,7 @@ public class TextStatUnit
     public GameObject _lifeGam = null;
     public GameObject _rangeGam = null;
     public GameObject _moveGam = null;
+    public GameObject _unitSpriteGam = null;
 }
 
 /// <summary>
