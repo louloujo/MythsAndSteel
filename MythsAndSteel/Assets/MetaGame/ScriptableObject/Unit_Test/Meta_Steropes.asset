@@ -20,6 +20,7 @@ MonoBehaviour:
   AttackRange: 3
   MoveSpeed: 3
   CreationCost: 4
+  numberOfUnitToAttack: 1
   DamageMinimum: 1
   NumberRangeMin: {x: 3, y: 7}
   DamageMaximum: 2

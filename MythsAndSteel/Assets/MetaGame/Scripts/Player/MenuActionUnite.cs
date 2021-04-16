@@ -65,8 +65,6 @@ public class MenuActionUnite : MonoBehaviour
     /// </summary>
     public void déplacement()
     {
-        Mouvement.Instance.StartMvmtForSelectedUnit();
-        Mouvement.Instance.Selected = true;
         closePanel();
     }
 
@@ -75,7 +73,6 @@ public class MenuActionUnite : MonoBehaviour
     /// </summary>
     public void attaque()
     {
-        Attaque.Instance.StartAttackSelectionUnit();
         closePanel();
     }
 

@@ -45,9 +45,6 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     public GameObject ActualUnitSelected => _actualUnitSelected;
 
     [Header("PANNEAU DES BOUTONS QUAND CLIC SUR UNITE")]
-    //Menu a activer quand clic sur unité
-    [SerializeField] private GameObject _menuForUnit = null;
-
     //Est ce que les joueurs peuvent jouer
     bool _isInTurn = false;
 
@@ -106,7 +103,11 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         {
             _isInTurn = GameManager.Instance.IsInTurn;
             _lastTile = _tile;
-            OnTileChanged();
+            if(!Input.GetKey(KeyCode.LeftShift))
+            {
+                OnTileChanged();
+            }
+
         }
     }
 
@@ -157,20 +158,23 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             //Si le mouvement n'a pas été lancé
             if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
             {
-                if(!Mouvement.Instance.Selected && !Attaque.Instance.Selected)
+                if(_actualUnitSelected == UnitInTile && !Mouvement.Instance.MvmtRunning && !Attaque.Instance.IsInAttack)
                 {
-                    if(_unitInTile != null)
+                    Mouvement.Instance.StopMouvement(true);
+                    Attaque.Instance.StopAttack();
+                    _actualTileSelected = null;
+                    _actualUnitSelected = null;
+                }
+                else if(!Mouvement.Instance.Selected && !Attaque.Instance.Selected && UnitInTile != null)
+                {
+                    if(CanUseUnitWhenClic(UnitInTile.GetComponent<UnitScript>()))
                     {
-                        if(CanUseUnitWhenClic(_unitInTile.GetComponent<UnitScript>()))
-                        {
-                            _actualTileSelected = _tile;
-                            _actualUnitSelected = _actualTileSelected.GetComponent<TileScript>().Unit;
-                            _menuForUnit.GetComponent<MenuActionUnite>().ShowPanel();
-                        }
+                        _actualTileSelected = _tile;
+                        _actualUnitSelected = _unitInTile;
+                        Mouvement.Instance.StartMvmtForSelectedUnit();
+                        Attaque.Instance.StartAttackSelectionUnit();
                     }
                 }
-
-                //Si le mouvement a été lancé
                 else if(Mouvement.Instance.Selected)
                 {
                     if(Mouvement.Instance.IsInMouvement && !Mouvement.Instance.MvmtRunning)
@@ -186,20 +190,6 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                         }
                     }
                 }
-                else if(Attaque.Instance.Selected)
-                {
-                    if(Attaque.Instance.IsInAttack)
-                    {
-                        if(_tile != _actualTileSelected)
-                        {
-                            Attaque.Instance.Attack(Tile.GetComponent<TileScript>().TileId);
-                        }
-                        else
-                        {
-                            Attaque.Instance.StopAttack();
-                        }
-                    }
-                }
             }
             else if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2){
                 if(GameManager.Instance.IsPlayerRedTurn && _tile == PlayerScript.Instance.RedPlayerInfos.TileCentreZoneOrgone)
@@ -211,6 +201,15 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                     OrgoneManager.Instance.StartToMoveZone();
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// Ajoute ou enleve une tile à la liste
+    /// </summary>
+    public void SelectTileForAttack(){
+        if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2){
+            Attaque.Instance.AddTileToList(Tile.GetComponent<TileScript>().TileId);
         }
     }
 

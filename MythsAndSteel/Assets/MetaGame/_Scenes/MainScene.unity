@@ -2078,7 +2078,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   neighbourValue: 
   newNeighbourId: 
-  selectedTileId: 
+  _selectablesTileId: 
   _isInAttack: 0
   _selected: 0
   _attackRange: 0
@@ -2087,8 +2087,10 @@ MonoBehaviour:
   _damageMaximum: 0
   _numberRangeMax: {x: 0, y: 0}
   _isActionDone: 0
+  _selectedTiles: 
   selectedUnitEnnemy: {fileID: 0}
-  _selectedSprite: {fileID: 21300000, guid: 47181d684d4ff18448f7329b069b20f0, type: 3}
+  _normalAttackSprite: {fileID: 21300000, guid: ba025916471d63f48be3fe5d880752b3, type: 3}
+  _selectedSprite: {fileID: 21300000, guid: f1269dd1b936f0848a90a0f788768ead, type: 3}
 --- !u!1001 &144114180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2675,6 +2677,10 @@ PrefabInstance:
     - target: {fileID: 5689533630533188056, guid: 91d2594b98d7c33448b384065d6a18cd, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6261975411731200437, guid: 91d2594b98d7c33448b384065d6a18cd, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7240694747227692535, guid: 91d2594b98d7c33448b384065d6a18cd, type: 3}
       propertyPath: m_AnchorMax.y
@@ -22422,7 +22428,6 @@ MonoBehaviour:
   _unitInTile: {fileID: 0}
   _actualTileSelected: {fileID: 0}
   _actualUnitSelected: {fileID: 0}
-  _menuForUnit: {fileID: 1645117448}
 --- !u!1 &1806476082
 GameObject:
   m_ObjectHideFlags: 0
