@@ -344,8 +344,11 @@ public class GameManager : MonoSingleton<GameManager>{
         foreach(GameObject gam in _selectableUnit){
             //Détruit l'enfant avec le tag selectable tile
             GameObject tile = TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId];
-            tile.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _normalEventSprite);
-            tile.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
+            if(tile != null)
+            {
+                tile.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _normalEventSprite);
+                tile.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
+            }
         }
 
         _selectableUnit.Clear();

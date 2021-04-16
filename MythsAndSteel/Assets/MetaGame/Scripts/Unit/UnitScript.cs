@@ -156,11 +156,11 @@ public class UnitScript : MonoBehaviour
         {
             if(UnitSO.IsInRedArmy)
             {
-                UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield - 1);
+                UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield);
             }
             else
             {
-                UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartShieldSprite, _life + _shield - 1);
+                UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartShieldSprite, _life + _shield);
             }
 
         }
@@ -177,19 +177,6 @@ public class UnitScript : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            GiveLife(1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            TakeDamage(1);
-        }
-    }
-
     #region LifeMethods
     /// <summary>
     /// Rajoute de la vie au joueur
@@ -202,11 +189,11 @@ public class UnitScript : MonoBehaviour
         {
             if(UnitSO.IsInRedArmy)
             {
-                UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield - 1);
+                UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield);
             }
             else
             {
-                UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartShieldSprite, _life + _shield - 1);
+                UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartShieldSprite, _life + _shield);
             }
         }
         else
@@ -217,7 +204,7 @@ public class UnitScript : MonoBehaviour
             }
             else
             {
-                UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartSprite, _life + _shield - 1);
+                UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartSprite, _life);
             }
         }
 
@@ -229,11 +216,11 @@ public class UnitScript : MonoBehaviour
             {
                 if(UnitSO.IsInRedArmy)
                 {
-                    UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield - 1);
+                    UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield);
                 }
                 else
                 {
-                    UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartShieldSprite, _life + _shield - 1);
+                    UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartShieldSprite, _life + _shield);
                 }
             }
             else
@@ -244,7 +231,7 @@ public class UnitScript : MonoBehaviour
                 }
                 else
                 {
-                    UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartSprite, _life + _shield - 1);
+                    UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartSprite, _life);
                 }
             }
         }
@@ -263,11 +250,11 @@ public class UnitScript : MonoBehaviour
             if(_shield > 0){
                 if(UnitSO.IsInRedArmy)
                 {
-                    UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield - 1);
+                    UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield);
                 }
                 else
                 {
-                    UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartShieldSprite, _life + _shield - 1);
+                    UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartShieldSprite, _life + _shield);
                 }
             }
             else{
@@ -277,7 +264,7 @@ public class UnitScript : MonoBehaviour
                 }
                 else
                 {
-                    UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartSprite, _life + _shield - 1);
+                    UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartSprite, _life);
                 }
             }
         }
@@ -288,11 +275,11 @@ public class UnitScript : MonoBehaviour
             {
                 if(UnitSO.IsInRedArmy)
                 {
-                    UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield - 1);
+                    UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield);
                 }
                 else
                 {
-                    UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartShieldSprite, _life + _shield - 1);
+                    UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartShieldSprite, _life + _shield);
                 }
             }
             else
@@ -305,11 +292,13 @@ public class UnitScript : MonoBehaviour
                     }
                     else
                     {
-                        UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartSprite, _life + _shield - 1);
+                        UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartSprite, _life);
                     }
                 }
             }
         }
+
+        CheckLife();
 
         //Ajout de l'orgone
         if(Damage > 0)
@@ -342,8 +331,6 @@ public class UnitScript : MonoBehaviour
                 }
             }
         }
-
-        CheckLife();
     }
 
     /// <summary>
