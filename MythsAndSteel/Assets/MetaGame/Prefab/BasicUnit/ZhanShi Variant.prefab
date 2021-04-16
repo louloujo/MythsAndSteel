@@ -20,6 +20,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7435506871874765581, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
+      propertyPath: _Animation
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435506871874765581, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
       propertyPath: _moveSpeed
       value: 4
       objectReference: {fileID: 0}
@@ -109,7 +113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7435506871874765619, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
       propertyPath: m_Name
-      value: ZhanShi
+      value: ZhanShi Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}

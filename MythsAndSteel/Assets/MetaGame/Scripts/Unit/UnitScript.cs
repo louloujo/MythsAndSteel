@@ -298,6 +298,8 @@ public class UnitScript : MonoBehaviour
             }
         }
 
+        CheckLife();
+
         //Ajout de l'orgone
         if(Damage > 0)
         {
@@ -329,8 +331,6 @@ public class UnitScript : MonoBehaviour
                 }
             }
         }
-
-        CheckLife();
     }
 
     /// <summary>
