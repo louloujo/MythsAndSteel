@@ -21,11 +21,11 @@ public class RenfortPhase : MonoBehaviour
     [SerializeField] private List<GameObject> _createLeader2;
     public List<GameObject> CreateLeader2 => _createLeader2;
 
-    [SerializeField] List<GameObject> _usineListRed = new List<GameObject>();
-    [SerializeField] List<GameObject> _usineListBlue = new List<GameObject>();
+    List<GameObject> _usineListRed = new List<GameObject>();
+    List<GameObject> _usineListBlue = new List<GameObject>();
 
-    [SerializeField] List<GameObject> _leaderListRed = new List<GameObject>();
-    [SerializeField] List<GameObject> _leaderListBlue = new List<GameObject>();
+    List<GameObject> _leaderListRed = new List<GameObject>();
+    List<GameObject> _leaderListBlue = new List<GameObject>();
 
     int idCreate = -1;
     bool redPlayerCreation = false;
@@ -191,9 +191,6 @@ public class RenfortPhase : MonoBehaviour
             {
                 int typeTileID = unit.GetComponent<UnitScript>().ActualTiledId;
 
-                //Evite d'avoir des doublons dans la List.
-                Debug.Log(typeTileID);
-
                 //Pour chaque numéro présent dans le PlayerStatic avec la valeur qu'on a convertit précédemment.
                 foreach(int idtyleIndex in PlayerStatic.GetNeighbourDiag(typeTileID, TilesManager.Instance.TileList[typeTileID].GetComponent<TileScript>().Line, false))
                 {
@@ -291,8 +288,6 @@ public class RenfortPhase : MonoBehaviour
     /// </summary>
     public void craftUnit(int unitId)
     {
-        //Insérer la fonction magique permettant de sélectionner les cases pour intanstier les troupes.
-        //Les troupes sont en référance dans la liste de UnitRéférence _unitClassCreableListRedPlayer et _unitClassCreableListBluePlayer
         if(GameManager.Instance.IsPlayerRedTurn)
         {
             List<GameObject> tileList = new List<GameObject>();
@@ -304,6 +299,7 @@ public class RenfortPhase : MonoBehaviour
 
             GameManager.Instance.StartEventModeTiles(1, true, tileList, "Création d'unité", "Êtes-vous sur de vouloir créer une unité sur cette case");
             GameManager.Instance._eventCall += CreateNewUnit;
+            RaycastManager.Instance._mouseCommand.QuitRenfortPanel();
         }
         else
         {
@@ -312,10 +308,11 @@ public class RenfortPhase : MonoBehaviour
             tileList.AddRange(GameManager.Instance.RenfortPhase.CreateTileJ2);
 
             idCreate = unitId;
-            redPlayerCreation = true;
+            redPlayerCreation = false;
 
             GameManager.Instance.StartEventModeTiles(1, false, tileList, "Création d'unité", "Êtes-vous sur de vouloir créer une unité sur cette case");
             GameManager.Instance._eventCall += CreateNewUnit;
+            RaycastManager.Instance._mouseCommand.QuitRenfortPanel();
         }
     }
 
@@ -327,16 +324,18 @@ public class RenfortPhase : MonoBehaviour
         {
             GameObject obj = Instantiate(PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[idCreate], GameManager.Instance.TileChooseList[0].transform.position, Quaternion.identity);
             GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().AddUnitToTile(obj);
-            GameManager.Instance._eventCall -= CreateNewUnit;
             PlayerScript.Instance.RedPlayerInfos.HasCreateUnit = true;
+            PlayerScript.Instance.UnitRef.UnitListRedPlayer.Add(obj);
         }
         else
         {
             GameObject obj = Instantiate(PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[idCreate], GameManager.Instance.TileChooseList[0].transform.position, Quaternion.identity);
             GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().AddUnitToTile(obj);
-            GameManager.Instance._eventCall -= CreateNewUnit;
             PlayerScript.Instance.BluePlayerInfos.HasCreateUnit = true;
+            PlayerScript.Instance.UnitRef.UnitListRedPlayer.Add(obj);
         }
+
+        GameManager.Instance.TileChooseList.Clear();
     }
     #endregion CréerUnité
 }

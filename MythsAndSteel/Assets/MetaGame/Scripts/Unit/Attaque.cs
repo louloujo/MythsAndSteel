@@ -120,6 +120,7 @@ public class Attaque : MonoSingleton<Attaque>
         }
         AnimationUpdate();
     }
+
     void UnitAttackTwoRanges(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, int DiceResult)
     {
         if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
@@ -194,8 +195,11 @@ public class Attaque : MonoSingleton<Attaque>
 
     public IEnumerator AnimationWait(Animator AnimToWait, string BoolName)
     {
-        yield return new WaitForSeconds(AnimToWait.runtimeAnimatorController.animationClips[0].length);
-        AnimToWait.SetBool(BoolName, false);
+        if(AnimToWait.runtimeAnimatorController != null)
+        {
+            yield return new WaitForSeconds(AnimToWait.runtimeAnimatorController.animationClips[0].length);
+            AnimToWait.SetBool(BoolName, false);
+        }
     }
 
     void ChooseAttackType(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, int DiceResult)
@@ -277,7 +281,7 @@ public class Attaque : MonoSingleton<Attaque>
                 Debug.Log(selectedUnit);
                 _selected = true;
                 GetStats();
-                StartAttack(TilesManager.Instance.TileList.IndexOf(tileSelected), selectedUnit.GetComponent<UnitScript>().AttackRange + selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
+                StartAttack(tileSelected.GetComponent<TileScript>().TileId, selectedUnit.GetComponent<UnitScript>().AttackRange + selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
             }
             else
             {
@@ -305,7 +309,7 @@ public class Attaque : MonoSingleton<Attaque>
             ID.Add(tileId);
 
             // Lance l'highlight des cases dans la range de l'unité.
-            Highlight(tileId, Range);
+            Highlight(tileId, Range); 
         }
     }
 

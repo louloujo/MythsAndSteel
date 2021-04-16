@@ -68,7 +68,7 @@ static class PlayerStatic{
             int rTopTile = idTile + 10;
 
             int lDownTile = idTile - 10;
-            int rDownTile = idTile + 8;
+            int rDownTile = idTile - 8;
 
             currentList.Add(lTopTile);
             currentList.Add(rTopTile);
