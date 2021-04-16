@@ -1520,6 +1520,7 @@ GameObject:
   - component: {fileID: 108961819}
   - component: {fileID: 108961821}
   - component: {fileID: 108961820}
+  - component: {fileID: 108961823}
   - component: {fileID: 108961822}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9)"
@@ -1633,6 +1634,25 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &108961822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108961818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f12cf60da23dcb43879eded830ccef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Capacity1Name: 
+  _Capacity1Description: 
+  _Capacity1Cost: 0
+  _isCapacity2Exist: 0
+  _Capacity2Name: 
+  _Capacity2Description: 
+  _Capacity2Cost: 0
+--- !u!114 &108961823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10744,6 +10764,7 @@ GameObject:
   - component: {fileID: 827471366}
   - component: {fileID: 827471368}
   - component: {fileID: 827471367}
+  - component: {fileID: 827471369}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9) 4"
   m_TagString: Untagged
@@ -10852,6 +10873,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &827471369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827471365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df02c3dbb45d51499d62b3e58ad30a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Capacity1Name: 
+  _Capacity1Description: 
+  _Capacity1Cost: 0
+  _isCapacity2Exist: 0
+  _Capacity2Name: 
+  _Capacity2Description: 
+  _Capacity2Cost: 0
 --- !u!1 &839524621
 GameObject:
   m_ObjectHideFlags: 0
@@ -14756,6 +14796,7 @@ GameObject:
   - component: {fileID: 1204031600}
   - component: {fileID: 1204031602}
   - component: {fileID: 1204031601}
+  - component: {fileID: 1204031603}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9) 3"
   m_TagString: Untagged
@@ -14864,6 +14905,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1204031603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204031599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df02c3dbb45d51499d62b3e58ad30a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Capacity1Name: 
+  _Capacity1Description: 
+  _Capacity1Cost: 0
+  _isCapacity2Exist: 0
+  _Capacity2Name: 
+  _Capacity2Description: 
+  _Capacity2Cost: 0
 --- !u!1 &1206416263
 GameObject:
   m_ObjectHideFlags: 0
@@ -16179,6 +16239,7 @@ GameObject:
   - component: {fileID: 1264806017}
   - component: {fileID: 1264806019}
   - component: {fileID: 1264806018}
+  - component: {fileID: 1264806020}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9) 5"
   m_TagString: Untagged
@@ -16287,6 +16348,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1264806020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264806016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df02c3dbb45d51499d62b3e58ad30a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Capacity1Name: 
+  _Capacity1Description: 
+  _Capacity1Cost: 0
+  _isCapacity2Exist: 0
+  _Capacity2Name: 
+  _Capacity2Description: 
+  _Capacity2Cost: 0
 --- !u!1 &1289587992
 GameObject:
   m_ObjectHideFlags: 0
@@ -21423,6 +21503,7 @@ GameObject:
   - component: {fileID: 1710207925}
   - component: {fileID: 1710207927}
   - component: {fileID: 1710207926}
+  - component: {fileID: 1710207928}
   m_Layer: 0
   m_Name: "Canon T90 (unit\xE9) 6"
   m_TagString: Untagged
@@ -21531,6 +21612,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1710207928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710207924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df02c3dbb45d51499d62b3e58ad30a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Capacity1Name: 
+  _Capacity1Description: 
+  _Capacity1Cost: 0
+  _isCapacity2Exist: 0
+  _Capacity2Name: 
+  _Capacity2Description: 
+  _Capacity2Cost: 0
 --- !u!1001 &1714259869
 PrefabInstance:
   m_ObjectHideFlags: 0
