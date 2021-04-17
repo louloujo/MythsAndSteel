@@ -242,10 +242,6 @@ public class GameManager : MonoSingleton<GameManager>{
         if(ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Debut){
             _isInTurn = false;
         }
-        else if(ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Strategie && !ManagerSO.GetDebutFunction())
-        {
-            _isInTurn = false;
-        }
         else
         {
             _isInTurn = true;

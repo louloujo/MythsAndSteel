@@ -118,22 +118,19 @@ public class PhaseActivation : MonoBehaviour
                                 J1Verif = false;
                                 Debug.Log("Changed choose card");
                                 ConfirmPanelRed.SetActive(false);
-                                ConfirmPanelRed.SetActive(true);
                             }
                         }
                     }
                 }
 
-                //Première partie du code qui s'execute, on regarde si le joueur appuie sur une touche,
-                //et si c'est le cas on sauvegarde la carte qui correspond à la touche pressée et les autres dans deux list différentes.
-                //On passe alors à la phase de vérification
+                //Check si le joueur appuie une première fois sur une touche
                 else if(J1Choix)
                 {
-                    J1CarteVerif = null;
-                    J1CartesNonVerif.Clear();
-
                     if(Input.anyKey)
                     {
+                        J1CarteVerif = null;
+                        J1CartesNonVerif.Clear();
+
                         foreach(CarteActivation carteactivation in RedCartesActivation)
                         {
                             if(Input.GetKeyDown(carteactivation.inputCarteActivation))
@@ -197,8 +194,6 @@ public class PhaseActivation : MonoBehaviour
                             {
                                 Debug.Log("Change card blue");
                                 ConfirmPanelBlue.SetActive(false);
-                                ConfirmPanelBlue.SetActive(true);
-
                             }
                             J2Choix = true;
                             J2Verif = false;
@@ -290,19 +285,20 @@ public class PhaseActivation : MonoBehaviour
         UIInstance.Instance.BackgroundActivation.SetActive(false);
 
         float InitiativeValeur = J1DernièreValeurActivation - J2DernièreValeurActivation;
+        float rgb = 0.2f;
         if(InitiativeValeur < 0)
         {
             GameManager.Instance.SetPlayerStart(true);
-            RedPlayerPanel.transform.GetChild(J1CarteVerif.IndexCarteActivation).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1f);
-            BluePlayerPanel.transform.GetChild(J2CarteVerif.IndexCarteActivation).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1f);
+            RedPlayerPanel.transform.GetChild(J1CarteVerif.IndexCarteActivation).GetComponent<Image>().color = new Color(rgb, rgb, rgb, 1f);
+            BluePlayerPanel.transform.GetChild(J2CarteVerif.IndexCarteActivation).GetComponent<Image>().color = new Color(rgb, rgb, rgb, 1f);
             Debug.Log("6");
             _result.SetActive(true);
         }
         else
         {
             GameManager.Instance.SetPlayerStart(false);
-            RedPlayerPanel.transform.GetChild(J1CarteVerif.IndexCarteActivation).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1f);
-            BluePlayerPanel.transform.GetChild(J2CarteVerif.IndexCarteActivation).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1f);
+            RedPlayerPanel.transform.GetChild(J1CarteVerif.IndexCarteActivation).GetComponent<Image>().color = new Color(rgb, rgb, rgb, 1f);
+            BluePlayerPanel.transform.GetChild(J2CarteVerif.IndexCarteActivation).GetComponent<Image>().color = new Color(rgb, rgb, rgb, 1f);
             Debug.Log("7");
             _result.SetActive(true);
         }
@@ -330,18 +326,13 @@ public class PhaseActivation : MonoBehaviour
         _canChooseCard = false;
     }
 
+    /// <summary>
+    /// Lance la phase d'activation
+    /// </summary>
     public void ActivateActivationPhase()
     {
         UIInstance.Instance.CanvasActivation.SetActive(true);
         UIInstance.Instance.DesactivateNextPhaseButton();
         _canChooseCard = true;
-    }
-
-    public void DisplayConfirmActivation()
-    {
-        if(J1Choix == true)
-        {
-
-        }
     }
 }
