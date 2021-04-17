@@ -14,7 +14,17 @@ public class Encyclopedie : MonoBehaviour
    
     private void Start()
     {
-        LayoutButton[CurrentButton].GetComponent<Canvas>().sortingOrder = 1000;
+        LayoutButton[CurrentButtonIndex].GetComponent<Canvas>().sortingOrder = 1000;
+    }
+
+    public void Click(int index)
+    {
+
+        if (CurrentButtonIndex != index)
+        {
+            Debug.Log("button change");
+            CurrentButtonIndex = index;
+        }
     }
 
 }
