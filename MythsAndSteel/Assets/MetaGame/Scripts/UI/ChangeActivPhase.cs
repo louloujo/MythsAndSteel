@@ -45,8 +45,8 @@ public class ChangeActivPhase : MonoBehaviour
             _actionJ1Img.color = _redPlayerColor;
             _actionJ2Img.color = _bluePlayerColor;
 
-            _actionJ1Txt.text = $"Phase d'action du joueur {PlayerScript.Instance.RedPlayerInfos.ArmyNameNomMasc}";
-            _actionJ2Txt.text = $"Phase d'action du joueur {PlayerScript.Instance.BluePlayerInfos.ArmyNameNomMasc}";
+            _actionJ1Txt.text = $"Phase de jeu du joueur {PlayerScript.Instance.RedPlayerInfos.ArmyNameNomMasc}";
+            _actionJ2Txt.text = $"Phase de jeu du joueur {PlayerScript.Instance.BluePlayerInfos.ArmyNameNomMasc}";
             _orgoneJ1Txt.text = $"Phase orgonique du joueur {PlayerScript.Instance.RedPlayerInfos.ArmyNameNomMasc}";
             _orgoneJ2Txt.text = $"Phase orgonique du joueur {PlayerScript.Instance.BluePlayerInfos.ArmyNameNomMasc}";
         }
@@ -57,8 +57,8 @@ public class ChangeActivPhase : MonoBehaviour
             _actionJ1Img.color = _bluePlayerColor;
             _actionJ2Img.color = _redPlayerColor;
 
-            _actionJ2Txt.text = $"Phase d'action du joueur {PlayerScript.Instance.RedPlayerInfos.ArmyNameNomMasc}";
-            _actionJ1Txt.text = $"Phase d'action du joueur {PlayerScript.Instance.BluePlayerInfos.ArmyNameNomMasc}";
+            _actionJ2Txt.text = $"Phase de jeu du joueur {PlayerScript.Instance.RedPlayerInfos.ArmyNameNomMasc}";
+            _actionJ1Txt.text = $"Phase de jeu du joueur {PlayerScript.Instance.BluePlayerInfos.ArmyNameNomMasc}";
             _orgoneJ2Txt.text = $"Phase orgonique du joueur {PlayerScript.Instance.RedPlayerInfos.ArmyNameNomMasc}";
             _orgoneJ1Txt.text = $"Phase orgonique du joueur {PlayerScript.Instance.BluePlayerInfos.ArmyNameNomMasc}";
         }
