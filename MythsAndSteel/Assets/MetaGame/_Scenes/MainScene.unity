@@ -1221,6 +1221,7 @@ MonoBehaviour:
   _normalEventSprite: {fileID: 21300000, guid: 77b08518472808f4a81cb0cdfa06b5ec, type: 3}
   "IllusionStrat\xE9gique": 0
   _activationPhase: {fileID: 915835425}
+  _Terrain: {fileID: 0}
   IsCheckingOrgone: 0
 --- !u!1 &99837085
 GameObject:
@@ -4451,7 +4452,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13190,7 +13191,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -17912,7 +17913,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22485,6 +22486,8 @@ MonoBehaviour:
   Terrain: {fileID: 11400000, guid: 6b9cd9dfcef01a747b717485f579f9a3, type: 2}
   _activationLeftTxtRP: {fileID: 563251741}
   _activationLeftTxtBP: {fileID: 1626702624}
+  _ressourceLeftTxtRP: {fileID: 0}
+  _ressourceLeftTxtBP: {fileID: 0}
   "_pageUnit\xE9Renfort":
     _ressourceJoueur: {fileID: 2086137267}
     _ressourceText: {fileID: 2086137323}
@@ -22764,7 +22767,7 @@ MonoBehaviour:
     OrgonePowerLeft: 0
     LastKnownOrgoneValue: 0
     TileCentreZoneOrgone: {fileID: 1036877431}
-    Ressource: 0
+    _Ressource: 0
     GoalCapturePointsNumber: 0
     HasCreateUnit: 0
     dontTouchThis: 0
@@ -22778,7 +22781,7 @@ MonoBehaviour:
     OrgonePowerLeft: 0
     LastKnownOrgoneValue: 0
     TileCentreZoneOrgone: {fileID: 1321010384}
-    Ressource: 0
+    _Ressource: 0
     GoalCapturePointsNumber: 0
     HasCreateUnit: 0
     dontTouchThis: 0
