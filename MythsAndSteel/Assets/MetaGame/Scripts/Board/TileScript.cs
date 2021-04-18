@@ -186,7 +186,6 @@ public class TileScript : MonoBehaviour
     public void RemoveRessources(int value, int player){
         if(_resourcesCounter - value >= 0){
             _resourcesCounter -= value;
-
             if(player == 1)
             {
                 PlayerScript.Instance.RedPlayerInfos.Ressource += value;
@@ -205,6 +204,59 @@ public class TileScript : MonoBehaviour
             else{
                 PlayerScript.Instance.BluePlayerInfos.Ressource += value;
             }
+        }
+    }
+
+    public void CreateEffect(MYthsAndSteel_Enum.TerrainType Type)
+    {
+        foreach (TerrainType T in GameManager.Instance.Terrain.EffetDeTerrain)
+        {
+            foreach (MYthsAndSteel_Enum.TerrainType T1 in T._eventType)
+            {
+                if (T1 == Type)
+                {
+                    if (!TerrainEffectList.Contains(Type))
+                    {
+                        TerrainEffectList.Add(Type);
+                    }
+                    GameObject Child = Instantiate(T.Child, transform.position, Quaternion.identity);
+                    Child.transform.parent = this.transform;
+                    Child.transform.localScale = new Vector3(.5f, .5f, .5f);
+                    _Child.Add(Child);
+                    Debug.Log("Creation de l'effet : " + Type);
+                }
+            }
+        }
+    }
+    public void test()
+    {
+        RemoveEffect(MYthsAndSteel_Enum.TerrainType.Point_de_ressource);
+    }
+
+    public void RemoveEffect(MYthsAndSteel_Enum.TerrainType Type)
+    {
+        if (TerrainEffectList.Contains(Type))
+        {                       
+            TerrainEffectList.Remove(Type);
+            Debug.Log("Effet " + Type + " supprimé.");
+            foreach (GameObject C in Child)
+            {
+                if (C.TryGetComponent<ChildEffect>(out ChildEffect T))
+                {
+                    if (T.Type == Type)
+                    {
+                        Debug.Log("Enfant : " + Type + " supprimé.");
+                        GameObject G = C;
+                        Child.Remove(C);
+                        Destroy(G);
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Aucun effet de ce type n'a été trouvé.");
         }
     }
 }

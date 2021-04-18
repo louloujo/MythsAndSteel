@@ -127,6 +127,10 @@ public class GameManager : MonoSingleton<GameManager>{
 
     float deltaTimeX = 0f;
 
+    // Scriptable terrain.
+    [SerializeField] TerrainTypeClass _Terrain;
+    public TerrainTypeClass Terrain => _Terrain;
+
     #region CheckOrgone
     //Check l'orgone pour éviter l'override
     public bool IsCheckingOrgone = false;

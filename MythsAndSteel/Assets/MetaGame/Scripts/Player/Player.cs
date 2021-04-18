@@ -25,11 +25,23 @@ public class Player
     //Permet de se souvenir de la dernière valeur d'orgone avant Update
     public int LastKnownOrgoneValue; 
     //Tile qui correspond au centre de la zone d'Orgone
-    public GameObject TileCentreZoneOrgone; 
+    public GameObject TileCentreZoneOrgone;
 
     [Header("RESSOURCE")]
     //Nombre de Ressources actuel
-    public int Ressource;
+    [SerializeField] private int _Ressource;
+    public int Ressource
+    {
+        get
+        {
+            return _Ressource;
+        }
+        set
+        {
+            _Ressource = value;            
+            UIInstance.Instance.UpdateRessourceLeft();
+        }
+    }
 
     [Header("OBJECTIF")]
     //Nombre d'objectif actuellement capturé
