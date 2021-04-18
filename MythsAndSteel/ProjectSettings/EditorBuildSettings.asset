@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MetaGame/_Scenes/MainScene.unity
     guid: 7ef584947fef55a45b31d07c5ba7268e
+  - enabled: 1
+    path: "Assets/MetaGame/_Scenes/Menu/Encyclop\xE9die.unity"
+    guid: 36026f23f5691484dac633989c61f187
   m_configObjects: {}
