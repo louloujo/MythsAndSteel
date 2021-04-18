@@ -512,15 +512,15 @@ public class Attaque : MonoSingleton<Attaque>
         // Applique les bonus/malus de terrains
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Bosquet, _selectedUnit.GetComponent<UnitScript>().ActualTiledId)) // Bosquet
         {
-            _numberRangeMin.x += 1;
-            _numberRangeMin.y += 1;
-            _numberRangeMax.x += 1;
+            _numberRangeMin.x -= 1;
+            _numberRangeMin.y -= 1;
+            _numberRangeMax.x -= 1;
             Debug.Log("BosquetEffectApplyed");
         }
 
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, _selectedUnit.GetComponent<UnitScript>().ActualTiledId)) // Colline
         {
-            _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
+            _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus += 1;
             Debug.Log("CollineEffectApplyed");
         }
 

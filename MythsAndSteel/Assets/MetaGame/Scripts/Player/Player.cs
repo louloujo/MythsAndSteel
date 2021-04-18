@@ -79,7 +79,6 @@ public class Player
             GameManager.Instance._eventCall += GiveDamageToUnitForOrgone;
             if(player == 1) GameManager.Instance._eventCallCancel += CancelOrgoneP1;
             else GameManager.Instance._eventCallCancel += CancelOrgoneP2;
-            unitList.Clear();
         }
         else
         {
