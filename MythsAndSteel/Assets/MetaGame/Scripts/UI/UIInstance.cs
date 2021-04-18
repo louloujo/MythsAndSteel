@@ -221,10 +221,21 @@ public class UIInstance : MonoSingleton<UIInstance>
     //nombre d'activation restante pour le joueur bleu
     [SerializeField] private TextMeshProUGUI _activationLeftTxtBP = null;
     public TextMeshProUGUI ActivationLeftTxtBP => _activationLeftTxtBP;
-
+    [Header("PLAYER RESSOURCE")]
+    //nombre d'activation restante pour le joueur rouge
+    [SerializeField] private TextMeshProUGUI _ressourceLeftTxtRP = null;
+    public TextMeshProUGUI ressourceLeftTxtRP => _ressourceLeftTxtRP;
+    //nombre d'activation restante pour le joueur bleu
+    [SerializeField] private TextMeshProUGUI _ressourceLeftTxtBP = null;
+    public TextMeshProUGUI ressourceLeftTxtBP => _ressourceLeftTxtBP;
     public void UpdateActivationLeft(){
         _activationLeftTxtRP.text = PlayerScript.Instance.RedPlayerInfos.ActivationLeft.ToString();
         _activationLeftTxtBP.text = PlayerScript.Instance.BluePlayerInfos.ActivationLeft.ToString();
+    }
+
+    public void UpdateRessourceLeft(){
+        _ressourceLeftTxtRP.text = PlayerScript.Instance.RedPlayerInfos.Ressource.ToString();
+        _ressourceLeftTxtBP.text = PlayerScript.Instance.BluePlayerInfos.Ressource.ToString();
     }
 
     #region MenuRenfort
