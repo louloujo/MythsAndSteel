@@ -799,13 +799,10 @@ public class MouseCommand : MonoBehaviour
     /// <summary>
     /// Update les stats du menu renfort
     /// </summary>
-    void UpdateStatsMenuRenforts()
+    void UpdateStatsMenuRenforts(bool player)
     {
-        if(GameManager.Instance.IsPlayerRedTurn && !PlayerScript.Instance.RedPlayerInfos.HasCreateUnit)
+        if(player)
         {
-            //A modifier si inversement au niveau des usines (J1 et J2)  = > changer le ActionJ2 en ActionJ1.
-            if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1)
-            {
                 /*
                 //Update le drapeau qui se situe dans UI Instance correspondant à l'armée Rouge.
                 UIInstance.Instance.EmplacementImageMenuRenfort._drapeauDuJoueur.GetComponent<SpriteRenderer>().sprite = UIInstance.Instance.StockageImage._drapeauJoueur[0];
@@ -1009,14 +1006,10 @@ public class MouseCommand : MonoBehaviour
                     }
                     #endregion Update Textuelle et Image Renforts de 4 à 6 pour l'équipe Rouge
                 }
-            }
         }
 
-        else if(!GameManager.Instance.IsPlayerRedTurn && !PlayerScript.Instance.BluePlayerInfos.HasCreateUnit)
+        else if(!player)
         {
-            //A modifier si inversement au niveau des usines (J1 et J2) = > changer le ActionJ1 en ActionJ2.
-            if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1)
-            {
                 /*
                 //Update le drapeau qui se situe dans UI Instance correspondant à l'armée Bleu.
                 UIInstance.Instance.EmplacementImageMenuRenfort._drapeauDuJoueur.GetComponent<SpriteRenderer>().sprite = UIInstance.Instance.StockageImage._drapeauJoueur[1];
@@ -1211,17 +1204,17 @@ public class MouseCommand : MonoBehaviour
                         #endregion Update Image Textuelle et Image de 4 à 6 pour l'équipe Bleu
                     }
                 }
-            }
+            
         }
     }
 
     /// <summary>
     /// Actives le menu renfort
     /// </summary>
-    public void MenuRenfortUI()
+    public void MenuRenfortUI(bool player)
     {
         RenfortUI.SetActive(true);
-        UpdateStatsMenuRenforts();
+        UpdateStatsMenuRenforts(player);
     }
     #endregion MenuRenfortFunction
 }

@@ -153,7 +153,12 @@ public class GameManagerSO : ScriptableObject
         }
     }
 
-    public bool GetDebutFunction(){
+    /// <summary>
+    /// Est ce que l'event de début possède des fonctions à appeler
+    /// </summary>
+    /// <returns></returns>
+    public bool GetDebutFunction()
+    {
         if(GoToDebutPhase != null) return true;
         else return false;
     }

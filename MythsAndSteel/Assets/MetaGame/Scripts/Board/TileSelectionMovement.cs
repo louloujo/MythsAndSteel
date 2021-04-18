@@ -27,7 +27,6 @@ public class TileSelectionMovement : MonoBehaviour{
     private Coroutine Last;
     #endregion Variables
 
-
     private void Start(){
         RaycastManager.Instance.OnTileChanged += TileChange;
         GetComponent<Animator>().SetInteger("Fade", 1);
@@ -51,8 +50,9 @@ public class TileSelectionMovement : MonoBehaviour{
         }
     }
 
-
-
+    /// <summary>
+    /// A chaque fois que la tile en dessous de la souris change
+    /// </summary>
     public void TileChange()
     {
         //Change l'objet de tiles où il doit se déplacer
@@ -141,7 +141,6 @@ public class TileSelectionMovement : MonoBehaviour{
         }
 
     }
-
 
     IEnumerator Wait()
     {

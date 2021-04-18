@@ -16,6 +16,14 @@ public class TerrainTypeClass : ScriptableObject
         }
     }
 
+    /// <summary>
+    /// Update le panneau d'effet de terrain avec l'effet principal sur la case
+    /// </summary>
+    /// <param name="tile"></param>
+    /// <param name="Title"></param>
+    /// <param name="Desc"></param>
+    /// <param name="Ressources"></param>
+    /// <param name="Rendu"></param>
     public void Synch(TileScript tile, TextMeshProUGUI Title, TextMeshProUGUI Desc, TextMeshProUGUI Ressources, Image Rendu)
     {
         TerrainType Saved = FindEffect(tile.TerrainEffectList[0]);
@@ -24,7 +32,7 @@ public class TerrainTypeClass : ScriptableObject
         Rendu.sprite = Saved.render;
         if (tile.TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Point_de_ressource))
         {
-            Ressources.text = tile.ResourcesCounter <= 0 ?  "" : "Ressources sur la case: " + tile.ResourcesCounter;
+            Ressources.text = tile.ResourcesCounter <= 0 ?  "" : "x" + tile.ResourcesCounter;
         }
         else { Ressources.text = ""; }
     }

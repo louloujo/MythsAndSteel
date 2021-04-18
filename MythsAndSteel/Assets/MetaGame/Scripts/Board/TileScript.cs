@@ -96,35 +96,38 @@ public class TileScript : MonoBehaviour
 
         foreach(GameObject gam in _Child){ 
             string tag = "";
-
-            switch(type){
-                case MYthsAndSteel_Enum.ChildTileType.MoveSelect:
-                    tag = "MoveSelectable";
-                    if(gam.tag == tag)
-                    {
-                        child = gam;
-                        child.GetComponent<SpriteRenderer>().enabled = true;
-                        if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
-                    }
-                    break;
-                case MYthsAndSteel_Enum.ChildTileType.AttackSelect:
-                    tag = "AttackSelectable";
-                    if(gam.tag == tag)
-                    {
-                        child = gam;
-                        child.GetComponent<SpriteRenderer>().enabled = true;
-                        if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
-                    }
-                    break;
-                case MYthsAndSteel_Enum.ChildTileType.EventSelect:
-                    tag = "SelectableTile";
-                    if(gam.tag == tag)
-                    {
-                        child = gam;
-                        child.GetComponent<SpriteRenderer>().enabled = true;
-                        if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
-                    }
-                    break;
+            if(gam.GetComponent<SpriteRenderer>() != null)
+            {
+                switch(type)
+                {
+                    case MYthsAndSteel_Enum.ChildTileType.MoveSelect:
+                        tag = "MoveSelectable";
+                        if(gam.tag == tag)
+                        {
+                            child = gam;
+                            child.GetComponent<SpriteRenderer>().enabled = true;
+                            if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
+                        }
+                        break;
+                    case MYthsAndSteel_Enum.ChildTileType.AttackSelect:
+                        tag = "AttackSelectable";
+                        if(gam.tag == tag)
+                        {
+                            child = gam;
+                            child.GetComponent<SpriteRenderer>().enabled = true;
+                            if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
+                        }
+                        break;
+                    case MYthsAndSteel_Enum.ChildTileType.EventSelect:
+                        tag = "SelectableTile";
+                        if(gam.tag == tag)
+                        {
+                            child = gam;
+                            child.GetComponent<SpriteRenderer>().enabled = true;
+                            if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
+                        }
+                        break;
+                }
             }
         }
         child.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alpha);
@@ -143,28 +146,31 @@ public class TileScript : MonoBehaviour
         foreach(GameObject gam in _Child)
         {
             string tag = "";
-
-            switch(type)
+            if(gam.GetComponent<SpriteRenderer>() != null)
             {
-                case MYthsAndSteel_Enum.ChildTileType.MoveSelect:
-                    tag = "MoveSelectable";
-                    break;
-                case MYthsAndSteel_Enum.ChildTileType.AttackSelect:
-                    tag = "AttackSelectable";
-                    break;
-                case MYthsAndSteel_Enum.ChildTileType.EventSelect:
-                    tag = "SelectableTile";
-                    break;
-            }
+                switch(type)
+                {
+                    case MYthsAndSteel_Enum.ChildTileType.MoveSelect:
+                        tag = "MoveSelectable";
+                        break;
+                    case MYthsAndSteel_Enum.ChildTileType.AttackSelect:
+                        tag = "AttackSelectable";
+                        break;
+                    case MYthsAndSteel_Enum.ChildTileType.EventSelect:
+                        tag = "SelectableTile";
+                        break;
+                }
 
-            if(gam.tag == tag)
-            {
-                child = gam;
-                child.GetComponent<SpriteRenderer>().enabled = false;
-                if(destroy){
-                    _Child.Remove(child);
-                    Destroy(child);
-                    child = null;
+                if(gam.tag == tag)
+                {
+                    child = gam;
+                    child.GetComponent<SpriteRenderer>().enabled = false;
+                    if(destroy)
+                    {
+                        _Child.Remove(child);
+                        Destroy(child);
+                        child = null;
+                    }
                 }
             }
         }
@@ -207,6 +213,10 @@ public class TileScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Ajoute un effet à la case
+    /// </summary>
+    /// <param name="Type"></param>
     public void CreateEffect(MYthsAndSteel_Enum.TerrainType Type)
     {
         foreach (TerrainType T in GameManager.Instance.Terrain.EffetDeTerrain)
@@ -223,29 +233,26 @@ public class TileScript : MonoBehaviour
                     Child.transform.parent = this.transform;
                     Child.transform.localScale = new Vector3(.5f, .5f, .5f);
                     _Child.Add(Child);
-                    Debug.Log("Creation de l'effet : " + Type);
                 }
             }
         }
     }
-    public void test()
-    {
-        RemoveEffect(MYthsAndSteel_Enum.TerrainType.Point_de_ressource);
-    }
 
+    /// <summary>
+    /// enleve un effet de la case
+    /// </summary>
+    /// <param name="Type"></param>
     public void RemoveEffect(MYthsAndSteel_Enum.TerrainType Type)
     {
         if (TerrainEffectList.Contains(Type))
         {                       
             TerrainEffectList.Remove(Type);
-            Debug.Log("Effet " + Type + " supprimé.");
             foreach (GameObject C in Child)
             {
                 if (C.TryGetComponent<ChildEffect>(out ChildEffect T))
                 {
                     if (T.Type == Type)
                     {
-                        Debug.Log("Enfant : " + Type + " supprimé.");
                         GameObject G = C;
                         Child.Remove(C);
                         Destroy(G);
@@ -253,10 +260,6 @@ public class TileScript : MonoBehaviour
                     }
                 }
             }
-        }
-        else
-        {
-            Debug.Log("Aucun effet de ce type n'a été trouvé.");
         }
     }
 }

@@ -64,25 +64,39 @@ public class RenfortPhase : MonoBehaviour
     /// <summary>
     /// Fais une liste des cases sélectionnables autour de l'usine
     /// </summary>
-    public void CreateRenfort()
+    public void CreateRenfort(bool playerRed)
     {
-        //A inverser si l'armée Bleu Devient l'armée Rouge
-        if (RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineRouge))
+        if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 ||
+            GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
         {
-            AroundCreateTileUsine(true);
-            AroundLeader(true);
+            AroundCreateTileUsine(playerRed);
+            AroundLeader(playerRed);
+            ChangeButtonStatut(true);
         }
-
-        //A inverser si l'armée Rouge Devient l'armée Bleu
-        else if (RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineBleu))
+        else
         {
-            AroundCreateTileUsine(false);
-            AroundLeader(false);
-
+            ChangeButtonStatut(false);
         }
     }
 
+    /// <summary>
+    /// Active ou désactive les boutons du menu renfort
+    /// </summary>
+    /// <param name="activate"></param>
+    void ChangeButtonStatut(bool activate){
+        UIInstance.Instance.ButtonRenfort._clicSurUnité1.interactable = activate;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité2.interactable = activate;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité3.interactable = activate;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité4.interactable = activate;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité5.interactable = activate;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité6.interactable = activate;
+    }
+
     #region GetTiles
+    /// <summary>
+    /// Créer une liste des tules autour des usines
+    /// </summary>
+    /// <param name="usine1"></param>
     void AroundCreateTileUsine(bool usine1)
     {
         //Si l'armée est jouer par l'armée Bleu.

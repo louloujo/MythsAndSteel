@@ -375,6 +375,8 @@ public class UnitScript : MonoBehaviour
         }
         else { }
 
+        PlayerScript.Instance.GiveEventCard(UnitSO.IsInRedArmy ? 1 : 2);
+
         StartCoroutine(DeathAnimation());
     }
 

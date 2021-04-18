@@ -228,11 +228,18 @@ public class UIInstance : MonoSingleton<UIInstance>
     //nombre d'activation restante pour le joueur bleu
     [SerializeField] private TextMeshProUGUI _ressourceLeftTxtBP = null;
     public TextMeshProUGUI ressourceLeftTxtBP => _ressourceLeftTxtBP;
+
+    /// <summary>
+    /// Update la valeur d'activation restante des joueurs
+    /// </summary>
     public void UpdateActivationLeft(){
         _activationLeftTxtRP.text = PlayerScript.Instance.RedPlayerInfos.ActivationLeft.ToString();
         _activationLeftTxtBP.text = PlayerScript.Instance.BluePlayerInfos.ActivationLeft.ToString();
     }
 
+    /// <summary>
+    /// Update la valeur de Ressources des joueurs
+    /// </summary>
     public void UpdateRessourceLeft(){
         _ressourceLeftTxtRP.text = PlayerScript.Instance.RedPlayerInfos.Ressource.ToString();
         _ressourceLeftTxtBP.text = PlayerScript.Instance.BluePlayerInfos.Ressource.ToString();
@@ -254,6 +261,10 @@ public class UIInstance : MonoSingleton<UIInstance>
 
     [SerializeField] private AssignRessouceUnit _ressourceUnit_PasTouche;
     public AssignRessouceUnit RessourceUnit_PasTouche => _ressourceUnit_PasTouche;
+
+    //Boutons du menu renfort
+    [SerializeField] private BouttonMenuRenfort _buttonRenfort;
+    public BouttonMenuRenfort ButtonRenfort => _buttonRenfort;
     #endregion MenuRenfort
 
     #region VieUnité
@@ -490,8 +501,6 @@ public class EmplacementImageMenuRenfort
 [System.Serializable]
 public class BouttonMenuRenfort
 {
-    public Button _quitMenuRenfort = null;
-
     public Button _clicSurUnité1 = null;
     public Button _clicSurUnité2 = null;
     public Button _clicSurUnité3 = null;
