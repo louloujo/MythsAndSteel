@@ -1202,7 +1202,7 @@ MonoBehaviour:
   _isPlayerRedStarting: 0
   _isPlayerRedTurn: 0
   _isInTurn: 0
-  _actualTurnPhase: 0
+  _actualTurnPhase: 2
   _changeActivPhase: {fileID: 1965578499}
   _eventCardSO: {fileID: 11400000, guid: 955303dc40a1fa54984cef9072aef4ad, type: 2}
   _managerSO: {fileID: 11400000, guid: 915a645e0a8638b4d8f4a6522da5cc44, type: 2}
@@ -18412,7 +18412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.data[0]
@@ -23780,18 +23780,6 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4473479720353736804, guid: cab109d310ee2b743ba60a48e05bdebf, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.0189934
-      objectReference: {fileID: 0}
-    - target: {fileID: 4473479720353736804, guid: cab109d310ee2b743ba60a48e05bdebf, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.0189934
-      objectReference: {fileID: 0}
-    - target: {fileID: 4473479720353736804, guid: cab109d310ee2b743ba60a48e05bdebf, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.0189934
-      objectReference: {fileID: 0}
-    - target: {fileID: 4473479720353736804, guid: cab109d310ee2b743ba60a48e05bdebf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.9231
       objectReference: {fileID: 0}
@@ -23835,10 +23823,6 @@ PrefabInstance:
       propertyPath: _actualTileld
       value: 74
       objectReference: {fileID: 0}
-    - target: {fileID: 4473479720353736807, guid: cab109d310ee2b743ba60a48e05bdebf, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 0d997174087e14547ababba79fce4f45, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cab109d310ee2b743ba60a48e05bdebf, type: 3}
 --- !u!4 &2037221012 stripped

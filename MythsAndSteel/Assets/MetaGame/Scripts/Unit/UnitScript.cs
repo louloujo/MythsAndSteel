@@ -245,7 +245,10 @@ public class UnitScript : MonoBehaviour
     {
         if(_shield > 0){
             _shield -= Damage;
-            _life += _shield;
+            
+            if(_shield < 0){
+                _life += _shield;
+            }
 
             if(_shield > 0){
                 if(UnitSO.IsInRedArmy)
@@ -359,8 +362,8 @@ public class UnitScript : MonoBehaviour
     /// </summary>
     public virtual void Death()
     {
-        if(UnitSO.IsInRedArmy) PlayerScript.Instance.UnitRef.UnitListRedPlayer.Remove(this.gameObject);
-        else PlayerScript.Instance.UnitRef.UnitListBluePlayer.Remove(this.gameObject);
+        if(UnitSO.IsInRedArmy) PlayerScript.Instance.UnitRef.UnitListRedPlayer.Remove(gameObject);
+        else PlayerScript.Instance.UnitRef.UnitListBluePlayer.Remove(gameObject);
 
         if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneRed)){
             PlayerScript.Instance.AddOrgone(1, 1);
@@ -371,11 +374,8 @@ public class UnitScript : MonoBehaviour
             PlayerScript.Instance.BluePlayerInfos.CheckOrgone(2);
         }
         else { }
-        
-        if(UnitSO.IsInRedArmy) PlayerScript.Instance.UnitRef.UnitListRedPlayer.Remove(this.gameObject);
-        else PlayerScript.Instance.UnitRef.UnitListBluePlayer.Remove(this.gameObject);
 
-        StartCoroutine(DeathAnimation()); ///
+        StartCoroutine(DeathAnimation());
     }
 
     /// <summary>
