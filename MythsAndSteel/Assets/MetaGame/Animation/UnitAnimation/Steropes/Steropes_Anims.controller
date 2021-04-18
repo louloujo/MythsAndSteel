@@ -120,7 +120,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: bc1c9db6a449f8442bf4f1dc9bc0b54b, type: 2}
+  m_Motion: {fileID: 7400000, guid: c2ff5c3eb91eced459304428fe6fbcdd, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -390,7 +390,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FacingDown
+  m_Name: MoveDown
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -403,7 +403,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 92c837123ba08a24daca2138d787f011, type: 2}
+  m_Motion: {fileID: 7400000, guid: ce4cfbbc95db0074687849aef538a5df, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -442,7 +442,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FacingUpAttack
+  m_Name: AttackUp
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -455,7 +455,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 3ca47e5576bdb3e438fd84cce54ff07d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 648ef800766a5ba45ab58b9d5d6ff784, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -505,7 +505,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FacingDownAttack
+  m_Name: AttackDown
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -518,7 +518,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 0eb73443894c2c54e814662987c07755, type: 2}
+  m_Motion: {fileID: 7400000, guid: a7d10e8bd73d6004b896f5cd9859fca4, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -530,7 +530,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Scorpion
+  m_Name: Steropes_Anims
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: X
@@ -772,7 +772,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e5a4716294b2cd141ac5281f12ed6506, type: 2}
+  m_Motion: {fileID: 7400000, guid: 440956043365dc94d979fd2363025acc, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -824,7 +824,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 4196292401757f34e9e4c79d5e7ce9cb, type: 2}
+  m_Motion: {fileID: 7400000, guid: 69bba7d282511bd48a56493073bce086, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -863,7 +863,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FacingUp
+  m_Name: MoveUp
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -876,7 +876,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 65489cee224811c43952f2b5440aedaf, type: 2}
+  m_Motion: {fileID: 7400000, guid: ca4639038adb5374091f5b823a387185, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
