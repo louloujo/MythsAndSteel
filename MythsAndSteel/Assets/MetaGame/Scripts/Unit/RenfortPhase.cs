@@ -155,21 +155,24 @@ public class RenfortPhase : MonoBehaviour
         {
             foreach(GameObject unit in _leaderListRed)
             {
-                int typeTileID = unit.GetComponent<UnitScript>().ActualTiledId;
-
-                //Pour chaque numéro présent dans le PlayerStatic avec la valeur qu'on a convertit précédemment.
-                foreach(int idtyleIndex in PlayerStatic.GetNeighbourDiag(typeTileID, TilesManager.Instance.TileList[typeTileID].GetComponent<TileScript>().Line, false))
+                if(unit != null)
                 {
-                    GameObject tile = TilesManager.Instance.TileList[idtyleIndex];
-                    //Si le numéro n'est pas présent dans la liste, tu l'ajoutes.
-                    if(!_createLeader1.Contains(tile))
-                    {
-                        _createLeader1.Add(tile);
+                    int typeTileID = unit.GetComponent<UnitScript>().ActualTiledId;
 
-                        //Si il y un boolean qui est retourné alors tu enlèves les éléments de la liste.
-                        if(CheckConditions(tile, typeTileID) == true)
+                    //Pour chaque numéro présent dans le PlayerStatic avec la valeur qu'on a convertit précédemment.
+                    foreach(int idtyleIndex in PlayerStatic.GetNeighbourDiag(typeTileID, TilesManager.Instance.TileList[typeTileID].GetComponent<TileScript>().Line, false))
+                    {
+                        GameObject tile = TilesManager.Instance.TileList[idtyleIndex];
+                        //Si le numéro n'est pas présent dans la liste, tu l'ajoutes.
+                        if(!_createLeader1.Contains(tile))
                         {
-                            _createLeader1.Remove(tile);
+                            _createLeader1.Add(tile);
+
+                            //Si il y un boolean qui est retourné alors tu enlèves les éléments de la liste.
+                            if(CheckConditions(tile, typeTileID) == true)
+                            {
+                                _createLeader1.Remove(tile);
+                            }
                         }
                     }
                 }
@@ -189,21 +192,24 @@ public class RenfortPhase : MonoBehaviour
         {
             foreach(GameObject unit in _leaderListBlue)
             {
-                int typeTileID = unit.GetComponent<UnitScript>().ActualTiledId;
-
-                //Pour chaque numéro présent dans le PlayerStatic avec la valeur qu'on a convertit précédemment.
-                foreach(int idtyleIndex in PlayerStatic.GetNeighbourDiag(typeTileID, TilesManager.Instance.TileList[typeTileID].GetComponent<TileScript>().Line, false))
+                if(unit != null)
                 {
-                    GameObject tile = TilesManager.Instance.TileList[idtyleIndex];
-                    //Si le numéro n'est pas présent dans la liste, tu l'ajoutes.
-                    if(!_createLeader2.Contains(tile))
-                    {
-                        _createLeader2.Add(tile);
+                    int typeTileID = unit.GetComponent<UnitScript>().ActualTiledId;
 
-                        //Si il y un boolean qui est retourné alors tu enlèves les éléments de la liste.
-                        if(CheckConditions(tile, typeTileID) == true)
+                    //Pour chaque numéro présent dans le PlayerStatic avec la valeur qu'on a convertit précédemment.
+                    foreach(int idtyleIndex in PlayerStatic.GetNeighbourDiag(typeTileID, TilesManager.Instance.TileList[typeTileID].GetComponent<TileScript>().Line, false))
+                    {
+                        GameObject tile = TilesManager.Instance.TileList[idtyleIndex];
+                        //Si le numéro n'est pas présent dans la liste, tu l'ajoutes.
+                        if(!_createLeader2.Contains(tile))
                         {
-                            _createLeader2.Remove(tile);
+                            _createLeader2.Add(tile);
+
+                            //Si il y un boolean qui est retourné alors tu enlèves les éléments de la liste.
+                            if(CheckConditions(tile, typeTileID) == true)
+                            {
+                                _createLeader2.Remove(tile);
+                            }
                         }
                     }
                 }

@@ -91,7 +91,7 @@ public class TileScript : MonoBehaviour
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    public GameObject ActiveChildObj(MYthsAndSteel_Enum.ChildTileType type, Sprite sprite = null){
+    public GameObject ActiveChildObj(MYthsAndSteel_Enum.ChildTileType type, Sprite sprite = null, float alpha = 1f){
         GameObject child = null;
 
         foreach(GameObject gam in _Child){ 
@@ -100,22 +100,34 @@ public class TileScript : MonoBehaviour
             switch(type){
                 case MYthsAndSteel_Enum.ChildTileType.MoveSelect:
                     tag = "MoveSelectable";
+                    if(gam.tag == tag)
+                    {
+                        child = gam;
+                        child.GetComponent<SpriteRenderer>().enabled = true;
+                        if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
+                    }
                     break;
                 case MYthsAndSteel_Enum.ChildTileType.AttackSelect:
                     tag = "AttackSelectable";
+                    if(gam.tag == tag)
+                    {
+                        child = gam;
+                        child.GetComponent<SpriteRenderer>().enabled = true;
+                        if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
+                    }
                     break;
                 case MYthsAndSteel_Enum.ChildTileType.EventSelect:
                     tag = "SelectableTile";
+                    if(gam.tag == tag)
+                    {
+                        child = gam;
+                        child.GetComponent<SpriteRenderer>().enabled = true;
+                        if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
+                    }
                     break;
             }
-
-            if(gam.tag == tag){
-                child = gam;
-                child.GetComponent<SpriteRenderer>().enabled = true;
-                child.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
-                if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
-            }
         }
+        child.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alpha);
         return child;
     }
 
@@ -174,7 +186,6 @@ public class TileScript : MonoBehaviour
     public void RemoveRessources(int value, int player){
         if(_resourcesCounter - value >= 0){
             _resourcesCounter -= value;
-
             if(player == 1)
             {
                 PlayerScript.Instance.RedPlayerInfos.Ressource += value;
@@ -193,6 +204,59 @@ public class TileScript : MonoBehaviour
             else{
                 PlayerScript.Instance.BluePlayerInfos.Ressource += value;
             }
+        }
+    }
+
+    public void CreateEffect(MYthsAndSteel_Enum.TerrainType Type)
+    {
+        foreach (TerrainType T in GameManager.Instance.Terrain.EffetDeTerrain)
+        {
+            foreach (MYthsAndSteel_Enum.TerrainType T1 in T._eventType)
+            {
+                if (T1 == Type)
+                {
+                    if (!TerrainEffectList.Contains(Type))
+                    {
+                        TerrainEffectList.Add(Type);
+                    }
+                    GameObject Child = Instantiate(T.Child, transform.position, Quaternion.identity);
+                    Child.transform.parent = this.transform;
+                    Child.transform.localScale = new Vector3(.5f, .5f, .5f);
+                    _Child.Add(Child);
+                    Debug.Log("Creation de l'effet : " + Type);
+                }
+            }
+        }
+    }
+    public void test()
+    {
+        RemoveEffect(MYthsAndSteel_Enum.TerrainType.Point_de_ressource);
+    }
+
+    public void RemoveEffect(MYthsAndSteel_Enum.TerrainType Type)
+    {
+        if (TerrainEffectList.Contains(Type))
+        {                       
+            TerrainEffectList.Remove(Type);
+            Debug.Log("Effet " + Type + " supprimé.");
+            foreach (GameObject C in Child)
+            {
+                if (C.TryGetComponent<ChildEffect>(out ChildEffect T))
+                {
+                    if (T.Type == Type)
+                    {
+                        Debug.Log("Enfant : " + Type + " supprimé.");
+                        GameObject G = C;
+                        Child.Remove(C);
+                        Destroy(G);
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Aucun effet de ce type n'a été trouvé.");
         }
     }
 }

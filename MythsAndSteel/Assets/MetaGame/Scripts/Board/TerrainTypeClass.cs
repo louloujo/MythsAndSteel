@@ -71,4 +71,5 @@ public class TerrainType
     [TextArea] public string _description = "";
     public List<MYthsAndSteel_Enum.TerrainType> _eventType = new List<MYthsAndSteel_Enum.TerrainType>();
     public Sprite render;
+    public GameObject Child;
 }

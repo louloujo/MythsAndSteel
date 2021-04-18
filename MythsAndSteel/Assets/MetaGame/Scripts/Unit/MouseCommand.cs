@@ -57,40 +57,75 @@ public class MouseCommand : MonoBehaviour
     [SerializeField] private List<GameObject> _elementMenuRenfort = null;
     public List<GameObject> ElementOfMenuRenfort => _elementMenuRenfort;
 
+    [Header("UNIT ICONE")]
+    [SerializeField] private UnitIcon _iconeUnit = null;
+
     #endregion Variables
 
     #region UpdateStats
     void UpdateUIStats()
     {
+        //Si la tile ne contient pas d'effet de terrain, on n'affiche pas d'information. Si la tile contient 1 effet, on affiche et met à jour l'effet de la case. Si la tile contient 2 effets, on affiche les 2 Effets.
+        UIInstance UI = UIInstance.Instance;
+
         //Statistique pour le MouseOver.
-        UIInstance.Instance.TitlePanelMouseOver.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.UnitName;
-        UIInstance.Instance.MouseOverStats._lifeGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().Life.ToString();
-        UIInstance.Instance.MouseOverStats._rangeGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().AttackRange.ToString();
-        UIInstance.Instance.MouseOverStats._moveGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().MoveSpeed.ToString();
+        UnitScript unit = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>();
+
+        UI.TitlePanelMouseOver.GetComponent<TextMeshProUGUI>().text = unit.UnitSO.UnitName;
+        UI.MouseOverStats._lifeGam.GetComponent<TextMeshProUGUI>().text = unit.Life.ToString();
+        UI.MouseOverStats._rangeGam.GetComponent<TextMeshProUGUI>().text = unit.AttackRange.ToString();
+        UI.MouseOverStats._moveGam.GetComponent<TextMeshProUGUI>().text = unit.MoveSpeed.ToString();
+
+        switch(unit.UnitSO.typeUnite)
+        {
+            case MYthsAndSteel_Enum.TypeUnite.Infanterie:
+                UI.PageUnitStat._unitSpriteGam.GetComponent<Image>().sprite = _iconeUnit.infanterieSprite;
+                UI.PageUnitStat._unitSpriteGam.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Infanterie";
+                break;
+            case MYthsAndSteel_Enum.TypeUnite.Artillerie:
+                UI.PageUnitStat._unitSpriteGam.GetComponent<Image>().sprite = _iconeUnit.ArtillerieSprite;
+                UI.PageUnitStat._unitSpriteGam.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Artillerie";
+                break;
+            case MYthsAndSteel_Enum.TypeUnite.Vehicule:
+                UI.PageUnitStat._unitSpriteGam.GetComponent<Image>().sprite = _iconeUnit.VehiculeSprite;
+                UI.PageUnitStat._unitSpriteGam.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Char";
+                break;
+            case MYthsAndSteel_Enum.TypeUnite.Mythe:
+                UI.PageUnitStat._unitSpriteGam.GetComponent<Image>().sprite = _iconeUnit.MytheSprite;
+                UI.PageUnitStat._unitSpriteGam.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Mythe";
+                break;
+            case MYthsAndSteel_Enum.TypeUnite.Mecha:
+                UI.PageUnitStat._unitSpriteGam.GetComponent<Image>().sprite = _iconeUnit.MechaSprite;
+                UI.PageUnitStat._unitSpriteGam.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Mécha";
+                break;
+            case MYthsAndSteel_Enum.TypeUnite.Leader:
+                UI.PageUnitStat._unitSpriteGam.GetComponent<Image>().sprite = _iconeUnit.LeaderSprite;
+                UI.PageUnitStat._unitSpriteGam.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Leader";
+                break;
+        }
 
         //Statistique de la Page 1 du Carnet.
         //Synchronise le texte du titre.
-        UIInstance.Instance.TitlePanelShiftClicPage1.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.UnitName;
+        UI.TitlePanelShiftClicPage1.GetComponent<TextMeshProUGUI>().text = unit.UnitSO.UnitName;
         //Synchronise le texte de la vie avec l'emplacement d'UI.
-        UIInstance.Instance.PageUnitStat._lifeGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().Life.ToString();
+        UI.PageUnitStat._lifeGam.GetComponent<TextMeshProUGUI>().text = unit.Life.ToString();
         //Synchronise le texte de la valeur de la distance d'attaque de l'unité avec l'emplacement d'UI.
-        UIInstance.Instance.PageUnitStat._rangeGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().AttackRange.ToString();
+        UI.PageUnitStat._rangeGam.GetComponent<TextMeshProUGUI>().text = unit.AttackRange.ToString();
         //Synchronise le texte de la valeur de la vitesse de l'unité avec l'emplacement d'UI.
-        UIInstance.Instance.PageUnitStat._moveGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().MoveSpeed.ToString();
+        UI.PageUnitStat._moveGam.GetComponent<TextMeshProUGUI>().text = unit.MoveSpeed.ToString();
 
         //Synchronise le texte de l'UI de la avec l'emplacement d'UI.
-        UIInstance.Instance.AttackStat._rangeMinDamageGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMin.x.ToString() + " - " + RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMin.y.ToString();
-        UIInstance.Instance.AttackStat._rangeMaxDamageGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMax.x.ToString() + " - " + RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMax.y.ToString();
-        UIInstance.Instance.AttackStat._minDamageValueGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().DamageMinimum.ToString();
-        UIInstance.Instance.AttackStat._maxDamageValueGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().DamageMaximum.ToString();
+        UI.AttackStat._rangeMinDamageGam.GetComponent<TextMeshProUGUI>().text = unit.NumberRangeMin.x.ToString() + " - " + unit.NumberRangeMin.y.ToString();
+        UI.AttackStat._rangeMaxDamageGam.GetComponent<TextMeshProUGUI>().text = unit.NumberRangeMax.x.ToString() + " - " + unit.NumberRangeMax.y.ToString();
+        UI.AttackStat._minDamageValueGam.GetComponent<TextMeshProUGUI>().text = unit.DamageMinimum.ToString();
+        UI.AttackStat._maxDamageValueGam.GetComponent<TextMeshProUGUI>().text = unit.DamageMaximum.ToString();
 
         //Statistique de la Page 2 du Carnet.  
         //Compléter avec les Images des Tiles.
         //UIInstance.Instance.MiddleImageTerrain[0].GetComponent<Image>().sprite = RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList[0].Image
         //UIInstance.Instance.MiddleImageTerrain[1].GetComponent<Image>().sprite = RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList[1].Image;
 
-        //Si la tile ne contient pas d'effet de terrain, on n'affiche pas d'information. Si la tile contient 1 effet, on affiche et met à jour l'effet de la case. Si la tile contient 2 effets, on affiche les 2 Effets.
-        UIInstance UI = UIInstance.Instance;
+
         for(int i = UI.effetDeTerrain.Count - 1; i >= 0; i--)
         {
             Destroy(UI.effetDeTerrain[UI.effetDeTerrain.Count - 1]);
@@ -107,7 +142,27 @@ public class MouseCommand : MonoBehaviour
 
             UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta.x, 212 * UI.effetDeTerrain.Count);
         }
+
+        /*
+        MYthsAndSteel_Enum.Attributs[] _UnitAttributs = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.UnitAttributs;
+
+        for(int i = 0; i < _UnitAttributs.Length; i++)
+        {
+            if(_UnitAttributs[i] == MYthsAndSteel_Enum.Attributs.Aucun)
+            {
+                UIInstance.Instance.objectsAttributs[i].MainObjects.SetActive(false);
+            }
+            else
+            {
+                UIInstance.Instance.objectsAttributs[i].MainObjects.SetActive(true);
+                UIInstance.Instance.objectsAttributs[i].MainObjects.GetComponent<Image>().sprite = UIInstance.Instance.textSpriteAttributUnit[(int)_UnitAttributs[i]].SpriteAttributUnit;
+
+                UIInstance.Instance.objectsAttributs[i].Description.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = UIInstance.Instance.textSpriteAttributUnit[(int)_UnitAttributs[i]].TextAttributUnit;
+
+            }
+        }*/
     }
+
     #endregion UpdateStats
 
     #region ActivateUI
@@ -1169,4 +1224,15 @@ public class MouseCommand : MonoBehaviour
         UpdateStatsMenuRenforts();
     }
     #endregion MenuRenfortFunction
+}
+
+[System.Serializable]
+public class UnitIcon
+{
+    public Sprite infanterieSprite;
+    public Sprite ArtillerieSprite;
+    public Sprite VehiculeSprite;
+    public Sprite LeaderSprite;
+    public Sprite MytheSprite;
+    public Sprite MechaSprite;
 }

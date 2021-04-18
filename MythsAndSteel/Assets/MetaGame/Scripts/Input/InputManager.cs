@@ -40,6 +40,7 @@ public class InputManager : MonoBehaviour
                 RaycastManager.Instance._mouseCommand._checkIfPlayerAsClic = true;
             }
         }
+        //Quand on relache le shift+clic
         if(Input.GetKeyUp(MoreInfoUnit))
         {
             if(GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation)
@@ -75,6 +76,10 @@ public class InputManager : MonoBehaviour
                     Mouvement.Instance.DeleteChildWhenMove();
                 }
             }
+            else
+            {
+                Mouvement.Instance.StopMouvement(true);
+            }
         }
 
         //Pour passer une phase rapidement
@@ -109,22 +114,29 @@ public class InputManager : MonoBehaviour
         {
             if(!GameManager.Instance.ChooseTileForEvent && !GameManager.Instance.ChooseUnitForEvent)
             {
-                //Si l'usine de l'Armée Bleu est sélectionnée et c'est le tour du joueur de l'Armée Bleu.
-                if(RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineBleu) &&
-                    !GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
-                    || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && !PlayerScript.Instance.BluePlayerInfos.HasCreateUnit)
+                if(!Mouvement.Instance.Selected && !Attaque.Instance.Selected)
                 {
-                    RaycastManager.Instance._mouseCommand.MenuRenfortUI();
-                    _renfortPhase.CreateRenfort();
-                }
+                    //Si l'usine de l'Armée Bleu est sélectionnée et c'est le tour du joueur de l'Armée Bleu.
+                    if(RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineBleu) &&
+                        !GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
+                        || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && !PlayerScript.Instance.BluePlayerInfos.HasCreateUnit)
+                    {
+                        RaycastManager.Instance._mouseCommand.MenuRenfortUI();
+                        _renfortPhase.CreateRenfort();
+                    }
 
-                //Si l'usine de l'Armée Rouge est sélectionnée et c'est le tour du joueur de l'Armée Rouge.
-                if(RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineRouge)
-                    && GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
-                    || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && !PlayerScript.Instance.RedPlayerInfos.HasCreateUnit)
+                    //Si l'usine de l'Armée Rouge est sélectionnée et c'est le tour du joueur de l'Armée Rouge.
+                    if(RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineRouge)
+                        && GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
+                        || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && !PlayerScript.Instance.RedPlayerInfos.HasCreateUnit)
+                    {
+                        RaycastManager.Instance._mouseCommand.MenuRenfortUI();
+                        _renfortPhase.CreateRenfort();
+                    }
+                }
+                else if(Attaque.Instance.Selected)
                 {
-                    RaycastManager.Instance._mouseCommand.MenuRenfortUI();
-                    _renfortPhase.CreateRenfort();
+                    RaycastManager.Instance.SelectTileForAttack();
                 }
             }
             else
@@ -147,8 +159,9 @@ public class InputManager : MonoBehaviour
             if(t > _timeToWaitForSkipPhase)
             {
                 UIInstance.Instance.ShowValidationPanel("Passer à la phase suivante", "Êtes-vous sur de vouloir passer à la phase suivante? En passant la phase vous n'aurez pas la possibilité de revenir en arrière.");
-                GameManager.Instance._eventCall += SkipPhaseFunc;
+                GameManager.Instance.CliCToChangePhase();
                 GameManager.Instance._eventCallCancel += CancelSkipPhase;
+                GameManager.Instance._eventCall += SkipPhaseFunc;
                 hasShowPanel = true;
                 t = 0;
                 UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta.y);
@@ -160,7 +173,6 @@ public class InputManager : MonoBehaviour
     /// Quand le joueur accepte de changer de phase
     /// </summary>
     void SkipPhaseFunc(){
-        GameManager.Instance.ChangePhase();
         hasShowPanel = false;
     }
 

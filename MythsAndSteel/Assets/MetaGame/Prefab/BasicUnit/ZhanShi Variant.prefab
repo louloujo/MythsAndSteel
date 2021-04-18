@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7435506871874765580, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0d997174087e14547ababba79fce4f45, type: 2}
     - target: {fileID: 7435506871874765581, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
       propertyPath: _life
       value: 3
@@ -19,6 +23,10 @@ PrefabInstance:
       propertyPath: _moveLeft
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7435506871874765581, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
+      propertyPath: _Animation
+      value: 
+      objectReference: {fileID: 4473479720353736807}
     - target: {fileID: 7435506871874765581, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
       propertyPath: _moveSpeed
       value: 4
@@ -68,6 +76,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7435506871874765583, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.0235868
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435506871874765583, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.0235868
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435506871874765583, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.0235868
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435506871874765583, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.4939659
       objectReference: {fileID: 0}
@@ -109,7 +129,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7435506871874765619, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
       propertyPath: m_Name
-      value: ZhanShi
+      value: ZhanShi Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
+--- !u!95 &4473479720353736807 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7435506871874765580, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
+  m_PrefabInstance: {fileID: 6423474474805062507}
+  m_PrefabAsset: {fileID: 0}

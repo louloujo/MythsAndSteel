@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TileSelectionMovement : MonoBehaviour{
     #region Variables
@@ -16,6 +17,14 @@ public class TileSelectionMovement : MonoBehaviour{
 
     [Range(15,40)]
     [SerializeField] private float _speedTiles = 0f;
+
+    //Objet ressource
+    [SerializeField] private Animator RessourceAnimator;
+    [SerializeField] private GameObject RessourceObject;
+
+    //Valeur ressource
+    [SerializeField] private TextMeshProUGUI Value;
+    private Coroutine Last;
     #endregion Variables
 
 
@@ -25,7 +34,8 @@ public class TileSelectionMovement : MonoBehaviour{
         _isVisble = false;
     }
 
-    void Update(){
+    void Update()
+    {
         //Bouge la zone de selection jusqu'à la tiles sous le raycast
         if(!_hasMakeMovement){
             if(RaycastManager.Instance.Tile != null){
@@ -41,17 +51,51 @@ public class TileSelectionMovement : MonoBehaviour{
         }
     }
 
-    public void TileChange(){
+
+
+    public void TileChange()
+    {
         //Change l'objet de tiles où il doit se déplacer
         if(RaycastManager.Instance.Tile != null && GameManager.Instance.IsInTurn && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation){
             //Est ce que l'objet est visible
             _isVisble = true;
             GetComponent<Animator>().SetInteger("Fade", 2);
-
+            if (RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Point_de_ressource))
+            {
+                if (RessourceAnimator.GetBool("In"))
+                {
+                    RessourceAnimator.SetBool("In", false);
+                    Last = StartCoroutine(Wait());
+                }
+                else
+                {
+                    if(Last != null)
+                    {
+                        StopCoroutine(Last);
+                    }
+                    RessourceAnimator.SetBool("In", true);
+                    RessourceObject.transform.position = new Vector3(RaycastManager.Instance.Tile.transform.position.x, RaycastManager.Instance.Tile.transform.position.y + .5f, RaycastManager.Instance.Tile.transform.position.z);
+                    Value.text = RaycastManager.Instance.Tile.GetComponent<TileScript>().ResourcesCounter.ToString();
+                }
+            }
+            else
+            {
+                if (Last != null)
+                {
+                    StopCoroutine(Last);
+                }
+                RessourceAnimator.SetBool("In", false);
+            }
             _hasMakeMovement = false;
         }
-        else {
+        else 
+        {
+            if (Last != null)
+            {
+                StopCoroutine(Last);
+            }
             GetComponent<Animator>().SetInteger("Fade", 1);
+            RessourceAnimator.SetBool("In", false);
             _isVisble = false;
         }
 
@@ -96,5 +140,14 @@ public class TileSelectionMovement : MonoBehaviour{
             GetComponent<Animator>().SetBool("HasUnit", false);
         }
 
+    }
+
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(.14f);
+        RessourceObject.transform.position = new Vector3(RaycastManager.Instance.Tile.transform.position.x, RaycastManager.Instance.Tile.transform.position.y + .5f, RaycastManager.Instance.Tile.transform.position.z);
+        Value.text = RaycastManager.Instance.Tile.GetComponent<TileScript>().ResourcesCounter.ToString();        
+        RessourceAnimator.SetBool("In", true);
     }
 }

@@ -50,10 +50,6 @@ public class MenuActionUnite : MonoBehaviour
     public void closePanel(){
         _isOpen = false;
         UIMenuActionUnite.SetActive(false);
-        _moveBtn.gameObject.GetComponent<MouseOverUI>().StopOver();
-        _atkBtn.gameObject.GetComponent<MouseOverUI>().StopOver();
-        _powerBtn.gameObject.GetComponent<MouseOverUI>().StopOver();
-        _quitBtn.gameObject.GetComponent<MouseOverUI>().StopOver();
     }
 
     /// <summary>
@@ -61,39 +57,7 @@ public class MenuActionUnite : MonoBehaviour
     /// </summary>
     void menuaffichage(UnitScript unitscript, bool capaActive)
     {
-        int numberOfButtonHide = 0;
-      //Vérifie que l'unité à une capacité active et désactive le bouton si elle en a pas
-        if (capaActive == false)
-        {
-            _powerBtn.gameObject.SetActive(false);
-        }
-
-        //Vérifie si l'unité a effectuer tout son déplacement si c'est le cas alors décale la position des boutons en supprimant le bouton de déplacement
-        if (unitscript.IsMoveDone == true){
-            _moveBtn.gameObject.SetActive(false);
-            numberOfButtonHide++;
-        }
-        else{
-            _moveBtn.gameObject.SetActive(true);
-        }
-
-        //Vérifie si l'unité a effectuer tout son déplacement si c'est le cas alors décale la position des boutons en supprimant le bouton de déplacement
-        if(unitscript._isActionDone == true)
-        {
-            _atkBtn.gameObject.SetActive(false);
-            _powerBtn.gameObject.SetActive(false);
-            numberOfButtonHide += 2;
-        }
-        else
-        {
-            _atkBtn.gameObject.SetActive(true);
-            _powerBtn.gameObject.SetActive(true);
-        }
-
-        UIMenuActionUnite.GetComponent<RectTransform>().sizeDelta = new Vector2(117.7325f, 90 - (17 * numberOfButtonHide));
-
-        // place le menu à coté de l'unité selectionnée
-        MouseCommand.ActivateUI(UIMenuActionUnite, 0.5f, 3, false, true);
+        UIMenuActionUnite.SetActive(true);
     }
 
     /// <summary>
@@ -101,8 +65,6 @@ public class MenuActionUnite : MonoBehaviour
     /// </summary>
     public void déplacement()
     {
-        Mouvement.Instance.StartMvmtForSelectedUnit();
-        Mouvement.Instance.Selected = true;
         closePanel();
     }
 
@@ -111,7 +73,6 @@ public class MenuActionUnite : MonoBehaviour
     /// </summary>
     public void attaque()
     {
-        Attaque.Instance.StartAttackSelectionUnit();
         closePanel();
     }
 
