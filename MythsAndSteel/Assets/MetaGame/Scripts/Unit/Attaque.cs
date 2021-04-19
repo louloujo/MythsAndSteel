@@ -129,6 +129,7 @@ public class Attaque : MonoSingleton<Attaque>
             AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
             Debug.Log("Damage : " + _damageMinimum);
+            StopAttack();
         }
         if (DiceResult < _numberRangeMin.x)
         {
@@ -137,13 +138,15 @@ public class Attaque : MonoSingleton<Attaque>
             {
                 AnimationUpdate();
                 ChangeStat();
-                StartDeviation(_damageMinimum);
+                this._damageMinimum = _damageMinimum;
+                StartDeviation();
             }
             else
             {
                 ChangeStat();
                 selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
                 Debug.Log("Damage : " + null);
+                StopAttack();
             }
         }
     }
@@ -166,6 +169,7 @@ public class Attaque : MonoSingleton<Attaque>
             AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
             Debug.Log("Damage : " + _damageMinimum);
+            StopAttack();
         }
         if (DiceResult >= _numberRangeMax.x && DiceResult <= _numberRangeMax.y)
         {
@@ -173,6 +177,7 @@ public class Attaque : MonoSingleton<Attaque>
             AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMaximum);
             Debug.Log("Damage : " + _damageMaximum);
+            StopAttack();
         }
         if (DiceResult < _numberRangeMin.x)
         {
@@ -180,13 +185,15 @@ public class Attaque : MonoSingleton<Attaque>
             {
                 ChangeStat();
                 AnimationUpdate();
-                StartDeviation(_damageMinimum);
+                this._damageMinimum = _damageMinimum;
+                StartDeviation();
             }
             else
             {
                 ChangeStat();
                 selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
                 Debug.Log("Damage : " + null);
+                StopAttack();
             }
 
         }
@@ -499,8 +506,6 @@ public class Attaque : MonoSingleton<Attaque>
                         StopAttack();
                     }
                 }
-
-                StopAttack();
             }
             else
             {
@@ -618,62 +623,55 @@ public class Attaque : MonoSingleton<Attaque>
 
         }
     }
+
     /// <summary>
     /// Initialisation de la déviation : on va récupérer quelques variables et illuminer les cases concernées par la déviation 
     /// </summary>
-    public void StartDeviation(int _damageminimum)
+    public void StartDeviation()
     {
+        foreach(int i in _selectedTiles){
+            TilesManager.Instance.TileList[i].gameObject.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect);
+        }
+
         //récupération de variable
         int ennemyUnitIdTile = selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId;
         bool endDeviation = false;
-   
+
         SetEnnemyUnitListTileNeighbourDiagUI = PlayerStatic.GetNeighbourDiag(ennemyUnitIdTile, TilesManager.Instance.TileList[ennemyUnitIdTile].GetComponent<TileScript>().Line, IsAttackDeviation);
 
-        List<int> ennemyUnitListTileNeighbourDiagUI = new List<int>(); 
-      SetEnnemyUnitListTileNeighbourDiagUI.Add(ennemyUnitIdTile);
-        ennemyUnitListTileNeighbourDiagUI.AddRange(SetEnnemyUnitListTileNeighbourDiagUI); 
+        List<int> ennemyUnitListTileNeighbourDiagUI = new List<int>();
+        SetEnnemyUnitListTileNeighbourDiagUI.Add(ennemyUnitIdTile);
+        ennemyUnitListTileNeighbourDiagUI.AddRange(SetEnnemyUnitListTileNeighbourDiagUI);
         ennemyUnitListTileNeighbourDiagUI.Sort();
-     
-
 
         //Illumination des cases
-        foreach (int id in SetEnnemyUnitListTileNeighbourDiagUI)
+        foreach(int id in SetEnnemyUnitListTileNeighbourDiagUI)
         {
-          
             TilesManager.Instance.TileList[id].GetComponent<SpriteRenderer>().sprite = _DeviationSelectUI;
             TilesManager.Instance.TileList[id].GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
-
-
         }
         //Lancement de l'animation Les coroutines ne se lancent pas les une après les autres c'est pour cela qu'il y a un delay qui va s'incrémenter au fur et à mesure de for 
         int x = 0;
-        for (int i = 0; i < ennemyUnitListTileNeighbourDiagUI.Count; i++, x++)
+        for(int i = 0; i < ennemyUnitListTileNeighbourDiagUI.Count; i++, x++)
         {
             StartCoroutine(ColorTile(i, x, ennemyUnitListTileNeighbourDiagUI, ennemyUnitIdTile, endDeviation));
         }
-       
-   
-   
     }
+
     /// <summary>
     /// L'animation de la déviation où un sprite rouge va "se déplacer" de case en case. Cette animation dépend de la taille d'une liste choisi. 
     /// </summary>
     IEnumerator ColorTile(int id, int delay, List<int> listTile, int ennemyIDTile, bool endDeviation)
     {
-
-
-        
         float z = (float)delay;
         int idMax =  listTile.Count-1;
-      //Si la case actuel n'est pas la première case de la liste alors la précédente case a son sprite qui devient bleu et l'actuelle qui devient un sprite rouge
-      if(id != 0)
+        //Si la case actuel n'est pas la première case de la liste alors la précédente case a son sprite qui devient bleu et l'actuelle qui devient un sprite rouge
+        if(id != 0)
         {
-        
-
-            yield return new WaitForSeconds(z/3);
+            yield return new WaitForSeconds(z / 3);
             TilesManager.Instance.TileList[listTile[id - 1]].GetComponent<SpriteRenderer>().sprite = DeviationSelectUI;
             TilesManager.Instance.TileList[listTile[id]].GetComponent<SpriteRenderer>().sprite = _selectedSprite;
-     //Si on est à la fin de la list et qu'on est a la première animation appel la fonction RandomCase.
+            //Si on est à la fin de la list et qu'on est a la première animation appel la fonction RandomCase.
             if(id == idMax && endDeviation == false)
             {
                 yield return new WaitForSeconds(z / 20);
@@ -681,10 +679,10 @@ public class Attaque : MonoSingleton<Attaque>
 
                 RandomCase(listTile, ennemyIDTile, endDeviation);
             }
-    //Si on est à la fin de la list et qu'on est a la deusième animation appel la fonction ApplyDeviation.
-            else if (id == idMax && endDeviation == true)
+            //Si on est à la fin de la list et qu'on est a la deusième animation appel la fonction ApplyDeviation.
+            else if(id == idMax && endDeviation == true)
             {
-                yield return new WaitForSeconds(z/2);
+                yield return new WaitForSeconds(z / 2);
                 TilesManager.Instance.TileList[listTile[id]].GetComponent<SpriteRenderer>().sprite = DeviationSelectUI;
 
                 ApplyDeviation();
@@ -693,11 +691,8 @@ public class Attaque : MonoSingleton<Attaque>
         //Si la case actuel est la première case alors son sprite bleu devient un sprite rouge.
         else
         {
-            
-            
-
             TilesManager.Instance.TileList[listTile[id]].GetComponent<SpriteRenderer>().sprite = _selectedSprite;
-            if (id == idMax && endDeviation == true)
+            if(id == idMax && endDeviation == true)
             {
                 yield return new WaitForSeconds(1f);
                 TilesManager.Instance.TileList[listTile[id]].GetComponent<SpriteRenderer>().sprite = DeviationSelectUI;
@@ -706,75 +701,71 @@ public class Attaque : MonoSingleton<Attaque>
             }
 
         }
-        /// <summary>
-        /// Cette fonction va déterminer la case ou l'attaque y sera devié et adapte la taille de la liste pour que l'id de cette case soit la dernière de la liste.
-        /// </summary>
-        void RandomCase (List<int> listIdUI, int ennemyUnitIDTile, bool endDeviation)
-            {
-            int x = 0;
-            int indexEnnemyUnitIdTile = listIdUI.IndexOf(ennemyUnitIDTile);
-        // On rajoute la case où il y a l'unité visé car l'attaque 2/10 d'être dévié sur la case où se trouve l'unité visée.  
-                listIdUI.Add(ennemyUnitIDTile);
-
-
-            //On tire au hasard une tile de la list et on applique les dégâts minimums si il y a une unité sur la tile.
-            //int DeviationIdTileIndex = Random.Range(0, listIdUI.Count);
-            int DeviationIdTileIndex = 0;
-
-                int DeviationIdTile = listIdUI[DeviationIdTileIndex];
-            selectedUnitEnnemy = TilesManager.Instance.TileList[DeviationIdTile].GetComponent<TileScript>().Unit;
-            //Si lors du random on tombe sur l'idée case de l'unité visée rajouté précédemment on la rapporte à son valeur correspondante. 
-            if (DeviationIdTileIndex == listIdUI.Count - 1)
-                {
-                    DeviationIdTileIndex = indexEnnemyUnitIdTile;
-
-                }
-                listIdUI.Remove(listIdUI[listIdUI.Count - 1]);
-            listIdUI.Sort();
-            //On redimensionne la list pour que l'id de la case où l'attaque est dévié soit la dernière de la list  
-                while (listIdUI.Count > DeviationIdTileIndex+1)
-                {
-                   listIdUI.Remove(listIdUI[listIdUI.Count - 1]);
-                }
-            endDeviation = true;
-            // On lance la deuxsième animation
-            for (int i = 0; i < listIdUI.Count; i++, x++)
-            {
-                StartCoroutine(ColorTile(i, x, listIdUI, ennemyUnitIDTile, endDeviation));
-            }
-            Debug.Log(DeviationIdTile);
-        }
-        /// <summary>
-        /// Cette fonction va appliquer les dégats de la déviation si il y a une unité sur la case et va reset le SpriteRenderer des cases.
-        /// </summary>
-        void ApplyDeviation()
-                {
-            foreach (int item in SetEnnemyUnitListTileNeighbourDiagUI)
-            {
-                TilesManager.Instance.TileList[item].GetComponent<SpriteRenderer>().sprite = DeviationOriginalSpriteCase;
-                TilesManager.Instance.TileList[item].GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.19f);
-
-
-            }
-            if (selectedUnitEnnemy == null)
-
-                {
-                    Debug.Log("Damage : " + null);
-                    
-                 
-                }
-                else
-                {
-
-                    selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
-                    Debug.Log("Damage : " + _damageMinimum);
-                }
-            }
-
-
-
-
     }
 
-}
+    /// <summary>
+    /// Cette fonction va déterminer la case ou l'attaque y sera devié et adapte la taille de la liste pour que l'id de cette case soit la dernière de la liste.
+    /// </summary>
+    void RandomCase(List<int> listIdUI, int ennemyUnitIDTile, bool endDeviation)
+    {
+        int x = 0;
+        int indexEnnemyUnitIdTile = listIdUI.IndexOf(ennemyUnitIDTile);
+        // On rajoute la case où il y a l'unité visé car l'attaque 2/10 d'être dévié sur la case où se trouve l'unité visée.  
+        listIdUI.Add(ennemyUnitIDTile);
 
+
+        //On tire au hasard une tile de la list et on applique les dégâts minimums si il y a une unité sur la tile.
+        int DeviationIdTileIndex = Random.Range(0, listIdUI.Count);
+
+        int DeviationIdTile = listIdUI[DeviationIdTileIndex];
+        selectedUnitEnnemy = TilesManager.Instance.TileList[DeviationIdTile].GetComponent<TileScript>().Unit;
+        //Si lors du random on tombe sur l'idée case de l'unité visée rajouté précédemment on la rapporte à son valeur correspondante. 
+        if(DeviationIdTileIndex == listIdUI.Count - 1)
+        {
+            DeviationIdTileIndex = indexEnnemyUnitIdTile;
+
+        }
+        listIdUI.Remove(listIdUI[listIdUI.Count - 1]);
+        listIdUI.Sort();
+        //On redimensionne la list pour que l'id de la case où l'attaque est dévié soit la dernière de la list  
+        while(listIdUI.Count > DeviationIdTileIndex + 1)
+        {
+            listIdUI.Remove(listIdUI[listIdUI.Count - 1]);
+        }
+        endDeviation = true;
+        // On lance la deuxsième animation
+        for(int i = 0; i < listIdUI.Count; i++, x++)
+        {
+            StartCoroutine(ColorTile(i, x, listIdUI, ennemyUnitIDTile, endDeviation));
+        }
+        Debug.Log(DeviationIdTile);
+    }
+
+    /// <summary>
+    /// Cette fonction va appliquer les dégats de la déviation si il y a une unité sur la case et va reset le SpriteRenderer des cases.
+    /// </summary>
+    void ApplyDeviation()
+    {
+        foreach(int item in SetEnnemyUnitListTileNeighbourDiagUI)
+        {
+            TilesManager.Instance.TileList[item].GetComponent<SpriteRenderer>().sprite = DeviationOriginalSpriteCase;
+            TilesManager.Instance.TileList[item].GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.19f);
+
+
+        }
+        if(selectedUnitEnnemy == null)
+
+        {
+            Debug.Log("Damage : " + null);
+
+
+        }
+        else
+        {
+
+            selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
+            Debug.Log("Damage : " + _damageMinimum);
+            StopAttack();
+        }
+    }
+}

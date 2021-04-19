@@ -2304,6 +2304,9 @@ MonoBehaviour:
   newNeighbourId: 
   _isInAttack: 0
   _selected: 0
+  _isAttackDeviation: 0
+  _DeviationSelectUI: {fileID: 21300000, guid: 77b08518472808f4a81cb0cdfa06b5ec, type: 3}
+  _DeviationOriginalSpriteCase: {fileID: 21300000, guid: 10fe0b0f972768b488ecd6188288670b, type: 3}
   _attackRange: 0
   _damageMinimum: 0
   _numberRangeMin: {x: 0, y: 0}
@@ -29913,6 +29916,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1306988842813179795, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3443668466286875165, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -29984,6 +29991,10 @@ PrefabInstance:
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_Name
       value: Tile id:0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998884390207056894, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
