@@ -113,8 +113,6 @@ public class Attaque : MonoSingleton<Attaque>
         DiceResult = firstDiceInt + secondDiceInt;
 
         RandomMore();
-
-        Debug.Log("Dice Result : " + DiceResult);
     }
 
     /// <summary>
@@ -200,51 +198,55 @@ public class Attaque : MonoSingleton<Attaque>
     void AnimationUpdate()
     {
         GameObject ActualUnit = RaycastManager.Instance.ActualUnitSelected;
-        GameObject ActualEnemy = selectedUnitEnnemy;
-
-        float X = ActualEnemy.transform.position.x - ActualUnit.transform.position.x;
-        float Y = ActualEnemy.transform.position.y - ActualUnit.transform.position.y;
-
-        if (X >= 0)
+        
+        if(ActualUnit.GetComponent<UnitScript>().Animation != null)
         {
-            if (Mathf.Abs(X) > Mathf.Abs(Y))
+            GameObject ActualEnemy = selectedUnitEnnemy;
+
+            float X = ActualEnemy.transform.position.x - ActualUnit.transform.position.x;
+            float Y = ActualEnemy.transform.position.y - ActualUnit.transform.position.y;
+
+            if(X >= 0)
             {
-                ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 1); //right
-                ActualUnit.GetComponent<SpriteRenderer>().flipX = true;
+                if(Mathf.Abs(X) > Mathf.Abs(Y))
+                {
+                    ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 1); //right
+                    ActualUnit.GetComponent<SpriteRenderer>().flipX = true;
+                }
+                else if(Mathf.Abs(X) <= Mathf.Abs(Y))
+                {
+                    if(Y > 0)
+                    {
+                        ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 2); // up
+                    }
+                    else if(Y < 0)
+                    {
+                        ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 3); // down
+                    }
+                }
             }
-            else if (Mathf.Abs(X) <= Mathf.Abs(Y))
+            if(X < 0)
             {
-                if (Y > 0)
+                if(Mathf.Abs(X) > Mathf.Abs(Y))
                 {
-                    ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 2); // up
+                    ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 1); // left
+                    ActualUnit.GetComponent<SpriteRenderer>().flipX = false;
                 }
-                else if (Y < 0)
+                else if(Mathf.Abs(X) <= Mathf.Abs(Y))
                 {
-                    ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 3); // down
+                    if(Y > 0)
+                    {
+                        ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 2); // up
+                    }
+                    else if(Y < 0)
+                    {
+                        ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 3); // down
+                    }
                 }
             }
+            ActualUnit.GetComponent<UnitScript>().Animation.SetBool("Attack", true);
+            StartCoroutine(AnimationWait(ActualUnit.GetComponent<UnitScript>().Animation, "Attack"));
         }
-        if (X < 0)
-        {
-            if (Mathf.Abs(X) > Mathf.Abs(Y))
-            {
-                ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 1); // left
-                ActualUnit.GetComponent<SpriteRenderer>().flipX = false;
-            }
-            else if (Mathf.Abs(X) <= Mathf.Abs(Y))
-            {
-                if (Y > 0)
-                {
-                    ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 2); // up
-                }
-                else if (Y < 0)
-                {
-                    ActualUnit.GetComponent<UnitScript>().Animation.SetInteger("A", 3); // down
-                }
-            }
-        }
-        ActualUnit.GetComponent<UnitScript>().Animation.SetBool("Attack", true);
-        StartCoroutine(AnimationWait(ActualUnit.GetComponent<UnitScript>().Animation, "Attack"));
     }
 
     public IEnumerator AnimationWait(Animator AnimToWait, string BoolName)
@@ -301,7 +303,7 @@ public class Attaque : MonoSingleton<Attaque>
 
                 if (!i)
                 {
-                    TileSc.ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect, _normalAttackSprite);
+                    TileSc.ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect, _normalAttackSprite, 1);
                     if (!newNeighbourId.Contains(ID))
                     {
                         newNeighbourId.Add(ID);
@@ -400,7 +402,7 @@ public class Attaque : MonoSingleton<Attaque>
             if(_selectedTiles.Count < numberOfTileToSelect && newNeighbourId.Contains(tileId))
             {
                 _selectedTiles.Add(tileId);
-                TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect, _selectedSprite);
+                TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect, _selectedSprite, 1);
             }
         }
         else
@@ -416,7 +418,7 @@ public class Attaque : MonoSingleton<Attaque>
     /// <param name="tileId"></param>
     void RemoveTileFromList(int tileId){
         _selectedTiles.Remove(tileId);
-        TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect, _normalAttackSprite);
+        TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect, _normalAttackSprite, 1);
     }
 
     /// <summary>
@@ -461,6 +463,7 @@ public class Attaque : MonoSingleton<Attaque>
                 }
             }
             _selectedTiles.Clear();
+            _newNeighbourId.Clear();
         }
         else
         {
@@ -556,15 +559,15 @@ public class Attaque : MonoSingleton<Attaque>
         // Applique les bonus/malus de terrains
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Bosquet, _selectedUnit.GetComponent<UnitScript>().ActualTiledId)) // Bosquet
         {
-            _numberRangeMin.x += 1;
-            _numberRangeMin.y += 1;
-            _numberRangeMax.x += 1;
+            _numberRangeMin.x -= 1;
+            _numberRangeMin.y -= 1;
+            _numberRangeMax.x -= 1;
             Debug.Log("BosquetEffectApplyed");
         }
 
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, _selectedUnit.GetComponent<UnitScript>().ActualTiledId)) // Colline
         {
-            _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
+            _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus += 1;
             Debug.Log("CollineEffectApplyed");
         }
 

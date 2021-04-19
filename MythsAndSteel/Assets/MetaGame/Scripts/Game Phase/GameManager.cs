@@ -49,6 +49,8 @@ public class GameManager : MonoSingleton<GameManager>{
     [SerializeField] private MYthsAndSteel_Enum.PhaseDeJeu _actualTurnPhase = MYthsAndSteel_Enum.PhaseDeJeu.Debut;
     public MYthsAndSteel_Enum.PhaseDeJeu ActualTurnPhase => _actualTurnPhase;
 
+    [SerializeField] private ChangeActivPhase _changeActivPhase = null;
+
     [Header("REFERENCES DES SCRIPTABLE")]
     //Event Manager
     [SerializeField] private EventCardClass _eventCardSO = null;
@@ -59,8 +61,8 @@ public class GameManager : MonoSingleton<GameManager>{
     public GameManagerSO ManagerSO => _managerSO;
 
     //Option manager pour ouvrir le menu d'option
-    [SerializeField] private MenuOption _optionSO = null;
-    public MenuOption OptionSO => _optionSO;
+    [SerializeField] private MenuTransition _optionSO = null;
+    public MenuTransition OptionSO => _optionSO;
 
     [Header("RENFORT PHASE SCRIPT")]
     [SerializeField] RenfortPhase _renfortPhase = null;
@@ -126,6 +128,10 @@ public class GameManager : MonoSingleton<GameManager>{
     public PhaseActivation ActivationPhase => _activationPhase;
 
     float deltaTimeX = 0f;
+
+    // Scriptable terrain.
+    [SerializeField] TerrainTypeClass _Terrain;
+    public TerrainTypeClass Terrain => _Terrain;
 
     #region CheckOrgone
     //Check l'orgone pour éviter l'override
@@ -237,7 +243,11 @@ public class GameManager : MonoSingleton<GameManager>{
     /// </summary>
     void OnclickedEvent(){
         SwitchPhaseObjectUI();
-        if(ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Debut){
+        if(ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Debut){
+            _isInTurn = false;
+        }
+        else
+        {
             _isInTurn = true;
         }
     }
@@ -245,6 +255,7 @@ public class GameManager : MonoSingleton<GameManager>{
     public void GoPhase(MYthsAndSteel_Enum.PhaseDeJeu phase)
     {
         _actualTurnPhase = phase;
+        _changeActivPhase.ChangeActivObj();
     }
 
     #region UIFunction
@@ -265,12 +276,19 @@ public class GameManager : MonoSingleton<GameManager>{
         {
             createPanel(1);
         }
-    
 
-        if(ActualTurnPhase + 1 == MYthsAndSteel_Enum.PhaseDeJeu.Activation){
+
+
+        if(ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Debut)
+        {
             StartCoroutine(waitToChange());
         }
-        else{
+        else if(ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Strategie && !ManagerSO.GetDebutFunction())
+        {
+            StartCoroutine(waitToChange());
+        }
+        else
+        {
             ManagerSO.GoToPhase();
         }
     }
@@ -344,8 +362,11 @@ public class GameManager : MonoSingleton<GameManager>{
         foreach(GameObject gam in _selectableUnit){
             //Détruit l'enfant avec le tag selectable tile
             GameObject tile = TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId];
-            tile.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _normalEventSprite);
-            tile.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
+            if(tile != null)
+            {
+                tile.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _normalEventSprite);
+                tile.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
+            }
         }
 
         _selectableUnit.Clear();

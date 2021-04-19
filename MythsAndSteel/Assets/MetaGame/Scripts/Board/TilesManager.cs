@@ -13,9 +13,13 @@ public class TilesManager : MonoSingleton<TilesManager>
     public List<GameObject> ResourcesList => _resourcesList;
 
 
-    private void Start(){
-        foreach(GameObject gam in _tileList){
-            if(gam.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Point_de_ressource)){
+    private void Start() 
+    { 
+        foreach(GameObject gam in _tileList)
+        {
+            if(gam.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Point_de_ressource))
+            {
+                gam.GetComponent<TileScript>().CreateEffect(MYthsAndSteel_Enum.TerrainType.Point_de_ressource);
                 _resourcesList.Add(gam);
             }
         }

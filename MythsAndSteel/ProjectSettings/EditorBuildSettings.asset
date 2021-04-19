@@ -7,11 +7,14 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/MetaGame/_Scenes/Menu/TitleScreen.unity
-    guid: 999c843bc3effdf469da91d7e8d699ed
+    guid: 339b8e121f7ef1d418fa79da564b48f9
   - enabled: 1
     path: Assets/MetaGame/_Scenes/Menu/SettingsMenu.unity
     guid: 599d1ca80636d9f4fa296210cdd1163b
   - enabled: 1
     path: Assets/MetaGame/_Scenes/MainScene.unity
     guid: 7ef584947fef55a45b31d07c5ba7268e
+  - enabled: 1
+    path: "Assets/MetaGame/_Scenes/Menu/Encyclop\xE9die.unity"
+    guid: 36026f23f5691484dac633989c61f187
   m_configObjects: {}

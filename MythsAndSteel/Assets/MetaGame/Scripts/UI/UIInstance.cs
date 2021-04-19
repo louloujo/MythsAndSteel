@@ -157,6 +157,8 @@ public class UIInstance : MonoSingleton<UIInstance>
 
     private void Start(){
         QuitValidationPanel();
+        UpdateRessourceLeft();
+        UpdateActivationLeft();
     }
 
     public void DesactivateNextPhaseButton(){
@@ -221,10 +223,28 @@ public class UIInstance : MonoSingleton<UIInstance>
     //nombre d'activation restante pour le joueur bleu
     [SerializeField] private TextMeshProUGUI _activationLeftTxtBP = null;
     public TextMeshProUGUI ActivationLeftTxtBP => _activationLeftTxtBP;
+    [Header("PLAYER RESSOURCE")]
+    //nombre d'activation restante pour le joueur rouge
+    [SerializeField] private TextMeshProUGUI _ressourceLeftTxtRP = null;
+    public TextMeshProUGUI ressourceLeftTxtRP => _ressourceLeftTxtRP;
+    //nombre d'activation restante pour le joueur bleu
+    [SerializeField] private TextMeshProUGUI _ressourceLeftTxtBP = null;
+    public TextMeshProUGUI ressourceLeftTxtBP => _ressourceLeftTxtBP;
 
+    /// <summary>
+    /// Update la valeur d'activation restante des joueurs
+    /// </summary>
     public void UpdateActivationLeft(){
         _activationLeftTxtRP.text = PlayerScript.Instance.RedPlayerInfos.ActivationLeft.ToString();
         _activationLeftTxtBP.text = PlayerScript.Instance.BluePlayerInfos.ActivationLeft.ToString();
+    }
+
+    /// <summary>
+    /// Update la valeur de Ressources des joueurs
+    /// </summary>
+    public void UpdateRessourceLeft(){
+        _ressourceLeftTxtRP.text = PlayerScript.Instance.RedPlayerInfos.Ressource.ToString();
+        _ressourceLeftTxtBP.text = PlayerScript.Instance.BluePlayerInfos.Ressource.ToString();
     }
 
     #region MenuRenfort
@@ -243,17 +263,27 @@ public class UIInstance : MonoSingleton<UIInstance>
 
     [SerializeField] private AssignRessouceUnit _ressourceUnit_PasTouche;
     public AssignRessouceUnit RessourceUnit_PasTouche => _ressourceUnit_PasTouche;
+
+    //Boutons du menu renfort
+    [SerializeField] private BouttonMenuRenfort _buttonRenfort;
+    public BouttonMenuRenfort ButtonRenfort => _buttonRenfort;
     #endregion MenuRenfort
 
     #region VieUnité
     [SerializeField] private GameObject _lifeHeartPrefab;
     public GameObject LifeHeartPrefab => _lifeHeartPrefab;
 
-    [SerializeField] private Sprite[] _shieldSprite;
-    public Sprite[] ShieldSprite => _shieldSprite;
+    [SerializeField] private Sprite[] _redHeartSprite;
+    public Sprite[] RedHeartSprite => _redHeartSprite;
 
-    [SerializeField] private Sprite[] _lifeHeartSprite;
-    public Sprite[] LifeHeartSprite => _lifeHeartSprite;
+    [SerializeField] private Sprite[] _blueHeartSprite;
+    public Sprite[] BlueHeartSprite => _blueHeartSprite;
+
+    [SerializeField] private Sprite[] _redHeartShieldSprite;
+    public Sprite[] RedHeartShieldSprite => _redHeartShieldSprite;
+
+    [SerializeField] private Sprite[] _blueHeartShieldSprite;
+    public Sprite[] BlueHeartShieldSprite => _blueHeartShieldSprite;
     #endregion VieUnité
 }
 
@@ -289,6 +319,7 @@ public class TextStatUnit
     public GameObject _lifeGam = null;
     public GameObject _rangeGam = null;
     public GameObject _moveGam = null;
+    public GameObject _unitSpriteGam = null;
 }
 
 /// <summary>
@@ -472,14 +503,12 @@ public class EmplacementImageMenuRenfort
 [System.Serializable]
 public class BouttonMenuRenfort
 {
-    public Button _quitMenuRenfort = null;
-
-    public Button _clicSurUnité1 = null;
-    public Button _clicSurUnité2 = null;
-    public Button _clicSurUnité3 = null;
-    public Button _clicSurUnité4 = null;
-    public Button _clicSurUnité5 = null;
-    public Button _clicSurUnité6 = null;
+    public GameObject _clicSurUnité1 = null;
+    public GameObject _clicSurUnité2 = null;
+    public GameObject _clicSurUnité3 = null;
+    public GameObject _clicSurUnité4 = null;
+    public GameObject _clicSurUnité5 = null;
+    public GameObject _clicSurUnité6 = null;
 }
 
 /// <summary>

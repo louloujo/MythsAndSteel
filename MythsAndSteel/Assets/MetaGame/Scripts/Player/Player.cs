@@ -10,6 +10,8 @@ public class Player
     [Header("ARMY INFO")]
     //nom de l'armée
     public string ArmyName;
+    public string ArmyNameNomMasc;
+    public string ArmyNameNomFem;
 
     [Header("ACTIVATION")]
     //Nombre d'activation restante
@@ -25,11 +27,23 @@ public class Player
     //Permet de se souvenir de la dernière valeur d'orgone avant Update
     public int LastKnownOrgoneValue; 
     //Tile qui correspond au centre de la zone d'Orgone
-    public GameObject TileCentreZoneOrgone; 
+    public GameObject TileCentreZoneOrgone;
 
     [Header("RESSOURCE")]
     //Nombre de Ressources actuel
-    public int Ressource;
+    [SerializeField] private int _Ressource;
+    public int Ressource
+    {
+        get
+        {
+            return _Ressource;
+        }
+        set
+        {
+            _Ressource = value;            
+            UIInstance.Instance.UpdateRessourceLeft();
+        }
+    }
 
     [Header("OBJECTIF")]
     //Nombre d'objectif actuellement capturé
@@ -65,7 +79,6 @@ public class Player
             GameManager.Instance._eventCall += GiveDamageToUnitForOrgone;
             if(player == 1) GameManager.Instance._eventCallCancel += CancelOrgoneP1;
             else GameManager.Instance._eventCallCancel += CancelOrgoneP2;
-            unitList.Clear();
         }
         else
         {

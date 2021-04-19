@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7435506871874765581}
   - component: {fileID: 7435506871874765580}
   m_Layer: 0
-  m_Name: "Canon T90 (unit\xE9) (1)"
+  m_Name: BasicUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 7435506871874765619}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -16.7, y: -12.22, z: -6.8020372}
-  m_LocalScale: {x: 2.3996048, y: 2.3996048, z: 2.3996048}
+  m_LocalScale: {x: 2.043417, y: 2.043417, z: 2.043417}
   m_Children:
   - {fileID: 7435506871316504964}
   m_Father: {fileID: 0}
@@ -180,7 +180,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitSO: {fileID: 0}
-  CurrentSpriteLifeHeartUI: {fileID: 0}
   _life: 0
   _shield: 0
   _attackRange: 0
@@ -193,14 +192,13 @@ MonoBehaviour:
   _diceBonus: 0
   _moveSpeed: 0
   MoveSpeedBonus: 0
-  _creationCost: 0
   _moveLeft: 0
+  _creationCost: 0
   _actualTileld: 0
   _hasStartMove: 0
   _isMoveDone: 0
   _isActionDone: 0
   _isActivationDone: 0
-  _pathtomake: 
   _unitStatus: 
   _Animation: {fileID: 7435506871874765580}
 --- !u!95 &7435506871874765580

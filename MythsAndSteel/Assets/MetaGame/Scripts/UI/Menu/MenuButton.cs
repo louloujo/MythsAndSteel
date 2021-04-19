@@ -5,16 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MenuButton : MonoBehaviour
 {
-    [SerializeField] int SceneToLoad;
     [SerializeField] GameObject _campagneCanvas;
     [SerializeField] GameObject _menuCanvas;
     
     /// <summary>
     /// Change de scène
     /// </summary>
-    public void ChangeScene()
+    public void ChangeScene(int sceneToLoad)
     {
-        SceneManager.LoadScene(SceneToLoad);
+        SceneManager.LoadSceneAsync(sceneToLoad);
     }
 
     /// <summary>

@@ -57,6 +57,9 @@ public class MouseCommand : MonoBehaviour
     [SerializeField] private List<GameObject> _elementMenuRenfort = null;
     public List<GameObject> ElementOfMenuRenfort => _elementMenuRenfort;
 
+    [Header("UNIT ICONE")]
+    [SerializeField] private UnitIcon _iconeUnit = null;
+
     #endregion Variables
 
     #region UpdateStats
@@ -66,26 +69,56 @@ public class MouseCommand : MonoBehaviour
         UIInstance UI = UIInstance.Instance;
 
         //Statistique pour le MouseOver.
-        UI.TitlePanelMouseOver.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.UnitName;
-        UI.MouseOverStats._lifeGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().Life.ToString();
-        UI.MouseOverStats._rangeGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().AttackRange.ToString();
-        UI.MouseOverStats._moveGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().MoveSpeed.ToString();
+        UnitScript unit = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>();
+
+        UI.TitlePanelMouseOver.GetComponent<TextMeshProUGUI>().text = unit.UnitSO.UnitName;
+        UI.MouseOverStats._lifeGam.GetComponent<TextMeshProUGUI>().text = unit.Life.ToString();
+        UI.MouseOverStats._rangeGam.GetComponent<TextMeshProUGUI>().text = unit.AttackRange.ToString();
+        UI.MouseOverStats._moveGam.GetComponent<TextMeshProUGUI>().text = unit.MoveSpeed.ToString();
+
+        switch(unit.UnitSO.typeUnite)
+        {
+            case MYthsAndSteel_Enum.TypeUnite.Infanterie:
+                UI.PageUnitStat._unitSpriteGam.GetComponent<Image>().sprite = _iconeUnit.infanterieSprite;
+                UI.PageUnitStat._unitSpriteGam.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Infanterie";
+                break;
+            case MYthsAndSteel_Enum.TypeUnite.Artillerie:
+                UI.PageUnitStat._unitSpriteGam.GetComponent<Image>().sprite = _iconeUnit.ArtillerieSprite;
+                UI.PageUnitStat._unitSpriteGam.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Artillerie";
+                break;
+            case MYthsAndSteel_Enum.TypeUnite.Vehicule:
+                UI.PageUnitStat._unitSpriteGam.GetComponent<Image>().sprite = _iconeUnit.VehiculeSprite;
+                UI.PageUnitStat._unitSpriteGam.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Char";
+                break;
+            case MYthsAndSteel_Enum.TypeUnite.Mythe:
+                UI.PageUnitStat._unitSpriteGam.GetComponent<Image>().sprite = _iconeUnit.MytheSprite;
+                UI.PageUnitStat._unitSpriteGam.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Mythe";
+                break;
+            case MYthsAndSteel_Enum.TypeUnite.Mecha:
+                UI.PageUnitStat._unitSpriteGam.GetComponent<Image>().sprite = _iconeUnit.MechaSprite;
+                UI.PageUnitStat._unitSpriteGam.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Mécha";
+                break;
+            case MYthsAndSteel_Enum.TypeUnite.Leader:
+                UI.PageUnitStat._unitSpriteGam.GetComponent<Image>().sprite = _iconeUnit.LeaderSprite;
+                UI.PageUnitStat._unitSpriteGam.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Leader";
+                break;
+        }
 
         //Statistique de la Page 1 du Carnet.
         //Synchronise le texte du titre.
-        UI.TitlePanelShiftClicPage1.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.UnitName;
+        UI.TitlePanelShiftClicPage1.GetComponent<TextMeshProUGUI>().text = unit.UnitSO.UnitName;
         //Synchronise le texte de la vie avec l'emplacement d'UI.
-        UI.PageUnitStat._lifeGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().Life.ToString();
+        UI.PageUnitStat._lifeGam.GetComponent<TextMeshProUGUI>().text = unit.Life.ToString();
         //Synchronise le texte de la valeur de la distance d'attaque de l'unité avec l'emplacement d'UI.
-        UI.PageUnitStat._rangeGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().AttackRange.ToString();
+        UI.PageUnitStat._rangeGam.GetComponent<TextMeshProUGUI>().text = unit.AttackRange.ToString();
         //Synchronise le texte de la valeur de la vitesse de l'unité avec l'emplacement d'UI.
-        UI.PageUnitStat._moveGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().MoveSpeed.ToString();
+        UI.PageUnitStat._moveGam.GetComponent<TextMeshProUGUI>().text = unit.MoveSpeed.ToString();
 
         //Synchronise le texte de l'UI de la avec l'emplacement d'UI.
-        UI.AttackStat._rangeMinDamageGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMin.x.ToString() + " - " + RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMin.y.ToString();
-        UI.AttackStat._rangeMaxDamageGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMax.x.ToString() + " - " + RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMax.y.ToString();
-        UI.AttackStat._minDamageValueGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().DamageMinimum.ToString();
-        UI.AttackStat._maxDamageValueGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().DamageMaximum.ToString();
+        UI.AttackStat._rangeMinDamageGam.GetComponent<TextMeshProUGUI>().text = unit.NumberRangeMin.x.ToString() + " - " + unit.NumberRangeMin.y.ToString();
+        UI.AttackStat._rangeMaxDamageGam.GetComponent<TextMeshProUGUI>().text = unit.NumberRangeMax.x.ToString() + " - " + unit.NumberRangeMax.y.ToString();
+        UI.AttackStat._minDamageValueGam.GetComponent<TextMeshProUGUI>().text = unit.DamageMinimum.ToString();
+        UI.AttackStat._maxDamageValueGam.GetComponent<TextMeshProUGUI>().text = unit.DamageMaximum.ToString();
 
         //Statistique de la Page 2 du Carnet.  
         //Compléter avec les Images des Tiles.
@@ -109,7 +142,27 @@ public class MouseCommand : MonoBehaviour
 
             UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta.x, 212 * UI.effetDeTerrain.Count);
         }
+
+        /*
+        MYthsAndSteel_Enum.Attributs[] _UnitAttributs = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.UnitAttributs;
+
+        for(int i = 0; i < _UnitAttributs.Length; i++)
+        {
+            if(_UnitAttributs[i] == MYthsAndSteel_Enum.Attributs.Aucun)
+            {
+                UIInstance.Instance.objectsAttributs[i].MainObjects.SetActive(false);
+            }
+            else
+            {
+                UIInstance.Instance.objectsAttributs[i].MainObjects.SetActive(true);
+                UIInstance.Instance.objectsAttributs[i].MainObjects.GetComponent<Image>().sprite = UIInstance.Instance.textSpriteAttributUnit[(int)_UnitAttributs[i]].SpriteAttributUnit;
+
+                UIInstance.Instance.objectsAttributs[i].Description.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = UIInstance.Instance.textSpriteAttributUnit[(int)_UnitAttributs[i]].TextAttributUnit;
+
+            }
+        }*/
     }
+
     #endregion UpdateStats
 
     #region ActivateUI
@@ -740,19 +793,41 @@ public class MouseCommand : MonoBehaviour
             GameManager.Instance.RenfortPhase.CreateLeader1.Clear();
         }
 
+        UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().interactable = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<RenfortBtnUI>().HideCanvas();
+
+        UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<CanvasGroup>().interactable = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<RenfortBtnUI>().HideCanvas();
+
+        UIInstance.Instance.ButtonRenfort._clicSurUnité3.GetComponent<CanvasGroup>().interactable = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité3.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité3.GetComponent<RenfortBtnUI>().HideCanvas();
+
+        UIInstance.Instance.ButtonRenfort._clicSurUnité4.GetComponent<CanvasGroup>().interactable = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité4.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité4.GetComponent<RenfortBtnUI>().HideCanvas();
+
+        UIInstance.Instance.ButtonRenfort._clicSurUnité5.GetComponent<CanvasGroup>().interactable = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité5.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité5.GetComponent<RenfortBtnUI>().HideCanvas();
+
+        UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<CanvasGroup>().interactable = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<RenfortBtnUI>().HideCanvas();
+
+
         RenfortUI.SetActive(false);
     }
 
     /// <summary>
     /// Update les stats du menu renfort
     /// </summary>
-    void UpdateStatsMenuRenforts()
+    void UpdateStatsMenuRenforts(bool player)
     {
-        if(GameManager.Instance.IsPlayerRedTurn && !PlayerScript.Instance.RedPlayerInfos.HasCreateUnit)
+        if(player)
         {
-            //A modifier si inversement au niveau des usines (J1 et J2)  = > changer le ActionJ2 en ActionJ1.
-            if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1)
-            {
                 /*
                 //Update le drapeau qui se situe dans UI Instance correspondant à l'armée Rouge.
                 UIInstance.Instance.EmplacementImageMenuRenfort._drapeauDuJoueur.GetComponent<SpriteRenderer>().sprite = UIInstance.Instance.StockageImage._drapeauJoueur[0];
@@ -956,14 +1031,10 @@ public class MouseCommand : MonoBehaviour
                     }
                     #endregion Update Textuelle et Image Renforts de 4 à 6 pour l'équipe Rouge
                 }
-            }
         }
 
-        else if(!GameManager.Instance.IsPlayerRedTurn && !PlayerScript.Instance.BluePlayerInfos.HasCreateUnit)
+        else if(!player)
         {
-            //A modifier si inversement au niveau des usines (J1 et J2) = > changer le ActionJ1 en ActionJ2.
-            if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1)
-            {
                 /*
                 //Update le drapeau qui se situe dans UI Instance correspondant à l'armée Bleu.
                 UIInstance.Instance.EmplacementImageMenuRenfort._drapeauDuJoueur.GetComponent<SpriteRenderer>().sprite = UIInstance.Instance.StockageImage._drapeauJoueur[1];
@@ -1158,17 +1229,28 @@ public class MouseCommand : MonoBehaviour
                         #endregion Update Image Textuelle et Image de 4 à 6 pour l'équipe Bleu
                     }
                 }
-            }
+            
         }
     }
 
     /// <summary>
     /// Actives le menu renfort
     /// </summary>
-    public void MenuRenfortUI()
+    public void MenuRenfortUI(bool player)
     {
         RenfortUI.SetActive(true);
-        UpdateStatsMenuRenforts();
+        UpdateStatsMenuRenforts(player);
     }
     #endregion MenuRenfortFunction
+}
+
+[System.Serializable]
+public class UnitIcon
+{
+    public Sprite infanterieSprite;
+    public Sprite ArtillerieSprite;
+    public Sprite VehiculeSprite;
+    public Sprite LeaderSprite;
+    public Sprite MytheSprite;
+    public Sprite MechaSprite;
 }

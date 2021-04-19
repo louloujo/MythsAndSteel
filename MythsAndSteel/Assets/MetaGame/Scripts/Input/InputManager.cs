@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private KeyCode MoreInfoUnit = KeyCode.LeftShift;
     [SerializeField] private KeyCode MakeAction = KeyCode.KeypadEnter;
     [SerializeField] private KeyCode SkipPhase = KeyCode.Space;
+    [SerializeField] private KeyCode OpenRenfort = KeyCode.Tab;
 
     [Header("INFOS TOUCHES")]
     [SerializeField] private float _timeToWaitForSkipPhase = 1;
@@ -121,8 +122,8 @@ public class InputManager : MonoBehaviour
                         !GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
                         || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && !PlayerScript.Instance.BluePlayerInfos.HasCreateUnit)
                     {
-                        RaycastManager.Instance._mouseCommand.MenuRenfortUI();
-                        _renfortPhase.CreateRenfort();
+                        RaycastManager.Instance._mouseCommand.MenuRenfortUI(false);
+                        _renfortPhase.CreateRenfort(false);
                     }
 
                     //Si l'usine de l'Armée Rouge est sélectionnée et c'est le tour du joueur de l'Armée Rouge.
@@ -130,8 +131,8 @@ public class InputManager : MonoBehaviour
                         && GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
                         || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && !PlayerScript.Instance.RedPlayerInfos.HasCreateUnit)
                     {
-                        RaycastManager.Instance._mouseCommand.MenuRenfortUI();
-                        _renfortPhase.CreateRenfort();
+                        RaycastManager.Instance._mouseCommand.MenuRenfortUI(true);
+                        _renfortPhase.CreateRenfort(true);
                     }
                 }
                 else if(Attaque.Instance.Selected)
@@ -143,6 +144,21 @@ public class InputManager : MonoBehaviour
             {
                 RaycastManager.Instance.Deselect();
             }
+        }
+
+        //Ouvrir/fermer le menu renfort
+        if(Input.GetKeyDown(OpenRenfort) && 
+            (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 ||
+            GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2 ||
+            GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1 ||
+            GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2))
+        {
+            RaycastManager.Instance._mouseCommand.MenuRenfortUI(GameManager.Instance.IsPlayerRedTurn);
+            _renfortPhase.CreateRenfort(GameManager.Instance.IsPlayerRedTurn? true : false);
+        }
+        if(Input.GetKeyUp(OpenRenfort))
+        {
+            RaycastManager.Instance._mouseCommand.QuitRenfortPanel();
         }
     }
 
@@ -159,8 +175,9 @@ public class InputManager : MonoBehaviour
             if(t > _timeToWaitForSkipPhase)
             {
                 UIInstance.Instance.ShowValidationPanel("Passer à la phase suivante", "Êtes-vous sur de vouloir passer à la phase suivante? En passant la phase vous n'aurez pas la possibilité de revenir en arrière.");
-                GameManager.Instance._eventCall += SkipPhaseFunc;
+                GameManager.Instance.CliCToChangePhase();
                 GameManager.Instance._eventCallCancel += CancelSkipPhase;
+                GameManager.Instance._eventCall += SkipPhaseFunc;
                 hasShowPanel = true;
                 t = 0;
                 UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta.y);
@@ -172,7 +189,6 @@ public class InputManager : MonoBehaviour
     /// Quand le joueur accepte de changer de phase
     /// </summary>
     void SkipPhaseFunc(){
-        GameManager.Instance.ChangePhase();
         hasShowPanel = false;
     }
 
