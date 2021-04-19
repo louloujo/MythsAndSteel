@@ -61,8 +61,8 @@ public class GameManager : MonoSingleton<GameManager>{
     public GameManagerSO ManagerSO => _managerSO;
 
     //Option manager pour ouvrir le menu d'option
-    [SerializeField] private MenuOption _optionSO = null;
-    public MenuOption OptionSO => _optionSO;
+    [SerializeField] private MenuTransition _optionSO = null;
+    public MenuTransition OptionSO => _optionSO;
 
     [Header("RENFORT PHASE SCRIPT")]
     [SerializeField] RenfortPhase _renfortPhase = null;
@@ -128,6 +128,10 @@ public class GameManager : MonoSingleton<GameManager>{
     public PhaseActivation ActivationPhase => _activationPhase;
 
     float deltaTimeX = 0f;
+
+    // Scriptable terrain.
+    [SerializeField] TerrainTypeClass _Terrain;
+    public TerrainTypeClass Terrain => _Terrain;
 
     #region CheckOrgone
     //Check l'orgone pour éviter l'override

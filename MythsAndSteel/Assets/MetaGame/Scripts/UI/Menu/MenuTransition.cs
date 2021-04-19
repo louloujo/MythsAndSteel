@@ -7,16 +7,16 @@ Ce Script permet d'afficher ou d'enlever les Options en appuyant sur Echap.
 Il fait apparaitre une autre scène qui va se superposer à la scène principal.
  */
 
-[CreateAssetMenu(menuName = "META/Option menu")]
-public class MenuOption : ScriptableObject
+[CreateAssetMenu(menuName = "META/Transition Menu")]
+public class MenuTransition : ScriptableObject
 {
-    public void ActiveMenu()
+    public void LoadScene(int sceneId)
     {
-       SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+       SceneManager.LoadSceneAsync(sceneId, LoadSceneMode.Additive);
     }
 
-    public void DesactivMenu()
+    public void DesactivMenu(int sceneId)
     { 
-        SceneManager.UnloadSceneAsync(1);
+        SceneManager.UnloadSceneAsync(sceneId);
     }
 }

@@ -111,6 +111,10 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         }
     }
 
+    public void EnterNewTile(){
+        _mouseCommand.MouseExitWithoutClick();
+    }
+
     /// <summary>
     /// Quand tu cliques sur une unité
     /// </summary>

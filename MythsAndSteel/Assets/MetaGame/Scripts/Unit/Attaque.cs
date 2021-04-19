@@ -268,7 +268,7 @@ public class Attaque : MonoSingleton<Attaque>
 
                 if (!i)
                 {
-                    TileSc.ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect, _normalAttackSprite, .275f);
+                    TileSc.ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect, _normalAttackSprite, 1);
                     if (!newNeighbourId.Contains(ID))
                     {
                         newNeighbourId.Add(ID);
@@ -383,7 +383,7 @@ public class Attaque : MonoSingleton<Attaque>
     /// <param name="tileId"></param>
     void RemoveTileFromList(int tileId){
         _selectedTiles.Remove(tileId);
-        TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect, _normalAttackSprite, .275f);
+        TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect, _normalAttackSprite, 1);
     }
 
     /// <summary>
