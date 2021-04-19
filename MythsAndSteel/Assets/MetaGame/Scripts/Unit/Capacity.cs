@@ -19,7 +19,6 @@ public class Capacity : MonoBehaviour
     virtual public void Capacite1()
     {
         Debug.Log("Active La capacité 1");
-
     }
 
 

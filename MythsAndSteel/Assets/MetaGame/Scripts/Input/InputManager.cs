@@ -122,8 +122,8 @@ public class InputManager : MonoBehaviour
                         !GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
                         || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && !PlayerScript.Instance.BluePlayerInfos.HasCreateUnit)
                     {
-                        RaycastManager.Instance._mouseCommand.MenuRenfortUI(true);
-                        _renfortPhase.CreateRenfort(true);
+                        RaycastManager.Instance._mouseCommand.MenuRenfortUI(false);
+                        _renfortPhase.CreateRenfort(false);
                     }
 
                     //Si l'usine de l'Armée Rouge est sélectionnée et c'est le tour du joueur de l'Armée Rouge.
@@ -131,8 +131,8 @@ public class InputManager : MonoBehaviour
                         && GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
                         || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && !PlayerScript.Instance.RedPlayerInfos.HasCreateUnit)
                     {
-                        RaycastManager.Instance._mouseCommand.MenuRenfortUI(false);
-                        _renfortPhase.CreateRenfort(false);
+                        RaycastManager.Instance._mouseCommand.MenuRenfortUI(true);
+                        _renfortPhase.CreateRenfort(true);
                     }
                 }
                 else if(Attaque.Instance.Selected)

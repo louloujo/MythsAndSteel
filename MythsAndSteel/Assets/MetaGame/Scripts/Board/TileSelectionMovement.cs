@@ -74,7 +74,7 @@ public class TileSelectionMovement : MonoBehaviour{
                         StopCoroutine(Last);
                     }
                     RessourceAnimator.SetBool("In", true);
-                    RessourceObject.transform.position = new Vector3(RaycastManager.Instance.Tile.transform.position.x, RaycastManager.Instance.Tile.transform.position.y + .5f, RaycastManager.Instance.Tile.transform.position.z);
+                    RessourceObject.transform.position = new Vector3(RaycastManager.Instance.Tile.transform.position.x, RaycastManager.Instance.Tile.transform.position.y + .5f, -25);
                     Value.text = RaycastManager.Instance.Tile.GetComponent<TileScript>().ResourcesCounter.ToString();
                 }
             }
@@ -145,7 +145,7 @@ public class TileSelectionMovement : MonoBehaviour{
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(.14f);
-        RessourceObject.transform.position = new Vector3(RaycastManager.Instance.Tile.transform.position.x, RaycastManager.Instance.Tile.transform.position.y + .5f, RaycastManager.Instance.Tile.transform.position.z);
+        RessourceObject.transform.position = new Vector3(RaycastManager.Instance.Tile.transform.position.x, RaycastManager.Instance.Tile.transform.position.y + .5f, -25);
         Value.text = RaycastManager.Instance.Tile.GetComponent<TileScript>().ResourcesCounter.ToString();        
         RessourceAnimator.SetBool("In", true);
     }

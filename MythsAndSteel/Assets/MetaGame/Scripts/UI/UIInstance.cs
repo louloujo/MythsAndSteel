@@ -503,12 +503,12 @@ public class EmplacementImageMenuRenfort
 [System.Serializable]
 public class BouttonMenuRenfort
 {
-    public Button _clicSurUnité1 = null;
-    public Button _clicSurUnité2 = null;
-    public Button _clicSurUnité3 = null;
-    public Button _clicSurUnité4 = null;
-    public Button _clicSurUnité5 = null;
-    public Button _clicSurUnité6 = null;
+    public GameObject _clicSurUnité1 = null;
+    public GameObject _clicSurUnité2 = null;
+    public GameObject _clicSurUnité3 = null;
+    public GameObject _clicSurUnité4 = null;
+    public GameObject _clicSurUnité5 = null;
+    public GameObject _clicSurUnité6 = null;
 }
 
 /// <summary>

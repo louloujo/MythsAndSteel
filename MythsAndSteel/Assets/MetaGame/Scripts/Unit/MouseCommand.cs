@@ -793,6 +793,31 @@ public class MouseCommand : MonoBehaviour
             GameManager.Instance.RenfortPhase.CreateLeader1.Clear();
         }
 
+        UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().interactable = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<RenfortBtnUI>().HideCanvas();
+
+        UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<CanvasGroup>().interactable = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<RenfortBtnUI>().HideCanvas();
+
+        UIInstance.Instance.ButtonRenfort._clicSurUnité3.GetComponent<CanvasGroup>().interactable = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité3.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité3.GetComponent<RenfortBtnUI>().HideCanvas();
+
+        UIInstance.Instance.ButtonRenfort._clicSurUnité4.GetComponent<CanvasGroup>().interactable = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité4.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité4.GetComponent<RenfortBtnUI>().HideCanvas();
+
+        UIInstance.Instance.ButtonRenfort._clicSurUnité5.GetComponent<CanvasGroup>().interactable = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité5.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité5.GetComponent<RenfortBtnUI>().HideCanvas();
+
+        UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<CanvasGroup>().interactable = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<RenfortBtnUI>().HideCanvas();
+
+
         RenfortUI.SetActive(false);
     }
 
