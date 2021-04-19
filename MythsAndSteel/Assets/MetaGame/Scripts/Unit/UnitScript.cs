@@ -55,7 +55,7 @@ public class UnitScript : MonoBehaviour
     [SerializeField] public int _diceBonus = 0;
     public int DiceBonus => _diceBonus;
 
-
+    
     [Header("------------------- MOUVEMENT -------------------")]
     //Vitesse de déplacement
     [SerializeField] int _moveSpeed;

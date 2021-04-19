@@ -150,7 +150,7 @@ public class PhaseActivation : MonoBehaviour{
                     J2DernièreValeurActivation = float.Parse(J2CarteVerif.valeurActivation) / 10;
                     CarteActivationUtilisée.Add(J2CarteVerif);
                     BlueCartesActivation.Clear();
-
+                  
                     foreach(CarteActivation carteactivations in J2CartesNonVerif){
                         BlueCartesActivation.Add(carteactivations);
                     }
@@ -171,6 +171,7 @@ public class PhaseActivation : MonoBehaviour{
                             }
                             J2Choix = true;
                             J2Verif = false;
+                           
                         }
                     }
                 }
