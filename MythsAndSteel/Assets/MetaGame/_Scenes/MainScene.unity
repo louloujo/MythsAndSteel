@@ -7755,8 +7755,12 @@ PrefabInstance:
       value: 57
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: _ownerObjectiv
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.data[0]
@@ -7764,7 +7768,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.data[1]
-      value: 30
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_Name
@@ -19391,8 +19395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RedObjCount: 1
   BlueObjCount: 1
-  ObjOwnedByRed: 0
-  ObjOwnedByBlue: 0
+  goalTileList: []
 --- !u!1 &1563925672
 GameObject:
   m_ObjectHideFlags: 0
@@ -22166,8 +22169,16 @@ PrefabInstance:
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
-      propertyPath: _terrainEffectList.Array.size
+      propertyPath: _ownerObjectiv
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: _terrainEffectList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
+      propertyPath: _terrainEffectList.Array.data[1]
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_Name
@@ -23702,8 +23713,8 @@ MonoBehaviour:
   Terrain: {fileID: 11400000, guid: 6b9cd9dfcef01a747b717485f579f9a3, type: 2}
   _activationLeftTxtRP: {fileID: 563251741}
   _activationLeftTxtBP: {fileID: 1626702624}
-  _ressourceLeftTxtRP: {fileID: 0}
-  _ressourceLeftTxtBP: {fileID: 0}
+  _ressourceLeftTxtRP: {fileID: 168102907}
+  _ressourceLeftTxtBP: {fileID: 1115031716}
   "_pageUnit\xE9Renfort":
     _ressourceJoueur: {fileID: 2086137267}
     _ressourceText: {fileID: 2086137323}
@@ -23990,7 +24001,7 @@ MonoBehaviour:
     OrgonePowerLeft: 0
     LastKnownOrgoneValue: 0
     TileCentreZoneOrgone: {fileID: 1036877431}
-    _Ressource: 0
+    _Ressource: 5
     GoalCapturePointsNumber: 0
     HasCreateUnit: 0
     dontTouchThis: 0

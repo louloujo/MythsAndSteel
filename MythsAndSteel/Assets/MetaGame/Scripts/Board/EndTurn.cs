@@ -8,11 +8,7 @@ public class EndTurn : MonoBehaviour
     [SerializeField] private int RedObjCount;
     [SerializeField] private int BlueObjCount;
 
-    [Header("Nombre d'objectif actuellement capturé par équipe.")]
-    [SerializeField] private int ObjOwnedByRed;
-    [SerializeField] private int ObjOwnedByBlue;
-
-    List<GameObject> goalTileList = new List<GameObject>();
+    [SerializeField] List<GameObject> goalTileList = new List<GameObject>();
 
     private void Start()
     {
@@ -86,27 +82,27 @@ public class EndTurn : MonoBehaviour
     void ChangeOwner(TileScript TileSc, bool RedArmy){
         if(TileSc.OwnerObjectiv == MYthsAndSteel_Enum.Owner.blue && RedArmy)
         {
-            ObjOwnedByBlue--;
+            PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber--;
             TileSc.ChangePlayerObj(MYthsAndSteel_Enum.Owner.red);
-            ObjOwnedByRed++;
+            PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber++;
         }
         if(TileSc.OwnerObjectiv == MYthsAndSteel_Enum.Owner.red && !RedArmy)
         {
-            ObjOwnedByRed--;
+            PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber--;
             TileSc.ChangePlayerObj(MYthsAndSteel_Enum.Owner.blue);
-            ObjOwnedByBlue++;
+            PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber++;
         }
         if(TileSc.OwnerObjectiv == MYthsAndSteel_Enum.Owner.neutral)
         {
             if(RedArmy)
             {
                 TileSc.ChangePlayerObj(MYthsAndSteel_Enum.Owner.red);
-                ObjOwnedByRed++;
+                PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber++;
             }
             else
             {
                 TileSc.ChangePlayerObj(MYthsAndSteel_Enum.Owner.blue);
-                ObjOwnedByBlue++;
+                PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber++;
             }
         }
     }
@@ -116,12 +112,12 @@ public class EndTurn : MonoBehaviour
     /// </summary>
     protected void CheckVictory()
     {
-        if(ObjOwnedByBlue == BlueObjCount)
+        if(PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber == BlueObjCount)
         {
             // Blue win. End game.
             Debug.Log("Blue win.");
         }
-        if(ObjOwnedByRed == RedObjCount)
+        if(PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber == RedObjCount)
         {
             // Red win. End game.
             Debug.Log("Red win.");

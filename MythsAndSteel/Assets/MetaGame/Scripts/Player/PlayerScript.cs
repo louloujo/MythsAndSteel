@@ -270,6 +270,15 @@ public class PlayerScript : MonoSingleton<PlayerScript>
             return true;
         }
     }
+
+    public void ResetPlayerInfo(){
+        if(GameManager.Instance.IsPlayerRedTurn){
+            RedPlayerInfos.HasCreateUnit = false;
+        }
+        else{
+            BluePlayerInfos.HasCreateUnit = false;
+        }
+    }
 }
 
 /// <summary>

@@ -157,6 +157,8 @@ public class UIInstance : MonoSingleton<UIInstance>
 
     private void Start(){
         QuitValidationPanel();
+        UpdateRessourceLeft();
+        UpdateActivationLeft();
     }
 
     public void DesactivateNextPhaseButton(){

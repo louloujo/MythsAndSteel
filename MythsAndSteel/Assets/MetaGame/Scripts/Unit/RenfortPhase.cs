@@ -71,11 +71,11 @@ public class RenfortPhase : MonoBehaviour
         {
             AroundCreateTileUsine(playerRed);
             AroundLeader(playerRed);
-            ChangeButtonStatut(true);
+            ChangeButtonStatut(true, playerRed);
         }
         else
         {
-            ChangeButtonStatut(false);
+            ChangeButtonStatut(false, playerRed);
         }
     }
 
@@ -83,13 +83,164 @@ public class RenfortPhase : MonoBehaviour
     /// Active ou désactive les boutons du menu renfort
     /// </summary>
     /// <param name="activate"></param>
-    void ChangeButtonStatut(bool activate){
+    void ChangeButtonStatut(bool activate, bool playerRed){
         UIInstance.Instance.ButtonRenfort._clicSurUnité1.interactable = activate;
         UIInstance.Instance.ButtonRenfort._clicSurUnité2.interactable = activate;
         UIInstance.Instance.ButtonRenfort._clicSurUnité3.interactable = activate;
         UIInstance.Instance.ButtonRenfort._clicSurUnité4.interactable = activate;
         UIInstance.Instance.ButtonRenfort._clicSurUnité5.interactable = activate;
         UIInstance.Instance.ButtonRenfort._clicSurUnité6.interactable = activate;
+
+        if(activate){
+            for(int i = 0; i < (playerRed? PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer.Count : PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer.Count); i++){
+                switch(i)
+                {
+                    case 0:
+                        if(playerRed){
+                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource){
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.interactable = true;
+                            }
+                            else{
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.interactable = false;
+                            }
+                        }
+                        else{
+                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.BluePlayerInfos.Ressource){
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.interactable = true;
+                            }
+                            else{
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.interactable = false;
+                            }
+                        }
+                        break;
+
+                    case 1:
+                        if(playerRed)
+                        {
+                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource)
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité2.interactable = true;
+                            }
+                            else
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité2.interactable = false;
+                            }
+                        }
+                        else
+                        {
+                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.BluePlayerInfos.Ressource)
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité2.interactable = true;
+                            }
+                            else
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité2.interactable = false;
+                            }
+                        }
+                        break;
+
+                    case 2:
+                        if(playerRed)
+                        {
+                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource)
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité3.interactable = true;
+                            }
+                            else
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité3.interactable = false;
+                            }
+                        }
+                        else
+                        {
+                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.BluePlayerInfos.Ressource)
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité3.interactable = true;
+                            }
+                            else
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité3.interactable = false;
+                            }
+                        }
+                        break;
+
+                    case 3:
+                        if(playerRed)
+                        {
+                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource)
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité4.interactable = true;
+                            }
+                            else
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité4.interactable = false;
+                            }
+                        }
+                        else
+                        {
+                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.BluePlayerInfos.Ressource)
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité4.interactable = true;
+                            }
+                            else
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité4.interactable = false;
+                            }
+                        }
+                        break;
+
+                    case 4:
+                        if(playerRed)
+                        {
+                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource)
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité5.interactable = true;
+                            }
+                            else
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité5.interactable = false;
+                            }
+                        }
+                        else
+                        {
+                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.BluePlayerInfos.Ressource)
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité5.interactable = true;
+                            }
+                            else
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité5.interactable = false;
+                            }
+                        }
+                        break;
+
+                    case 5:
+                        if(playerRed)
+                        {
+                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource)
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité6.interactable = true;
+                            }
+                            else
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité6.interactable = false;
+                            }
+                        }
+                        else
+                        {
+                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.BluePlayerInfos.Ressource)
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité6.interactable = true;
+                            }
+                            else
+                            {
+                                UIInstance.Instance.ButtonRenfort._clicSurUnité6.interactable = false;
+                            }
+                        }
+                        break;
+                }
+            }
+        }
     }
 
     #region GetTiles
@@ -346,6 +497,9 @@ public class RenfortPhase : MonoBehaviour
             GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().AddUnitToTile(obj);
             PlayerScript.Instance.RedPlayerInfos.HasCreateUnit = true;
             PlayerScript.Instance.UnitRef.UnitListRedPlayer.Add(obj);
+
+            PlayerScript.Instance.RedPlayerInfos.Ressource -= PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[idCreate].GetComponent<UnitScript>().UnitSO.CreationCost;
+            UIInstance.Instance.UpdateRessourceLeft();
         }
         else
         {
@@ -353,6 +507,9 @@ public class RenfortPhase : MonoBehaviour
             GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().AddUnitToTile(obj);
             PlayerScript.Instance.BluePlayerInfos.HasCreateUnit = true;
             PlayerScript.Instance.UnitRef.UnitListBluePlayer.Add(obj);
+
+            PlayerScript.Instance.BluePlayerInfos.Ressource -= PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[idCreate].GetComponent<UnitScript>().UnitSO.CreationCost;
+            UIInstance.Instance.UpdateRessourceLeft();
         }
 
         GameManager.Instance.TileChooseList.Clear();
