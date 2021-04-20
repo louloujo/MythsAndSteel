@@ -80,13 +80,20 @@ public class Mouvement : MonoSingleton<Mouvement>
         }
     }
     [SerializeField] private List<MYthsAndSteel_Enum.TerrainType> EffectToCheck;
-
+    [SerializeField] private Sprite UpArrow = null;
+    [SerializeField] private Sprite DownArrow = null;
+    [SerializeField] private Sprite LeftArrow = null;
+    [SerializeField] private Sprite RightArrow = null;
     #endregion RenduSpriteTile
 
     private void Update()
     {
         // Permet d'effectuer le moveTowards de l'unité à sa prochaine case.
         UpdatingMove(mUnit, mStart, mEnd);
+        while (_isInMouvement)
+        {
+            DisplayMoveArrow();
+        }
     }
 
     /// <summary>
@@ -737,5 +744,17 @@ public class Mouvement : MonoSingleton<Mouvement>
             Unit.GetComponent<UnitScript>().Animation.SetFloat("X", EndPos.transform.position.x - Unit.transform.position.x);
             Unit.GetComponent<UnitScript>().Animation.SetFloat("Y", EndPos.transform.position.y - Unit.transform.position.y);
             Unit.GetComponent<SpriteRenderer>().flipX = Unit.GetComponent<UnitScript>().Animation.GetFloat("X") > 0;
+    }
+
+    private void DisplayMoveArrow()
+    {
+        GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
+        int tileID;
+        tileID = tileSelected.GetComponent<TileScript>().TileId;
+        TilesManager.Instance.TileList[tileID + 9].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, UpArrow);
+        TilesManager.Instance.TileList[tileID - 9].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, DownArrow);
+        TilesManager.Instance.TileList[tileID - 1].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, LeftArrow);
+        TilesManager.Instance.TileList[tileID + 1].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, RightArrow);
+
     }
 }
