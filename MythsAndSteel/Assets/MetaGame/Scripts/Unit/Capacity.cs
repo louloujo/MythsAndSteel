@@ -59,6 +59,13 @@ public class Capacity : MonoBehaviour
                     PrefabCapacity.transform.GetChild(0).GetComponent<Image>().sprite = render1;
                     PrefabCapacity.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _Capacity1Name;
                     PrefabCapacity.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = _Capacity1Description;
+                    
+                    int lengthTxt = _Capacity1Description.Length;
+                    float LengthLine = (float) lengthTxt / 21;
+                    int truncateLine = (int) LengthLine;
+                    PrefabCapacity.GetComponent<RectTransform>().sizeDelta = new Vector2(
+                        PrefabCapacity.GetComponent<RectTransform>().sizeDelta.x,
+                        130 + (20 * truncateLine));
                     break;
                 }
             case 1:
@@ -68,6 +75,13 @@ public class Capacity : MonoBehaviour
                         PrefabCapacity.transform.GetChild(0).GetComponent<Image>().sprite = render2;
                         PrefabCapacity.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _Capacity2Name;
                         PrefabCapacity.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = _Capacity2Description;
+
+                        int lengthTxt = _Capacity2Description.Length;
+                        float LengthLine = lengthTxt / 21;
+                        int truncateLine = (int)LengthLine;
+                        PrefabCapacity.GetComponent<RectTransform>().sizeDelta = new Vector2(
+                            PrefabCapacity.GetComponent<RectTransform>().sizeDelta.x,
+                            130 + (20 * truncateLine));
                     }
                     else
                     {

@@ -121,7 +121,7 @@ public class UIInstance : MonoSingleton<UIInstance>
 
     //Comporte les descriptions et sprites pour chaque Attribut. 
     //Si vous changez la taille ou le positionnement des élements de l'Array il faut absolument que la position dans l'Arraye de Chaque ObjectsAttributs correspondent à l'ID de son enum.
-    public TextSpriteAttributUnit[] textSpriteAttributUnit = new TextSpriteAttributUnit[11];
+    public List<TextSpriteAttributUnit> textSpriteAttributUnit = new List<TextSpriteAttributUnit>();
     //Array comportant les ObjectsAttributs. A ne pas modifier !
     public ObjectsAttributs[] objectsAttributs = new ObjectsAttributs[3];
     #endregion ShiftClicPanelP1
@@ -526,9 +526,11 @@ public class BouttonMenuRenfort
 [System.Serializable]
 public class TextSpriteAttributUnit
 {
+    public string _name;
+    public MYthsAndSteel_Enum.Attributs _attributs;
+    public Sprite SpriteAttributUnit;
     [TextArea]
     public string TextAttributUnit;
-    public Sprite SpriteAttributUnit;
 }
 
 /// <summary>

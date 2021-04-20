@@ -128,33 +128,75 @@ public class MouseCommand : MonoBehaviour
 
         if(RaycastManager.Instance.Tile.GetComponent<TileScript>().Unit.TryGetComponent<Capacity>(out Capacity Capa))
         {
+            int contentSize = 0;
             // CAPACITY 1.             
             if(Capa.ReturnInfo(UI.capacityPrefab, 0) != null)
             {
                 UI.capacityParent.transform.parent.parent.GetComponent<ScrollRect>().verticalScrollbar.value = 1;
-                GameObject CAPA1 = Instantiate(Capa.ReturnInfo(UI.capacityPrefab, 0), UI.capacityParent.transform.position, Quaternion.identity);
+                GameObject CAPA1 = Instantiate(Capa.ReturnInfo(UI.capacityPrefab, 0), Vector2.zero, Quaternion.identity);
                 CAPA1.transform.SetParent(UI.capacityParent.transform);
                 CAPA1.transform.localScale = new Vector3(.9f, .9f, .9f);
                 UI.capacityList.Add(CAPA1);
-                UI.capacityParent.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.capacityParent.GetComponent<RectTransform>().sizeDelta.x, 212 * UI.effetDeTerrain.Count);
+
+                int lengthTxt = CAPA1.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text.Length;
+                float LengthLine = (float)lengthTxt / 21;
+                int truncateLine = (int)LengthLine;
+                int capaSize = 130 + (20 * truncateLine);
+                contentSize += capaSize;
             }
             // CAPACITY 2. 
             if(Capa.ReturnInfo(UI.capacityPrefab, 1) != null)
             {
                 UI.capacityParent.transform.parent.parent.GetComponent<ScrollRect>().verticalScrollbar.value = 1;
-                GameObject CAPA2 = Instantiate(Capa.ReturnInfo(UI.capacityPrefab, 1), UI.capacityParent.transform.position, Quaternion.identity);
+                GameObject CAPA2 = Instantiate(Capa.ReturnInfo(UI.capacityPrefab, 1), Vector2.zero, Quaternion.identity);
                 CAPA2.transform.SetParent(UI.capacityParent.transform);
                 CAPA2.transform.localScale = new Vector3(.9f, .9f, .9f);
                 UI.capacityList.Add(CAPA2);
-                UI.capacityParent.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.capacityParent.GetComponent<RectTransform>().sizeDelta.x, 212 * UI.effetDeTerrain.Count);
+
+                int lengthTxt = CAPA2.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text.Length;
+                float LengthLine = (float)lengthTxt / 21;
+                int truncateLine = (int)LengthLine;
+                int capaSize = 130 + (20 * truncateLine);
+                contentSize += capaSize;
+            }
+
+            UI.capacityParent.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.capacityParent.GetComponent<RectTransform>().sizeDelta.x, contentSize);
+        }
+
+        //Attributs
+        MYthsAndSteel_Enum.Attributs[] _UnitAttributs = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.UnitAttributs;
+        for(int i = 0; i < 3; i++)
+        {
+            if(_UnitAttributs.Length > i)
+            {
+                if(_UnitAttributs[i] == MYthsAndSteel_Enum.Attributs.Aucun)
+                {
+                    UIInstance.Instance.objectsAttributs[i].MainObjects.SetActive(false);
+                    continue;
+                }
+
+                foreach(TextSpriteAttributUnit attribut in UIInstance.Instance.textSpriteAttributUnit)
+                {
+                    if(attribut._attributs == _UnitAttributs[i])
+                    {
+                        GameObject gam = UIInstance.Instance.objectsAttributs[i].MainObjects;
+                        gam.SetActive(true);
+                        gam.transform.GetChild(0).GetComponent<Image>().sprite = attribut.SpriteAttributUnit;
+
+                        UIInstance.Instance.objectsAttributs[i].Description.GetComponent<TextMeshProUGUI>().text = attribut._name + " :" + attribut.TextAttributUnit;
+                        continue;
+                    }
+                }
+            }
+            else
+            {
+                UIInstance.Instance.objectsAttributs[i].MainObjects.SetActive(false);
+                continue;
             }
         }
 
         //Statistique de la Page 2 du Carnet.  
         //Compléter avec les Images des Tiles.
-        //UIInstance.Instance.MiddleImageTerrain[0].GetComponent<Image>().sprite = RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList[0].Image
-        //UIInstance.Instance.MiddleImageTerrain[1].GetComponent<Image>().sprite = RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList[1].Image;
-
 
         for(int i = UI.effetDeTerrain.Count - 1; i >= 0; i--)
         {
@@ -172,25 +214,6 @@ public class MouseCommand : MonoBehaviour
 
             UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta.x, 212 * UI.effetDeTerrain.Count);
         }
-
-        /*
-        MYthsAndSteel_Enum.Attributs[] _UnitAttributs = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.UnitAttributs;
-
-        for(int i = 0; i < _UnitAttributs.Length; i++)
-        {
-            if(_UnitAttributs[i] == MYthsAndSteel_Enum.Attributs.Aucun)
-            {
-                UIInstance.Instance.objectsAttributs[i].MainObjects.SetActive(false);
-            }
-            else
-            {
-                UIInstance.Instance.objectsAttributs[i].MainObjects.SetActive(true);
-                UIInstance.Instance.objectsAttributs[i].MainObjects.GetComponent<Image>().sprite = UIInstance.Instance.textSpriteAttributUnit[(int)_UnitAttributs[i]].SpriteAttributUnit;
-
-                UIInstance.Instance.objectsAttributs[i].Description.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = UIInstance.Instance.textSpriteAttributUnit[(int)_UnitAttributs[i]].TextAttributUnit;
-
-            }
-        }*/
     }
 
     #endregion UpdateStats
@@ -781,6 +804,10 @@ public class MouseCommand : MonoBehaviour
     public void QuitShiftPanel()
     {
         //Je retourne la valeur comme quoi il a clické à false car il a fini son action de Shift+Clic et désactive les 2 pages.
+        for(int i = 0; i < 3; i++){
+            UIInstance.Instance.objectsAttributs[i].MainObjects.transform.GetChild(0).GetComponent<MouseOverUI>().StopOver();
+        }
+
         _checkIfPlayerAsClic = false;
         ShiftUI[0].SetActive(false);
         ShiftUI[1].SetActive(false);
