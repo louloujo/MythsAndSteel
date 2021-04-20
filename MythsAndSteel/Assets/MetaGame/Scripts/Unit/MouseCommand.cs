@@ -751,7 +751,6 @@ public class MouseCommand : MonoBehaviour
     public void ShiftClick(){
         ActivateUI(ShiftUI[0], 0, 0, false, false, false, true);
         UpdateUIStats();
-        _hasCheckUnit = true;
     }
 
     /// <summary>
@@ -759,16 +758,19 @@ public class MouseCommand : MonoBehaviour
     /// </summary>
     public void MouseOverWithoutClick()
     {
-        //Si le joueur n'a pas cliqué, alors tu lances la coroutine.
-        if (_checkIfPlayerAsClic == false)
+        if(!_hasCheckUnit)
         {
-            //Coroutine : Une coroutine est une fonction qui peut suspendre son exécution (yield) jusqu'à la fin de la YieldInstruction donnée.
-            StartCoroutine(ShowObject(TimeToWait));
-            UpdateUIStats();
+            //Si le joueur n'a pas cliqué, alors tu lances la coroutine.
+            if(_checkIfPlayerAsClic == false)
+            {
+                //Coroutine : Une coroutine est une fonction qui peut suspendre son exécution (yield) jusqu'à la fin de la YieldInstruction donnée.
+                StartCoroutine(ShowObject(TimeToWait));
+                UpdateUIStats();
+                _hasCheckUnit = true;
+            }
         }
-        else
+        if(_checkIfPlayerAsClic)
         {
-            //Si le joueur click, alors je cache le MouseOver.
             MouseExitWithoutClick();
         }
     }
@@ -781,6 +783,7 @@ public class MouseCommand : MonoBehaviour
         //Arrete l'ensemble des coroutines dans la scène.
         StopAllCoroutines();
         _mouseOverUI.SetActive(false);
+        _hasCheckUnit = false;
     }
 
     /// <summary>

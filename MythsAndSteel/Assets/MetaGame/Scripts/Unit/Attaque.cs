@@ -151,8 +151,6 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
-
-
     /// <summary>
     /// Attaque d'une unité avec deux ranges d'attaque
     /// </summary>
