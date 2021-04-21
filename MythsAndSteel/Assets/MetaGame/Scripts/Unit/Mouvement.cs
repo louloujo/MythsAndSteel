@@ -99,7 +99,6 @@ public class Mouvement : MonoSingleton<Mouvement>
         if (_isInMouvement)
         {
             DisplayMoveArrow();
-
         }
     }
 
@@ -780,61 +779,63 @@ public class Mouvement : MonoSingleton<Mouvement>
             }
         }
 
-        if (selectedTileId.Count >= 2)
+        if (selectedTileId.Count > 1)
         {
-            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2]].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, true);
-            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2]].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, true);
-            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2]].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, true);
-            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2]].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, true);
+
+            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] + 9].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect);
+            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] - 1].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect);
+            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] + 1].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect);
+            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] - 9].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect);
         }
 
-        if (selectedTileId.Count >= 3)
+        /*if (selectedTileId.Count > 2)
         {
 
             if (selectedTileId.Count - 3 == 10 && selectedTileId.Count - 2 == 9 || selectedTileId.Count - 2 == -9)
             {
                 TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2]].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, Virage1);
             }
-            if (selectedTileId.Count - 3 == 8 && selectedTileId.Count - 2 == 9 || selectedTileId.Count - 2 == -9)
+            else if (selectedTileId.Count - 3 == 8 && selectedTileId.Count - 2 == 9 || selectedTileId.Count - 2 == -9)
             {
                 TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2]].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, Virage2);
             }
-            if (selectedTileId.Count - 3 == -10 && selectedTileId.Count - 2 == 9 || selectedTileId.Count - 2 == -9)
+            else if (selectedTileId.Count - 3 == -10 && selectedTileId.Count - 2 == 9 || selectedTileId.Count - 2 == -9)
             {
                 TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2]].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, Virage3);
             }
-            if (selectedTileId.Count - 3 == -8 && selectedTileId.Count - 2 == 9 || selectedTileId.Count - 2 == -9)
+            else if (selectedTileId.Count - 3 == -8 && selectedTileId.Count - 2 == 9 || selectedTileId.Count - 2 == -9)
             {
                 TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2]].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, Virage3);
             }
+            else
+            {
+                TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2]].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, Vertical);
+            }
         }
-        else
-        {
-            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2]].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, Vertical);
-        }
+        
 
-        if (selectedTileId.Count >= 3)
+        if (selectedTileId.Count > 2)
         {
             if (selectedTileId.Count - 3 == 10 && selectedTileId.Count - 2 == 1 || selectedTileId.Count - 2 == -1)
             {
                 TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2]].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, Virage1);
             }
-            if (selectedTileId.Count - 3 == 8 && selectedTileId.Count - 2 == 1 || selectedTileId.Count - 2 == -1)
+            else if (selectedTileId.Count - 3 == 8 && selectedTileId.Count - 2 == 1 || selectedTileId.Count - 2 == -1)
             {
                 TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2]].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, Virage2);
             }
-            if (selectedTileId.Count - 3 == -10 && selectedTileId.Count - 2 == 1 || selectedTileId.Count - 2 == -1)
+            else if (selectedTileId.Count - 3 == -10 && selectedTileId.Count - 2 == 1 || selectedTileId.Count - 2 == -1)
             {
                 TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2]].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, Virage3);
             }
-            if (selectedTileId.Count - 3 == -8 && selectedTileId.Count - 2 == 1 || selectedTileId.Count - 2 == -1)
+            else if (selectedTileId.Count - 3 == -8 && selectedTileId.Count - 2 == 1 || selectedTileId.Count - 2 == -1)
             {
                 TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2]].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, Virage4);
             }
-        }
-        else
-        {
-            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2]].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, Horizontal);
-        }
+            else
+            {
+                TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2]].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, Horizontal);
+            }
+        }*/
     }
 }
