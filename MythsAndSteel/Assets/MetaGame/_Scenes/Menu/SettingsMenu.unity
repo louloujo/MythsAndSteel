@@ -991,7 +991,7 @@ RectTransform:
   - {fileID: 1223928837}
   - {fileID: 254023919}
   m_Father: {fileID: 1781968245}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1975,7 +1975,7 @@ RectTransform:
   m_LocalScale: {x: 1.9874, y: 1.9874, z: 1.9874}
   m_Children: []
   m_Father: {fileID: 1781968245}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2520,7 +2520,7 @@ RectTransform:
   - {fileID: 1437540634}
   - {fileID: 1182204857}
   m_Father: {fileID: 1781968245}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2670,7 +2670,7 @@ GameObject:
   - component: {fileID: 1303878357}
   - component: {fileID: 1303878358}
   m_Layer: 5
-  m_Name: Son effet (Slider)
+  m_Name: Volume effet (Slider)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2692,7 +2692,7 @@ RectTransform:
   - {fileID: 1289502835}
   - {fileID: 1769446821}
   m_Father: {fileID: 1781968245}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3350,7 +3350,7 @@ GameObject:
   - component: {fileID: 1769697925}
   - component: {fileID: 1769697926}
   m_Layer: 5
-  m_Name: Son musique (Slider)
+  m_Name: Volume musique (Slider)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3372,7 +3372,7 @@ RectTransform:
   - {fileID: 971425454}
   - {fileID: 389506079}
   m_Father: {fileID: 1781968245}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3535,11 +3535,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 995524978}
+  - {fileID: 1107163669}
   - {fileID: 508016246}
+  - {fileID: 1268416620}
   - {fileID: 1303878357}
   - {fileID: 1769697925}
-  - {fileID: 1268416620}
-  - {fileID: 1107163669}
   - {fileID: 1157752872}
   - {fileID: 642522609}
   m_Father: {fileID: 0}
