@@ -14,8 +14,9 @@ public class Option : MonoBehaviour
     Resolution[] resolutions;//Array de toute 
     int currentResolutionIndex = 0;
     Resolution OldResolution;
+    int Oldindex;
 
-    bool FirstTime;
+    bool FirstTime = true;
 
     [SerializeField] GameObject ValidationPanel;
 
@@ -53,14 +54,17 @@ public class Option : MonoBehaviour
 
     public void SetResolution(int resolutionIndex) //
     {
-        
+
         OldResolution = resolutions[currentResolutionIndex];
+        Oldindex = currentResolutionIndex;
+
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        currentResolutionIndex = resolutionIndex;
         Debug.Log("rr");
         if (!FirstTime)
         {
-            StartCoroutine("Validation");
+            StartCoroutine(Validation());
         }
         else
         {
@@ -70,8 +74,16 @@ public class Option : MonoBehaviour
 
     public void ResetResolution()
     {
+        Debug.Log(OldResolution);
         Screen.SetResolution(OldResolution.width, OldResolution.height, Screen.fullScreen);
+
+        ResolutionDropdown.value = Oldindex;
+        currentResolutionIndex = Oldindex;
+        ResolutionDropdown.RefreshShownValue();
+
         ValidationPanel.SetActive(false);
+
+        
     }
 
     public IEnumerator Validation()
