@@ -127,6 +127,15 @@ public class TileScript : MonoBehaviour
                             if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
                         }
                         break;
+                    case MYthsAndSteel_Enum.ChildTileType.MoveArrow:
+                        tag = "DisplayArrowForMove";
+                        if (gam.tag == tag)
+                        {
+                            child = gam;
+                            child.GetComponent<SpriteRenderer>().enabled = true;
+                            if (sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
+                        }
+                        break;
                 }
             }
         }
@@ -158,6 +167,9 @@ public class TileScript : MonoBehaviour
                         break;
                     case MYthsAndSteel_Enum.ChildTileType.EventSelect:
                         tag = "SelectableTile";
+                        break;
+                    case MYthsAndSteel_Enum.ChildTileType.MoveArrow:
+                        tag = "DisplayArrowForMove";
                         break;
                 }
 

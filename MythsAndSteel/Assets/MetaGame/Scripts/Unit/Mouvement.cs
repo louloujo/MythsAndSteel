@@ -760,32 +760,32 @@ public class Mouvement : MonoSingleton<Mouvement>
 
             if (_newNeighbourId.Contains(selectedTileId[selectedTileId.Count - 1] + 9))
             {
-                TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 1] + 9].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, UpArrow);
+                TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 1] + 9].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow, UpArrow);
             }
 
             if (newNeighbourId.Contains(selectedTileId[selectedTileId.Count - 1] - 9))
             {
-                TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 1] - 9].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, DownArrow);
+                TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 1] - 9].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow, DownArrow);
             }
 
             if (newNeighbourId.Contains(selectedTileId[selectedTileId.Count - 1] + 1))
             {
-                TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 1] + 1].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, RightArrow);
+                TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 1] + 1].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow, RightArrow);
             }
 
             if (newNeighbourId.Contains(selectedTileId[selectedTileId.Count - 1] - 1))
             {
-                TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 1] - 1].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, LeftArrow);
+                TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 1] - 1].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow, LeftArrow);
             }
         }
 
         if (selectedTileId.Count > 1)
         {
             Debug.Log("fjdgoi");
-            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] + 9].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect);
-            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] - 1].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect);
-            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] + 1].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect);
-            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] - 9].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect);
+            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] + 9].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
+            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] - 1].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
+            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] + 1].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
+            TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] - 9].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
         }
     }
 }
