@@ -22,13 +22,13 @@ MonoBehaviour:
   CreationCost: 4
   numberOfUnitToAttack: 1
   DamageMinimum: 1
-  NumberRangeMin: {x: 3, y: 7}
+  NumberRangeMin: {x: 11, y: 12}
   DamageMaximum: 2
-  NumberRangeMax: {x: 8, y: 12}
+  NumberRangeMax: {x: 13, y: 14}
   Son1: {fileID: 0}
   Son2: {fileID: 0}
   Sprite: {fileID: 5601724313049997956, guid: a50948e13bd96eb4099118ef8c1813aa, type: 3}
   CanAttackEmptyTile: 0
   UsefullToWin: 0
   IsInRedArmy: 1
-  UnitAttributs: 090000000700000000000000
+  UnitAttributs: 010000000500000006000000

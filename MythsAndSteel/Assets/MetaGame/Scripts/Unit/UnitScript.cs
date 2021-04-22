@@ -55,7 +55,7 @@ public class UnitScript : MonoBehaviour
     [SerializeField] public int _diceBonus = 0;
     public int DiceBonus => _diceBonus;
 
-
+    
     [Header("------------------- MOUVEMENT -------------------")]
     //Vitesse de déplacement
     [SerializeField] int _moveSpeed;
@@ -147,6 +147,8 @@ public class UnitScript : MonoBehaviour
 
     private void Start()
     {
+        UpdateUnitStat();
+
         // On instancie l'object qui possède le sprite correspondant à l'UI au point de vie et de bouclier de l'unité.
         GameObject LifeHeartUI = Instantiate(UIInstance.Instance.LifeHeartPrefab, gameObject.transform);
 
