@@ -23,9 +23,12 @@ public class Option : MonoBehaviour
     //-------Avertissement--------
     bool isAvertissement;
 
-    #region Résolution
     private void Start()
     {
+        SetEffectvolume(PlayerPrefs.GetFloat("Effectvolume"));
+        SetMusicVolume(PlayerPrefs.GetFloat("MusicVolum"));
+
+
         resolutions = Screen.resolutions; //Récupère toute les résoluttion possible
         ResolutionDropdown.ClearOptions();//Enlève les options de bases du Dropdown
 
@@ -33,13 +36,13 @@ public class Option : MonoBehaviour
         //--------Convertie les résolution en String pour les afficher dans le Dropdown---------
         List<string> options = new List<string>();
 
-        
-        for (int i=0; i<resolutions.Length; i++)
+
+        for (int i = 0; i < resolutions.Length; i++)
         {
-           string option = resolutions[i].width + "x" + resolutions[i].height;
+            string option = resolutions[i].width + "x" + resolutions[i].height;
             options.Add(option);
 
-            if(resolutions[i].width == Screen.currentResolution.width && //Cherche la résolution actuelle de l'écran
+            if (resolutions[i].width == Screen.currentResolution.width && //Cherche la résolution actuelle de l'écran
                resolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionIndex = i;
@@ -51,6 +54,8 @@ public class Option : MonoBehaviour
         ResolutionDropdown.value = currentResolutionIndex; //Assigne la résolution actuelle au Dropdown
         ResolutionDropdown.RefreshShownValue();//Actualise le Dropdown pour afficher la résolution actuelle
     }
+
+    #region Résolution
 
     public void SetResolution(int resolutionIndex) //
     {
@@ -110,11 +115,13 @@ public class Option : MonoBehaviour
     public void SetEffectvolume (float volume)
     {
         audioMixer.SetFloat("Effect", volume);
+        PlayerPrefs.SetFloat("EffectVolume", volume);
     }
 
     public void SetMusicVolume(float volume)
     {
         audioMixer.SetFloat("Music", volume);
+        PlayerPrefs.SetFloat("MusicVolume", volume);
     }
     #endregion
 
@@ -125,5 +132,6 @@ public class Option : MonoBehaviour
     }
     #endregion
 
+    
 
 }
