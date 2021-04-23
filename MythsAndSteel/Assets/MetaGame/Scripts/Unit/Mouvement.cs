@@ -464,10 +464,8 @@ public class Mouvement : MonoSingleton<Mouvement>
                             temp.Add(selectedTileId[i]);
                             TilesManager.Instance.TileList[selectedTileId[i]].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, _selectedSprite); // Repasse les sprites en apparence "séléctionnable".
                             // Déselectionne les cases. hxh
-                            TilesManager.Instance.TileList[selectedTileId[i] + 9].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
-                            TilesManager.Instance.TileList[selectedTileId[i] - 9].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
-                            TilesManager.Instance.TileList[selectedTileId[i] + 1].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
-                            TilesManager.Instance.TileList[selectedTileId[i] - 9].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
+
+                            TilesManager.Instance.TileList[selectedTileId[i]].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
 
                         }
                         else
