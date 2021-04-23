@@ -463,7 +463,12 @@ public class Mouvement : MonoSingleton<Mouvement>
 
                             temp.Add(selectedTileId[i]);
                             TilesManager.Instance.TileList[selectedTileId[i]].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect, _selectedSprite); // Repasse les sprites en apparence "séléctionnable".
-                            // Déselectionne les cases.
+                            // Déselectionne les cases. hxh
+                            TilesManager.Instance.TileList[selectedTileId[i] + 9].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
+                            TilesManager.Instance.TileList[selectedTileId[i] - 9].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
+                            TilesManager.Instance.TileList[selectedTileId[i] + 1].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
+                            TilesManager.Instance.TileList[selectedTileId[i] - 9].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
+
                         }
                         else
                         {
@@ -613,7 +618,6 @@ public class Mouvement : MonoSingleton<Mouvement>
             UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
         }
         DisplayMoveArrow();
-
     }
 
     /// <summary>
@@ -781,7 +785,7 @@ public class Mouvement : MonoSingleton<Mouvement>
 
         if (selectedTileId.Count > 1)
         {
-            Debug.Log("fjdgoi");
+            Debug.Log("Détruire fleches");
             TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] + 9].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
             TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] - 1].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
             TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] + 1].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
