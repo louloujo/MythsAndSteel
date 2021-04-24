@@ -436,7 +436,6 @@ GameObject:
   - component: {fileID: 18941025}
   - component: {fileID: 18941027}
   - component: {fileID: 18941026}
-  - component: {fileID: 18941028}
   m_Layer: 0
   m_Name: Jauge
   m_TagString: Untagged
@@ -461,7 +460,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -149, y: -92}
+  m_AnchoredPosition: {x: -149, y: 48.4}
   m_SizeDelta: {x: 645.6763, y: 96.8515}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &18941026
@@ -502,25 +501,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18941024}
   m_CullTransparentMesh: 1
---- !u!95 &18941028
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 18941024}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e5762cd4fe3a8d043be32aec883f3890, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &20062007
 GameObject:
   m_ObjectHideFlags: 0
@@ -2563,6 +2543,7 @@ MonoBehaviour:
   _selectedSprite: {fileID: 21300000, guid: 729aaa8c99018e44990a4a6b7842a9fa, type: 3}
   Ui: {fileID: 400880111}
   Go: 0
+  JaugeAttack: {fileID: 400880111}
 --- !u!1001 &144114180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11333,6 +11314,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 777859340}
     m_Modifications:
     - target: {fileID: 6244242718017290048, guid: 05ea443c18494aa4b9bebdf213b20ae8, type: 3}
+      propertyPath: _diceBonus
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244242718017290048, guid: 05ea443c18494aa4b9bebdf213b20ae8, type: 3}
       propertyPath: _actualTileld
       value: 10
       objectReference: {fileID: 0}
@@ -11887,7 +11872,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10
+  m_text: '?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb7f594cfee377946b6a7722bdbf99b4, type: 2}
   m_sharedMaterial: {fileID: 4168847588075372454, guid: fb7f594cfee377946b6a7722bdbf99b4, type: 2}
@@ -15821,7 +15806,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: '?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb7f594cfee377946b6a7722bdbf99b4, type: 2}
   m_sharedMaterial: {fileID: 4168847588075372454, guid: fb7f594cfee377946b6a7722bdbf99b4, type: 2}
@@ -16214,9 +16199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '5
-
-'
+  m_text: '?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb7f594cfee377946b6a7722bdbf99b4, type: 2}
   m_sharedMaterial: {fileID: 4168847588075372454, guid: fb7f594cfee377946b6a7722bdbf99b4, type: 2}
@@ -18284,6 +18267,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 777859340}
     m_Modifications:
     - target: {fileID: 6244242718017290048, guid: 05ea443c18494aa4b9bebdf213b20ae8, type: 3}
+      propertyPath: _diceBonus
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244242718017290048, guid: 05ea443c18494aa4b9bebdf213b20ae8, type: 3}
       propertyPath: _actualTileld
       value: 15
       objectReference: {fileID: 0}
@@ -19689,6 +19676,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 777859340}
     m_Modifications:
+    - target: {fileID: 6244242718017290048, guid: 05ea443c18494aa4b9bebdf213b20ae8, type: 3}
+      propertyPath: _diceBonus
+      value: -3
+      objectReference: {fileID: 0}
     - target: {fileID: 6244242718017290048, guid: 05ea443c18494aa4b9bebdf213b20ae8, type: 3}
       propertyPath: _actualTileld
       value: 29
@@ -26327,8 +26318,6 @@ MonoBehaviour:
     _ressources: {fileID: 1066021800}
     _uiTiles: {fileID: 1154411010}
   Terrain: {fileID: 11400000, guid: 6b9cd9dfcef01a747b717485f579f9a3, type: 2}
-  JaugeAttack: {fileID: 400880111}
-  JaugeAttackAnimator: {fileID: 18941028}
   _activationLeftTxtRP: {fileID: 563251741}
   _activationLeftTxtBP: {fileID: 1626702624}
   _ressourceLeftTxtRP: {fileID: 168102907}
@@ -34506,7 +34495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6244242718017290048, guid: 05ea443c18494aa4b9bebdf213b20ae8, type: 3}
       propertyPath: _diceBonus
-      value: -5
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 6244242718017290048, guid: 05ea443c18494aa4b9bebdf213b20ae8, type: 3}
       propertyPath: MoveSpeedBonus

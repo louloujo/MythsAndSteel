@@ -550,7 +550,7 @@ TextureImporter:
       name: Sprite sheet attaque centre_18
       rect:
         serializedVersion: 2
-        x: 1005
+        x: 1006
         y: 62
         width: 335
         height: 62
@@ -702,7 +702,7 @@ TextureImporter:
         width: 335
         height: 62
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
