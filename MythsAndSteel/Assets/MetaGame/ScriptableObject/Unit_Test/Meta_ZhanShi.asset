@@ -31,4 +31,4 @@ MonoBehaviour:
   CanAttackEmptyTile: 1
   UsefullToWin: 0
   IsInRedArmy: 0
-  UnitAttributs: 000000000000000000000000
+  UnitAttributs: 020000000300000004000000

@@ -1,5 +1,27 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &5175906133083138480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4473479720353736792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa96692a7d2f2c4493090433583d569, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Capacity1Name: C TROP CHIANT
+  render1: {fileID: 21300000, guid: 778083e7eba65f040a645d34ad449d9b, type: 3}
+  _Capacity1Description: "Jpp je veux dormir voila c dit et cette capa va \xEAtre
+    longue pour test la taille du texte"
+  _Capacity1Cost: 0
+  _isCapacity2Exist: 1
+  _Capacity2Name: Cours de culture
+  render2: {fileID: 21300000, guid: 2464b79d1d9c3b240858e925750e6aea, type: 3}
+  _Capacity2Description: Vous pouvez enfin dormir
+  _Capacity2Cost: 0
 --- !u!1001 &6423474474805062507
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -133,6 +155,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
+--- !u!1 &4473479720353736792 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7435506871874765619, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
+  m_PrefabInstance: {fileID: 6423474474805062507}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &4473479720353736807 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7435506871874765580, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}

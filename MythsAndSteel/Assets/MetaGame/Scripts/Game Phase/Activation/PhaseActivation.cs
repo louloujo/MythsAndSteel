@@ -5,12 +5,12 @@ using UnityEngine.UI;
 using EasyButtons;
 
 /*
-Ce Script gère la phase d'activation : le choix de la carte d'activation, la confirmation du choix pour chaque joueur,
-ainsi que la comparaison entre les deux cartes choisies pour savoir quelle joueur a l'initiative et combien d'unité chaque joueur peut activer.
+Ce Script gÃ¨re la phase d'activation : le choix de la carte d'activation, la confirmation du choix pour chaque joueur,
+ainsi que la comparaison entre les deux cartes choisies pour savoir quelle joueur a l'initiative et combien d'unitÃ© chaque joueur peut activer.
 Ce script renvoie comme principals informations :
 - une bool IsPlayer1Starting pour savoir qui commence
-- une float J1DernièreValeurActivation et une float J2DernièreValeurActivation pour savoir le montant d'unité activable pendant le tour
-- Une list de CarteActivation CarteActivationUtilisée pour savoir quelle carte activation ont était utilisée depuis le début de la partie
+- une float J1DerniÃ¨reValeurActivation et une float J2DerniÃ¨reValeurActivation pour savoir le montant d'unitÃ© activable pendant le tour
+- Une list de CarteActivation CarteActivationUtilisÃ©e pour savoir quelle carte activation ont Ã©tait utilisÃ©e depuis le dÃ©but de la partie
 */
 
 public class PhaseActivation : MonoBehaviour
@@ -31,7 +31,7 @@ public class PhaseActivation : MonoBehaviour
     CarteActivation J1CarteVerif = null;
 
     List<CarteActivation> J1CartesNonVerif = new List<CarteActivation>();
-    private float J1DernièreValeurActivation;
+    private float J1DerniÃ¨reValeurActivation;
 
     private bool _j1CarteChoisie = false;
     public bool J1CarteChoisie => _j1CarteChoisie;
@@ -50,13 +50,13 @@ public class PhaseActivation : MonoBehaviour
     bool J2Verif = false;
     CarteActivation J2CarteVerif = null;
     List<CarteActivation> J2CartesNonVerif = new List<CarteActivation>();
-    private float J2DernièreValeurActivation;
+    private float J2DerniÃ¨reValeurActivation;
 
     private bool _j2CarteChoisie = false;
     public bool J2CarteChoisie => _j2CarteChoisie;
 
     //Variables communes
-    private List<CarteActivation> CarteActivationUtilisée = new List<CarteActivation>();
+    private List<CarteActivation> CarteActivationUtilisÃ©e = new List<CarteActivation>();
 
     [SerializeField] private GameObject _result = null;
 
@@ -79,7 +79,7 @@ public class PhaseActivation : MonoBehaviour
             //Joueur 1
             if(!_j1CarteChoisie)
             {
-                //On vérifie si le joueur 1 choisit sa carte
+                //On vÃ©rifie si le joueur 1 choisit sa carte
                 if(J1Verif && Input.GetKeyDown(J1CarteVerif.inputCarteActivation))
                 {
                     foreach(CarteActivation Carteactivations in RedCartesActivation)
@@ -89,8 +89,8 @@ public class PhaseActivation : MonoBehaviour
                         HasConfirmedPanelRed.SetActive(true);
                     }
 
-                    J1DernièreValeurActivation = float.Parse(J1CarteVerif.valeurActivation) / 10;
-                    CarteActivationUtilisée.Add(J1CarteVerif);
+                    J1DerniÃ¨reValeurActivation = float.Parse(J1CarteVerif.valeurActivation) / 10;
+                    CarteActivationUtilisÃ©e.Add(J1CarteVerif);
                     RedCartesActivation.Clear();
 
                     foreach(CarteActivation carteactivations in J1CartesNonVerif)
@@ -123,7 +123,7 @@ public class PhaseActivation : MonoBehaviour
                     }
                 }
 
-                //Check si le joueur appuie une première fois sur une touche
+                //Check si le joueur appuie une premiÃ¨re fois sur une touche
                 else if(J1Choix)
                 {
                     if(Input.anyKey)
@@ -168,12 +168,11 @@ public class PhaseActivation : MonoBehaviour
                         HasConfirmedPanelBlue.SetActive(true);
                     }
 
-                    J2DernièreValeurActivation = float.Parse(J2CarteVerif.valeurActivation) / 10;
-                    CarteActivationUtilisée.Add(J2CarteVerif);
+                    J2DerniÃ¨reValeurActivation = float.Parse(J2CarteVerif.valeurActivation) / 10;
+                    CarteActivationUtilisÃ©e.Add(J2CarteVerif);
                     BlueCartesActivation.Clear();
 
-                    foreach(CarteActivation carteactivations in J2CartesNonVerif)
-                    {
+                    foreach(CarteActivation carteactivations in J2CartesNonVerif){
                         BlueCartesActivation.Add(carteactivations);
                     }
 
@@ -197,6 +196,7 @@ public class PhaseActivation : MonoBehaviour
                             }
                             J2Choix = true;
                             J2Verif = false;
+                           
                         }
                     }
                 }
@@ -246,7 +246,7 @@ public class PhaseActivation : MonoBehaviour
         J1Choix = true;
         J1Verif = false;
 
-        J1DernièreValeurActivation = 0f;
+        J1DerniÃ¨reValeurActivation = 0f;
         _j1CarteChoisie = false;
 
         //Variables pour le joueur 2
@@ -258,7 +258,7 @@ public class PhaseActivation : MonoBehaviour
         J2Choix = true;
         J2Verif = false;
 
-        J2DernièreValeurActivation = 0f;
+        J2DerniÃ¨reValeurActivation = 0f;
         _j2CarteChoisie = false;
 
         UIInstance.Instance.BackgroundActivation.SetActive(true);
@@ -278,13 +278,13 @@ public class PhaseActivation : MonoBehaviour
     }
 
     /// <summary>
-    /// Lorsque les joueurs vont cliquer sur le bouton pour aller à la phase suivante
+    /// Lorsque les joueurs vont cliquer sur le bouton pour aller Ã  la phase suivante
     /// </summary>
     public void ShowResult()
     {
         UIInstance.Instance.BackgroundActivation.SetActive(false);
 
-        float InitiativeValeur = J1DernièreValeurActivation - J2DernièreValeurActivation;
+        float InitiativeValeur = J1DerniÃ¨reValeurActivation - J2DerniÃ¨reValeurActivation;
         float rgb = 0.2f;
         if(InitiativeValeur < 0)
         {
@@ -310,15 +310,15 @@ public class PhaseActivation : MonoBehaviour
         HasConfirmedPanelRed.SetActive(false);
         HasConfirmedPanelBlue.SetActive(false);
 
-        PlayerScript.Instance.RedPlayerInfos.ActivationLeft = (int)J1DernièreValeurActivation;
-        PlayerScript.Instance.BluePlayerInfos.ActivationLeft = (int)J2DernièreValeurActivation;
+        PlayerScript.Instance.RedPlayerInfos.ActivationLeft = (int)J1DerniÃ¨reValeurActivation;
+        PlayerScript.Instance.BluePlayerInfos.ActivationLeft = (int)J2DerniÃ¨reValeurActivation;
         UIInstance.Instance.UpdateActivationLeft();
 
         UIInstance.Instance.ActivateNextPhaseButton();
     }
 
     /// <summary>
-    /// Passe à la phase suivante
+    /// Passe Ã  la phase suivante
     /// </summary>
     public void DesactivateActivationPhase()
     {
