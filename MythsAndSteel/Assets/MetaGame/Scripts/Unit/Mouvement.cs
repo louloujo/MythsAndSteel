@@ -621,10 +621,17 @@ public class Mouvement : MonoSingleton<Mouvement>
     /// </summary>
     public void ApplyMouvement()
     {
+
+        if (!SoundController.Instance.Source.isPlaying)
+        {
+            SoundController.Instance.PlaySound(RaycastManager.Instance.ActualUnitSelected.GetComponent<UnitScript>().SonDeplacement);
+        }
+
         Attaque.Instance.RemoveTileSprite(true);
 
         //Ferme le panneau de déplacement
         UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
+
 
         if(_selectedTileId.Count > 1)
         {

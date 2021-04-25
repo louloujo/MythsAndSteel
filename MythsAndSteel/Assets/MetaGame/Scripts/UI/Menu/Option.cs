@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Option : MonoBehaviour
 {
+    #region Variables
     //---------Audio--------------
     public AudioMixer audioMixer; //Variable qui défini quel AudioMixer on modifie
 
@@ -22,6 +23,7 @@ public class Option : MonoBehaviour
 
     //-------Avertissement--------
     bool isAvertissement;
+    #endregion 
 
     private void Start()
     {

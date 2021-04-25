@@ -194,6 +194,9 @@ MonoBehaviour:
   MoveSpeedBonus: 0
   _moveLeft: 0
   _creationCost: 0
+  _SonAttaque: {fileID: 0}
+  _SonDeplacement: {fileID: 0}
+  _SonMort: {fileID: 0}
   _actualTileld: 0
   _hasStartMove: 0
   _isMoveDone: 0

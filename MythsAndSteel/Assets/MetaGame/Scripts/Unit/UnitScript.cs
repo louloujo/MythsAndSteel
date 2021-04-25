@@ -81,6 +81,20 @@ public class UnitScript : MonoBehaviour
     [SerializeField] int _creationCost;
     public int CreationCost => _creationCost;
 
+    [Header("----------------------- SOUND -----------------------------")]
+    
+    [SerializeField] AudioClip _SonAttaque;
+    public AudioClip SonAttaque => _SonAttaque;
+
+    [SerializeField] AudioClip _SonDeplacement;
+    public AudioClip SonDeplacement => _SonDeplacement;
+
+    [SerializeField] AudioClip _SonMort;
+    public AudioClip SonMort => _SonMort;
+
+    private AudioSource _SourceAudio;
+    public AudioSource SourceAudio => _SourceAudio;
+
     [Header("------------------- CASE DE L'UNITE -------------------")]
     //Valeur (id) de la case sur laquelle se trouve l'unité
     [SerializeField] int _actualTileld;
@@ -134,7 +148,7 @@ public class UnitScript : MonoBehaviour
     List<int> _pathtomake;
     public List<int> Pathtomake => _pathtomake;
 
-    [Header("------------------- STAUT DE L'UNITE -------------------")]
+    [Header("------------------- STATU DE L'UNITE -------------------")]
     //Statut que possède l'unité
     [SerializeField] private List<MYthsAndSteel_Enum.UnitStatut> _unitStatus = new List<MYthsAndSteel_Enum.UnitStatut>();
     public List<MYthsAndSteel_Enum.UnitStatut> UnitStatus => _unitStatus;
@@ -364,7 +378,8 @@ public class UnitScript : MonoBehaviour
     /// </summary>
     public virtual void Death()
     {
-        if(UnitSO.IsInRedArmy) PlayerScript.Instance.UnitRef.UnitListRedPlayer.Remove(gameObject);
+        
+        if (UnitSO.IsInRedArmy) PlayerScript.Instance.UnitRef.UnitListRedPlayer.Remove(gameObject);
         else PlayerScript.Instance.UnitRef.UnitListBluePlayer.Remove(gameObject);
 
         if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneRed)){
@@ -376,6 +391,7 @@ public class UnitScript : MonoBehaviour
             PlayerScript.Instance.BluePlayerInfos.CheckOrgone(2);
         }
         else { }
+        
 
         PlayerScript.Instance.GiveEventCard(UnitSO.IsInRedArmy ? 1 : 2);
 
@@ -395,7 +411,7 @@ public class UnitScript : MonoBehaviour
             yield return new WaitForSeconds(Animation.runtimeAnimatorController.animationClips[0].length);
         }
         Destroy(gameObject);
-
+        SoundController.Instance.PlaySound(_SonMort);
         Debug.Log("Unité Détruite");
     }
 
@@ -455,6 +471,12 @@ public class UnitScript : MonoBehaviour
 
         //Assigne le sprite de l'unité
         GetComponent<SpriteRenderer>().sprite = _unitSO.Sprite;
+
+        //Assigne les sons
+        _SonAttaque = _unitSO.SonAttaque;
+        _SonDeplacement = _unitSO.SonDeplacement;
+        _SonMort = _unitSO.SonMort;
+        _SourceAudio = GetComponent<AudioSource>();
 
         ResetTurn();
     }
@@ -520,4 +542,5 @@ public class UnitScript : MonoBehaviour
             }
         }
     }
+
 }
