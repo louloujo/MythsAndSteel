@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class TileScript : MonoBehaviour
 {
@@ -38,7 +38,7 @@ public class TileScript : MonoBehaviour
     //Id de la case
     [SerializeField] private int _tileId;
     public int TileId => _tileId;
-    
+
     [Space(20)]
     //Liste des effets de terrain sur chaque tile
     [SerializeField] private List<MYthsAndSteel_Enum.TerrainType> _terrainEffectList = new List<MYthsAndSteel_Enum.TerrainType>();
@@ -57,74 +57,90 @@ public class TileScript : MonoBehaviour
     [SerializeField] int _resourcesCounter = 0;
     public int ResourcesCounter => _resourcesCounter;
 
-    private void Start(){
-        //Met l'unité à la bonne position
-        if(_unit != null){
+    private void Start()
+    {
+        //Met l'unitï¿½ ï¿½ la bonne position
+        if (_unit != null)
+        {
             _unit.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, _unit.transform.position.z);
         }
 
-        for(int i = 0; i < transform.childCount; i++){
+        for (int i = 0; i < transform.childCount; i++)
+        {
             _Child.Add(transform.GetChild(i).gameObject);
         }
     }
 
     /// <summary>
-    /// Ajoute une unité à cette case
+    /// Ajoute une unitï¿½ ï¿½ cette case
     /// </summary>
     /// <param name="unit"></param>
-    public void AddUnitToTile(GameObject unit, bool inEditor = false){
+    public void AddUnitToTile(GameObject unit, bool inEditor = false)
+    {
         _unit = unit;
         _unit.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, _unit.transform.position.z);
 
-        if(!inEditor) _unit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(this.gameObject);
+        if (!inEditor) _unit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(this.gameObject);
     }
 
     /// <summary>
-    /// Enleve l'unité qui se trouve sur cette case
+    /// Enleve l'unitï¿½ qui se trouve sur cette case
     /// </summary>
-    public void RemoveUnitFromTile(){
+    public void RemoveUnitFromTile()
+    {
         _unit = null;
     }
 
     /// <summary>
-    /// Active un enfant à l'unité
+    /// Active un enfant ï¿½ l'unitï¿½
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    public GameObject ActiveChildObj(MYthsAndSteel_Enum.ChildTileType type, Sprite sprite = null, float alpha = 1f){
+    public GameObject ActiveChildObj(MYthsAndSteel_Enum.ChildTileType type, Sprite sprite = null, float alpha = 1f)
+    {
         GameObject child = null;
 
-        foreach(GameObject gam in _Child){ 
+        foreach (GameObject gam in _Child)
+        {
             string tag = "";
-            if(gam.GetComponent<SpriteRenderer>() != null)
+            if (gam.GetComponent<SpriteRenderer>() != null)
             {
-                switch(type)
+                switch (type)
                 {
                     case MYthsAndSteel_Enum.ChildTileType.MoveSelect:
                         tag = "MoveSelectable";
-                        if(gam.tag == tag)
+                        if (gam.tag == tag)
                         {
                             child = gam;
                             child.GetComponent<SpriteRenderer>().enabled = true;
-                            if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
+                            if (sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
                         }
                         break;
                     case MYthsAndSteel_Enum.ChildTileType.AttackSelect:
                         tag = "AttackSelectable";
-                        if(gam.tag == tag)
+                        if (gam.tag == tag)
                         {
                             child = gam;
                             child.GetComponent<SpriteRenderer>().enabled = true;
-                            if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
+                            if (sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
                         }
                         break;
                     case MYthsAndSteel_Enum.ChildTileType.EventSelect:
                         tag = "SelectableTile";
-                        if(gam.tag == tag)
+                        if (gam.tag == tag)
                         {
                             child = gam;
                             child.GetComponent<SpriteRenderer>().enabled = true;
-                            if(sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
+                            if (sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
+                        }
+                        break;
+                    case MYthsAndSteel_Enum.ChildTileType.MoveArrow:
+                        tag = "DisplayArrowForMove";
+                        if (gam.tag == tag)
+                        {
+                            child = gam;
+                            child.GetComponent<SpriteRenderer>().enabled = true;
+                            if (sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
                         }
                         break;
                 }
@@ -135,20 +151,21 @@ public class TileScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Désactive un enfant à l'unité
+    /// Dï¿½sactive un enfant ï¿½ l'unitï¿½
     /// </summary>
     /// <param name="type"></param>
     /// <param name="destroy"></param>
     /// <returns></returns>
-    public GameObject DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType type, bool destroy = false){
+    public GameObject DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType type, bool destroy = false)
+    {
         GameObject child = null;
 
-        foreach(GameObject gam in _Child)
+        foreach (GameObject gam in _Child)
         {
             string tag = "";
-            if(gam.GetComponent<SpriteRenderer>() != null)
+            if (gam.GetComponent<SpriteRenderer>() != null)
             {
-                switch(type)
+                switch (type)
                 {
                     case MYthsAndSteel_Enum.ChildTileType.MoveSelect:
                         tag = "MoveSelectable";
@@ -159,13 +176,16 @@ public class TileScript : MonoBehaviour
                     case MYthsAndSteel_Enum.ChildTileType.EventSelect:
                         tag = "SelectableTile";
                         break;
+                    case MYthsAndSteel_Enum.ChildTileType.MoveArrow:
+                        tag = "DisplayArrowForMove";
+                        break;
                 }
 
-                if(gam.tag == tag)
+                if (gam.tag == tag)
                 {
                     child = gam;
                     child.GetComponent<SpriteRenderer>().enabled = false;
-                    if(destroy)
+                    if (destroy)
                     {
                         _Child.Remove(child);
                         Destroy(child);
@@ -178,21 +198,24 @@ public class TileScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Change le joueur qui possède le drapeau
+    /// Change le joueur qui possï¿½de le drapeau
     /// </summary>
     /// <param name="own"></param>
-    public void ChangePlayerObj(MYthsAndSteel_Enum.Owner own){
+    public void ChangePlayerObj(MYthsAndSteel_Enum.Owner own)
+    {
         _ownerObjectiv = own;
     }
 
     /// <summary>
-    /// Enleve des ressources à la case
+    /// Enleve des ressources ï¿½ la case
     /// </summary>
     /// <param name="value"></param>
-    public void RemoveRessources(int value, int player){
-        if(_resourcesCounter - value >= 0){
+    public void RemoveRessources(int value, int player)
+    {
+        if (_resourcesCounter - value >= 0)
+        {
             _resourcesCounter -= value;
-            if(player == 1)
+            if (player == 1)
             {
                 PlayerScript.Instance.RedPlayerInfos.Ressource += value;
             }
@@ -201,7 +224,7 @@ public class TileScript : MonoBehaviour
                 PlayerScript.Instance.BluePlayerInfos.Ressource += value;
             }
         }
-        else{
+         else{
             int ressourceToGice = value - (_resourcesCounter - value);
 
             if(player == 1){
@@ -210,11 +233,11 @@ public class TileScript : MonoBehaviour
             else{
                 PlayerScript.Instance.BluePlayerInfos.Ressource += value;
             }
-        }
+         }
     }
 
     /// <summary>
-    /// Ajoute un effet à la case
+    /// Ajoute un effet ï¿½ la case
     /// </summary>
     /// <param name="Type"></param>
     public void CreateEffect(MYthsAndSteel_Enum.TerrainType Type)
