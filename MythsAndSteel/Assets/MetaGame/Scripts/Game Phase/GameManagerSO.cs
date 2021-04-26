@@ -76,6 +76,7 @@ public class GameManagerSO : ScriptableObject
             {
                 phaseSuivante = 0;
                 GameManager.Instance.ActualTurnNumber++;
+                GameManager.Instance.UpdateTurn();
             }
         }
 
