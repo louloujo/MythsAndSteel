@@ -28,12 +28,12 @@ public class MouseCommand : MonoBehaviour
     public List<GameObject> ShiftUI => _shiftUI;
 
     [Header("DELAI ATTENTE MOUSE OVER")]
-    //Paramètre de délai qui s'applique à la couritine.
+    //Paramètre de délai qui s'applique à la coroutine.
     [SerializeField] private float _timeToWait = 2f;
     public float TimeToWait => _timeToWait;
 
     [Header("VALEUR POSITION UI")]
-    //Permet de modifier la position de l'UI dans l'escpace
+    //Permet de modifier la position de l'UI dans l'espace
     [SerializeField] private float _offsetXActivationMenu;
     [SerializeField] private float _offsetYActivationMenu;
     [Space]
@@ -214,6 +214,10 @@ public class MouseCommand : MonoBehaviour
 
             UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta.x, 212 * UI.effetDeTerrain.Count);
         }
+
+        GameObject Tile = RaycastManager.Instance.Tile;
+        // Update des info de la tile sur le pannel du bas
+        UI.Terrain.Synch(Tile.GetComponent<TileScript>(), );
     }
 
     #endregion UpdateStats
@@ -1313,4 +1317,4 @@ public class UnitIcon
     public Sprite LeaderSprite;
     public Sprite MytheSprite;
     public Sprite MechaSprite;
-}
+}   
