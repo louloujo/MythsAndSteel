@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 using System;
+using UnityEngine.UI;
 
 /*
     Ce script est le Game Manager. Il va gérer toutes les phases du jeu, les différents tours de jeu, ...
@@ -30,6 +31,7 @@ public class GameManager : MonoSingleton<GameManager>{
             _actualTurnNumber = value;
         }
     }
+    [SerializeField] TextMeshProUGUI _TurnNumber;
 
     //Permet de savoir si c'est le joueur 1 (TRUE) ou le joueur 2 (FALSE) qui commence durant ce tour
     [SerializeField] private bool _isPlayerRedStarting = false;
@@ -558,5 +560,10 @@ public class GameManager : MonoSingleton<GameManager>{
         yield return new WaitForSeconds(1.35f);
         ManagerSO.GoToPhase();
         _isInTurn = true;
+    }
+
+    public void UpdateTurn()
+    {
+        _TurnNumber.text = _actualTurnNumber.ToString();
     }
 }
