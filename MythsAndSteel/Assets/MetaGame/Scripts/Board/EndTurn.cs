@@ -32,14 +32,20 @@ public class EndTurn : MonoBehaviour
         foreach(GameObject Tile in TilesManager.Instance.ResourcesList)
         {
             TileScript S = Tile.GetComponent<TileScript>();
-            if(S.Unit != null)
+            if (S.ResourcesCounter != 0)
             {
-                UnitScript US = S.Unit.GetComponent<UnitScript>();
-                S.RemoveRessources(1, PlayerStatic.CheckIsUnitArmy(US.GetComponent<UnitScript>(), true) == true ? 1 : 2);
+                if (S.Unit != null)
+                {
+                    UnitScript US = S.Unit.GetComponent<UnitScript>();
+                    S.RemoveRessources(1, PlayerStatic.CheckIsUnitArmy(US.GetComponent<UnitScript>(), true) == true ? 1 : 2);
+                }
             }
+
             if(S.ResourcesCounter == 0)
             {
-                S.RemoveEffect(MYthsAndSteel_Enum.TerrainType.Point_de_ressource); 
+                S.RemoveEffect(MYthsAndSteel_Enum.TerrainType.Point_de_ressource);
+                S.TerrainEffectList.Remove(MYthsAndSteel_Enum.TerrainType.Point_de_ressource);
+                S.TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Point_de_ressources_vide);
             }
         }
     }

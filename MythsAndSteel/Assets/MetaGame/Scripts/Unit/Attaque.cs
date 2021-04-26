@@ -109,8 +109,8 @@ public class Attaque : MonoSingleton<Attaque>
         firstDiceInt = Random.Range(1, 7);
         secondDiceInt = Random.Range(1, 7);
 
-        //DiceResult = firstDiceInt + secondDiceInt + selectedUnit.GetComponent<UnitScript>().DiceBonus;
-        DiceResult = firstDiceInt + secondDiceInt;
+        DiceResult = firstDiceInt + secondDiceInt + RaycastManager.Instance.ActualUnitSelected.GetComponent<UnitScript>().DiceBonus;
+        //DiceResult = firstDiceInt + secondDiceInt;
 
         RandomMore();
     }
@@ -128,6 +128,7 @@ public class Attaque : MonoSingleton<Attaque>
             ChangeStat();  
             AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
+            SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
             Debug.Log("Damage : " + _damageMinimum);
             StopAttack();
         }
@@ -145,6 +146,7 @@ public class Attaque : MonoSingleton<Attaque>
             {
                 ChangeStat();
                 selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
+                SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
                 Debug.Log("Damage : " + null);
                 StopAttack();
             }
@@ -166,6 +168,7 @@ public class Attaque : MonoSingleton<Attaque>
             ChangeStat();
             AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
+            SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
             Debug.Log("Damage : " + _damageMinimum);
             StopAttack();
         }
@@ -174,6 +177,7 @@ public class Attaque : MonoSingleton<Attaque>
             ChangeStat();
             AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMaximum);
+            SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
             Debug.Log("Damage : " + _damageMaximum);
             StopAttack();
         }
@@ -190,6 +194,7 @@ public class Attaque : MonoSingleton<Attaque>
             {
                 ChangeStat();
                 selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
+                SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
                 Debug.Log("Damage : " + null);
                 StopAttack();
             }
@@ -263,6 +268,8 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
+    [SerializeField] private AttaqueUI Ui;
+    public bool Go = false;
     /// <summary>
     /// Choisit le type d'attaque
     /// </summary>
@@ -273,11 +280,14 @@ public class Attaque : MonoSingleton<Attaque>
     /// <param name="DiceResult"></param>
     void ChooseAttackType(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, int DiceResult)
     {
+        Go = false;
+        Debug.Log("Dice: " + (firstDiceInt + secondDiceInt));
+        Ui.SynchAttackBorne(RaycastManager.Instance.ActualUnitSelected.GetComponent<UnitScript>());
+        Ui.Attack(firstDiceInt + secondDiceInt);
         if (_numberRangeMax.x == 0 && _numberRangeMax.y == 0)
         {
             UnitAttackOneRange(_numberRangeMin, _damageMinimum, DiceResult);
         }
-
         else
         {
             UnitAttackTwoRanges(_numberRangeMin, _damageMinimum, _numberRangeMax, _damageMaximum, DiceResult);
@@ -340,31 +350,58 @@ public class Attaque : MonoSingleton<Attaque>
     /// </summary>
     public void StartAttackSelectionUnit(int tileId = -1)
     {
-        if(tileId != -1)
+        if (GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0)
         {
-            if(!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
+            if (tileId != -1)
             {
-                _isInAttack = false;
-                StartAttack(tileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
+
+
+                if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
+                {
+                    _isInAttack = false;
+                    StartAttack(tileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
+                }
+                else
+                {
+                    _selected = false;
+                }
+
             }
             else
             {
-                _selected = false;
+                GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
+
+                if (tileSelected != null)
+                {
+                    _selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
+                    if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
+                    {
+                        Debug.Log(_selectedUnit);
+                        _selected = true;
+                        GetStats();
+                        UpdateJauge(tileId);
+                        StartAttack(tileSelected.GetComponent<TileScript>().TileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
+                    }
+                    else
+                    {
+                        _selected = false;
+                    }
+                }
+                else
+                {
+                    _selected = false;
+                }
             }
         }
-        else
+        else if (!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.ActivationLeft > 0)
         {
-            GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
-
-            if(tileSelected != null)
+            if (tileId != -1)
             {
-                _selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
-                if(!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
+                if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
                 {
-                    Debug.Log(_selectedUnit);
-                    _selected = true;
-                    GetStats();
-                    StartAttack(tileSelected.GetComponent<TileScript>().TileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
+                    _isInAttack = false;
+                    StartAttack(tileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
+
                 }
                 else
                 {
@@ -373,12 +410,51 @@ public class Attaque : MonoSingleton<Attaque>
             }
             else
             {
-                _selected = false;
+                GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
+
+                if (tileSelected != null)
+                {
+                    _selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
+                    if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
+                    {
+                        Debug.Log(_selectedUnit);
+                        _selected = true;
+                     
+                        GetStats();
+                           UpdateJauge(tileId);
+                        StartAttack(tileSelected.GetComponent<TileScript>().TileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
+                    }
+                    else
+                    {
+                        _selected = false;
+                    }
+                }
+                else
+                {
+                    _selected = false;
+                }
             }
         }
-        
     }
-
+    [Header("Jauge d'attaque")]
+    [SerializeField] private AttaqueUI JaugeAttack;
+    public void UpdateJauge(int TileId = -1)
+    {
+        if (TileId != -1)
+        {
+            if (TilesManager.Instance.TileList[TileId].TryGetComponent(out TileScript u) && u.Unit != null)
+            {
+                if (GameManager.Instance.IsPlayerRedTurn && u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy)
+                {
+                    JaugeAttack.SynchAttackBorne(u.Unit.GetComponent<UnitScript>());
+                }
+                else if (!GameManager.Instance.IsPlayerRedTurn && !u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy)
+                {
+                    JaugeAttack.SynchAttackBorne(u.Unit.GetComponent<UnitScript>());
+                }
+            }
+        }
+    }
     /// <summary>
     /// PrÃ©pare l'Highlight des tiles ciblables & passe le statut de l'unitÃ© en -> _isInAttack
     /// </summary>
@@ -393,6 +469,7 @@ public class Attaque : MonoSingleton<Attaque>
             ID.Add(tileId);
 
             // Lance l'highlight des cases dans la range de l'unitÃ©.
+            UpdateJauge(tileId);
             Highlight(tileId, Range); 
         }
     }
@@ -754,6 +831,7 @@ public class Attaque : MonoSingleton<Attaque>
         if(selectedUnitEnnemy == null)
 
         {
+            SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
             Debug.Log("Damage : " + null);
 
 
@@ -762,6 +840,7 @@ public class Attaque : MonoSingleton<Attaque>
         {
 
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
+            SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
             Debug.Log("Damage : " + _damageMinimum);
             StopAttack();
         }

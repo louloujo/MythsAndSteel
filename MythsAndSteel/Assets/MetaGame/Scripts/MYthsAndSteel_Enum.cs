@@ -24,7 +24,7 @@ public class MYthsAndSteel_Enum : MonoBehaviour
     /// </summary>
     public enum ChildTileType
     {
-        AttackSelect, MoveSelect, EventSelect
+        AttackSelect, MoveSelect, EventSelect, MoveArrow
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ public class MYthsAndSteel_Enum : MonoBehaviour
     /// Tous les types de terrain
     /// </summary>
     public enum TerrainType{
-        Sol, Forêt, Bosquet, Plage, Colline, Haute_colline, Mont, Ravin, Eau, Boue, Rivière_Nord, Rivière_Sud, Rivière_Est, Rivière_Ouest, Fleuve, Ruisseau, Pont_Nord, Pont_Sud, Pont_Est, Pont_Ouest, Route, Rails, Maison, Immeuble, Ruines, UsineRouge, UsineBleu, Point_de_ressource, Gare, Bunker, Cabane_Isatabu, Point_Objectif, OrgoneBlue, OrgoneRed,
+        Sol, Forêt, Bosquet, Plage, Colline, Haute_colline, Mont, Ravin, Eau, Boue, Rivière_Nord, Rivière_Sud, Rivière_Est, Rivière_Ouest, Fleuve, Ruisseau, Pont_Nord, Pont_Sud, Pont_Est, Pont_Ouest, Route, Rails, Maison, Immeuble, Ruines, UsineRouge, UsineBleu, Point_de_ressource, Gare, Bunker, Cabane_Isatabu, Point_Objectif, OrgoneBlue, OrgoneRed, Point_de_ressources_vide
     }
 
     /// <summary>
