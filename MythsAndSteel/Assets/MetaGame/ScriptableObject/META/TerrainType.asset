@@ -170,3 +170,8 @@ MonoBehaviour:
     _eventType: 17000000
     render: {fileID: 0}
     Child: {fileID: 0}
+  - _terrainName: "Pt. \xC9puis\xE9"
+    _description: "Point de ressource \xE9puis\xE9"
+    _eventType: 22000000
+    render: {fileID: 21300000, guid: ba025916471d63f48be3fe5d880752b3, type: 3}
+    Child: {fileID: 0}
