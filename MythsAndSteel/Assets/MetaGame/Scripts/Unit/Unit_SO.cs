@@ -42,8 +42,9 @@ public class Unit_SO : ScriptableObject{
     public Vector2 NumberRangeMax;
 
     [Header("Son de l'unité")]
-    public AudioClip Son1; //Son 1 de l'unité
-    public AudioClip Son2; //Son 2 de l'unité
+    public AudioClip SonAttaque; //Son d'Attaque de l'unité
+    public AudioClip SonDeplacement;//Son de déplacement de l'unité
+    public AudioClip SonMort; //Son de mort de l'unité
 
     [Header("Sprite de l'unité")]
     [Tooltip("Sprite de base de l'unité")]
@@ -57,9 +58,4 @@ public class Unit_SO : ScriptableObject{
     [Tooltip("Est ce que cette unité fait parti de l'armée 1?")]
     public bool IsInRedArmy = true;
     public MYthsAndSteel_Enum.Attributs[] UnitAttributs = new MYthsAndSteel_Enum.Attributs[3];
-  
-
-
-    
-
 }

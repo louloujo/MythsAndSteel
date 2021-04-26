@@ -128,6 +128,7 @@ public class Attaque : MonoSingleton<Attaque>
             ChangeStat();  
             AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
+            SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
             Debug.Log("Damage : " + _damageMinimum);
             StopAttack();
         }
@@ -145,6 +146,7 @@ public class Attaque : MonoSingleton<Attaque>
             {
                 ChangeStat();
                 selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
+                SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
                 Debug.Log("Damage : " + null);
                 StopAttack();
             }
@@ -166,6 +168,7 @@ public class Attaque : MonoSingleton<Attaque>
             ChangeStat();
             AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
+            SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
             Debug.Log("Damage : " + _damageMinimum);
             StopAttack();
         }
@@ -174,6 +177,7 @@ public class Attaque : MonoSingleton<Attaque>
             ChangeStat();
             AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMaximum);
+            SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
             Debug.Log("Damage : " + _damageMaximum);
             StopAttack();
         }
@@ -190,6 +194,7 @@ public class Attaque : MonoSingleton<Attaque>
             {
                 ChangeStat();
                 selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(0);
+                SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
                 Debug.Log("Damage : " + null);
                 StopAttack();
             }
@@ -795,6 +800,7 @@ public class Attaque : MonoSingleton<Attaque>
         if(selectedUnitEnnemy == null)
 
         {
+            SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
             Debug.Log("Damage : " + null);
 
 
@@ -803,6 +809,7 @@ public class Attaque : MonoSingleton<Attaque>
         {
 
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
+            SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
             Debug.Log("Damage : " + _damageMinimum);
             StopAttack();
         }
