@@ -340,31 +340,14 @@ public class Attaque : MonoSingleton<Attaque>
     /// </summary>
     public void StartAttackSelectionUnit(int tileId = -1)
     {
-        if(tileId != -1)
+        if (GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0)
         {
-            if(!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
+            if (tileId != -1)
             {
-                _isInAttack = false;
-                StartAttack(tileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
-            }
-            else
-            {
-                _selected = false;
-            }
-        }
-        else
-        {
-            GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
-
-            if(tileSelected != null)
-            {
-                _selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
-                if(!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
+                if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
                 {
-                    Debug.Log(_selectedUnit);
-                    _selected = true;
-                    GetStats();
-                    StartAttack(tileSelected.GetComponent<TileScript>().TileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
+                    _isInAttack = false;
+                    StartAttack(tileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
                 }
                 else
                 {
@@ -373,10 +356,68 @@ public class Attaque : MonoSingleton<Attaque>
             }
             else
             {
-                _selected = false;
+                GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
+
+                if (tileSelected != null)
+                {
+                    _selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
+                    if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
+                    {
+                        Debug.Log(_selectedUnit);
+                        _selected = true;
+                        GetStats();
+                        StartAttack(tileSelected.GetComponent<TileScript>().TileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
+                    }
+                    else
+                    {
+                        _selected = false;
+                    }
+                }
+                else
+                {
+                    _selected = false;
+                }
             }
         }
-        
+        else if (!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.ActivationLeft > 0)
+        {
+            if (tileId != -1)
+            {
+                if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
+                {
+                    _isInAttack = false;
+                    StartAttack(tileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
+                }
+                else
+                {
+                    _selected = false;
+                }
+            }
+            else
+            {
+                GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
+
+                if (tileSelected != null)
+                {
+                    _selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
+                    if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
+                    {
+                        Debug.Log(_selectedUnit);
+                        _selected = true;
+                        GetStats();
+                        StartAttack(tileSelected.GetComponent<TileScript>().TileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
+                    }
+                    else
+                    {
+                        _selected = false;
+                    }
+                }
+                else
+                {
+                    _selected = false;
+                }
+            }
+        }
     }
 
     /// <summary>

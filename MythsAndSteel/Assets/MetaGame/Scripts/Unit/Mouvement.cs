@@ -314,24 +314,47 @@ public class Mouvement : MonoSingleton<Mouvement>
     public void StartMvmtForSelectedUnit()
     {
         GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
-
-        if (tileSelected != null)
+        if (GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0)
         {
-            mUnit = tileSelected.GetComponent<TileScript>().Unit;
-            if (!mUnit.GetComponent<UnitScript>().IsMoveDone)
+            if (tileSelected != null)
             {
-                _selected = true;
-                MoveLeftBase = mUnit.GetComponent<UnitScript>().MoveLeft;
-                StartMouvement(TilesManager.Instance.TileList.IndexOf(tileSelected), mUnit.GetComponent<UnitScript>().MoveSpeed - (mUnit.GetComponent<UnitScript>().MoveSpeed - MoveLeftBase) + mUnit.GetComponent<UnitScript>().MoveSpeedBonus);
+                mUnit = tileSelected.GetComponent<TileScript>().Unit;
+                if (!mUnit.GetComponent<UnitScript>().IsMoveDone)
+                {
+                    _selected = true;
+                    MoveLeftBase = mUnit.GetComponent<UnitScript>().MoveLeft;
+                    StartMouvement(TilesManager.Instance.TileList.IndexOf(tileSelected), mUnit.GetComponent<UnitScript>().MoveSpeed - (mUnit.GetComponent<UnitScript>().MoveSpeed - MoveLeftBase) + mUnit.GetComponent<UnitScript>().MoveSpeedBonus);
+                }
+                else
+                {
+                    _selected = false;
+                }
             }
             else
             {
                 _selected = false;
             }
         }
-        else
+        else if (!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.ActivationLeft > 0)
         {
-            _selected = false;
+            if (tileSelected != null)
+            {
+                mUnit = tileSelected.GetComponent<TileScript>().Unit;
+                if (!mUnit.GetComponent<UnitScript>().IsMoveDone)
+                {
+                    _selected = true;
+                    MoveLeftBase = mUnit.GetComponent<UnitScript>().MoveLeft;
+                    StartMouvement(TilesManager.Instance.TileList.IndexOf(tileSelected), mUnit.GetComponent<UnitScript>().MoveSpeed - (mUnit.GetComponent<UnitScript>().MoveSpeed - MoveLeftBase) + mUnit.GetComponent<UnitScript>().MoveSpeedBonus);
+                }
+                else
+                {
+                    _selected = false;
+                }
+            }
+            else
+            {
+                _selected = false;
+            }
         }
     }
 
