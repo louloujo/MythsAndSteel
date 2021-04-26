@@ -350,6 +350,8 @@ public class Attaque : MonoSingleton<Attaque>
     /// </summary>
     public void StartAttackSelectionUnit(int tileId = -1)
     {
+        _selectedTiles.Clear();
+        _newNeighbourId.Clear();
         if (GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0)
         {
             if (tileId != -1)
@@ -508,7 +510,7 @@ public class Attaque : MonoSingleton<Attaque>
     /// </summary>
     public void StopAttack()
     {
-        RemoveTileSprite();
+       RemoveTileSprite();
 
         // Clear de toutes les listes et stats
         newNeighbourId.Clear();
@@ -544,8 +546,6 @@ public class Attaque : MonoSingleton<Attaque>
                     TilesManager.Instance.TileList[Neighbour].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect);
                 }
             }
-            _selectedTiles.Clear();
-            _newNeighbourId.Clear();
         }
         else
         {
@@ -557,6 +557,7 @@ public class Attaque : MonoSingleton<Attaque>
                 }
             }
         }
+          
     }
 
     /// <summary>
@@ -833,7 +834,7 @@ public class Attaque : MonoSingleton<Attaque>
         {
             SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
             Debug.Log("Damage : " + null);
-
+            StopAttack();
 
         }
         else
