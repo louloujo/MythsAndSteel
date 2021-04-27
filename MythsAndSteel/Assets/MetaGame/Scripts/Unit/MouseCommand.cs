@@ -11,6 +11,7 @@ using TMPro;
 /// </summary>
 public class MouseCommand : MonoBehaviour
 {
+
     #region Variables
     [Header("UNIT REFERENCE")]
     public UnitReference unitReference = null;
@@ -59,7 +60,6 @@ public class MouseCommand : MonoBehaviour
 
     [Header("UNIT ICONE")]
     [SerializeField] private UnitIcon _iconeUnit = null;
-
     #endregion Variables
 
     #region UpdateStats
@@ -215,13 +215,20 @@ public class MouseCommand : MonoBehaviour
             UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta.x, 212 * UI.effetDeTerrain.Count);
         }
 
+     
+        //Update des info de la tile sur le pannel du bas quand 
         GameObject Tile = RaycastManager.Instance.Tile;
-        // Update des info de la tile sur le pannel du bas
-        UI.Terrain.Synch(Tile.GetComponent<TileScript>(), );
+        UI.CallUpdateUI(Tile);
     }
 
     #endregion UpdateStats
-
+    private void Update()
+    {
+        UIInstance UI = UIInstance.Instance;
+        //Update des info de la tile sur le pannel du bas quand 
+        GameObject Tile = RaycastManager.Instance.Tile;
+        UI.CallUpdateUI(Tile);
+    }
     #region ActivateUI
     /// <summary>
     /// Permet d'activer un élément de l'UI en utilisant un Raycast distint de la position et d'assigner une position custom par rapport au Canvas (Conflit avec le Canvas).
@@ -758,7 +765,7 @@ public class MouseCommand : MonoBehaviour
     }
 
     /// <summary>
-    /// Permet de déterminer et d'afficher un élément quand la souris passe au dessus d'une tuile possédant une unité.
+    /// Permet de déterminer et d'afficher un élément quand la souris passe au dessus d'une tile possédant une unité.
     /// </summary>
     public void MouseOverWithoutClick()
     {
