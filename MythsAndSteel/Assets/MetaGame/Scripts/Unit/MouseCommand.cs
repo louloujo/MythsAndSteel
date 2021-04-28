@@ -65,6 +65,7 @@ public class MouseCommand : MonoBehaviour
     #region UpdateStats
     void UpdateUIStats()
     {
+
         //Si la tile ne contient pas d'effet de terrain, on n'affiche pas d'information. Si la tile contient 1 effet, on affiche et met à jour l'effet de la case. Si la tile contient 2 effets, on affiche les 2 Effets.
         UIInstance UI = UIInstance.Instance;
 
@@ -214,21 +215,21 @@ public class MouseCommand : MonoBehaviour
 
             UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta.x, 212 * UI.effetDeTerrain.Count);
         }
-
-     
-        //Update des info de la tile sur le pannel du bas quand 
-        GameObject Tile = RaycastManager.Instance.Tile;
-        UI.CallUpdateUI(Tile);
     }
 
     #endregion UpdateStats
+
     private void Update()
     {
         UIInstance UI = UIInstance.Instance;
-        //Update des info de la tile sur le pannel du bas quand 
         GameObject Tile = RaycastManager.Instance.Tile;
+
+        //Update des info de la tile sur le pannel du bas quand 
         UI.CallUpdateUI(Tile);
+
+        // TileSelectionMovement.Instance.TileChange();
     }
+
     #region ActivateUI
     /// <summary>
     /// Permet d'activer un élément de l'UI en utilisant un Raycast distint de la position et d'assigner une position custom par rapport au Canvas (Conflit avec le Canvas).
@@ -241,7 +242,7 @@ public class MouseCommand : MonoBehaviour
         //Reprendre la position du raycast qui a sélectionné la tile
         RaycastHit2D hit = RaycastManager.Instance.GetRaycastHit();
 
-        //Je stop l'ensemble des coroutines en cour.
+        //Je stop l'ensemble des coroutines en cours.
         Vector3 pos = Vector3.zero;
         StopAllCoroutines();
 
