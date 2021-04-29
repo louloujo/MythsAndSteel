@@ -162,7 +162,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             //Si le mouvement n'a pas été lancé
             if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
             {
-                if(_actualUnitSelected == UnitInTile && !Mouvement.Instance.MvmtRunning && !Attaque.Instance.IsInAttack)
+                if(_actualUnitSelected == UnitInTile && !Mouvement.Instance.MvmtRunning && Attaque.Instance.IsInAttack)
                 {
                     Mouvement.Instance.StopMouvement(true);
                     Attaque.Instance.StopAttack();
