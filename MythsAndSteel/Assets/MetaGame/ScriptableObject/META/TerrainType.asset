@@ -120,7 +120,7 @@ MonoBehaviour:
   - _terrainName: Pt. Objectif
     _description: "Objectif de carte, ils sont pris par une unit\xE9 \xE0 la fin
       du prochain tour de l'adversaire suivant celui de l'arriv\xE9e de l'unit\xE9."
-    _eventType: 1e000000
+    _eventType: 1f000000
     render: {fileID: 0}
     Child: {fileID: 0}
   - _terrainName: Pont
