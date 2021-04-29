@@ -338,6 +338,7 @@ public class GameManager : MonoSingleton<GameManager>{
         if(unit != null){
             _unitChooseList.Add(unit);
 
+            Debug.Log("Je suis passé par ici poto");
             //Pour la carte événement illusion stratégique
             if(IllusionStratégique)
             {

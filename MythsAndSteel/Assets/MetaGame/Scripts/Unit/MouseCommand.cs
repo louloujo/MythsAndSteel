@@ -14,6 +14,7 @@ public class MouseCommand : MonoBehaviour
     #region Variables
     [Header("UNIT REFERENCE")]
     public UnitReference unitReference = null;
+    public Transport_UnitScript transportReference = null;
 
     public bool _checkIfPlayerAsClic;
 
@@ -26,6 +27,7 @@ public class MouseCommand : MonoBehaviour
     //Le panneau ou les panneaux à afficher lorsqu'on souhaite le shift click sur l'unité
     [SerializeField] private List<GameObject> _shiftUI;
     public List<GameObject> ShiftUI => _shiftUI;
+
 
     [Header("DELAI ATTENTE MOUSE OVER")]
     //Paramètre de délai qui s'applique à la couritine.
@@ -50,17 +52,177 @@ public class MouseCommand : MonoBehaviour
     [SerializeField] private Vector2 _xOffsetMax;
     [SerializeField] private Vector2 _yOffsetMax;
 
+    [Header("UI Transport Panel")]
+    [SerializeField] private GameObject _transportUIOnTopOfUnit;
+    public GameObject TransportUIOnTopOfUnit => _transportUIOnTopOfUnit;
+
     [Header("UI RENFORT UNITE")]
     [SerializeField] private GameObject _renfortUI;
     public GameObject RenfortUI => _renfortUI;
 
     [SerializeField] private List<GameObject> _elementMenuRenfort = null;
     public List<GameObject> ElementOfMenuRenfort => _elementMenuRenfort;
+
+    [Header("UI Menu Transport")]
+    //Emplacement du Menu Transport sur la Page1
+    [SerializeField] private GameObject _transportPannelPage1;
+    public GameObject TransportPannelPage1 => _transportPannelPage1;
+
+    //Emplacement du Menu Transport sur la Page2
+    [SerializeField] private GameObject _transportPannelPage2;
+    public GameObject TransportPannelPage2 => _transportPannelPage2;
+
+    //Emplacement des elements sur la page 1 du menu Transport
+    [SerializeField] private List<GameObject> _elementMenuTransportPage1 = null;
+    public List<GameObject> ElementOfMenuTransportPage1 => _elementMenuTransportPage1;
+
+    //Emplacement des elements sur la page 2 du menu Transport
+    [SerializeField] private List<GameObject> _elementMenuTransportPage2 = null;
+    public List<GameObject> ElementOfMenuTransportPage2 => _elementMenuTransportPage2;
+
+
     #endregion Variables
+
+
+
 
     #region UpdateStats
     void UpdateUIStats()
     {
+        if (RaycastManager.Instance.Tile.GetComponent<TileScript>().Unit.GetComponent<Transport_UnitScript>())
+        {
+            for (int i = transportReference.UnitTransport.Count; i < transportReference.UnitTransport.Count; i++)
+            {
+                //Permet de mettre à jour sur la Page1
+                if (i <= 0)
+                {
+                    _transportPannelPage1.SetActive(false);
+
+                    if (i >= 0)
+                    {
+                        _transportPannelPage1.SetActive(true);
+                        _elementMenuTransportPage1[0].SetActive(true);
+                        _elementMenuTransportPage1[1].SetActive(false);
+                        _elementMenuTransportPage1[2].SetActive(false);
+                        _elementMenuTransportPage1[3].SetActive(false);
+
+                        //Update des stats pour l'emplacement 1
+                        UIInstance.Instance.EmplacementUniteVieTransport._emplacementUnit1_Page1.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[0].GetComponent<SpriteRenderer>().sprite;
+                        UIInstance.Instance.EmplacementUniteVieTransport._emplacementLife1_Page1.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[0].GetComponent<UnitScript>().CurrentSpriteLifeHeartUI.sprite;
+
+                        if (i >= 1)
+                        {
+                            _elementMenuTransportPage1[1].SetActive(true);
+
+                            //Update des stats pour l'emplacement 2
+                            UIInstance.Instance.EmplacementUniteVieTransport._emplacementUnit1_Page1.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[1].GetComponent<SpriteRenderer>().sprite;
+                            UIInstance.Instance.EmplacementUniteVieTransport._emplacementLife1_Page1.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[1].GetComponent<UnitScript>().CurrentSpriteLifeHeartUI.sprite;
+
+                            if (i >= 2)
+                            {
+                                _elementMenuTransportPage1[2].SetActive(true);
+
+                                //Update des stats pour l'emplacement 3
+                                UIInstance.Instance.EmplacementUniteVieTransport._emplacementUnit1_Page1.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[2].GetComponent<SpriteRenderer>().sprite;
+                                UIInstance.Instance.EmplacementUniteVieTransport._emplacementLife1_Page1.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[2].GetComponent<UnitScript>().CurrentSpriteLifeHeartUI.sprite;
+
+                                if (i >= 3)
+                                {
+                                    _elementMenuTransportPage1[3].SetActive(true);
+
+                                    //Update des stats pour l'emplacement 4
+                                    UIInstance.Instance.EmplacementUniteVieTransport._emplacementUnit1_Page1.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[3].GetComponent<SpriteRenderer>().sprite;
+                                    UIInstance.Instance.EmplacementUniteVieTransport._emplacementLife1_Page1.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[3].GetComponent<UnitScript>().CurrentSpriteLifeHeartUI.sprite;
+
+                                }
+                                else
+                                {
+                                    _elementMenuTransportPage1[3].SetActive(false);
+                                }
+                            }
+                            else
+                            {
+                                _elementMenuTransportPage1[2].SetActive(false);
+                            }
+                        }
+                        else
+                        {
+                            _elementMenuTransportPage1[1].SetActive(false);
+                        }
+                    }
+                    else
+                    {
+                        _elementMenuTransportPage1[0].SetActive(false);
+                    }
+                }
+
+
+
+                //Permet de mettre à jour sur la Page2
+                if (i <= 0)
+                {
+                    _transportPannelPage1.SetActive(false);
+
+                    if (i >= 0)
+                    {
+                        _transportPannelPage1.SetActive(true);
+                        _elementMenuTransportPage1[0].SetActive(true);
+                        _elementMenuTransportPage1[1].SetActive(false);
+                        _elementMenuTransportPage1[2].SetActive(false);
+                        _elementMenuTransportPage1[3].SetActive(false);
+
+                        //Update des stats pour l'emplacement 1
+                        UIInstance.Instance.EmplacementUniteVieTransport._emplacementUnit1_Page2.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[0].GetComponent<SpriteRenderer>().sprite;
+                        UIInstance.Instance.EmplacementUniteVieTransport._emplacementLife1_Page2.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[0].GetComponent<UnitScript>().CurrentSpriteLifeHeartUI.sprite;
+
+                        if (i >= 1)
+                        {
+                            _elementMenuTransportPage1[1].SetActive(true);
+
+                            //Update des stats pour l'emplacement 2
+                            UIInstance.Instance.EmplacementUniteVieTransport._emplacementUnit1_Page2.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[1].GetComponent<SpriteRenderer>().sprite;
+                            UIInstance.Instance.EmplacementUniteVieTransport._emplacementLife1_Page2.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[1].GetComponent<UnitScript>().CurrentSpriteLifeHeartUI.sprite;
+
+                            if (i >= 2)
+                            {
+                                _elementMenuTransportPage1[2].SetActive(true);
+
+                                //Update des stats pour l'emplacement 3
+                                UIInstance.Instance.EmplacementUniteVieTransport._emplacementUnit1_Page2.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[2].GetComponent<SpriteRenderer>().sprite;
+                                UIInstance.Instance.EmplacementUniteVieTransport._emplacementLife1_Page2.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[2].GetComponent<UnitScript>().CurrentSpriteLifeHeartUI.sprite;
+
+                                if (i >= 3)
+                                {
+                                    _elementMenuTransportPage1[3].SetActive(true);
+
+                                    //Update des stats pour l'emplacement 4
+                                    UIInstance.Instance.EmplacementUniteVieTransport._emplacementUnit1_Page2.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[3].GetComponent<SpriteRenderer>().sprite;
+                                    UIInstance.Instance.EmplacementUniteVieTransport._emplacementLife1_Page2.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[3].GetComponent<UnitScript>().CurrentSpriteLifeHeartUI.sprite;
+
+                                }
+                                else
+                                {
+                                    _elementMenuTransportPage1[3].SetActive(false);
+                                }
+                            }
+                            else
+                            {
+                                _elementMenuTransportPage1[2].SetActive(false);
+                            }
+                        }
+                        else
+                        {
+                            _elementMenuTransportPage1[1].SetActive(false);
+                        }
+                    }
+                    else
+                    {
+                        _elementMenuTransportPage1[0].SetActive(true);
+                    }
+                }
+            }
+        }
+
         //Statistique pour le MouseOver.
         UIInstance.Instance.TitlePanelMouseOver.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.UnitName;
         UIInstance.Instance.MouseOverStats._lifeGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().Life.ToString();
@@ -76,6 +238,8 @@ public class MouseCommand : MonoBehaviour
         UIInstance.Instance.PageUnitStat._rangeGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().AttackRange.ToString();
         //Synchronise le texte de la valeur de la vitesse de l'unité avec l'emplacement d'UI.
         UIInstance.Instance.PageUnitStat._moveGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().MoveSpeed.ToString();
+
+
 
         //Synchronise le texte de l'UI de la avec l'emplacement d'UI.
         UIInstance.Instance.AttackStat._rangeMinDamageGam.GetComponent<TextMeshProUGUI>().text = RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMin.x.ToString() + " - " + RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().NumberRangeMin.y.ToString();
@@ -127,15 +291,15 @@ public class MouseCommand : MonoBehaviour
         StopAllCoroutines();
 
         //Menu d'activation d'une unité
-        if(activationMenu)
+        if (activationMenu)
         {
-            if(hit.transform.position.x >= _xOffset.y)
+            if (hit.transform.position.x >= _xOffset.y)
             {
-                if(hit.transform.position.x >= _xOffsetMax.y)
+                if (hit.transform.position.x >= _xOffsetMax.y)
                 {
-                    if(hit.transform.position.y >= _yOffset.y)
+                    if (hit.transform.position.y >= _yOffset.y)
                     {
-                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        if (hit.transform.position.y >= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y - _offsetYActivationMenu + .5f, hit.transform.position.z));
                         }
@@ -144,9 +308,9 @@ public class MouseCommand : MonoBehaviour
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
                         }
                     }
-                    else if(hit.transform.position.y <= _yOffset.x)
+                    else if (hit.transform.position.y <= _yOffset.x)
                     {
-                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        if (hit.transform.position.y <= _yOffsetMax.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y + _offsetYActivationMenu - .5f, hit.transform.position.z));
                         }
@@ -162,9 +326,9 @@ public class MouseCommand : MonoBehaviour
                 }
                 else
                 {
-                    if(hit.transform.position.y >= _yOffset.y)
+                    if (hit.transform.position.y >= _yOffset.y)
                     {
-                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        if (hit.transform.position.y >= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y - _offsetYActivationMenu + .5f, hit.transform.position.z));
                         }
@@ -173,9 +337,9 @@ public class MouseCommand : MonoBehaviour
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
                         }
                     }
-                    else if(hit.transform.position.y <= _yOffset.x)
+                    else if (hit.transform.position.y <= _yOffset.x)
                     {
-                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        if (hit.transform.position.y <= _yOffsetMax.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXActivationMenu, hit.transform.position.y + _offsetYActivationMenu - .5f, hit.transform.position.z));
                         }
@@ -191,13 +355,13 @@ public class MouseCommand : MonoBehaviour
                 }
             }
 
-            else if(hit.transform.position.x <= _xOffset.x)
+            else if (hit.transform.position.x <= _xOffset.x)
             {
-                if(hit.transform.position.x <= _xOffsetMax.x)
+                if (hit.transform.position.x <= _xOffsetMax.x)
                 {
-                    if(hit.transform.position.y >= _yOffset.y)
+                    if (hit.transform.position.y >= _yOffset.y)
                     {
-                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        if (hit.transform.position.y >= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y - _offsetYActivationMenu + .5f, hit.transform.position.z));
                         }
@@ -206,9 +370,9 @@ public class MouseCommand : MonoBehaviour
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
                         }
                     }
-                    else if(hit.transform.position.y <= _yOffset.x)
+                    else if (hit.transform.position.y <= _yOffset.x)
                     {
-                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        if (hit.transform.position.y <= _yOffsetMax.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y + _offsetYActivationMenu - .5f, hit.transform.position.z));
                         }
@@ -224,9 +388,9 @@ public class MouseCommand : MonoBehaviour
                 }
                 else
                 {
-                    if(hit.transform.position.y >= _yOffset.y)
+                    if (hit.transform.position.y >= _yOffset.y)
                     {
-                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        if (hit.transform.position.y >= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y - _offsetYActivationMenu + .5f, hit.transform.position.z));
                         }
@@ -235,9 +399,9 @@ public class MouseCommand : MonoBehaviour
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y, hit.transform.position.z));
                         }
                     }
-                    else if(hit.transform.position.y <= _yOffset.x)
+                    else if (hit.transform.position.y <= _yOffset.x)
                     {
-                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        if (hit.transform.position.y <= _yOffsetMax.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y + _offsetYActivationMenu - .5f, hit.transform.position.z));
                         }
@@ -254,11 +418,11 @@ public class MouseCommand : MonoBehaviour
             }
             else
             {
-                if(hit.transform.position.y >= _yOffsetMax.y)
+                if (hit.transform.position.y >= _yOffsetMax.y)
                 {
                     pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y - _offsetYActivationMenu, hit.transform.position.z));
                 }
-                else if(hit.transform.position.y <= _yOffsetMax.x)
+                else if (hit.transform.position.y <= _yOffsetMax.x)
                 {
                     pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXActivationMenu, hit.transform.position.y + _offsetYActivationMenu, hit.transform.position.z));
                 }
@@ -270,19 +434,19 @@ public class MouseCommand : MonoBehaviour
         }
 
         //Menu mouseOver
-        else if(mouseOver)
+        else if (mouseOver)
         {
-            if(hit.transform.position.x >= _xOffset.y)
+            if (hit.transform.position.x >= _xOffset.y)
             {
-                if(hit.transform.position.x >= _xOffsetMax.y)
+                if (hit.transform.position.x >= _xOffsetMax.y)
                 {
-                    if(hit.transform.position.y >= _yOffsetMin.y)
+                    if (hit.transform.position.y >= _yOffsetMin.y)
                     {
-                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        if (hit.transform.position.y >= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - 1, hit.transform.position.z));
                         }
-                        else if(hit.transform.position.y <= _yOffsetMax.y && hit.transform.position.y >= _yOffset.y)
+                        else if (hit.transform.position.y <= _yOffsetMax.y && hit.transform.position.y >= _yOffset.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
                         }
@@ -291,13 +455,13 @@ public class MouseCommand : MonoBehaviour
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
                         }
                     }
-                    else if(hit.transform.position.y <= _yOffsetMin.x)
+                    else if (hit.transform.position.y <= _yOffsetMin.x)
                     {
-                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        if (hit.transform.position.y <= _yOffsetMax.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver, hit.transform.position.y + _offsetYMouseOver + 1, hit.transform.position.z));
                         }
-                        else if(hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
+                        else if (hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver, hit.transform.position.y + _offsetYMouseOver + .5f, hit.transform.position.z));
                         }
@@ -313,13 +477,13 @@ public class MouseCommand : MonoBehaviour
                 }
                 else
                 {
-                    if(hit.transform.position.y >= _yOffsetMin.y)
+                    if (hit.transform.position.y >= _yOffsetMin.y)
                     {
-                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        if (hit.transform.position.y >= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYMouseOver - 1, hit.transform.position.z));
                         }
-                        else if(hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
+                        else if (hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
                         }
@@ -328,13 +492,13 @@ public class MouseCommand : MonoBehaviour
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
                         }
                     }
-                    else if(hit.transform.position.y <= _yOffsetMin.x)
+                    else if (hit.transform.position.y <= _yOffsetMin.x)
                     {
-                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        if (hit.transform.position.y <= _yOffsetMax.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y + _offsetYMouseOver + 1, hit.transform.position.z));
                         }
-                        else if(hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
+                        else if (hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y + _offsetYMouseOver + .5f, hit.transform.position.z));
                         }
@@ -350,17 +514,17 @@ public class MouseCommand : MonoBehaviour
                 }
             }
 
-            else if(hit.transform.position.x <= _xOffset.x)
+            else if (hit.transform.position.x <= _xOffset.x)
             {
-                if(hit.transform.position.x <= _xOffsetMax.x)
+                if (hit.transform.position.x <= _xOffsetMax.x)
                 {
-                    if(hit.transform.position.y >= _yOffsetMin.y)
+                    if (hit.transform.position.y >= _yOffsetMin.y)
                     {
-                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        if (hit.transform.position.y >= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - 1, hit.transform.position.z));
                         }
-                        else if(hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
+                        else if (hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
                         }
@@ -369,13 +533,13 @@ public class MouseCommand : MonoBehaviour
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
                         }
                     }
-                    else if(hit.transform.position.y <= _yOffsetMin.x)
+                    else if (hit.transform.position.y <= _yOffsetMin.x)
                     {
-                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        if (hit.transform.position.y <= _yOffsetMax.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y + _offsetYMouseOver + 1, hit.transform.position.z));
                         }
-                        else if(hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
+                        else if (hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y + _offsetYMouseOver + .5f, hit.transform.position.z));
                         }
@@ -391,13 +555,13 @@ public class MouseCommand : MonoBehaviour
                 }
                 else
                 {
-                    if(hit.transform.position.y >= _yOffsetMin.y)
+                    if (hit.transform.position.y >= _yOffsetMin.y)
                     {
-                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        if (hit.transform.position.y >= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - 1, hit.transform.position.z));
                         }
-                        else if(hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
+                        else if (hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
                         }
@@ -406,13 +570,13 @@ public class MouseCommand : MonoBehaviour
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
                         }
                     }
-                    else if(hit.transform.position.y <= _yOffsetMin.x)
+                    else if (hit.transform.position.y <= _yOffsetMin.x)
                     {
-                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        if (hit.transform.position.y <= _yOffsetMax.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y + _offsetYMouseOver + 1, hit.transform.position.z));
                         }
-                        else if(hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
+                        else if (hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXMouseOver, hit.transform.position.y + _offsetYMouseOver + .5f, hit.transform.position.z));
                         }
@@ -429,11 +593,11 @@ public class MouseCommand : MonoBehaviour
             }
             else
             {
-                if(hit.transform.position.y >= _yOffsetMax.y)
+                if (hit.transform.position.y >= _yOffsetMax.y)
                 {
                     pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver / 2, hit.transform.position.y - _offsetYMouseOver - .5f, hit.transform.position.z));
                 }
-                else if(hit.transform.position.y <= _yOffsetMax.x)
+                else if (hit.transform.position.y <= _yOffsetMax.x)
                 {
                     pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXMouseOver / 2, hit.transform.position.y + _offsetYMouseOver + .5f, hit.transform.position.z));
                 }
@@ -445,19 +609,19 @@ public class MouseCommand : MonoBehaviour
         }
 
         //Menu avec toutes les stats
-        else if(bigStat)
+        else if (bigStat)
         {
-            if(hit.transform.position.x >= _xOffset.y)
+            if (hit.transform.position.x >= _xOffset.y)
             {
-                if(hit.transform.position.x >= _xOffsetMax.y)
+                if (hit.transform.position.x >= _xOffsetMax.y)
                 {
-                    if(hit.transform.position.y >= _yOffsetMin.y)
+                    if (hit.transform.position.y >= _yOffsetMin.y)
                     {
-                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        if (hit.transform.position.y >= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - 1, hit.transform.position.z));
                         }
-                        else if(hit.transform.position.y <= _yOffsetMax.y && hit.transform.position.y >= _yOffset.y)
+                        else if (hit.transform.position.y <= _yOffsetMax.y && hit.transform.position.y >= _yOffset.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
                         }
@@ -466,13 +630,13 @@ public class MouseCommand : MonoBehaviour
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
                         }
                     }
-                    else if(hit.transform.position.y <= _yOffsetMin.x)
+                    else if (hit.transform.position.y <= _yOffsetMin.x)
                     {
-                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        if (hit.transform.position.y <= _yOffsetMax.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus, hit.transform.position.y + _offsetYStatPlus + 1, hit.transform.position.z));
                         }
-                        else if(hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
+                        else if (hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus, hit.transform.position.y + _offsetYStatPlus + .5f, hit.transform.position.z));
                         }
@@ -488,13 +652,13 @@ public class MouseCommand : MonoBehaviour
                 }
                 else
                 {
-                    if(hit.transform.position.y >= _yOffsetMin.y)
+                    if (hit.transform.position.y >= _yOffsetMin.y)
                     {
-                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        if (hit.transform.position.y >= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYStatPlus - 1, hit.transform.position.z));
                         }
-                        else if(hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
+                        else if (hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
                         }
@@ -503,13 +667,13 @@ public class MouseCommand : MonoBehaviour
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
                         }
                     }
-                    else if(hit.transform.position.y <= _yOffsetMin.x)
+                    else if (hit.transform.position.y <= _yOffsetMin.x)
                     {
-                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        if (hit.transform.position.y <= _yOffsetMax.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y + _offsetYStatPlus + 1, hit.transform.position.z));
                         }
-                        else if(hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
+                        else if (hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x, hit.transform.position.y + _offsetYStatPlus + .5f, hit.transform.position.z));
                         }
@@ -525,17 +689,17 @@ public class MouseCommand : MonoBehaviour
                 }
             }
 
-            else if(hit.transform.position.x <= _xOffset.x)
+            else if (hit.transform.position.x <= _xOffset.x)
             {
-                if(hit.transform.position.x <= _xOffsetMax.x)
+                if (hit.transform.position.x <= _xOffsetMax.x)
                 {
-                    if(hit.transform.position.y >= _yOffsetMin.y)
+                    if (hit.transform.position.y >= _yOffsetMin.y)
                     {
-                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        if (hit.transform.position.y >= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - 1, hit.transform.position.z));
                         }
-                        else if(hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
+                        else if (hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
                         }
@@ -544,13 +708,13 @@ public class MouseCommand : MonoBehaviour
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
                         }
                     }
-                    else if(hit.transform.position.y <= _yOffsetMin.x)
+                    else if (hit.transform.position.y <= _yOffsetMin.x)
                     {
-                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        if (hit.transform.position.y <= _yOffsetMax.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y + _offsetYStatPlus + 1, hit.transform.position.z));
                         }
-                        else if(hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
+                        else if (hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y + _offsetYStatPlus + .5f, hit.transform.position.z));
                         }
@@ -566,13 +730,13 @@ public class MouseCommand : MonoBehaviour
                 }
                 else
                 {
-                    if(hit.transform.position.y >= _yOffsetMin.y)
+                    if (hit.transform.position.y >= _yOffsetMin.y)
                     {
-                        if(hit.transform.position.y >= _yOffsetMax.y)
+                        if (hit.transform.position.y >= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - 1, hit.transform.position.z));
                         }
-                        else if(hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
+                        else if (hit.transform.position.y >= _yOffset.y && hit.transform.position.y <= _yOffsetMax.y)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
                         }
@@ -581,13 +745,13 @@ public class MouseCommand : MonoBehaviour
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
                         }
                     }
-                    else if(hit.transform.position.y <= _yOffsetMin.x)
+                    else if (hit.transform.position.y <= _yOffsetMin.x)
                     {
-                        if(hit.transform.position.y <= _yOffsetMax.x)
+                        if (hit.transform.position.y <= _yOffsetMax.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y + _offsetYStatPlus + 1, hit.transform.position.z));
                         }
-                        else if(hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
+                        else if (hit.transform.position.y >= _yOffsetMax.x && hit.transform.position.y <= _yOffset.x)
                         {
                             pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x + _offsetXStatPlus, hit.transform.position.y + _offsetYStatPlus + .5f, hit.transform.position.z));
                         }
@@ -604,11 +768,11 @@ public class MouseCommand : MonoBehaviour
             }
             else
             {
-                if(hit.transform.position.y >= _yOffsetMax.y)
+                if (hit.transform.position.y >= _yOffsetMax.y)
                 {
                     pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus / 2, hit.transform.position.y - _offsetYStatPlus - .5f, hit.transform.position.z));
                 }
-                else if(hit.transform.position.y <= _yOffsetMax.x)
+                else if (hit.transform.position.y <= _yOffsetMax.x)
                 {
                     pos = Camera.main.WorldToScreenPoint(new Vector3(hit.transform.position.x - _offsetXStatPlus / 2, hit.transform.position.y + _offsetYStatPlus + .5f, hit.transform.position.z));
                 }
@@ -618,10 +782,12 @@ public class MouseCommand : MonoBehaviour
                 }
             }
         }
-        else if(switchPage){
+        else if (switchPage)
+        {
             pos = new Vector3(lastPosX, lastPosY, ShiftUI[0].transform.position.z);
         }
-        else{
+        else
+        {
             Debug.LogError("Vous essayez de positionner un objet qui ne peut pas se positionner autour de l'unité");
         }
 
@@ -639,7 +805,8 @@ public class MouseCommand : MonoBehaviour
     /// <summary>
     /// Permet de déterminer quand le joueur appuie sur le Shift puis le clic Gauche de la souris.
     /// </summary>
-    public void ShiftClick(){
+    public void ShiftClick()
+    {
         ActivateUI(ShiftUI[0], 0, 0, false, false, false, true);
         UpdateUIStats();
         _hasCheckUnit = true;
@@ -655,6 +822,7 @@ public class MouseCommand : MonoBehaviour
         {
             //Coroutine : Une coroutine est une fonction qui peut suspendre son exécution (yield) jusqu'à la fin de la YieldInstruction donnée.
             StartCoroutine(ShowObject(TimeToWait));
+            UpdateUIStats();
             UpdateUIStats();
         }
         else
@@ -688,16 +856,94 @@ public class MouseCommand : MonoBehaviour
     }
     #endregion ControleDesClicks
 
+    #region MenuTransportFunction
+
+
+    #region QuitTransportPanel
+    public void QuitTransportPanel()
+    {
+        TransportUIOnTopOfUnit.SetActive(false);
+    }
+
+    #endregion QuitTransportPanel
+
+
+    public void UpdateTransportStats()
+    {
+        _elementMenuTransportPage1[0].SetActive(false);
+        _elementMenuTransportPage1[1].SetActive(false);
+        _elementMenuTransportPage1[2].SetActive(false);
+        _elementMenuTransportPage1[3].SetActive(false);
+
+        for (int i = 0; i < transportReference.UnitTransport.Count; i++)
+        {
+            if (i >= 0)
+            {
+                _elementMenuTransportPage1[0].SetActive(true);
+                if (i >= 1)
+                {
+                    _elementMenuTransportPage1[1].SetActive(true);
+                    if (i >= 2)
+                    {
+                        _elementMenuTransportPage1[2].SetActive(true);
+                        if (i >= 3)
+                        {
+                            _elementMenuTransportPage1[3].SetActive(true);
+                        }
+                        else
+                        {
+                            _elementMenuTransportPage1[3].SetActive(false);
+                        }
+                    }
+                    else
+                    {
+                        _elementMenuTransportPage1[2].SetActive(false);
+                    }
+                }
+                else
+                {
+                    _elementMenuTransportPage1[1].SetActive(false);
+                }
+            }
+            else
+            {
+                _elementMenuTransportPage1[0].SetActive(false);
+            }
+        }
+
+        //Update l'élément 1 de transport
+        UIInstance.Instance.EmplacementUniteVieTransport._emplacementUnit1_Page2.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[0].GetComponent<SpriteRenderer>().sprite;
+        UIInstance.Instance.EmplacementUniteVieTransport._emplacementLife1_Page2.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[0].GetComponent<UnitScript>().CurrentSpriteLifeHeartUI.GetComponent<SpriteRenderer>().sprite;
+
+        //Update l'élément 2 de transport
+        UIInstance.Instance.EmplacementUniteVieTransport._emplacementUnit2_Page2.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[1].GetComponent<SpriteRenderer>().sprite;
+        UIInstance.Instance.EmplacementUniteVieTransport._emplacementLife2_Page2.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[1].GetComponent<UnitScript>().CurrentSpriteLifeHeartUI.GetComponent<SpriteRenderer>().sprite;
+
+        //Update l'élément 3 de transport
+        UIInstance.Instance.EmplacementUniteVieTransport._emplacementUnit3_Page2.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[2].GetComponent<SpriteRenderer>().sprite;
+        UIInstance.Instance.EmplacementUniteVieTransport._emplacementLife3_Page2.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[2].GetComponent<UnitScript>().CurrentSpriteLifeHeartUI.GetComponent<SpriteRenderer>().sprite;
+
+        //Update l'élément 4 de transport
+        UIInstance.Instance.EmplacementUniteVieTransport._emplacementUnit4_Page2.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[3].GetComponent<SpriteRenderer>().sprite;
+        UIInstance.Instance.EmplacementUniteVieTransport._emplacementLife4_Page2.GetComponent<SpriteRenderer>().sprite = RaycastManager.Instance.UnitInTile.GetComponent<Transport_UnitScript>().UnitTransport[3].GetComponent<UnitScript>().CurrentSpriteLifeHeartUI.GetComponent<SpriteRenderer>().sprite;
+
+    }
+
+    public void MenuTransportUI()
+    {
+        TransportUIOnTopOfUnit.SetActive(true);
+        //UpdateStatsMenuTransports();
+
+    }
+    #endregion MenuTransportFunction
+
     #region SwitchPages
     /// <summary>
     /// Fonction qui permet de cacher les Pages 1 et 2 du carnet.
     /// </summary>
     public void QuitShiftPanel()
     {
-        //Je retourne la valeur comme quoi il a clické à false car il a fini son action de Shift+Clic et désactive les 2 pages.
-        _checkIfPlayerAsClic = false;
-        ShiftUI[0].SetActive(false);
-        ShiftUI[1].SetActive(false);
+        RenfortUI.SetActive(false);
     }
 
     /// <summary>
@@ -725,13 +971,14 @@ public class MouseCommand : MonoBehaviour
     /// <summary>
     /// Quitte le menu renfort
     /// </summary>
-    public void QuitRenfortPanel(){
-        if(!GameManager.Instance.IsPlayerRedTurn)
+    public void QuitRenfortPanel()
+    {
+        if (!GameManager.Instance.IsPlayerRedTurn)
         {
             GameManager.Instance.RenfortPhase.CreateTileJ2.Clear();
             GameManager.Instance.RenfortPhase.CreateLeader2.Clear();
         }
-        else if(GameManager.Instance.IsPlayerRedTurn)
+        else if (GameManager.Instance.IsPlayerRedTurn)
         {
             GameManager.Instance.RenfortPhase.CreateTileJ1.Clear();
             GameManager.Instance.RenfortPhase.CreateLeader1.Clear();
@@ -745,15 +992,15 @@ public class MouseCommand : MonoBehaviour
     /// </summary>
     void UpdateStatsMenuRenforts()
     {
-        if(GameManager.Instance.IsPlayerRedTurn && !PlayerScript.Instance.RedPlayerInfos.HasCreateUnit)
+        if (GameManager.Instance.IsPlayerRedTurn && !PlayerScript.Instance.RedPlayerInfos.HasCreateUnit)
         {
             //A modifier si inversement au niveau des usines (J1 et J2)  = > changer le ActionJ2 en ActionJ1.
-            if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1)
+            if (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1)
             {
                 /*
                 //Update le drapeau qui se situe dans UI Instance correspondant à l'armée Rouge.
                 UIInstance.Instance.EmplacementImageMenuRenfort._drapeauDuJoueur.GetComponent<SpriteRenderer>().sprite = UIInstance.Instance.StockageImage._drapeauJoueur[0];
-                
+
                 UIInstance.Instance.PageUnitéRenfort._ressourceJoueur.GetComponent<TextMeshProUGUI>().text = player.Ressource.ToString();
                 if(player.Ressource <= 1)
                 {
@@ -761,7 +1008,7 @@ public class MouseCommand : MonoBehaviour
                 }*/
 
                 //Permet de déterminer le nombre d'emplacements à mettre à jour sur le menu Renfort de l'Armée Rouge.
-                for(int i = 2; i < unitReference.UnitClassCreableListRedPlayer.Count; i++)
+                for (int i = 2; i < unitReference.UnitClassCreableListRedPlayer.Count; i++)
                 {
                     #region UpdateTexteRenfort1a3
                     //Active les différents UI des unités de 1 à 3.
@@ -802,7 +1049,7 @@ public class MouseCommand : MonoBehaviour
                     UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[1].SetActive(true);
 
                     //Si la première unité de l'armée Rouge a besoin de plus de 2 ressources.
-                    if(unitReference.UnitClassCreableListRedPlayer[0].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
+                    if (unitReference.UnitClassCreableListRedPlayer[0].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
                     {
                         UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[2].SetActive(true);
                         UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[3].SetActive(true);
@@ -818,7 +1065,7 @@ public class MouseCommand : MonoBehaviour
                     UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[1].SetActive(true);
 
                     //Si la deuxième unité de l'armée Rouge a besoin de plus de 2 ressources.
-                    if(unitReference.UnitClassCreableListRedPlayer[1].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
+                    if (unitReference.UnitClassCreableListRedPlayer[1].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
                     {
                         UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[2].SetActive(true);
                         UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[3].SetActive(true);
@@ -835,7 +1082,7 @@ public class MouseCommand : MonoBehaviour
                     UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[1].SetActive(true);
 
                     //Si la troisième unité de l'armée Rouge a besoin de plus de 2 ressources.
-                    if(unitReference.UnitClassCreableListRedPlayer[2].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
+                    if (unitReference.UnitClassCreableListRedPlayer[2].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
                     {
                         UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[2].SetActive(true);
                         UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[3].SetActive(true);
@@ -850,7 +1097,7 @@ public class MouseCommand : MonoBehaviour
 
                     #region Update Textuelle et Image Renforts de 4 à 6 pour l'équipe Rouge
                     //Si la liste des unités créables comportent plus de 3 unités dans la liste de l'équipe Rouge.
-                    if(i >= 3)
+                    if (i >= 3)
                     {
                         //Active l'UI de l'unité 4 de l'arrmée Rouge.
                         _elementMenuRenfort[3].SetActive(true);
@@ -867,7 +1114,7 @@ public class MouseCommand : MonoBehaviour
                         UIInstance.Instance.RessourceUnit_PasTouche._unité4Ressource[1].SetActive(true);
 
                         //Si la quatrième unité de l'armée Rouge a besoin de plus de 2 ressources.
-                        if(unitReference.UnitClassCreableListRedPlayer[3].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
+                        if (unitReference.UnitClassCreableListRedPlayer[3].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
                         {
                             UIInstance.Instance.RessourceUnit_PasTouche._unité4Ressource[2].SetActive(true);
                             UIInstance.Instance.RessourceUnit_PasTouche._unité4Ressource[3].SetActive(true);
@@ -879,7 +1126,7 @@ public class MouseCommand : MonoBehaviour
                         }
 
                         //Si la liste des unités créables comportent plus de 4 unités dans la liste de l'équipe Rouge.
-                        if(i >= 4)
+                        if (i >= 4)
                         {
                             //Active l'UI de l'unité 5 de l'arrmée Rouge.
                             _elementMenuRenfort[4].SetActive(true);
@@ -896,7 +1143,7 @@ public class MouseCommand : MonoBehaviour
                             UIInstance.Instance.RessourceUnit_PasTouche._unité5Ressource[1].SetActive(true);
 
                             //Si la cinquième unité de l'armée Rouge a besoin de plus de 2 ressources.
-                            if(unitReference.UnitClassCreableListRedPlayer[4].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
+                            if (unitReference.UnitClassCreableListRedPlayer[4].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
                             {
                                 UIInstance.Instance.RessourceUnit_PasTouche._unité5Ressource[2].SetActive(true);
                                 UIInstance.Instance.RessourceUnit_PasTouche._unité5Ressource[3].SetActive(true);
@@ -908,7 +1155,7 @@ public class MouseCommand : MonoBehaviour
                             }
 
                             //Si la liste des unités créables comportent plus de 5 unités dans la liste de l'équipe Rouge.
-                            if(i >= 5)
+                            if (i >= 5)
                             {
                                 //Active l'UI de l'unité 6 de l'arrmée Rouge.
                                 _elementMenuRenfort[5].SetActive(true);
@@ -925,7 +1172,7 @@ public class MouseCommand : MonoBehaviour
                                 UIInstance.Instance.RessourceUnit_PasTouche._unité6Ressource[1].SetActive(true);
 
                                 //Si la sixième unité de l'armée Rouge a besoin de plus de 2 ressources.
-                                if(unitReference.UnitClassCreableListRedPlayer[5].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
+                                if (unitReference.UnitClassCreableListRedPlayer[5].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
                                 {
                                     UIInstance.Instance.RessourceUnit_PasTouche._unité6Ressource[2].SetActive(true);
                                     UIInstance.Instance.RessourceUnit_PasTouche._unité6Ressource[3].SetActive(true);
@@ -937,16 +1184,19 @@ public class MouseCommand : MonoBehaviour
                                 }
 
                             }
-                            else{
+                            else
+                            {
                                 _elementMenuRenfort[5].SetActive(false);
                             }
                         }
-                        else{
+                        else
+                        {
                             _elementMenuRenfort[4].SetActive(false);
                             _elementMenuRenfort[5].SetActive(false);
                         }
                     }
-                    else{
+                    else
+                    {
                         _elementMenuRenfort[3].SetActive(false);
                         _elementMenuRenfort[4].SetActive(false);
                         _elementMenuRenfort[5].SetActive(false);
@@ -956,10 +1206,10 @@ public class MouseCommand : MonoBehaviour
             }
         }
 
-        else if(!GameManager.Instance.IsPlayerRedTurn && !PlayerScript.Instance.BluePlayerInfos.HasCreateUnit)
+        else if (!GameManager.Instance.IsPlayerRedTurn && !PlayerScript.Instance.BluePlayerInfos.HasCreateUnit)
         {
             //A modifier si inversement au niveau des usines (J1 et J2) = > changer le ActionJ1 en ActionJ2.
-            if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1)
+            if (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1)
             {
                 /*
                 //Update le drapeau qui se situe dans UI Instance correspondant à l'armée Bleu.
@@ -972,7 +1222,7 @@ public class MouseCommand : MonoBehaviour
                 }*/
 
                 //Permet de déterminer le nombre d'emplacements à mettre à jour sur le menu Renfort de l'Armée Bleu.
-                for(int i = 2; i < unitReference.UnitClassCreableListBluePlayer.Count; i++)
+                for (int i = 2; i < unitReference.UnitClassCreableListBluePlayer.Count; i++)
                 {
 
                     #region Update Textuelle et Image Renforts de 1 à 3 pour l'équipe Bleu
@@ -1014,7 +1264,7 @@ public class MouseCommand : MonoBehaviour
                     UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[1].SetActive(true);
 
                     //Si la première unité de l'armée Bleu a besoin de plus de 2 ressources.
-                    if(unitReference.UnitClassCreableListBluePlayer[0].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
+                    if (unitReference.UnitClassCreableListBluePlayer[0].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
                     {
                         UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[2].SetActive(true);
                         UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[3].SetActive(true);
@@ -1030,7 +1280,7 @@ public class MouseCommand : MonoBehaviour
                     UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[1].SetActive(true);
 
                     //Si la deuxième unité de l'armée Bleu a besoin de plus de 2 ressources.
-                    if(unitReference.UnitClassCreableListBluePlayer[1].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
+                    if (unitReference.UnitClassCreableListBluePlayer[1].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
                     {
                         UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[2].SetActive(true);
                         UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[3].SetActive(true);
@@ -1047,7 +1297,7 @@ public class MouseCommand : MonoBehaviour
                     UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[1].SetActive(true);
 
                     //Si la troisième unité de l'armée Bleu a besoin de plus de 2 ressources.
-                    if(unitReference.UnitClassCreableListBluePlayer[2].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
+                    if (unitReference.UnitClassCreableListBluePlayer[2].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
                     {
                         UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[2].SetActive(true);
                         UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[3].SetActive(true);
@@ -1064,7 +1314,7 @@ public class MouseCommand : MonoBehaviour
                     #region Update Image Textuelle et Image de 4 à 6 pour l'équipe Bleu
                     //Update Ressource en fonction du nombre.
                     //Si la liste des unités créables comportent plus de 3 unités dans la liste de l'équipe Rouge.
-                    if(i >= 3)
+                    if (i >= 3)
                     {
                         //Active l'UI de l'unité 4 (oui 4 car dans une liste, le 0 est pris en compte comme l'emplacement 1).
                         _elementMenuRenfort[3].SetActive(true);
@@ -1081,7 +1331,7 @@ public class MouseCommand : MonoBehaviour
                         UIInstance.Instance.RessourceUnit_PasTouche._unité4Ressource[1].SetActive(true);
 
                         //Si la quatrième unité de l'armée Bleu a besoin de plus de 2 ressources.
-                        if(unitReference.UnitClassCreableListBluePlayer[3].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
+                        if (unitReference.UnitClassCreableListBluePlayer[3].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
                         {
                             UIInstance.Instance.RessourceUnit_PasTouche._unité4Ressource[2].SetActive(true);
                             UIInstance.Instance.RessourceUnit_PasTouche._unité4Ressource[3].SetActive(true);
@@ -1093,7 +1343,7 @@ public class MouseCommand : MonoBehaviour
                         }
 
                         //Si la liste des unités créables comportent plus de 4 unités dans la liste de l'équipe Bleu.
-                        if(i >= 4)
+                        if (i >= 4)
                         {
                             //Active l'UI de l'unité 5 (oui 5 car dans une liste, le 0 est pris en compte comme l'emplacement 1).
                             _elementMenuRenfort[4].SetActive(true);
@@ -1111,7 +1361,7 @@ public class MouseCommand : MonoBehaviour
                             UIInstance.Instance.RessourceUnit_PasTouche._unité5Ressource[1].SetActive(true);
 
                             //Si la cinquième unité de l'armée Bleu a besoin de plus de 2 ressources.
-                            if(unitReference.UnitClassCreableListBluePlayer[4].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
+                            if (unitReference.UnitClassCreableListBluePlayer[4].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
                             {
                                 UIInstance.Instance.RessourceUnit_PasTouche._unité5Ressource[2].SetActive(true);
                                 UIInstance.Instance.RessourceUnit_PasTouche._unité5Ressource[3].SetActive(true);
@@ -1123,7 +1373,7 @@ public class MouseCommand : MonoBehaviour
                             }
 
                             //Si la liste des unités créables comportent plus de 5 unités dans la liste de l'équipe Bleu.
-                            if(i >= 5)
+                            if (i >= 5)
                             {
                                 //Active l'UI de l'unité 6 (oui 6 car dans une liste, le 0 est pris en compte comme l'emplacement 1).
                                 _elementMenuRenfort[5].SetActive(true);
@@ -1140,7 +1390,7 @@ public class MouseCommand : MonoBehaviour
                                 UIInstance.Instance.RessourceUnit_PasTouche._unité6Ressource[1].SetActive(true);
 
                                 //Si la sixième unité de l'armée Bleu a besoin de plus de 2 ressources.
-                                if(unitReference.UnitClassCreableListBluePlayer[5].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
+                                if (unitReference.UnitClassCreableListBluePlayer[5].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
                                 {
                                     UIInstance.Instance.RessourceUnit_PasTouche._unité6Ressource[2].SetActive(true);
                                     UIInstance.Instance.RessourceUnit_PasTouche._unité6Ressource[3].SetActive(true);
@@ -1151,10 +1401,25 @@ public class MouseCommand : MonoBehaviour
                                     UIInstance.Instance.RessourceUnit_PasTouche._unité6Ressource[3].SetActive(false);
                                 }
                             }
+                            else
+                            {
+                                _elementMenuRenfort[5].SetActive(false);
+                            }
                         }
-                        #endregion Update Image Textuelle et Image de 4 à 6 pour l'équipe Bleu
+                        else
+                        {
+                            _elementMenuRenfort[4].SetActive(false);
+                            _elementMenuRenfort[5].SetActive(false);
+                        }
+                    }
+                    else
+                    {
+                        _elementMenuRenfort[3].SetActive(false);
+                        _elementMenuRenfort[4].SetActive(false);
+                        _elementMenuRenfort[5].SetActive(false);
                     }
                 }
+                #endregion Update Image Textuelle et Image de 4 à 6 pour l'équipe Bleu
             }
         }
     }
@@ -1168,4 +1433,5 @@ public class MouseCommand : MonoBehaviour
         UpdateStatsMenuRenforts();
     }
     #endregion MenuRenfortFunction
+
 }

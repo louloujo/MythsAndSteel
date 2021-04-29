@@ -89,17 +89,17 @@ public class UIInstance : MonoSingleton<UIInstance>
     //Ordre : 0 => Texte Vie, 1 => Texte Portée et 2 => Texte Déplacement
     [SerializeField] private TextStatUnit _mouseOverStats;
     public TextStatUnit MouseOverStats => _mouseOverStats;
-    
+
     [Space]
 
     #region ShiftClicPanelP1
     [Header("LISTES DES ELEMENTS UI POUR LE SHIFT CLIC DE LA PAGE 1")]
     [Tooltip("Tous les éléments qui composent l'UI pour le Shift Clic de la Page 1")]
-    
+
     //Texte qui indique le nom de l'unité.
     [SerializeField] private GameObject _titlePanelShiftClicPage1;
     public GameObject TitlePanelShiftClicPage1 => _titlePanelShiftClicPage1;
-    
+
     //Ordre : 0 => Texte Vie, 1 => Texte Portée et 2 => Texte Déplacement
     [SerializeField] private TextStatUnit _pageUnitStat;
     public TextStatUnit PageUnitStat => _pageUnitStat;
@@ -114,8 +114,8 @@ public class UIInstance : MonoSingleton<UIInstance>
     [Tooltip("Tous les éléments qui composent l'UI pour le Shift Clic de la Page 2")]
     //Texte qui indique le nom de l'unité.
     [SerializeField] private GameObject _titlePanelShiftClicPage2;
-    public GameObject TitlePanelShiftClicPage2 => _titlePanelShiftClicPage2;    
-    
+    public GameObject TitlePanelShiftClicPage2 => _titlePanelShiftClicPage2;
+
     [SerializeField] private List<GameObject> _middleImageTerrain;
     public List<GameObject> MiddleImageTerrain => _middleImageTerrain;
 
@@ -123,7 +123,7 @@ public class UIInstance : MonoSingleton<UIInstance>
     public List<GameObject> MiddleTextTerrain => _middleTextTerrain;
     #endregion ShiftClicPanelP2
 
-    
+
     [Header("ENFANTS CASE DU PLATEAU")]
     [SerializeField] private GameObject _mouvementTilePrefab;
     public GameObject MouvementTilePrefab => _mouvementTilePrefab;
@@ -147,18 +147,21 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private TextMeshProUGUI _fpsText = null;
     public TextMeshProUGUI FpsText => _fpsText;
 
-    private void Start(){
+    private void Start()
+    {
         QuitValidationPanel();
     }
 
-    public void DesactivateNextPhaseButton(){
+    public void DesactivateNextPhaseButton()
+    {
         _buttonNextPhase.SetActive(false);
     }
 
     /// <summary>
     /// Affiche le bouton pour passer à la phase suivante
     /// </summary>
-    public void ActivateNextPhaseButton(){
+    public void ActivateNextPhaseButton()
+    {
         _buttonNextPhase.SetActive(true);
     }
 
@@ -167,7 +170,8 @@ public class UIInstance : MonoSingleton<UIInstance>
     /// </summary>
     /// <param name="title"></param>
     /// <param name="description"></param>
-    public void ShowValidationPanel(string title, string description){
+    public void ShowValidationPanel(string title, string description)
+    {
         _validationPanel.SetActive(true);
         _titleValidationTxt.text = title;
         _descriptionValidationTxt.text = description;
@@ -177,7 +181,8 @@ public class UIInstance : MonoSingleton<UIInstance>
     /// <summary>
     /// Cache le panneau de validation
     /// </summary>
-    public void QuitValidationPanel(){
+    public void QuitValidationPanel()
+    {
         _validationPanel.SetActive(false);
     }
 
@@ -214,7 +219,8 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private TextMeshProUGUI _activationLeftTxtBP = null;
     public TextMeshProUGUI ActivationLeftTxtBP => _activationLeftTxtBP;
 
-    public void UpdateActivationLeft(){
+    public void UpdateActivationLeft()
+    {
         _activationLeftTxtRP.text = PlayerScript.Instance.RedPlayerInfos.ActivationLeft.ToString();
         _activationLeftTxtBP.text = PlayerScript.Instance.BluePlayerInfos.ActivationLeft.ToString();
     }
@@ -237,7 +243,22 @@ public class UIInstance : MonoSingleton<UIInstance>
     public AssignRessouceUnit RessourceUnit_PasTouche => _ressourceUnit_PasTouche;
     #endregion MenuRenfort
 
+    #region ELEMENT POUR L'UI DU MENU TRANSPORT
+    [Header("ELEMENT UI POUR L'AFFICHADE DU MENU TRANSPORTS")]
+
+    [SerializeField] private GameObject _menuTransport;
+    public GameObject MenuTransport => _menuTransport;
+
+    [SerializeField] private EmplacementUniteVieTransport _emplacementUITransport;
+    public EmplacementUniteVieTransport EmplacementUniteVieTransport => _emplacementUITransport;
+
+    [SerializeField] private ButtonMenuTransportPage1 _buttonMenuTransport;
+    public ButtonMenuTransportPage1 ButtonMenuTransport => _buttonMenuTransport;
+    #endregion ELEMENT POUR L'UI DU MENU TRANSPORT
+
     #region VieUnité
+
+    [Header("ELEMENT UI CONCERNANT LA VIE")]
     [SerializeField] private GameObject _lifeHeartPrefab;
     public GameObject LifeHeartPrefab => _lifeHeartPrefab;
 
@@ -247,6 +268,19 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private Sprite[] _lifeHeartSprite;
     public Sprite[] LifeHeartSprite => _lifeHeartSprite;
     #endregion VieUnité
+
+
+    #region NombreDeTransports
+
+    [Header("ELEMENT UI POUR L'AFFICHAGE DES TRANSPORTS AU DESSUS DE l'UNITE")]
+    [SerializeField] private GameObject _transportPrefab;
+    public GameObject TransportPrefab => _transportPrefab;
+
+    [SerializeField] private IndicatorEmplacementTopUnit _emplacementIconTopUnitTransport;
+    public IndicatorEmplacementTopUnit EmplacementIconTopUnitTransport => _emplacementIconTopUnitTransport;
+    #endregion NombreDeTransports
+
+
 }
 
 #region ClassToRangeList
@@ -424,6 +458,7 @@ public class TextRenfortMenu
 
 }
 
+
 [System.Serializable]
 public class AssignRessouceUnit
 {
@@ -434,6 +469,7 @@ public class AssignRessouceUnit
     public List<GameObject> _unité5Ressource;
     public List<GameObject> _unité6Ressource;
 }
+
 
 /// <summary>
 /// GameObject qui comprend l'ensemble des images pour le menuRenfort (les icones de vie, portée et déplacement ainsi qu les illustrations d'unités).
@@ -461,6 +497,7 @@ public class EmplacementImageMenuRenfort
     public GameObject _imageRessource = null;
 }
 
+
 [System.Serializable]
 public class BouttonMenuRenfort
 {
@@ -472,5 +509,72 @@ public class BouttonMenuRenfort
     public Button _clicSurUnité4 = null;
     public Button _clicSurUnité5 = null;
     public Button _clicSurUnité6 = null;
+}
+
+
+[System.Serializable]
+public class EmplacementUniteVieTransport
+{
+    [Header("EmplacementUnité Page1")]
+    public GameObject _emplacementUnit1_Page1 = null;
+    public GameObject _emplacementUnit2_Page1 = null;
+    public GameObject _emplacementUnit3_Page1 = null;
+    public GameObject _emplacementUnit4_Page1 = null;
+
+    [Space]
+
+    [Header("EmplacementUnité Page2")]
+    public GameObject _emplacementUnit1_Page2 = null;
+    public GameObject _emplacementUnit2_Page2 = null;
+    public GameObject _emplacementUnit3_Page2 = null;
+    public GameObject _emplacementUnit4_Page2 = null;
+
+    [Space]
+
+    [Header("EmplacementVie Page1")]
+    public GameObject _emplacementLife1_Page1 = null;
+    public GameObject _emplacementLife2_Page1 = null;
+    public GameObject _emplacementLife3_Page1 = null;
+    public GameObject _emplacementLife4_Page1 = null;
+
+    [Space]
+
+    [Header("EmplacementVie Page2")]
+    public GameObject _emplacementLife1_Page2 = null;
+    public GameObject _emplacementLife2_Page2 = null;
+    public GameObject _emplacementLife3_Page2 = null;
+    public GameObject _emplacementLife4_Page2 = null;
+}
+
+
+[System.Serializable]
+public class ButtonMenuTransportPage1
+{
+    [Header("Boutton des unités en Page1")]
+    public Button _clicSurUnité1_Page1 = null;
+    public Button _clicSurUnité2_Page1 = null;
+    public Button _clicSurUnité3_Page1 = null;
+    public Button _clicSurUnité4_Page1 = null;
+
+    [Header("Boutton des unités en Page2")]
+    public Button _clicSurUnité1_Page2 = null;
+    public Button _clicSurUnité2_Page2 = null;
+    public Button _clicSurUnité3_Page2 = null;
+    public Button _clicSurUnité4_Page2 = null;
+}
+
+
+
+
+[System.Serializable]
+public class IndicatorEmplacementTopUnit
+{
+    [Header("Emplacement UI transport au dessus de l'unité")]
+    public List<GameObject> _emplacementTransport = null;
+
+    [Space]
+
+    [Header("Element Sprite Transport")]
+    public Sprite[] _spriteTransport = null;
 }
 #endregion ClassToRangeList

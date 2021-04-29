@@ -228,7 +228,7 @@ public class RenfortPhase : MonoBehaviour
     /// </summary>
     /// <param name="tileCheck"></param>
     /// <returns></returns>
-    bool CheckConditions(GameObject tileCheck, int origin)
+    public bool CheckConditions(GameObject tileCheck, int origin)
     {
         //Y a une unité?
         if(tileCheck.GetComponent<TileScript>().Unit != null)
@@ -302,6 +302,7 @@ public class RenfortPhase : MonoBehaviour
             idCreate = unitId;
             redPlayerCreation = true;
 
+            Debug.Log("c'est moi");
             GameManager.Instance.StartEventModeTiles(1, true, tileList, "Création d'unité", "Êtes-vous sur de vouloir créer une unité sur cette case");
             GameManager.Instance._eventCall += CreateNewUnit;
         }

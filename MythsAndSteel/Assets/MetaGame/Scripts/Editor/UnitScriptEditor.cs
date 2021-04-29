@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
-[CustomEditor(typeof(UnitScript))]
+[CustomEditor(typeof(Transport_UnitScript))]
+//[CustomEditor(typeof(UnitScript))]
 public class UnitScriptEditor : Editor
 {
     public override void OnInspectorGUI()

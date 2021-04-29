@@ -25,7 +25,7 @@ public class UnitScript : MonoBehaviour
     public int Shield => _shield;
 
     //UI de la vie de l'unité
-    SpriteRenderer CurrentSpriteLifeHeartUI;
+    public SpriteRenderer CurrentSpriteLifeHeartUI;
 
     [Header("-------------------- ATTAQUE -------------------")]
     //Portée
