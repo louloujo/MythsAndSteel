@@ -301,6 +301,7 @@ public class Attaque : MonoSingleton<Attaque>
     /// <param name="Range"></param>
     public void Highlight(int tileId, int Range)
     {
+        UIInstance.Instance.DesactivateNextPhaseButton();
         if (Range > 0)
         {
             foreach (int ID in PlayerStatic.GetNeighbourDiag(tileId, TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().Line, false))
@@ -352,7 +353,7 @@ public class Attaque : MonoSingleton<Attaque>
     {
         _selectedTiles.Clear();
         _newNeighbourId.Clear();
-        if (GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0)
+        if (GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft >= 0)
         {
             if (tileId != -1)
             {
@@ -395,7 +396,7 @@ public class Attaque : MonoSingleton<Attaque>
                 }
             }
         }
-        else if (!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.ActivationLeft > 0)
+        else if (!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.ActivationLeft >= 0)
         {
             if (tileId != -1)
             {
@@ -485,8 +486,12 @@ public class Attaque : MonoSingleton<Attaque>
         {
             if(_selectedTiles.Count < numberOfTileToSelect && newNeighbourId.Contains(tileId))
             {
+                if (TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().Unit != null)
+                {
                 _selectedTiles.Add(tileId);
                 TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect, _selectedSprite, 1);
+
+                }
             }
         }
         else
@@ -510,7 +515,8 @@ public class Attaque : MonoSingleton<Attaque>
     /// </summary>
     public void StopAttack()
     {
-       RemoveTileSprite();
+        UIInstance.Instance.ActivateNextPhaseButton();
+        RemoveTileSprite();
 
         // Clear de toutes les listes et stats
         newNeighbourId.Clear();
