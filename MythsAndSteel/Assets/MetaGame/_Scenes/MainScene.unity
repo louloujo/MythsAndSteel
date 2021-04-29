@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10213,7 +10213,7 @@ Transform:
   - {fileID: 2037221012}
   - {fileID: 802328527}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &788355126
 GameObject:
@@ -21709,7 +21709,7 @@ Transform:
   - {fileID: 148049505}
   - {fileID: 1101442823}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1564384576
 PrefabInstance:
@@ -22873,6 +22873,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2013598116}
     m_Modifications:
+    - target: {fileID: 1655679490276374436, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -35961,6 +35965,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6244242718017290048, guid: 05ea443c18494aa4b9bebdf213b20ae8, type: 3}
+      propertyPath: _diceBonus
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244242718017290048, guid: 05ea443c18494aa4b9bebdf213b20ae8, type: 3}
+      propertyPath: _damageBonus
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244242718017290048, guid: 05ea443c18494aa4b9bebdf213b20ae8, type: 3}
       propertyPath: MoveSpeedBonus
       value: 0
       objectReference: {fileID: 0}
@@ -35986,7 +35998,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6244242718017290050, guid: 05ea443c18494aa4b9bebdf213b20ae8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.856
+      value: -4.84
       objectReference: {fileID: 0}
     - target: {fileID: 6244242718017290050, guid: 05ea443c18494aa4b9bebdf213b20ae8, type: 3}
       propertyPath: m_LocalPosition.z
