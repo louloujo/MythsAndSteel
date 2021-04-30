@@ -81,9 +81,13 @@ public class GameManager : MonoSingleton<GameManager>{
     [SerializeField] private List<GameObject> _selectableUnit = new List<GameObject>();
     public List<GameObject> SelectableUnit => _selectableUnit;
 
+    List<GameObject> _saveselectableUnit = new List<GameObject>();
+
     //Liste des unités choisies
     [SerializeField] private List<GameObject> _unitChooseList = new List<GameObject>();
     public List<GameObject> UnitChooseList => _unitChooseList;
+
+
 
     //Nombre d'unité à choisir
     [SerializeField] int _numberOfUnitToChoose = 0;
@@ -138,6 +142,9 @@ public class GameManager : MonoSingleton<GameManager>{
     #region CheckOrgone
     //Check l'orgone pour éviter l'override
     public bool IsCheckingOrgone = false;
+
+
+    public bool DoingEpxlosionOrgone = false;
 
     //Event qui permet d'attendre pour donner de l'orgone à un joueur
     public delegate void Checkorgone();
@@ -328,7 +335,7 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <param name="armyUnit"></param>
     public void StartEventModeUnit(int numberUnit, bool redPlayer, List<GameObject> _unitSelectable, string title, string description, bool multiplesUnit = false){
         UIInstance.Instance.DesactivateNextPhaseButton();
-
+        Debug.Log("Set Event param");
         _titleValidation = title;
         _descriptionValidation = description;
 
@@ -340,6 +347,7 @@ public class GameManager : MonoSingleton<GameManager>{
 
         foreach(GameObject gam in _selectableUnit){
             TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
+            Debug.Log("Show EventSelect" + gam);
         }
 
         _eventCall += StopEventModeUnit;
@@ -382,8 +390,32 @@ public class GameManager : MonoSingleton<GameManager>{
         if(unit != null){
             if(_canSelectMultiples)
             {
-                _unitChooseList.Add(unit);
-                TilesManager.Instance.TileList[unit.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _selectedTileSprite);
+                if (DoingEpxlosionOrgone)
+                {
+                    int TimeChoosen = 1;
+                    for(int i = 0; i < _unitChooseList.Count; i++)
+                    {
+                        if (_unitChooseList[i] == unit)
+                        {
+                            TimeChoosen++;
+                        }
+                        
+                    }
+                    
+                    if(TimeChoosen == unit.GetComponent<UnitScript>().Life)
+                    {
+                        SelectableUnit.Remove(unit);
+                    }
+                    
+                    _unitChooseList.Add(unit);
+                    TilesManager.Instance.TileList[unit.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _selectedTileSprite);
+                    
+                }
+                else
+                {
+                    _unitChooseList.Add(unit);
+                    TilesManager.Instance.TileList[unit.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _selectedTileSprite);
+                }
             }
             else if(!_canSelectMultiples && !_unitChooseList.Contains(unit))
             {
@@ -546,11 +578,16 @@ public class GameManager : MonoSingleton<GameManager>{
     /// Call the event cancel on the validation panel
     /// </summary>
     public void CancelEvent(){
+        foreach(GameObject gam in _unitChooseList)
+        {
+            if (!_selectableUnit.Contains(gam)) _selectableUnit.Add(gam);
+        }
         StopEventModeTile();
         StopEventModeUnit();
+
         
-        UnitChooseList.Clear();
         TileChooseList.Clear();
+        UnitChooseList.Clear();
 
         if(_eventCallCancel != null) _eventCallCancel();
     }
