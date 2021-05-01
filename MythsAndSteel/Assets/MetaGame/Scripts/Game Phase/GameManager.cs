@@ -142,9 +142,10 @@ public class GameManager : MonoSingleton<GameManager>{
     #region CheckOrgone
     //Check l'orgone pour éviter l'override
     public bool IsCheckingOrgone = false;
-
-
     public bool DoingEpxlosionOrgone = false;
+    public int DeathByOrgone = 0;
+
+
 
     //Event qui permet d'attendre pour donner de l'orgone à un joueur
     public delegate void Checkorgone();
@@ -392,6 +393,7 @@ public class GameManager : MonoSingleton<GameManager>{
             {
                 if (DoingEpxlosionOrgone)
                 {
+                    Debug.Log("Do explosion");
                     int TimeChoosen = 1;
                     for(int i = 0; i < _unitChooseList.Count; i++)
                     {
@@ -405,6 +407,7 @@ public class GameManager : MonoSingleton<GameManager>{
                     if(TimeChoosen == unit.GetComponent<UnitScript>().Life)
                     {
                         SelectableUnit.Remove(unit);
+                        unit.GetComponent<UnitScript>().DieByOrgone();
                     }
                     
                     _unitChooseList.Add(unit);
@@ -571,7 +574,19 @@ public class GameManager : MonoSingleton<GameManager>{
     /// Call the event of validation panel
     /// </summary>
     public void CallEvent(){
+        if (DoingEpxlosionOrgone)
+        {
+            if(_unitChooseList.Count != _selectableUnit.Count) 
+            foreach (GameObject gam in _unitChooseList)
+            {
+                if (!_selectableUnit.Contains(gam)) _selectableUnit.Add(gam);
+            }
+        }
         _eventCall();
+        
+        DoingEpxlosionOrgone = false;
+    
+
     }
 
     /// <summary>

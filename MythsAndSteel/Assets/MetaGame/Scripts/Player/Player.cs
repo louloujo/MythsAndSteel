@@ -88,7 +88,7 @@ public class Player
         else
         {
             UpdateOrgoneUI(player);
-            Debug.Log("Update UI Orgone");
+
 
             GameManager.Instance.IsCheckingOrgone = false;
             if(GameManager.Instance._waitToCheckOrgone != null)
@@ -214,6 +214,7 @@ public class Player
                 }
             }
         }
+        Debug.Log("Update UI Orgone : " + OrgoneValue);
     }
 
     //AV
