@@ -53,7 +53,9 @@ public class InputManager : MonoBehaviour
                 RaycastManager.Instance._mouseCommand.QuitShiftPanel();
                 RaycastManager.Instance._mouseCommand._checkIfPlayerAsClic = false;
                 RaycastManager.Instance._mouseCommand._hasCheckUnit = true;
-                
+                RaycastManager.Instance.supersose = true;
+
+
             }
         }
 
