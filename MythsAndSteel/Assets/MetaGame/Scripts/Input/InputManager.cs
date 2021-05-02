@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour
 {
+    
     [Header("TOUCHES")]
     [SerializeField] private KeyCode escapeEvent = KeyCode.Escape;
     [SerializeField] private KeyCode MoreInfoUnit = KeyCode.LeftShift;
@@ -82,6 +83,7 @@ public class InputManager : MonoBehaviour
         {
             if (Mouvement.Instance.IsInMouvement && Mouvement.Instance._selectedTileId.Count > 1)
             {
+             
                 if (TilesManager.Instance.TileList[Mouvement.Instance._selectedTileId[Mouvement.Instance._selectedTileId.Count - 1]].GetComponent<TileScript>().Unit == null)
                 {
                     Mouvement.Instance.ApplyMouvement();
@@ -90,18 +92,21 @@ public class InputManager : MonoBehaviour
             }
             else
             {
-                Mouvement.Instance.StopMouvement(true);
+                Attaque.Instance.Attack();
             }
         }
 
         //Pour passer une phase rapidement
         if (GameManager.Instance.IsInTurn && !GameManager.Instance.ChooseTileForEvent && !GameManager.Instance.ChooseUnitForEvent)
         {
-            if (Input.GetKeyDown(SkipPhase))
+            if(UIInstance.Instance.skiPhaseTouche)
+            {
+
+             if (Input.GetKeyDown(SkipPhase))
             {
                 t = 0;
             }
-            if (Input.GetKey(SkipPhase) && !hasShowPanel && !Attaque.Instance.Selected && !Mouvement.Instance.Selected && !OrgoneManager.Instance.Selected)
+             if (Input.GetKey(SkipPhase) && !hasShowPanel && !Attaque.Instance.Selected && !Mouvement.Instance.Selected && !OrgoneManager.Instance.Selected)
             {
                 if (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Activation)
                 {
@@ -115,9 +120,10 @@ public class InputManager : MonoBehaviour
                     ClicToSkipPhase();
                 }
             }
-            if (Input.GetKeyUp(SkipPhase))
+             if (Input.GetKeyUp(SkipPhase))
             {
                 UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta.y);
+            }
             }
         }
 
@@ -178,6 +184,8 @@ public class InputManager : MonoBehaviour
     /// </summary>
     void ClicToSkipPhase()
     {
+     
+
         if ((GameManager.Instance.IsPlayerRedTurn && !OrgoneManager.Instance.RedPlayerZone.GetComponent<ZoneOrgone>().IsInValidation) ||
                            (!GameManager.Instance.IsPlayerRedTurn && !OrgoneManager.Instance.BluePlayerZone.GetComponent<ZoneOrgone>().IsInValidation))
         {
@@ -194,6 +202,7 @@ public class InputManager : MonoBehaviour
                 UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta.y);
             }
         }
+        
     }
 
     /// <summary>

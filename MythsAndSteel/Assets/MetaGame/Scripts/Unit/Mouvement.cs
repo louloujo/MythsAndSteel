@@ -324,7 +324,7 @@ public class Mouvement : MonoSingleton<Mouvement>
     public void StartMvmtForSelectedUnit()
     {
         GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
-        if (GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0)
+        if (GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft >= 0)
         {
             if (tileSelected != null)
             {
@@ -345,7 +345,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                 _selected = false;
             }
         }
-        else if (!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.ActivationLeft > 0)
+        else if (!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.ActivationLeft >= 0)
         {
             if (tileSelected != null)
             {

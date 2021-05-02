@@ -299,7 +299,7 @@ public class Attaque : MonoSingleton<Attaque>
     /// </summary>
     /// <param name="tileId"></param>
     /// <param name="Range"></param>
-    public void Highlight(int tileId, int Range)
+    public void Highlight(int tileId, int currentID, int Range)
     {
         UIInstance.Instance.DesactivateNextPhaseButton();
         if (Range > 0)
@@ -309,12 +309,10 @@ public class Attaque : MonoSingleton<Attaque>
                 TileScript TileSc = TilesManager.Instance.TileList[ID].GetComponent<TileScript>();
                 bool i = false;
 
-                if (TileSc.Unit != null)
+              if(ID == currentID )
                 {
-                    if (GameManager.Instance.IsPlayerRedTurn == TileSc.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy)
-                    {
-                        i = true;
-                    }
+                    i = true;
+                    Debug.Log("jfdklq");
                 }
 
                 if (!i)
@@ -324,7 +322,7 @@ public class Attaque : MonoSingleton<Attaque>
                     {
                         newNeighbourId.Add(ID);
                     }
-                    Highlight(ID, Range - 1);
+                    Highlight(ID, currentID, Range - 1); ;
                 }
             }
         }
@@ -473,7 +471,7 @@ public class Attaque : MonoSingleton<Attaque>
 
             // Lance l'highlight des cases dans la range de l'unitÃ©.
             UpdateJauge(tileId);
-            Highlight(tileId, Range); 
+            Highlight(tileId, tileId, Range); 
         }
     }
 
@@ -486,10 +484,15 @@ public class Attaque : MonoSingleton<Attaque>
         {
             if(_selectedTiles.Count < numberOfTileToSelect && newNeighbourId.Contains(tileId))
             {
-                if (TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().Unit != null)
+                TileScript currentTileScript = TilesManager.Instance.TileList[tileId].GetComponent<TileScript>();
+                if (currentTileScript.Unit != null  )
                 {
+                if(currentTileScript.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy != GameManager.Instance.IsPlayerRedTurn)
+                    {
+
                 _selectedTiles.Add(tileId);
                 TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect, _selectedSprite, 1);
+                    }
 
                 }
             }
@@ -514,8 +517,9 @@ public class Attaque : MonoSingleton<Attaque>
     /// ArrÃªte l'attaque de l'unitÃ© select (UI + possibilitÃ© d'attaquer
     /// </summary>
     public void StopAttack()
+     
     {
-        UIInstance.Instance.ActivateNextPhaseButton();
+
         RemoveTileSprite();
 
         // Clear de toutes les listes et stats
@@ -614,7 +618,8 @@ public class Attaque : MonoSingleton<Attaque>
         _numberRangeMax.y = _selectedUnit.GetComponent<UnitScript>().NumberRangeMax.y; // Récupération de la Range min - y
         numberOfTileToSelect = _selectedUnit.GetComponent<UnitScript>().UnitSO.numberOfUnitToAttack;
         _isAttackDeviation = false;
-      
+        
+
         if (!_isAttackDeviation)
         foreach (MYthsAndSteel_Enum.Attributs element in _selectedUnit.GetComponent<UnitScript>().UnitSO.UnitAttributs)
         {

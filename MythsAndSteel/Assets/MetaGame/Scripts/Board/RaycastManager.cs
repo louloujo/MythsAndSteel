@@ -122,7 +122,8 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     public void Select(){
         //Lorsque le joueur choisit une unité
         if(GameManager.Instance.ChooseUnitForEvent){
-            if(_unitInTile != null){
+            if(_unitInTile != null)
+            {
                 if(GameManager.Instance.SelectableUnit.Contains(UnitInTile))
                 {
                     if(!GameManager.Instance.IllusionStratégique)
@@ -172,7 +173,9 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                 }
                 else if(!Mouvement.Instance.Selected && !Attaque.Instance.Selected && UnitInTile != null)
                 {
-                    if(CanUseUnitWhenClic(UnitInTile.GetComponent<UnitScript>()))
+                    
+                   UnitScript currentUnitScript = UnitInTile.GetComponent<UnitScript>();
+                    if (CanUseUnitWhenClic(currentUnitScript))
                     {
                         _actualTileSelected = _tile;
                         _actualUnitSelected = _unitInTile;
