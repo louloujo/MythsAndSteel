@@ -253,7 +253,8 @@ public class GameManager : MonoSingleton<GameManager>{
     /// </summary>
     void OnclickedEvent(){
         SwitchPhaseObjectUI();
-        if(ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Debut){
+        if(ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Debut)
+        {
             _isInTurn = false;
         }
         else

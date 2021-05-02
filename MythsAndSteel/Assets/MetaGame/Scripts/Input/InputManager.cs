@@ -90,41 +90,41 @@ public class InputManager : MonoBehaviour
                     Mouvement.Instance.DeleteChildWhenMove();
                 }
             }
-            else
+            else if(Attaque.Instance.SelectedTiles.Count == 1)
             {
                 Attaque.Instance.Attack();
             }
-        }
 
+        }  
         //Pour passer une phase rapidement
         if (GameManager.Instance.IsInTurn && !GameManager.Instance.ChooseTileForEvent && !GameManager.Instance.ChooseUnitForEvent)
         {
-            if(UIInstance.Instance.skiPhaseTouche)
+            if (UIInstance.Instance.skiPhaseTouche)
             {
 
-             if (Input.GetKeyDown(SkipPhase))
-            {
-                t = 0;
-            }
-             if (Input.GetKey(SkipPhase) && !hasShowPanel && !Attaque.Instance.Selected && !Mouvement.Instance.Selected && !OrgoneManager.Instance.Selected)
-            {
-                if (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Activation)
+                if (Input.GetKeyDown(SkipPhase) && UIInstance.Instance.skiPhaseTouche)
                 {
-                    if (GameManager.Instance.ActivationPhase.J1CarteChoisie && GameManager.Instance.ActivationPhase.J2CarteChoisie)
+                    t = 0;
+                }
+                if (Input.GetKey(SkipPhase) && !hasShowPanel && !Attaque.Instance.Selected && !Mouvement.Instance.Selected && !OrgoneManager.Instance.Selected)
+                {
+                    if (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Activation)
+                    {
+                        if (GameManager.Instance.ActivationPhase.J1CarteChoisie && GameManager.Instance.ActivationPhase.J2CarteChoisie)
+                        {
+                            ClicToSkipPhase();
+                        }
+                    }
+                    else
                     {
                         ClicToSkipPhase();
                     }
                 }
-                else
+            }
+                if (Input.GetKeyUp(SkipPhase))
                 {
-                    ClicToSkipPhase();
+                    UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta.y);
                 }
-            }
-             if (Input.GetKeyUp(SkipPhase))
-            {
-                UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta.y);
-            }
-            }
         }
 
         //Quand tu cliques ur une case
@@ -184,25 +184,29 @@ public class InputManager : MonoBehaviour
     /// </summary>
     void ClicToSkipPhase()
     {
-     
 
         if ((GameManager.Instance.IsPlayerRedTurn && !OrgoneManager.Instance.RedPlayerZone.GetComponent<ZoneOrgone>().IsInValidation) ||
-                           (!GameManager.Instance.IsPlayerRedTurn && !OrgoneManager.Instance.BluePlayerZone.GetComponent<ZoneOrgone>().IsInValidation))
+                       (!GameManager.Instance.IsPlayerRedTurn && !OrgoneManager.Instance.BluePlayerZone.GetComponent<ZoneOrgone>().IsInValidation))
         {
             t += Time.deltaTime;
             UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta = new Vector2(SkipPhaseStartWidth * (t / _timeToWaitForSkipPhase), UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta.y);
             if (t > _timeToWaitForSkipPhase)
             {
-                UIInstance.Instance.ShowValidationPanel("Passer à la phase suivante", "Êtes-vous sur de vouloir passer à la phase suivante? En passant la phase vous n'aurez pas la possibilité de revenir en arrière.");
+              
                 GameManager.Instance.CliCToChangePhase();
+                EventSystem.current.SetSelectedGameObject(null);
                 GameManager.Instance._eventCallCancel += CancelSkipPhase;
                 GameManager.Instance._eventCall += SkipPhaseFunc;
+
                 hasShowPanel = true;
                 t = 0;
                 UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta.y);
             }
+
+
         }
-        
+
+
     }
 
     /// <summary>
