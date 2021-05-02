@@ -19,6 +19,9 @@ public class UnitScript : MonoBehaviour
     //Vie actuelle
     [SerializeField] int _life;
     public int Life => _life;
+
+    bool IsDead = false;
+    bool IsDeadByOrgone = false;
     
     // Bouclier actuelle
     [SerializeField] int _shield;
@@ -257,7 +260,7 @@ public class UnitScript : MonoBehaviour
     /// Fait perdre de la vie au joueur
     /// </summary>
     /// <param name="Damage"></param>
-    public virtual void TakeDamage(int Damage)
+    public virtual void TakeDamage(int Damage, bool IsOrgoneDamage = false)
     {
         if(_shield > 0){
             _shield -= Damage;
@@ -331,7 +334,11 @@ public class UnitScript : MonoBehaviour
                 }
                 else
                 {
-                    PlayerScript.Instance.AddOrgone(1, 1);
+                    if (!IsOrgoneDamage)
+                    {
+                        PlayerScript.Instance.AddOrgone(1, 1);
+                        Debug.Log("Ca buuuuuug");
+                    }
                     if(GameManager.Instance._waitToCheckOrgone != null) GameManager.Instance._waitToCheckOrgone += AddOrgoneToPlayer;
                 }
             }
@@ -345,8 +352,12 @@ public class UnitScript : MonoBehaviour
                 }
                 else
                 {
-                    PlayerScript.Instance.AddOrgone(1, 2);
-                    if(GameManager.Instance._waitToCheckOrgone != null) GameManager.Instance._waitToCheckOrgone += AddOrgoneToPlayer;
+                    if (!IsOrgoneDamage)
+                    {
+                        PlayerScript.Instance.AddOrgone(1, 1);
+                        Debug.Log("Ca buuuuuug");
+                    }
+                    if (GameManager.Instance._waitToCheckOrgone != null) GameManager.Instance._waitToCheckOrgone += AddOrgoneToPlayer;
                 }
             }
         }
@@ -367,33 +378,52 @@ public class UnitScript : MonoBehaviour
     /// </summary>
     void CheckLife()
     {
-        if (_life <= 0)
+        
+        if (_life <= 0 && !IsDead)
         {
             Death();
+            IsDead = true;
         }
     }
 
+
+    public void DieByOrgone()
+    {
+        IsDeadByOrgone = true;
+    }
     /// <summary>
     /// Tue l'unité
     /// </summary>
     public virtual void Death()
     {
-        
+        Debug.Log("Unité Détruite");
         if (UnitSO.IsInRedArmy) PlayerScript.Instance.UnitRef.UnitListRedPlayer.Remove(gameObject);
         else PlayerScript.Instance.UnitRef.UnitListBluePlayer.Remove(gameObject);
+        if (!IsDeadByOrgone)
+        {
+            if (TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneRed))
+            {
+                Debug.Log("doing orgone" + GameManager.Instance.DoingEpxlosionOrgone);
+                PlayerScript.Instance.AddOrgone(1, 1);
+                PlayerScript.Instance.RedPlayerInfos.CheckOrgone(1);
+            }
+            else if (TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneBlue))
+            {
+                if (!GameManager.Instance.DoingEpxlosionOrgone) PlayerScript.Instance.AddOrgone(1, 2);
+                PlayerScript.Instance.BluePlayerInfos.CheckOrgone(2);
+            }
+            else { }
+        }
+        else
+        {
+            GameManager.Instance.DeathByOrgone--;
+        }
+        
 
-        if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneRed)){
-            PlayerScript.Instance.AddOrgone(1, 1);
-            PlayerScript.Instance.RedPlayerInfos.CheckOrgone(1);
-        }
-        else if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneBlue)){
-            PlayerScript.Instance.AddOrgone(1, 2);
-            PlayerScript.Instance.BluePlayerInfos.CheckOrgone(2);
-        }
-        else { }
         
 
         PlayerScript.Instance.GiveEventCard(UnitSO.IsInRedArmy ? 1 : 2);
+        IsDead = false;
 
         StartCoroutine(DeathAnimation());
     }
@@ -412,7 +442,6 @@ public class UnitScript : MonoBehaviour
         }
         Destroy(gameObject);
         SoundController.Instance.PlaySound(_SonMort);
-        Debug.Log("Unité Détruite");
     }
 
     /// <summary>

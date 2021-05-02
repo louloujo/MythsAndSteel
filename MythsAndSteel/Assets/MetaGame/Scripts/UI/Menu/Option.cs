@@ -8,7 +8,10 @@ public class Option : MonoBehaviour
 {
     #region Variables
     //---------Audio--------------
-    public AudioMixer audioMixer; //Variable qui défini quel AudioMixer on modifie
+    public AudioMixer audioMixer; //Variable qui défin
+    [SerializeField] GameObject EffectVolumeSlider;
+    [SerializeField] GameObject MusicVolumeSlider;
+    [SerializeField] GameObject Toggle;
 
     //--------Résolution----------
     public Dropdown ResolutionDropdown;//Variable qui défini quel dropdown on modifie
@@ -27,9 +30,7 @@ public class Option : MonoBehaviour
 
     private void Start()
     {
-        SetEffectvolume(PlayerPrefs.GetFloat("Effectvolume"));
-        SetMusicVolume(PlayerPrefs.GetFloat("MusicVolum"));
-
+        
 
         resolutions = Screen.resolutions; //Récupère toute les résoluttion possible
         ResolutionDropdown.ClearOptions();//Enlève les options de bases du Dropdown
@@ -55,6 +56,16 @@ public class Option : MonoBehaviour
         ResolutionDropdown.AddOptions(options); //Ajoute toutes les résolution possible au Dropdown (en string)
         ResolutionDropdown.value = currentResolutionIndex; //Assigne la résolution actuelle au Dropdown
         ResolutionDropdown.RefreshShownValue();//Actualise le Dropdown pour afficher la résolution actuelle
+    }
+    private void Awake()
+    {
+        audioMixer.SetFloat("Effect", PlayerPrefs.GetFloat("EffectVolume"));
+        audioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume"));
+        EffectVolumeSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("EffectVolume");
+        MusicVolumeSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("MusicVolume");
+        Debug.Log("Volume set : Effect " + PlayerPrefs.GetFloat("EffectVolume") + ", Music " + PlayerPrefs.GetFloat("MusicVolume"));
+        if (PlayerPrefs.GetInt("Volume") == 1) Toggle.GetComponent<Toggle>().isOn = true;
+        else Toggle.GetComponent<Toggle>().isOn = false;
     }
 
     #region Résolution
@@ -108,16 +119,20 @@ public class Option : MonoBehaviour
         if (isVolumeOn)
         {
             audioMixer.SetFloat("Master", 0);
+            PlayerPrefs.SetInt("Volume", 1);
         }
         else
         {
             audioMixer.SetFloat("Master", -80);
+            PlayerPrefs.SetInt("Volume", 0);
         }
+
     }
-    public void SetEffectvolume (float volume)
+    public void SetEffectVolume (float volume)
     {
         audioMixer.SetFloat("Effect", volume);
         PlayerPrefs.SetFloat("EffectVolume", volume);
+
     }
 
     public void SetMusicVolume(float volume)
