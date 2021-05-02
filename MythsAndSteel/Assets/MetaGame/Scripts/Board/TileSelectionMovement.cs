@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class TileSelectionMovement : MonoBehaviour{
+public class TileSelectionMovement : MonoSingleton<TileSelectionMovement>
+{
+
     #region Variables
     //Est ce que l'objet a fait le déplacement
     bool _hasMakeMovement = false;

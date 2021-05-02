@@ -8,7 +8,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     #region Appel de Script
     public MouseCommand _mouseCommand;
     #endregion
-
+    public bool supersose = true;
     #region Variables
     [Header("INFO DU RAYCAST")]
     //Les layer qui sont détectés par le raycast
@@ -76,10 +76,11 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         //Permet de combiner le Shift et le click gauche de la souris.
         if (_unitInTile == true && GameManager.Instance.IsInTurn && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation){
             //Si le joueur a utilisé le Shift puis leclick, le joueur est considéré comme click et on applique les fonctions propres au bouton des panneaux. De plus, le mouseOver est désactivé.
-            if (_mouseCommand._checkIfPlayerAsClic == true && _mouseCommand._hasCheckUnit == false)
+            if (_mouseCommand._checkIfPlayerAsClic == true && _mouseCommand._hasCheckUnit == false && supersose)
             {
                 _mouseCommand.ShiftClick();
                 _mouseCommand.MouseExitWithoutClick();
+                supersose = false;
             }
             else if(_mouseCommand._checkIfPlayerAsClic == false)
             {
@@ -162,7 +163,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             //Si le mouvement n'a pas été lancé
             if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
             {
-                if(_actualUnitSelected == UnitInTile && !Mouvement.Instance.MvmtRunning && !Attaque.Instance.IsInAttack)
+                if(_actualUnitSelected == UnitInTile && !Mouvement.Instance.MvmtRunning && Attaque.Instance.IsInAttack)
                 {
                     Mouvement.Instance.StopMouvement(true);
                     Attaque.Instance.StopAttack();

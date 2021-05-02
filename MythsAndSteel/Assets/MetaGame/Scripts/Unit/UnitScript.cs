@@ -156,7 +156,7 @@ public class UnitScript : MonoBehaviour
     [SerializeField] private List<MYthsAndSteel_Enum.UnitStatut> _unitStatus = new List<MYthsAndSteel_Enum.UnitStatut>();
     public List<MYthsAndSteel_Enum.UnitStatut> UnitStatus => _unitStatus;
 
-    bool hasUseActivation = false;
+   public bool hasUseActivation = false;
     [SerializeField] private Animator _Animation;
     public Animator Animation => _Animation;
 
