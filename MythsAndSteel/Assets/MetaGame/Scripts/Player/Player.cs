@@ -59,6 +59,10 @@ public class Player
     /// </summary>
     /// <returns></returns>
     public bool OrgoneExplose(){
+      
+        
+         
+      
         return OrgoneValue > 5 ? true : false;
     }
     
@@ -72,10 +76,12 @@ public class Player
     }
 
     public void CheckOrgone(int player){
+ 
         GameManager.Instance.IsCheckingOrgone = true;
-        
-        if(OrgoneExplose() && !GameManager.Instance.ChooseUnitForEvent)
+      
+        if (OrgoneExplose() && !GameManager.Instance.ChooseUnitForEvent)
         {
+            
             GameManager.Instance.DoingEpxlosionOrgone = true;
             List<GameObject> unitList = player == 1 ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer;
             GameManager.Instance.StartEventModeUnit(4, player == 1 ? true : false, unitList, "Explosion d'orgone", "Êtes-vous sur de vouloir infliger des dégâts à ces unités?", true);
@@ -83,6 +89,7 @@ public class Player
             if(player == 1) GameManager.Instance._eventCallCancel += CancelOrgoneP1;
             else GameManager.Instance._eventCallCancel += CancelOrgoneP2;
             PLayerOrgoneExplose = player;
+          
             
         }
         else

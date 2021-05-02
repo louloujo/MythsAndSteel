@@ -1454,6 +1454,8 @@ MonoBehaviour:
   _activationPhase: {fileID: 915835425}
   _Terrain: {fileID: 11400000, guid: 6b9cd9dfcef01a747b717485f579f9a3, type: 2}
   IsCheckingOrgone: 0
+  DoingEpxlosionOrgone: 0
+  DeathByOrgone: 0
 --- !u!1 &99837085
 GameObject:
   m_ObjectHideFlags: 0
@@ -25483,6 +25485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mouseCommand: {fileID: 868507530}
+  supersose: 1
   _layerM:
     serializedVersion: 2
     m_Bits: 8
@@ -26877,6 +26880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1129ac21bcf02f742b54eb48f71a9ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skiPhaseTouche: 1
   _switchPhaseObject: {fileID: 4950479300666342195, guid: 111b4523566bf904e984f7c9843eb641, type: 3}
   _canvasActivation: {fileID: 75961213}
   _skipPhaseImage: {fileID: 709209550}

@@ -393,6 +393,8 @@ public class GameManager : MonoSingleton<GameManager>{
             {
                 if (DoingEpxlosionOrgone)
                 {
+                    
+
                     Debug.Log("Do explosion");
                     int TimeChoosen = 1;
                     for(int i = 0; i < _unitChooseList.Count; i++)

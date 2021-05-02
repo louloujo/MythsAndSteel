@@ -329,6 +329,7 @@ public class UnitScript : MonoBehaviour
             {
                 if(!GameManager.Instance.IsCheckingOrgone)
                 {
+
                     PlayerScript.Instance.AddOrgone(1, 1);
                     PlayerScript.Instance.RedPlayerInfos.CheckOrgone(1);
                 }

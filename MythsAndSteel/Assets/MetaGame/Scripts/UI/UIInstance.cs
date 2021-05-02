@@ -6,6 +6,7 @@ using TMPro;
 
 public class UIInstance : MonoSingleton<UIInstance>
 {
+    public bool skiPhaseTouche = true;
     #region PhaseDeJeu
     [Header("PHASE DE JEU")]
     //Le panneau à afficher lorsque l'on change de phase
@@ -172,6 +173,8 @@ public class UIInstance : MonoSingleton<UIInstance>
 
     public void DesactivateNextPhaseButton(){
         _buttonNextPhase.SetActive(false);
+        skiPhaseTouche = false;
+   
     }
 
     /// <summary>
@@ -179,6 +182,7 @@ public class UIInstance : MonoSingleton<UIInstance>
     /// </summary>
     public void ActivateNextPhaseButton(){
         _buttonNextPhase.SetActive(true);
+        skiPhaseTouche = true;
     }
 
     /// <summary>
