@@ -324,11 +324,13 @@ public class Mouvement : MonoSingleton<Mouvement>
     public void StartMvmtForSelectedUnit()
     {
         GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
-        if (GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft >= 0)
+        if (tileSelected != null)
         {
-            if (tileSelected != null)
+            mUnit = tileSelected.GetComponent<TileScript>().Unit;
+            if ((GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0) || (mUnit.GetComponent<UnitScript>()._hasStartMove && GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft == 0))
             {
-                mUnit = tileSelected.GetComponent<TileScript>().Unit;
+
+              
                 if (!mUnit.GetComponent<UnitScript>().IsMoveDone)
                 {
                     _selected = true;
@@ -339,17 +341,13 @@ public class Mouvement : MonoSingleton<Mouvement>
                 {
                     _selected = false;
                 }
+
             }
-            else
+
+            else if ((GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0) || (mUnit.GetComponent<UnitScript>()._hasStartMove && GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft == 0))
             {
-                _selected = false;
-            }
-        }
-        else if (!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.ActivationLeft >= 0)
-        {
-            if (tileSelected != null)
-            {
-                mUnit = tileSelected.GetComponent<TileScript>().Unit;
+
+               
                 if (!mUnit.GetComponent<UnitScript>().IsMoveDone)
                 {
                     _selected = true;
@@ -360,13 +358,18 @@ public class Mouvement : MonoSingleton<Mouvement>
                 {
                     _selected = false;
                 }
-            }
-            else
-            {
-                _selected = false;
+
+
+
             }
         }
+        else
+        {
+            _selected = false;
+        }
+
     }
+            
 
     /// <summary>
     /// Lance le mvmt d'une unité séléctionnée avec sa range.
