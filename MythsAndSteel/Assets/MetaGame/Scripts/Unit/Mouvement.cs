@@ -324,7 +324,7 @@ public class Mouvement : MonoSingleton<Mouvement>
     public void StartMvmtForSelectedUnit()
     {
         GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
-        if (GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0)
+        if (GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft >= 0)
         {
             if (tileSelected != null)
             {
@@ -345,7 +345,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                 _selected = false;
             }
         }
-        else if (!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.ActivationLeft > 0)
+        else if (!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.ActivationLeft >= 0)
         {
             if (tileSelected != null)
             {
@@ -638,7 +638,7 @@ public class Mouvement : MonoSingleton<Mouvement>
         {
             UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
         }
-        DisplayMoveArrow();
+        //DisplayMoveArrow();
     }
 
     /// <summary>
@@ -786,7 +786,7 @@ public class Mouvement : MonoSingleton<Mouvement>
         Unit.GetComponent<SpriteRenderer>().flipX = Unit.GetComponent<UnitScript>().Animation.GetFloat("X") > 0;
     }
 
-    private void DisplayMoveArrow()
+    /*private void DisplayMoveArrow()
     {
         if (mUnit.GetComponent<UnitScript>().MoveLeft != 0)
         {
@@ -820,5 +820,5 @@ public class Mouvement : MonoSingleton<Mouvement>
             TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] + 1].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
             TilesManager.Instance.TileList[selectedTileId[selectedTileId.Count - 2] - 9].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);
         }
-    }
+    }*/
 }

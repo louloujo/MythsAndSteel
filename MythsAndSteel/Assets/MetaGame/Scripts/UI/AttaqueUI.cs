@@ -145,12 +145,13 @@ public class AttaqueUI : MonoBehaviour
         {
             Dice = 12;
         }                        
-        Impactor.gameObject.transform.position = new Vector3(Borne[Dice - 2].transform.position.x + 28, Borne[Dice - 2].transform.position.y + 4, I.z);
+        Impactor.gameObject.transform.position = new Vector3(Borne[Dice - 2].transform.position.x, Borne[Dice - 2].transform.position.y, I.z);
         if(Dice == 2)
         {
+            Debug.Log("low");
             Impactor.SetTrigger("ImpactLeft");
         }
-        if (Dice == 12)
+        else if (Dice == 12)
         {
             Impactor.SetTrigger("ImpactRight");
         }
