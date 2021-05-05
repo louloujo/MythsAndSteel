@@ -349,6 +349,8 @@ public class Attaque : MonoSingleton<Attaque>
     /// </summary>
     public void StartAttackSelectionUnit(int tileId = -1)
     {
+        GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
+        _selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
         _selectedTiles.Clear();
         _newNeighbourId.Clear();
         if ((GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0) || (_selectedUnit.GetComponent<UnitScript>()._hasStartMove && GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft == 0))
@@ -370,11 +372,11 @@ public class Attaque : MonoSingleton<Attaque>
             }
             else
             {
-                GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
+                
 
                 if (tileSelected != null)
                 {
-                    _selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
+                
                     if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
                     {
                         Debug.Log(_selectedUnit);
@@ -394,7 +396,7 @@ public class Attaque : MonoSingleton<Attaque>
                 }
             }
         }
-        else if ((GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0) || (_selectedUnit.GetComponent<UnitScript>()._hasStartMove && GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft == 0))
+        else if ((!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0) || (_selectedUnit.GetComponent<UnitScript>()._hasStartMove && !GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft == 0))
         {
             if (tileId != -1)
             {
@@ -411,11 +413,11 @@ public class Attaque : MonoSingleton<Attaque>
             }
             else
             {
-                GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
+               
 
                 if (tileSelected != null)
                 {
-                    _selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
+           
                     if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
                     {
                         Debug.Log(_selectedUnit);
