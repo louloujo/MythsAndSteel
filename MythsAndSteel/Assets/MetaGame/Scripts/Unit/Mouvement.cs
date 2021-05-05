@@ -883,8 +883,8 @@ public class Mouvement : MonoSingleton<Mouvement>
         return Temp;
     }
 
-    public List<int> ArrowedTile = new List<int>();
-    public List<int> PathTile = new List<int>();
+     List<int> ArrowedTile = new List<int>();
+     List<int> PathTile = new List<int>();
     private void DisplayMoveArrow()
     {
         if (PathTile.Count > 0)
@@ -933,7 +933,6 @@ public class Mouvement : MonoSingleton<Mouvement>
                 }
             }
         }
-
         if(selectedTileId.Count >= 2)
         {
             for (int i = 1; i < selectedTileId.Count - 1; i++)
