@@ -97,6 +97,7 @@ public class ZoneOrgone : MonoBehaviour
     /// Lorsque le joueur commence à cliquer sur la case centrale de la zone d'orgone
     /// </summary>
     public void AddOrgoneAtRange(){
+        UIInstance.Instance.DesactivateNextPhaseButton();
         List<int> OrgoneNeigh = _redPlayerZone ? PlayerStatic.GetNeighbourDiag(PlayerScript.Instance.RedPlayerInfos.TileCentreZoneOrgone.GetComponent<TileScript>().TileId, 
                                                                                PlayerScript.Instance.RedPlayerInfos.TileCentreZoneOrgone.GetComponent<TileScript>().Line,   
                                                                                false) : 
@@ -213,6 +214,7 @@ public class ZoneOrgone : MonoBehaviour
     public void CancelValidation(){
         transform.position = _centerOrgoneArea.transform.position;
         _lastTileInRange = null;
+        UIInstance.Instance.ActivateNextPhaseButton();
         GameManager.Instance._eventCallCancel -= CancelValidation;
 
         foreach(GameObject gam in _tilesInRange)

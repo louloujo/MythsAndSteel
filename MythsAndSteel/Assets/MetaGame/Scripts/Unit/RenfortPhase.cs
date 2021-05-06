@@ -293,7 +293,7 @@ public class RenfortPhase : MonoBehaviour
 
     #region GetTiles
     /// <summary>
-    /// Créer une liste des tules autour des usines
+    /// Créer une liste des tiles autour des usines
     /// </summary>
     /// <param name="usine1"></param>
     void AroundCreateTileUsine(bool usine1)
@@ -320,7 +320,7 @@ public class RenfortPhase : MonoBehaviour
 
         foreach(GameObject typeTile in usineList)
         {
-            int typeTileID = int.Parse(TilesManager.Instance.TileList.IndexOf(typeTile).ToString());
+            int typeTileID = TilesManager.Instance.TileList.IndexOf(typeTile);
             //Debug.Log(typeTile);
             foreach(int idtyleIndex in PlayerStatic.GetNeighbourDiag(typeTileID, TilesManager.Instance.TileList[typeTileID].GetComponent<TileScript>().Line, false))
             {

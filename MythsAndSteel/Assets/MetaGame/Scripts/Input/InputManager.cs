@@ -92,6 +92,7 @@ public class InputManager : MonoBehaviour
             }
             else if(Attaque.Instance.SelectedTiles.Count == 1)
             {
+                Mouvement.Instance.StopMouvement(true);
                 Attaque.Instance.Attack();
             }
 
