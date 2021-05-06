@@ -5919,30 +5919,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6244242718017290110, guid: 05ea443c18494aa4b9bebdf213b20ae8, type: 3}
   m_PrefabInstance: {fileID: 3573671939702946865}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &409550975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409550974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f401c3105a8d0bb4995c646f8c89ea47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Activate: 0
-  Fx:
-  - {fileID: 409550978}
-  minA: 0
-  maxA: 1
-  speed: 0.2
-  A: 0
---- !u!212 &409550978 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 6244242718017290051, guid: 05ea443c18494aa4b9bebdf213b20ae8, type: 3}
-  m_PrefabInstance: {fileID: 3573671939702946865}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &438218564
 GameObject:
   m_ObjectHideFlags: 0

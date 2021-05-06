@@ -7,6 +7,10 @@ using TMPro;
 [CreateAssetMenu(menuName = "META/Terrain Scriptable")]
 public class TerrainTypeClass : ScriptableObject
 {
+    [SerializeReference]
+    public InterfaceTest test;
+
+
     [SerializeField] private TerrainType[] _EffetDeTerrain;
     public TerrainType[] EffetDeTerrain
     {

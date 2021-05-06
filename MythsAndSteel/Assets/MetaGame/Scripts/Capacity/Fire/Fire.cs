@@ -30,12 +30,32 @@ public class Fire : MonoBehaviour
         {
             GetComponent<Animator>().SetBool("Feu", false);
             GetComponent<Animator>().SetBool("Brasier", true);
+
+            if (GetComponentInParent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Feu))
+            {
+                GetComponentInParent<TileScript>().TerrainEffectList.Remove(MYthsAndSteel_Enum.TerrainType.Feu);
+            }
+            if (!GetComponentInParent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Brasier))
+            {
+                GetComponentInParent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Brasier);
+            }
+            GetComponentInParent<ChildEffect>().Type = MYthsAndSteel_Enum.TerrainType.Brasier;
         }
         else if(TurnLeft == 1)
         {
             GetComponent<Animator>().SetTrigger("Out");
             GetComponent<Animator>().SetBool("Brasier", false);
             GetComponent<Animator>().SetBool("Feu", true);
+
+            if (GetComponentInParent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Brasier))
+            {
+                GetComponentInParent<TileScript>().TerrainEffectList.Remove(MYthsAndSteel_Enum.TerrainType.Brasier);
+            }
+            if (!GetComponentInParent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Feu))
+            {
+                GetComponentInParent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Feu);
+            }
+            GetComponentInParent<ChildEffect>().Type = MYthsAndSteel_Enum.TerrainType.Feu;
         }
         else if(TurnLeft <= 0)
         {
@@ -51,6 +71,14 @@ public class Fire : MonoBehaviour
             GetComponentInParent<TileScript>().RemoveEffect(MYthsAndSteel_Enum.TerrainType.Feu);
             GetComponentInParent<TileScript>().RemoveEffect(MYthsAndSteel_Enum.TerrainType.Brasier);
             Destroy(this.gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (FireG.FireActive.Contains(this))
+        {
+            FireG.FireActive.Remove(this);
         }
     }
 }

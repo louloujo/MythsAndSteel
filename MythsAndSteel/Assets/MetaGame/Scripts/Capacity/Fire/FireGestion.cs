@@ -6,7 +6,6 @@ public class FireGestion : MonoBehaviour
 {
     [SerializeField] public List<Fire> FireActive = new List<Fire>();
     
-
     /// <summary>
     /// create a fire on a tile.
     /// </summary>
@@ -19,18 +18,26 @@ public class FireGestion : MonoBehaviour
             {
                 if (T1 == MYthsAndSteel_Enum.TerrainType.Brasier)
                 {
-                    GameObject Child = Instantiate(T.Child, transform.position, Quaternion.identity);
-                    Child.transform.parent = TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().transform;
-                    Child.transform.localScale = new Vector3(.5f, .5f, .5f);
-                    TilesManager.Instance.TileList[tileId].GetComponent<TileScript>()._Child.Add(Child);
-                    Child.GetComponentInChildren<Fire>().FireG = this;
-                    FireActive.Add(Child.GetComponentInChildren<Fire>());
-                    Child.transform.localPosition = Vector3.zero;
-                    TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Brasier);
+                    if (!TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Brasier) && !TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Feu))
+                    {
+                        GameObject Child = Instantiate(T.Child, transform.position, Quaternion.identity);
+                        Child.transform.parent = TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().transform;
+                        Child.transform.localScale = new Vector3(.5f, .5f, .5f);
+                        TilesManager.Instance.TileList[tileId].GetComponent<TileScript>()._Child.Add(Child);
+                        Child.GetComponentInChildren<Fire>().FireG = this;
+                        FireActive.Add(Child.GetComponentInChildren<Fire>());
+                        Child.transform.localPosition = Vector3.zero;
+                        TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Brasier);
+                    }
+                    else
+                    {
+                        TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().RemoveEffect(MYthsAndSteel_Enum.TerrainType.Brasier);
+                        TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().RemoveEffect(MYthsAndSteel_Enum.TerrainType.Feu);
+                        CreateFire(tileId);
+                    }
                 }
             }
         }
-        
     }
 
     public void Turn()
