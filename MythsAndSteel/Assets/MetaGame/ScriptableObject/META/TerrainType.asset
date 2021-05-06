@@ -145,8 +145,8 @@ MonoBehaviour:
     _description: "Case sans effet, g\xE9n\xE9ralement r\xE9sultat de la destruction
       d'Habitations ou d'un Village Fortifi\xE9."
     _eventType: 18000000
-    render: {fileID: 0}
-    Child: {fileID: 0}
+    render: {fileID: 21300000, guid: ba025916471d63f48be3fe5d880752b3, type: 3}
+    Child: {fileID: 7295470563782542346, guid: a3510d7a12c1ba54e8594430f6db3e28, type: 3}
   - _terrainName: Ruisseau
     _description: "Cours d'eau plac\xE9 en bordure de case. Consomme 2 mouvements
       pour se d\xE9placer au travers."
@@ -174,4 +174,4 @@ MonoBehaviour:
     _description: "Point de ressource \xE9puis\xE9"
     _eventType: 22000000
     render: {fileID: 21300000, guid: ba025916471d63f48be3fe5d880752b3, type: 3}
-    Child: {fileID: 0}
+    Child: {fileID: 7295470563782542346, guid: a3510d7a12c1ba54e8594430f6db3e28, type: 3}

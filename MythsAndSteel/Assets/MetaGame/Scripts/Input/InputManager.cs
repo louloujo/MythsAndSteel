@@ -38,7 +38,7 @@ public class InputManager : MonoBehaviour
         //Quand on shiftclic sur le plateau
         if (Input.GetKeyDown(MoreInfoUnit))
         {
-            if (GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation)
+            if (GameManager.Instance.activationDone == false)
             {
                 RaycastManager.Instance._mouseCommand.QuitShiftPanel();
                 RaycastManager.Instance._mouseCommand._checkIfPlayerAsClic = true;
@@ -49,15 +49,16 @@ public class InputManager : MonoBehaviour
         //Quand on relache le shift+clic
         if (Input.GetKeyUp(MoreInfoUnit))
         {
-            if (GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation)
+                if (GameManager.Instance.activationDone == false)
             {
-                RaycastManager.Instance._mouseCommand.QuitShiftPanel();
+
+                    RaycastManager.Instance._mouseCommand.QuitShiftPanel();
                 RaycastManager.Instance._mouseCommand._checkIfPlayerAsClic = false;
                 RaycastManager.Instance._mouseCommand._hasCheckUnit = true;
                 RaycastManager.Instance.supersose = true;
-
-
             }
+
+
         }
 
         //Clic sur le plateau ou une unité
@@ -92,6 +93,7 @@ public class InputManager : MonoBehaviour
             }
             else if(Attaque.Instance.SelectedTiles.Count == 1)
             {
+                Mouvement.Instance.StopMouvement(true);
                 Attaque.Instance.Attack();
             }
 

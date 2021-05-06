@@ -74,7 +74,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         _unitInTile = _tile != null ? _tile.GetComponent<TileScript>().Unit != null ? _tile.GetComponent<TileScript>().Unit : null : null;
 
         //Permet de combiner le Shift et le click gauche de la souris.
-        if (_unitInTile == true && GameManager.Instance.IsInTurn && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation){
+        if (_unitInTile == true && GameManager.Instance.IsInTurn){
             //Si le joueur a utilisé le Shift puis leclick, le joueur est considéré comme click et on applique les fonctions propres au bouton des panneaux. De plus, le mouseOver est désactivé.
             if (_mouseCommand._checkIfPlayerAsClic == true && _mouseCommand._hasCheckUnit == false && supersose)
             {

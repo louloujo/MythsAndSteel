@@ -139,7 +139,7 @@ public class Attaque : MonoSingleton<Attaque>
             {
                 AnimationUpdate();
                 ChangeStat();
-                this._damageMinimum = _damageMinimum;
+                _damageMinimum = this._damageMinimum;
                 StartDeviation();
             }
             else
@@ -166,6 +166,8 @@ public class Attaque : MonoSingleton<Attaque>
         if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
         {
             ChangeStat();
+            _damageMinimum = this._damageMinimum;
+            _damageMaximum = this._damageMaximum;
             AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
             SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
@@ -175,6 +177,8 @@ public class Attaque : MonoSingleton<Attaque>
         if (DiceResult >= _numberRangeMax.x && DiceResult <= _numberRangeMax.y)
         {
             ChangeStat();
+          
+            _damageMaximum = this._damageMaximum;
             AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMaximum);
             SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
@@ -349,9 +353,11 @@ public class Attaque : MonoSingleton<Attaque>
     /// </summary>
     public void StartAttackSelectionUnit(int tileId = -1)
     {
+        GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
+        _selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
         _selectedTiles.Clear();
         _newNeighbourId.Clear();
-        if (GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft >= 0)
+        if ((GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0) || (_selectedUnit.GetComponent<UnitScript>()._hasStartMove && GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft == 0))
         {
             if (tileId != -1)
             {
@@ -370,11 +376,11 @@ public class Attaque : MonoSingleton<Attaque>
             }
             else
             {
-                GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
+                
 
                 if (tileSelected != null)
                 {
-                    _selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
+                
                     if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
                     {
                         Debug.Log(_selectedUnit);
@@ -394,7 +400,7 @@ public class Attaque : MonoSingleton<Attaque>
                 }
             }
         }
-        else if (!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.ActivationLeft >= 0)
+        else if ((!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0) || (_selectedUnit.GetComponent<UnitScript>()._hasStartMove && !GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft == 0))
         {
             if (tileId != -1)
             {
@@ -411,11 +417,11 @@ public class Attaque : MonoSingleton<Attaque>
             }
             else
             {
-                GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
+               
 
                 if (tileSelected != null)
                 {
-                    _selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
+           
                     if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
                     {
                         Debug.Log(_selectedUnit);
@@ -519,7 +525,7 @@ public class Attaque : MonoSingleton<Attaque>
     public void StopAttack()
      
     {
-
+        
         RemoveTileSprite();
 
         // Clear de toutes les listes et stats
@@ -640,7 +646,9 @@ public class Attaque : MonoSingleton<Attaque>
         Randomdice();
         IsInAttack = false;
         _selectedUnit.GetComponent<UnitScript>()._isActionDone = true;
+        
         _selectedUnit.GetComponent<UnitScript>().checkActivation();
+        _selectedUnit.GetComponent<UnitScript>().checkMovementLeft(); 
     }
 
     /// <summary>
@@ -694,8 +702,8 @@ public class Attaque : MonoSingleton<Attaque>
             _damageMinimum -= 1;
             _damageMaximum -= 1;
             Debug.Log("Dégats Reduits");
-            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Remove(MYthsAndSteel_Enum.TerrainType.Maison);
-            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Ruines);
+            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().RemoveEffect(MYthsAndSteel_Enum.TerrainType.Maison);
+            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().CreateEffect(MYthsAndSteel_Enum.TerrainType.Ruines);
             Debug.Log("IkeaEffectApplyed");
         }
 
@@ -704,8 +712,9 @@ public class Attaque : MonoSingleton<Attaque>
             _damageMinimum = 0;
             _damageMaximum = 0;
             Debug.Log("Annulés");
-            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Remove(MYthsAndSteel_Enum.TerrainType.Immeuble);
-            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Ruines);
+
+            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().RemoveEffect(MYthsAndSteel_Enum.TerrainType.Immeuble);
+            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().CreateEffect(MYthsAndSteel_Enum.TerrainType.Ruines);
             Debug.Log("BigBoumIkeaEffectApplyed");
 
         }

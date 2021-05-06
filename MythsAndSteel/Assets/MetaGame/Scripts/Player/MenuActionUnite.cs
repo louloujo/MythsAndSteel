@@ -25,7 +25,7 @@ public class MenuActionUnite : MonoBehaviour
 
     private void Start(){
         _movePanel.SetActive(false);
-        UIMenuActionUnite.SetActive(false);
+       
     }
 
     /// <summary>
