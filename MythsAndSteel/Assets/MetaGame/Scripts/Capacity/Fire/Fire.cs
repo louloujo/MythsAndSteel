@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fire : MonoBehaviour
+public class Fire : TerrainParent
 {
     [SerializeField] private int _Turnleft;
     public FireGestion FireG;
@@ -23,6 +23,7 @@ public class Fire : MonoBehaviour
     private void Start()
     {
         Check();
+        Test();
     }
     public void Check()
     {
@@ -80,5 +81,17 @@ public class Fire : MonoBehaviour
         {
             FireG.FireActive.Remove(this);
         }
+    }
+
+
+    public void Test()
+    {
+        TerrainGestion.Instance.UnitModification(this);
+    }
+
+    public override void OnUnityAdd()
+    {
+        base.OnUnityAdd();
+        Debug.Log("Test" + this.name);
     }
 }
