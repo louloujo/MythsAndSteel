@@ -7,9 +7,6 @@ using TMPro;
 [CreateAssetMenu(menuName = "META/Terrain Scriptable")]
 public class TerrainTypeClass : ScriptableObject
 {
-    [SerializeReference]
-    public InterfaceTest test;
-
 
     [SerializeField] private TerrainType[] _EffetDeTerrain;
     public TerrainType[] EffetDeTerrain
@@ -83,5 +80,6 @@ public class TerrainType
     [TextArea] public string _description = "";
     public List<MYthsAndSteel_Enum.TerrainType> _eventType = new List<MYthsAndSteel_Enum.TerrainType>();
     public Sprite render;
+    public bool MustBeInstantiate = true;
     public GameObject Child;
 }

@@ -275,11 +275,11 @@ public class TileScript : MonoBehaviour
                     if (!TerrainEffectList.Contains(Type))
                     {
                         TerrainEffectList.Add(Type);
-                        GameObject Child = Instantiate(T.Child, transform.position, Quaternion.identity);
-                        Child.transform.parent = this.transform;
-                        Child.transform.localScale = new Vector3(.5f, .5f, .5f);
-                        _Child.Add(Child);
                     }
+                    GameObject Child = Instantiate(T.Child, transform.position, Quaternion.identity);
+                    Child.transform.parent = this.transform;
+                    Child.transform.localScale = new Vector3(.5f, .5f, .5f);
+                    _Child.Add(Child);
                 }
             }
         }
