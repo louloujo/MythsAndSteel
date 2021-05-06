@@ -132,7 +132,7 @@ public class GameManager : MonoSingleton<GameManager>{
     //Est ce que le joueur est en train de choisir des unités
     [SerializeField] private PhaseActivation _activationPhase = null;
     public PhaseActivation ActivationPhase => _activationPhase;
-    public bool activationDone = false;
+
     float deltaTimeX = 0f;
 
     // Scriptable terrain.

@@ -15,7 +15,6 @@ Ce script renvoie comme principals informations :
 
 public class PhaseActivation : MonoBehaviour
 {
-   
     //Variables pour le joueur avec les cartes bleu
     //Carte du joueur 1
     [SerializeField] private List<CarteActivation> RedCartesActivation = new List<CarteActivation>();
@@ -61,7 +60,7 @@ public class PhaseActivation : MonoBehaviour
 
     [SerializeField] private GameObject _result = null;
 
-   
+    bool _canChooseCard = false;
 
     private void Start()
     {
@@ -75,7 +74,7 @@ public class PhaseActivation : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.Instance.activationDone)
+        if(_canChooseCard)
         {
             //Joueur 1
             if(!_j1CarteChoisie)
@@ -263,7 +262,6 @@ public class PhaseActivation : MonoBehaviour
         _j2CarteChoisie = false;
 
         UIInstance.Instance.BackgroundActivation.SetActive(true);
- 
 
         _result.SetActive(false);
     }
@@ -303,30 +301,20 @@ public class PhaseActivation : MonoBehaviour
             BluePlayerPanel.transform.GetChild(J2CarteVerif.IndexCarteActivation).GetComponent<Image>().color = new Color(rgb, rgb, rgb, 1f);
             Debug.Log("7");
             _result.SetActive(true);
-            
         }
 
-
-
-        PlayerScript.Instance.RedPlayerInfos.ActivationLeft = (int)J1DernièreValeurActivation;
-        PlayerScript.Instance.BluePlayerInfos.ActivationLeft = (int)J2DernièreValeurActivation;
-        UIInstance.Instance.UpdateActivationLeft();
-
-       
-    }
-    public void DesactivatePannelActivation()
-    {
         RedPlayerPanel.SetActive(false);
         BluePlayerPanel.SetActive(false);
         ConfirmPanelBlue.SetActive(false);
         ConfirmPanelRed.SetActive(false);
         HasConfirmedPanelRed.SetActive(false);
         HasConfirmedPanelBlue.SetActive(false);
+
+        PlayerScript.Instance.RedPlayerInfos.ActivationLeft = (int)J1DernièreValeurActivation;
+        PlayerScript.Instance.BluePlayerInfos.ActivationLeft = (int)J2DernièreValeurActivation;
+        UIInstance.Instance.UpdateActivationLeft();
+
         UIInstance.Instance.ActivateNextPhaseButton();
-        UIInstance.Instance.CanvasActivation.SetActive(false);
-        GameManager.Instance.activationDone = false;
-        _result.SetActive(false);
-     
     }
 
     /// <summary>
@@ -335,7 +323,7 @@ public class PhaseActivation : MonoBehaviour
     public void DesactivateActivationPhase()
     {
         UIInstance.Instance.CanvasActivation.SetActive(false);
-        GameManager.Instance.activationDone = false;
+        _canChooseCard = false;
     }
 
     /// <summary>
@@ -345,8 +333,6 @@ public class PhaseActivation : MonoBehaviour
     {
         UIInstance.Instance.CanvasActivation.SetActive(true);
         UIInstance.Instance.DesactivateNextPhaseButton();
-
-
-        GameManager.Instance.activationDone = true;
+        _canChooseCard = true;
     }
 }

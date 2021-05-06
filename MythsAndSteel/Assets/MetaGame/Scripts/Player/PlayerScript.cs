@@ -127,11 +127,11 @@ public class PlayerScript : MonoSingleton<PlayerScript>
         AddEventToButton(card, newCard);
 
         if(player == 1){
-            EventCardList._eventGamRedPlayer.Insert(0, newCard);
+            EventCardList._eventGamRedPlayer.Insert(1, newCard);
             _eventCardList._eventSO.UpdateVisualUI(EventCardList._eventGamRedPlayer, 1);
         }
         else if(player == 2){
-            EventCardList._eventGamBluePlayer.Insert(0, newCard);
+            EventCardList._eventGamBluePlayer.Insert(1, newCard);
             _eventCardList._eventSO.UpdateVisualUI(EventCardList._eventGamBluePlayer, 2);
         }
         else{

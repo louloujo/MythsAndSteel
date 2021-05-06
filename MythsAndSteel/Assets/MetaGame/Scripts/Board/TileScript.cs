@@ -143,6 +143,15 @@ public class TileScript : MonoBehaviour
                             if (sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
                         }
                         break;
+                    case MYthsAndSteel_Enum.ChildTileType.MovePath:
+                        tag = "DisplayMovePath";
+                        if (gam.tag == tag)
+                        {
+                            child = gam;
+                            child.GetComponent<SpriteRenderer>().enabled = true;
+                            if (sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
+                        }
+                        break;
                 }
             }
         }
@@ -179,11 +188,15 @@ public class TileScript : MonoBehaviour
                     case MYthsAndSteel_Enum.ChildTileType.MoveArrow:
                         tag = "DisplayArrowForMove";
                         break;
+                    case MYthsAndSteel_Enum.ChildTileType.MovePath:
+                        tag = "DisplayMovePath";
+                        break;
                 }
 
                 if (gam.tag == tag)
                 {
                     child = gam;
+                    Debug.Log("desactive " + child.name);
                     child.GetComponent<SpriteRenderer>().enabled = false;
                     if (destroy)
                     {
@@ -253,18 +266,7 @@ public class TileScript : MonoBehaviour
                         TerrainEffectList.Add(Type);
                     }
                     GameObject Child = Instantiate(T.Child, transform.position, Quaternion.identity);
-                    if(Type == MYthsAndSteel_Enum.TerrainType.Ruines || Type == MYthsAndSteel_Enum.TerrainType.Point_de_ressources_vide)
-                    {
-
-                        Child.GetComponent <SpriteRenderer>().sprite = T.render;
-                        Debug.Log("fdljq");
-                    }
-                    else {
-
-                        Child.transform.localScale = new Vector3(.5f, .5f, .5f);
-                    }
                     Child.transform.parent = this.transform;
-
                     Child.transform.localScale = new Vector3(.5f, .5f, .5f);
                     _Child.Add(Child);
                 }

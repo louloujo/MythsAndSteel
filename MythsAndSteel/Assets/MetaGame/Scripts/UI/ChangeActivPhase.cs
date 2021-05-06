@@ -8,7 +8,6 @@ public class ChangeActivPhase : MonoBehaviour
 {
     [Header("PhaseObj")]
     [SerializeField] private GameObject _debutGam;
-
     [SerializeField] private GameObject _activationGam;
     [SerializeField] private GameObject _orgoneJ1Gam;
     [SerializeField] private GameObject _actionJ1Gam;
@@ -21,10 +20,6 @@ public class ChangeActivPhase : MonoBehaviour
     [SerializeField] private Image _actionJ1Img;
     [SerializeField] private Image _orgoneJ2Img;
     [SerializeField] private Image _actionJ2Img;
-    [SerializeField] private Sprite _refOrgoneJ1Img;
-    [SerializeField] private Sprite _refActionJ1Img;
-    [SerializeField] private Sprite _refOrgoneJ2Img;
-    [SerializeField] private Sprite _refActionJ2Img;
 
     [Header("Texte Phase Spé")]
     [SerializeField] private TextMeshProUGUI _orgoneJ1Txt;
@@ -42,26 +37,7 @@ public class ChangeActivPhase : MonoBehaviour
         
         ChangeActivObj();
     }
-  public  void ChangeSpriteButtonPhase()
-    {
-        if(GameManager.Instance.IsPlayerRedStarting)
-        {
-            gameObject.transform.GetChild(2).GetComponent<Image>().sprite = _refOrgoneJ1Img;
-            gameObject.transform.GetChild(3).GetComponent<Image>().sprite = _refActionJ1Img;
-            gameObject.transform.GetChild(4).GetComponent<Image>().sprite = _refOrgoneJ2Img;
-            gameObject.transform.GetChild(5).GetComponent<Image>().sprite = _refActionJ2Img;
 
-
-        }
-        else
-        {
-            gameObject.transform.GetChild(2).GetComponent<Image>().sprite = _refOrgoneJ2Img;
-            gameObject.transform.GetChild(3).GetComponent<Image>().sprite = _refActionJ2Img;
-            gameObject.transform.GetChild(4).GetComponent<Image>().sprite = _refOrgoneJ1Img;
-            gameObject.transform.GetChild(5).GetComponent<Image>().sprite = _refActionJ1Img;
-        }
-    }
-        
     void ChangeColorTextPhase(){
         if(GameManager.Instance.IsPlayerRedStarting){
             _orgoneJ1Img.color = _redPlayerColor;
