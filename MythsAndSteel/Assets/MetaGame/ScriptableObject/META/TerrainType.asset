@@ -175,3 +175,13 @@ MonoBehaviour:
     _eventType: 22000000
     render: {fileID: 21300000, guid: ba025916471d63f48be3fe5d880752b3, type: 3}
     Child: {fileID: 0}
+  - _terrainName: Brasier
+    _description: "Case embras\xE9e."
+    _eventType: 23000000
+    render: {fileID: 21300000, guid: 3d22f4fa890fc2d4fb056354c5dccaba, type: 3}
+    Child: {fileID: 4840181140325066073, guid: 2c4bce46ac3d9114db40c4aa43f9fd1f, type: 3}
+  - _terrainName: Feu
+    _description: "Case emflamm\xE9e."
+    _eventType: 24000000
+    render: {fileID: 21300000, guid: f9dd8bef7361d5c489fd683fc644e5b8, type: 3}
+    Child: {fileID: 4840181140325066073, guid: 2c4bce46ac3d9114db40c4aa43f9fd1f, type: 3}
