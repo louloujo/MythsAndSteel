@@ -253,7 +253,18 @@ public class TileScript : MonoBehaviour
                         TerrainEffectList.Add(Type);
                     }
                     GameObject Child = Instantiate(T.Child, transform.position, Quaternion.identity);
+                    if(Type == MYthsAndSteel_Enum.TerrainType.Ruines || Type == MYthsAndSteel_Enum.TerrainType.Point_de_ressources_vide)
+                    {
+
+                        Child.GetComponent <SpriteRenderer>().sprite = T.render;
+                        Debug.Log("fdljq");
+                    }
+                    else {
+
+                        Child.transform.localScale = new Vector3(.5f, .5f, .5f);
+                    }
                     Child.transform.parent = this.transform;
+
                     Child.transform.localScale = new Vector3(.5f, .5f, .5f);
                     _Child.Add(Child);
                 }

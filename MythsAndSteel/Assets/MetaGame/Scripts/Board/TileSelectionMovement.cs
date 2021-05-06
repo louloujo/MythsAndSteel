@@ -58,7 +58,7 @@ public class TileSelectionMovement : MonoSingleton<TileSelectionMovement>
     public void TileChange()
     {
         //Change l'objet de tiles où il doit se déplacer
-        if(RaycastManager.Instance.Tile != null && GameManager.Instance.IsInTurn && GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation){
+        if(RaycastManager.Instance.Tile != null && GameManager.Instance.IsInTurn && GameManager.Instance.activationDone == false){
             //Est ce que l'objet est visible
             _isVisble = true;
             GetComponent<Animator>().SetInteger("Fade", 2);

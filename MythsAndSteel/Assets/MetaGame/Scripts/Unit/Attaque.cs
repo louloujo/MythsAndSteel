@@ -139,7 +139,7 @@ public class Attaque : MonoSingleton<Attaque>
             {
                 AnimationUpdate();
                 ChangeStat();
-                this._damageMinimum = _damageMinimum;
+                _damageMinimum = this._damageMinimum;
                 StartDeviation();
             }
             else
@@ -166,6 +166,8 @@ public class Attaque : MonoSingleton<Attaque>
         if (DiceResult >= _numberRangeMin.x && DiceResult <= _numberRangeMin.y)
         {
             ChangeStat();
+            _damageMinimum = this._damageMinimum;
+            _damageMaximum = this._damageMaximum;
             AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMinimum);
             SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
@@ -175,6 +177,8 @@ public class Attaque : MonoSingleton<Attaque>
         if (DiceResult >= _numberRangeMax.x && DiceResult <= _numberRangeMax.y)
         {
             ChangeStat();
+          
+            _damageMaximum = this._damageMaximum;
             AnimationUpdate();
             selectedUnitEnnemy.GetComponent<UnitScript>().TakeDamage(_damageMaximum);
             SoundController.Instance.PlaySound(_selectedUnit.GetComponent<UnitScript>().SonAttaque);
@@ -698,8 +702,8 @@ public class Attaque : MonoSingleton<Attaque>
             _damageMinimum -= 1;
             _damageMaximum -= 1;
             Debug.Log("Dégats Reduits");
-            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Remove(MYthsAndSteel_Enum.TerrainType.Maison);
-            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Ruines);
+            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().RemoveEffect(MYthsAndSteel_Enum.TerrainType.Maison);
+            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().CreateEffect(MYthsAndSteel_Enum.TerrainType.Ruines);
             Debug.Log("IkeaEffectApplyed");
         }
 
@@ -708,8 +712,9 @@ public class Attaque : MonoSingleton<Attaque>
             _damageMinimum = 0;
             _damageMaximum = 0;
             Debug.Log("Annulés");
-            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Remove(MYthsAndSteel_Enum.TerrainType.Immeuble);
-            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Ruines);
+
+            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().RemoveEffect(MYthsAndSteel_Enum.TerrainType.Immeuble);
+            TilesManager.Instance.TileList[selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().CreateEffect(MYthsAndSteel_Enum.TerrainType.Ruines);
             Debug.Log("BigBoumIkeaEffectApplyed");
 
         }

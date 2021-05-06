@@ -6,9 +6,12 @@ using UnityEngine.UI;
 
 public class EventCardContainer : MonoBehaviour
 {
+
     [Header("Event Info")]
     [SerializeField] private EventCard _eventCardInfo = null;
     public EventCard EventCardInfo => _eventCardInfo;
+
+ 
 
     [Header("Object Reference")]
     [SerializeField] private Image _spriteObject = null;
@@ -29,5 +32,7 @@ public class EventCardContainer : MonoBehaviour
         _titleText.text = _eventCardInfo._eventName;
         _descriptionText.text = _eventCardInfo._description;
         _spriteObject.sprite = _eventCardInfo._eventSprite;
+      
     }
+
 }
