@@ -272,7 +272,7 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
-    [SerializeField] private AttaqueUI Ui;
+    [SerializeField] private AttaqueUI1 Ui;
     public bool Go = false;
     /// <summary>
     /// Choisit le type d'attaque
@@ -444,7 +444,7 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
     [Header("Jauge d'attaque")]
-    [SerializeField] private AttaqueUI JaugeAttack;
+    [SerializeField] private AttaqueUI1 JaugeAttack;
     public void UpdateJauge(int TileId = -1)
     {
         if (TileId != -1)
