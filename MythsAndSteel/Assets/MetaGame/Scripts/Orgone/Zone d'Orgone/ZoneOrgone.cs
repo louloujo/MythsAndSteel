@@ -156,6 +156,10 @@ public class ZoneOrgone : MonoBehaviour
                 _isInValidation = true;
                 GameManager.Instance._eventCall += WhenValidate;
                 GameManager.Instance._eventCallCancel += CancelValidation;
+                if(PlayerPrefs.GetInt("Avertissement") == 0)
+                {
+                    GameManager.Instance._eventCall();
+                }
                 UIInstance.Instance.ShowValidationPanel("Zone d'orgone", "Êtes-vous sur de vouloir déplacer votre zone d'orgone sur cette case? Toutes unités qui prend des dégâts ou perde de la vie dans cette zone vous fera gagner de l'orgone!");
             }
             else{

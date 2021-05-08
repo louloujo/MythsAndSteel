@@ -164,6 +164,7 @@ public class UnitScript : MonoBehaviour
 
     private void Start()
     {
+        gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_HitTime", Time.time);
         UpdateUnitStat();
 
         // On instancie l'object qui possède le sprite correspondant à l'UI au point de vie et de bouclier de l'unité.
@@ -320,6 +321,7 @@ public class UnitScript : MonoBehaviour
             }
         }
 
+      gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_HitTime", Time.time);
         CheckLife();
 
         //Ajout de l'orgone
@@ -572,5 +574,6 @@ public class UnitScript : MonoBehaviour
             }
         }
     }
+ 
 
 }

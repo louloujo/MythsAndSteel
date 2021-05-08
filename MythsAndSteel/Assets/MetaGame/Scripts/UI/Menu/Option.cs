@@ -12,11 +12,13 @@ public class Option : MonoBehaviour
     [SerializeField] GameObject EffectVolumeSlider;
     [SerializeField] GameObject MusicVolumeSlider;
     [SerializeField] GameObject Toggle;
+    [SerializeField] GameObject toggleAvertissement;
+   
 
     //--------Résolution----------
     public Dropdown ResolutionDropdown;//Variable qui défini quel dropdown on modifie
     Resolution[] resolutions;//Array de toute 
-    int currentResolutionIndex = 0;
+    int currentResolutionIndex = 2;
     Resolution OldResolution;
     int Oldindex;
 
@@ -25,12 +27,11 @@ public class Option : MonoBehaviour
     [SerializeField] GameObject ValidationPanel;
 
     //-------Avertissement--------
-    bool isAvertissement;
+    int isAvertissement;
     #endregion 
 
     private void Start()
     {
-        
 
         resolutions = Screen.resolutions; //Récupère toute les résoluttion possible
         ResolutionDropdown.ClearOptions();//Enlève les options de bases du Dropdown
@@ -60,12 +61,18 @@ public class Option : MonoBehaviour
     private void Awake()
     {
         audioMixer.SetFloat("Effect", PlayerPrefs.GetFloat("EffectVolume"));
+
+     
         audioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume"));
         EffectVolumeSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("EffectVolume");
         MusicVolumeSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("MusicVolume");
+        
         Debug.Log("Volume set : Effect " + PlayerPrefs.GetFloat("EffectVolume") + ", Music " + PlayerPrefs.GetFloat("MusicVolume"));
         if (PlayerPrefs.GetInt("Volume") == 1) Toggle.GetComponent<Toggle>().isOn = true;
         else Toggle.GetComponent<Toggle>().isOn = false;
+
+        if (PlayerPrefs.GetInt("Avertissement") == 1) toggleAvertissement.GetComponent<Toggle>().isOn = true;
+        else toggleAvertissement.GetComponent<Toggle>().isOn = false;
     }
 
     #region Résolution
@@ -143,9 +150,17 @@ public class Option : MonoBehaviour
     #endregion
 
     #region Avertissement
-    public void SetAvertissement(bool IsAverti)
+    public void Avertissement()
     {
-        isAvertissement = IsAverti;
+       if( PlayerPrefs.GetInt("Avertissement")  == 1)
+        {
+            PlayerPrefs.SetInt("Avertissement", 0); 
+        }
+       else
+        {
+            PlayerPrefs.SetInt("Avertissement", 1);
+        }
+        
     }
     #endregion
 
