@@ -42,7 +42,29 @@ public class RaycastManager : MonoSingleton<RaycastManager>
 
     //Lorsque le joueur clique sur une tile et qu'il y a une unité
     [SerializeField] private GameObject _actualUnitSelected;
-    public GameObject ActualUnitSelected => _actualUnitSelected;
+    public GameObject ActualUnitSelected
+    {
+        get
+        {
+            return _actualUnitSelected;
+        }
+        set
+        {
+            if (_actualUnitSelected != value)
+            {
+                if (_actualUnitSelected != null)
+                {
+                    Debug.Log("false");
+                    UIInstance.Instance.DownSliderJauge.SetBool("In", false);
+                }
+                _actualUnitSelected = value;
+                if(value != null)
+                {
+                    AttackJauge(true);
+                }
+            }
+        }
+    }
 
     [Header("PANNEAU DES BOUTONS QUAND CLIC SUR UNITE")]
     //Est ce que les joueurs peuvent jouer
@@ -56,6 +78,11 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     private void Start()
     {
         OnTileChanged += RaycastManager_OnTileChanged;
+    }
+
+    public void AttackJauge(bool in_)
+    {
+        UIInstance.Instance.DownSliderJauge.SetBool("In", in_);
     }
 
     private void RaycastManager_OnTileChanged()
@@ -164,12 +191,12 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             //Si le mouvement n'a pas été lancé
             if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
             {
-                if(_actualUnitSelected == UnitInTile && !Mouvement.Instance.MvmtRunning && Attaque.Instance.IsInAttack)
+                if(ActualUnitSelected == UnitInTile && !Mouvement.Instance.MvmtRunning && Attaque.Instance.IsInAttack)
                 {
                     Mouvement.Instance.StopMouvement(true);
                     Attaque.Instance.StopAttack();
-                    _actualTileSelected = null;
-                    _actualUnitSelected = null;
+                    ActualUnitSelected = null;
+                    ActualUnitSelected = null;
                 }
                 else if(!Mouvement.Instance.Selected && !Attaque.Instance.Selected && UnitInTile != null)
                 {
@@ -178,7 +205,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                     if (CanUseUnitWhenClic(currentUnitScript))
                     {
                         _actualTileSelected = _tile;
-                        _actualUnitSelected = _unitInTile;
+                        ActualUnitSelected = _unitInTile;
                         Mouvement.Instance.StartMvmtForSelectedUnit();
                         Attaque.Instance.StartAttackSelectionUnit();
                     }

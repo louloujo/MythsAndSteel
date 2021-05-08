@@ -734,6 +734,7 @@ public class MouseCommand : MonoBehaviour
                 }
             }
         }
+
         else if (switchPage)
         {
             pos = new Vector3(lastPosX, lastPosY, ShiftUI[0].transform.position.z);
