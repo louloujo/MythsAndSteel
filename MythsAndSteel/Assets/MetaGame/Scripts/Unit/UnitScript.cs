@@ -109,9 +109,14 @@ public class UnitScript : MonoBehaviour
         }
         set
         {
-            _actualTileld = value;
+            if (_actualTileld != value)
+            {
+                LastTileId = _actualTileld;
+                _actualTileld = value;
+            }
         }
     }
+    public int LastTileId;
 
     [HideInInspector] int lastTileId = 0;
 
@@ -164,6 +169,7 @@ public class UnitScript : MonoBehaviour
 
     private void Start()
     {
+        LastTileId = ActualTiledId;
         UpdateUnitStat();
 
         // On instancie l'object qui possède le sprite correspondant à l'UI au point de vie et de bouclier de l'unité.

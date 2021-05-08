@@ -206,11 +206,17 @@ MonoBehaviour:
     _description: "Case embras\xE9e."
     _eventType: 23000000
     render: {fileID: 21300000, guid: 3d22f4fa890fc2d4fb056354c5dccaba, type: 3}
-    MustBeInstantiate: 1
+    MustBeInstantiate: 0
     Child: {fileID: 4840181140325066073, guid: 2c4bce46ac3d9114db40c4aa43f9fd1f, type: 3}
   - _terrainName: Feu
     _description: "Case emflamm\xE9e."
     _eventType: 24000000
     render: {fileID: 21300000, guid: f9dd8bef7361d5c489fd683fc644e5b8, type: 3}
-    MustBeInstantiate: 1
+    MustBeInstantiate: 0
     Child: {fileID: 4840181140325066073, guid: 2c4bce46ac3d9114db40c4aa43f9fd1f, type: 3}
+  - _terrainName: "Barbel\xE9"
+    _description: "Inflige 2 points de d\xE9g\xE2ts."
+    _eventType: 25000000260000002700000028000000
+    render: {fileID: 21300000, guid: 9b9ce38bfad3a734ab5935779bb47782, type: 3}
+    MustBeInstantiate: 0
+    Child: {fileID: 2443697204554867568, guid: 6121b405301c5ea44bedafd9513f86f0, type: 3}

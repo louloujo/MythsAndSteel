@@ -23,14 +23,13 @@ public class Fire : TerrainParent
     private void Start()
     {
         Check();
-        Test();
     }
     public void Check()
     {
         if(TurnLeft == 2)
         {
-            GetComponent<Animator>().SetBool("Feu", false);
-            GetComponent<Animator>().SetBool("Brasier", true);
+            GetComponentInChildren<Animator>().SetBool("Feu", false);
+            GetComponentInChildren<Animator>().SetBool("Brasier", true);
 
             if (GetComponentInParent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Feu))
             {
@@ -44,9 +43,9 @@ public class Fire : TerrainParent
         }
         else if(TurnLeft == 1)
         {
-            GetComponent<Animator>().SetTrigger("Out");
-            GetComponent<Animator>().SetBool("Brasier", false);
-            GetComponent<Animator>().SetBool("Feu", true);
+            GetComponentInChildren<Animator>().SetTrigger("Out");
+            GetComponentInChildren<Animator>().SetBool("Brasier", false);
+            GetComponentInChildren<Animator>().SetBool("Feu", true);
 
             if (GetComponentInParent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Brasier))
             {
@@ -60,7 +59,7 @@ public class Fire : TerrainParent
         }
         else if(TurnLeft <= 0)
         {
-            GetComponent<Animator>().SetTrigger("Out");
+            GetComponentInChildren<Animator>().SetTrigger("Out");
         }
     }
 
@@ -83,15 +82,22 @@ public class Fire : TerrainParent
         }
     }
 
-
-    public void Test()
+    public override void OnUnityAdd(UnitScript Unit)
     {
-        TerrainGestion.Instance.UnitModification(this);
+        if(GetComponentInParent<ChildEffect>().Type == MYthsAndSteel_Enum.TerrainType.Brasier)
+        {
+            Unit.TakeDamage(FireG.BrasierDamage);
+        }
+        if (GetComponentInParent<ChildEffect>().Type == MYthsAndSteel_Enum.TerrainType.Feu)
+        {
+            Unit.TakeDamage(FireG.FireDamage);
+        }
+        base.OnUnityAdd(Unit);
     }
 
-    public override void OnUnityAdd()
+    public override void ComingFromUp(UnitScript Unit)
     {
-        base.OnUnityAdd();
-        Debug.Log("Test" + this.name);
+        base.ComingFromUp(Unit);
+        Debug.Log(this.name + " Coming from up.");
     }
 }

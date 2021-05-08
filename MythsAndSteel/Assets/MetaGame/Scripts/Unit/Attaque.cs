@@ -309,10 +309,9 @@ public class Attaque : MonoSingleton<Attaque>
                 TileScript TileSc = TilesManager.Instance.TileList[ID].GetComponent<TileScript>();
                 bool i = false;
 
-              if(ID == currentID )
+                if (ID == currentID)
                 {
                     i = true;
-                    Debug.Log("jfdklq");
                 }
 
                 if (!i)
@@ -377,7 +376,6 @@ public class Attaque : MonoSingleton<Attaque>
                     _selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
                     if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
                     {
-                        Debug.Log(_selectedUnit);
                         _selected = true;
                         GetStats();
                         UpdateJauge(tileId);

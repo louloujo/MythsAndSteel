@@ -710,6 +710,11 @@ public class Mouvement : MonoSingleton<Mouvement>
         }
     }
 
+    bool TileAlreadyUsed = false;
+    [Header("Unit collision.")]
+    [SerializeField] List<UnitScript> ActualUnit;
+    [SerializeField] List<UnitScript> LastUnit;
+    [SerializeField] List<TileScript> TileUnit;
     /// <summary>
     /// Coroutine d'attente entre chaque case. Probablement pendant ce temps que l'on devra appliquer les effets de case.
     /// </summary>
@@ -717,7 +722,26 @@ public class Mouvement : MonoSingleton<Mouvement>
     private IEnumerator MvmtEnd()
     {
         mEnd.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveSelect); // La case dépassée redevient une "empty"
-        if (MvmtIndex >= selectedTileId.Count - 1) mEnd.GetComponent<TileScript>().AddUnitToTile(mUnit); // L'unité de la case d'arrivée devient celle de la case de départ.
+        if (mEnd.GetComponent<TileScript>().Unit == null)
+        {
+            mEnd.GetComponent<TileScript>().AddUnitToTile(mUnit);
+        }
+        else
+        {
+            ActualUnit.Add(mEnd.GetComponent<TileScript>().Unit.GetComponent<UnitScript>());
+            if (mEnd.GetComponent<TileScript>().LastUnit)
+            {
+                LastUnit.Add(mEnd.GetComponent<TileScript>().LastUnit.GetComponent<UnitScript>());
+            }
+            else
+            {
+                LastUnit.Add(null);
+            }
+            TileUnit.Add(mEnd.GetComponent<TileScript>());
+            mEnd.GetComponent<TileScript>().ClearUnitInfo();
+            mEnd.GetComponent<TileScript>().AddUnitToTile(mUnit);
+        }
+        // L'unité de la case d'arrivée devient celle de la case de départ.
         if (mStart.GetComponent<TileScript>().Unit == mUnit) mStart.GetComponent<TileScript>().RemoveUnitFromTile(); // L'ancienne case n'a plus d'unité.
         mUnit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(mEnd);
 
@@ -734,6 +758,13 @@ public class Mouvement : MonoSingleton<Mouvement>
         else // Si il ne reste aucun mvmt dans la liste SelectedTile.
         {
             MvmtIndex = 1;
+            if (TileUnit.Count > 0)
+            {
+                for (int i = 0; i < TileUnit.Count; i++)
+                {
+                    TileUnit[i].AddUnitInfo(ActualUnit[i], LastUnit[i]);
+                }
+            }
             StopMouvement(false); // Arête le mvmt de l'unité.
         }
         Launch = false; // Reset de la bool Launch

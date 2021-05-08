@@ -8,15 +8,38 @@ public class TileScript : MonoBehaviour
     public GameObject Unit
     {
         get
-        {
+        {           
             return _unit;
         }
         set
         {
+            LastUnit = _unit;
             _unit = value;
+            foreach(MYthsAndSteel_Enum.TerrainType T1 in TerrainEffectList)
+            {
+                foreach (TerrainType Type in GameManager.Instance.Terrain.EffetDeTerrain)
+                {
+
+                    foreach (MYthsAndSteel_Enum.TerrainType T2 in Type._eventType)
+                    {
+                        if (T1 == T2)
+                        {
+                            if (Type.Child != null)
+                            {
+                                Debug.Log(Type._terrainName);
+                                if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
+                                {
+                                    TerrainGestion.Instance.UnitModification(Try, this);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
-
+    public GameObject LastUnit;
+    
     //Liste des enfants de la case
     [SerializeField] private List<GameObject> Child;
     public List<GameObject> _Child
@@ -73,6 +96,7 @@ public class TileScript : MonoBehaviour
         //Met l'unit� � la bonne position
         if (_unit != null)
         {
+            LastUnit = _unit;
             _unit.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, _unit.transform.position.z);
         }
 
@@ -87,19 +111,43 @@ public class TileScript : MonoBehaviour
     /// </summary>
     /// <param name="unit"></param>
     public void AddUnitToTile(GameObject unit, bool inEditor = false)
-    {
-        _unit = unit;
-        _unit.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, _unit.transform.position.z);
-
-        if (!inEditor) _unit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(this.gameObject);
+    {                
+        if (!inEditor) unit.GetComponent<UnitScript>().ActualTiledId = TileId;        
+        Unit = unit;
+        Unit.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, _unit.transform.position.z);
     }
 
+    /// <summary>
+    /// Clear unit without effect.
+    /// </summary>
+    public void ClearUnitInfo()
+    {
+        _unit = null;
+        LastUnit = null;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="InfoLastAndActualUnit"> K<K<Actual Unit, Last Unit>, Tile> </param>
+    public void AddUnitInfo(UnitScript Actual, UnitScript Last)
+    {
+        _unit = Actual.gameObject;
+        if(LastUnit != null)
+        {
+            LastUnit = Last.gameObject;
+        }
+        else
+        {
+            LastUnit = null;
+        }
+    }
     /// <summary>
     /// Enleve l'unit� qui se trouve sur cette case
     /// </summary>
     public void RemoveUnitFromTile()
     {
-        _unit = null;
+        Unit = null;
     }
 
     /// <summary>
@@ -207,7 +255,6 @@ public class TileScript : MonoBehaviour
                 if (gam.tag == tag)
                 {
                     child = gam;
-                    Debug.Log("desactive " + child.name);
                     child.GetComponent<SpriteRenderer>().enabled = false;
                     if (destroy)
                     {

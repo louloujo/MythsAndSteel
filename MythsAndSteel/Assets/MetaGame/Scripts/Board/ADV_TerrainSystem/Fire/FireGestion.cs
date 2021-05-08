@@ -5,7 +5,10 @@ using UnityEngine;
 public class FireGestion : MonoBehaviour
 {
     [SerializeField] public List<Fire> FireActive = new List<Fire>();
-    
+    [SerializeField] public int BrasierDamage = 2;
+    [SerializeField] public int FireDamage = 1;
+
+
     /// <summary>
     /// create a fire on a tile.
     /// </summary>
@@ -39,6 +42,15 @@ public class FireGestion : MonoBehaviour
             }
         }
     }
+
+    public void CreateFireAll()
+    {
+        foreach(GameObject t in TilesManager.Instance.TileList)
+        {
+            CreateFire(t.GetComponent<TileScript>().TileId);
+        }
+    }
+
 
     public void Turn()
     {
