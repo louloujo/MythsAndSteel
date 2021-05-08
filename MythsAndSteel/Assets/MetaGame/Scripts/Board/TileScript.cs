@@ -359,6 +359,7 @@ public class TileScript : MonoBehaviour
                     {
                         GameObject G = C;
                         Child.Remove(C);
+                        Debug.Log(G.GetComponentInParent<TileScript>().name);
                         Destroy(G);
                         break;
                     }

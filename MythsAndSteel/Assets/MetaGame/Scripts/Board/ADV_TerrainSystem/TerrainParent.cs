@@ -4,31 +4,27 @@ using UnityEngine;
 
 public class TerrainParent : MonoBehaviour
 {
+
     public virtual void OnUnityAdd(UnitScript Unit)
     {
 
     }
-
     public virtual void OnUnityDown(UnitScript Unit)
     {
 
     }
-
     public virtual void ComingFromUp(UnitScript Unit)
     {
 
     }
-
     public virtual void ComingFromDown(UnitScript Unit)
     {
 
     }
-
     public virtual void ComingFromLeft(UnitScript Unit)
     {
 
     }
-
     public virtual void ComingFromRight(UnitScript Unit)
     {
 
@@ -49,4 +45,13 @@ public class TerrainParent : MonoBehaviour
     {
 
     }
+    public virtual void UnithasBeenAttacked(UnitScript Unit)
+    {
+
+    }
+    public virtual void UnithasBeenSelectedForAttack(UnitScript Unit)
+    {
+
+    }
+
 }

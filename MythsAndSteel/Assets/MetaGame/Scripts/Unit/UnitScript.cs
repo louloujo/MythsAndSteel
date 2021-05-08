@@ -18,7 +18,17 @@ public class UnitScript : MonoBehaviour
     [Header("------------------- STAT EN JEU -------------------")]
     //Vie actuelle
     [SerializeField] int _life;
-    public int Life => _life;
+    public int Life
+    {
+        get
+        {
+            return _life;
+        }
+        set
+        {
+            _life = value;
+        }
+    }
 
     bool IsDead = false;
     bool IsDeadByOrgone = false;

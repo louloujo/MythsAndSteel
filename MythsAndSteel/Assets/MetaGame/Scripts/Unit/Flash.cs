@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Flash : MonoBehaviour
 {
     [SerializeField] private bool Activate = false;
     [SerializeField] private List<SpriteRenderer> Fx;
+    [SerializeField] private List<Image> Fx2;
 
     private void Start()
     {
@@ -50,10 +52,19 @@ public class Flash : MonoBehaviour
             {
                 F.color = new Color(A, A, A, A);
             }
+            foreach (Image F in Fx2)
+            {
+                F.color = new Color(A, A, A, A);
+            }
         }
         else
         {
             foreach (SpriteRenderer F in Fx)
+            {
+                A = Mathf.MoveTowards(A, 1, speed);
+                F.color = new Color(A, A, A, A);
+            }
+            foreach (Image F in Fx2)
             {
                 A = Mathf.MoveTowards(A, 1, speed);
                 F.color = new Color(A, A, A, A);

@@ -486,11 +486,11 @@ public class Attaque : MonoSingleton<Attaque>
                 if (currentTileScript.Unit != null  )
                 {
                 if(currentTileScript.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy != GameManager.Instance.IsPlayerRedTurn)
-                    {
+                {
 
                 _selectedTiles.Add(tileId);
                 TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect, _selectedSprite, 1);
-                    }
+                }
 
                 }
             }
