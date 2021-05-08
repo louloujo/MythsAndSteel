@@ -55,7 +55,7 @@ public class Fire : TerrainParent
             {
                 GetComponentInParent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Feu);
             }
-            GetComponentInParent<ChildEffect>().Type = MYthsAndSteel_Enum.TerrainType.Feu;
+            GetComponent<ChildEffect>().Type = MYthsAndSteel_Enum.TerrainType.Feu;
         }
         else if(TurnLeft <= 0)
         {
@@ -84,13 +84,13 @@ public class Fire : TerrainParent
 
     public override void OnUnityAdd(UnitScript Unit)
     {
-        if(GetComponentInParent<ChildEffect>().Type == MYthsAndSteel_Enum.TerrainType.Brasier)
+        if(GetComponent<ChildEffect>().Type == MYthsAndSteel_Enum.TerrainType.Brasier)
         {
-            Unit.TakeDamage(FireG.BrasierDamage);
+            Unit.TakeDamage(5);
         }
-        if (GetComponentInParent<ChildEffect>().Type == MYthsAndSteel_Enum.TerrainType.Feu)
+        if (GetComponent<ChildEffect>().Type == MYthsAndSteel_Enum.TerrainType.Feu)
         {
-            Unit.TakeDamage(FireG.FireDamage);
+            Unit.TakeDamage(1);
         }
         base.OnUnityAdd(Unit);
     }

@@ -133,7 +133,7 @@ public class TileScript : MonoBehaviour
     public void AddUnitInfo(UnitScript Actual, UnitScript Last)
     {
         _unit = Actual.gameObject;
-        if(LastUnit != null)
+        if(Last != null)
         {
             LastUnit = Last.gameObject;
         }
