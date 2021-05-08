@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private KeyCode MakeAction = KeyCode.KeypadEnter;
     [SerializeField] private KeyCode SkipPhase = KeyCode.Space;
     [SerializeField] private KeyCode OpenRenfort = KeyCode.Tab;
+    [SerializeField] private KeyCode PauseGame = KeyCode.Escape;
 
     [Header("INFOS TOUCHES")]
     [SerializeField] private float _timeToWaitForSkipPhase = 1;
@@ -29,158 +30,174 @@ public class InputManager : MonoBehaviour
     void Update()
     {
 
-        //Pour quitter la phase d'événement qui permet de choisir une case ou une unité
-        if (Input.GetKeyDown(escapeEvent) && (GameManager.Instance.ChooseUnitForEvent || GameManager.Instance.ChooseTileForEvent))
+        if (!GameManager.Instance.isGamePaused)
         {
-            GameManager.Instance.CancelEvent();
-        }
-
-        //Quand on shiftclic sur le plateau
-        if (Input.GetKeyDown(MoreInfoUnit))
-        {
-            if (GameManager.Instance.activationDone == false)
+            if (Input.GetKeyDown(PauseGame))
             {
-                RaycastManager.Instance._mouseCommand.QuitShiftPanel();
-                RaycastManager.Instance._mouseCommand._checkIfPlayerAsClic = true;
-                RaycastManager.Instance._mouseCommand._hasCheckUnit = false;
+          
+                GameManager.Instance.Paused();
             }
-        }
-
-        //Quand on relache le shift+clic
-        if (Input.GetKeyUp(MoreInfoUnit))
-        {
-                if (GameManager.Instance.activationDone == false)
+            //Pour quitter la phase d'événement qui permet de choisir une case ou une unité
+            if (Input.GetKeyDown(escapeEvent) && (GameManager.Instance.ChooseUnitForEvent || GameManager.Instance.ChooseTileForEvent))
             {
+                GameManager.Instance.CancelEvent();
+            }
+
+            //Quand on shiftclic sur le plateau
+            if (Input.GetKeyDown(MoreInfoUnit))
+            {
+                if (GameManager.Instance.activationDone == false)
+                {
+                    RaycastManager.Instance._mouseCommand.QuitShiftPanel();
+                    RaycastManager.Instance._mouseCommand._checkIfPlayerAsClic = true;
+                    RaycastManager.Instance._mouseCommand._hasCheckUnit = false;
+                }
+            }
+
+            //Quand on relache le shift+clic
+            if (Input.GetKeyUp(MoreInfoUnit))
+            {
+                if (GameManager.Instance.activationDone == false)
+                {
 
                     RaycastManager.Instance._mouseCommand.QuitShiftPanel();
-                RaycastManager.Instance._mouseCommand._checkIfPlayerAsClic = false;
-                RaycastManager.Instance._mouseCommand._hasCheckUnit = true;
-                RaycastManager.Instance.supersose = true;
-            }
-
-
-        }
-
-        //Clic sur le plateau ou une unité
-        if (Input.GetMouseButtonDown(0) && !Input.GetKey(MoreInfoUnit))
-        {
-            if (EventSystem.current.IsPointerOverGameObject() == false)
-            {
-                if (GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation)
-                {
-                    RaycastManager.Instance.Select();
+                    RaycastManager.Instance._mouseCommand._checkIfPlayerAsClic = false;
+                    RaycastManager.Instance._mouseCommand._hasCheckUnit = true;
+                    RaycastManager.Instance.supersose = true;
                 }
-            }
-        }
 
-        //Poser la zone d'orgone à sa nouvelle position
-        if (Input.GetMouseButtonUp(0) && OrgoneManager.Instance.Selected)
-        {
-            OrgoneManager.Instance.ReleaseZone();
-        }
 
-        //Quand le joueur clic sur entrée pour valider une action
-        if (Input.GetKeyDown(MakeAction))
-        {
-            if (Mouvement.Instance.IsInMouvement && Mouvement.Instance._selectedTileId.Count > 1)
-            {
-             
-                if (TilesManager.Instance.TileList[Mouvement.Instance._selectedTileId[Mouvement.Instance._selectedTileId.Count - 1]].GetComponent<TileScript>().Unit == null)
-                {
-                    Mouvement.Instance.ApplyMouvement();
-                    Mouvement.Instance.DeleteChildWhenMove();
-                }
-            }
-            else if(Attaque.Instance.SelectedTiles.Count == 1)
-            {
-                Mouvement.Instance.StopMouvement(true);
-                Attaque.Instance.Attack();
             }
 
-        }  
-        //Pour passer une phase rapidement
-        if (GameManager.Instance.IsInTurn && !GameManager.Instance.ChooseTileForEvent && !GameManager.Instance.ChooseUnitForEvent)
-        {
-            if (UIInstance.Instance.skiPhaseTouche)
+            //Clic sur le plateau ou une unité
+            if (Input.GetMouseButtonDown(0) && !Input.GetKey(MoreInfoUnit))
             {
-
-                if (Input.GetKeyDown(SkipPhase) && UIInstance.Instance.skiPhaseTouche)
+                if (EventSystem.current.IsPointerOverGameObject() == false)
                 {
-                    t = 0;
-                }
-                if (Input.GetKey(SkipPhase) && !hasShowPanel && !Attaque.Instance.Selected && !Mouvement.Instance.Selected && !OrgoneManager.Instance.Selected)
-                {
-                    if (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Activation)
+                    if (GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation)
                     {
-                        if (GameManager.Instance.ActivationPhase.J1CarteChoisie && GameManager.Instance.ActivationPhase.J2CarteChoisie)
+                        RaycastManager.Instance.Select();
+                    }
+                }
+            }
+
+            //Poser la zone d'orgone à sa nouvelle position
+            if (Input.GetMouseButtonUp(0) && OrgoneManager.Instance.Selected)
+            {
+                OrgoneManager.Instance.ReleaseZone();
+            }
+
+            //Quand le joueur clic sur entrée pour valider une action
+            if (Input.GetKeyDown(MakeAction))
+            {
+                if (Mouvement.Instance.IsInMouvement && Mouvement.Instance._selectedTileId.Count > 1)
+                {
+
+                    if (TilesManager.Instance.TileList[Mouvement.Instance._selectedTileId[Mouvement.Instance._selectedTileId.Count - 1]].GetComponent<TileScript>().Unit == null)
+                    {
+                        Mouvement.Instance.ApplyMouvement();
+                        Mouvement.Instance.DeleteChildWhenMove();
+                    }
+                }
+                else if (Attaque.Instance.SelectedTiles.Count == 1)
+                {
+                    Mouvement.Instance.StopMouvement(true);
+                    Attaque.Instance.Attack();
+                }
+
+            }
+            //Pour passer une phase rapidement
+            if (GameManager.Instance.IsInTurn && !GameManager.Instance.ChooseTileForEvent && !GameManager.Instance.ChooseUnitForEvent)
+            {
+                if (UIInstance.Instance.skiPhaseTouche)
+                {
+
+                    if (Input.GetKeyDown(SkipPhase) && UIInstance.Instance.skiPhaseTouche)
+                    {
+                        t = 0;
+                    }
+                    if (Input.GetKey(SkipPhase) && !hasShowPanel && !Attaque.Instance.Selected && !Mouvement.Instance.Selected && !OrgoneManager.Instance.Selected)
+                    {
+                        if (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Activation)
+                        {
+                            if (GameManager.Instance.ActivationPhase.J1CarteChoisie && GameManager.Instance.ActivationPhase.J2CarteChoisie)
+                            {
+                                ClicToSkipPhase();
+                            }
+                        }
+                        else
                         {
                             ClicToSkipPhase();
                         }
                     }
-                    else
-                    {
-                        ClicToSkipPhase();
-                    }
                 }
-            }
                 if (Input.GetKeyUp(SkipPhase))
                 {
                     UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta.y);
                 }
-        }
+            }
 
-        //Quand tu cliques ur une case
-        if (Input.GetMouseButtonDown(1) && RaycastManager.Instance.Tile != null)
-        {
-            if (!GameManager.Instance.ChooseTileForEvent && !GameManager.Instance.ChooseUnitForEvent)
+            //Quand tu cliques ur une case
+            if (Input.GetMouseButtonDown(1) && RaycastManager.Instance.Tile != null && !GameManager.Instance.DoingEpxlosionOrgone)
             {
-                if (!Mouvement.Instance.Selected && !Attaque.Instance.Selected)
+                if (!GameManager.Instance.ChooseTileForEvent && !GameManager.Instance.ChooseUnitForEvent)
                 {
-                    //Si l'usine de l'Armée Bleu est sélectionnée et c'est le tour du joueur de l'Armée Bleu.
-                    if (RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineBleu) &&
-                        !GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
-                        || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && !PlayerScript.Instance.BluePlayerInfos.HasCreateUnit)
+                    if (!Mouvement.Instance.Selected && !Attaque.Instance.Selected)
                     {
-                        RaycastManager.Instance._mouseCommand.MenuRenfortUI(false);
-                        _renfortPhase.CreateRenfort(false);
-                    }
+                        //Si l'usine de l'Armée Bleu est sélectionnée et c'est le tour du joueur de l'Armée Bleu.
+                        if (RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineBleu) &&
+                            !GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
+                            || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && !PlayerScript.Instance.BluePlayerInfos.HasCreateUnit)
+                        {
+                            RaycastManager.Instance._mouseCommand.MenuRenfortUI(false);
+                            _renfortPhase.CreateRenfort(false);
+                        }
 
-                    //Si l'usine de l'Armée Rouge est sélectionnée et c'est le tour du joueur de l'Armée Rouge.
-                    if (RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineRouge)
-                        && GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
-                        || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && !PlayerScript.Instance.RedPlayerInfos.HasCreateUnit)
+                        //Si l'usine de l'Armée Rouge est sélectionnée et c'est le tour du joueur de l'Armée Rouge.
+                        if (RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.UsineRouge)
+                            && GameManager.Instance.IsPlayerRedTurn && (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1
+                            || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && !PlayerScript.Instance.RedPlayerInfos.HasCreateUnit)
+                        {
+                            RaycastManager.Instance._mouseCommand.MenuRenfortUI(true);
+                            _renfortPhase.CreateRenfort(true);
+                        }
+                    }
+                    else if (Attaque.Instance.Selected)
                     {
-                        RaycastManager.Instance._mouseCommand.MenuRenfortUI(true);
-                        _renfortPhase.CreateRenfort(true);
+                        RaycastManager.Instance.SelectTileForAttack();
                     }
                 }
-                else if (Attaque.Instance.Selected)
+                else
                 {
-                    RaycastManager.Instance.SelectTileForAttack();
+                    RaycastManager.Instance.Deselect();
                 }
             }
-            else
+
+            //Ouvrir/fermer le menu renfort
+            if (Input.GetKeyDown(OpenRenfort) &&
+                (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 ||
+                GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2 ||
+                GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1 ||
+                GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2))
             {
-                RaycastManager.Instance.Deselect();
+                RaycastManager.Instance._mouseCommand.MenuRenfortUI(GameManager.Instance.IsPlayerRedTurn);
+                _renfortPhase.CreateRenfort(GameManager.Instance.IsPlayerRedTurn ? true : false);
+            }
+            if (Input.GetKeyUp(OpenRenfort))
+            {
+                RaycastManager.Instance._mouseCommand.QuitRenfortPanel();
             }
         }
 
-        //Ouvrir/fermer le menu renfort
-        if (Input.GetKeyDown(OpenRenfort) &&
-            (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 ||
-            GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2 ||
-            GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1 ||
-            GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2))
+        else
         {
-            RaycastManager.Instance._mouseCommand.MenuRenfortUI(GameManager.Instance.IsPlayerRedTurn);
-            _renfortPhase.CreateRenfort(GameManager.Instance.IsPlayerRedTurn ? true : false);
-        }
-        if (Input.GetKeyUp(OpenRenfort))
-        {
-            RaycastManager.Instance._mouseCommand.QuitRenfortPanel();
+            if(Input.GetKeyDown(PauseGame))
+            {
+
+            GameManager.Instance.StopPaused();
+            }
         }
     }
-
     /// <summary>
     /// Quand le joueur peut changer de phase
     /// </summary>
@@ -199,8 +216,11 @@ public class InputManager : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(null);
                 GameManager.Instance._eventCallCancel += CancelSkipPhase;
                 GameManager.Instance._eventCall += SkipPhaseFunc;
-
                 hasShowPanel = true;
+                if(PlayerPrefs.GetInt("Avertissement") == 0)
+                {
+                    GameManager.Instance._eventCall();
+                }
                 t = 0;
                 UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta = new Vector2(0, UIInstance.Instance.SkipPhaseImage.GetComponent<RectTransform>().sizeDelta.y);
             }
@@ -208,8 +228,10 @@ public class InputManager : MonoBehaviour
 
         }
 
+        }
 
-    }
+
+    
 
     /// <summary>
     /// Quand le joueur accepte de changer de phase

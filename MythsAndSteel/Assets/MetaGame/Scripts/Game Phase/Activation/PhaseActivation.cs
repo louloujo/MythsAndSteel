@@ -284,7 +284,6 @@ public class PhaseActivation : MonoBehaviour
     /// </summary>
     public void ShowResult()
     {
-        UIInstance.Instance.BackgroundActivation.SetActive(false);
 
         float InitiativeValeur = J1DernièreValeurActivation - J2DernièreValeurActivation;
         float rgb = 0.2f;
@@ -317,6 +316,7 @@ public class PhaseActivation : MonoBehaviour
     public void DesactivatePannelActivation()
     {
         RedPlayerPanel.SetActive(false);
+        UIInstance.Instance.BackgroundActivation.SetActive(false);
         BluePlayerPanel.SetActive(false);
         ConfirmPanelBlue.SetActive(false);
         ConfirmPanelRed.SetActive(false);

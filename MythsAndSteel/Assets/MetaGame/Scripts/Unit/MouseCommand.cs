@@ -769,6 +769,9 @@ public class MouseCommand : MonoBehaviour
     /// </summary>
     public void MouseOverWithoutClick()
     {
+        if (GameManager.Instance.activationDone == false)
+        {
+
         if (!_hasCheckUnit)
         {
             //Si le joueur n'a pas cliqué, alors tu lances la coroutine.
@@ -784,6 +787,7 @@ public class MouseCommand : MonoBehaviour
         {
             MouseExitWithoutClick();
         }
+        }
     }
 
     /// <summary>
@@ -791,10 +795,14 @@ public class MouseCommand : MonoBehaviour
     /// </summary>
     public void MouseExitWithoutClick()
     {
+        if(GameManager.Instance.activationDone == false)
+        {
         //Arrete l'ensemble des coroutines dans la scène.
         StopAllCoroutines();
         _mouseOverUI.SetActive(false);
         _hasCheckUnit = false;
+
+        }
     }
 
     /// <summary>

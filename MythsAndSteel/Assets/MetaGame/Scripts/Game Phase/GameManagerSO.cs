@@ -60,7 +60,7 @@ public class GameManagerSO : ScriptableObject
     /// <param name="phaseToGoTo"></param>
     public void GoToPhase()
     {
-        UIInstance.Instance.ActivateNextPhaseButton();
+       
 
         int phaseSuivante = ((int)GameManager.Instance.ActualTurnPhase) + 1;
 

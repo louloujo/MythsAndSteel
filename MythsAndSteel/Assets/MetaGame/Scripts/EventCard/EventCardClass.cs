@@ -423,7 +423,13 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            GameManager.Instance._eventCall += OptimisationOrgone;
+                GameManager.Instance._eventCall += OptimisationOrgone;
+            if (PlayerPrefs.GetInt("Avertissement") == 0)
+            {
+
+                GameManager.Instance._eventCall();
+            }
+
             UIInstance.Instance.ShowValidationPanel("Optimisation de l'orgone", "Êtes-vous sur de vouloir augmenter votre nombre d'utilisation de charge d'orgones de ");
         }
     }
@@ -558,7 +564,10 @@ public class EventCardClass : ScriptableObject{
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
             GameManager.Instance._eventCall += ManoeuvreStratégique;
-
+            if(PlayerPrefs.GetInt("Avertissement") == 0)
+            {
+                GameManager.Instance._eventCall();
+            }
             UIInstance.Instance.ShowValidationPanel("Manoeuvre stratégique", "Êtes-vous sur de vouloir activer une unité supplémentaire durant ce tour?");
         }
     }
@@ -624,6 +633,10 @@ public class EventCardClass : ScriptableObject{
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
             GameManager.Instance._eventCall += ActivationDeNodus;
+            if (PlayerPrefs.GetInt("Avertissement") == 0)
+            {
+                GameManager.Instance._eventCall();
+            }
             UIInstance.Instance.ShowValidationPanel("Activation de Nodus", "Êtes-vous sur de vouloir utiliser un pouvoir orgonique durant votre phase d'action?");
         }
     }

@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /*
     Ce script est le Game Manager. Il va gérer toutes les phases du jeu, les différents tours de jeu, ...
@@ -19,7 +20,17 @@ public class GameManager : MonoSingleton<GameManager>{
     #region Variables
     [Header("INFO TOUR ACTUEL")]
     //Correspond à la valeur du tour actuel
+   
+    [SerializeField]
+    GameObject pauseMenu;
+
+    [SerializeField]
+    GameObject backgroundActivation;
+    public bool isGamePaused = false;
+    [SerializeField]
+    GameObject BackgroundPaused;
     [SerializeField] private int _actualTurnNumber = 0;
+    
     public int ActualTurnNumber
     {
         get
@@ -183,9 +194,16 @@ public class GameManager : MonoSingleton<GameManager>{
     /// Quand le joueur clic pour passer à la phase suivante
     /// </summary>
     public void CliCToChangePhase(){
-        UIInstance.Instance.ShowValidationPanel("Passer à la phase suivante", "Êtes-vous sur de vouloir passer à la phase suivante? En passant la phase vous n'aurez pas la possibilité de revenir en arrière.");
-        _eventCall += ChangePhase;
+
         _eventCallCancel += CancelSkipPhase;
+        _eventCall += ChangePhase;
+
+        if (PlayerPrefs.GetInt("Avertissement") == 0)
+        {
+            _eventCall();
+        
+        }
+        UIInstance.Instance.ShowValidationPanel("Passer à la phase suivante", "Êtes-vous sur de vouloir passer à la phase suivante? En passant la phase vous n'aurez pas la possibilité de revenir en arrière.");
     }
 
     /// <summary>
@@ -275,6 +293,7 @@ public class GameManager : MonoSingleton<GameManager>{
     /// </summary>
     void SwitchPhaseObjectUI()
     {
+       
         int nextPhase = (int)_actualTurnPhase + 1 > 6? 0 : (int)_actualTurnPhase + 1;
         if((MYthsAndSteel_Enum.PhaseDeJeu) nextPhase != MYthsAndSteel_Enum.PhaseDeJeu.Debut){
             createPanel(1);
@@ -308,6 +327,7 @@ public class GameManager : MonoSingleton<GameManager>{
     {
         //Ajoute le menu où il faut cliquer
         //Instantie le panneau de transition entre deux phases et le garde en mémoire
+        UIInstance.Instance.DesactivateNextPhaseButton();
         GameObject phaseObj = Instantiate(UIInstance.Instance.SwitchPhaseObject, UIInstance.Instance.CanvasTurnPhase.transform.position,
                                           Quaternion.identity, UIInstance.Instance.CanvasTurnPhase.transform);
 
@@ -316,7 +336,15 @@ public class GameManager : MonoSingleton<GameManager>{
         string textForSwitch = "Phase " + ((MYthsAndSteel_Enum.PhaseDeJeu)nextPhase).ToString();
 
         phaseObj.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = textForSwitch;
-        Destroy(phaseObj, 1.25f);
+            
+            Destroy(phaseObj, 1.25f);
+        StartCoroutine(ButtonDesactivateWhenAnimation());
+      
+    }
+    IEnumerator ButtonDesactivateWhenAnimation()
+    {
+        yield return new WaitForSeconds(1.25f);
+        UIInstance.Instance.ActivateNextPhaseButton();
     }
     #endregion UIFunction
 
@@ -326,6 +354,7 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <param name="player1"></param>
     public void SetPlayerStart(bool player1){
         _isPlayerRedStarting = player1;
+
     }
 
     #region EventMode
@@ -444,6 +473,10 @@ public class GameManager : MonoSingleton<GameManager>{
             if(_unitChooseList.Count == _numberOfUnitToChoose)
             {
                 _chooseUnitForEvent = false;
+                if (PlayerPrefs.GetInt("Avertissement") == 0)
+                {
+                    _eventCall();
+                }
                 UIInstance.Instance.ShowValidationPanel(_titleValidation, _descriptionValidation);
             }
         }
@@ -475,7 +508,8 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <param name="_tileSelectable"></param>
     public void StartEventModeTiles(int numberOfTile, bool redPlayer, List<GameObject> _tileSelectable, string title, string description, bool multiplesTile = false)
     {
-        UIInstance.Instance.DesactivateNextPhaseButton();
+       //
+       UIInstance.Instance.DesactivateNextPhaseButton();
 
         _titleValidation = title;
         _descriptionValidation = description;
@@ -540,6 +574,10 @@ public class GameManager : MonoSingleton<GameManager>{
                 if(_tileChooseList.Count == _numberOfTilesToChoose)
                 {
                     _chooseTileForEvent = false;
+                    if(PlayerPrefs.GetInt("Avertissement") == 0)
+                    {
+                       _eventCall();
+                    }
                     UIInstance.Instance.ShowValidationPanel(_titleValidation, _descriptionValidation);
                 }
             }
@@ -613,6 +651,7 @@ public class GameManager : MonoSingleton<GameManager>{
 
     IEnumerator waitToChange(){
         yield return new WaitForSeconds(1.35f);
+      
         ManagerSO.GoToPhase();
         _isInTurn = true;
     }
@@ -621,4 +660,40 @@ public class GameManager : MonoSingleton<GameManager>{
     {
         _TurnNumber.text = _actualTurnNumber.ToString();
     }
+    public void LoadMainMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(1);
+    }
+    public void Paused()
+    {
+
+    
+        Time.timeScale = 0;
+        pauseMenu.SetActive(true);
+        BackgroundPaused.SetActive(true);
+        if(ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Activation)
+        {
+            backgroundActivation.SetActive(false);
+         
+        }
+        isGamePaused = true;
+    }
+    public void StopPaused()
+    {
+       
+
+        Time.timeScale = 1;
+        isGamePaused = false;
+
+        pauseMenu.SetActive(false);
+        if (ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.Activation)
+        {
+            backgroundActivation.SetActive(true);
+
+        }
+        BackgroundPaused.SetActive(false);
+        
+    }
+
 }
