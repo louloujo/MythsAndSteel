@@ -43,7 +43,7 @@ public class AttaqueUI : MonoBehaviour
         Min = new List<int>();
         Max = new List<int>();
 
-        BonusTxt.text = Unit.DiceBonus.ToString();
+        BonusTxt.text = (Unit.DiceBonus + Bonus).ToString();
         StartMin = (int)Unit.NumberRangeMin.x;
         EndMin = (int)Unit.NumberRangeMin.y;
         StartMax = (int)Unit.NumberRangeMax.x;

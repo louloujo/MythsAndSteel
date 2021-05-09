@@ -18,8 +18,8 @@ MonoBehaviour:
       unit\xE9 dans cette case."
     _eventType: 02000000
     render: {fileID: 0}
-    MustBeInstantiate: 1
-    Child: {fileID: 0}
+    MustBeInstantiate: 0
+    Child: {fileID: 2443697204554867568, guid: f11dd5de5eeea6c438ec63cfabf30015, type: 3}
   - _terrainName: Boue
     _description: "Inflige 1 point de d\xE9g\xE2ts aux unit\xE9s sur cette case ne
       s'\xE9tant pas d\xE9plac\xE9 \xE0 la fin du tour de son joueur."
@@ -104,8 +104,8 @@ MonoBehaviour:
       unit\xE9 dans cette case."
     _eventType: 03000000
     render: {fileID: 0}
-    MustBeInstantiate: 1
-    Child: {fileID: 0}
+    MustBeInstantiate: 0
+    Child: {fileID: 2443697204554867568, guid: edf7359052f96bb4f893bc12e87a8f94, type: 3}
   - _terrainName: "Ravin\v"
     _description: "Case inaccessible de base, mais des unit\xE9s subissant un Recul
       Forc\xE9 peuvent y aller, \xE9tant tu\xE9 instantan\xE9ment."

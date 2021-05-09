@@ -45,7 +45,7 @@ public class FireGestion : MonoBehaviour
 
     public void CreateFireAll()
     {
-        foreach(GameObject t in TilesManager.Instance.TileList)
+        foreach (GameObject t in TilesManager.Instance.TileList)
         {
             CreateFire(t.GetComponent<TileScript>().TileId);
         }
@@ -54,9 +54,18 @@ public class FireGestion : MonoBehaviour
 
     public void Turn()
     {
-        foreach(Fire f in FireActive)
+        foreach (Fire f in FireActive)
         {
             f.TurnLeft--;
+        }
+    }
+
+    public void RandomFire(int Number)
+    {
+        for (int p = 0; p <= Number; p++)
+        {
+            int w = Random.Range(1, 80);
+            CreateFire(w);
         }
     }
 }

@@ -25,7 +25,6 @@ public class TileScript : MonoBehaviour
                         {
                             if (Type.Child != null)
                             {
-                                Debug.Log(Type._terrainName);
                                 if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
                                 {
                                     TerrainGestion.Instance.UnitModification(Try, this);

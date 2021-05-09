@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Fire : TerrainParent
 {
+
+    public enum type {
+        brasier, feu
+    }
+    private type Type;
+
     [SerializeField] private int _Turnleft;
     public FireGestion FireG;
 
@@ -26,7 +32,7 @@ public class Fire : TerrainParent
     }
     public void Check()
     {
-        if(TurnLeft == 2)
+        if (TurnLeft == 2)
         {
             GetComponentInChildren<Animator>().SetBool("Feu", false);
             GetComponentInChildren<Animator>().SetBool("Brasier", true);
@@ -40,8 +46,10 @@ public class Fire : TerrainParent
                 GetComponentInParent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Brasier);
             }
             GetComponentInParent<ChildEffect>().Type = MYthsAndSteel_Enum.TerrainType.Brasier;
+            Type = type.brasier;
+
         }
-        else if(TurnLeft == 1)
+        else if (TurnLeft == 1)
         {
             GetComponentInChildren<Animator>().SetTrigger("Out");
             GetComponentInChildren<Animator>().SetBool("Brasier", false);
@@ -56,8 +64,9 @@ public class Fire : TerrainParent
                 GetComponentInParent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Feu);
             }
             GetComponent<ChildEffect>().Type = MYthsAndSteel_Enum.TerrainType.Feu;
+            Type = type.feu;
         }
-        else if(TurnLeft <= 0)
+        else if (TurnLeft <= 0)
         {
             GetComponentInChildren<Animator>().SetTrigger("Out");
         }
@@ -84,26 +93,31 @@ public class Fire : TerrainParent
 
     public override void OnUnityAdd(UnitScript Unit)
     {
-        if(GetComponent<ChildEffect>().Type == MYthsAndSteel_Enum.TerrainType.Brasier)
+        Debug.Log(TurnLeft);
+
+        if (TurnLeft == 2)
         {
-            Unit.TakeDamage(5);
+            Unit.TakeDamage(2);
         }
-        if (GetComponent<ChildEffect>().Type == MYthsAndSteel_Enum.TerrainType.Feu)
+        if (TurnLeft == 1)
         {
-            Unit.TakeDamage(1);
+            Unit.TakeDamage(1); 
         }
         base.OnUnityAdd(Unit);
     }
 
-    public override void ComingFromUp(UnitScript Unit)
+    public override void EndTurnEffect(TileScript ts, UnitScript Unit = null)
     {
-        base.ComingFromUp(Unit);
-        Debug.Log(this.name + " Coming from up.");
-    }
+        Debug.Log(TurnLeft);
+        if (TurnLeft == 2)
+        {
+            if (Unit != null) Unit.TakeDamage(2);
 
-    public override int AttackRangeValue(int i = 0)
-    {
-        i = 3;
-        return base.AttackRangeValue(i);
+        }
+        if (TurnLeft == 1)
+        {
+            if (Unit != null) Unit.TakeDamage(1);
+        }
+        base.EndTurnEffect(ts, Unit);
     }
 }
