@@ -36,7 +36,7 @@ public class AttaqueUI : MonoBehaviour
     public int EndMax;
     public int DiceBonus;
 
-    public void SynchAttackBorne(UnitScript Unit)
+    public void SynchAttackBorne(UnitScript Unit, int Bonus = 0)
     {
         bool Done = false;
 
@@ -48,7 +48,7 @@ public class AttaqueUI : MonoBehaviour
         EndMin = (int)Unit.NumberRangeMin.y;
         StartMax = (int)Unit.NumberRangeMax.x;
         EndMax = (int)Unit.NumberRangeMax.y;
-        DiceBonus = Unit.DiceBonus;
+        DiceBonus = Unit.DiceBonus + Bonus;
         Temp = new List<int>();
         for (int u = 0; u < Borne.Count; u++)
         {

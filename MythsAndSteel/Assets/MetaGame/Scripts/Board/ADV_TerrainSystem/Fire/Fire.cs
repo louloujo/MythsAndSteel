@@ -100,4 +100,10 @@ public class Fire : TerrainParent
         base.ComingFromUp(Unit);
         Debug.Log(this.name + " Coming from up.");
     }
+
+    public override int AttackRangeValue(int i = 0)
+    {
+        i = 3;
+        return base.AttackRangeValue(i);
+    }
 }

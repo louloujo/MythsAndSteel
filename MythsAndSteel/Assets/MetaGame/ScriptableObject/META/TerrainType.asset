@@ -48,8 +48,8 @@ MonoBehaviour:
       sur cette case."
     _eventType: 04000000
     render: {fileID: 0}
-    MustBeInstantiate: 1
-    Child: {fileID: 0}
+    MustBeInstantiate: 0
+    Child: {fileID: 2443697204554867568, guid: ae9cf55b4ba905b4baacff6ada04095d, type: 3}
   - _terrainName: Eau
     _description: Case inaccessible en temps normal.
     _eventType: 08000000
@@ -91,8 +91,8 @@ MonoBehaviour:
       venant pas d'une Colline."
     _eventType: 05000000
     render: {fileID: 0}
-    MustBeInstantiate: 1
-    Child: {fileID: 0}
+    MustBeInstantiate: 0
+    Child: {fileID: 2443697204554867568, guid: 9c29ab5cb9f82f34d8ed9226d13808f0, type: 3}
   - _terrainName: Mont
     _description: "Consomme 2 D\xE9placements pour se d\xE9placer sur cette case."
     _eventType: 06000000

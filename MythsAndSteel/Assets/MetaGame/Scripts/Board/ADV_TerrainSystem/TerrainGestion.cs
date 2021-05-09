@@ -61,7 +61,6 @@ public class TerrainGestion : MonoSingleton<TerrainGestion>
             Debug.Log(ts.LastUnit + " a quitté la case");
         }
     }
-
     public void EndTurn(TerrainParent pt, TileScript ts)
     {
         if(ts.Unit != null)
@@ -75,3 +74,4 @@ public class TerrainGestion : MonoSingleton<TerrainGestion>
         }
     }
 }
+

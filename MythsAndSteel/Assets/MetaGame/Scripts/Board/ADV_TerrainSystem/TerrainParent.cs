@@ -49,16 +49,32 @@ public class TerrainParent : MonoBehaviour
     {
 
     }
-    public virtual void UnithasBeenSelectedForAttack(UnitScript Unit)
-    {
 
-    }
     /// <summary>
     /// Effet appliqué à la case à la fin de chaque tour de jeu.
     /// Cette fonction est appelée même si il n'y a pas d'unité sur la case.
     /// </summary>
     /// <param name="Unit"></param>
     public virtual void EndTurnEffect(TileScript ts, UnitScript Unit = null)
+    {
+
+    }
+
+    /// <summary>
+    /// Cette fonction sert uniquement à modifier la range d'attaque de l'unité se trouvant sur la case.
+    /// </summary>
+    /// <param name="i"></param>
+    /// <returns></returns>
+    public virtual int AttackRangeValue(int i = 0)
+    {
+        return i;
+    }
+
+    public virtual void CibledByAttack(UnitScript AttackerUnit, TileScript AttackerUnitCase)
+    {
+        // Colline, plage, bosquet 
+    }
+    public virtual void UnCibledByAttack(UnitScript AttackerUnit)
     {
 
     }

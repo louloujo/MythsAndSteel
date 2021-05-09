@@ -19,7 +19,6 @@ public class TileScript : MonoBehaviour
             {
                 foreach (TerrainType Type in GameManager.Instance.Terrain.EffetDeTerrain)
                 {
-
                     foreach (MYthsAndSteel_Enum.TerrainType T2 in Type._eventType)
                     {
                         if (T1 == T2)

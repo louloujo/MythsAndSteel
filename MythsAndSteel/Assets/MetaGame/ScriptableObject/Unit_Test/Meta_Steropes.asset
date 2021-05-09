@@ -17,8 +17,8 @@ MonoBehaviour:
   typeUnite: 0
   LifeMax: 5
   ShieldMax: 2
-  AttackRange: 3
-  MoveSpeed: 6
+  AttackRange: 0
+  MoveSpeed: 5
   CreationCost: 4
   numberOfUnitToAttack: 1
   DamageMinimum: 2
