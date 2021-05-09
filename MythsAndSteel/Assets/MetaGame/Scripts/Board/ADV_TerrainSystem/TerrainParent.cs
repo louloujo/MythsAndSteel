@@ -53,5 +53,13 @@ public class TerrainParent : MonoBehaviour
     {
 
     }
+    /// <summary>
+    /// Effet appliqué à la case à la fin de chaque tour de jeu.
+    /// Cette fonction est appelée même si il n'y a pas d'unité sur la case.
+    /// </summary>
+    /// <param name="Unit"></param>
+    public virtual void EndTurnEffect(TileScript ts, UnitScript Unit = null)
+    {
 
+    }
 }

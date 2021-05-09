@@ -399,6 +399,10 @@ public class Mouvement : MonoSingleton<Mouvement>
     /// </summary>
     public void StopMouvement(bool forceStop)
     {
+        if(Last != null)
+        {
+            StopCoroutine(Last);
+        }
         if (newNeighbourId.Count > 0)
         {
             foreach (int Neighbour in newNeighbourId) // Supprime toutes les tiles.
@@ -432,7 +436,7 @@ public class Mouvement : MonoSingleton<Mouvement>
 
         if (mUnit != null) mUnit.GetComponent<UnitScript>().MoveLeft = forceStop ? MoveLeftBase : mUnit.GetComponent<UnitScript>().MoveLeft;
 
-        if (!forceStop) mUnit.GetComponent<UnitScript>().checkMovementLeft();
+        if (!forceStop) if (mUnit != null) mUnit.GetComponent<UnitScript>().checkMovementLeft();
 
         mUnit = null;
 
@@ -742,8 +746,18 @@ public class Mouvement : MonoSingleton<Mouvement>
             mEnd.GetComponent<TileScript>().AddUnitToTile(mUnit);
         }
         // L'unité de la case d'arrivée devient celle de la case de départ.
-        if (mStart.GetComponent<TileScript>().Unit == mUnit) mStart.GetComponent<TileScript>().RemoveUnitFromTile(); // L'ancienne case n'a plus d'unité.
-        mUnit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(mEnd);
+        if (mStart != null)
+        {
+            if (mStart.GetComponent<TileScript>().Unit == mUnit) 
+            {
+                mStart.GetComponent<TileScript>().RemoveUnitFromTile();
+            }
+        }
+        // L'ancienne case n'a plus d'unité.
+        if(mUnit != null)
+        {
+            mUnit.GetComponent<UnitScript>().ActualTiledId = TilesManager.Instance.TileList.IndexOf(mEnd);
+        }
 
         RaycastManager.Instance.ActualTileSelected = mEnd;
         mStart = mEnd;
@@ -776,6 +790,7 @@ public class Mouvement : MonoSingleton<Mouvement>
     /// <param name="Unit">The unit gameobject.</param>
     /// <param name="StartPos">start position tile</param>
     /// <param name="EndPos">end position tile</param>
+    private Coroutine Last;
     private void UpdatingMove(GameObject Unit, GameObject StartPos, GameObject EndPos)
     {
         if (Unit != null && StartPos != null && EndPos != null)
@@ -788,7 +803,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                 Unit.GetComponent<UnitScript>().Animation.SetFloat("X", 0);
                 Unit.GetComponent<UnitScript>().Animation.SetFloat("Y", 0);
                 Launch = true;
-                StartCoroutine(MvmtEnd()); // Lancer le prochain mvmt avec délai. 
+                Last = StartCoroutine(MvmtEnd()); // Lancer le prochain mvmt avec délai. 
             }
             else // Sinon appliqué l'opacité à la case d'arrivée en fonction de la distance unité - arrivée.
             {

@@ -19,10 +19,38 @@ public class EndTurn : MonoBehaviour
                 goalTileList.Add(Tile);
             }
         }
-
+        GameManager.Instance.ManagerSO.GoToStrategyPhase += EndTerrainEffect;
         GameManager.Instance.ManagerSO.GoToStrategyPhase += CheckResources;
         GameManager.Instance.ManagerSO.GoToStrategyPhase += CheckOwner;
     }
+
+    public void EndTerrainEffect()
+    {
+        foreach (GameObject TS in TilesManager.Instance.TileList)
+        {
+            foreach (MYthsAndSteel_Enum.TerrainType T1 in TS.GetComponent<TileScript>().TerrainEffectList)
+            {
+                foreach (TerrainType Type in GameManager.Instance.Terrain.EffetDeTerrain)
+                {
+                    foreach (MYthsAndSteel_Enum.TerrainType T2 in Type._eventType)
+                    {
+                        if (T1 == T2)
+                        {
+                            if (Type.Child != null)
+                            {
+                                Debug.Log(Type._terrainName);
+                                if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
+                                {
+                                    TerrainGestion.Instance.EndTurn(Try, TS.GetComponent<TileScript>());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     /// <summary>
     /// Check si des ressources doivent être distribuées.

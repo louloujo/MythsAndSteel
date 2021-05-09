@@ -149,7 +149,18 @@ public class UnitScript : MonoBehaviour
 
     [Header("------------------- ACTIVATION UNITE -------------------")]
     //A commencer à se déplacer
-    public bool _hasStartMove = false;
+    [SerializeField] private bool hasStartMove = false;
+    public bool _hasStartMove
+    {
+        get
+        {
+            return hasStartMove;
+        }
+        set
+        {
+            hasStartMove = value;
+        }
+    }
 
     //lorsque le joueur a fini d'utiliser tous ses points de déplacement
     [SerializeField] bool _isMoveDone;
@@ -414,6 +425,10 @@ public class UnitScript : MonoBehaviour
     public virtual void Death()
     {
         Debug.Log("Unité Détruite");
+        if(RaycastManager.Instance.ActualUnitSelected == this.gameObject)
+        {
+            Mouvement.Instance.StopMouvement(false);
+        }
         if (UnitSO.IsInRedArmy) PlayerScript.Instance.UnitRef.UnitListRedPlayer.Remove(gameObject);
         else PlayerScript.Instance.UnitRef.UnitListBluePlayer.Remove(gameObject);
         if (!IsDeadByOrgone)
