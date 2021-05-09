@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class RenfortPhase : MonoBehaviour
+public class RenfortPhase : MonoSingleton<RenfortPhase>
 {
     #region AppelDeScript
     Player player;
@@ -518,6 +518,7 @@ public class RenfortPhase : MonoBehaviour
 
             GameManager.Instance.StartEventModeTiles(1, true, tileList, "Création d'unité", "Êtes-vous sur de vouloir créer une unité sur cette case");
             GameManager.Instance._eventCall += CreateNewUnit;
+            GameManager.Instance._eventCall += UIInstance.Instance.ActivateNextPhaseButton;
             RaycastManager.Instance._mouseCommand.QuitRenfortPanel();
         }
         else
@@ -538,7 +539,7 @@ public class RenfortPhase : MonoBehaviour
     /// <summary>
     /// Crée une nouvelle unité sur le terrain au niveau de la tile sélectionnée
     /// </summary>
-    void CreateNewUnit(){
+    public void CreateNewUnit(){
         if(redPlayerCreation)
         {
             GameObject obj = Instantiate(PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[idCreate], GameManager.Instance.TileChooseList[0].transform.position, Quaternion.identity);

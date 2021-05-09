@@ -334,6 +334,7 @@ public class EventCardClass : ScriptableObject{
 
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && 
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn))){
+            GameManager.Instance._eventCall += RenfortPhase.Instance.CreateNewUnit;
             LaunchEventTile(1, player == 1 ? true : false, gamList, "Déploiement accéléré", "Êtes-vous sur de vouloir créer une unité d'infanterie sur cette case?");
             GameManager.Instance._eventCall += DéploiementAccéléré;
         }
