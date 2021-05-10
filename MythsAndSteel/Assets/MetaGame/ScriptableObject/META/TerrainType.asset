@@ -34,7 +34,7 @@ MonoBehaviour:
     _eventType: 1d000000
     render: {fileID: 6222823821224107078, guid: cf0a4f14231f3084dbaa83c3706b5a15, type: 3}
     MustBeInstantiate: 1
-    Child: {fileID: 0}
+    Child: {fileID: 2443697204554867568, guid: b6b10a71a08c6e34da29c196bf62bd8e, type: 3}
   - _terrainName: Cabane Isatabu
     _description: "Si une Jauge d'Orgone explose d\xFBe \xE0 l'action d'un des 2
       joueurs, alors l'ennemi obtient une unit\xE9 Isatabu, qu'il peut faire appara\xEEtre
