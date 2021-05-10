@@ -17,6 +17,7 @@ using UnityEngine.UI;
 public class GameManager : MonoSingleton<GameManager>{
 
     #region Variables
+    [SerializeField] private VictoryScreen victoryScreen;
     [Header("INFO TOUR ACTUEL")]
     //Correspond à la valeur du tour actuel
     [SerializeField] private int _actualTurnNumber = 0;
@@ -217,6 +218,20 @@ public class GameManager : MonoSingleton<GameManager>{
     /// <param name="armeeGagnante"></param>
     public void VictoryForArmy(int armeeGagnante){
         Debug.Log($"Armée {armeeGagnante} a gagné");
+        if (armeeGagnante == 1)
+        {
+            UIInstance.Instance.VictoryScreen.SetActive(true);
+            victoryScreen.IsVictoryScreenActive = true;
+            victoryScreen.RedWin = true;
+            Debug.Log("Red win.");
+        }
+        else if (armeeGagnante == 2)
+        {
+            UIInstance.Instance.VictoryScreen.SetActive(true);
+            victoryScreen.IsVictoryScreenActive = true;
+            victoryScreen.BlueWin = true;
+            Debug.Log("Blue win.");
+        }
     }
 
     /// <summary>
@@ -586,10 +601,8 @@ public class GameManager : MonoSingleton<GameManager>{
             }
         }
         _eventCall();
-        
-        DoingEpxlosionOrgone = false;
-    
 
+        DoingEpxlosionOrgone = false;
     }
 
     /// <summary>
@@ -620,5 +633,6 @@ public class GameManager : MonoSingleton<GameManager>{
     public void UpdateTurn()
     {
         _TurnNumber.text = _actualTurnNumber.ToString();
+        victoryScreen.turnCounter = _actualTurnNumber;
     }
 }

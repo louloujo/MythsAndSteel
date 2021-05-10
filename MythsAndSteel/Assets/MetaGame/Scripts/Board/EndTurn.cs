@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EndTurn : MonoBehaviour
 {
+    VictoryScreen victoryScreen;
     [Header("Nombre d'objectif à capturer pour la victoire par équipe.")]
     [SerializeField] private int RedObjCount;
     [SerializeField] private int BlueObjCount;
@@ -118,15 +119,13 @@ public class EndTurn : MonoBehaviour
     /// </summary>
     protected void CheckVictory()
     {
-        if(PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber == BlueObjCount)
+        if(PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber == BlueObjCount && PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber != RedObjCount)
         {
-            // Blue win. End game.
-            Debug.Log("Blue win.");
+            GameManager.Instance.VictoryForArmy(2);
         }
-        if(PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber == RedObjCount)
+        if(PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber == RedObjCount && PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber != BlueObjCount)
         {
-            // Red win. End game.
-            Debug.Log("Red win.");
+            GameManager.Instance.VictoryForArmy(1);
         }
     }
 }

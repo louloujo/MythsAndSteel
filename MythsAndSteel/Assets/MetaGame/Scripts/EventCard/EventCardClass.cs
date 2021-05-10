@@ -6,6 +6,7 @@ using UnityEngine.UI;
 [CreateAssetMenu(menuName = "META/Event Scriptable")]
 public class EventCardClass : ScriptableObject{
     //Nombre de cartes events
+    [SerializeField] private VictoryScreen victoryScreen;
     [SerializeField] private int _numberOfEventCard = 0;
     public int NumberOfEventCard => _numberOfEventCard;
 
@@ -67,10 +68,12 @@ public class EventCardClass : ScriptableObject{
         if(player == 1){
             PlayerScript.Instance.EventCardList._eventGamRedPlayer.Remove(gam);
             Destroy(gam);
+            victoryScreen.redEventUsed += 1;
         }
         else if(player == 2){
             PlayerScript.Instance.EventCardList._eventGamBluePlayer.Remove(gam);
             Destroy(gam);
+            victoryScreen.blueEventUsed += 1;
         }
         else{
             Debug.LogError("Vous essayez d'enlever une carte event a un joueur qui n'existe pas");
@@ -932,4 +935,5 @@ public class EventCard {
     public bool _isEventInFinalGame = true;
     public Sprite _eventSprite = null;
     public GameObject _effectToSpawn = null;
+    [SerializeField] private VictoryScreen victoryScreen;
 }

@@ -8,6 +8,7 @@ public class RenfortPhase : MonoBehaviour
     #region AppelDeScript
     Player player;
     UnitReference unitReference;
+    [SerializeField] private VictoryScreen victoryScreen;
     #endregion
 
     [SerializeField] private List<GameObject> _createTileJ1;
@@ -548,6 +549,7 @@ public class RenfortPhase : MonoBehaviour
 
             PlayerScript.Instance.RedPlayerInfos.Ressource -= PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[idCreate].GetComponent<UnitScript>().UnitSO.CreationCost;
             UIInstance.Instance.UpdateRessourceLeft();
+            victoryScreen.redRessourcesUsed += PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[idCreate].GetComponent<UnitScript>().UnitSO.CreationCost;
         }
         else
         {
@@ -558,6 +560,7 @@ public class RenfortPhase : MonoBehaviour
 
             PlayerScript.Instance.BluePlayerInfos.Ressource -= PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[idCreate].GetComponent<UnitScript>().UnitSO.CreationCost;
             UIInstance.Instance.UpdateRessourceLeft();
+            victoryScreen.blueResourcesUsed += PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[idCreate].GetComponent<UnitScript>().UnitSO.CreationCost;
         }
 
         GameManager.Instance.TileChooseList.Clear();
