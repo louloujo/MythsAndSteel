@@ -32,29 +32,29 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
 
     private void Start()
     {
-        foreach(GameObject typeTile in TilesManager.Instance.TileList)
+        foreach (GameObject typeTile in TilesManager.Instance.TileList)
         {
-            if(typeTile.GetComponent<TileScript>().TerrainEffectList.Contains((MYthsAndSteel_Enum.TerrainType.UsineRouge)))
+            if (typeTile.GetComponent<TileScript>().TerrainEffectList.Contains((MYthsAndSteel_Enum.TerrainType.UsineRouge)))
             {
                 _usineListRed.Add(typeTile);
             }
-            else if(typeTile.GetComponent<TileScript>().TerrainEffectList.Contains((MYthsAndSteel_Enum.TerrainType.UsineBleu)))
+            else if (typeTile.GetComponent<TileScript>().TerrainEffectList.Contains((MYthsAndSteel_Enum.TerrainType.UsineBleu)))
             {
                 _usineListBlue.Add(typeTile);
             }
         }
 
-        foreach(GameObject unit in PlayerScript.Instance.UnitRef.UnitListRedPlayer)
+        foreach (GameObject unit in PlayerScript.Instance.UnitRef.UnitListRedPlayer)
         {
-            if(unit.GetComponent<UnitScript>().UnitSO.typeUnite == MYthsAndSteel_Enum.TypeUnite.Leader)
+            if (unit.GetComponent<UnitScript>().UnitSO.typeUnite == MYthsAndSteel_Enum.TypeUnite.Leader)
             {
                 _leaderListRed.Add(unit);
             }
         }
 
-        foreach(GameObject unit in PlayerScript.Instance.UnitRef.UnitListBluePlayer)
+        foreach (GameObject unit in PlayerScript.Instance.UnitRef.UnitListBluePlayer)
         {
-            if(unit.GetComponent<UnitScript>().UnitSO.typeUnite == MYthsAndSteel_Enum.TypeUnite.Leader)
+            if (unit.GetComponent<UnitScript>().UnitSO.typeUnite == MYthsAndSteel_Enum.TypeUnite.Leader)
             {
                 _leaderListBlue.Add(unit);
             }
@@ -66,7 +66,7 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
     /// </summary>
     public void CreateRenfort(bool playerRed)
     {
-        if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 ||
+        if (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 ||
             GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
         {
             AroundCreateTileUsine(playerRed);
@@ -83,7 +83,8 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
     /// Active ou désactive les boutons du menu renfort
     /// </summary>
     /// <param name="activate"></param>
-    void ChangeButtonStatut(bool activate, bool playerRed){
+    void ChangeButtonStatut(bool activate, bool playerRed)
+    {
         UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().interactable = activate;
         UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().blocksRaycasts = activate;
 
@@ -102,202 +103,25 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
         UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<CanvasGroup>().interactable = activate;
         UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<CanvasGroup>().blocksRaycasts = activate;
 
-        if(activate){
-            for(int i = 0; i < (playerRed? PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer.Count : PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer.Count); i++){
-                switch(i)
-                {
-                    case 0:
-                        if(playerRed){
-                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource){
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().interactable = true;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().blocksRaycasts = true;
-                            }
-                            else{
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().interactable = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().blocksRaycasts = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<RenfortBtnUI>().HideCanvas();
-                            }
-                        }
-                        else{
-                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.BluePlayerInfos.Ressource){
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().interactable = true;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().blocksRaycasts = true;
-                            }
-                            else{
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().interactable = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().blocksRaycasts = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<RenfortBtnUI>().HideCanvas();
-                            }
-                        }
-                        break;
-
-                    case 1:
-                        if(playerRed)
-                        {
-                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource)
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<CanvasGroup>().interactable = true;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<CanvasGroup>().blocksRaycasts = true;
-                            }
-                            else
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<CanvasGroup>().interactable = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<CanvasGroup>().blocksRaycasts = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<RenfortBtnUI>().HideCanvas();
-                            }
-                        }
-                        else
-                        {
-                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.BluePlayerInfos.Ressource)
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<CanvasGroup>().interactable = true;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<CanvasGroup>().blocksRaycasts = true;
-                            }
-                            else
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<CanvasGroup>().interactable = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<CanvasGroup>().blocksRaycasts = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<RenfortBtnUI>().HideCanvas();
-                            }
-                        }
-                        break;
-
-                    case 2:
-                        if(playerRed)
-                        {
-                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource)
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité3.GetComponent<CanvasGroup>().interactable = true;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité3.GetComponent<CanvasGroup>().blocksRaycasts = true;
-                            }
-                            else
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité3.GetComponent<CanvasGroup>().interactable = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité3.GetComponent<CanvasGroup>().blocksRaycasts = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<RenfortBtnUI>().HideCanvas();
-                            }
-                        }
-                        else
-                        {
-                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.BluePlayerInfos.Ressource)
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité3.GetComponent<CanvasGroup>().interactable = true;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité3.GetComponent<CanvasGroup>().blocksRaycasts = true;
-                            }
-                            else
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité3.GetComponent<CanvasGroup>().interactable = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité3.GetComponent<CanvasGroup>().blocksRaycasts = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<RenfortBtnUI>().HideCanvas();
-                            }
-                        }
-                        break;
-
-                    case 3:
-                        if(playerRed)
-                        {
-                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource)
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité4.GetComponent<CanvasGroup>().interactable = true;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité4.GetComponent<CanvasGroup>().blocksRaycasts = true;
-                            }
-                            else
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité4.GetComponent<CanvasGroup>().interactable = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité4.GetComponent<CanvasGroup>().blocksRaycasts = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<RenfortBtnUI>().HideCanvas();
-                            }
-                        }
-                        else
-                        {
-                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.BluePlayerInfos.Ressource)
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité4.GetComponent<CanvasGroup>().interactable = true;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité4.GetComponent<CanvasGroup>().blocksRaycasts = true;
-                            }
-                            else
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité4.GetComponent<CanvasGroup>().interactable = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité4.GetComponent<CanvasGroup>().blocksRaycasts = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<RenfortBtnUI>().HideCanvas();
-                            }
-                        }
-                        break;
-
-                    case 4:
-                        if(playerRed)
-                        {
-                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource)
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité5.GetComponent<CanvasGroup>().interactable = true;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité5.GetComponent<CanvasGroup>().blocksRaycasts = true;
-                            }
-                            else
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité5.GetComponent<CanvasGroup>().interactable = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité5.GetComponent<CanvasGroup>().blocksRaycasts = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<RenfortBtnUI>().HideCanvas();
-                            }
-                        }
-                        else
-                        {
-                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.BluePlayerInfos.Ressource)
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité5.GetComponent<CanvasGroup>().interactable = true;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité5.GetComponent<CanvasGroup>().blocksRaycasts = true;
-                            }
-                            else
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité5.GetComponent<CanvasGroup>().interactable = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité5.GetComponent<CanvasGroup>().blocksRaycasts = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<RenfortBtnUI>().HideCanvas();
-                            }
-                        }
-                        break;
-
-                    case 5:
-                        if(playerRed)
-                        {
-                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource)
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<CanvasGroup>().interactable = true;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<CanvasGroup>().blocksRaycasts = true;
-                            }
-                            else
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<CanvasGroup>().interactable = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<CanvasGroup>().blocksRaycasts = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<RenfortBtnUI>().HideCanvas();
-                            }
-                        }
-                        else
-                        {
-                            if(PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.BluePlayerInfos.Ressource)
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<CanvasGroup>().interactable = true;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<CanvasGroup>().blocksRaycasts = true;
-                            }
-                            else
-                            {
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<CanvasGroup>().interactable = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<CanvasGroup>().blocksRaycasts = false;
-                                UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<RenfortBtnUI>().HideCanvas();
-                            }
-                        }
-                        break;
-                }
+        if (activate)
+        {
+            Debug.Log("Is ACtive");
+            for (int i = 0; i < (playerRed ? PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer.Count : PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer.Count); i++)
+            {
                 switch (i)
                 {
                     case 0:
-                        if (!playerRed)
+                        if (playerRed)
                         {
-                            if (PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource)
+                            if (PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost <= PlayerScript.Instance.RedPlayerInfos.Ressource)
                             {
+                                Debug.Log("assez de rressource");
                                 UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().interactable = true;
                                 UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().blocksRaycasts = true;
                             }
                             else
                             {
+                                Debug.Log("pas assez de rressource");
                                 UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().interactable = false;
                                 UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().blocksRaycasts = false;
                                 UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<RenfortBtnUI>().HideCanvas();
@@ -305,13 +129,14 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
                         }
                         else
                         {
-                            if (PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.BluePlayerInfos.Ressource)
+                            if (PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost <= PlayerScript.Instance.BluePlayerInfos.Ressource)
                             {
                                 UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().interactable = true;
                                 UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().blocksRaycasts = true;
                             }
                             else
                             {
+                                Debug.Log("Pas assez de eressoruce J2");
                                 UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().interactable = false;
                                 UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().blocksRaycasts = false;
                                 UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<RenfortBtnUI>().HideCanvas();
@@ -320,9 +145,9 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
                         break;
 
                     case 1:
-                        if (!playerRed)
+                        if (playerRed)
                         {
-                            if (PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource)
+                            if (PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost <= PlayerScript.Instance.RedPlayerInfos.Ressource)
                             {
                                 UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<CanvasGroup>().interactable = true;
                                 UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<CanvasGroup>().blocksRaycasts = true;
@@ -336,7 +161,7 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
                         }
                         else
                         {
-                            if (PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.BluePlayerInfos.Ressource)
+                            if (PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost <= PlayerScript.Instance.BluePlayerInfos.Ressource)
                             {
                                 UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<CanvasGroup>().interactable = true;
                                 UIInstance.Instance.ButtonRenfort._clicSurUnité2.GetComponent<CanvasGroup>().blocksRaycasts = true;
@@ -351,7 +176,7 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
                         break;
 
                     case 2:
-                        if (!playerRed)
+                        if (playerRed)
                         {
                             if (PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource)
                             {
@@ -382,7 +207,7 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
                         break;
 
                     case 3:
-                        if (!playerRed)
+                        if (playerRed)
                         {
                             if (PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource)
                             {
@@ -413,7 +238,7 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
                         break;
 
                     case 4:
-                        if (!playerRed)
+                        if (playerRed)
                         {
                             if (PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource)
                             {
@@ -444,7 +269,7 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
                         break;
 
                     case 5:
-                        if (!playerRed)
+                        if (playerRed)
                         {
                             if (PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[i].GetComponent<UnitScript>().UnitSO.CreationCost < PlayerScript.Instance.RedPlayerInfos.Ressource)
                             {
@@ -474,6 +299,7 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
                         }
                         break;
                 }
+                
             }
         }
     }
@@ -486,7 +312,7 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
     void AroundCreateTileUsine(bool usine1)
     {
         //Si l'armée est jouer par l'armée Bleu.
-        if(usine1 == true)
+        if (usine1 == true)
         {
             _createTileJ1 = CreateTileList(_usineListRed);
         }
@@ -505,26 +331,26 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
     {
         List<GameObject> tempList = new List<GameObject>();
 
-        foreach(GameObject typeTile in usineList)
+        foreach (GameObject typeTile in usineList)
         {
             int typeTileID = TilesManager.Instance.TileList.IndexOf(typeTile);
             //Debug.Log(typeTile);
-            foreach(int idtyleIndex in PlayerStatic.GetNeighbourDiag(typeTileID, TilesManager.Instance.TileList[typeTileID].GetComponent<TileScript>().Line, false))
+            foreach (int idtyleIndex in PlayerStatic.GetNeighbourDiag(typeTileID, TilesManager.Instance.TileList[typeTileID].GetComponent<TileScript>().Line, false))
             {
                 //Tu ajoutes la tile correspondant à l'usineJ2
-                if(!tempList.Contains(typeTile))
+                if (!tempList.Contains(typeTile))
                 {
-                    if(typeTile.GetComponent<TileScript>().Unit == null)
+                    if (typeTile.GetComponent<TileScript>().Unit == null)
                     {
                         tempList.Add(typeTile);
                     }
                 }
                 //Si le numéro n'est pas présent dans la liste, tu l'ajoutes.
-                if(!tempList.Contains(TilesManager.Instance.TileList[idtyleIndex]))
+                if (!tempList.Contains(TilesManager.Instance.TileList[idtyleIndex]))
                 {
                     tempList.Add(TilesManager.Instance.TileList[idtyleIndex]);
                     //Si il y un boolean qui est retourné alors tu enlèves les éléments de la liste.
-                    if(CheckConditions(TilesManager.Instance.TileList[idtyleIndex], typeTileID) == true)
+                    if (CheckConditions(TilesManager.Instance.TileList[idtyleIndex], typeTileID) == true)
                     {
                         tempList.Remove(TilesManager.Instance.TileList[idtyleIndex]);
                     }
@@ -533,9 +359,9 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
         }
 
         //Pour chaque élément dans la liste, tu ajoutes l'effet TileCréable
-        foreach(GameObject typeWithoutEffect in tempList)
+        foreach (GameObject typeWithoutEffect in tempList)
         {
-            if(!typeWithoutEffect.GetComponent<TileScript>().EffetProg.Contains(MYthsAndSteel_Enum.EffetProg.Zone_creable))
+            if (!typeWithoutEffect.GetComponent<TileScript>().EffetProg.Contains(MYthsAndSteel_Enum.EffetProg.Zone_creable))
             {
                 typeWithoutEffect.GetComponent<TileScript>().EffetProg.Add(MYthsAndSteel_Enum.EffetProg.Zone_creable);
             }
@@ -551,25 +377,25 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
     void AroundLeader(bool leaderArmy1)
     {
         //Si l'armée est jouer par l'armée Bleu.
-        if(leaderArmy1 == true)
+        if (leaderArmy1 == true)
         {
-            foreach(GameObject unit in _leaderListRed)
+            foreach (GameObject unit in _leaderListRed)
             {
-                if(unit != null)
+                if (unit != null)
                 {
                     int typeTileID = unit.GetComponent<UnitScript>().ActualTiledId;
 
                     //Pour chaque numéro présent dans le PlayerStatic avec la valeur qu'on a convertit précédemment.
-                    foreach(int idtyleIndex in PlayerStatic.GetNeighbourDiag(typeTileID, TilesManager.Instance.TileList[typeTileID].GetComponent<TileScript>().Line, false))
+                    foreach (int idtyleIndex in PlayerStatic.GetNeighbourDiag(typeTileID, TilesManager.Instance.TileList[typeTileID].GetComponent<TileScript>().Line, false))
                     {
                         GameObject tile = TilesManager.Instance.TileList[idtyleIndex];
                         //Si le numéro n'est pas présent dans la liste, tu l'ajoutes.
-                        if(!_createLeader1.Contains(tile))
+                        if (!_createLeader1.Contains(tile))
                         {
                             _createLeader1.Add(tile);
 
                             //Si il y un boolean qui est retourné alors tu enlèves les éléments de la liste.
-                            if(CheckConditions(tile, typeTileID) == true)
+                            if (CheckConditions(tile, typeTileID) == true)
                             {
                                 _createLeader1.Remove(tile);
                             }
@@ -578,9 +404,9 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
                 }
             }
             //Pour chaque élément dans la liste, tu ajoutes l'effet TileCréable
-            foreach(GameObject typeWithoutEffect in _createLeader1)
+            foreach (GameObject typeWithoutEffect in _createLeader1)
             {
-                if(!typeWithoutEffect.GetComponent<TileScript>().EffetProg.Contains(MYthsAndSteel_Enum.EffetProg.Zone_creable))
+                if (!typeWithoutEffect.GetComponent<TileScript>().EffetProg.Contains(MYthsAndSteel_Enum.EffetProg.Zone_creable))
                 {
                     typeWithoutEffect.GetComponent<TileScript>().EffetProg.Add(MYthsAndSteel_Enum.EffetProg.Zone_creable);
                 }
@@ -590,23 +416,23 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
 
         else
         {
-            foreach(GameObject unit in _leaderListBlue)
+            foreach (GameObject unit in _leaderListBlue)
             {
-                if(unit != null)
+                if (unit != null)
                 {
                     int typeTileID = unit.GetComponent<UnitScript>().ActualTiledId;
 
                     //Pour chaque numéro présent dans le PlayerStatic avec la valeur qu'on a convertit précédemment.
-                    foreach(int idtyleIndex in PlayerStatic.GetNeighbourDiag(typeTileID, TilesManager.Instance.TileList[typeTileID].GetComponent<TileScript>().Line, false))
+                    foreach (int idtyleIndex in PlayerStatic.GetNeighbourDiag(typeTileID, TilesManager.Instance.TileList[typeTileID].GetComponent<TileScript>().Line, false))
                     {
                         GameObject tile = TilesManager.Instance.TileList[idtyleIndex];
                         //Si le numéro n'est pas présent dans la liste, tu l'ajoutes.
-                        if(!_createLeader2.Contains(tile))
+                        if (!_createLeader2.Contains(tile))
                         {
                             _createLeader2.Add(tile);
 
                             //Si il y un boolean qui est retourné alors tu enlèves les éléments de la liste.
-                            if(CheckConditions(tile, typeTileID) == true)
+                            if (CheckConditions(tile, typeTileID) == true)
                             {
                                 _createLeader2.Remove(tile);
                             }
@@ -615,9 +441,9 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
                 }
             }
             //Pour chaque élément dans la liste, tu ajoutes l'effet TileCréable
-            foreach(GameObject typeWithoutEffect in _createTileJ2)
+            foreach (GameObject typeWithoutEffect in _createTileJ2)
             {
-                if(!typeWithoutEffect.GetComponent<TileScript>().EffetProg.Contains(MYthsAndSteel_Enum.EffetProg.Zone_creable))
+                if (!typeWithoutEffect.GetComponent<TileScript>().EffetProg.Contains(MYthsAndSteel_Enum.EffetProg.Zone_creable))
                 {
                     typeWithoutEffect.GetComponent<TileScript>().EffetProg.Add(MYthsAndSteel_Enum.EffetProg.Zone_creable);
                 }
@@ -634,50 +460,50 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
     bool CheckConditions(GameObject tileCheck, int origin)
     {
         //Y a une unité?
-        if(tileCheck.GetComponent<TileScript>().Unit != null)
+        if (tileCheck.GetComponent<TileScript>().Unit != null)
         {
             return true;
         }
 
         //Y a de l'eau ou un ravin?
-        if(tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Ravin)
+        if (tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Ravin)
             || tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Eau))
         {
             return true;
         }
 
         //RIVIERE?
-        if(tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Nord)
+        if (tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Nord)
         && PlayerStatic.CheckDirection(origin, tileCheck.GetComponent<TileScript>().TileId) == MYthsAndSteel_Enum.Direction.Sud)
         {
-            if(!tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Pont_Nord))
+            if (!tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Pont_Nord))
             {
                 return true;
             }
         }
 
-        if(tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Sud)
+        if (tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Sud)
         && PlayerStatic.CheckDirection(origin, tileCheck.GetComponent<TileScript>().TileId) == MYthsAndSteel_Enum.Direction.Nord)
         {
-            if(!tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Pont_Sud))
+            if (!tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Pont_Sud))
             {
                 return true;
             }
         }
 
-        if(tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Ouest)
+        if (tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Ouest)
         && PlayerStatic.CheckDirection(origin, tileCheck.GetComponent<TileScript>().TileId) == MYthsAndSteel_Enum.Direction.Est)
         {
-            if(!tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Ouest))
+            if (!tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Ouest))
             {
                 return true;
             }
         }
 
-        if(tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Est)
+        if (tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Est)
         && PlayerStatic.CheckDirection(origin, tileCheck.GetComponent<TileScript>().TileId) == MYthsAndSteel_Enum.Direction.Ouest)
         {
-            if(!tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Est))
+            if (!tileCheck.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Est))
             {
                 return true;
             }
@@ -689,27 +515,36 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
     }
 
     #region CréerUnité
+
+   
+
     /// <summary>
     /// Permet de créer une unité
     /// </summary>
     public void craftUnit(int unitId)
     {
-        if(GameManager.Instance.IsPlayerRedTurn)
+        if (GameManager.Instance.IsPlayerRedTurn)
         {
-            List<GameObject> tileList = new List<GameObject>();
-            tileList.AddRange(GameManager.Instance.RenfortPhase.CreateLeader1);
-            tileList.AddRange(GameManager.Instance.RenfortPhase.CreateTileJ1);
+            if (PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[unitId].GetComponent<UnitScript>().UnitSO.CreationCost <= PlayerScript.Instance.RedPlayerInfos.Ressource)
+            {
+                List<GameObject> tileList = new List<GameObject>();
+                tileList.AddRange(GameManager.Instance.RenfortPhase.CreateLeader1);
+                tileList.AddRange(GameManager.Instance.RenfortPhase.CreateTileJ1);
 
-            idCreate = unitId;
-            redPlayerCreation = true;
+                idCreate = unitId;
+                redPlayerCreation = true;
 
-            GameManager.Instance.StartEventModeTiles(1, true, tileList, "Création d'unité", "Êtes-vous sur de vouloir créer une unité sur cette case");
-            GameManager.Instance._eventCall += CreateNewUnit;
-            GameManager.Instance._eventCall += UIInstance.Instance.ActivateNextPhaseButton;
-            RaycastManager.Instance._mouseCommand.QuitRenfortPanel();
+                GameManager.Instance.StartEventModeTiles(1, true, tileList, "Création d'unité", "Êtes-vous sur de vouloir créer une unité sur cette case");
+                GameManager.Instance._eventCall += CreateNewUnit;
+                GameManager.Instance._eventCall += UIInstance.Instance.ActivateNextPhaseButton;
+                RaycastManager.Instance._mouseCommand.QuitRenfortPanel();
+
+            }
         }
         else
         {
+            if(PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[unitId].GetComponent<UnitScript>().UnitSO.CreationCost <= PlayerScript.Instance.RedPlayerInfos.Ressource)
+            {
             List<GameObject> tileList = new List<GameObject>();
             tileList.AddRange(GameManager.Instance.RenfortPhase.CreateLeader2);
             tileList.AddRange(GameManager.Instance.RenfortPhase.CreateTileJ2);
@@ -720,14 +555,17 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
             GameManager.Instance.StartEventModeTiles(1, false, tileList, "Création d'unité", "Êtes-vous sur de vouloir créer une unité sur cette case");
             GameManager.Instance._eventCall += CreateNewUnit;
             RaycastManager.Instance._mouseCommand.QuitRenfortPanel();
+
+            }
         }
     }
 
     /// <summary>
     /// Crée une nouvelle unité sur le terrain au niveau de la tile sélectionnée
     /// </summary>
-    public void CreateNewUnit(){
-        if(redPlayerCreation)
+    public void CreateNewUnit()
+    {
+        if (redPlayerCreation)
         {
             GameObject obj = Instantiate(PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[idCreate], GameManager.Instance.TileChooseList[0].transform.position, Quaternion.identity);
             GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().AddUnitToTile(obj);
