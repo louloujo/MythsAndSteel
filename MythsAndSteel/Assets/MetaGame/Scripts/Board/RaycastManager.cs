@@ -190,6 +190,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                 {
                     Mouvement.Instance.StopMouvement(true);
                     Attaque.Instance.StopAttack();
+                    UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
                     _actualTileSelected = null;
                     ActualUnitSelected = null;
                 }
@@ -213,10 +214,11 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                         {
                             Mouvement.Instance.AddMouvement(TilesManager.Instance.TileList.IndexOf(_tile));
                         }
+
                         else
                         {
-                            Mouvement.Instance.StopMouvement(true);
                             UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
+                            Mouvement.Instance.StopMouvement(true);
                         }
                     }
                 }
