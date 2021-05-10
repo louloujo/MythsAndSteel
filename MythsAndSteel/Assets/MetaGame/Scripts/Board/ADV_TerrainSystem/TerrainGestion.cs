@@ -32,7 +32,7 @@ public class TerrainGestion : MonoSingleton<TerrainGestion>
             }
             else
             {
-                Debug.Log("Coming from unknown place");
+                Debug.LogError("Coming from unknown place");
             }
         }
         if(ts.LastUnit == ts.Unit)
@@ -58,7 +58,6 @@ public class TerrainGestion : MonoSingleton<TerrainGestion>
             {
                 pt.QuitToDown(us);
             }
-            Debug.Log(ts.LastUnit + " a quitté la case");
         }
     }
     public void EndTurn(TerrainParent pt, TileScript ts)

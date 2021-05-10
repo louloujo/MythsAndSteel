@@ -130,6 +130,47 @@ public class GameManagerSO : ScriptableObject
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2:
+                foreach (GameObject TS in TilesManager.Instance.TileList)
+                {
+                    foreach (MYthsAndSteel_Enum.TerrainType T1 in TS.GetComponent<TileScript>().TerrainEffectList)
+                    {
+                        foreach (TerrainType Type in GameManager.Instance.Terrain.EffetDeTerrain)
+                        {
+                            foreach (MYthsAndSteel_Enum.TerrainType T2 in Type._eventType)
+                            {
+                                if (T1 == T2)
+                                {
+                                    if (Type.Child != null)
+                                    {
+                                        if (Type.MustBeInstantiate)
+                                        {
+                                            foreach (GameObject G in TS.GetComponent<TileScript>()._Child)
+                                            {
+                                                if (G.TryGetComponent<ChildEffect>(out ChildEffect Try2))
+                                                {
+                                                    if (Try2.Type == T1)
+                                                    {
+                                                        if (Try2.TryGetComponent<TerrainParent>(out TerrainParent Try3))
+                                                        {
+                                                            Try3.EndPlayerTurnEffect(GameManager.Instance.IsPlayerRedTurn);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
+                                            {
+                                                Try.EndPlayerTurnEffect(GameManager.Instance.IsPlayerRedTurn);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2);
 
                 GoToOrgoneJ2Phase();
@@ -147,6 +188,29 @@ public class GameManagerSO : ScriptableObject
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.Strategie:
+                Debug.Log("End");
+                foreach (GameObject TS in TilesManager.Instance.TileList)
+                {
+                    foreach (MYthsAndSteel_Enum.TerrainType T1 in TS.GetComponent<TileScript>().TerrainEffectList)
+                    {
+                        foreach (TerrainType Type in GameManager.Instance.Terrain.EffetDeTerrain)
+                        {
+                            foreach (MYthsAndSteel_Enum.TerrainType T2 in Type._eventType)
+                            {
+                                if (T1 == T2)
+                                {
+                                    if (Type.Child != null)
+                                    {
+                                        if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
+                                        {
+                                            Try.EndPlayerTurnEffect(GameManager.Instance.IsPlayerRedTurn);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.Strategie);
 
                 if(GoToStrategyPhase != null) GoToStrategyPhase();

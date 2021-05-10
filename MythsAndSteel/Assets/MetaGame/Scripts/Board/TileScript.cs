@@ -4,6 +4,9 @@ using System.Collections;
 
 public class TileScript : MonoBehaviour
 {
+    private bool _firstunit = true;
+    public bool firstunit => _firstunit;
+
     [SerializeField] private GameObject _unit;
     public GameObject Unit
     {
@@ -15,6 +18,49 @@ public class TileScript : MonoBehaviour
         {
             LastUnit = _unit;
             _unit = value;
+            if(value != null && _firstunit)
+            {
+                _firstunit = false;
+                foreach (MYthsAndSteel_Enum.TerrainType T1 in TerrainEffectList)
+                {
+                    foreach (TerrainType Type in GameManager.Instance.Terrain.EffetDeTerrain)
+                    {
+                        foreach (MYthsAndSteel_Enum.TerrainType T2 in Type._eventType)
+                        {
+                            if (T1 == T2)
+                            {
+                                if (Type.Child != null)
+                                {
+                                    if (Type.MustBeInstantiate)
+                                    {
+                                        foreach (GameObject G in _Child)
+                                        {
+                                            if (G.TryGetComponent<ChildEffect>(out ChildEffect Try2))
+                                            {
+                                                if (Try2.Type == T1)
+                                                {
+                                                    if (Try2.TryGetComponent<TerrainParent>(out TerrainParent Try3))
+                                                    {
+                                                        Try3.FirstUnitOnCase(_unit.GetComponent<UnitScript>());
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    else
+                                    {
+                                        if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
+                                        {
+                                            Try.FirstUnitOnCase(_unit.GetComponent<UnitScript>());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             foreach(MYthsAndSteel_Enum.TerrainType T1 in TerrainEffectList)
             {
                 foreach (TerrainType Type in GameManager.Instance.Terrain.EffetDeTerrain)
@@ -25,9 +71,29 @@ public class TileScript : MonoBehaviour
                         {
                             if (Type.Child != null)
                             {
-                                if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
+                                if (Type.MustBeInstantiate)
                                 {
-                                    TerrainGestion.Instance.UnitModification(Try, this);
+                                    foreach (GameObject G in _Child)
+                                    {
+                                        if (G.TryGetComponent<ChildEffect>(out ChildEffect Try2))
+                                        {
+                                            if (Try2.Type == T1)
+                                            {
+                                                if (Try2.TryGetComponent<TerrainParent>(out TerrainParent Try3))
+                                                {
+                                                    TerrainGestion.Instance.UnitModification(Try3, this);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                else
+                                {
+                                    if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
+                                    {
+                                        TerrainGestion.Instance.UnitModification(Try, this);
+                                    }
                                 }
                             }
                         }
@@ -87,7 +153,11 @@ public class TileScript : MonoBehaviour
     public MYthsAndSteel_Enum.Owner OwnerObjectiv => _ownerObjectiv;
 
     [SerializeField] int _resourcesCounter = 0;
-    public int ResourcesCounter => _resourcesCounter;
+    public int ResourcesCounter
+    {
+        get { return _resourcesCounter; }
+        set { _resourcesCounter = value; }
+    }
 
     private void Start()
     {
@@ -357,7 +427,6 @@ public class TileScript : MonoBehaviour
                     {
                         GameObject G = C;
                         Child.Remove(C);
-                        Debug.Log(G.GetComponentInParent<TileScript>().name);
                         Destroy(G);
                         break;
                     }

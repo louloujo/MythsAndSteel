@@ -905,7 +905,6 @@ public class Mouvement : MonoSingleton<Mouvement>
                         }
                     }
                 }
-                Debug.Log("Contain");
                 if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Ravin, ID) || PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Eau, ID))
                 {
                     i = true;

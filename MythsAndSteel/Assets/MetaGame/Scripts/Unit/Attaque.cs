@@ -471,26 +471,44 @@ public class Attaque : MonoSingleton<Attaque>
             // Lance l'highlight des cases dans la range de l'unitÃ©.
             UpdateJauge(tileId);
             int Range2 = Range;
-                foreach (MYthsAndSteel_Enum.TerrainType T1 in TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().TerrainEffectList)
+            foreach (MYthsAndSteel_Enum.TerrainType T1 in TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().TerrainEffectList)
+            {
+                foreach (TerrainType Type in GameManager.Instance.Terrain.EffetDeTerrain)
                 {
-                    foreach (TerrainType Type in GameManager.Instance.Terrain.EffetDeTerrain)
+                    foreach (MYthsAndSteel_Enum.TerrainType T2 in Type._eventType)
                     {
-                        foreach (MYthsAndSteel_Enum.TerrainType T2 in Type._eventType)
+                        if (T1 == T2)
                         {
-                            if (T1 == T2)
+                            if (Type.Child != null)
                             {
-                                if (Type.Child != null)
+                                if (Type.MustBeInstantiate)
                                 {
-                                    Debug.Log(Type._terrainName);
+                                    foreach (GameObject G in TilesManager.Instance.TileList[tileId].GetComponent<TileScript>()._Child)
+                                    {
+                                        if (G.TryGetComponent<ChildEffect>(out ChildEffect Try2))
+                                        {
+                                            if (Try2.Type == T1)
+                                            {
+                                                if (Try2.TryGetComponent<TerrainParent>(out TerrainParent Try3))
+                                                {
+                                                    Range2 += Try3.AttackRangeValue(0);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
                                     if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
                                     {
-                                    Range2 += Try.AttackRangeValue(0);
+                                        Range2 += Try.AttackRangeValue(0);
                                     }
                                 }
                             }
                         }
                     }
                 }
+            }
             Highlight(tileId, tileId, Range2); 
         }
     }

@@ -49,6 +49,10 @@ public class TerrainParent : MonoBehaviour
     {
 
     }
+    public virtual void FirstUnitOnCase(UnitScript Unit)
+    {
+
+    }
 
     /// <summary>
     /// Effet appliqué à la case à la fin de chaque tour de jeu.
@@ -59,7 +63,10 @@ public class TerrainParent : MonoBehaviour
     {
 
     }
+    public virtual void EndPlayerTurnEffect(bool IsInRedArmy)
+    {
 
+    }
     /// <summary>
     /// Cette fonction sert uniquement à modifier la range d'attaque de l'unité se trouvant sur la case.
     /// </summary>

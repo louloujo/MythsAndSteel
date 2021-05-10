@@ -38,7 +38,6 @@ public class BarbelGestion : MonoBehaviour
             if (D != Direction.Unknown)
             {
                 Delete(tileId, D);
-                Debug.Log("find");
             }
             else
             {

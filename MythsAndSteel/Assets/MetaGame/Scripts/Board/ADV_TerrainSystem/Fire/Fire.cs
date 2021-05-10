@@ -93,8 +93,6 @@ public class Fire : TerrainParent
 
     public override void OnUnityAdd(UnitScript Unit)
     {
-        Debug.Log(TurnLeft);
-
         if (TurnLeft == 2)
         {
             Unit.TakeDamage(2);

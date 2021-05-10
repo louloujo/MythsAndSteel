@@ -38,10 +38,28 @@ public class EndTurn : MonoBehaviour
                         {
                             if (Type.Child != null)
                             {
-                                Debug.Log(Type._terrainName);
-                                if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
+                                if (Type.MustBeInstantiate)
                                 {
-                                    TerrainGestion.Instance.EndTurn(Try, TS.GetComponent<TileScript>());
+                                    foreach (GameObject G in TS.GetComponent<TileScript>()._Child)
+                                    {
+                                        if (G.TryGetComponent<ChildEffect>(out ChildEffect Try2))
+                                        {
+                                            if (Try2.Type == T1)
+                                            {
+                                                if (Try2.TryGetComponent<TerrainParent>(out TerrainParent Try3))
+                                                {
+                                                    TerrainGestion.Instance.EndTurn(Try3, TS.GetComponent<TileScript>());
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
+                                    {
+                                        TerrainGestion.Instance.EndTurn(Try, TS.GetComponent<TileScript>());
+                                    }
                                 }
                             }
                         }

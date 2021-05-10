@@ -28,7 +28,6 @@ public class Flash : MonoBehaviour
     private bool switched = false;
     private void Flashingeffect()
     {
-        Debug.Log("flash");
         if (Activate)
         {
             if (switched)

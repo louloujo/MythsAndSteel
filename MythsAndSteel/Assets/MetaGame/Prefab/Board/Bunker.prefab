@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2443697204554867582}
   - component: {fileID: 2443697204554867569}
   - component: {fileID: 4070945295929355028}
-  - component: {fileID: 5151115517840445919}
+  - component: {fileID: 6737276730437902805}
   m_Layer: 0
-  m_Name: Bosquet
+  m_Name: Bunker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c53440f7cba5245a21d4f23a4bdd96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Type: 2
---- !u!114 &5151115517840445919
+  _Type: 29
+--- !u!114 &6737276730437902805
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,6 +106,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2443697204554867568}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5380d040c7335174ebff6d2bda887aea, type: 3}
+  m_Script: {fileID: 11500000, guid: 73f0e8a50f9e8a741a7cc43e07dd6e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

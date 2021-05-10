@@ -72,7 +72,6 @@ public class Barbel : TerrainParent
     {
         if(Direc == BarbelGestion.Direction.Nord)
         {
-            Debug.Log("Damage");
             Unit.TakeDamage(2);
         }
         base.ComingFromUp(Unit);
@@ -82,7 +81,6 @@ public class Barbel : TerrainParent
     {
         if (Direc == BarbelGestion.Direction.Sud)
         {
-            Debug.Log("Damage");
             Unit.TakeDamage(2);
         }
         base.ComingFromDown(Unit);
@@ -92,7 +90,6 @@ public class Barbel : TerrainParent
     {
         if (Direc == BarbelGestion.Direction.Ouest)
         {
-            Debug.Log("Damage");
             Unit.TakeDamage(2);
         }
         base.ComingFromLeft(Unit);
@@ -102,7 +99,6 @@ public class Barbel : TerrainParent
     {
         if (Direc == BarbelGestion.Direction.Est)
         {
-            Debug.Log("Damage");
             Unit.TakeDamage(2);
         }
         base.ComingFromRight(Unit);
@@ -112,7 +108,6 @@ public class Barbel : TerrainParent
     {
         if (Direc == BarbelGestion.Direction.Sud)
         {
-            Debug.Log("Damage");
             Unit.TakeDamage(2);
         }
         base.QuitToDown(Unit);
@@ -122,7 +117,6 @@ public class Barbel : TerrainParent
     {
         if (Direc == BarbelGestion.Direction.Ouest)
         {
-            Debug.Log("Damage");
             Unit.TakeDamage(2);
         }
         base.ComingFromLeft(Unit);
@@ -133,7 +127,6 @@ public class Barbel : TerrainParent
     {
         if (Direc == BarbelGestion.Direction.Est)
         {
-            Debug.Log("Damage");
             Unit.TakeDamage(2);
         }
         base.ComingFromRight(Unit);
@@ -144,7 +137,6 @@ public class Barbel : TerrainParent
     {
         if (Direc == BarbelGestion.Direction.Nord)
         {
-            Debug.Log("Damage");
             Unit.TakeDamage(2);
         }
         base.ComingFromUp(Unit);
