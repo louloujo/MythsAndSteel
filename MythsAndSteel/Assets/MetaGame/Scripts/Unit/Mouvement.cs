@@ -129,6 +129,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                         {
                             i = true;
                         }
+
                     }
                 }
                 if (!GameManager.Instance.IsPlayerRedTurn)
@@ -143,6 +144,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                         {
                             i = true;
                         }
+
                     }
                 }
                 foreach (MYthsAndSteel_Enum.TerrainType Type in TileSc.TerrainEffectList)
@@ -412,7 +414,7 @@ public class Mouvement : MonoSingleton<Mouvement>
             }
         }
 
-        if (selectedTileId.Count > 1)
+        if (selectedTileId.Count >=1)
         {
             foreach (int NeighbourSelect in selectedTileId) // Si un path de mvmt était séléctionné.
             {

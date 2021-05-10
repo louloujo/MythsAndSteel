@@ -70,13 +70,20 @@ public class InputManager : MonoBehaviour
             }
 
             //Clic sur le plateau ou une unité
-            if (Input.GetMouseButtonDown(0) && !Input.GetKey(MoreInfoUnit))
+            if (Input.GetMouseButtonDown(0) && !Input.GetKey(MoreInfoUnit) )
             {
+
                 if (EventSystem.current.IsPointerOverGameObject() == false)
                 {
                     if (GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation)
                     {
+                        if(Attaque.Instance.SelectedTiles.Count ==0)
+                        {
+      
                         RaycastManager.Instance.Select();
+
+                        }
+
                     }
                 }
             }
@@ -167,6 +174,7 @@ public class InputManager : MonoBehaviour
                         RaycastManager.Instance.SelectTileForAttack();
                     }
                 }
+ 
                 else
                 {
                     RaycastManager.Instance.Deselect();

@@ -145,7 +145,10 @@ public class AttaqueUI1 : MonoBehaviour
         {
             Dice = 12;
         }                        
+        if(Dice -2 >= 0 && Dice -2 < Borne.Count)
+        { 
         Impactor.gameObject.transform.position = new Vector3(Borne[Dice - 2].transform.position.x, Borne[Dice - 2].transform.position.y, I.z);
+        }
         if(Dice == 2)
         {
             Debug.Log("low");

@@ -7,7 +7,10 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoSingleton<PlayerScript>
 {
-
+    [SerializeField ]
+   List<MYthsAndSteel_Enum.EventCard> eventWithCostRessource;
+    [SerializeField]
+    GameObject prefabIconRessource; 
     [SerializeField] bool _ArmyRedWinAtTheEnd;
     public bool ArmyRedWinAtTheEnd => _ArmyRedWinAtTheEnd;
 
@@ -31,7 +34,7 @@ public class PlayerScript : MonoSingleton<PlayerScript>
     [SerializeField] private EventCardList _eventCardList = null;
     public EventCardList EventCardList => _eventCardList;
 
-    List<MYthsAndSteel_Enum.EventCard> _cardObtain = new List<MYthsAndSteel_Enum.EventCard>();
+   public List<MYthsAndSteel_Enum.EventCard> _cardObtain = new List<MYthsAndSteel_Enum.EventCard>();
 
     private void Start(){
         EventCardList._eventSO.UpdateVisualUI(_eventCardList._eventGamBluePlayer, 2);
@@ -125,7 +128,13 @@ public class PlayerScript : MonoSingleton<PlayerScript>
         newCard.GetComponent<EventCardContainer>().AddEvent(newEventCard);
 
         AddEventToButton(card, newCard);
+       if(eventWithCostRessource.Contains(card))
+        {
+            Debug.Log("fdjlmsq");
 
+            Instantiate(prefabIconRessource, new Vector3(newCard.transform.transform.position.x+30, newCard.transform.transform.position.y-33, newCard.transform.transform.position.z),  Quaternion.identity, newCard.transform);
+
+        }
         if(player == 1){
             EventCardList._eventGamRedPlayer.Insert(0, newCard);
             _eventCardList._eventSO.UpdateVisualUI(EventCardList._eventGamRedPlayer, 1);
