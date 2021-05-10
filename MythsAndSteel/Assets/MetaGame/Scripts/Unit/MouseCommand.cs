@@ -1301,9 +1301,26 @@ public class MouseCommand : MonoBehaviour
                                 UIInstance.Instance.RessourceUnit_PasTouche._unité6Ressource[3].SetActive(false);
                             }
                         }
+                        else
+                        {
+                            _elementMenuRenfort[5].SetActive(false);
+                        }
                     }
-                    #endregion Update Image Textuelle et Image de 4 à 6 pour l'équipe Bleu
+                    else
+                    {
+                        _elementMenuRenfort[4].SetActive(false);
+                        _elementMenuRenfort[5].SetActive(false);
+                    }
                 }
+                else
+                {
+                    _elementMenuRenfort[3].SetActive(false);
+                    _elementMenuRenfort[4].SetActive(false);
+                    _elementMenuRenfort[5].SetActive(false);
+                }
+
+                #endregion Update Image Textuelle et Image de 4 à 6 pour l'équipe Bleu
+
             }
 
         }
