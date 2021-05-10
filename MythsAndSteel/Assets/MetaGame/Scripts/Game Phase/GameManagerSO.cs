@@ -125,8 +125,7 @@ public class GameManagerSO : ScriptableObject
                 {
                     unit.GetComponent<UnitScript>().ResetTurn();
                 }
-
-                GoToActionJ1Phase();
+    
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2:

@@ -6,6 +6,7 @@ using TMPro;
 
 public class UIInstance : MonoSingleton<UIInstance>
 {
+    public Animator DownSliderJauge;
     public bool skiPhaseTouche = true;
     #region PhaseDeJeu
     [Header("PHASE DE JEU")]

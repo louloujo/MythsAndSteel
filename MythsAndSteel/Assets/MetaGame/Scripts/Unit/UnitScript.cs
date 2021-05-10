@@ -527,6 +527,7 @@ public class UnitScript : MonoBehaviour
         hasUseActivation = false;
         _moveLeft = _unitSO.MoveSpeed;
         _hasStartMove = false;
+        
     }
 
     /// <summary>
@@ -534,12 +535,12 @@ public class UnitScript : MonoBehaviour
     /// </summary>
     public void checkMovementLeft()
     {
-        if(UnitSO.IsInRedArmy && !hasUseActivation)
+        if(UnitSO.IsInRedArmy && !hasUseActivation && _hasStartMove|| (!_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé) && _hasStartMove)  )
         {
             hasUseActivation = true;
             PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
         }
-        else if(!UnitSO.IsInRedArmy && !hasUseActivation)
+        else if(!UnitSO.IsInRedArmy && !hasUseActivation || (_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé) && _hasStartMove)  )
         {
             hasUseActivation = true;
             PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
@@ -565,15 +566,25 @@ public class UnitScript : MonoBehaviour
             if(_unitSO.IsInRedArmy || (!_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
             {
                 if(!_hasStartMove) PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
+
                 UIInstance.Instance.UpdateActivationLeft();
             }
             else if(!_unitSO.IsInRedArmy || (_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
             {
-                if(!_hasStartMove) PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
+                if (!_hasStartMove) PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
+              
                 UIInstance.Instance.UpdateActivationLeft();
             }
         }
     }
- 
+  public void ResetStatutPossesion()
+    {
+        if(_unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
+        {
+           ResetTurn();
+            _diceBonus += 4;
+            _unitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.Possédé);
+        }
+    }
 
 }

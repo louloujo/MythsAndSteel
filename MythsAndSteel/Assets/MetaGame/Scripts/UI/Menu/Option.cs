@@ -62,7 +62,7 @@ public class Option : MonoBehaviour
     {
         audioMixer.SetFloat("Effect", PlayerPrefs.GetFloat("EffectVolume"));
 
-     
+        Debug.Log(PlayerPrefs.GetInt("Avertissement"));
         audioMixer.SetFloat("Music", PlayerPrefs.GetFloat("MusicVolume"));
         EffectVolumeSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("EffectVolume");
         MusicVolumeSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("MusicVolume");
@@ -71,8 +71,19 @@ public class Option : MonoBehaviour
         if (PlayerPrefs.GetInt("Volume") == 1) Toggle.GetComponent<Toggle>().isOn = true;
         else Toggle.GetComponent<Toggle>().isOn = false;
 
-        if (PlayerPrefs.GetInt("Avertissement") == 1) toggleAvertissement.GetComponent<Toggle>().isOn = true;
-        else toggleAvertissement.GetComponent<Toggle>().isOn = false;
+        if (PlayerPrefs.GetInt("Avertissement") == 1)
+        { toggleAvertissement.GetComponent<Toggle>().isOn = true;
+            Debug.Log(PlayerPrefs.GetInt("Avertissement"));
+        }
+        else if (PlayerPrefs.GetInt("Avertissement") == 0)
+       
+        {
+
+            toggleAvertissement.GetComponent<Toggle>().isOn = false;
+            PlayerPrefs.SetInt("Avertissement", 0);
+        Debug.Log(PlayerPrefs.GetInt("Avertissement"));
+        }
+   
     }
 
     #region Résolution

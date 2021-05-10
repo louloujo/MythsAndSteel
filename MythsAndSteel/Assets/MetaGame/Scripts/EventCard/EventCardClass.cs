@@ -283,7 +283,7 @@ public class EventCardClass : ScriptableObject{
         }
 
         GameManager.Instance.TileChooseList.Clear();
-
+        RemovePlayerRessource(MYthsAndSteel_Enum.EventCard.Déploiement_accéléré);
         RemoveEvents(MYthsAndSteel_Enum.EventCard.Déploiement_accéléré);
     }
 
@@ -298,43 +298,56 @@ public class EventCardClass : ScriptableObject{
             List<int> neighTile = PlayerStatic.GetNeighbourDiag(unit.GetComponent<UnitScript>().ActualTiledId, TilesManager.Instance.TileList[unit.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().Line, false);
 
             //Check les effets de terrain pour voir si il doit ajouter la tile à la liste
-            foreach(int i in neighTile){
+            foreach (int i in neighTile)
+            {
                 //Obtient la direction de la case par rapport à l'unité
                 MYthsAndSteel_Enum.Direction dir = PlayerStatic.CheckDirection(unit.GetComponent<UnitScript>().ActualTiledId, i);
+                if (PlayerScript.Instance.RedPlayerInfos.Ressource >= 1 && player == 1 || PlayerScript.Instance.BluePlayerInfos.Ressource >= 1 && player == 2)
+                {
 
-                if(TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Ravin) || TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Eau)) {
-                    //La tile n'est pas ajoutée
-                }
-                else { 
-                    switch(dir){
-                        case MYthsAndSteel_Enum.Direction.Nord:
-                            if(!TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Sud)){
-                                gamList.Add(TilesManager.Instance.TileList[i]);
-                            }
-                            break;
-                        case MYthsAndSteel_Enum.Direction.Sud:
-                            if(!TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Nord)){
-                                gamList.Add(TilesManager.Instance.TileList[i]);
-                            }
-                            break;
-                        case MYthsAndSteel_Enum.Direction.Est:
-                            if(!TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Ouest)){
-                                gamList.Add(TilesManager.Instance.TileList[i]);
-                            }
-                            break;
-                        case MYthsAndSteel_Enum.Direction.Ouest:
-                            if(!TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Est)){
-                                gamList.Add(TilesManager.Instance.TileList[i]);
-                            }
-                            break;
+
+                    if (TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Ravin) || TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Eau))
+                    {
+                        //La tile n'est pas ajoutée
                     }
+                    else
+                    {
+                        switch (dir)
+                        {
+                            case MYthsAndSteel_Enum.Direction.Nord:
+                                if (!TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Sud))
+                                {
+                                    gamList.Add(TilesManager.Instance.TileList[i]);
+                                }
+                                break;
+                            case MYthsAndSteel_Enum.Direction.Sud:
+                                if (!TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Nord))
+                                {
+                                    gamList.Add(TilesManager.Instance.TileList[i]);
+                                }
+                                break;
+                            case MYthsAndSteel_Enum.Direction.Est:
+                                if (!TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Ouest))
+                                {
+                                    gamList.Add(TilesManager.Instance.TileList[i]);
+                                }
+                                break;
+                            case MYthsAndSteel_Enum.Direction.Ouest:
+                                if (!TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Rivière_Est))
+                                {
+                                    gamList.Add(TilesManager.Instance.TileList[i]);
+                                }
+                                break;
+                        }
+                    }
+                    
                 }
             }
         }
 
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && 
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn))){
-            LaunchEventTile(1, player == 1 ? true : false, gamList, "Déploiement accéléré", "Êtes-vous sur de vouloir créer une unité d'infanterie sur cette case?");
+            LaunchEventTile(1, player == 1 ? true : false, gamList, "Déploiement accéléré", "Êtes-vous sur de vouloir créer une unité d'infanterie sur cette case?", false);
             GameManager.Instance._eventCall += DéploiementAccéléré;
         }
     }
@@ -462,7 +475,7 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEventTile(2, player == 1 ? true : false, tileList, "Pillage d'orgone", "Êtes-vous sur de vouloir voler deux Ressources sur ces cases?");
+            LaunchEventTile(2, player == 1 ? true : false, tileList, "Pillage d'orgone", "Êtes-vous sur de vouloir voler deux Ressources sur ces cases?", true);
             GameManager.Instance._eventCall += PillageOrgone;
         }
 
@@ -705,7 +718,7 @@ public class EventCardClass : ScriptableObject{
             tileList.Add(TilesManager.Instance.TileList[i]);
         }
 
-        LaunchEventTile(1, player == 1 ? true : false, tileList, "Bombardement Aérien", "Êtes-vous sur de vouloir déplacer l'unité attaquée sur cette case?");
+        LaunchEventTile(1, player == 1 ? true : false, tileList, "Bombardement Aérien", "Êtes-vous sur de vouloir déplacer l'unité attaquée sur cette case?", false) ;
         GameManager.Instance._eventCall += MoveUnitBombardement;
 
         tileList.Clear();
@@ -722,7 +735,7 @@ public class EventCardClass : ScriptableObject{
         }
 
         GameManager.Instance.UnitChooseList.Clear();
-
+        RemovePlayerRessource(MYthsAndSteel_Enum.EventCard.Reprogrammation);
         //Remove la carte event chez le bon joueur
         RemoveEvents(MYthsAndSteel_Enum.EventCard.Reprogrammation);
     }
@@ -736,8 +749,12 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
+            if(PlayerScript.Instance.RedPlayerInfos.Ressource >= 1 && player == 1 || PlayerScript.Instance.BluePlayerInfos.Ressource >= 1 && player == 2)
+            {
+
             LaunchEventUnit(1, player == 1? true : false, unitList, "Reproggramation", "Êtes-vous sur de vouloir activer cette unité adverse durant ce tour?");
             GameManager.Instance._eventCall += Reproggramation;
+            }
         }
 
         unitList.Clear();
@@ -757,7 +774,7 @@ public class EventCardClass : ScriptableObject{
         }
 
         GameManager.Instance.UnitChooseList.Clear();
-
+        RemovePlayerRessource(MYthsAndSteel_Enum.EventCard.Cessez_le_feu);
         //Remove la carte event chez le bon joueur
         RemoveEvents(MYthsAndSteel_Enum.EventCard.Cessez_le_feu);
     }
@@ -772,9 +789,14 @@ public class EventCardClass : ScriptableObject{
 
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+
         {
-            LaunchEventUnit(1, player == 1 ? true : false, unitList, "Cessez le feu!", "Êtes-vous sur de vouloir empêcher cette unité de prendre des dégâts, capturer un objectif et d'attaquer durant ce tour?");
+            if (PlayerScript.Instance.RedPlayerInfos.Ressource >= 1 && player == 1 || PlayerScript.Instance.BluePlayerInfos.Ressource >= 1 && player == 2)
+            {
+
+                LaunchEventUnit(1, player == 1 ? true : false, unitList, "Cessez le feu!", "Êtes-vous sur de vouloir empêcher cette unité de prendre des dégâts, capturer un objectif et d'attaquer durant ce tour?");
             GameManager.Instance._eventCall += CessezLeFeu;
+            }
         }
 
         unitList.Clear();
@@ -895,7 +917,7 @@ public class EventCardClass : ScriptableObject{
     /// <param name="redPlayer"></param>
     void LaunchEventUnit(int unitNumber, bool redPlayer, List<GameObject> unitList, string titleValidation, string descriptionValidation)
     {
-        GameManager.Instance.StartEventModeUnit(unitNumber, redPlayer, unitList, titleValidation, descriptionValidation);
+        GameManager.Instance.StartEventModeUnit(unitNumber, redPlayer, unitList, titleValidation, descriptionValidation) ;
     }
 
     /// <summary>
@@ -904,8 +926,8 @@ public class EventCardClass : ScriptableObject{
     /// <param name="numberOfTiles"></param>
     /// <param name="redPlayer"></param>
     /// <param name="gamList"></param>
-    void LaunchEventTile(int numberOfTiles, bool redPlayer, List<GameObject> gamList, string titleValidation, string descriptionValidation){
-        GameManager.Instance.StartEventModeTiles(numberOfTiles, redPlayer, gamList, titleValidation, descriptionValidation);
+    void LaunchEventTile(int numberOfTiles, bool redPlayer, List<GameObject> gamList, string titleValidation, string descriptionValidation, bool multiple){
+        GameManager.Instance.StartEventModeTiles(numberOfTiles, redPlayer, gamList, titleValidation, descriptionValidation, multiple);
     }
 
     /// <summary>
@@ -931,8 +953,19 @@ public class EventCardClass : ScriptableObject{
         return 0;
     }
     #endregion Evenement
-}
+void RemovePlayerRessource(MYthsAndSteel_Enum.EventCard eventCardEnum)
+{
+        if (DeterminArmy(eventCardEnum) == 1)
+        {
 
+            PlayerScript.Instance.RedPlayerInfos.Ressource -= 1;
+        }
+        else
+        {
+            PlayerScript.Instance.BluePlayerInfos.Ressource -= 1;
+        }
+    }
+}
 /// <summary>
 /// Class qui regroupe toutes les variables pour une carte event
 /// </summary>
