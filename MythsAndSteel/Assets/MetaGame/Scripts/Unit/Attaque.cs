@@ -85,7 +85,7 @@ public class Attaque : MonoSingleton<Attaque>
 
     int numberOfTileToSelect = 0;
 
-    [SerializeField] GameObject selectedUnitEnnemy;
+   public GameObject selectedUnitEnnemy;
 
     [Header("SPRITES POUR LES CASES")]
     [SerializeField] private Sprite _normalAttackSprite = null;
@@ -402,7 +402,7 @@ public class Attaque : MonoSingleton<Attaque>
                 }
             }
         }
-        else if ((!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0) || (_selectedUnit.GetComponent<UnitScript>()._hasStartMove && !GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft == 0))
+        else if ((!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.ActivationLeft > 0) || (_selectedUnit.GetComponent<UnitScript>()._hasStartMove && !GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.ActivationLeft == 0))
         {
             if (tileId != -1)
             {
@@ -528,14 +528,14 @@ public class Attaque : MonoSingleton<Attaque>
     public void StopAttack()
      
     {
+        selectedUnitEnnemy = null;
+        _isInAttack = false;
+        _selected = false;
         
         RemoveTileSprite();
 
         // Clear de toutes les listes et stats
         newNeighbourId.Clear();
-
-        _isInAttack = false;
-        _selected = false;
 
         DiceResult = 0;
         firstDiceInt = 0;
@@ -547,7 +547,9 @@ public class Attaque : MonoSingleton<Attaque>
         _numberRangeMin.y = 0;
         _numberRangeMax.x = 0;
         _numberRangeMax.y = 0;
-
+        
+  
+   
         RaycastManager.Instance.ActualTileSelected = null;
     }
 

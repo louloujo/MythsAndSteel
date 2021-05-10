@@ -200,6 +200,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                    UnitScript currentUnitScript = UnitInTile.GetComponent<UnitScript>();
                     if (CanUseUnitWhenClic(currentUnitScript))
                     {
+                        
                         _actualTileSelected = _tile;
                         ActualUnitSelected = _unitInTile;
                         Mouvement.Instance.StartMvmtForSelectedUnit();
