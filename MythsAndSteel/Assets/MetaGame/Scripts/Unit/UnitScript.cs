@@ -160,6 +160,10 @@ public class UnitScript : MonoBehaviour
     [SerializeField] private Animator _Animation;
     public Animator Animation => _Animation;
 
+    //Récupération de stats pour l'écran de victoire
+    [SerializeField] private VictoryScreen victoryScreen;
+
+
     #endregion Variables
 
     private void Start()
@@ -382,6 +386,14 @@ public class UnitScript : MonoBehaviour
         
         if (_life <= 0 && !IsDead)
         {
+            if (UnitSO.IsInRedArmy)
+            {
+                victoryScreen.redDeadUnits += 1;
+            }
+            if (!UnitSO.IsInRedArmy)
+            {
+                victoryScreen.blueDeadUnits += 1;
+            }
             Death();
             IsDead = true;
         }

@@ -41,5 +41,11 @@ public class MenuButton : MonoBehaviour
         _campagneCanvas.SetActive(false);
         _menuCanvas.SetActive(true);
     }
+
+    //reload la scene
+    public void ReloadScene()
+    {
+        Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+    }
 }
     
