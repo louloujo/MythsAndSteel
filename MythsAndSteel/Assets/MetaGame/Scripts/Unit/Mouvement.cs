@@ -110,6 +110,7 @@ public class Mouvement : MonoSingleton<Mouvement>
     /// <param name="Range">Range de l'unité</param>
     public void Highlight(int tileId, int Range, int lasttileId)
     {
+  
         if (Range > 0)
         {
             foreach (int ID in PlayerStatic.GetNeighbourDiag(tileId, TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().Line, false))
@@ -341,6 +342,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                 {
                     _selected = true;
                     MoveLeftBase = mUnit.GetComponent<UnitScript>().MoveLeft;
+                    Debug.Log("un plaisir");
                     StartMouvement(TilesManager.Instance.TileList.IndexOf(tileSelected), mUnit.GetComponent<UnitScript>().MoveSpeed - (mUnit.GetComponent<UnitScript>().MoveSpeed - MoveLeftBase) + mUnit.GetComponent<UnitScript>().MoveSpeedBonus);
                 }
                 else
@@ -350,7 +352,7 @@ public class Mouvement : MonoSingleton<Mouvement>
 
             }
 
-            else if ((!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0) || (mUnit.GetComponent<UnitScript>()._hasStartMove && !GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft == 0))
+            else if ((!GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.ActivationLeft > 0) || (mUnit.GetComponent<UnitScript>()._hasStartMove && !GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.BluePlayerInfos.ActivationLeft == 0))
             {
 
                
@@ -358,6 +360,7 @@ public class Mouvement : MonoSingleton<Mouvement>
                 {
                     _selected = true;
                     MoveLeftBase = mUnit.GetComponent<UnitScript>().MoveLeft;
+                    Debug.Log("un plaisir");
                     StartMouvement(TilesManager.Instance.TileList.IndexOf(tileSelected), mUnit.GetComponent<UnitScript>().MoveSpeed - (mUnit.GetComponent<UnitScript>().MoveSpeed - MoveLeftBase) + mUnit.GetComponent<UnitScript>().MoveSpeedBonus);
                 }
                 else
@@ -386,6 +389,7 @@ public class Mouvement : MonoSingleton<Mouvement>
     {
         if (!_mvmtRunning && !_isInMouvement)
         {
+           
             _isInMouvement = true;
             selectedTileId.Add(tileId);
             List<int> ID = new List<int>();

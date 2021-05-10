@@ -77,7 +77,7 @@ public class InputManager : MonoBehaviour
                 {
                     if (GameManager.Instance.ActualTurnPhase != MYthsAndSteel_Enum.PhaseDeJeu.Activation)
                     {
-                        if(Attaque.Instance.SelectedTiles.Count ==0)
+                        if(Attaque.Instance.selectedUnitEnnemy == null)
                         {
       
                         RaycastManager.Instance.Select();
