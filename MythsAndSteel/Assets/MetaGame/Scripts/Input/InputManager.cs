@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class InputManager : MonoBehaviour
 {
@@ -28,7 +29,17 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-
+        if (GameManager.Instance.IsPlayerRedTurn)
+        {
+            UIInstance.Instance.ButtonRenfort.ButtonRenfortJ2.GetComponent<Button>().interactable = false;
+            UIInstance.Instance.ButtonRenfort.ButtonRenfortJ1.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            UIInstance.Instance.ButtonRenfort.ButtonRenfortJ1.GetComponent<Button>().interactable = false;
+            UIInstance.Instance.ButtonRenfort.ButtonRenfortJ2.GetComponent<Button>().interactable = true;
+        }
+        
         //Pour quitter la phase d'événement qui permet de choisir une case ou une unité
         if (Input.GetKeyDown(escapeEvent) && (GameManager.Instance.ChooseUnitForEvent || GameManager.Instance.ChooseTileForEvent))
         {
