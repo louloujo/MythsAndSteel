@@ -95,11 +95,6 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
         StartCoroutine(UpdateOrgoneUI(Player, LastOrgoneValue, ActualOrgoneValue));
     }
 
-    public void TESTING(int value)
-    {
-        PlayerScript.Instance.BluePlayerInfos.ChangeOrgone(value, 1);
-    }
-
     public IEnumerator UpdateOrgoneUI(int Player, int LastOrgoneValue, int ActualOrgoneValue)
     {
         if (Player == 1)
