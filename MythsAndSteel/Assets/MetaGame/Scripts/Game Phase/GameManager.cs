@@ -18,7 +18,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoSingleton<GameManager>{
 
     #region Variables
-    [SerializeField] private VictoryScreen victoryScreen;
+    public VictoryScreen victoryScreen;
     [Header("INFO TOUR ACTUEL")]
     //Correspond à la valeur du tour actuel
    

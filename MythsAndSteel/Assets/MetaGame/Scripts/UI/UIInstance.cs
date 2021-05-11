@@ -38,7 +38,7 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private MenuActionUnite _activationUnitPanel = null;
     public MenuActionUnite ActivationUnitPanel => _activationUnitPanel;
 
-    VictoryScreen victoryScreen;
+
     [Header("ECRAN DE VICTOIRE")]
     [SerializeField] private GameObject _victoryScreen;
     public GameObject VictoryScreen => _victoryScreen;

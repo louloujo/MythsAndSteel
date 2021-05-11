@@ -35,8 +35,9 @@ public class VictoryScreen : MonoBehaviour
     private float startTime;
     public bool IsVictoryScreenActive = false;
     #endregion
-    void Start()
+    void Awake()
     {
+        Time.timeScale = 1;
         startTime = Time.time;
     }
 
