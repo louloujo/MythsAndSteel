@@ -285,7 +285,6 @@ public class Attaque : MonoSingleton<Attaque>
     void ChooseAttackType(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, int DiceResult)
     {
         Go = false;
-        Debug.Log("Dice: " + (firstDiceInt + secondDiceInt));
         Ui.SynchAttackBorne(RaycastManager.Instance.ActualUnitSelected.GetComponent<UnitScript>());
         Ui.Attack(firstDiceInt + secondDiceInt);
         if (_numberRangeMax.x == 0 && _numberRangeMax.y == 0)
@@ -316,7 +315,6 @@ public class Attaque : MonoSingleton<Attaque>
               if(ID == currentID )
                 {
                     i = true;
-                    Debug.Log("jfdklq");
                 }
 
                 if (!i)
@@ -384,7 +382,6 @@ public class Attaque : MonoSingleton<Attaque>
                 
                     if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
                     {
-                        Debug.Log(_selectedUnit);
                         _selected = true;
                         GetStats();
                    

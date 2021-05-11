@@ -36,11 +36,12 @@ public class PlayerScript : MonoSingleton<PlayerScript>
 
    public List<MYthsAndSteel_Enum.EventCard> _cardObtain = new List<MYthsAndSteel_Enum.EventCard>();
 
-    private void Start(){
+    private void Start(){        
         EventCardList._eventSO.UpdateVisualUI(_eventCardList._eventGamBluePlayer, 2);
         EventCardList._eventSO.UpdateVisualUI(_eventCardList._eventGamRedPlayer, 1);
         RedPlayerInfos.UpdateOrgoneUI(1);
         BluePlayerInfos.UpdateOrgoneUI(2);
+
     }
 
     #region DesactivationUnitType

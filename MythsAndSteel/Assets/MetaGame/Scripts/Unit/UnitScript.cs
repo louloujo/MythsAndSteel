@@ -399,7 +399,7 @@ public class UnitScript : MonoBehaviour
     /// </summary>
     public virtual void Death()
     {
-        Debug.Log("Unité Détruite");
+
         if (UnitSO.IsInRedArmy) PlayerScript.Instance.UnitRef.UnitListRedPlayer.Remove(gameObject);
         else PlayerScript.Instance.UnitRef.UnitListBluePlayer.Remove(gameObject);
         if (!IsDeadByOrgone)
@@ -440,7 +440,6 @@ public class UnitScript : MonoBehaviour
         if(Animation != null)
         {
             Animation.SetBool("Dead", true); 
-            Debug.Log(Animation.runtimeAnimatorController.animationClips[0].length);
             yield return new WaitForSeconds(Animation.runtimeAnimatorController.animationClips[0].length);
         }
         Destroy(gameObject);

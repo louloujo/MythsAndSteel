@@ -196,7 +196,6 @@ public class TileScript : MonoBehaviour
                 if (gam.tag == tag)
                 {
                     child = gam;
-                    Debug.Log("desactive " + child.name);
                     child.GetComponent<SpriteRenderer>().enabled = false;
                     if (destroy)
                     {

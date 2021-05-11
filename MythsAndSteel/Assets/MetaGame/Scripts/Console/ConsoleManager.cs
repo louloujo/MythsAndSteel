@@ -165,11 +165,11 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
                             switch (int.Parse(split[1]))
                             {
                                 case 1:
-                                    PlayerScript.Instance.RedPlayerInfos.OrgoneValue += int.Parse(split[2]);
+                                    PlayerScript.Instance.RedPlayerInfos.ChangeOrgone(int.Parse(split[2]), 1);
 
                                     break;
                                 case 2:
-                                    PlayerScript.Instance.RedPlayerInfos.OrgoneValue += int.Parse(split[2]);
+                                    PlayerScript.Instance.RedPlayerInfos.ChangeOrgone(int.Parse(split[2]), 2);
                                     break;
                             }
                             Log("Le joueur " + split[1].ToString() + " a gagné " + int.Parse(split[2]) + " d'orgone(s))", cmd, true);

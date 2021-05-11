@@ -342,7 +342,6 @@ public class Mouvement : MonoSingleton<Mouvement>
                 {
                     _selected = true;
                     MoveLeftBase = mUnit.GetComponent<UnitScript>().MoveLeft;
-                    Debug.Log("un plaisir");
                     StartMouvement(TilesManager.Instance.TileList.IndexOf(tileSelected), mUnit.GetComponent<UnitScript>().MoveSpeed - (mUnit.GetComponent<UnitScript>().MoveSpeed - MoveLeftBase) + mUnit.GetComponent<UnitScript>().MoveSpeedBonus);
                 }
                 else
