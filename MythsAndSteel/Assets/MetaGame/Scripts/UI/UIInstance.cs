@@ -38,6 +38,17 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private MenuActionUnite _activationUnitPanel = null;
     public MenuActionUnite ActivationUnitPanel => _activationUnitPanel;
 
+    VictoryScreen victoryScreen;
+    [Header("ECRAN DE VICTOIRE")]
+    [SerializeField] private GameObject _victoryScreen;
+    public GameObject VictoryScreen => _victoryScreen;
+
+    [SerializeField] private GameObject _redWin;
+    public GameObject RedWin => _redWin;
+
+    [SerializeField] private GameObject _blueWin;
+    public GameObject BlueWin => _blueWin;
+
     #region CarteEvenement
     [Header("CARTES EVENEMENTS")]
     //L'objet d'event à afficher lorsqu'une nouvelle carte event est piochée pour le joueur rouge
@@ -170,6 +181,7 @@ public class UIInstance : MonoSingleton<UIInstance>
         QuitValidationPanel();
         UpdateRessourceLeft();
         UpdateActivationLeft();
+        VictoryScreen.SetActive(false);
     }
 
     public void DesactivateNextPhaseButton(){
