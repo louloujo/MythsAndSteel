@@ -14,13 +14,17 @@ public class Campagne : MonoBehaviour
     [SerializeField] int Unlocked;//Nombre actuelle de niveau débloqué
 
     [Header("Assignations")]
-    public Slider Unlockslider; // Slider qui lontre la progression de dévérouillage
+    public Slider Unlockslider; // Slider qui montre la progression de dévérouillage
 
     [SerializeField] private GameObject _buttonLeft = null;
     [SerializeField] private GameObject _buttonRight = null;
     [SerializeField] private float _mapSpeed = 0f;
     [SerializeField] private GameObject _mapTransform = null;
 
+    private void Awake()
+    {
+        Unlocked = PlayerPrefs.GetInt("UnlockedCampaign");
+    }
     private void Start()
     {
         //Assigne les valeur de dévérouillage des scénario
@@ -99,5 +103,6 @@ public class Campagne : MonoBehaviour
     [EasyButtons.Button]
     public void UpdateSliderValue(){
         Unlockslider.value = Unlocked;
+
     }
 }
