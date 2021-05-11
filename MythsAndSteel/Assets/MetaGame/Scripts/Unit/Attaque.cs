@@ -272,7 +272,7 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
-    [SerializeField] private AttaqueUI1 Ui;
+    
     public bool Go = false;
     /// <summary>
     /// Choisit le type d'attaque
@@ -286,8 +286,8 @@ public class Attaque : MonoSingleton<Attaque>
     {
         Go = false;
         Debug.Log("Dice: " + (firstDiceInt + secondDiceInt));
-        Ui.SynchAttackBorne(RaycastManager.Instance.ActualUnitSelected.GetComponent<UnitScript>());
-        Ui.Attack(firstDiceInt + secondDiceInt);
+        _JaugeAttack.SynchAttackBorne(RaycastManager.Instance.ActualUnitSelected.GetComponent<UnitScript>());
+        _JaugeAttack.Attack(firstDiceInt + secondDiceInt);
         if (_numberRangeMax.x == 0 && _numberRangeMax.y == 0)
         {
             UnitAttackOneRange(_numberRangeMin, _damageMinimum, DiceResult);
@@ -316,7 +316,7 @@ public class Attaque : MonoSingleton<Attaque>
               if(ID == currentID )
                 {
                     i = true;
-                    Debug.Log("jfdklq");
+
                 }
 
                 if (!i)
@@ -384,7 +384,7 @@ public class Attaque : MonoSingleton<Attaque>
                 
                     if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
                     {
-                        Debug.Log(_selectedUnit);
+
                         _selected = true;
                         GetStats();
                    
@@ -447,7 +447,7 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
     [Header("Jauge d'attaque")]
-    [SerializeField] private AttaqueUI1 JaugeAttack;
+    [SerializeField] public AttaqueUI1 _JaugeAttack;
     public void UpdateJauge(int TileId = -1)
     {
         if (TileId != -1)
@@ -456,11 +456,11 @@ public class Attaque : MonoSingleton<Attaque>
             {
                 if (GameManager.Instance.IsPlayerRedTurn && u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy || (GameManager.Instance.IsPlayerRedTurn && !u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy && u.Unit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
                 {
-                    JaugeAttack.SynchAttackBorne(u.Unit.GetComponent<UnitScript>());
+                    _JaugeAttack.SynchAttackBorne(u.Unit.GetComponent<UnitScript>());
                 }
                 else if (!GameManager.Instance.IsPlayerRedTurn && !u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy || (!GameManager.Instance.IsPlayerRedTurn && !u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy && u.Unit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
                 {
-                    JaugeAttack.SynchAttackBorne(u.Unit.GetComponent<UnitScript>());
+                    _JaugeAttack.SynchAttackBorne(u.Unit.GetComponent<UnitScript>());
                 }
             }
         }
@@ -480,7 +480,47 @@ public class Attaque : MonoSingleton<Attaque>
 
             // Lance l'highlight des cases dans la range de l'unitÃ©.
             UpdateJauge(tileId);
-            Highlight(tileId, tileId, Range); 
+            int Range2 = Range;
+            foreach (MYthsAndSteel_Enum.TerrainType T1 in TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().TerrainEffectList)
+            {
+                foreach (TerrainType Type in GameManager.Instance.Terrain.EffetDeTerrain)
+                {
+                    foreach (MYthsAndSteel_Enum.TerrainType T2 in Type._eventType)
+                    {
+                        if (T1 == T2)
+                        {
+                            if (Type.Child != null)
+                            {
+                                if (Type.MustBeInstantiate)
+                                {
+                                    foreach (GameObject G in TilesManager.Instance.TileList[tileId].GetComponent<TileScript>()._Child)
+                                    {
+                                        if (G.TryGetComponent<ChildEffect>(out ChildEffect Try2))
+                                        {
+                                            if (Try2.Type == T1)
+                                            {
+                                                if (Try2.TryGetComponent<TerrainParent>(out TerrainParent Try3))
+                                                {
+                                                    Range2 += Try3.AttackRangeValue(0);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
+                                    {
+                                        Range2 += Try.AttackRangeValue(0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            Highlight(tileId, tileId, Range2);
+            
         }
     }
 
@@ -498,8 +538,28 @@ public class Attaque : MonoSingleton<Attaque>
                 {
                 if(currentTileScript.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy != GameManager.Instance.IsPlayerRedTurn)
                     {
-
-                _selectedTiles.Add(tileId);
+                        foreach (MYthsAndSteel_Enum.TerrainType T1 in TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().TerrainEffectList)
+                        {
+                            foreach (TerrainType Type in GameManager.Instance.Terrain.EffetDeTerrain)
+                            {
+                                foreach (MYthsAndSteel_Enum.TerrainType T2 in Type._eventType)
+                                {
+                                    if (T1 == T2)
+                                    {
+                                        if (Type.Child != null)
+                                        {
+                                            Debug.Log(Type._terrainName);
+                                            if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
+                                            {
+                                                Debug.Log("Child");
+                                                Try.CibledByAttack(RaycastManager.Instance.ActualUnitSelected.GetComponent<UnitScript>(), TilesManager.Instance.TileList[Mouvement.Instance._selectedTileId[Mouvement.Instance._selectedTileId.Count - 1]].GetComponent<TileScript>());
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        _selectedTiles.Add(tileId);
                 TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect, _selectedSprite, 1);
                     }
 
@@ -508,6 +568,26 @@ public class Attaque : MonoSingleton<Attaque>
         }
         else
         {
+            foreach (MYthsAndSteel_Enum.TerrainType T1 in TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().TerrainEffectList)
+            {
+                foreach (TerrainType Type in GameManager.Instance.Terrain.EffetDeTerrain)
+                {
+                    foreach (MYthsAndSteel_Enum.TerrainType T2 in Type._eventType)
+                    {
+                        if (T1 == T2)
+                        {
+                            if (Type.Child != null)
+                            {
+                                Debug.Log(Type._terrainName);
+                                if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
+                                {
+                                    Try.UnCibledByAttack(RaycastManager.Instance.ActualUnitSelected.GetComponent<UnitScript>());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             RemoveTileFromList(tileId);
         }
 
@@ -670,11 +750,7 @@ public class Attaque : MonoSingleton<Attaque>
             Debug.Log("BosquetEffectApplyed");
         }
 
-        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Colline, _selectedUnit.GetComponent<UnitScript>().ActualTiledId)) // Colline
-        {
-            _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus += 1;
-            Debug.Log("CollineEffectApplyed");
-        }
+
 
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Plage, _selectedUnit.GetComponent<UnitScript>().ActualTiledId) && _selectedUnit.GetComponent<Unit_SO>().typeUnite == MYthsAndSteel_Enum.TypeUnite.Infanterie) // Plage
         {
@@ -684,11 +760,6 @@ public class Attaque : MonoSingleton<Attaque>
             Debug.Log("PlayaEffectApplyed");
         }
 
-        if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, _selectedUnit.GetComponent<UnitScript>().ActualTiledId)) // Haute colline 1
-        {
-            _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus = 1;
-            Debug.Log("Haute collineEffectApplyed");
-        }
 
         if (PlayerStatic.CheckTiles(MYthsAndSteel_Enum.TerrainType.Haute_colline, selectedUnitEnnemy.GetComponent<UnitScript>().ActualTiledId)) // Haute colline 2
         {

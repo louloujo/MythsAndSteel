@@ -85,7 +85,7 @@ public class PhaseActivation : MonoBehaviour
                 {
                     foreach(CarteActivation Carteactivations in RedCartesActivation)
                     {
-                        Debug.Log("Confirm Red Card");
+
                         ConfirmPanelRed.SetActive(false);
                         HasConfirmedPanelRed.SetActive(true);
                     }
@@ -117,7 +117,7 @@ public class PhaseActivation : MonoBehaviour
                             {
                                 J1Choix = true;
                                 J1Verif = false;
-                                Debug.Log("Changed choose card");
+                               
                                 ConfirmPanelRed.SetActive(false);
                             }
                         }
@@ -138,7 +138,7 @@ public class PhaseActivation : MonoBehaviour
                             {
                                 foreach(CarteActivation carteactivations in RedCartesActivation)
                                 {
-                                    Debug.Log("Choose Red Card");
+
                                     ConfirmPanelRed.SetActive(true);
                                     J1CarteVerif = carteactivation;
                                     if(carteactivations == J1CarteVerif) { }
@@ -164,7 +164,7 @@ public class PhaseActivation : MonoBehaviour
                 {
                     foreach(CarteActivation Carteactivations in BlueCartesActivation)
                     {
-                        Debug.Log("Confirm Blue Card");
+
                         ConfirmPanelBlue.SetActive(false);
                         HasConfirmedPanelBlue.SetActive(true);
                     }
@@ -224,7 +224,7 @@ public class PhaseActivation : MonoBehaviour
 
                             J2Verif = true;
                             J2Choix = false;
-                            Debug.Log("Choose Blue Card");
+
                         }
                     }
                 }
@@ -292,7 +292,7 @@ public class PhaseActivation : MonoBehaviour
             GameManager.Instance.SetPlayerStart(true);
             RedPlayerPanel.transform.GetChild(J1CarteVerif.IndexCarteActivation).GetComponent<Image>().color = new Color(rgb, rgb, rgb, 1f);
             BluePlayerPanel.transform.GetChild(J2CarteVerif.IndexCarteActivation).GetComponent<Image>().color = new Color(rgb, rgb, rgb, 1f);
-            Debug.Log("6");
+        
             _result.SetActive(true);
         }
         else

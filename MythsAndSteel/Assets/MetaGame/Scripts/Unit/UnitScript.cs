@@ -18,11 +18,21 @@ public class UnitScript : MonoBehaviour
     [Header("------------------- STAT EN JEU -------------------")]
     //Vie actuelle
     [SerializeField] int _life;
-    public int Life => _life;
+    public int Life
+    {
+        get
+        {
+            return _life;
+        }
+        set
+        {
+            _life = value;
+        }
+    }
 
     bool IsDead = false;
     bool IsDeadByOrgone = false;
-    
+
     // Bouclier actuelle
     [SerializeField] int _shield;
     public int Shield => _shield;
@@ -58,13 +68,13 @@ public class UnitScript : MonoBehaviour
     [SerializeField] public int _diceBonus = 0;
     public int DiceBonus => _diceBonus;
 
-    
+
     [Header("------------------- MOUVEMENT -------------------")]
     //Vitesse de déplacement
     [SerializeField] int _moveSpeed;
     public int MoveSpeed => _moveSpeed;
     public int MoveSpeedBonus = 0;
-
+    public bool BonusUsed = false;
     // Déplacement réstant de l'unité durant cette activation
     [SerializeField] int _moveLeft;
     public int MoveLeft
@@ -79,13 +89,13 @@ public class UnitScript : MonoBehaviour
         }
     }
 
-    [Header("------------------- COUT DE CREATION -------------------" )]
+    [Header("------------------- COUT DE CREATION -------------------")]
     // Coût de création
     [SerializeField] int _creationCost;
     public int CreationCost => _creationCost;
 
     [Header("----------------------- SOUND -----------------------------")]
-    
+
     [SerializeField] AudioClip _SonAttaque;
     public AudioClip SonAttaque => _SonAttaque;
 
@@ -109,15 +119,21 @@ public class UnitScript : MonoBehaviour
         }
         set
         {
-            _actualTileld = value;
+            if (_actualTileld != value)
+            {
+                LastTileId = _actualTileld;
+                _actualTileld = value;
+            }
         }
     }
+    public int LastTileId;
 
     [HideInInspector] int lastTileId = 0;
 
 #if UNITY_EDITOR
-    public void AddTileUnderUnit(){
-        if(lastTileId != ActualTiledId)
+    public void AddTileUnderUnit()
+    {
+        if (lastTileId != ActualTiledId)
         {
             FindObjectOfType<TilesManager>().TileList[lastTileId].GetComponent<TileScript>().RemoveUnitFromTile();
             lastTileId = ActualTiledId;
@@ -134,7 +150,18 @@ public class UnitScript : MonoBehaviour
 
     [Header("------------------- ACTIVATION UNITE -------------------")]
     //A commencer à se déplacer
-    public bool _hasStartMove = false;
+    [SerializeField] private bool hasStartMove = false;
+    public bool _hasStartMove
+    {
+        get
+        {
+            return hasStartMove;
+        }
+        set
+        {
+            hasStartMove = value;
+        }
+    }
 
     //lorsque le joueur a fini d'utiliser tous ses points de déplacement
     [SerializeField] bool _isMoveDone;
@@ -156,7 +183,7 @@ public class UnitScript : MonoBehaviour
     [SerializeField] private List<MYthsAndSteel_Enum.UnitStatut> _unitStatus = new List<MYthsAndSteel_Enum.UnitStatut>();
     public List<MYthsAndSteel_Enum.UnitStatut> UnitStatus => _unitStatus;
 
-   public bool hasUseActivation = false;
+    public bool hasUseActivation = false;
     [SerializeField] private Animator _Animation;
     public Animator Animation => _Animation;
 
@@ -164,7 +191,7 @@ public class UnitScript : MonoBehaviour
 
     private void Start()
     {
-        gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_HitTime", Time.time);
+        LastTileId = ActualTiledId;
         UpdateUnitStat();
 
         // On instancie l'object qui possède le sprite correspondant à l'UI au point de vie et de bouclier de l'unité.
@@ -172,9 +199,9 @@ public class UnitScript : MonoBehaviour
 
 
         CurrentSpriteLifeHeartUI = LifeHeartUI.GetComponent<SpriteRenderer>();
-        if(_shield > 0)
+        if (_shield > 0)
         {
-            if(UnitSO.IsInRedArmy)
+            if (UnitSO.IsInRedArmy)
             {
                 UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield);
             }
@@ -186,7 +213,7 @@ public class UnitScript : MonoBehaviour
         }
         else
         {
-            if(UnitSO.IsInRedArmy)
+            if (UnitSO.IsInRedArmy)
             {
                 UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartSprite, _life);
             }
@@ -205,9 +232,9 @@ public class UnitScript : MonoBehaviour
     public virtual void GiveLife(int Lifeadd)
     {
         _life += Lifeadd;
-        if(_shield > 0)
+        if (_shield > 0)
         {
-            if(UnitSO.IsInRedArmy)
+            if (UnitSO.IsInRedArmy)
             {
                 UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield);
             }
@@ -218,7 +245,7 @@ public class UnitScript : MonoBehaviour
         }
         else
         {
-            if(UnitSO.IsInRedArmy)
+            if (UnitSO.IsInRedArmy)
             {
                 UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartSprite, _life);
             }
@@ -228,13 +255,14 @@ public class UnitScript : MonoBehaviour
             }
         }
 
-        if (_life > UnitSO.LifeMax){
+        if (_life > UnitSO.LifeMax)
+        {
             int shieldPlus = _life - UnitSO.LifeMax;
             _life = UnitSO.LifeMax;
             _shield += shieldPlus;
-            if(_shield > 0)
+            if (_shield > 0)
             {
-                if(UnitSO.IsInRedArmy)
+                if (UnitSO.IsInRedArmy)
                 {
                     UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield);
                 }
@@ -245,7 +273,7 @@ public class UnitScript : MonoBehaviour
             }
             else
             {
-                if(UnitSO.IsInRedArmy)
+                if (UnitSO.IsInRedArmy)
                 {
                     UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartSprite, _life);
                 }
@@ -263,15 +291,18 @@ public class UnitScript : MonoBehaviour
     /// <param name="Damage"></param>
     public virtual void TakeDamage(int Damage, bool IsOrgoneDamage = false)
     {
-        if(_shield > 0){
+        if (_shield > 0)
+        {
             _shield -= Damage;
-            
-            if(_shield < 0){
+
+            if (_shield < 0)
+            {
                 _life += _shield;
             }
 
-            if(_shield > 0){
-                if(UnitSO.IsInRedArmy)
+            if (_shield > 0)
+            {
+                if (UnitSO.IsInRedArmy)
                 {
                     UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield);
                 }
@@ -280,8 +311,9 @@ public class UnitScript : MonoBehaviour
                     UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartShieldSprite, _life + _shield);
                 }
             }
-            else{
-                if(UnitSO.IsInRedArmy)
+            else
+            {
+                if (UnitSO.IsInRedArmy)
                 {
                     UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartSprite, _life);
                 }
@@ -294,9 +326,9 @@ public class UnitScript : MonoBehaviour
         else
         {
             _life -= Damage;
-            if(_shield > 0)
+            if (_shield > 0)
             {
-                if(UnitSO.IsInRedArmy)
+                if (UnitSO.IsInRedArmy)
                 {
                     UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield);
                 }
@@ -307,9 +339,9 @@ public class UnitScript : MonoBehaviour
             }
             else
             {
-                if(_life > 0)
+                if (_life > 0)
                 {
-                    if(UnitSO.IsInRedArmy)
+                    if (UnitSO.IsInRedArmy)
                     {
                         UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartSprite, _life);
                     }
@@ -321,15 +353,14 @@ public class UnitScript : MonoBehaviour
             }
         }
 
-      gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_HitTime", Time.time);
         CheckLife();
 
         //Ajout de l'orgone
-        if(Damage > 0)
+        if (Damage > 0)
         {
-            if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneRed))
+            if (TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneRed))
             {
-                if(!GameManager.Instance.IsCheckingOrgone)
+                if (!GameManager.Instance.IsCheckingOrgone)
                 {
 
                     PlayerScript.Instance.AddOrgone(1, 1);
@@ -342,13 +373,13 @@ public class UnitScript : MonoBehaviour
                         PlayerScript.Instance.AddOrgone(1, 1);
                         Debug.Log("Ca buuuuuug");
                     }
-                    if(GameManager.Instance._waitToCheckOrgone != null) GameManager.Instance._waitToCheckOrgone += AddOrgoneToPlayer;
+                    if (GameManager.Instance._waitToCheckOrgone != null) GameManager.Instance._waitToCheckOrgone += AddOrgoneToPlayer;
                 }
             }
 
-            if(TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneBlue))
+            if (TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneBlue))
             {
-                if(!GameManager.Instance.IsCheckingOrgone)
+                if (!GameManager.Instance.IsCheckingOrgone)
                 {
                     PlayerScript.Instance.AddOrgone(1, 2);
                     PlayerScript.Instance.BluePlayerInfos.CheckOrgone(2);
@@ -369,7 +400,8 @@ public class UnitScript : MonoBehaviour
     /// <summary>
     /// Check si l'orgone a redépassé le joueur
     /// </summary>
-    void AddOrgoneToPlayer(){
+    void AddOrgoneToPlayer()
+    {
         PlayerScript.Instance.RedPlayerInfos.CheckOrgone(1);
         PlayerScript.Instance.BluePlayerInfos.CheckOrgone(2);
 
@@ -381,7 +413,7 @@ public class UnitScript : MonoBehaviour
     /// </summary>
     void CheckLife()
     {
-        
+
         if (_life <= 0 && !IsDead)
         {
             Death();
@@ -400,6 +432,10 @@ public class UnitScript : MonoBehaviour
     public virtual void Death()
     {
         Debug.Log("Unité Détruite");
+        if (RaycastManager.Instance.ActualUnitSelected == this.gameObject)
+        {
+            Mouvement.Instance.StopMouvement(false);
+        }
         if (UnitSO.IsInRedArmy) PlayerScript.Instance.UnitRef.UnitListRedPlayer.Remove(gameObject);
         else PlayerScript.Instance.UnitRef.UnitListBluePlayer.Remove(gameObject);
         if (!IsDeadByOrgone)
@@ -421,9 +457,9 @@ public class UnitScript : MonoBehaviour
         {
             GameManager.Instance.DeathByOrgone--;
         }
-        
 
-        
+
+
 
         PlayerScript.Instance.GiveEventCard(UnitSO.IsInRedArmy ? 1 : 2);
         IsDead = false;
@@ -437,9 +473,9 @@ public class UnitScript : MonoBehaviour
     /// <returns></returns>
     IEnumerator DeathAnimation()
     {
-        if(Animation != null)
+        if (Animation != null)
         {
-            Animation.SetBool("Dead", true); 
+            Animation.SetBool("Dead", true);
             Debug.Log(Animation.runtimeAnimatorController.animationClips[0].length);
             yield return new WaitForSeconds(Animation.runtimeAnimatorController.animationClips[0].length);
         }
@@ -457,7 +493,8 @@ public class UnitScript : MonoBehaviour
     #endregion LifeMethods
 
     #region Statut
-    public void AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut stat){
+    public void AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut stat)
+    {
         _unitStatus.Add(stat);
     }
 
@@ -468,7 +505,8 @@ public class UnitScript : MonoBehaviour
     /// Ajoute des dégâts supplémentaires aux unités
     /// </summary>
     /// <param name="value"></param>
-    public void AddDamageToUnit(int value){
+    public void AddDamageToUnit(int value)
+    {
         _damageBonus += value;
     }
 
@@ -476,7 +514,8 @@ public class UnitScript : MonoBehaviour
     /// Ajout une valeur aux lancés de dés de l'unité
     /// </summary>
     /// <param name="value"></param>
-    public void AddDiceToUnit(int value){
+    public void AddDiceToUnit(int value)
+    {
         _diceBonus += value;
     }
     #endregion ChangementStat
@@ -516,7 +555,8 @@ public class UnitScript : MonoBehaviour
     /// <summary>
     /// Reset les valeurs nécéssaires pour un nouveau tour
     /// </summary>
-    public virtual void ResetTurn(){
+    public virtual void ResetTurn()
+    {
         _isActivationDone = false;
         _isMoveDone = false;
         _isActionDone = false;
@@ -527,7 +567,6 @@ public class UnitScript : MonoBehaviour
         hasUseActivation = false;
         _moveLeft = _unitSO.MoveSpeed;
         _hasStartMove = false;
-        
     }
 
     /// <summary>
@@ -535,17 +574,17 @@ public class UnitScript : MonoBehaviour
     /// </summary>
     public void checkMovementLeft()
     {
-        if(UnitSO.IsInRedArmy && !hasUseActivation && _hasStartMove|| (!_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé) && _hasStartMove)  )
+        if (UnitSO.IsInRedArmy && !hasUseActivation)
         {
             hasUseActivation = true;
             PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
         }
-        else if(!UnitSO.IsInRedArmy && !hasUseActivation || (_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé) && _hasStartMove)  )
+        else if (!UnitSO.IsInRedArmy && !hasUseActivation)
         {
             hasUseActivation = true;
             PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
         }
-         
+
         UIInstance.Instance.UpdateActivationLeft();
 
         if (_moveLeft == 0)
@@ -559,32 +598,30 @@ public class UnitScript : MonoBehaviour
     /// </summary>
     public void checkActivation()
     {
-        if (_isActionDone){
+        if (_isActionDone)
+        {
             _isActivationDone = true;
 
             //Réduit le nombre d'activation restante
-            if(_unitSO.IsInRedArmy || (!_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
+            if (_unitSO.IsInRedArmy || (!_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
             {
-                if(!_hasStartMove) PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
-
+                if (!_hasStartMove) PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
                 UIInstance.Instance.UpdateActivationLeft();
             }
-            else if(!_unitSO.IsInRedArmy || (_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
+            else if (!_unitSO.IsInRedArmy || (_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
             {
                 if (!_hasStartMove) PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
-              
                 UIInstance.Instance.UpdateActivationLeft();
             }
         }
     }
-  public void ResetStatutPossesion()
+    public void ResetStatutPossesion()
     {
-        if(_unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
+        if (_unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
         {
-           ResetTurn();
+            ResetTurn();
             _diceBonus += 4;
             _unitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.Possédé);
         }
     }
-
 }

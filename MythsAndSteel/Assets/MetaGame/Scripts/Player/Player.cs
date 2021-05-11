@@ -221,7 +221,7 @@ public class Player
                 }
             }
         }
-        Debug.Log("Update UI Orgone : " + OrgoneValue);
+
     }
 
     //AV
