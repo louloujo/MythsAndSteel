@@ -404,9 +404,9 @@ public class TileScript : MonoBehaviour
                     else
                     {
 
+                    Child.transform.parent = this.transform;
                         Child.transform.localScale = new Vector3(.5f, .5f, .5f);
                     }
-                    Child.transform.parent = this.transform;
                   
                     _Child.Add(Child);
                 }
