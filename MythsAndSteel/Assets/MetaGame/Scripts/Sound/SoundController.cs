@@ -13,7 +13,7 @@ public class SoundController : MonoSingleton<SoundController>
     {
         AudioClip tolpay = SoundPlay;
         _Source.clip = tolpay;
-        Debug.Log("Play");
+
         _Source.Play();
     }
 }

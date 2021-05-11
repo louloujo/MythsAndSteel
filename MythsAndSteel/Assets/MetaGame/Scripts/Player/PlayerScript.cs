@@ -130,7 +130,7 @@ public class PlayerScript : MonoSingleton<PlayerScript>
         AddEventToButton(card, newCard);
        if(eventWithCostRessource.Contains(card))
         {
-            Debug.Log("fdjlmsq");
+            
 
             Instantiate(prefabIconRessource, new Vector3(newCard.transform.transform.position.x+30, newCard.transform.transform.position.y-33, newCard.transform.transform.position.z),  Quaternion.identity, newCard.transform);
 

@@ -26,7 +26,7 @@ public class GameManagerSO : ScriptableObject
         int phaseSuivante = ((int)GameManager.Instance.ActualTurnPhase) + 1;
         MYthsAndSteel_Enum.PhaseDeJeu nextPhase = MYthsAndSteel_Enum.PhaseDeJeu.Debut;
 
-        if(randomPhase)
+        if (randomPhase)
         {
             nextPhase = phase;
         }
@@ -34,9 +34,9 @@ public class GameManagerSO : ScriptableObject
         {
             phaseSuivante = ((int)GameManager.Instance.ActualTurnPhase) + 1;
 
-            if(phaseSuivante > 6)
+            if (phaseSuivante > 6)
             {
-                if(GameManager.Instance.ActualTurnNumber > 11)
+                if (GameManager.Instance.ActualTurnNumber > 11)
                 {
                     GameManager.Instance.VictoryForArmy(1);
                     return;
@@ -65,9 +65,9 @@ public class GameManagerSO : ScriptableObject
         int phaseSuivante = ((int)GameManager.Instance.ActualTurnPhase) + 1;
 
 
-        if(phaseSuivante > 6)
+        if (phaseSuivante > 6)
         {
-            if(GameManager.Instance.ActualTurnNumber > 11)
+            if (GameManager.Instance.ActualTurnNumber > 11)
             {
                 GameManager.Instance.VictoryForArmy(1);
                 return;
@@ -92,10 +92,10 @@ public class GameManagerSO : ScriptableObject
     void gophase(MYthsAndSteel_Enum.PhaseDeJeu nextPhase)
     {
         //Selon la phase effectue certaines actions
-        switch(nextPhase)
+        switch (nextPhase)
         {
             case MYthsAndSteel_Enum.PhaseDeJeu.Debut:
-                if(GoToDebutPhase != null)
+                if (GoToDebutPhase != null)
                 {
                     GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.Debut);
                     GoToDebutPhase();
@@ -121,16 +121,58 @@ public class GameManagerSO : ScriptableObject
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1:
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1);
 
-                foreach(GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer)
+                foreach (GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer)
                 {
                     unit.GetComponent<UnitScript>().ResetTurn();
                 }
 
                 GoToActionJ1Phase();
-
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2:
+                foreach (GameObject TS in TilesManager.Instance.TileList)
+                {
+                    foreach (MYthsAndSteel_Enum.TerrainType T1 in TS.GetComponent<TileScript>().TerrainEffectList)
+                    {
+                        foreach (TerrainType Type in GameManager.Instance.Terrain.EffetDeTerrain)
+                        {
+                            foreach (MYthsAndSteel_Enum.TerrainType T2 in Type._eventType)
+                            {
+                                if (T1 == T2)
+                                {
+                                    if (Type.Child != null)
+                                    {
+                                        if (Type.MustBeInstantiate)
+                                        {
+                                            foreach (GameObject G in TS.GetComponent<TileScript>()._Child)
+                                            {
+                                                if (G.TryGetComponent<ChildEffect>(out ChildEffect Try2))
+                                                {
+                                                    if (Try2.Type == T1)
+                                                    {
+                                                        if (Try2.TryGetComponent<TerrainParent>(out TerrainParent Try3))
+                                                        {
+                                                            Debug.Log("bon");
+                                                            Try3.EndPlayerTurnEffect(GameManager.Instance.IsPlayerRedTurn);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
+                                            {
+                                                Debug.Log("bon1");
+                                                Try.EndPlayerTurnEffect(GameManager.Instance.IsPlayerRedTurn);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2);
 
                 GoToOrgoneJ2Phase();
@@ -139,7 +181,7 @@ public class GameManagerSO : ScriptableObject
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2:
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2);
 
-                foreach(GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer)
+                foreach (GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer)
                 {
                     unit.GetComponent<UnitScript>().ResetTurn();
                 }
@@ -148,9 +190,53 @@ public class GameManagerSO : ScriptableObject
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.Strategie:
+                Debug.Log("End");
+                foreach (GameObject TS in TilesManager.Instance.TileList)
+                {
+                    foreach (MYthsAndSteel_Enum.TerrainType T1 in TS.GetComponent<TileScript>().TerrainEffectList)
+                    {
+                        foreach (TerrainType Type in GameManager.Instance.Terrain.EffetDeTerrain)
+                        {
+                            foreach (MYthsAndSteel_Enum.TerrainType T2 in Type._eventType)
+                            {
+                                if (T1 == T2)
+                                {
+                                    if (Type.Child != null)
+                                    {
+                                        if (Type.MustBeInstantiate)
+                                        {
+                                            foreach (GameObject G in TS.GetComponent<TileScript>()._Child)
+                                            {
+                                                if (G.TryGetComponent<ChildEffect>(out ChildEffect Try2))
+                                                {
+                                                    if (Try2.Type == T1)
+                                                    {
+                                                        if (Try2.TryGetComponent<TerrainParent>(out TerrainParent Try3))
+                                                        {
+                                                            Debug.Log("bon");
+                                                            Try3.EndPlayerTurnEffect(GameManager.Instance.IsPlayerRedTurn);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
+                                            {
+                                                Debug.Log("bon1");
+                                                Try.EndPlayerTurnEffect(GameManager.Instance.IsPlayerRedTurn);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.Strategie);
 
-                if(GoToStrategyPhase != null) GoToStrategyPhase();
+                if (GoToStrategyPhase != null) GoToStrategyPhase();
                 break;
         }
     }
@@ -161,7 +247,7 @@ public class GameManagerSO : ScriptableObject
     /// <returns></returns>
     public bool GetDebutFunction()
     {
-        if(GoToDebutPhase != null) return true;
+        if (GoToDebutPhase != null) return true;
         else return false;
     }
 }
