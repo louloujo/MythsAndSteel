@@ -125,11 +125,11 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
         Debug.Log(Player);
         if(Player == 1)
         {
-            Explodeblue.SetTrigger("explode");
+            Explodered.SetTrigger("explode");
         }
         else
         {
-            Explodered.SetTrigger("explode");
+            Explodeblue.SetTrigger("explode");
         }
         StartCoroutine(UpdateOrgoneUI(Player, 4, 0));
     }
@@ -156,13 +156,13 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
                     }
                     for (int u = 0; u <= i; u++)
                     {
-                        if (!OrgoneManager.Instance.BluePlayerCharge[u].GetBool("Increase"))
+                        if (!OrgoneManager.Instance.RedPlayerCharge[u].GetBool("Increase"))
                         {
-                            OrgoneManager.Instance.BluePlayerCharge[u].SetBool("Increase", true);
+                            OrgoneManager.Instance.RedPlayerCharge[u].SetBool("Increase", true);
                             yield return new WaitForSeconds(.75f);
                         }
                     }
-                    OrgoneManager.Instance.BluePlayerCharge[i].SetBool("Increase", true);
+                    OrgoneManager.Instance.RedPlayerCharge[i].SetBool("Increase", true);
                     yield return new WaitForSeconds(.75f);
                 }
             }
@@ -174,20 +174,16 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
                     {
                         if (i < 0 || i > 4)
                         {
-                            if (i > 4)
-                            {
-                                ExplosionOrgone(1);
-                            }
                             OrgoneRunning1 = false;
                             break;
                         }
-                        if (OrgoneManager.Instance.BluePlayerCharge[u].GetBool("Increase"))
+                        if (OrgoneManager.Instance.RedPlayerCharge[u].GetBool("Increase"))
                         {
-                            OrgoneManager.Instance.BluePlayerCharge[u].SetBool("Increase", false);
+                            OrgoneManager.Instance.RedPlayerCharge[u].SetBool("Increase", false);
                             yield return new WaitForSeconds(.75f);
                         }
                     }
-                    OrgoneManager.Instance.BluePlayerCharge[i - 1].SetBool("Increase", false);
+                    OrgoneManager.Instance.RedPlayerCharge[i - 1].SetBool("Increase", false);
                     yield return new WaitForSeconds(.5f);
                 }
             }
@@ -217,13 +213,13 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
                     }
                     for (int u = 0; u <= i; u++)
                     {
-                        if (!OrgoneManager.Instance.RedPlayerCharge[u].GetBool("Increase"))
+                        if (!OrgoneManager.Instance.BluePlayerCharge[u].GetBool("Increase"))
                         {
-                            OrgoneManager.Instance.RedPlayerCharge[u].SetBool("Increase", true);
+                            OrgoneManager.Instance.BluePlayerCharge[u].SetBool("Increase", true);
                             yield return new WaitForSeconds(.75f);
                         }
                     }
-                    OrgoneManager.Instance.RedPlayerCharge[i].SetBool("Increase", true); 
+                    OrgoneManager.Instance.BluePlayerCharge[i].SetBool("Increase", true); 
                     yield return new WaitForSeconds(.75f);
                 }
             }
@@ -233,22 +229,18 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
                 {
                     if(i < 0 || i > 4)
                     {
-                        if (i > 4)
-                        {
-                            ExplosionOrgone(2);
-                        }
                         OrgoneRunning2 = false;
                         break;
                     }
                     for (int u = 4; u >= i; u--)
                     {
-                        if (OrgoneManager.Instance.RedPlayerCharge[u].GetBool("Increase"))
+                        if (OrgoneManager.Instance.BluePlayerCharge[u].GetBool("Increase"))
                         {
-                            OrgoneManager.Instance.RedPlayerCharge[u].SetBool("Increase", false);
+                            OrgoneManager.Instance.BluePlayerCharge[u].SetBool("Increase", false);
                             yield return new WaitForSeconds(.75f);
                         }
                     }
-                    OrgoneManager.Instance.RedPlayerCharge[i - 1].SetBool("Increase", false);
+                    OrgoneManager.Instance.BluePlayerCharge[i - 1].SetBool("Increase", false);
                     yield return new WaitForSeconds(.5f);
                 }
             }
