@@ -148,8 +148,9 @@ public class GameManagerSO : ScriptableObject
 
             case MYthsAndSteel_Enum.PhaseDeJeu.Strategie:
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.Strategie);
-
-                if(GoToStrategyPhase != null) GoToStrategyPhase();
+                PlayerScript.Instance.RedPlayerInfos.HasCreateUnit = false;
+                PlayerScript.Instance.BluePlayerInfos.HasCreateUnit = false;
+                if (GoToStrategyPhase != null) GoToStrategyPhase();
                 break;
         }
     }

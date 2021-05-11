@@ -302,7 +302,7 @@ public class EventCardClass : ScriptableObject{
                 //Obtient la direction de la case par rapport à l'unité
                 MYthsAndSteel_Enum.Direction dir = PlayerStatic.CheckDirection(unit.GetComponent<UnitScript>().ActualTiledId, i);
 
-                if(TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Ravin) || TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Eau)) {
+                if(TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Ravin) || TilesManager.Instance.TileList[i].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Eau ) || TilesManager.Instance.TileList[i].GetComponent<TileScript>().Unit != null) {
                     //La tile n'est pas ajoutée
                 }
                 else { 

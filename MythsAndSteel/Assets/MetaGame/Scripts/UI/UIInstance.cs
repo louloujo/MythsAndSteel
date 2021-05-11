@@ -520,6 +520,8 @@ public class EmplacementImageMenuRenfort
 [System.Serializable]
 public class BouttonMenuRenfort
 {
+    public GameObject ButtonRenfortJ1 = null;
+    public GameObject ButtonRenfortJ2 = null;
     public GameObject _clicSurUnité1 = null;
     public GameObject _clicSurUnité2 = null;
     public GameObject _clicSurUnité3 = null;
