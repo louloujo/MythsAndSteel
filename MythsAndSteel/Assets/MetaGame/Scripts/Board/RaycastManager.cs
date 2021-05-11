@@ -42,7 +42,29 @@ public class RaycastManager : MonoSingleton<RaycastManager>
 
     //Lorsque le joueur clique sur une tile et qu'il y a une unité
     [SerializeField] private GameObject _actualUnitSelected;
-    public GameObject ActualUnitSelected => _actualUnitSelected;
+    public GameObject ActualUnitSelected
+    {
+        get
+        {
+            return _actualUnitSelected;
+        }
+        set
+        {
+            if (_actualUnitSelected != value)
+            {
+                if (_actualUnitSelected != null)
+                {
+                    Debug.Log("false");
+                    UIInstance.Instance.DownSliderJauge.SetBool("In", false);
+                }
+                _actualUnitSelected = value;
+                if (value != null)
+                {
+                    AttackJauge(true);
+                }
+            }
+        }
+    }
 
     [Header("PANNEAU DES BOUTONS QUAND CLIC SUR UNITE")]
     //Est ce que les joueurs peuvent jouer
@@ -166,10 +188,12 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             {
                 if(_actualUnitSelected == UnitInTile && !Mouvement.Instance.MvmtRunning && Attaque.Instance.IsInAttack)
                 {
-                    Mouvement.Instance.StopMouvement(true);
+                    Debug.Log("fjdkms");
                     Attaque.Instance.StopAttack();
+                    Mouvement.Instance.StopMouvement(true);
+                    UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
                     _actualTileSelected = null;
-                    _actualUnitSelected = null;
+                    ActualUnitSelected = null;
                 }
                 else if(!Mouvement.Instance.Selected && !Attaque.Instance.Selected && UnitInTile != null)
                 {
@@ -177,8 +201,9 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                    UnitScript currentUnitScript = UnitInTile.GetComponent<UnitScript>();
                     if (CanUseUnitWhenClic(currentUnitScript))
                     {
+                        
                         _actualTileSelected = _tile;
-                        _actualUnitSelected = _unitInTile;
+                        ActualUnitSelected = _unitInTile;
                         Mouvement.Instance.StartMvmtForSelectedUnit();
                         Attaque.Instance.StartAttackSelectionUnit();
                     }
@@ -189,12 +214,15 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                     {
                         if(_tile != _actualTileSelected)
                         {
+                            Debug.Log("fjdkms");
                             Mouvement.Instance.AddMouvement(TilesManager.Instance.TileList.IndexOf(_tile));
                         }
+
                         else
                         {
-                            Mouvement.Instance.StopMouvement(true);
+                            Debug.Log("fjdkms");
                             UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
+                            Mouvement.Instance.StopMouvement(true);
                         }
                     }
                 }
@@ -298,5 +326,9 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         Vector2 mouseDirection = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         Ray2D ray = new Ray2D(Camera.main.ScreenToWorldPoint(Input.mousePosition), mouseDirection);
         return Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, _layerM);
+    }
+    public void AttackJauge(bool _in)
+    {
+        UIInstance.Instance.DownSliderJauge.SetBool("In", _in);
     }
 }

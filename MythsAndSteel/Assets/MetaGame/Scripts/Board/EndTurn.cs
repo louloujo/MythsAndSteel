@@ -5,7 +5,7 @@ using UnityEngine;
 public class EndTurn : MonoBehaviour
 {
     VictoryScreen victoryScreen;
-    [Header("Nombre d'objectif à capturer pour la victoire par équipe.")]
+    [Header("Nombre d'objectif Ã  capturer pour la victoire par Ã©quipe.")]
     [SerializeField] private int RedObjCount;
     [SerializeField] private int BlueObjCount;
 
@@ -13,24 +13,71 @@ public class EndTurn : MonoBehaviour
 
     private void Start()
     {
-        foreach(GameObject Tile in TilesManager.Instance.TileList)
+        foreach (GameObject Tile in TilesManager.Instance.TileList)
         {
-            if(Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Point_Objectif))
+            if (Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Point_Objectif))
             {
                 goalTileList.Add(Tile);
             }
         }
-
+        GameManager.Instance.ManagerSO.GoToStrategyPhase += EndTerrainEffect;
         GameManager.Instance.ManagerSO.GoToStrategyPhase += CheckResources;
         GameManager.Instance.ManagerSO.GoToStrategyPhase += CheckOwner;
     }
 
+    public void EndTerrainEffect()
+    {
+        foreach (GameObject TS in TilesManager.Instance.TileList)
+        {
+            foreach (MYthsAndSteel_Enum.TerrainType T1 in TS.GetComponent<TileScript>().TerrainEffectList)
+            {
+                foreach (TerrainType Type in GameManager.Instance.Terrain.EffetDeTerrain)
+                {
+                    foreach (MYthsAndSteel_Enum.TerrainType T2 in Type._eventType)
+                    {
+                        if (T1 == T2)
+                        {
+                            if (Type.Child != null)
+                            {
+                                if (Type.MustBeInstantiate)
+                                {
+                                    foreach (GameObject G in TS.GetComponent<TileScript>()._Child)
+                                    {
+                                        if (G.TryGetComponent<ChildEffect>(out ChildEffect Try2))
+                                        {
+                                            if (Try2.Type == T1)
+                                            {
+                                                if (Try2.TryGetComponent<TerrainParent>(out TerrainParent Try3))
+                                                {
+                                                    TerrainGestion.Instance.EndTurn(Try3, TS.GetComponent<TileScript>());
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
+                                    {
+                                        TerrainGestion.Instance.EndTurn(Try, TS.GetComponent<TileScript>());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
     /// <summary>
-    /// Check si des ressources doivent être distribuées.
+    /// Check si des ressources doivent Ãªtre distribuÃ©es.
     /// </summary>
-    public void CheckResources(){
+    public void CheckResources()
+    {
         Debug.Log("Ressources");
-        foreach(GameObject Tile in TilesManager.Instance.ResourcesList)
+        foreach (GameObject Tile in TilesManager.Instance.ResourcesList)
         {
             TileScript S = Tile.GetComponent<TileScript>();
             if (S.ResourcesCounter != 0)
@@ -42,17 +89,18 @@ public class EndTurn : MonoBehaviour
                 }
             }
 
-            if(S.ResourcesCounter == 0)
+            if (S.ResourcesCounter == 0)
             {
                 S.RemoveEffect(MYthsAndSteel_Enum.TerrainType.Point_de_ressource);
                 S.TerrainEffectList.Remove(MYthsAndSteel_Enum.TerrainType.Point_de_ressource);
+                S.CreateEffect(MYthsAndSteel_Enum.TerrainType.Point_de_ressources_vide);
                 S.TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Point_de_ressources_vide);
             }
         }
     }
 
     /// <summary>
-    /// Prend les nouveaux propriétaires des objectifs et check ensuite les conditions de victoire.
+    /// Prend les nouveaux propriÃ©taires des objectifs et check ensuite les conditions de victoire.
     /// </summary>
     public void CheckOwner()
     {
@@ -60,17 +108,17 @@ public class EndTurn : MonoBehaviour
         foreach (GameObject Tile in goalTileList)
         {
             TileScript S = Tile.GetComponent<TileScript>();
-            if(S.TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Point_Objectif))
+            if (S.TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Point_Objectif))
             {
-                if(S.Unit != null)
+                if (S.Unit != null)
                 {
                     UnitScript US = S.Unit.GetComponent<UnitScript>();
-                    if(US.UnitSO.IsInRedArmy && !US.UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasPrendreDesObjectifs))
+                    if (US.UnitSO.IsInRedArmy && !US.UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasPrendreDesObjectifs))
                     {
                         Debug.Log("Objectif dans le camp rouge.");
                         ChangeOwner(S, true);
                     }
-                    else if(!US.UnitSO.IsInRedArmy && !US.UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasPrendreDesObjectifs))
+                    else if (!US.UnitSO.IsInRedArmy && !US.UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasPrendreDesObjectifs))
                     {
                         Debug.Log("Objectif dans le camp bleu.");
                         ChangeOwner(S, false);
@@ -82,26 +130,27 @@ public class EndTurn : MonoBehaviour
     }
 
     /// <summary>
-    /// Change le propriétaire d'un objectif.
+    /// Change le propriÃ©taire d'un objectif.
     /// </summary>
     /// <param name="TileSc"></param>
     /// <param name="RedArmy"></param>
-    void ChangeOwner(TileScript TileSc, bool RedArmy){
-        if(TileSc.OwnerObjectiv == MYthsAndSteel_Enum.Owner.blue && RedArmy)
+    void ChangeOwner(TileScript TileSc, bool RedArmy)
+    {
+        if (TileSc.OwnerObjectiv == MYthsAndSteel_Enum.Owner.blue && RedArmy)
         {
             PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber--;
             TileSc.ChangePlayerObj(MYthsAndSteel_Enum.Owner.red);
             PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber++;
         }
-        if(TileSc.OwnerObjectiv == MYthsAndSteel_Enum.Owner.red && !RedArmy)
+        if (TileSc.OwnerObjectiv == MYthsAndSteel_Enum.Owner.red && !RedArmy)
         {
             PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber--;
             TileSc.ChangePlayerObj(MYthsAndSteel_Enum.Owner.blue);
             PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber++;
         }
-        if(TileSc.OwnerObjectiv == MYthsAndSteel_Enum.Owner.neutral)
+        if (TileSc.OwnerObjectiv == MYthsAndSteel_Enum.Owner.neutral)
         {
-            if(RedArmy)
+            if (RedArmy)
             {
                 TileSc.ChangePlayerObj(MYthsAndSteel_Enum.Owner.red);
                 PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber++;
@@ -119,11 +168,16 @@ public class EndTurn : MonoBehaviour
     /// </summary>
     protected void CheckVictory()
     {
+
         if(PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber == BlueObjCount && PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber != RedObjCount)
+
+
         {
             GameManager.Instance.VictoryForArmy(2);
         }
+
         if(PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber == RedObjCount && PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber != BlueObjCount)
+
         {
             GameManager.Instance.VictoryForArmy(1);
         }

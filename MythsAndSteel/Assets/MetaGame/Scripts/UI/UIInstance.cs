@@ -6,6 +6,7 @@ using TMPro;
 
 public class UIInstance : MonoSingleton<UIInstance>
 {
+    public Animator DownSliderJauge;
     public bool skiPhaseTouche = true;
     #region PhaseDeJeu
     [Header("PHASE DE JEU")]
@@ -203,12 +204,15 @@ public class UIInstance : MonoSingleton<UIInstance>
     /// <param name="title"></param>
     /// <param name="description"></param>
     public void ShowValidationPanel(string title, string description){
+       
+        if (PlayerPrefs.GetInt("Avertissement") == 1)
+        {
 
-        
         _validationPanel.SetActive(true);
         _titleValidationTxt.text = title;
         _descriptionValidationTxt.text = description;
         DesactivateNextPhaseButton();
+        }
 
 
     }

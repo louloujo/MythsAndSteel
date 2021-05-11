@@ -36,19 +36,19 @@ public class AttaqueUI1 : MonoBehaviour
     public int EndMax;
     public int DiceBonus;
 
-    public void SynchAttackBorne(UnitScript Unit)
+    public void SynchAttackBorne(UnitScript Unit, int Bonus = 0)
     {
         bool Done = false;
 
         Min = new List<int>();
         Max = new List<int>();
 
-        BonusTxt.text = Unit.DiceBonus.ToString();
+        BonusTxt.text = (Unit.DiceBonus+Bonus).ToString();
         StartMin = (int)Unit.NumberRangeMin.x;
         EndMin = (int)Unit.NumberRangeMin.y;
         StartMax = (int)Unit.NumberRangeMax.x;
         EndMax = (int)Unit.NumberRangeMax.y;
-        DiceBonus = Unit.DiceBonus;
+        DiceBonus = Unit.DiceBonus + Bonus;
         Temp = new List<int>();
         for (int u = 0; u < Borne.Count; u++)
         {
@@ -145,7 +145,10 @@ public class AttaqueUI1 : MonoBehaviour
         {
             Dice = 12;
         }                        
+        if(Dice -2 >= 0 && Dice -2 < Borne.Count)
+        { 
         Impactor.gameObject.transform.position = new Vector3(Borne[Dice - 2].transform.position.x, Borne[Dice - 2].transform.position.y, I.z);
+        }
         if(Dice == 2)
         {
             Debug.Log("low");
