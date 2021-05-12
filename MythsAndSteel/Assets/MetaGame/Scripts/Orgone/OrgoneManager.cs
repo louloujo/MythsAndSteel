@@ -175,11 +175,16 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
                         if (OrgoneManager.Instance.RedPlayerCharge[u].GetBool("Increase"))
                         {
                             OrgoneManager.Instance.RedPlayerCharge[u].SetBool("Increase", false);
-                            yield return new WaitForSeconds(.75f);
+                            yield return new WaitForSeconds(.5f);
                         }
+
                     }
-                    OrgoneManager.Instance.RedPlayerCharge[i - 1].SetBool("Increase", false);
-                    yield return new WaitForSeconds(.5f);
+                    if (i - 1 >= 0)
+                    {
+                        OrgoneManager.Instance.RedPlayerCharge[i - 1].SetBool("Increase", false);
+                        yield return new WaitForSeconds(.5f);
+                    }
+                 
                 }
             }
             else if (w == 0)
@@ -232,11 +237,14 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
                         if (OrgoneManager.Instance.BluePlayerCharge[u].GetBool("Increase"))
                         {
                             OrgoneManager.Instance.BluePlayerCharge[u].SetBool("Increase", false);
-                            yield return new WaitForSeconds(.75f);
+                            yield return new WaitForSeconds(.5f);
                         }
                     }
+                    if(i-1>=0)
+                    { 
                     OrgoneManager.Instance.BluePlayerCharge[i - 1].SetBool("Increase", false);
                     yield return new WaitForSeconds(.5f);
+                    }
                 }
             }
             else if (w == 0)
