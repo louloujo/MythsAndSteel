@@ -213,11 +213,13 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                     {
                         if(_tile != _actualTileSelected)
                         {
+                            Debug.Log("fjdkms");
                             Mouvement.Instance.AddMouvement(TilesManager.Instance.TileList.IndexOf(_tile));
                         }
 
                         else
                         {
+                            Debug.Log("fjdkms");
                             UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
                             Mouvement.Instance.StopMouvement(true);
                         }

@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -8
+  m_SortingOrder: -6
   m_Sprite: {fileID: 21300000, guid: 120dc50b5dfb8c746a31d79d36df8a98, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_FlipX: 0
@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 5729802673627382403}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.32, y: 0.32, z: 0}
-  m_LocalScale: {x: 2.025321, y: 2.0253208, z: 0.9113945}
+  m_LocalScale: {x: 2.2222223, y: 2.222222, z: 1}
   m_Children:
   - {fileID: 6175167592534521617}
   - {fileID: 8998884390207056895}
@@ -210,11 +210,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unit: {fileID: 0}
-  LastUnit: {fileID: 0}
   Child: []
-  _line: 4
-  _tileId: 28
-  _terrainEffectList: 00000000
+  _line: -7
+  _tileId: 0
+  _terrainEffectList: 
   _effetProg: 
   _ownerObjectiv: 0
   _resourcesCounter: 0
@@ -452,7 +451,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -6
+  m_SortingOrder: -5
   m_Sprite: {fileID: 21300000, guid: 77b08518472808f4a81cb0cdfa06b5ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
