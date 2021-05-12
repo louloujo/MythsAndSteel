@@ -54,7 +54,6 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             {
                 if (_actualUnitSelected != null)
                 {
-                    Debug.Log("false");
                     UIInstance.Instance.DownSliderJauge.SetBool("In", false);
                 }
                 _actualUnitSelected = value;

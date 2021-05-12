@@ -21,13 +21,16 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
 
     [Space]
     //Liste des enfants de la jauge d'orgone du joueur rouge
-    [SerializeField] private List<Image> _redPlayerCharge = new List<Image>();
-    public List<Image> RedPlayerCharge => _redPlayerCharge;
+    [SerializeField] private List<Animator> _redPlayerCharge = new List<Animator>();
+    public List<Animator> RedPlayerCharge => _redPlayerCharge;
+
+    [SerializeField] private Animator Explodered;
 
     //Liste des enfants de la jauge d'orgone du joueur bleu
-    [SerializeField] private List<Image> _bluePlayerCharge = new List<Image>();
-    public List<Image> BluePlayerCharge => _bluePlayerCharge;
+    [SerializeField] private List<Animator> _bluePlayerCharge = new List<Animator>();
+    public List<Animator> BluePlayerCharge => _bluePlayerCharge;
 
+    [SerializeField] private Animator Explodeblue;
 
     [Header("ZONE ORGONE")]
     //Est ce qu'une jauge d'orgone est sélectionnée
@@ -81,20 +84,175 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
         return newValue;
     }
 
+
+    private bool OrgoneRunning1 = false; private bool OrgoneRunning2 = false;
     /// <summary>
     /// Détermine et applique l'animation de l'UI de la jauge d'orgone. A DÉTERMINER !
     /// </summary>
-    public void UpdateOrgoneUI()
+
+    public void StartOrgoneAnimation(int Player, int LastOrgoneValue, int ActualOrgoneValue)
     {
-        /* Pour les animations voici ma proposition
-         il faudrait faire une liste de boutons avec les boutons d'une jauge d'orgone
-         il faudrait la valeur actuelle de l'orgone 
-         et la variation
-         on applique ensuite un for qui dépend qui s'arrete quand on a appliquer tout la fluctuation de l'orgone et 
-        qui a chaque fois applique l'animation pour chaque boutons concernés
-        on aurait du coup un valeur spécifique temporaire qui corresponderait à la valeur actuelle qui se baisse au fur et à mesure pour comptabiliser le nombre d'animation qui reste à faire
-        
-         */
+        StartCoroutine(UpdateOrgoneUI(Player, LastOrgoneValue, ActualOrgoneValue));
+    }
+
+    public IEnumerator UpdateOrgoneUI(int Player, int LastOrgoneValue, int ActualOrgoneValue)
+    {
+        if (Player == 1)
+        {
+            while (OrgoneRunning1)
+            {
+                yield return new WaitForSeconds(0.1f);
+            }
+            StartCoroutine(AnimationOrgone(LastOrgoneValue, ActualOrgoneValue, 1));
+        }
+        else if (Player == 2)
+        {
+            while (OrgoneRunning2)
+            {
+                yield return new WaitForSeconds(0.1f);
+            }
+            StartCoroutine(AnimationOrgone(LastOrgoneValue, ActualOrgoneValue, 2));
+        }
+    }
+
+    public void ExplosionOrgone(int Player)
+    {
+        Debug.Log(Player);
+        if(Player == 1)
+        {
+            Explodered.SetTrigger("explode");
+        }
+        else
+        {
+            Explodeblue.SetTrigger("explode");
+        }
+        StartCoroutine(UpdateOrgoneUI(Player, 4, 0));
+    }
+
+    IEnumerator AnimationOrgone(int LastOrgoneValue, int ActualOrgoneValue, int Player)
+    {            
+        if (Player == 1)
+        {        
+            OrgoneRunning1 = true;
+            int w = ActualOrgoneValue - LastOrgoneValue;
+            if(w > 0)
+            {
+                for (int i = LastOrgoneValue; i < ActualOrgoneValue; i++)
+                {
+                    if (i < 0 || i > 4)
+                    {
+                        // Explosion.
+                        if(i > 4)
+                        {
+                            ExplosionOrgone(1);
+                        }
+                        OrgoneRunning1 = false;
+                        break;
+                    }
+                    for (int u = 0; u <= i; u++)
+                    {
+                        if (!OrgoneManager.Instance.RedPlayerCharge[u].GetBool("Increase"))
+                        {
+                            OrgoneManager.Instance.RedPlayerCharge[u].SetBool("Increase", true);
+                            yield return new WaitForSeconds(.75f);
+                        }
+                    }
+                    OrgoneManager.Instance.RedPlayerCharge[i].SetBool("Increase", true);
+                    yield return new WaitForSeconds(.75f);
+                }
+            }
+            if(w < 0)
+            {
+                for (int i = LastOrgoneValue; i > ActualOrgoneValue; i--)
+                {
+                    for (int u = 4; u >= i; u--)
+                    {
+                        if (i < 0 || i > 4)
+                        {
+                            OrgoneRunning1 = false;
+                            break;
+                        }
+                        if (OrgoneManager.Instance.RedPlayerCharge[u].GetBool("Increase"))
+                        {
+                            OrgoneManager.Instance.RedPlayerCharge[u].SetBool("Increase", false);
+                            yield return new WaitForSeconds(.5f);
+                        }
+
+                    }
+                    if (i - 1 >= 0)
+                    {
+                        OrgoneManager.Instance.RedPlayerCharge[i - 1].SetBool("Increase", false);
+                        yield return new WaitForSeconds(.5f);
+                    }
+                 
+                }
+            }
+            else if (w == 0)
+            {
+                Debug.Log("Same value.");
+            }
+            OrgoneRunning1 = false;
+        }
+        else if (Player == 2)
+        {
+            OrgoneRunning2 = true;
+            int w = ActualOrgoneValue - LastOrgoneValue;
+            if (w > 0)
+            {
+                for (int i = LastOrgoneValue; i < ActualOrgoneValue; i++)
+                {
+                    if (i < 0 || i > 4)
+                    {
+                        if (i > 4)
+                        {
+                            ExplosionOrgone(2);
+                        }
+                        // Explosion.
+                        OrgoneRunning2 = false;
+                        break;
+                    }
+                    for (int u = 0; u <= i; u++)
+                    {
+                        if (!OrgoneManager.Instance.BluePlayerCharge[u].GetBool("Increase"))
+                        {
+                            OrgoneManager.Instance.BluePlayerCharge[u].SetBool("Increase", true);
+                            yield return new WaitForSeconds(.75f);
+                        }
+                    }
+                    OrgoneManager.Instance.BluePlayerCharge[i].SetBool("Increase", true); 
+                    yield return new WaitForSeconds(.75f);
+                }
+            }
+            if (w < 0)
+            {
+                for (int i = LastOrgoneValue; i > ActualOrgoneValue; i--)
+                {
+                    if(i < 0 || i > 4)
+                    {
+                        OrgoneRunning2 = false;
+                        break;
+                    }
+                    for (int u = 4; u >= i; u--)
+                    {
+                        if (OrgoneManager.Instance.BluePlayerCharge[u].GetBool("Increase"))
+                        {
+                            OrgoneManager.Instance.BluePlayerCharge[u].SetBool("Increase", false);
+                            yield return new WaitForSeconds(.5f);
+                        }
+                    }
+                    if(i-1>=0)
+                    { 
+                    OrgoneManager.Instance.BluePlayerCharge[i - 1].SetBool("Increase", false);
+                    yield return new WaitForSeconds(.5f);
+                    }
+                }
+            }
+            else if (w == 0)
+            {
+                Debug.Log("Same value.");
+            }
+            OrgoneRunning2 = false;
+        }
     }
 
     public void ActivateOrgoneArea(){

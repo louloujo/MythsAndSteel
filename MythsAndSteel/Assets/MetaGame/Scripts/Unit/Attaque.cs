@@ -285,9 +285,11 @@ public class Attaque : MonoSingleton<Attaque>
     void ChooseAttackType(Vector2 _numberRangeMin, int _damageMinimum, Vector2 _numberRangeMax, int _damageMaximum, int DiceResult)
     {
         Go = false;
+
         Debug.Log("Dice: " + (firstDiceInt + secondDiceInt));
         _JaugeAttack.SynchAttackBorne(RaycastManager.Instance.ActualUnitSelected.GetComponent<UnitScript>());
         _JaugeAttack.Attack(firstDiceInt + secondDiceInt);
+
         if (_numberRangeMax.x == 0 && _numberRangeMax.y == 0)
         {
             UnitAttackOneRange(_numberRangeMin, _damageMinimum, DiceResult);
@@ -388,8 +390,7 @@ public class Attaque : MonoSingleton<Attaque>
                 
                     if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
                     {
-                        
-                            
+
                         GetStats();
                         _selected = true;
                         UpdateJauge(tileId);
