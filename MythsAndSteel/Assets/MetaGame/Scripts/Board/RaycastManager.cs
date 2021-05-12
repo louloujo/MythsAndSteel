@@ -187,8 +187,9 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             {
                 if(_actualUnitSelected == UnitInTile && !Mouvement.Instance.MvmtRunning && Attaque.Instance.IsInAttack)
                 {
-                    Mouvement.Instance.StopMouvement(true);
+                    Debug.Log("fjdkms");
                     Attaque.Instance.StopAttack();
+                    Mouvement.Instance.StopMouvement(true);
                     UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
                     _actualTileSelected = null;
                     ActualUnitSelected = null;
@@ -212,11 +213,13 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                     {
                         if(_tile != _actualTileSelected)
                         {
+                            Debug.Log("fjdkms");
                             Mouvement.Instance.AddMouvement(TilesManager.Instance.TileList.IndexOf(_tile));
                         }
 
                         else
                         {
+                            Debug.Log("fjdkms");
                             UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
                             Mouvement.Instance.StopMouvement(true);
                         }
@@ -241,6 +244,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     /// </summary>
     public void SelectTileForAttack(){
         if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2){
+
             Attaque.Instance.AddTileToList(Tile.GetComponent<TileScript>().TileId);
         }
     }

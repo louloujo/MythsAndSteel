@@ -11,5 +11,9 @@ public class ChildEffect : MonoBehaviour
         {
             return _Type;
         }
+        set
+        {
+            _Type = value;
+        }
     }
 }

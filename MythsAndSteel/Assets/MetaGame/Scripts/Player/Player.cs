@@ -8,7 +8,7 @@ public class Player
 {
     #region Variables
     [Header("ARMY INFO")]
-    //nom de l'armÈe
+    //nom de l'arm√©e
     public string ArmyName;
     public string ArmyNameNomMasc;
     public string ArmyNameNomFem;
@@ -16,7 +16,7 @@ public class Player
     [Header("ACTIVATION")]
     //Nombre d'activation restante
     public int ActivationLeft; 
-    //Valeur de la carte activation posÈe
+    //Valeur de la carte activation pos√©e
     public int ActivationCardValue;
 
     [Header("ORGONE")]
@@ -31,7 +31,7 @@ public class Player
     }
     //Nombre de pouvoirs d'orgone encore activable
     public int OrgonePowerLeft; 
-    //Permet de se souvenir de la derniËre valeur d'orgone avant Update
+    //Permet de se souvenir de la derni√®re valeur d'orgone avant Update
     public int _LastKnownOrgoneValue;
     //Tile qui correspond au centre de la zone d'Orgone
     public GameObject TileCentreZoneOrgone;
@@ -55,10 +55,10 @@ public class Player
     }
 
     [Header("OBJECTIF")]
-    //Nombre d'objectif actuellement capturÈ
+    //Nombre d'objectif actuellement captur√©
     public int GoalCapturePointsNumber; 
 
-    public bool HasCreateUnit; //est ce que le joueur a crÈer une unitÈ durant sont tour
+    public bool HasCreateUnit; //est ce que le joueur a cr√©er une unit√© durant sont tour
     #endregion Variables
 
     /// <summary>
@@ -76,7 +76,7 @@ public class Player
     /// <summary>
     /// Change la valeur (pos/neg) de la jauge d'orgone.
     /// </summary>
-    /// <param name="Value">Valeur positive ou nÈgative.</param>
+    /// <param name="Value">Valeur positive ou n√©gative.</param>
     public void ChangeOrgone(int Value, int player){
         if (Value != 0)
         {
@@ -95,7 +95,7 @@ public class Player
             
             GameManager.Instance.DoingEpxlosionOrgone = true;
             List<GameObject> unitList = player == 1 ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer;
-            GameManager.Instance.StartEventModeUnit(4, player == 1 ? true : false, unitList, "Explosion d'orgone", " tes-vous sur de vouloir infliger des dÈg‚ts ‡ ces unitÈs?", true);
+            GameManager.Instance.StartEventModeUnit(4, player == 1 ? true : false, unitList, "Explosion d'orgone", "√ätes-vous sur de vouloir infliger des d√©g√¢ts √† ces unit√©s?", true);
             GameManager.Instance._eventCall += GiveDamageToUnitForOrgone;
             if(player == 1) GameManager.Instance._eventCallCancel += CancelOrgoneP1;
             else GameManager.Instance._eventCallCancel += CancelOrgoneP2;
@@ -214,6 +214,7 @@ public class Player
         {
             OrgoneManager.Instance.StartOrgoneAnimation(2, _LastKnownOrgoneValue, OrgoneValue);
         }
+
     }
 
     //AV

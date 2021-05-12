@@ -7,10 +7,14 @@ public class MenuButton : MonoBehaviour
 {
     [SerializeField] GameObject _campagneCanvas;
     [SerializeField] GameObject _menuCanvas;
-    
+
     /// <summary>
     /// Change de scène
     /// </summary>
+    private void Awake()
+    {
+        Time.timeScale = 1;
+    }
     public void ChangeScene(int sceneToLoad)
     {
         SceneManager.LoadSceneAsync(sceneToLoad);
@@ -40,6 +44,18 @@ public class MenuButton : MonoBehaviour
     {
         _campagneCanvas.SetActive(false);
         _menuCanvas.SetActive(true);
+    }
+
+    //reload la scene
+    public void ReloadScene()
+    {
+     
+        Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+    }
+    public void LoadScene(int sceneToLoad)
+    {
+       
+        SceneManager.LoadScene(sceneToLoad);
     }
 }
     
