@@ -19,11 +19,12 @@ public class ChargeRedPlayer : ChargeOrgone
     public override void ChargeOrgone5(int cost)
     {
         Debug.Log("R5");
-        if (GameManager.Instance.IsPlayerRedTurn)
+        if (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1)
         {
             OrgoneManager.Instance.DoingOrgoneCharge = true;
             List<GameObject> TempSelectablelist = PlayerInstance.GetComponent<UnitReference>().UnitClassCreableListRedPlayer;
             PlayerInstance.GetComponent<UnitReference>().UnitClassCreableListRedPlayer = UnitListForOrgone;
+            RenfortPhase.Instance.CreateRenfort(true);
             mouseCommand.GetComponent<MouseCommand>().MenuRenfortUI(true);
         }
         

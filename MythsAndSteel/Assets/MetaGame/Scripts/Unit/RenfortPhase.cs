@@ -86,6 +86,7 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
     /// <param name="activate"></param>
     void ChangeButtonStatut(bool activate, bool playerRed)
     {
+        Debug.Log("a batard tu active");
         UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().interactable = activate;
         UIInstance.Instance.ButtonRenfort._clicSurUnité1.GetComponent<CanvasGroup>().blocksRaycasts = activate;
 
