@@ -719,5 +719,4 @@ public class GameManager : MonoSingleton<GameManager>{
         BackgroundPaused.SetActive(false);
         
     }
-
 }
