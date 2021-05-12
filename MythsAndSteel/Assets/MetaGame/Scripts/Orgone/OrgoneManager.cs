@@ -42,6 +42,9 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
     [SerializeField] private GameObject _bluePlayerZone = null;
     public GameObject BluePlayerZone => _bluePlayerZone;
 
+    public bool DoingOrgoneCharge = false;
+
+
     #endregion Variables
 
     private void Start(){

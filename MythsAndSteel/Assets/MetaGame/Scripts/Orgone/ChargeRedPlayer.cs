@@ -4,25 +4,27 @@ using UnityEngine;
 
 public class ChargeRedPlayer : ChargeOrgone
 {
-    MouseCommand mouseCommand;
-    UnitReference unitReference;
+    [SerializeField] GameObject mouseCommand;
+    [SerializeField] GameObject PlayerInstance;
     public List<GameObject> UnitListForOrgone = new List<GameObject>();
     public override void ChargeOrgone1(int cost)
     {
-
+        Debug.Log("R1");
     }
     public override void ChargeOrgone3(int cost)
     {
+        Debug.Log("R3");
 
     }
     public override void ChargeOrgone5(int cost)
     {
+        Debug.Log("R5");
         if (GameManager.Instance.IsPlayerRedTurn)
         {
-            DoingOrgoneCharge = true;
-            List<GameObject> TempSelectablelist = unitReference.UnitClassCreableListRedPlayer;
-            unitReference.UnitClassCreableListRedPlayer = UnitListForOrgone;
-            mouseCommand.MenuRenfortUI(true);
+            OrgoneManager.Instance.DoingOrgoneCharge = true;
+            List<GameObject> TempSelectablelist = PlayerInstance.GetComponent<UnitReference>().UnitClassCreableListRedPlayer;
+            PlayerInstance.GetComponent<UnitReference>().UnitClassCreableListRedPlayer = UnitListForOrgone;
+            mouseCommand.GetComponent<MouseCommand>().MenuRenfortUI(true);
         }
         
     }

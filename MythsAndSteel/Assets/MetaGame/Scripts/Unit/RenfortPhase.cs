@@ -67,7 +67,7 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
     public void CreateRenfort(bool playerRed)
     {
         if (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 ||
-            GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2)
+            GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2 || OrgoneManager.Instance.DoingOrgoneCharge )
         {
             AroundCreateTileUsine(playerRed);
             AroundLeader(playerRed);
@@ -75,6 +75,7 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
         }
         else
         {
+            Debug.Log("t'es niqué");
             ChangeButtonStatut(false, playerRed);
         }
     }
@@ -103,7 +104,7 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
         UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<CanvasGroup>().interactable = activate;
         UIInstance.Instance.ButtonRenfort._clicSurUnité6.GetComponent<CanvasGroup>().blocksRaycasts = activate;
 
-        if (activate)
+        if (activate && !OrgoneManager.Instance.DoingOrgoneCharge)
         {
             Debug.Log("Is ACtive");
             for (int i = 0; i < (playerRed ? PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer.Count : PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer.Count); i++)
@@ -299,7 +300,7 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
                         }
                         break;
                 }
-                
+
             }
         }
     }
@@ -516,7 +517,7 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
 
     #region CréerUnité
 
-   
+
 
     /// <summary>
     /// Permet de créer une unité
@@ -543,18 +544,18 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
         }
         else
         {
-            if(PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[unitId].GetComponent<UnitScript>().UnitSO.CreationCost <= PlayerScript.Instance.RedPlayerInfos.Ressource)
+            if (PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[unitId].GetComponent<UnitScript>().UnitSO.CreationCost <= PlayerScript.Instance.RedPlayerInfos.Ressource)
             {
-            List<GameObject> tileList = new List<GameObject>();
-            tileList.AddRange(GameManager.Instance.RenfortPhase.CreateLeader2);
-            tileList.AddRange(GameManager.Instance.RenfortPhase.CreateTileJ2);
+                List<GameObject> tileList = new List<GameObject>();
+                tileList.AddRange(GameManager.Instance.RenfortPhase.CreateLeader2);
+                tileList.AddRange(GameManager.Instance.RenfortPhase.CreateTileJ2);
 
-            idCreate = unitId;
-            redPlayerCreation = false;
+                idCreate = unitId;
+                redPlayerCreation = false;
 
-            GameManager.Instance.StartEventModeTiles(1, false, tileList, "Création d'unité", "Êtes-vous sur de vouloir créer une unité sur cette case");
-            GameManager.Instance._eventCall += CreateNewUnit;
-            RaycastManager.Instance._mouseCommand.QuitRenfortPanel();
+                GameManager.Instance.StartEventModeTiles(1, false, tileList, "Création d'unité", "Êtes-vous sur de vouloir créer une unité sur cette case");
+                GameManager.Instance._eventCall += CreateNewUnit;
+                RaycastManager.Instance._mouseCommand.QuitRenfortPanel();
 
             }
         }
@@ -571,9 +572,11 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
             GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().AddUnitToTile(obj);
             PlayerScript.Instance.RedPlayerInfos.HasCreateUnit = true;
             PlayerScript.Instance.UnitRef.UnitListRedPlayer.Add(obj);
-
-            PlayerScript.Instance.RedPlayerInfos.Ressource -= PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[idCreate].GetComponent<UnitScript>().UnitSO.CreationCost;
-            UIInstance.Instance.UpdateRessourceLeft();
+            if (!OrgoneManager.Instance.DoingOrgoneCharge)
+            {
+                PlayerScript.Instance.RedPlayerInfos.Ressource -= PlayerScript.Instance.UnitRef.UnitClassCreableListRedPlayer[idCreate].GetComponent<UnitScript>().UnitSO.CreationCost;
+                UIInstance.Instance.UpdateRessourceLeft();
+            }
         }
         else
         {
@@ -581,9 +584,11 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
             GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().AddUnitToTile(obj);
             PlayerScript.Instance.BluePlayerInfos.HasCreateUnit = true;
             PlayerScript.Instance.UnitRef.UnitListBluePlayer.Add(obj);
-
-            PlayerScript.Instance.BluePlayerInfos.Ressource -= PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[idCreate].GetComponent<UnitScript>().UnitSO.CreationCost;
-            UIInstance.Instance.UpdateRessourceLeft();
+            if (!OrgoneManager.Instance.DoingOrgoneCharge)
+            {
+                PlayerScript.Instance.BluePlayerInfos.Ressource -= PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[idCreate].GetComponent<UnitScript>().UnitSO.CreationCost;
+                UIInstance.Instance.UpdateRessourceLeft();
+            }
         }
 
         GameManager.Instance.TileChooseList.Clear();

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3272,10 +3272,14 @@ PrefabInstance:
     - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11400000, guid: 471bacfd92a6a5c40befff9af7d96722, type: 2}
+      objectReference: {fileID: 504869460}
     - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChargeOrgone5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ChargeBluePlayer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -5989,8 +5993,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 504869456}
+    - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChargeOrgone4
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -6909,6 +6917,8 @@ GameObject:
   m_Component:
   - component: {fileID: 504869457}
   - component: {fileID: 504869458}
+  - component: {fileID: 504869460}
+  - component: {fileID: 504869459}
   m_Layer: 0
   m_Name: Orgone
   m_TagString: Untagged
@@ -6959,6 +6969,35 @@ MonoBehaviour:
   _selected: 0
   _redPlayerZone: {fileID: 181898282}
   _bluePlayerZone: {fileID: 1467254372}
+--- !u!114 &504869459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504869456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88345b93caaa7e74fbb1821f98184745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DoingOrgoneCharge: 0
+  _isRedOrgonePower: 0
+  UnitListForOrgone: []
+--- !u!114 &504869460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504869456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6cb8adf4e58ef4b90fa2a94daddb28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DoingOrgoneCharge: 0
+  _isRedOrgonePower: 0
 --- !u!1 &508802284
 GameObject:
   m_ObjectHideFlags: 0
@@ -9353,8 +9392,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 504869459}
+    - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChargeOrgone3
+      objectReference: {fileID: 0}
+    - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ChargeRedPlayer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -16703,10 +16750,14 @@ PrefabInstance:
     - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11400000, guid: 471bacfd92a6a5c40befff9af7d96722, type: 2}
+      objectReference: {fileID: 504869460}
     - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChargeOrgone3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ChargeBluePlayer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -17232,8 +17283,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 504869456}
+    - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChargeOrgone2
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -22834,8 +22889,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 504869459}
+    - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChargeOrgone5
+      objectReference: {fileID: 0}
+    - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ChargeRedPlayer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -23282,10 +23345,10 @@ PrefabInstance:
     - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11400000, guid: 471bacfd92a6a5c40befff9af7d96722, type: 2}
+      objectReference: {fileID: 504869456}
     - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChargeOrgone2
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -26919,6 +26982,8 @@ MonoBehaviour:
     - {fileID: 2086137296}
     - {fileID: 2086137295}
   _buttonRenfort:
+    ButtonRenfortJ1: {fileID: 60152269}
+    ButtonRenfortJ2: {fileID: 1974073918}
     "_clicSurUnit\xE91": {fileID: 2091418681}
     "_clicSurUnit\xE92": {fileID: 1936029754}
     "_clicSurUnit\xE93": {fileID: 2103909734}
@@ -27170,8 +27235,7 @@ MonoBehaviour:
   - {fileID: 927307460}
   - {fileID: 1522235964}
   - {fileID: 794419050}
-  _unitClassListRedPlayer:
-  - {fileID: 11400000, guid: de7341a724493fc4b8ef2f7b5fad5c81, type: 2}
+  _unitClassListRedPlayer: []
   _unitClassListBluePlayer:
   - {fileID: 11400000, guid: 2378c437940554d4a8df8fe602444812, type: 2}
   _unitClassCreableListRedPlayer:
@@ -28813,6 +28877,18 @@ PrefabInstance:
     - target: {fileID: 741350119019039962, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 504869459}
+    - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChargeOrgone1
+      objectReference: {fileID: 0}
+    - target: {fileID: 741350119019039963, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ChargeRedPlayer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 741350119019039965, guid: 1040606f6e860fe4bbd05faccc4376cd, type: 3}
       propertyPath: m_Name
@@ -31690,10 +31766,10 @@ PrefabInstance:
     - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11400000, guid: 471bacfd92a6a5c40befff9af7d96722, type: 2}
+      objectReference: {fileID: 504869456}
     - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChargeOrgone4
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -38269,10 +38345,14 @@ PrefabInstance:
     - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11400000, guid: 471bacfd92a6a5c40befff9af7d96722, type: 2}
+      objectReference: {fileID: 504869460}
     - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChargeOrgone1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7292604908447532626, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ChargeBluePlayer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7292604908447532627, guid: 323dad8e6cb1208498190d4fc8b443cc, type: 3}
       propertyPath: m_Pivot.x
