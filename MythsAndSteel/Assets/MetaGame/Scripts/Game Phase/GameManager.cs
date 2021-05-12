@@ -19,6 +19,7 @@ public class GameManager : MonoSingleton<GameManager>{
 
     #region Variables
     [SerializeField] private VictoryScreen victoryScreen;
+    [SerializeField] private SaveData saveData;
     [Header("INFO TOUR ACTUEL")]
     //Correspond à la valeur du tour actuel
    
@@ -241,13 +242,22 @@ public class GameManager : MonoSingleton<GameManager>{
             UIInstance.Instance.VictoryScreen.SetActive(true);
             victoryScreen.IsVictoryScreenActive = true;
             victoryScreen.RedWin = true;
+            saveData.redPlayerVictories += 1;
+            PlayerPrefs.SetInt("RedPlayerVictories", saveData.redPlayerVictories);
+            saveData.unlockCampaign += 1;
+            PlayerPrefs.SetInt("UnlockCampaign", saveData.unlockCampaign);
             Debug.Log("Red win.");
         }
+
         else if (armeeGagnante == 2)
         {
             UIInstance.Instance.VictoryScreen.SetActive(true);
             victoryScreen.IsVictoryScreenActive = true;
             victoryScreen.BlueWin = true;
+            saveData.bluePlayerVictories += 1;
+            PlayerPrefs.SetInt("BluePlayerVictories", saveData.bluePlayerVictories);
+            saveData.unlockCampaign += 1;
+            PlayerPrefs.SetInt("UnlockCampaign", saveData.unlockCampaign);
             Debug.Log("Blue win.");
         }
     }

@@ -10,7 +10,6 @@ public class Campagne : MonoBehaviour
     public MYthsAndSteel_Enum.Scenario _Scenario; //Scénario Séléctionné et affiché
     [SerializeField] int ScenarioVal = 0;
     [SerializeField] int spaceBetweenScenario = 0;
-        
     [SerializeField] int Unlocked;//Nombre actuelle de niveau débloqué
 
     [Header("Assignations")]
@@ -21,11 +20,11 @@ public class Campagne : MonoBehaviour
     [SerializeField] private float _mapSpeed = 0f;
     [SerializeField] private GameObject _mapTransform = null;
 
-    private void Start()
+    private void Awake()
     {
-        //Assigne les valeur de dévérouillage des scénario
-        Unlockslider.value = Unlocked;
+        Unlockslider.value = PlayerPrefs.GetInt("UnlockedCampaign");
     }
+
 
     private void Update(){
         _mapTransform.GetComponent<RectTransform>().localPosition = Vector2.MoveTowards(_mapTransform.GetComponent<RectTransform>().localPosition, new Vector2(-spaceBetweenScenario * (Screen.width / 1920) * ScenarioVal, _mapTransform.GetComponent<RectTransform>().localPosition.y), Time.deltaTime * _mapSpeed);
@@ -46,7 +45,7 @@ public class Campagne : MonoBehaviour
     {
         int targetValue = ScenarioVal - 1;
 
-        if(targetValue > 0 && targetValue < 6)
+        if(targetValue > 0 && targetValue < 7)
         {
             _buttonRight.GetComponent<Button>().interactable = true;
             _buttonLeft.GetComponent<Button>().interactable = true;
@@ -70,21 +69,21 @@ public class Campagne : MonoBehaviour
     {
         int targetValue = ScenarioVal+1;
 
-        if(targetValue > 0 && targetValue < 6)
+        if(targetValue > 0 && targetValue < 7)
         {
             _buttonRight.GetComponent<Button>().interactable = true;
             _buttonLeft.GetComponent<Button>().interactable = true;
             _Scenario++;
             ScenarioVal++;
         }
-        else if(targetValue == 6)
+        else if(targetValue == 7)
         {
             _buttonRight.GetComponent<Button>().interactable = false;
             _buttonLeft.GetComponent<Button>().interactable = true;
             _Scenario++;
             ScenarioVal++;
         }
-        else if(targetValue > 6){}
+        else if(targetValue > 7){}
 
         if(ScenarioVal == targetValue){
             if(ScenarioVal == Unlocked){
