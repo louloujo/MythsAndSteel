@@ -391,7 +391,6 @@ public class GameManager : MonoSingleton<GameManager>
     public void StartEventModeUnit(int numberUnit, bool redPlayer, List<GameObject> _unitSelectable, string title, string description, bool multiplesUnit = false)
     {
         UIInstance.Instance.DesactivateNextPhaseButton();
-        Debug.Log("Set Event param");
         _titleValidation = title;
         _descriptionValidation = description;
 
@@ -404,7 +403,6 @@ public class GameManager : MonoSingleton<GameManager>
         foreach (GameObject gam in _selectableUnit)
         {
             TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
-            Debug.Log("Show EventSelect" + gam);
         }
 
         _eventCall += StopEventModeUnit;

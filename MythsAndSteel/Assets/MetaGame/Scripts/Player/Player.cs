@@ -8,7 +8,7 @@ public class Player
 {
     #region Variables
     [Header("ARMY INFO")]
-    //nom de l'armÈe
+    //nom de l'arm√©e
     public string ArmyName;
     public string ArmyNameNomMasc;
     public string ArmyNameNomFem;
@@ -16,16 +16,23 @@ public class Player
     [Header("ACTIVATION")]
     //Nombre d'activation restante
     public int ActivationLeft; 
-    //Valeur de la carte activation posÈe
-    public int ActivationCardValue; 
+    //Valeur de la carte activation pos√©e
+    public int ActivationCardValue;
 
     [Header("ORGONE")]
     //Nombre de charges d'orgone actuel
-    public int OrgoneValue; 
+    [SerializeField] private int _OrgoneValue;
+    public int OrgoneValue
+    {
+        get
+        {
+            return _OrgoneValue;
+        }
+    }
     //Nombre de pouvoirs d'orgone encore activable
     public int OrgonePowerLeft; 
-    //Permet de se souvenir de la derniËre valeur d'orgone avant Update
-    public int LastKnownOrgoneValue; 
+    //Permet de se souvenir de la derni√®re valeur d'orgone avant Update
+    public int _LastKnownOrgoneValue;
     //Tile qui correspond au centre de la zone d'Orgone
     public GameObject TileCentreZoneOrgone;
     //Save Le joueur dont la jauge explose
@@ -48,10 +55,10 @@ public class Player
     }
 
     [Header("OBJECTIF")]
-    //Nombre d'objectif actuellement capturÈ
+    //Nombre d'objectif actuellement captur√©
     public int GoalCapturePointsNumber; 
 
-    public bool HasCreateUnit; //est ce que le joueur a crÈer une unitÈ durant sont tour
+    public bool HasCreateUnit; //est ce que le joueur a cr√©er une unit√© durant sont tour
     #endregion Variables
 
     /// <summary>
@@ -69,10 +76,14 @@ public class Player
     /// <summary>
     /// Change la valeur (pos/neg) de la jauge d'orgone.
     /// </summary>
-    /// <param name="Value">Valeur positive ou nÈgative.</param>
+    /// <param name="Value">Valeur positive ou n√©gative.</param>
     public void ChangeOrgone(int Value, int player){
-        OrgoneValue += Value;
-        UpdateOrgoneUI(player);
+        if (Value != 0)
+        {
+            _LastKnownOrgoneValue = _OrgoneValue;
+            _OrgoneValue += Value;
+            UpdateOrgoneUI(player);
+        }
     }
 
     public void CheckOrgone(int player){
@@ -84,13 +95,13 @@ public class Player
             
             GameManager.Instance.DoingEpxlosionOrgone = true;
             List<GameObject> unitList = player == 1 ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer;
-            GameManager.Instance.StartEventModeUnit(4, player == 1 ? true : false, unitList, "Explosion d'orgone", " tes-vous sur de vouloir infliger des dÈg‚ts ‡ ces unitÈs?", true);
+            GameManager.Instance.StartEventModeUnit(4, player == 1 ? true : false, unitList, "Explosion d'orgone", "√ätes-vous sur de vouloir infliger des d√©g√¢ts √† ces unit√©s?", true);
             GameManager.Instance._eventCall += GiveDamageToUnitForOrgone;
             if(player == 1) GameManager.Instance._eventCallCancel += CancelOrgoneP1;
             else GameManager.Instance._eventCallCancel += CancelOrgoneP2;
             PLayerOrgoneExplose = player;
-          
-            
+
+            UpdateOrgoneUI(player);
         }
         else
         {
@@ -116,7 +127,7 @@ public class Player
         GameManager.Instance._waitEvent += DealOrgoneDamageToUnit;
         GameManager.Instance.WaitToMove(0);
 
-        OrgoneValue -= 6;
+        ChangeOrgone(-6, PLayerOrgoneExplose);
         UpdateOrgoneUI(PLayerOrgoneExplose);
 
     }
@@ -194,32 +205,14 @@ public class Player
     /// <summary>
     /// Update l'UI de la jauge d'orgone en fonction du nombre de charge
     /// </summary>
-    public void UpdateOrgoneUI(int player){
-        if(player == 1){
-            foreach(Image img in OrgoneManager.Instance.RedPlayerCharge){
-                img.enabled = false;
-            }
-
-            for(int i = 0; i < OrgoneValue; i++){
-                if(i < 5)
-                {
-                    OrgoneManager.Instance.RedPlayerCharge[i].enabled = true;
-                }
-            }
+    public void UpdateOrgoneUI(int player)
+    {
+        if (player == 1){
+            OrgoneManager.Instance.StartOrgoneAnimation(1, _LastKnownOrgoneValue, OrgoneValue);
         }
-        else{
-            foreach(Image img in OrgoneManager.Instance.BluePlayerCharge)
-            {
-                img.enabled = false;
-            }
-
-            for(int i = 0; i < OrgoneValue; i++)
-            {
-                if(i < 5)
-                {
-                    OrgoneManager.Instance.BluePlayerCharge[i].enabled = true;
-                }
-            }
+        else
+        {
+            OrgoneManager.Instance.StartOrgoneAnimation(2, _LastKnownOrgoneValue, OrgoneValue);
         }
 
     }
