@@ -245,6 +245,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
     /// </summary>
     public void SelectTileForAttack(){
         if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2){
+
             Attaque.Instance.AddTileToList(Tile.GetComponent<TileScript>().TileId);
         }
     }

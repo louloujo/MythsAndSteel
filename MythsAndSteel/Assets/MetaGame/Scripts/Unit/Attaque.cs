@@ -353,21 +353,25 @@ public class Attaque : MonoSingleton<Attaque>
     /// </summary>
     public void StartAttackSelectionUnit(int tileId = -1)
     {
+        
         GameObject tileSelected = RaycastManager.Instance.ActualTileSelected;
         _selectedUnit = tileSelected.GetComponent<TileScript>().Unit;
         _selectedTiles.Clear();
         _newNeighbourId.Clear();
-      
+        
         if ((GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft > 0) || (_selectedUnit.GetComponent<UnitScript>()._hasStartMove && GameManager.Instance.IsPlayerRedTurn && PlayerScript.Instance.RedPlayerInfos.ActivationLeft == 0))
         {
             if (tileId != -1)
             {
 
 
-                if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
+                if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
                 {
+                   
                     _isInAttack = false;
                     StartAttack(tileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
+                    
+                        
                 }
                 else
                 {
@@ -382,14 +386,15 @@ public class Attaque : MonoSingleton<Attaque>
                 if (tileSelected != null)
                 {
                 
-                    if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
+                    if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
                     {
-
-                        _selected = true;
+                        
+                            
                         GetStats();
-                   
+                        _selected = true;
                         UpdateJauge(tileId);
                         StartAttack(tileSelected.GetComponent<TileScript>().TileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
+                        
                     }
                     else
                     {
@@ -406,11 +411,11 @@ public class Attaque : MonoSingleton<Attaque>
         {
             if (tileId != -1)
             {
-                if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
+                if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
                 {
                     _isInAttack = false;
                     StartAttack(tileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
-                    StartAttack(tileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
+                   
 
                 }
                 else
@@ -425,7 +430,7 @@ public class Attaque : MonoSingleton<Attaque>
                 if (tileSelected != null)
                 {
            
-                    if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone)
+                    if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
                     {
                         Debug.Log(_selectedUnit);
                         _selected = true;

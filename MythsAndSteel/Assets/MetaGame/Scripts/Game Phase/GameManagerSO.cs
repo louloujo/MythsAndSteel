@@ -114,22 +114,44 @@ public class GameManagerSO : ScriptableObject
 
             case MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1:
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1);
+                foreach (GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListBluePlayer : PlayerScript.Instance.UnitRef.UnitListRedPlayer)
+                {
+                    unit.GetComponent<UnitScript>().ResetTurn();
+                }
 
+                foreach (GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer)
+                {
+                    unit.GetComponent<UnitScript>().ResetStatutPossesion();
+
+
+
+                }
                 GoToOrgoneJ1Phase();
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1:
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1);
 
-                foreach (GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer)
-                {
-                    unit.GetComponent<UnitScript>().ResetTurn();
-                }
 
                 GoToActionJ1Phase();
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2:
+
+               
+                foreach (GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer)
+                {
+                    unit.GetComponent<UnitScript>().ResetTurn();
+                }
+
+                foreach (GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListBluePlayer : PlayerScript.Instance.UnitRef.UnitListRedPlayer)
+                {
+                    unit.GetComponent<UnitScript>().ResetStatutPossesion();
+
+
+
+                }
+                GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2);
                 foreach (GameObject TS in TilesManager.Instance.TileList)
                 {
                     foreach (MYthsAndSteel_Enum.TerrainType T1 in TS.GetComponent<TileScript>().TerrainEffectList)
@@ -152,7 +174,7 @@ public class GameManagerSO : ScriptableObject
                                                     {
                                                         if (Try2.TryGetComponent<TerrainParent>(out TerrainParent Try3))
                                                         {
-                                                            Debug.Log("bon");
+                                                          
                                                             Try3.EndPlayerTurnEffect(GameManager.Instance.IsPlayerRedTurn);
                                                         }
                                                     }
@@ -163,7 +185,7 @@ public class GameManagerSO : ScriptableObject
                                         {
                                             if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
                                             {
-                                                Debug.Log("bon1");
+                                             
                                                 Try.EndPlayerTurnEffect(GameManager.Instance.IsPlayerRedTurn);
                                             }
                                         }
@@ -173,18 +195,12 @@ public class GameManagerSO : ScriptableObject
                         }
                     }
                 }
-                GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2);
-
                 GoToOrgoneJ2Phase();
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2:
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2);
 
-                foreach (GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer)
-                {
-                    unit.GetComponent<UnitScript>().ResetTurn();
-                }
 
                 GoToActionJ2Phase();
                 break;
@@ -213,7 +229,7 @@ public class GameManagerSO : ScriptableObject
                                                     {
                                                         if (Try2.TryGetComponent<TerrainParent>(out TerrainParent Try3))
                                                         {
-                                                            Debug.Log("bon");
+                                                      
                                                             Try3.EndPlayerTurnEffect(GameManager.Instance.IsPlayerRedTurn);
                                                         }
                                                     }
@@ -224,7 +240,7 @@ public class GameManagerSO : ScriptableObject
                                         {
                                             if (Type.Child.TryGetComponent<TerrainParent>(out TerrainParent Try))
                                             {
-                                                Debug.Log("bon1");
+                                            
                                                 Try.EndPlayerTurnEffect(GameManager.Instance.IsPlayerRedTurn);
                                             }
                                         }
@@ -233,6 +249,18 @@ public class GameManagerSO : ScriptableObject
                             }
                         }
                     }
+                }
+                foreach (GameObject unit in PlayerScript.Instance.UnitRef.UnitListRedPlayer)
+                {
+                    GameManager.Instance.DesactiveStatutCessezLeFeu(unit);
+                }
+
+                foreach (GameObject unit in PlayerScript.Instance.UnitRef.UnitListBluePlayer)
+                {
+
+                    GameManager.Instance.DesactiveStatutCessezLeFeu(unit);
+
+
                 }
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.Strategie);
 

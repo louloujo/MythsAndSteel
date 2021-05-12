@@ -15,7 +15,11 @@ Ce script renvoie comme principals informations :
 
 public class PhaseActivation : MonoBehaviour
 {
-   
+    private void Awake()
+    {
+        
+    }
+
     //Variables pour le joueur avec les cartes bleu
     //Carte du joueur 1
     [SerializeField] private List<CarteActivation> RedCartesActivation = new List<CarteActivation>();

@@ -8,7 +8,7 @@ public class EndTurn : MonoBehaviour
     [Header("Nombre d'objectif à capturer pour la victoire par équipe.")]
     [SerializeField] private int RedObjCount;
     [SerializeField] private int BlueObjCount;
-
+   
     [SerializeField] List<GameObject> goalTileList = new List<GameObject>();
 
     private void Start()
@@ -23,6 +23,7 @@ public class EndTurn : MonoBehaviour
         GameManager.Instance.ManagerSO.GoToStrategyPhase += EndTerrainEffect;
         GameManager.Instance.ManagerSO.GoToStrategyPhase += CheckResources;
         GameManager.Instance.ManagerSO.GoToStrategyPhase += CheckOwner;
+      
     }
 
     public void EndTerrainEffect()
@@ -182,4 +183,5 @@ public class EndTurn : MonoBehaviour
             GameManager.Instance.VictoryForArmy(1);
         }
     }
+
 }

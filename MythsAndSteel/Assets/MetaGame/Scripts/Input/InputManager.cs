@@ -171,12 +171,14 @@ public class InputManager : MonoBehaviour
                     }
                     else if (Attaque.Instance.Selected)
                     {
+
                         RaycastManager.Instance.SelectTileForAttack();
                     }
                 }
  
                 else
                 {
+
                     RaycastManager.Instance.Deselect();
                 }
             }

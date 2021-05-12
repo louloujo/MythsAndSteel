@@ -775,7 +775,7 @@ public class EventCardClass : ScriptableObject{
             unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Invincible);
             unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.PeutPasPrendreDesObjectifs);
         }
-
+        GameManager.Instance.CessezlefeuUsed = true;
         GameManager.Instance.UnitChooseList.Clear();
         RemovePlayerRessource(MYthsAndSteel_Enum.EventCard.Cessez_le_feu);
         //Remove la carte event chez le bon joueur
@@ -813,7 +813,11 @@ public class EventCardClass : ScriptableObject{
 
         foreach(GameObject unit in GameManager.Instance.UnitChooseList)
         {
+         
+            
+
             unit.GetComponent<UnitScript>().GiveLife(1);
+            
         }
 
         GameManager.Instance.UnitChooseList.Clear();
@@ -830,11 +834,17 @@ public class EventCardClass : ScriptableObject{
 
         unitList.AddRange(player == 2 ? PlayerScript.Instance.UnitRef.UnitListBluePlayer : PlayerScript.Instance.UnitRef.UnitListRedPlayer);
 
-        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+        if ((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
+        
+                
+            
+   
+
             LaunchEventUnit(2, player == 1 ? true : false, unitList, "Réapprovisionnement", "Êtes-vous sur de vouloir soigner ces deux unités de 1 point de vie?");
             GameManager.Instance._eventCall += Reapprovisionnement;
+            
         }
 
         unitList.Clear();
