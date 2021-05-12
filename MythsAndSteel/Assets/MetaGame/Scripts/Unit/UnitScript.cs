@@ -188,7 +188,7 @@ public class UnitScript : MonoBehaviour
     public Animator Animation => _Animation;
 
     //Récupération de stats pour l'écran de victoire
-    [SerializeField] private VictoryScreen victoryScreen;
+ 
 
 
     #endregion Variables
@@ -295,6 +295,9 @@ public class UnitScript : MonoBehaviour
     /// <param name="Damage"></param>
     public virtual void TakeDamage(int Damage, bool IsOrgoneDamage = false)
     {
+        if(!_unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Invincible))
+            {
+
         if (_shield > 0)
         {
             _shield -= Damage;
@@ -400,6 +403,7 @@ public class UnitScript : MonoBehaviour
             }
         }
     }
+        }
 
     /// <summary>
     /// Check si l'orgone a redépassé le joueur
@@ -422,11 +426,11 @@ public class UnitScript : MonoBehaviour
         {
             if (UnitSO.IsInRedArmy)
             {
-                victoryScreen.redDeadUnits += 1;
+               GameManager.Instance.victoryScreen.redDeadUnits += 1;
             }
             if (!UnitSO.IsInRedArmy)
             {
-                victoryScreen.blueDeadUnits += 1;
+               GameManager.Instance.victoryScreen.blueDeadUnits += 1;
             }
             Death();
             IsDead = true;
@@ -586,12 +590,12 @@ public class UnitScript : MonoBehaviour
     /// </summary>
     public void checkMovementLeft()
     {
-        if (UnitSO.IsInRedArmy && !hasUseActivation)
+        if (UnitSO.IsInRedArmy && !hasUseActivation || (!_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)) && !hasUseActivation) 
         {
             hasUseActivation = true;
             PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
         }
-        else if (!UnitSO.IsInRedArmy && !hasUseActivation)
+        else if (!UnitSO.IsInRedArmy && !hasUseActivation || (_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)) && !hasUseActivation)
         {
             hasUseActivation = true;
             PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
@@ -631,8 +635,9 @@ public class UnitScript : MonoBehaviour
     {
         if (_unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
         {
-            ResetTurn();
             _diceBonus += 4;
+          
+            ResetTurn();
             _unitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.Possédé);
         }
     }
