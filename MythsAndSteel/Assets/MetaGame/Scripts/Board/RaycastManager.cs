@@ -187,7 +187,6 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             {
                 if(_actualUnitSelected == UnitInTile && !Mouvement.Instance.MvmtRunning && Attaque.Instance.IsInAttack)
                 {
-                    Debug.Log("fjdkms");
                     Attaque.Instance.StopAttack();
                     Mouvement.Instance.StopMouvement(true);
                     UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();

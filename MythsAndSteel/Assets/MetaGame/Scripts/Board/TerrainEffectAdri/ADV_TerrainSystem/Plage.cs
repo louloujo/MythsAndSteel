@@ -6,13 +6,15 @@ public class Plage : TerrainParent
 {
     public override void CibledByAttack(UnitScript AttackerUnit, TileScript AttackerUnitCase)
     {
-        Attaque.Instance._JaugeAttack.SynchAttackBorne(AttackerUnit, -1);
+        AttackerUnit.DiceBonus += -1;
+        Attaque.Instance._JaugeAttack.SynchAttackBorne(AttackerUnit);
         base.CibledByAttack(AttackerUnit, AttackerUnitCase);
     }
 
     public override void UnCibledByAttack(UnitScript Unit)
     {
-        Attaque.Instance._JaugeAttack.SynchAttackBorne(Unit, 0);
+        Unit.DiceBonus += 1;
+        Attaque.Instance._JaugeAttack.SynchAttackBorne(Unit);
         base.UnCibledByAttack(Unit);
     }
 }

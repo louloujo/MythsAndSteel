@@ -66,7 +66,17 @@ public class UnitScript : MonoBehaviour
 
     //Bonus aux lancés de dé
     [SerializeField] public int _diceBonus = 0;
-    public int DiceBonus => _diceBonus;
+    public int DiceBonus
+    {
+        get
+        {
+            return _diceBonus;
+        }
+        set
+        {
+            _diceBonus = value;
+        }
+    }
 
 
     [Header("------------------- MOUVEMENT -------------------")]
