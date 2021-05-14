@@ -176,6 +176,10 @@ public class PlayerScript : MonoSingleton<PlayerScript>
                 cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchDéploiementAccéléré);
                 break;
 
+            case MYthsAndSteel_Enum.EventCard.Vol_de_ravitaillement:
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchVolDeRavitaillement);
+                break;
+
             case MYthsAndSteel_Enum.EventCard.Détonation_d_orgone:
                 break;
 
@@ -199,6 +203,7 @@ public class PlayerScript : MonoSingleton<PlayerScript>
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Paralysie:
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchParalysie);
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Pillage_orgone:
@@ -218,6 +223,7 @@ public class PlayerScript : MonoSingleton<PlayerScript>
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Sabotage:
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchSabotage);
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Sérum_expérimental:

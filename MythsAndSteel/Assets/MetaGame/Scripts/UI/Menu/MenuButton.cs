@@ -11,10 +11,7 @@ public class MenuButton : MonoBehaviour
     /// <summary>
     /// Change de scène
     /// </summary>
-    private void Awake()
-    {
-        Time.timeScale = 1;
-    }
+
     public void ChangeScene(int sceneToLoad)
     {
         SceneManager.LoadSceneAsync(sceneToLoad);

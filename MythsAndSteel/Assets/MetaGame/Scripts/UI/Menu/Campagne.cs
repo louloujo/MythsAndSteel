@@ -20,7 +20,7 @@ public class Campagne : MonoBehaviour
     [SerializeField] private GameObject _buttonRight = null;
     [SerializeField] private float _mapSpeed = 0f;
     [SerializeField] private GameObject _mapTransform = null;
-
+    
     private void Start()
     {
         //Assigne les valeur de dévérouillage des scénario

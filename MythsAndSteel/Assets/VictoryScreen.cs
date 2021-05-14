@@ -37,7 +37,7 @@ public class VictoryScreen : MonoBehaviour
     #endregion
     void Awake()
     {
-        Time.timeScale = 1;
+      
         startTime = Time.time;
     }
 

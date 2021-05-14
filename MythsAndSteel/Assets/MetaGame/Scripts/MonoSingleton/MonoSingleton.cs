@@ -7,6 +7,10 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
     public static T Instance => _instance;
 
     private void Awake(){
-        if(_instance == null) _instance = (T) this;
+        if(_instance == null) 
+        {
+            _instance = (T)this;
+
+        }
     }
 }

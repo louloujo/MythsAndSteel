@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3668bad8ee21a84d94958001e121a9a, type: 3}
   m_Name: Game Manager SO
   m_EditorClassIdentifier: 
+  azer: 1
