@@ -106,7 +106,7 @@ public class InputManager : MonoBehaviour
                         Mouvement.Instance.DeleteChildWhenMove();
                     }
                 }
-                else if (Attaque.Instance.SelectedTiles.Count == 1)
+                else if (Attaque.Instance._selectedTiles.Count == 1)
                 {
                     Mouvement.Instance.StopMouvement(true);
                     Attaque.Instance.Attack();

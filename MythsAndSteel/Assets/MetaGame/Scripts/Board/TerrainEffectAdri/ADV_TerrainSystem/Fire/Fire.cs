@@ -102,7 +102,6 @@ public class Fire : TerrainParent
             Unit.TakeDamage(1); 
         }
         base.OnUnityAdd(Unit);
-        Debug.Log("damage");
     }
 
     public override void EndTurnEffect(TileScript ts, UnitScript Unit = null)

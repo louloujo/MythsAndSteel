@@ -85,4 +85,8 @@ public class TerrainParent : MonoBehaviour
     {
 
     }
+    public virtual int AttackApply(int BaseDamage = 0)
+    {
+        return BaseDamage;
+    }
 }
