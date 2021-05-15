@@ -187,16 +187,25 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             {
                 if(_actualUnitSelected == UnitInTile && !Mouvement.Instance.MvmtRunning && Attaque.Instance.IsInAttack)
                 {
+
+                    if(!UnitInTile.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
+                    {
+
+                    Debug.Log("fjdkms");
+
                     Attaque.Instance.StopAttack();
                     Mouvement.Instance.StopMouvement(true);
                     UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
                     _actualTileSelected = null;
                     ActualUnitSelected = null;
+                    }
                 }
                 else if(!Mouvement.Instance.Selected && !Attaque.Instance.Selected && UnitInTile != null)
                 {
-                    
-                   UnitScript currentUnitScript = UnitInTile.GetComponent<UnitScript>();
+                    if (!UnitInTile.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
+                    {
+
+                    UnitScript currentUnitScript = UnitInTile.GetComponent<UnitScript>();
                     if (CanUseUnitWhenClic(currentUnitScript))
                     {
                         
@@ -204,6 +213,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                         ActualUnitSelected = _unitInTile;
                         Mouvement.Instance.StartMvmtForSelectedUnit();
                         Attaque.Instance.StartAttackSelectionUnit();
+                    }
                     }
                 }
                 else if(Mouvement.Instance.Selected)

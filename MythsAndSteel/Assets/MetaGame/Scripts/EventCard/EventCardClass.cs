@@ -348,7 +348,7 @@ public class EventCardClass : ScriptableObject{
             }
         }
 
-        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && 
+        if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 && Attaque.Instance.IsInAttack|| GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) && 
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn))){
             LaunchEventTile(1, player == 1 ? true : false, gamList, "Déploiement accéléré", "Êtes-vous sur de vouloir créer une unité d'infanterie sur cette case?", false);
             GameManager.Instance._eventCall += DéploiementAccéléré;
@@ -410,8 +410,8 @@ public class EventCardClass : ScriptableObject{
             LaunchEventUnit(2, player == 1 ? true : false, unitList, "Illusion Stratégique", "Êtes-vous sur de vouloir échanger la position de ces deux unités sur le plateau?");
             GameManager.Instance._eventCall += IllusionStratégique;
         }
-
         unitList.Clear();
+      
     }
     #endregion IllusionStratégique
 
@@ -526,7 +526,7 @@ public class EventCardClass : ScriptableObject{
     {
         UIInstance.Instance.ActivateNextPhaseButton();
 
-        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Arme_épidémiologique);
+        GameManager.Instance.armeEpidemelogiqueStat = DeterminArmy(MYthsAndSteel_Enum.EventCard.Arme_épidémiologique);
 
         GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.ArmeEpidemiologique);
 
@@ -546,7 +546,7 @@ public class EventCardClass : ScriptableObject{
         if((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
             ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
         {
-            LaunchEventUnit(1, player == 1 ? true : false, unitList, "Arme épidémiologique", "Êtes-vous sur de vouloir Infliger l'effet à cette unité? Toutes unités adjacentes à cette unité se verra perdre un point de vie à la fin du tour");
+            LaunchEventUnit(1, player == 1 ? true : false, unitList, "Arme épidémiologique", "Êtes-vous sur de vouloir Infliger l'effet à cette unité? Toutes unités adjacentes à cette unité se verra perdre un point de vie à la fin du tour adverse ainsi que les unités adjacentes.");
             GameManager.Instance._eventCall += ArmeEpidemiologique;
         }
 
@@ -563,9 +563,11 @@ public class EventCardClass : ScriptableObject{
         
         if(player == 1){
             PlayerScript.Instance.RedPlayerInfos.ActivationLeft++;
+            UIInstance.Instance.UpdateActivationLeft();
         }
         else{
             PlayerScript.Instance.BluePlayerInfos.ActivationLeft++;
+            UIInstance.Instance.UpdateActivationLeft();
         }
 
         //Remove la carte event chez le bon joueur
@@ -736,7 +738,7 @@ public class EventCardClass : ScriptableObject{
             unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Possédé);
             unit.GetComponent<UnitScript>().AddDiceToUnit(-4);
         }
-
+        GameManager.Instance.possesion = true;
         GameManager.Instance.UnitChooseList.Clear();
         RemovePlayerRessource(MYthsAndSteel_Enum.EventCard.Reprogrammation);
         //Remove la carte event chez le bon joueur
@@ -775,7 +777,7 @@ public class EventCardClass : ScriptableObject{
             unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Invincible);
             unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.PeutPasPrendreDesObjectifs);
         }
-        GameManager.Instance.CessezlefeuUsed = true;
+
         GameManager.Instance.UnitChooseList.Clear();
         RemovePlayerRessource(MYthsAndSteel_Enum.EventCard.Cessez_le_feu);
         //Remove la carte event chez le bon joueur
@@ -804,8 +806,141 @@ public class EventCardClass : ScriptableObject{
 
         unitList.Clear();
     }
+
     #endregion Reprogrammation
 
+    #region Vol de Ravitaillement
+
+    public void VolDeRavitaillement()
+    {
+     
+        UIInstance.Instance.ActivateNextPhaseButton();
+        if(GameManager.Instance.IsPlayerRedTurn)
+        {
+
+        GameManager.Instance.VolDeRavitaillementStat = 1;
+        }
+        else
+        {
+            GameManager.Instance.VolDeRavitaillementStat = 2;
+        }
+      
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Vol_de_ravitaillement);
+
+    }
+        
+   public void LaunchVolDeRavitaillement()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Vol_de_ravitaillement);
+
+       if ((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+         
+
+         
+            GameManager.Instance._eventCall += VolDeRavitaillement;
+
+            if (PlayerPrefs.GetInt("Avertissement") == 0)
+            {
+               GameManager.Instance._eventCall();
+
+            }
+            UIInstance.Instance.ShowValidationPanel("Vol de Ravitaillement", "Êtes-vous sur de vouloir de voler les ressources récupérées par votre adversaire pendant ce tour?");
+        }
+    }
+    #endregion
+    #region Sabotage
+    public void Sabotage()
+    {
+        UIInstance.Instance.ActivateNextPhaseButton();
+        if (GameManager.Instance.IsPlayerRedTurn)
+        {
+
+            GameManager.Instance.SabotageStat = 1;
+        }
+        else
+        {
+            GameManager.Instance.SabotageStat = 2;
+        }
+
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Sabotage);
+    }
+    public void LaunchSabotage()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Sabotage);
+        if ((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+      ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+            GameManager.Instance._eventCall += Sabotage;
+            if (PlayerPrefs.GetInt("Avertissement") == 0)
+            {
+                GameManager.Instance._eventCall();
+
+            }
+            UIInstance.Instance.ShowValidationPanel("Sabotage", "Êtes-vous sur de vouloir de réduire la valeur d'activation de votre adversaire lors de sa prochaine phase d'action?");
+        }
+    }
+    #endregion
+    #region Paralysie
+    public void Paralysie()
+    {
+        List<GameObject> unitList = new List<GameObject>();
+        unitList.AddRange(PlayerScript.Instance.UnitRef.UnitListBluePlayer);
+        unitList.AddRange(PlayerScript.Instance.UnitRef.UnitListRedPlayer);
+        UIInstance.Instance.ActivateNextPhaseButton();
+        MYthsAndSteel_Enum.TypeUnite typeUnitChoose = GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().UnitSO.typeUnite;
+        foreach (GameObject unit in unitList)
+        {
+            if(unit.GetComponent<UnitScript>().UnitSO.typeUnite == typeUnitChoose)
+            {
+                unit.GetComponent<UnitScript>().AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Paralysie);
+            }
+        }
+        if (GameManager.Instance.IsPlayerRedTurn)
+        {
+
+            GameManager.Instance.ParalysieStat = 1;
+        }
+        else
+        {
+            GameManager.Instance.ParalysieStat = 2;
+        }
+        RemovePlayerRessource(MYthsAndSteel_Enum.EventCard.Paralysie);
+        unitList.Clear();
+        typeUnitChoose = MYthsAndSteel_Enum.TypeUnite.Autre;
+        GameManager.Instance.UnitChooseList.Clear();
+        //Remove la carte event chez le bon joueur
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Sabotage);
+    }
+    public void LaunchParalysie()
+    {
+        List<GameObject> unitList = new List<GameObject>();
+
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Paralysie);
+        unitList.AddRange(PlayerScript.Instance.UnitRef.UnitListBluePlayer);
+        unitList.AddRange(PlayerScript.Instance.UnitRef.UnitListRedPlayer);
+        if ((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2) &&
+      ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+            if ((player == 1 && PlayerScript.Instance.RedPlayerInfos.Ressource > 0) || (player == 2 && PlayerScript.Instance.BluePlayerInfos.Ressource > 0))
+            {
+              
+
+            GameManager.Instance._eventCall += Paralysie;
+               
+
+                LaunchEventUnit(1, player == 1 ? true : false, unitList, "Paralysie", "Êtes-vous sur de vouloir empecher l'activation des unités ayant le même type que celle séléctionnée?");
+               
+            }
+        
+            }
+        unitList.Clear();
+    }
+
+    #endregion
     #region Réapprovisionnement
     public void Reapprovisionnement()
     {

@@ -95,11 +95,15 @@ public class Player
             
             GameManager.Instance.DoingEpxlosionOrgone = true;
             List<GameObject> unitList = player == 1 ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer;
+
+
             GameManager.Instance.StartEventModeUnit(4, player == 1 ? true : false, unitList, "Explosion d'orgone", "Êtes-vous sur de vouloir infliger des dégâts à ces unités?", true);
             GameManager.Instance._eventCall += GiveDamageToUnitForOrgone;
-            if(player == 1) GameManager.Instance._eventCallCancel += CancelOrgoneP1;
+       
+            if (player == 1) GameManager.Instance._eventCallCancel += CancelOrgoneP1;
             else GameManager.Instance._eventCallCancel += CancelOrgoneP2;
             PLayerOrgoneExplose = player;
+
 
             UpdateOrgoneUI(player);
         }
@@ -169,6 +173,7 @@ public class Player
             GameManager.Instance._waitEvent += DealOrgoneDamageToUnit;
             GameManager.Instance.WaitToMove(.035f);
         }
+   
         else
         {
             GameManager.Instance._waitEvent -= DealOrgoneDamageToUnit;

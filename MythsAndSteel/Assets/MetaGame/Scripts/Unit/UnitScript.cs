@@ -405,7 +405,7 @@ public class UnitScript : MonoBehaviour
                 {
                     if (!IsOrgoneDamage)
                     {
-                        PlayerScript.Instance.AddOrgone(1, 1);
+                        PlayerScript.Instance.AddOrgone(1, 2);
                         Debug.Log("Ca buuuuuug");
                     }
                     if (GameManager.Instance._waitToCheckOrgone != null) GameManager.Instance._waitToCheckOrgone += AddOrgoneToPlayer;
@@ -476,13 +476,15 @@ public class UnitScript : MonoBehaviour
             }
             else if (TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.OrgoneBlue))
             {
-                if (!GameManager.Instance.DoingEpxlosionOrgone) PlayerScript.Instance.AddOrgone(1, 2);
+                PlayerScript.Instance.AddOrgone(1, 2);
                 PlayerScript.Instance.BluePlayerInfos.CheckOrgone(2);
             }
             else { }
         }
         else
         {
+            Debug.Log("fdkj");
+            TilesManager.Instance.TileList[ActualTiledId].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
             GameManager.Instance.DeathByOrgone--;
         }
 

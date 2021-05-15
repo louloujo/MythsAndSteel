@@ -86,7 +86,31 @@ public class EndTurn : MonoBehaviour
                 if (S.Unit != null)
                 {
                     UnitScript US = S.Unit.GetComponent<UnitScript>();
+                    if(GameManager.Instance.VolDeRavitaillementStat != 3)
+                    {
+                       if(S.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy && GameManager.Instance.VolDeRavitaillementStat == 2)
+                        {
+                       
+                            S.RemoveRessources(1, 2);
+                      
+                        }
+                       else if (!S.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy && GameManager.Instance.VolDeRavitaillementStat == 1)
+                        {
+                       
+                            S.RemoveRessources(1, 1);
+                     
+                        }
+                        else
+                        {
+
+                            S.RemoveRessources(1, PlayerStatic.CheckIsUnitArmy(US.GetComponent<UnitScript>(), true) == true ? 1 : 2);
+                        }
+                    }
+                    else
+                    {
+
                     S.RemoveRessources(1, PlayerStatic.CheckIsUnitArmy(US.GetComponent<UnitScript>(), true) == true ? 1 : 2);
+                    }
                 }
             }
 
@@ -98,6 +122,7 @@ public class EndTurn : MonoBehaviour
                 S.TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Point_de_ressources_vide);
             }
         }
+        GameManager.Instance.VolDeRavitaillementStat = 3;
     }
 
     /// <summary>

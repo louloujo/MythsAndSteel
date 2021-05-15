@@ -201,7 +201,7 @@ public class InputManager : MonoBehaviour
 
         else
         {
-            if(Input.GetKeyDown(PauseGame))
+            if(Input.GetKeyDown(PauseGame) && !GameManager.Instance.menuOptionOuvert)
             {
 
             GameManager.Instance.StopPaused();
