@@ -17,15 +17,21 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    
 
     #region Variables
     public VictoryScreen victoryScreen;
     [Header("INFO TOUR ACTUEL")]
     //Correspond à la valeur du tour actuel
-
+  public  int armeEpidemelogiqueStat = 0;
+    public int VolDeRavitaillementStat = 3;
+    public bool possesion = false;
+    public int SabotageStat = 3;
+    public int ParalysieStat = 3;
     [SerializeField]
     GameObject pauseMenu;
-
+    /// <param name="sceneId"></param>
+   public  bool menuOptionOuvert = false;
     [SerializeField]
     GameObject backgroundActivation;
     public bool isGamePaused = false;
@@ -44,7 +50,7 @@ public class GameManager : MonoSingleton<GameManager>
             _actualTurnNumber = value;
         }
     }
-    public bool CessezlefeuUsed = false;
+  
     [SerializeField] TextMeshProUGUI _TurnNumber;
 
     //Permet de savoir si c'est le joueur 1 (TRUE) ou le joueur 2 (FALSE) qui commence durant ce tour
@@ -184,6 +190,7 @@ public class GameManager : MonoSingleton<GameManager>
         _managerSO.GoToOrgoneJ1Phase += DetermineWhichPlayerplay;
         _managerSO.GoToOrgoneJ2Phase += DetermineWhichPlayerplay;
         _isInTurn = true;
+        activationDone = false;
     }
 
     private void Update()
@@ -390,6 +397,7 @@ public class GameManager : MonoSingleton<GameManager>
     /// <param name="armyUnit"></param>
     public void StartEventModeUnit(int numberUnit, bool redPlayer, List<GameObject> _unitSelectable, string title, string description, bool multiplesUnit = false)
     {
+
         UIInstance.Instance.DesactivateNextPhaseButton();
         _titleValidation = title;
         _descriptionValidation = description;
@@ -402,16 +410,25 @@ public class GameManager : MonoSingleton<GameManager>
 
         foreach (GameObject gam in _selectableUnit)
         {
+
             TilesManager.Instance.TileList[gam.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
         }
 
+       if(!DoingEpxlosionOrgone && PlayerPrefs.GetInt("Avertissement") == 0 || PlayerPrefs.GetInt("Avertissement") == 1)
+        {
+
         _eventCall += StopEventModeUnit;
+        }
+       
+
+        
+
     }
 
     /// <summary>
     /// Arrete le choix d'unité
     /// </summary>
-    void StopEventModeUnit()
+ public   void StopEventModeUnit()
     {
         _titleValidation = "";
         _descriptionValidation = "";
@@ -503,8 +520,13 @@ public class GameManager : MonoSingleton<GameManager>
                 _chooseUnitForEvent = false;
                 if (PlayerPrefs.GetInt("Avertissement") == 0)
                 {
+                    if(DoingEpxlosionOrgone)
+                    {
+                        _eventCall += StopEventModeUnit;
+                    }
                     _eventCall();
                 }
+               
                 UIInstance.Instance.ShowValidationPanel(_titleValidation, _descriptionValidation);
             }
         }
@@ -701,11 +723,7 @@ public class GameManager : MonoSingleton<GameManager>
         _TurnNumber.text = _actualTurnNumber.ToString();
         victoryScreen.turnCounter = _actualTurnNumber;
     }
-    public void LoadMainMenu()
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadScene(1);
-    }
+
     public void Paused()
     {
 
@@ -736,19 +754,5 @@ public class GameManager : MonoSingleton<GameManager>
         BackgroundPaused.SetActive(false);
 
     }
-    public void DesactiveStatutCessezLeFeu(GameObject unit)
-    {
-        if (CessezlefeuUsed )
-        {
 
-            List<MYthsAndSteel_Enum.UnitStatut> currentunitstatut = new List<MYthsAndSteel_Enum.UnitStatut>();
-           
-            unit.GetComponent<UnitScript>().UnitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre);
-            unit.GetComponent<UnitScript>().UnitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.Invincible);
-            CessezlefeuUsed = false;
-        }
-
-
-    
-    }
 }

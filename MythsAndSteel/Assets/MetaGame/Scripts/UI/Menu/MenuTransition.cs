@@ -13,12 +13,22 @@ public class MenuTransition : ScriptableObject
     /// <summary>
     /// Active une scène
     /// </summary>
-    /// <param name="sceneId"></param>
+ 
     public void LoadScene(int sceneId)
     {
        SceneManager.LoadSceneAsync(sceneId, LoadSceneMode.Additive);
     }
+    public void LoadSceneOptionInGame(int sceneId)
+    {
+       GameManager.Instance.menuOptionOuvert = true;
+        SceneManager.LoadSceneAsync(sceneId, LoadSceneMode.Additive);
 
+    }
+    public void DesactivMenuOptionInGame(int sceneId)
+    {
+       GameManager.Instance.menuOptionOuvert = false;
+        SceneManager.UnloadSceneAsync(sceneId);
+    }
     /// <summary>
     /// Désactive une scène
     /// </summary>

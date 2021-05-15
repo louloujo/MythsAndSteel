@@ -256,6 +256,7 @@ public class TileScript : MonoBehaviour
                         tag = "SelectableTile";
                         if (gam.tag == tag)
                         {
+
                             child = gam;
                             child.GetComponent<SpriteRenderer>().enabled = true;
                             if (sprite != null) child.GetComponent<SpriteRenderer>().sprite = sprite;
@@ -353,13 +354,16 @@ public class TileScript : MonoBehaviour
     {
         if (_resourcesCounter - value >= 0)
         {
+            
             _resourcesCounter -= value;
             if (player == 1)
             {
+              
                 PlayerScript.Instance.RedPlayerInfos.Ressource += value;
             }
             else
             {
+                
                 PlayerScript.Instance.BluePlayerInfos.Ressource += value;
             }
         }
@@ -369,10 +373,12 @@ public class TileScript : MonoBehaviour
 
             if (player == 1)
             {
+              
                 PlayerScript.Instance.RedPlayerInfos.Ressource += value;
             }
             else
             {
+                
                 PlayerScript.Instance.BluePlayerInfos.Ressource += value;
             }
         }

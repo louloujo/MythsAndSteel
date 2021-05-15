@@ -1580,12 +1580,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   victoryScreen: {fileID: 1898137079}
+  armeEpidemelogiqueStat: 0
+  VolDeRavitaillementStat: 3
+  possesion: 0
+  SabotageStat: 3
+  ParalysieStat: 3
   pauseMenu: {fileID: 1477396351}
+  menuOptionOuvert: 0
   backgroundActivation: {fileID: 2057195738}
   isGamePaused: 0
   BackgroundPaused: {fileID: 2104470150}
   _actualTurnNumber: 0
-  CessezlefeuUsed: 0
   _TurnNumber: {fileID: 1228111641}
   _isPlayerRedStarting: 0
   _isPlayerRedTurn: 0

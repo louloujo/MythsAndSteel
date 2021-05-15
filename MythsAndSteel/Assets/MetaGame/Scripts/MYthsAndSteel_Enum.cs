@@ -8,7 +8,7 @@ public class MYthsAndSteel_Enum : MonoBehaviour
     /// Enum pour le type des unités
     /// </summary>
     public enum TypeUnite{ 
-        Infanterie, Vehicule, Artillerie, Mythe, Leader, Mecha
+        Infanterie, Vehicule, Artillerie, Mythe, Leader, Mecha, Autre
     }
 
     /// <summary>
