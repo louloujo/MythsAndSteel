@@ -117,7 +117,6 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
 
     public void ExplosionOrgone(int Player)
     {
-        Debug.Log(Player);
         if(Player == 1)
         {
             Explodered.SetTrigger("explode");

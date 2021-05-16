@@ -26,4 +26,15 @@ public class Bunker : TerrainParent
         }
         base.FirstUnitOnCase(Unit);
     }
+
+    public override int AttackApply(int BaseDamage = 0)
+    {
+        int i = 0;
+        if(BaseDamage > 0)
+        {
+            i--;
+        }
+        Debug.Log("attack low");
+        return base.AttackApply(i);
+    }
 }

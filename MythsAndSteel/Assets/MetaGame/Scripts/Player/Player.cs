@@ -182,6 +182,8 @@ public class Player
 
             GameManager.Instance.IsCheckingOrgone = false;
 
+            GameManager.Instance.DoingEpxlosionOrgone = false;
+
             if (GameManager.Instance._waitToCheckOrgone != null)
             {
                 GameManager.Instance._waitToCheckOrgone();
