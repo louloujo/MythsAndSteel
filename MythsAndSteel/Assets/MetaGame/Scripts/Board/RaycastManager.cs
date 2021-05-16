@@ -266,7 +266,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         }
         else if(GameManager.Instance.ChooseTileForEvent)
         {
-            GameManager.Instance.RemoveUnitToList(_tile);
+            GameManager.Instance.RemoveTileToList(_tile);
         }
     }
 

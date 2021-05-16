@@ -2,26 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BarbelGestion : MonoBehaviour
+public class BarbelGestion : MonoSingleton<BarbelGestion>
 {
 
 
-    public enum Direction
-    {
-        Nord, Sud, Est, Ouest, Unknown
-    }
+
     [SerializeField] private int BarbelDamage = 2;
 
-    [SerializeField] private Direction Direct;
+    
 
     public Sprite Horizontal;
     public Sprite Vertical;
     public List<Barbel> BarbelActive;
 
-    public void CreateBarbel(int tileId)
+    public void CreateBarbel(int tileId, MYthsAndSteel_Enum.Direction Direct)
     {
         List<MYthsAndSteel_Enum.TerrainType> T = TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().TerrainEffectList;
-        Direction D = Direction.Unknown;
+        MYthsAndSteel_Enum.Direction D = MYthsAndSteel_Enum.Direction.None;
         if (T.Contains(MYthsAndSteel_Enum.TerrainType.Barbelé_Est) || T.Contains(MYthsAndSteel_Enum.TerrainType.Barbelé_Nord) || T.Contains(MYthsAndSteel_Enum.TerrainType.Barbelé_Sud) || T.Contains(MYthsAndSteel_Enum.TerrainType.Barbelé_Ouest))
         {
             List<GameObject> G = TilesManager.Instance.TileList[tileId].GetComponent<TileScript>()._Child;
@@ -35,7 +32,7 @@ public class BarbelGestion : MonoBehaviour
                     }
                 }
             }
-            if (D != Direction.Unknown)
+            if (D != MYthsAndSteel_Enum.Direction.None)
             {
                 Delete(tileId, D);
             }
@@ -43,43 +40,43 @@ public class BarbelGestion : MonoBehaviour
             {
                 switch (Direct)
                 {
-                    case Direction.Est:
+                    case MYthsAndSteel_Enum.Direction.Est:
                         if (tileId + 1 <= 80)
                         {
                             List<MYthsAndSteel_Enum.TerrainType> T2 = TilesManager.Instance.TileList[tileId + 1].GetComponent<TileScript>().TerrainEffectList;
                             if (T2.Contains(MYthsAndSteel_Enum.TerrainType.Barbelé_Ouest))
                             {
-                                Delete(tileId + 1, Direction.Ouest);
+                                Delete(tileId + 1, MYthsAndSteel_Enum.Direction.Ouest);
                             }
                         }
                         break;
-                    case Direction.Ouest:
+                    case MYthsAndSteel_Enum.Direction.Ouest:
                         if (tileId - 1 >= 0)
                         {
                             List<MYthsAndSteel_Enum.TerrainType> T2 = TilesManager.Instance.TileList[tileId - 1].GetComponent<TileScript>().TerrainEffectList;
                             if (T2.Contains(MYthsAndSteel_Enum.TerrainType.Barbelé_Est))
                             {
-                                Delete(tileId - 1, Direction.Est);
+                                Delete(tileId - 1, MYthsAndSteel_Enum.Direction.Est);
                             }
                         }
                         break;
-                    case Direction.Nord:
+                    case MYthsAndSteel_Enum.Direction.Nord:
                         if (tileId + 9 <= 80)
                         {
                             List<MYthsAndSteel_Enum.TerrainType> T2 = TilesManager.Instance.TileList[tileId + 9].GetComponent<TileScript>().TerrainEffectList;
                             if (T2.Contains(MYthsAndSteel_Enum.TerrainType.Barbelé_Sud))
                             {
-                                Delete(tileId + 9, Direction.Sud);
+                                Delete(tileId + 9, MYthsAndSteel_Enum.Direction.Sud);
                             }
                         }
                         break;
-                    case Direction.Sud:
+                    case MYthsAndSteel_Enum.Direction.Sud:
                         if (tileId - 9 >= 0)
                         {
                             List<MYthsAndSteel_Enum.TerrainType> T2 = TilesManager.Instance.TileList[tileId - 9].GetComponent<TileScript>().TerrainEffectList;
                             if (T2.Contains(MYthsAndSteel_Enum.TerrainType.Barbelé_Nord))
                             {
-                                Delete(tileId - 9, Direction.Nord);
+                                Delete(tileId - 9, MYthsAndSteel_Enum.Direction.Nord);
                             }
                         }
                         break;
@@ -93,12 +90,12 @@ public class BarbelGestion : MonoBehaviour
         }
     }
 
-    public void Delete(int tileId, Direction Direction)
+    public void Delete(int tileId, MYthsAndSteel_Enum.Direction Direction)
     {
         TileScript TS = TilesManager.Instance.TileList[tileId].GetComponent<TileScript>();
         switch (Direction)
         {
-            case Direction.Est: 
+            case MYthsAndSteel_Enum.Direction.Est: 
                 TS.RemoveEffect(MYthsAndSteel_Enum.TerrainType.Barbelé_Est);
                 if (tileId + 1 <= 80)
                 {
@@ -106,7 +103,7 @@ public class BarbelGestion : MonoBehaviour
                     TSE.RemoveEffect(MYthsAndSteel_Enum.TerrainType.Barbelé_Ouest);
                 }
                 break;
-            case Direction.Nord:
+            case MYthsAndSteel_Enum.Direction.Nord:
                 TS.RemoveEffect(MYthsAndSteel_Enum.TerrainType.Barbelé_Nord);
                 if (tileId + 9 <= 80)
                 {
@@ -114,7 +111,7 @@ public class BarbelGestion : MonoBehaviour
                      TSN.RemoveEffect(MYthsAndSteel_Enum.TerrainType.Barbelé_Sud);
                 }
                 break;
-            case Direction.Sud:
+            case MYthsAndSteel_Enum.Direction.Sud:
                 TS.RemoveEffect(MYthsAndSteel_Enum.TerrainType.Barbelé_Sud);
                 if (tileId - 9 >= 0)
                 {
@@ -122,7 +119,7 @@ public class BarbelGestion : MonoBehaviour
                     TSS.RemoveEffect(MYthsAndSteel_Enum.TerrainType.Barbelé_Nord);
                 }
                 break;
-            case Direction.Ouest:
+            case MYthsAndSteel_Enum.Direction.Ouest:
                 TS.RemoveEffect(MYthsAndSteel_Enum.TerrainType.Barbelé_Ouest);
                 if (tileId - 1 >= 0)
                 {
@@ -134,7 +131,7 @@ public class BarbelGestion : MonoBehaviour
     }
 
     MYthsAndSteel_Enum.TerrainType TY;
-    protected void BarbelCreationAfterVerification(int tileId, Direction Direction)
+    protected void BarbelCreationAfterVerification(int tileId, MYthsAndSteel_Enum.Direction Direction)
     {
         foreach (TerrainType T in GameManager.Instance.Terrain.EffetDeTerrain)
         {
@@ -153,7 +150,7 @@ public class BarbelGestion : MonoBehaviour
                     Child.transform.localPosition = Vector3.zero;
 
                     TileScript TS = TilesManager.Instance.TileList[tileId].GetComponent<TileScript>();
-                    if (Direction == Direction.Nord)
+                    if (Direction == MYthsAndSteel_Enum.Direction.Nord)
                     {
                         TY = MYthsAndSteel_Enum.TerrainType.Barbelé_Nord; TS.TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Barbelé_Nord);
                         if (tileId + 9 <= 80)
@@ -162,7 +159,7 @@ public class BarbelGestion : MonoBehaviour
                             TSN.TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Barbelé_Sud);
                         }
                     }
-                    if (Direction == Direction.Sud)
+                    if (Direction == MYthsAndSteel_Enum.Direction.Sud)
                     {
                         TY = MYthsAndSteel_Enum.TerrainType.Barbelé_Sud; TS.TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Barbelé_Sud);
                         if (tileId - 9 >= 0)
@@ -171,7 +168,7 @@ public class BarbelGestion : MonoBehaviour
                             TSS.TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Barbelé_Nord);
                         }
                     }
-                    if (Direction == Direction.Est)
+                    if (Direction == MYthsAndSteel_Enum.Direction.Est)
                     {
                         TY = MYthsAndSteel_Enum.TerrainType.Barbelé_Est; TS.TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Barbelé_Est);
                         if (tileId + 1 <= 80)
@@ -180,7 +177,7 @@ public class BarbelGestion : MonoBehaviour
                             TSE.TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Barbelé_Ouest);
                         }
                     }
-                    if (Direction == Direction.Ouest)
+                    if (Direction == MYthsAndSteel_Enum.Direction.Ouest)
                     {
                         TY = MYthsAndSteel_Enum.TerrainType.Barbelé_Ouest; TS.TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Barbelé_Ouest); 
                         if (tileId - 1 >= 0)
@@ -195,31 +192,24 @@ public class BarbelGestion : MonoBehaviour
         }
     }
 
-    public void Turn()
-    {
-        foreach (Barbel b in BarbelActive)
-        {
-            b.TurnLeft--;
-        }
-    }
 
 
 
-    public void RandomBarbel(int Number)
+    public void RandomBarbel(int Number, MYthsAndSteel_Enum.Direction Direct)
     {
         for(int p = 0; p <= Number; p++)
         {
         int i = Random.Range(1, 5);
         int w = Random.Range(1, 80);
-        Direction D;
+        MYthsAndSteel_Enum.Direction D;
         switch (i)
         {
-            case 1: Direct = Direction.Nord; break;
-            case 2: Direct = Direction.Sud; break;
-            case 3: Direct = Direction.Est; break;
-            case 4: Direct = Direction.Ouest; break;
+            case 1: Direct = MYthsAndSteel_Enum.Direction.Nord; break;
+            case 2: Direct = MYthsAndSteel_Enum.Direction.Sud; break;
+            case 3: Direct = MYthsAndSteel_Enum.Direction.Est; break;
+            case 4: Direct = MYthsAndSteel_Enum.Direction.Ouest; break;
         }
-        CreateBarbel(w);
+        CreateBarbel(w, Direct);
         }
     }
 }

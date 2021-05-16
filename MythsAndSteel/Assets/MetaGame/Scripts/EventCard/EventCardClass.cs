@@ -40,7 +40,7 @@ public class EventCardClass : ScriptableObject{
     void RemoveEvents(MYthsAndSteel_Enum.EventCard ev){
         if(PlayerScript.Instance.EventCardList._eventCardRedPlayer.Contains(ev)){
             PlayerScript.Instance.EventCardList._eventCardRedPlayer.Remove(ev);
-
+            
             foreach(GameObject gam in PlayerScript.Instance.EventCardList._eventGamRedPlayer){
                 if(gam.GetComponent<EventCardContainer>().EventCardInfo._eventType == ev){
                     RemoveEventGam(gam, 1);
@@ -484,7 +484,97 @@ public class EventCardClass : ScriptableObject{
 
         tileList.Clear();
     }
+
     #endregion PillageOrgone
+    #region Fils Barbelés
+    public void Fils_Barbelés()
+    {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
+
+foreach (GameObject element in TilesManager.Instance.TileList)
+        {
+         
+            element.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
+
+        }
+    MYthsAndSteel_Enum.Direction  barbelposition =  PlayerStatic.CheckDirection(GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().TileId, GameManager.Instance.TileChooseList[1].GetComponent<TileScript>().TileId);
+        BarbelGestion.Instance.CreateBarbel(GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().TileId, barbelposition);
+
+        RemovePlayerRessource(MYthsAndSteel_Enum.EventCard.Fil_barbelé);
+        //Remove la carte event chez le bon joueur
+        GameManager.Instance.TileChooseList.Clear();
+        GameManager.Instance.filBbarbelés = false;
+        barbelposition =MYthsAndSteel_Enum.Direction.None;
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Fil_barbelé);
+    }
+
+    public void LaunchFils_Barbelés()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Fil_barbelé);
+
+        List<GameObject> tileList = new List<GameObject>();
+        tileList.AddRange(TilesManager.Instance.TileList);
+
+        if ((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+            if (PlayerScript.Instance.RedPlayerInfos.Ressource >= 1 && player == 1 || PlayerScript.Instance.BluePlayerInfos.Ressource >= 1 && player == 2)
+            {
+                LaunchEventTile(2, player == 1 ? true : false, tileList, "Fils Barbelés", "Êtes-vous sur de vouloir faire apparaitre un barbelés entre deux cases?", true);
+                GameManager.Instance.filBbarbelés = true;
+                GameManager.Instance._eventCall += Fils_Barbelés;
+            }
+        }
+
+        tileList.Clear();
+    }
+    #endregion
+
+    #region Détonation d'Orgone
+    public void Détonation_d_Orgone()
+    {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
+
+        foreach (GameObject element in TilesManager.Instance.TileList)
+        {
+
+            element.GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
+
+        }
+        MYthsAndSteel_Enum.Direction barbelposition = PlayerStatic.CheckDirection(GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().TileId, GameManager.Instance.TileChooseList[1].GetComponent<TileScript>().TileId);
+        BarbelGestion.Instance.CreateBarbel(GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().TileId, barbelposition);
+
+        RemovePlayerRessource(MYthsAndSteel_Enum.EventCard.Fil_barbelé);
+        //Remove la carte event chez le bon joueur
+        GameManager.Instance.TileChooseList.Clear();
+        GameManager.Instance.filBbarbelés = false;
+        barbelposition = MYthsAndSteel_Enum.Direction.None;
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Fil_barbelé);
+    }
+
+    public void LaunchDétonation_d_Orgone()
+    {
+        int player = DeterminArmy(MYthsAndSteel_Enum.EventCard.Fil_barbelé);
+
+        List<GameObject> tileList = new List<GameObject>();
+        tileList.AddRange(TilesManager.Instance.TileList);
+
+        if ((GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2) &&
+            ((player == 1 && GameManager.Instance.IsPlayerRedTurn) || (player == 2 && !GameManager.Instance.IsPlayerRedTurn)))
+        {
+            if (PlayerScript.Instance.RedPlayerInfos.Ressource >= 1 && player == 1 || PlayerScript.Instance.BluePlayerInfos.Ressource >= 1 && player == 2)
+            {
+                LaunchEventTile(2, player == 1 ? true : false, tileList, "Fils Barbelés", "Êtes-vous sur de vouloir faire apparaitre un barbelés entre deux cases?", true);
+                GameManager.Instance.filBbarbelés = true;
+                GameManager.Instance._eventCall += Fils_Barbelés;
+            }
+        }
+
+        tileList.Clear();
+    }
+    #endregion
 
     #region PointeursLaser
     public void PointeursLaserOptimisés()

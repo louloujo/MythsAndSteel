@@ -24,6 +24,7 @@ public class GameManager : MonoSingleton<GameManager>
     [Header("INFO TOUR ACTUEL")]
     //Correspond à la valeur du tour actuel
   public  int armeEpidemelogiqueStat = 0;
+    public bool filBbarbelés = false;
     public int VolDeRavitaillementStat = 3;
     public bool possesion = false;
     public int SabotageStat = 3;
@@ -134,7 +135,7 @@ public class GameManager : MonoSingleton<GameManager>
     public bool RedPlayerUseEvent => _redPlayerUseEvent;
 
     [SerializeField] private Sprite _selectedTileSprite = null;
-    [SerializeField] private Sprite _normalEventSprite = null;
+    public Sprite _normalEventSprite = null;
 
     [HideInInspector] public bool IllusionStratégique = false;
 
@@ -639,6 +640,31 @@ public class GameManager : MonoSingleton<GameManager>
                     UIInstance.Instance.ShowValidationPanel(_titleValidation, _descriptionValidation);
                 }
             }
+            if (filBbarbelés && _tileChooseList.Count >= 1)
+            {
+                if(_tileChooseList.Count == 1)
+                {
+                _tileChooseList[0].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _normalEventSprite);
+                _selectableTiles.Clear();
+
+               foreach( int element in PlayerStatic.GetNeighbourDiag(_tileChooseList[0].GetComponent<TileScript>().TileId, _tileChooseList[0].GetComponent<TileScript>().Line, false))
+                {
+                    TilesManager.Instance.TileList[element].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _selectedTileSprite);
+                    _selectableTiles.Add(TilesManager.Instance.TileList[element]);
+
+                }
+
+                }
+    
+                else if (_tileChooseList.Count == 2)
+                {
+                    foreach (GameObject element in _selectableTiles)
+                    {
+                        element.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _normalEventSprite);
+                    }
+                }
+                
+            }
         }
     }
 
@@ -648,10 +674,33 @@ public class GameManager : MonoSingleton<GameManager>
     /// <param name="tile"></param>
     public void RemoveTileToList(GameObject tile)
     {
+        if(!filBbarbelés)
+        {
+
         _tileChooseList.Remove(tile);
         if (!_tileChooseList.Contains(tile))
         {
             tile.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _normalEventSprite);
+        }
+        }
+
+        if (filBbarbelés)
+        {
+            if (_tileChooseList.Contains(tile))
+            {
+                _selectableTiles.Clear();
+                _selectableTiles.AddRange(TilesManager.Instance.TileList);
+            Debug.Log("test3");
+            foreach (int element in PlayerStatic.GetNeighbourDiag(_tileChooseList[0].GetComponent<TileScript>().TileId, _tileChooseList[0].GetComponent<TileScript>().Line, false))
+            {
+               
+          TilesManager.Instance.TileList[element].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _normalEventSprite);
+                Debug.Log("test4");
+                _tileChooseList.Remove(tile);
+            }
+            }
+
+            
         }
     }
 
@@ -699,6 +748,7 @@ public class GameManager : MonoSingleton<GameManager>
         {
             if (!_selectableUnit.Contains(gam)) _selectableUnit.Add(gam);
         }
+        UIInstance.Instance.ActivateNextPhaseButton();
         StopEventModeTile();
         StopEventModeUnit();
 

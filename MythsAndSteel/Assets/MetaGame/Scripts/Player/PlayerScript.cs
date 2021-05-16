@@ -181,6 +181,7 @@ public class PlayerScript : MonoSingleton<PlayerScript>
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Détonation_d_orgone:
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchDétonation_d_Orgone);
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Entraînement_rigoureux:
@@ -188,6 +189,7 @@ public class PlayerScript : MonoSingleton<PlayerScript>
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Fil_barbelé:
+                cardGam.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(_eventCardList._eventSO.LaunchFils_Barbelés);
                 break;
 
             case MYthsAndSteel_Enum.EventCard.Illusion_stratégique:
