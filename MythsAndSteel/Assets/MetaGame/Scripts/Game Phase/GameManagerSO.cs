@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "META/Game Manager")]
 public class GameManagerSO : ScriptableObject
@@ -121,6 +122,7 @@ public class GameManagerSO : ScriptableObject
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1:
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1);
                 UIInstance.Instance.DesactiveOrgoneChargeButton();
+                UIInstance.Instance.ButtonRenfort.ButtonRenfortJ1.GetComponent<Button>().interactable = true;
                 foreach (GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer)
                 {
                     unit.GetComponent<UnitScript>().ResetTurn();
@@ -131,14 +133,14 @@ public class GameManagerSO : ScriptableObject
 
             case MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2:
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2);
-
+                UIInstance.Instance.ButtonRenfort.ButtonRenfortJ1.GetComponent<Button>().interactable = false;
                 GoToOrgoneJ2Phase();
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2:
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2);
-
-                foreach(GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer)
+                UIInstance.Instance.ButtonRenfort.ButtonRenfortJ2.GetComponent<Button>().interactable = true;
+                foreach (GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer)
                 {
                     unit.GetComponent<UnitScript>().ResetTurn();
                 }
@@ -148,6 +150,7 @@ public class GameManagerSO : ScriptableObject
 
             case MYthsAndSteel_Enum.PhaseDeJeu.Strategie:
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.Strategie);
+                UIInstance.Instance.ButtonRenfort.ButtonRenfortJ2.GetComponent<Button>().interactable = false;
                 PlayerScript.Instance.RedPlayerInfos.HasCreateUnit = false;
                 PlayerScript.Instance.BluePlayerInfos.HasCreateUnit = false;
                 if (GoToStrategyPhase != null) GoToStrategyPhase();

@@ -947,54 +947,72 @@ public class MouseCommand : MonoBehaviour
 
                 #region UpdateImageRenfort1a3
                 //Update Ressource en fonction du nombre.
-
-                //Image Ressource pour l'unité 1 de l'armée Rouge
-                UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[0].SetActive(true);
-                UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[1].SetActive(true);
-
-                //Si la première unité de l'armée Rouge a besoin de plus de 2 ressources.
-                if (unitReference.UnitClassCreableListRedPlayer[0].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
+                if (!OrgoneManager.Instance.DoingOrgoneCharge)
                 {
-                    UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[2].SetActive(true);
-                    UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[3].SetActive(true);
+                    //Image Ressource pour l'unité 1 de l'armée Rouge
+                    UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[0].SetActive(true);
+                    UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[1].SetActive(true);
+
+                    //Si la première unité de l'armée Rouge a besoin de plus de 2 ressources.
+                    if (unitReference.UnitClassCreableListRedPlayer[0].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
+                    {
+                        UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[2].SetActive(true);
+                        UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[3].SetActive(true);
+                    }
+                    else
+                    {
+                        UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[2].SetActive(false);
+                        UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[3].SetActive(false);
+                    }
+
+                    //Image Ressource pour l'unité 2 de l'armée Rouge
+                    UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[0].SetActive(true);
+                    UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[1].SetActive(true);
+
+                    //Si la deuxième unité de l'armée Rouge a besoin de plus de 2 ressources.
+                    if (unitReference.UnitClassCreableListRedPlayer[1].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
+                    {
+                        UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[2].SetActive(true);
+                        UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[3].SetActive(true);
+                    }
+                    else
+                    {
+                        UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[2].SetActive(false);
+                        UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[3].SetActive(false);
+                    }
+
+
+                    //Image Ressource pour l'unité 3 de l'armée Rouge
+                    UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[0].SetActive(true);
+                    UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[1].SetActive(true);
+
+                    //Si la troisième unité de l'armée Rouge a besoin de plus de 2 ressources.
+                    if (unitReference.UnitClassCreableListRedPlayer[2].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
+                    {
+                        UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[2].SetActive(true);
+                        UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[3].SetActive(true);
+                    }
+                    else
+                    {
+                        UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[2].SetActive(false);
+                        UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[3].SetActive(false);
+                    }
                 }
                 else
                 {
-                    UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[2].SetActive(false);
-                    UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource[3].SetActive(false);
-                }
+                   foreach(GameObject gam in UIInstance.Instance.RessourceUnit_PasTouche._unité1Ressource)
+                    {
+                        gam.SetActive(false);
+                    }
+                    foreach (GameObject gam in UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource)
+                    {
+                        gam.SetActive(false);
+                    }
+                    foreach (GameObject gam in UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource)
+                    {
+                        gam.SetActive(false);
+                    }
 
-                //Image Ressource pour l'unité 2 de l'armée Rouge
-                UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[0].SetActive(true);
-                UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[1].SetActive(true);
-
-                //Si la deuxième unité de l'armée Rouge a besoin de plus de 2 ressources.
-                if (unitReference.UnitClassCreableListRedPlayer[1].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
-                {
-                    UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[2].SetActive(true);
-                    UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[3].SetActive(true);
-                }
-                else
-                {
-                    UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[2].SetActive(false);
-                    UIInstance.Instance.RessourceUnit_PasTouche._unité2Ressource[3].SetActive(false);
-                }
-
-
-                //Image Ressource pour l'unité 3 de l'armée Rouge
-                UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[0].SetActive(true);
-                UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[1].SetActive(true);
-
-                //Si la troisième unité de l'armée Rouge a besoin de plus de 2 ressources.
-                if (unitReference.UnitClassCreableListRedPlayer[2].GetComponent<UnitScript>().UnitSO.CreationCost > 2)
-                {
-                    UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[2].SetActive(true);
-                    UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[3].SetActive(true);
-                }
-                else
-                {
-                    UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[2].SetActive(false);
-                    UIInstance.Instance.RessourceUnit_PasTouche._unité3Ressource[3].SetActive(false);
                 }
 
                 #endregion UpdateImageRenfort1a3

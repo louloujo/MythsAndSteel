@@ -19,7 +19,7 @@ public class ChargeRedPlayer : ChargeOrgone
     public override void ChargeOrgone5(int cost)
     {
         Debug.Log("R5");
-        if (PlayerScript.Instance.RedPlayerInfos.OrgoneValue == 5)
+        if (PlayerScript.Instance.RedPlayerInfos.OrgoneValue == 4)
         {
             OrgoneManager.Instance.DoingOrgoneCharge = true;
             List<GameObject> TempSelectablelist = PlayerInstance.GetComponent<UnitReference>().UnitClassCreableListRedPlayer;
