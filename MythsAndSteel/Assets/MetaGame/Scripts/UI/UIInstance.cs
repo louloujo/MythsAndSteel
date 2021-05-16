@@ -247,6 +247,35 @@ public class UIInstance : MonoSingleton<UIInstance>
     //nombre d'activation restante pour le joueur bleu
     [SerializeField] private TextMeshProUGUI _ressourceLeftTxtBP = null;
     public TextMeshProUGUI ressourceLeftTxtBP => _ressourceLeftTxtBP;
+    [Header("BOUTON LIE A L'ORGONE")]
+    [Header("RedPlayer")]
+    public GameObject RedButtonCharge1;
+    public GameObject RedButtonCharge3;
+    public GameObject RedButtonCharge5;
+    [Header("BluePlayer")]
+    public GameObject BlueButtonCharge1;
+    public GameObject BlueButtonCharge3;
+    public GameObject BlueButtonCharge5;
+
+    public void ActiveOrgoneChargeButton()
+    {
+        RedButtonCharge1.GetComponent<Button>().interactable = true;
+        RedButtonCharge3.GetComponent<Button>().interactable = true;
+        RedButtonCharge5.GetComponent<Button>().interactable = true;
+        BlueButtonCharge1.GetComponent<Button>().interactable = true;
+        BlueButtonCharge3.GetComponent<Button>().interactable = true;
+        BlueButtonCharge5.GetComponent<Button>().interactable = true;
+    }
+
+    public void DesactiveOrgoneChargeButton()
+    {
+        RedButtonCharge1.GetComponent<Button>().interactable = false;
+        RedButtonCharge3.GetComponent<Button>().interactable = false;
+        RedButtonCharge5.GetComponent<Button>().interactable = false;
+        BlueButtonCharge1.GetComponent<Button>().interactable = false;
+        BlueButtonCharge3.GetComponent<Button>().interactable = false;
+        BlueButtonCharge5.GetComponent<Button>().interactable = false;
+    }
 
     /// <summary>
     /// Update la valeur d'activation restante des joueurs

@@ -114,14 +114,14 @@ public class GameManagerSO : ScriptableObject
 
             case MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1:
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1);
-
+                UIInstance.Instance.ActiveOrgoneChargeButton();
                 GoToOrgoneJ1Phase();
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1:
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1);
-
-                foreach(GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer)
+                UIInstance.Instance.DesactiveOrgoneChargeButton();
+                foreach (GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer)
                 {
                     unit.GetComponent<UnitScript>().ResetTurn();
                 }

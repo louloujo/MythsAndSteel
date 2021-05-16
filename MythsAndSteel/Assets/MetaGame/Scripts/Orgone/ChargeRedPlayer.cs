@@ -19,7 +19,7 @@ public class ChargeRedPlayer : ChargeOrgone
     public override void ChargeOrgone5(int cost)
     {
         Debug.Log("R5");
-        if (GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1 && PlayerScript.Instance.RedPlayerInfos.OrgoneValue == 5)
+        if (PlayerScript.Instance.RedPlayerInfos.OrgoneValue == 5)
         {
             OrgoneManager.Instance.DoingOrgoneCharge = true;
             List<GameObject> TempSelectablelist = PlayerInstance.GetComponent<UnitReference>().UnitClassCreableListRedPlayer;
@@ -35,6 +35,7 @@ public class ChargeRedPlayer : ChargeOrgone
                     break;
                 }
             }
+            PlayerScript.Instance.RedPlayerInfos.OrgoneValue = 0;
         }
         
     }
