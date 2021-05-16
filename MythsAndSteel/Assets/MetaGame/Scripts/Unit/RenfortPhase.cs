@@ -588,6 +588,10 @@ public class RenfortPhase : MonoSingleton<RenfortPhase>
                 PlayerScript.Instance.BluePlayerInfos.Ressource -= PlayerScript.Instance.UnitRef.UnitClassCreableListBluePlayer[idCreate].GetComponent<UnitScript>().UnitSO.CreationCost;
                 UIInstance.Instance.UpdateRessourceLeft();
             }
+            else
+            {
+                OrgoneManager.Instance.DoingOrgoneCharge = false;
+            }
         }
 
         GameManager.Instance.TileChooseList.Clear();
