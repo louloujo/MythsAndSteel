@@ -1,37 +1,37 @@
 fileFormatVersion: 2
-guid: 2fedc6507ef5bec40a3cd8c1c48b08cb
+guid: e7307cba37dcfc54eab8d24eee4f9c80
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 97338797935697790
-    second: Jauge_Idle_3_0
+      213: -6341211034064998737
+    second: jauge_AnimB7_0
   - first:
-      213: 5074552705166704789
-    second: Jauge_Idle_3_1
+      213: -1058637299755188686
+    second: jauge_AnimB7_1
   - first:
-      213: 163585869639706188
-    second: Jauge_Idle_3_2
+      213: -4967299165563652000
+    second: jauge_AnimB7_2
   - first:
-      213: 3704400861162469535
-    second: Jauge_Idle_3_3
+      213: 483700755084065607
+    second: jauge_AnimB7_3
   - first:
-      213: 7106338938383341460
-    second: Jauge_Idle_3_4
+      213: -2669346210262043038
+    second: jauge_AnimB7_4
   - first:
-      213: 8982592956191985112
-    second: Jauge_Idle_3_5
+      213: -726368254848445988
+    second: jauge_AnimB7_5
   - first:
-      213: 1741098886257155844
-    second: Jauge_Idle_3_6
+      213: -7779510972949191968
+    second: jauge_AnimB7_6
   - first:
-      213: 728449039846917973
-    second: Jauge_Idle_3_7
+      213: 3450316920909891912
+    second: jauge_AnimB7_7
   - first:
-      213: -5266340537107474304
-    second: Jauge_Idle_3_8
+      213: -9000461560514715465
+    second: jauge_AnimB7_8
   - first:
-      213: -529664315853421662
-    second: Jauge_Idle_3_9
+      213: 5548971703422666815
+    second: jauge_AnimB7_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -133,7 +133,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Jauge_Idle_3_0
+      name: jauge_AnimB7_0
       rect:
         serializedVersion: 2
         x: 0
@@ -147,14 +147,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7f12d9fe11d95100800000000000000
-      internalID: 97338797935697790
+      spriteID: faea4c4692e7ff7a0800000000000000
+      internalID: -6341211034064998737
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jauge_Idle_3_1
+      name: jauge_AnimB7_1
       rect:
         serializedVersion: 2
         x: 938
@@ -168,14 +168,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59085799cce6c6640800000000000000
-      internalID: 5074552705166704789
+      spriteID: 23efc1a1cf6fe41f0800000000000000
+      internalID: -1058637299755188686
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jauge_Idle_3_2
+      name: jauge_AnimB7_2
       rect:
         serializedVersion: 2
         x: 1876
@@ -189,14 +189,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c46e5225b7c254200800000000000000
-      internalID: 163585869639706188
+      spriteID: 068fb7f0abb901bb0800000000000000
+      internalID: -4967299165563652000
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jauge_Idle_3_3
+      name: jauge_AnimB7_3
       rect:
         serializedVersion: 2
         x: 2814
@@ -210,14 +210,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f987d3bd4fca86330800000000000000
-      internalID: 3704400861162469535
+      spriteID: 74bbf54264376b600800000000000000
+      internalID: 483700755084065607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jauge_Idle_3_4
+      name: jauge_AnimB7_4
       rect:
         serializedVersion: 2
         x: 3752
@@ -231,14 +231,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4979ddb0d99ce9260800000000000000
-      internalID: 7106338938383341460
+      spriteID: 266bbcab3c394fad0800000000000000
+      internalID: -2669346210262043038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jauge_Idle_3_5
+      name: jauge_AnimB7_5
       rect:
         serializedVersion: 2
         x: 4690
@@ -252,14 +252,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ddcfbba3b498ac70800000000000000
-      internalID: 8982592956191985112
+      spriteID: cd153a1bbeb6be5f0800000000000000
+      internalID: -726368254848445988
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jauge_Idle_3_6
+      name: jauge_AnimB7_6
       rect:
         serializedVersion: 2
         x: 5628
@@ -273,14 +273,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40f9f2a5630a92810800000000000000
-      internalID: 1741098886257155844
+      spriteID: 0e22c1bdcff990490800000000000000
+      internalID: -7779510972949191968
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jauge_Idle_3_7
+      name: jauge_AnimB7_7
       rect:
         serializedVersion: 2
         x: 6566
@@ -294,14 +294,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 557cc01da88fb1a00800000000000000
-      internalID: 728449039846917973
+      spriteID: 8498a5185fcf1ef20800000000000000
+      internalID: 3450316920909891912
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jauge_Idle_3_8
+      name: jauge_AnimB7_8
       rect:
         serializedVersion: 2
         x: 7504
@@ -315,14 +315,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 088187b0f233ae6b0800000000000000
-      internalID: -5266340537107474304
+      spriteID: 7b066fea5efe71380800000000000000
+      internalID: -9000461560514715465
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jauge_Idle_3_9
+      name: jauge_AnimB7_9
       rect:
         serializedVersion: 2
         x: 8442
@@ -336,8 +336,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a34b5b6c1146a8f0800000000000000
-      internalID: -529664315853421662
+      spriteID: f38c3335d58e10d40800000000000000
+      internalID: 5548971703422666815
       vertices: []
       indices: 
       edges: []

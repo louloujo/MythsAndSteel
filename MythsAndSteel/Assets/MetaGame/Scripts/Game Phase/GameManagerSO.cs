@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(menuName = "META/Game Manager")]
 public class GameManagerSO : ScriptableObject
@@ -249,5 +250,18 @@ public class GameManagerSO : ScriptableObject
     {
         if (GoToDebutPhase != null) return true;
         else return false;
+    }
+    public void LoadMainMenu()
+    {
+        Time.timeScale = 1;
+        GoToDebutPhase = null;
+        GoToActivationPhase = null;
+        GoToOrgoneJ1Phase = null;
+        GoToActionJ1Phase = null;
+        GoToOrgoneJ2Phase = null;
+        GoToActionJ2Phase = null;
+        GoToStrategyPhase = null;
+        GameManager.Instance.isGamePaused = false;
+        SceneManager.LoadScene(1);
     }
 }

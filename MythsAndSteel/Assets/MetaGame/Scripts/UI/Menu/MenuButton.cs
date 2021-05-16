@@ -31,6 +31,7 @@ public class MenuButton : MonoBehaviour
     {
         _campagneCanvas.SetActive(true);
         _menuCanvas.SetActive(false);
+        Time.timeScale = 1;
     }
 
     /// <summary>
@@ -46,6 +47,13 @@ public class MenuButton : MonoBehaviour
     public void ReloadScene()
     {
         Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+        Time.timeScale = 1;
+    }
+
+    public void LoadScene(int sceneToLoad)
+    {
+        SceneManager.LoadScene(sceneToLoad);
+        Time.timeScale = 1;
     }
 }
     

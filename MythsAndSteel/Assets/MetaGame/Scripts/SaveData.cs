@@ -20,4 +20,10 @@ public class SaveData : MonoBehaviour
             bluePlayerVictories = PlayerPrefs.GetInt("BluePlayerVictories");
         }
     }
+    public void ResetData()
+    {
+        PlayerPrefs.SetInt("UnlockCampaign", 0);
+        PlayerPrefs.SetInt("RedPlayerVictories", 0);
+        PlayerPrefs.SetInt("BluePlayerVictories", 0);
+    }
 }
