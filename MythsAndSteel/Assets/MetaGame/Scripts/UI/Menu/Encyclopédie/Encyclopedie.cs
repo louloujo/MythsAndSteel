@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Encyclopedie : MonoBehaviour
 {
@@ -11,8 +13,6 @@ public class Encyclopedie : MonoBehaviour
 
     [SerializeField] GameObject Layer1;
     [SerializeField] GameObject Layer2;
-
-
 
     private void Start()
     {
