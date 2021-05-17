@@ -115,6 +115,9 @@ public class GameManagerSO : ScriptableObject
 
             case MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1:
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1);
+                PlayerScript.Instance.RedPlayerInfos.EventUseLeft = 1;
+                PlayerScript.Instance.RedPlayerInfos.OrgonePowerLeft = 1;
+                PlayerScript.Instance.BluePlayerInfos.OrgonePowerLeft = 1;
                 UIInstance.Instance.ActiveOrgoneChargeButton();
                 GoToOrgoneJ1Phase();
                 break;
@@ -133,6 +136,8 @@ public class GameManagerSO : ScriptableObject
 
             case MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2:
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2);
+                PlayerScript.Instance.BluePlayerInfos.EventUseLeft = 1;
+                PlayerScript.Instance.BluePlayerInfos.OrgonePowerLeft = 1;
                 UIInstance.Instance.ButtonRenfort.ButtonRenfortJ1.GetComponent<Button>().interactable = false;
                 GoToOrgoneJ2Phase();
                 break;

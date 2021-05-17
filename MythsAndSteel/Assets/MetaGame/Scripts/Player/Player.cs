@@ -34,6 +34,10 @@ public class Player
     [Header("RESSOURCE")]
     //Nombre de Ressources actuel
     [SerializeField] private int _Ressource;
+
+    [Header("CARTE EVENT")]
+    public int EventUseLeft;
+
     public int Ressource
     {
         get
