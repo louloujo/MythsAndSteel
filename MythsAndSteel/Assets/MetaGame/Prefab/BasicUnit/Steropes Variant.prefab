@@ -118,6 +118,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7435506871874765581, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
+      propertyPath: _shield
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435506871874765581, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
       propertyPath: _unitSO
       value: 
       objectReference: {fileID: 11400000, guid: de7341a724493fc4b8ef2f7b5fad5c81, type: 2}
@@ -147,7 +151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7435506871874765581, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
       propertyPath: _actualTileld
-      value: 15
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7435506871874765581, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
       propertyPath: _creationCost
@@ -191,23 +195,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7435506871874765583, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.0468628
+      value: 2.0434175
       objectReference: {fileID: 0}
     - target: {fileID: 7435506871874765583, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.0468628
+      value: 2.0434175
       objectReference: {fileID: 0}
     - target: {fileID: 7435506871874765583, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.0468628
+      value: 2.0434175
       objectReference: {fileID: 0}
     - target: {fileID: 7435506871874765583, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.1696
+      value: -2.874
       objectReference: {fileID: 0}
     - target: {fileID: 7435506871874765583, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.895
+      value: -4.84
       objectReference: {fileID: 0}
     - target: {fileID: 7435506871874765583, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
       propertyPath: m_LocalPosition.z
@@ -243,7 +247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7435506871874765619, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
       propertyPath: m_Name
-      value: Steropes 3
+      value: Steropes
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a9c066d73fc2fc428855165ad69e183, type: 3}
