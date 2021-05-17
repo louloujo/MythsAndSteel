@@ -123,15 +123,19 @@ namespace MythsAndSteel.Orgone{
             bool canUse = false;
 
             if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2){
+                Debug.Log("orgonephase");
                 if(GameManager.Instance.IsPlayerRedTurn == (player == 1? true : false)){
+                    Debug.Log("jsp" + player);
                     if(player == 1){
                         if(PlayerScript.Instance.RedPlayerInfos.OrgonePowerLeft > 0 && PlayerScript.Instance.RedPlayerInfos.OrgoneValue >= cost){
                             canUse = true;
+                            Debug.Log("oui");
                         }
                     }
                     else{
                         if(PlayerScript.Instance.BluePlayerInfos.OrgonePowerLeft > 0 && PlayerScript.Instance.BluePlayerInfos.OrgoneValue >= cost){
                             canUse = true;
+                            Debug.Log("ouioui");
                         }
                     }
                 }
