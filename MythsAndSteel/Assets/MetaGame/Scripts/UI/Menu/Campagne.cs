@@ -1,12 +1,14 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Campagne : MonoBehaviour
 {
+    [SerializeField] private SaveData saveData;
     public MYthsAndSteel_Enum.Scenario _Scenario; //Scénario Séléctionné et affiché
     [SerializeField] int ScenarioVal = 0;
     [SerializeField] int spaceBetweenScenario = 0;
@@ -26,9 +28,14 @@ public class Campagne : MonoBehaviour
     [SerializeField] private GameObject _buttonRight = null;
     [SerializeField] private float _mapSpeed = 0f;
     [SerializeField] private GameObject _mapTransform = null;
+    [SerializeField] private TextMeshProUGUI RedPlayerVictories;
+    [SerializeField] private TextMeshProUGUI BluePlayerVictories;
+    [SerializeField] int redPlayerVictories;
+    [SerializeField] int bluePlayerVictories;
 
     private void Awake()
     {
+        Time.timeScale = 1;
         Unlocked = PlayerPrefs.GetInt("UnlockCampaign");
 
         if (Unlocked == 0)
@@ -119,11 +126,20 @@ public class Campagne : MonoBehaviour
             Jauge6.SetActive(false);
             Jauge7.SetActive(true);
         }
+        if (Unlocked == 0)
+        {
+            _buttonRight.GetComponent<Button>().interactable = false;
+            _buttonLeft.GetComponent<Button>().interactable = false;
+        }
     }
 
 
     private void Update(){
         _mapTransform.GetComponent<RectTransform>().localPosition = Vector2.MoveTowards(_mapTransform.GetComponent<RectTransform>().localPosition, new Vector2(-spaceBetweenScenario * (Screen.width / 1920f) * ScenarioVal, _mapTransform.GetComponent<RectTransform>().localPosition.y), Time.deltaTime * _mapSpeed);
+        redPlayerVictories = saveData.redPlayerVictories;
+        bluePlayerVictories = saveData.bluePlayerVictories;
+        RedPlayerVictories.text = redPlayerVictories.ToString();
+        BluePlayerVictories.text = bluePlayerVictories.ToString();
     }
 
     /// <summary>
@@ -181,10 +197,10 @@ public class Campagne : MonoBehaviour
         }
         else if(targetValue > 6){}
 
-        if(ScenarioVal == targetValue){
-            if(ScenarioVal == Unlocked){
-                _buttonRight.GetComponent<Button>().interactable = false;
-            }
+   
+        if(ScenarioVal == Unlocked){
+            _buttonRight.GetComponent<Button>().interactable = false;
         }
+        
     }
 }

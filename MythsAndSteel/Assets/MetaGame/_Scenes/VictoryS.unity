@@ -2092,7 +2092,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115424847}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8df61a83645b3d74aba0ab66019d49f6, type: 3}
   m_Name: 
@@ -2100,6 +2100,8 @@ MonoBehaviour:
   unlockCampaign: 0
   redPlayerVictories: 0
   bluePlayerVictories: 0
+  RedPlayerVictories: {fileID: 0}
+  BluePlayerVictories: {fileID: 0}
 --- !u!1 &116298214
 GameObject:
   m_ObjectHideFlags: 0

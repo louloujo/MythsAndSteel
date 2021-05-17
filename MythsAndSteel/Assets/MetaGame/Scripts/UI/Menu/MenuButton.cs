@@ -52,6 +52,7 @@ public class MenuButton : MonoBehaviour
 
     public void LoadScene(int sceneToLoad)
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(sceneToLoad);
         Time.timeScale = 1;
     }
