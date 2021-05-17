@@ -29,7 +29,8 @@ public class UnitScript : MonoBehaviour
             _life = value;
         }
     }
-
+    [SerializeField]
+    SpriteRenderer Renderer;
     bool IsDead = false;
     bool IsDeadByOrgone = false;
 
@@ -322,22 +323,30 @@ public class UnitScript : MonoBehaviour
                 if (UnitSO.IsInRedArmy)
                 {
                     UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield);
-                }
+                        Renderer.material.SetFloat("_HitTime", Time.time);
+                       
+                    }
                 else
                 {
                     UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartShieldSprite, _life + _shield);
-                }
+                        Renderer.material.SetFloat("_HitTime", Time.time);
+                       
+                    }
             }
             else
             {
                 if (UnitSO.IsInRedArmy)
                 {
                     UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartSprite, _life);
-                }
+                        Renderer.material.SetFloat("_HitTime", Time.time);
+                     
+                    }
                 else
                 {
                     UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartSprite, _life);
-                }
+                        Renderer.material.SetFloat("_HitTime", Time.time);
+                 
+                    }
             }
         }
         else
@@ -348,11 +357,15 @@ public class UnitScript : MonoBehaviour
                 if (UnitSO.IsInRedArmy)
                 {
                     UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartShieldSprite, _life + _shield);
-                }
+                        Renderer.material.SetFloat("_HitTime", Time.time);
+                        Debug.Log("je ne fonctionne pas ");
+                    }
                 else
                 {
                     UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartShieldSprite, _life + _shield);
-                }
+                        Renderer.material.SetFloat("_HitTime", Time.time);
+                   
+                    }
             }
             else
             {
@@ -361,11 +374,15 @@ public class UnitScript : MonoBehaviour
                     if (UnitSO.IsInRedArmy)
                     {
                         UpdateLifeHeartShieldUI(UIInstance.Instance.RedHeartSprite, _life);
-                    }
+                            Renderer.material.SetFloat("_HitTime", Time.time);
+                           
+                        }
                     else
                     {
                         UpdateLifeHeartShieldUI(UIInstance.Instance.BlueHeartSprite, _life);
-                    }
+                            Renderer.material.SetFloat("_HitTime", Time.time);
+                        
+                        }
                 }
             }
         }
