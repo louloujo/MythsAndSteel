@@ -212,7 +212,7 @@ public class EventCardClass : ScriptableObject{
     /// Reset la position du parent des cartes events d'un joueur
     /// </summary>
     /// <param name="player"></param>
-    void ResetEventParentPos(int player)
+ public   void ResetEventParentPos(int player)
     {
         if(player == 1)
         {
