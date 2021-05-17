@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 [CreateAssetMenu(menuName = "META/Game Manager")]
 public class GameManagerSO : ScriptableObject
 {
@@ -120,14 +121,22 @@ public class GameManagerSO : ScriptableObject
                 {
                     unit.GetComponent<UnitScript>().ResetTurn();
                 }
-
-
+                UIInstance.Instance.ActiveOrgoneChargeButton();
+                if(GameManager.Instance.IsPlayerRedStarting)
+                {
+                    PlayerScript.Instance.RedPlayerInfos.OrgonePowerLeft = 1;
+                }
+                else
+                {
+                    PlayerScript.Instance.BluePlayerInfos.OrgonePowerLeft = 1;
+                }
                 GoToOrgoneJ1Phase();
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1:
                 GameManager.Instance.GoPhase(MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1);
-
+                UIInstance.Instance.DesactiveOrgoneChargeButton();
+                UIInstance.Instance.ButtonRenfortJ1.GetComponent<Button>().interactable = true;
                 if (GameManager.Instance.SabotageStat == 1 && !GameManager.Instance.IsPlayerRedTurn)
                 {
                     PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
@@ -146,7 +155,7 @@ public class GameManagerSO : ScriptableObject
 
             case MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2:
 
-
+                UIInstance.Instance.ButtonRenfortJ1.GetComponent<Button>().interactable = false;
                 foreach (GameObject unit in GameManager.Instance.IsPlayerRedTurn ? PlayerScript.Instance.UnitRef.UnitListRedPlayer : PlayerScript.Instance.UnitRef.UnitListBluePlayer)
                 {
                     unit.GetComponent<UnitScript>().ResetTurn();
@@ -265,13 +274,21 @@ public class GameManagerSO : ScriptableObject
                     GameManager.Instance.ParalysieStat = 3;
                     refunit.Clear();
                 }
-
+                if (!GameManager.Instance.IsPlayerRedStarting)
+                {
+                    PlayerScript.Instance.RedPlayerInfos.OrgonePowerLeft = 1;
+                }
+                else
+                {
+                    PlayerScript.Instance.BluePlayerInfos.OrgonePowerLeft = 1;
+                }
 
 
                 GoToOrgoneJ2Phase();
                 break;
 
             case MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2:
+                UIInstance.Instance.ButtonRenfortJ2.GetComponent<Button>().interactable = true;
                 if (GameManager.Instance.SabotageStat == 1 && !GameManager.Instance.IsPlayerRedTurn)
                 {
                     PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
@@ -412,7 +429,10 @@ public class GameManagerSO : ScriptableObject
                     GameManager.Instance.ParalysieStat = 3;
                     refunit.Clear();
                 }
-                        if (GoToStrategyPhase != null) GoToStrategyPhase();
+                UIInstance.Instance.ButtonRenfortJ2.GetComponent<Button>().interactable = false;
+                PlayerScript.Instance.RedPlayerInfos.HasCreateUnit = false;
+                PlayerScript.Instance.BluePlayerInfos.HasCreateUnit = false;
+                if (GoToStrategyPhase != null) GoToStrategyPhase();
                         break;
         }
     }

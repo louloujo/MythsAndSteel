@@ -9,6 +9,7 @@ C'est pour cela qu'il ne faut surtout pas le MODIFIER !!
  */ 
 public class OrgoneManager : MonoSingleton<OrgoneManager>
 {
+    public bool DoingOrgoneCharge = false;
     #region Variables
     [Header("PARENT JAUGE D'ORGONE")]
     //Jauge d'orgone joueur rouge
@@ -275,17 +276,22 @@ namespace MythsAndSteel.Orgone{
         /// <returns></returns>
         public static bool CanUseOrgonePower(int cost, int player){
             bool canUse = false;
-
+            Debug.Log("pk tu marche pas1");
             if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.OrgoneJ2){
                 if(GameManager.Instance.IsPlayerRedTurn == (player == 1? true : false)){
-                    if(player == 1){
-                        if(PlayerScript.Instance.RedPlayerInfos.OrgonePowerLeft > 0 && PlayerScript.Instance.RedPlayerInfos.OrgoneValue >= cost){
+                    Debug.Log("pk tu marche pas2");
+                    if (player == 1){
+                        Debug.Log("pk tu marche pas3");
+                        if (PlayerScript.Instance.RedPlayerInfos.OrgonePowerLeft > 0 && PlayerScript.Instance.RedPlayerInfos.OrgoneValue >= cost){
+                            Debug.Log("pk tu marche pas4");
                             canUse = true;
                         }
                     }
                     else{
-                        if(PlayerScript.Instance.BluePlayerInfos.OrgonePowerLeft > 0 && PlayerScript.Instance.BluePlayerInfos.OrgoneValue >= cost){
+                        Debug.Log("pk tu marche pas5");
+                        if (PlayerScript.Instance.BluePlayerInfos.OrgonePowerLeft > 0 && PlayerScript.Instance.BluePlayerInfos.OrgoneValue >= cost){
                             canUse = true;
+                            Debug.Log("pk tu marche pas6");
                         }
                     }
                 }

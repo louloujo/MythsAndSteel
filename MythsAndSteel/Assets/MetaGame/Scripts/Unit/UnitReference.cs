@@ -19,8 +19,13 @@ public class UnitReference : MonoBehaviour{
 
     [Header("LISTE DES UNITES CREABLES")]
     [SerializeField] List<GameObject> _unitClassCreableListRedPlayer = new List<GameObject>();
-    public List<GameObject> UnitClassCreableListRedPlayer => _unitClassCreableListRedPlayer;
+   
 
     [SerializeField] List<GameObject> _unitClassCreableListBluePlayer = new List<GameObject>();
     public List<GameObject> UnitClassCreableListBluePlayer => _unitClassCreableListBluePlayer;
+    public List<GameObject> UnitClassCreableListRedPlayer
+    {
+        get => _unitClassCreableListRedPlayer;
+        set => _unitClassCreableListRedPlayer = value;
+    }
 }
