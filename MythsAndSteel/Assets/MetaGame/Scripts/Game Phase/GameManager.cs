@@ -20,7 +20,7 @@ public class GameManager : MonoSingleton<GameManager>
 
 
     #region Variables
-
+    [SerializeField] private SaveData saveData;
     public GameObject détonationPrefab;
     public VictoryScreen victoryScreen;
     [Header("INFO TOUR ACTUEL")]
@@ -257,6 +257,12 @@ public class GameManager : MonoSingleton<GameManager>
             UIInstance.Instance.VictoryScreen.SetActive(true);
             victoryScreen.IsVictoryScreenActive = true;
             victoryScreen.RedWin = true;
+            saveData.redPlayerVictories += 1;
+            PlayerPrefs.SetInt("RedPlayerVictories", saveData.redPlayerVictories);
+            Debug.Log(PlayerPrefs.GetInt("RedPlayerVictories"));
+            saveData.unlockCampaign += 1;
+            PlayerPrefs.SetInt("UnlockCampaign", saveData.unlockCampaign);
+            Debug.Log(PlayerPrefs.GetInt("UnlockCampaign"));
             Debug.Log("Red win.");
         }
         else if (armeeGagnante == 2)
@@ -264,6 +270,10 @@ public class GameManager : MonoSingleton<GameManager>
             UIInstance.Instance.VictoryScreen.SetActive(true);
             victoryScreen.IsVictoryScreenActive = true;
             victoryScreen.BlueWin = true;
+            saveData.bluePlayerVictories += 1;
+            PlayerPrefs.SetInt("BluePlayerVictories", saveData.bluePlayerVictories);
+            saveData.unlockCampaign += 1;
+            PlayerPrefs.SetInt("UnlockCampaign", saveData.unlockCampaign);
             Debug.Log("Blue win.");
         }
     }
