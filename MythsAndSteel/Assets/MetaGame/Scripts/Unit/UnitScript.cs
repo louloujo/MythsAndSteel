@@ -676,9 +676,45 @@ public class UnitScript : MonoBehaviour
         }
     }
 
-    public void checkcapacity()
+    public void StartCapacity()
     {
+        RunningCapacity = true;
+        foreach (Transform Child in transform)
+        {
+            if (Child.TryGetComponent<Capacity>(out Capacity T))
+            {
+                T.StartCpty();
+                break;
+            }
+        }
+    }
 
+    public void EndCapacity()
+    {
+        _isActivationDone = true;
+        RunningCapacity = false;
+        checkActivation();
+        foreach (Transform Child in transform)
+        {
+            if (Child.TryGetComponent<Capacity>(out Capacity T))
+            {
+                T.EndCpty();
+                break;
+            }
+        }
+    }
+
+    public void StopCapacity()
+    {
+        RunningCapacity = false;
+        foreach (Transform Child in transform)
+        {
+            if(Child.TryGetComponent<Capacity>(out Capacity T))
+            {
+                T.StopCpty();
+                break;
+            }
+        }
     }
 
     public void ResetStatutPossesion()

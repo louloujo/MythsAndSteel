@@ -72,6 +72,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
 
     public void Updatebutton()
     {
+        Debug.Log("DEB");
         if(_actualUnitSelected != null)
         {
             if (_actualUnitSelected.GetComponent<UnitScript>().GotCapacity())
@@ -296,11 +297,15 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             {
                 if (!ActualUnitSelected.GetComponent<UnitScript>().RunningCapacity)
                 {
-                    ActualUnitSelected.GetComponent<UnitScript>().RunningCapacity = true;
-                    Updatebutton();
+                        Attaque.Instance.StopAttack();
+                        Mouvement.Instance.StopMouvement(false);
+                        //ActualUnitSelected.GetComponent<UnitScript>().StartCapacity();
+                        ActualUnitSelected.GetComponent<UnitScript>().RunningCapacity = true;
+                        Updatebutton();
                 }
                 else if (ActualUnitSelected.GetComponent<UnitScript>().RunningCapacity)
                 {
+                    //ActualUnitSelected.GetComponent<UnitScript>().StopCapacity();
                     ActualUnitSelected.GetComponent<UnitScript>().RunningCapacity = false;
                     Updatebutton();
                 }
