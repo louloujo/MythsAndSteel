@@ -8,11 +8,51 @@ public class ChargeBluePlayer : ChargeOrgone
 
     public override void ChargeOrgone1(int cost)
     {
-        Debug.Log("B1");
+        if (MythsAndSteel.Orgone.OrgoneCheck.CanUseOrgonePower(1, 2))
+        {
+            List<GameObject> unitList = new List<GameObject>();
+
+            unitList.AddRange(PlayerScript.Instance.UnitRef.UnitListBluePlayer);
+
+                GameManager.Instance.StartEventModeUnit(1, true, unitList, "Charge d'orgone 1", "Êtes-vous sur de vouloir augmenter d'1 les dégâts de cete unité?");
+                GameManager.Instance._eventCall += UseChargeOrgone1;
+            
+        }
     }
+
+    void UseChargeOrgone1()
+    {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
+        foreach (GameObject unit in GameManager.Instance.UnitChooseList)
+        {
+            unit.GetComponent<UnitScript>().AddDamageToUnit(1);
+        }
+
+        GameManager.Instance.UnitChooseList.Clear();
+    }
+    
     public override void ChargeOrgone3(int cost)
     {
-        Debug.Log("B3");
+        if (MythsAndSteel.Orgone.OrgoneCheck.CanUseOrgonePower(3, 2))
+        {
+            List<GameObject> tileList = new List<GameObject>();
+            tileList.AddRange(TilesManager.Instance.ResourcesList);
+
+            GameManager.Instance.StartEventModeTiles(1, true, tileList, "Charge d'orgone 3", "Êtes-vous sur de vouloir voler une Ressources sur cette case?");
+            GameManager.Instance._eventCall += UseChargeOrgone3;
+        }
+    }
+    void UseChargeOrgone3()
+    {
+        UIInstance.Instance.ActivateNextPhaseButton();
+
+        foreach (GameObject gam in GameManager.Instance.TileChooseList)
+        {
+            gam.GetComponent<TileScript>().RemoveRessources(1, 2);
+        }
+
+        GameManager.Instance.TileChooseList.Clear();
     }
 
     #region Charge 5 D'orgone
