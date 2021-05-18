@@ -43,6 +43,7 @@ public class OrgoneManager : MonoSingleton<OrgoneManager>
     public GameObject BluePlayerZone => _bluePlayerZone;
 
     public bool DoingOrgoneCharge = false;
+    public bool ischarge5Blue = false;
 
 
     #endregion Variables

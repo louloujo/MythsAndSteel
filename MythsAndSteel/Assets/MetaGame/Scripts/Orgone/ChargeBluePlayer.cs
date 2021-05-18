@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ChargeBluePlayer : ChargeOrgone
 {
-    
-    
+
+
     public override void ChargeOrgone1(int cost)
     {
         Debug.Log("B1");
@@ -20,9 +20,10 @@ public class ChargeBluePlayer : ChargeOrgone
     {
         if (MythsAndSteel.Orgone.OrgoneCheck.CanUseOrgonePower(4, 2))
         {
+            OrgoneManager.Instance.ischarge5Blue = true;
             Debug.Log("B5");
             GameManager.Instance._eventCall += UseCharge5BluePlayer;
-            GameManager.Instance.StartEventModeUnit(1, false, PlayerScript.Instance.UnitRef.UnitListBluePlayer, "Charge 3 d'orgone Bleu" , "Êtes vous sûr de vouloir d'utiliser la charge 3 d'orgone ?");
+            GameManager.Instance.StartEventModeUnit(1, false, PlayerScript.Instance.UnitRef.UnitListBluePlayer, "Charge 3 d'orgone Bleu", "Êtes vous sûr de vouloir d'utiliser la charge 3 d'orgone ?");
         }
     }
 
@@ -30,16 +31,16 @@ public class ChargeBluePlayer : ChargeOrgone
     {
         Debug.Log("UseCharge");
         List<GameObject> SelectTileList = new List<GameObject>();
-        foreach(GameObject gam in TilesManager.Instance.TileList)
+        foreach (GameObject gam in TilesManager.Instance.TileList)
         {
             TileScript tilescript = gam.GetComponent<TileScript>();
             Debug.Log(tilescript.TileId);
-            if(tilescript.Unit == null)
+            if (tilescript.Unit == null)
             {
                 Debug.Log("Unit est null");
-                foreach(MYthsAndSteel_Enum.TerrainType i in tilescript.TerrainEffectList)
+                foreach (MYthsAndSteel_Enum.TerrainType i in tilescript.TerrainEffectList)
                 {
-                    if(i != MYthsAndSteel_Enum.TerrainType.Point_de_ressource && i != MYthsAndSteel_Enum.TerrainType.Point_Objectif && i != MYthsAndSteel_Enum.TerrainType.UsineBleu && i != MYthsAndSteel_Enum.TerrainType.UsineRouge)
+                    if (i != MYthsAndSteel_Enum.TerrainType.Point_de_ressource && i != MYthsAndSteel_Enum.TerrainType.Point_Objectif && i != MYthsAndSteel_Enum.TerrainType.UsineBleu && i != MYthsAndSteel_Enum.TerrainType.UsineRouge)
                     {
                         SelectTileList.Add(gam);
                         Debug.Log("break");
@@ -48,13 +49,18 @@ public class ChargeBluePlayer : ChargeOrgone
                 }
             }
         }
-        GameManager.Instance._eventCall += DoneCharge5Blueplayer;
         GameManager.Instance._eventCall -= UseCharge5BluePlayer;
+        //if (GameManager.Instance._eventCall == null) Debug.Log("Call null"); else Debug.Log("Call non null");
         GameManager.Instance.StartEventModeTiles(1, false, SelectTileList, "Tile de tp", "Etes vous sur de validé cette case de tp?");
+        //if (GameManager.Instance._eventCall == null) Debug.Log("Call null"); else Debug.Log("Call non null");
+        GameManager.Instance._eventCall += DoneCharge5Blueplayer;
     }
     void DoneCharge5Blueplayer()
     {
+        Debug.Log("Tu as atin le bonheur");
         GameManager.Instance.UnitChooseList[0].GetComponent<UnitScript>().ActualTiledId = GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().TileId;
+        GameManager.Instance.StopEventModeTile();
+
     }
     #endregion
 

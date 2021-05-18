@@ -359,6 +359,7 @@ public class GameManager : MonoSingleton<GameManager>{
     /// Arrete le choix d'unité
     /// </summary>
     void StopEventModeUnit(){
+        Debug.Log("Stop event");
         _titleValidation = "";
         _descriptionValidation = "";
 
@@ -476,9 +477,9 @@ public class GameManager : MonoSingleton<GameManager>{
     public void StartEventModeTiles(int numberOfTile, bool redPlayer, List<GameObject> _tileSelectable, string title, string description, bool multiplesTile = false)
     {
         UIInstance.Instance.DesactivateNextPhaseButton();
-
         _titleValidation = title;
         _descriptionValidation = description;
+        Debug.Log("lu");
 
         _chooseTileForEvent = true;
         _redPlayerUseEvent = redPlayer;
@@ -490,13 +491,13 @@ public class GameManager : MonoSingleton<GameManager>{
             gam.GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect);
         }
 
-        _eventCall += StopEventModeTile;
+         _eventCall += StopEventModeTile;
     }
 
     /// <summary>
     /// Arrete le choix de case
     /// </summary>
-    void StopEventModeTile(){
+    public void StopEventModeTile(){
         _titleValidation = "";
         _descriptionValidation = "";
 
