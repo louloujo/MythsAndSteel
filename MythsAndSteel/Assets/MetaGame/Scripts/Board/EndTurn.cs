@@ -8,16 +8,27 @@ public class EndTurn : MonoBehaviour
     [Header("Nombre d'objectif à capturer pour la victoire par équipe.")]
     [SerializeField] private int RedObjCount;
     [SerializeField] private int BlueObjCount;
-   
-    [SerializeField] List<GameObject> goalTileList = new List<GameObject>();
+
+    [Header("Nombre d'objectif à capturer pour la victoire par équipe Rouge.")]
+    [SerializeField] List<GameObject> RedgoalTileList = new List<GameObject>();
+
+    [Header("Nombre d'objectif à capturer pour la victoire par l'équipe Bleu.")]
+    [SerializeField] List<GameObject> BluegoalTileList = new List<GameObject>();
 
     private void Start()
     {
         foreach (GameObject Tile in TilesManager.Instance.TileList)
         {
-            if (Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Point_Objectif))
+            if (Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Point_Objectif_Rouge))
             {
-                goalTileList.Add(Tile);
+                RedgoalTileList.Add(Tile);
+            }
+        }
+        foreach (GameObject Tile in TilesManager.Instance.TileList)
+        {
+            if (Tile.GetComponent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Point_Objectif_Bleu))
+            {
+                BluegoalTileList.Add(Tile);
             }
         }
         GameManager.Instance.ManagerSO.GoToStrategyPhase += EndTerrainEffect;
@@ -131,10 +142,31 @@ public class EndTurn : MonoBehaviour
     public void CheckOwner()
     {
         Debug.Log("Ressources");
-        foreach (GameObject Tile in goalTileList)
+        foreach (GameObject Tile in RedgoalTileList)
         {
             TileScript S = Tile.GetComponent<TileScript>();
-            if (S.TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Point_Objectif))
+            if (S.TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Point_Objectif_Rouge))
+            {
+                if (S.Unit != null)
+                {
+                    UnitScript US = S.Unit.GetComponent<UnitScript>();
+                    if (US.UnitSO.IsInRedArmy && !US.UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasPrendreDesObjectifs))
+                    {
+                        Debug.Log("Objectif dans le camp rouge.");
+                        ChangeOwner(S, true);
+                    }
+                    else if (!US.UnitSO.IsInRedArmy && !US.UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasPrendreDesObjectifs))
+                    {
+                        Debug.Log("Objectif dans le camp bleu.");
+                        ChangeOwner(S, false);
+                    }
+                }
+            }
+        }
+        foreach (GameObject Tile in BluegoalTileList)
+        {
+            TileScript S = Tile.GetComponent<TileScript>();
+            if (S.TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Point_Objectif_Bleu))
             {
                 if (S.Unit != null)
                 {
@@ -194,19 +226,98 @@ public class EndTurn : MonoBehaviour
     /// </summary>
     protected void CheckVictory()
     {
-
-        if(PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber == BlueObjCount && PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber != RedObjCount)
-
-
+        switch (PlayerPrefs.GetInt("Bataille"))
         {
-            GameManager.Instance.VictoryForArmy(2);
-        }
+            case 1: // RETHEL
+                if (true /*Prendre 2 objectifs simultanément*/)
+                {
+                    GameManager.Instance.VictoryForArmy(1); // Allemand
+                }
 
-        if(PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber == RedObjCount && PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber != BlueObjCount)
+                if (GameManager.Instance.ActualTurnNumber == 12)
+                {
+                    GameManager.Instance.VictoryForArmy(2); // OUI
+                }
+                break;
 
-        {
-            GameManager.Instance.VictoryForArmy(1);
+
+            case 2: // SHANGHAI
+                if (PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber == RedObjCount) /* RedObjCount = 2 */
+                {
+                    GameManager.Instance.VictoryForArmy(1); // OUI
+                }
+
+                if (GameManager.Instance.ActualTurnNumber == 12)
+                {
+                    GameManager.Instance.VictoryForArmy(2); // OUI
+                }
+                break;
+
+
+            case 3: // STALINGRAD
+                if (true /*Avoir le plus d'objectifs à la fin du tour 12 (un check au tour 6, puis un check au tour 12)  SI EGALITE T12 ALL WIN */) 
+                {
+                    GameManager.Instance.VictoryForArmy(1); // Allemand
+                }
+
+                if (true /*Avoir le plus d'objectifs à la fin du tour 12 (un check au tour 6, puis un check au tour 12)*/)
+                {
+                    GameManager.Instance.VictoryForArmy(2); // Russe
+                }
+                break;
+
+
+            case 4: // HUSKY
+                if (GameManager.Instance.ActualTurnNumber == 10)
+                {
+                    GameManager.Instance.VictoryForArmy(1); // OUI
+                }
+
+                if (true /* Prendre 2 objectifs simultanément a partir du T5*/)
+                {
+                    GameManager.Instance.VictoryForArmy(2); // UK
+                }
+                break;
+
+
+            case 5: // GUADALCANAL
+                if (GameManager.Instance.ActualTurnNumber == 12)
+                {
+                    GameManager.Instance.VictoryForArmy(1); // OUI
+                }
+
+                if (PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber == BlueObjCount) /* BlueObjCount = 3 */
+                {
+                    GameManager.Instance.VictoryForArmy(2); // OUI
+                }
+                break;
+
+
+            case 6: // EL ALAMEIN
+                if (PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber == RedObjCount /* ou tuer la chaine de commandement */) /* RedObjCount = 1 */
+                {
+                    GameManager.Instance.VictoryForArmy(1); // Allemand
+                }
+
+                if (GameManager.Instance.ActualTurnNumber == 10)
+                {
+                    GameManager.Instance.VictoryForArmy(2); // OUI
+                }
+                break;
+
+
+            case 7:
+                if (PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber == RedObjCount) /* RedObjCount = 1 */
+                {
+                    GameManager.Instance.VictoryForArmy(1); // OUI
+                }
+
+                if (GameManager.Instance.ActualTurnNumber == 12)
+                {
+                    GameManager.Instance.VictoryForArmy(2); // OUI
+                }
+                break;
         }
     }
-
+    // PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber == RedObjCount && PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber != BlueObjCount
 }
