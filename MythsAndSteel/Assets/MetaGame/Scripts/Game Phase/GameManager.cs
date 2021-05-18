@@ -654,20 +654,20 @@ public class GameManager : MonoSingleton<GameManager>
             }
             if (filBbarbelés && _tileChooseList.Count >= 1)
             {
-                if(_tileChooseList.Count == 1)
+                if (_tileChooseList.Count == 1)
                 {
-                _tileChooseList[0].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _normalEventSprite);
-                _selectableTiles.Clear();
+                    _tileChooseList[0].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _normalEventSprite);
+                    _selectableTiles.Clear();
 
-               foreach( int element in PlayerStatic.GetNeighbourDiag(_tileChooseList[0].GetComponent<TileScript>().TileId, _tileChooseList[0].GetComponent<TileScript>().Line, false))
-                {
-                    TilesManager.Instance.TileList[element].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _selectedTileSprite);
-                    _selectableTiles.Add(TilesManager.Instance.TileList[element]);
+                    foreach (int element in PlayerStatic.GetNeighbourDiag(_tileChooseList[0].GetComponent<TileScript>().TileId, _tileChooseList[0].GetComponent<TileScript>().Line, false))
+                    {
+                        TilesManager.Instance.TileList[element].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.EventSelect, _selectedTileSprite);
+                        _selectableTiles.Add(TilesManager.Instance.TileList[element]);
+
+                    }
 
                 }
 
-                }
-    
                 else if (_tileChooseList.Count == 2)
                 {
                     foreach (GameObject element in _selectableTiles)

@@ -678,41 +678,37 @@ public class UnitScript : MonoBehaviour
 
     public void StartCapacity()
     {
-        RunningCapacity = true;
-        foreach (Transform Child in transform)
-        {
-            if (Child.TryGetComponent<Capacity>(out Capacity T))
+        Debug.Log("starrt");
+
+        RunningCapacity = true; 
+        CapacitySystem.Instance.Updatebutton();
+        UIInstance.Instance.DesactivateNextPhaseButton();
+            if (TryGetComponent<Capacity>(out Capacity T))
             {
+                Debug.Log("starrt");
                 T.StartCpty();
-                break;
             }
-        }
     }
 
     public void EndCapacity()
     {
         _isActivationDone = true;
-        RunningCapacity = false;
+        RunningCapacity = false; 
+        CapacitySystem.Instance.Updatebutton();
+        UIInstance.Instance.ActivateNextPhaseButton();
         checkActivation();
-        foreach (Transform Child in transform)
-        {
-            if (Child.TryGetComponent<Capacity>(out Capacity T))
-            {
-                T.EndCpty();
-                break;
-            }
-        }
     }
 
-    public void StopCapacity()
+    public void StopCapacity(bool FromCptyScript = false)
     {
+        UIInstance.Instance.ActivateNextPhaseButton();
         RunningCapacity = false;
-        foreach (Transform Child in transform)
+        CapacitySystem.Instance.Updatebutton();
+        if (TryGetComponent<Capacity>(out Capacity T))
         {
-            if(Child.TryGetComponent<Capacity>(out Capacity T))
+            if (!FromCptyScript)
             {
                 T.StopCpty();
-                break;
             }
         }
     }

@@ -59,41 +59,14 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                 }
                 _actualUnitSelected = value;
                 if (value != null)
-                {
-                    Updatebutton();
+                {                    
+                    value.GetComponent<UnitScript>().RunningCapacity = false;
+                    CapacitySystem.Instance.Updatebutton();
                     AttackJauge(true);
                 }
             }
         }
     }
-
-    [SerializeField] private Sprite attacklaunchspritebutton;
-    [SerializeField] private Sprite attackcancelspritebutton;
-
-    public void Updatebutton()
-    {
-        Debug.Log("DEB");
-        if(_actualUnitSelected != null)
-        {
-            if (_actualUnitSelected.GetComponent<UnitScript>().GotCapacity())
-            {
-                if (_actualUnitSelected.GetComponent<UnitScript>().RunningCapacity)
-                {
-                    ButtonLaunchCapacity.GetComponent<Image>().sprite = attackcancelspritebutton;
-                }
-                else
-                {
-                    ButtonLaunchCapacity.GetComponent<Image>().sprite = attacklaunchspritebutton;
-                }
-            }
-            else
-            {
-                ButtonLaunchCapacity.SetActive(false);
-            }
-        }
-    }
-
-    [SerializeField] private GameObject ButtonLaunchCapacity;
 
 
 
@@ -220,16 +193,13 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                 if(_actualUnitSelected == UnitInTile && !Mouvement.Instance.MvmtRunning && Attaque.Instance.IsInAttack)
                 {
 
-                    if(!UnitInTile.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
+                    if (!UnitInTile.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
                     {
-
-                    Debug.Log("fjdkms");
-
-                    Attaque.Instance.StopAttack();
-                    Mouvement.Instance.StopMouvement(true);
-                    UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
-                    _actualTileSelected = null;
-                    ActualUnitSelected = null;
+                        Attaque.Instance.StopAttack();
+                        Mouvement.Instance.StopMouvement(true);
+                        UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
+                        _actualTileSelected = null;
+                        ActualUnitSelected = null;
                     }
                 }
                 else if(!Mouvement.Instance.Selected && !Attaque.Instance.Selected && UnitInTile != null)
@@ -243,6 +213,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                         
                         _actualTileSelected = _tile;
                         ActualUnitSelected = _unitInTile;
+                        ActualUnitSelected.GetComponent<UnitScript>().StopCapacity();
                         Mouvement.Instance.StartMvmtForSelectedUnit();
                         Attaque.Instance.StartAttackSelectionUnit();
                     }
@@ -285,31 +256,6 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         if(GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ1 || GameManager.Instance.ActualTurnPhase == MYthsAndSteel_Enum.PhaseDeJeu.ActionJ2){
 
             Attaque.Instance.AddTileToList(Tile.GetComponent<TileScript>().TileId);
-        }
-    }
-
-
-    public void CapacityButton()
-    {
-        if (ActualUnitSelected != null)
-        {
-            if (!ActualUnitSelected.GetComponent<UnitScript>().IsActivationDone)
-            {
-                if (!ActualUnitSelected.GetComponent<UnitScript>().RunningCapacity)
-                {
-                        Attaque.Instance.StopAttack();
-                        Mouvement.Instance.StopMouvement(false);
-                        //ActualUnitSelected.GetComponent<UnitScript>().StartCapacity();
-                        ActualUnitSelected.GetComponent<UnitScript>().RunningCapacity = true;
-                        Updatebutton();
-                }
-                else if (ActualUnitSelected.GetComponent<UnitScript>().RunningCapacity)
-                {
-                    //ActualUnitSelected.GetComponent<UnitScript>().StopCapacity();
-                    ActualUnitSelected.GetComponent<UnitScript>().RunningCapacity = false;
-                    Updatebutton();
-                }
-            }
         }
     }
 
