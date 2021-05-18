@@ -19,7 +19,7 @@ MonoBehaviour:
     _description: "Inflige \xE0 la fin du prochain tour de l'adversaire 1 PV \xE0
       l'unit\xE9 et toutes les unit\xE9s qui lui sont adjacentes."
   - Status: 1
-    Animation: {fileID: 0}
+    Animation: {fileID: 9100000, guid: 01e18e83d3c3f7b4991e6d549ab80bde, type: 2}
     Icon: {fileID: 21300000, guid: 519d3646ee564f54d82f9c54dce35022, type: 3}
     _description: "Ne peut pas se d\xE9placer jusqu'\xE0 la fin du prochain tour
       de son possesseur.\r\n"
@@ -29,7 +29,7 @@ MonoBehaviour:
     _description: "Ne peut pas \xEAtre activ\xE9 jusqu'\xE0 la fin du prochain tour
       de son possesseur.\r\n"
   - Status: 3
-    Animation: {fileID: 0}
+    Animation: {fileID: 9100000, guid: a3df959e23b849740875869a58d456b4, type: 2}
     Icon: {fileID: 21300000, guid: 01b62f3e2e0c3eb419ee14a4efe69d47, type: 3}
     _description: "Indique que l'unit\xE9 est li\xE9e \xE0 une autre unit\xE9, mourrant
       lorsque que cette derni\xE8re est tu\xE9e."
