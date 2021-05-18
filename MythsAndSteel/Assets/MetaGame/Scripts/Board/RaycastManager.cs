@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class RaycastManager : MonoSingleton<RaycastManager>
 {
@@ -59,11 +60,41 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                 _actualUnitSelected = value;
                 if (value != null)
                 {
+                    Updatebutton();
                     AttackJauge(true);
                 }
             }
         }
     }
+
+    [SerializeField] private Sprite attacklaunchspritebutton;
+    [SerializeField] private Sprite attackcancelspritebutton;
+
+    public void Updatebutton()
+    {
+        if(_actualUnitSelected != null)
+        {
+            if (_actualUnitSelected.GetComponent<UnitScript>().GotCapacity())
+            {
+                if (_actualUnitSelected.GetComponent<UnitScript>().RunningCapacity)
+                {
+                    ButtonLaunchCapacity.GetComponent<Image>().sprite = attackcancelspritebutton;
+                }
+                else
+                {
+                    ButtonLaunchCapacity.GetComponent<Image>().sprite = attacklaunchspritebutton;
+                }
+            }
+            else
+            {
+                ButtonLaunchCapacity.SetActive(false);
+            }
+        }
+    }
+
+    [SerializeField] private GameObject ButtonLaunchCapacity;
+
+
 
     [Header("PANNEAU DES BOUTONS QUAND CLIC SUR UNITE")]
     //Est ce que les joueurs peuvent jouer
@@ -255,6 +286,29 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             Attaque.Instance.AddTileToList(Tile.GetComponent<TileScript>().TileId);
         }
     }
+
+
+    public void CapacityButton()
+    {
+        if (ActualUnitSelected != null)
+        {
+            if (!ActualUnitSelected.GetComponent<UnitScript>().IsActivationDone)
+            {
+                if (!ActualUnitSelected.GetComponent<UnitScript>().RunningCapacity)
+                {
+                    ActualUnitSelected.GetComponent<UnitScript>().RunningCapacity = true;
+                    Updatebutton();
+                }
+                else if (ActualUnitSelected.GetComponent<UnitScript>().RunningCapacity)
+                {
+                    ActualUnitSelected.GetComponent<UnitScript>().RunningCapacity = false;
+                    Updatebutton();
+                }
+            }
+        }
+    }
+
+
 
     /// <summary>
     /// Déselectionne un élément (case ou unité)

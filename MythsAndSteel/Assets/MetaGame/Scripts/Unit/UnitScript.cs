@@ -79,6 +79,7 @@ public class UnitScript : MonoBehaviour
         }
     }
 
+    public bool RunningCapacity = false;
 
     [Header("------------------- MOUVEMENT -------------------")]
     //Vitesse de déplacement
@@ -200,6 +201,17 @@ public class UnitScript : MonoBehaviour
 
     //Récupération de stats pour l'écran de victoire
  
+    public bool GotCapacity()
+    {
+        if(TryGetComponent<Capacity>(out Capacity C))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 
     #endregion Variables
@@ -663,6 +675,12 @@ public class UnitScript : MonoBehaviour
             }
         }
     }
+
+    public void checkcapacity()
+    {
+
+    }
+
     public void ResetStatutPossesion()
     {
         if (_unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))

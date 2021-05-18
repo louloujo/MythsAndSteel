@@ -143,21 +143,6 @@ public class MouseCommand : MonoBehaviour
                 int capaSize = 130 + (20 * truncateLine);
                 contentSize += capaSize;
             }
-            // CAPACITY 2. 
-            if (Capa.ReturnInfo(UI.capacityPrefab, 1) != null)
-            {
-                UI.capacityParent.transform.parent.parent.GetComponent<ScrollRect>().verticalScrollbar.value = 1;
-                GameObject CAPA2 = Instantiate(Capa.ReturnInfo(UI.capacityPrefab, 1), Vector2.zero, Quaternion.identity);
-                CAPA2.transform.SetParent(UI.capacityParent.transform);
-                CAPA2.transform.localScale = new Vector3(.9f, .9f, .9f);
-                UI.capacityList.Add(CAPA2);
-
-                int lengthTxt = CAPA2.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text.Length;
-                float LengthLine = (float)lengthTxt / 21;
-                int truncateLine = (int)LengthLine;
-                int capaSize = 130 + (20 * truncateLine);
-                contentSize += capaSize;
-            }
 
             UI.capacityParent.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.capacityParent.GetComponent<RectTransform>().sizeDelta.x, contentSize);
         }
