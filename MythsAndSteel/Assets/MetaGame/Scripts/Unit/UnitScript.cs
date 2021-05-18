@@ -678,8 +678,7 @@ public class UnitScript : MonoBehaviour
 
     public void StartCapacity()
     {
-        Debug.Log("starrt");
-
+        CapacitySystem.Instance.CapacityRunning = true;
         RunningCapacity = true; 
         CapacitySystem.Instance.Updatebutton();
         UIInstance.Instance.DesactivateNextPhaseButton();
@@ -692,6 +691,7 @@ public class UnitScript : MonoBehaviour
 
     public void EndCapacity()
     {
+        CapacitySystem.Instance.CapacityRunning = false;
         _isActivationDone = true;
         RunningCapacity = false; 
         CapacitySystem.Instance.Updatebutton();
@@ -701,6 +701,7 @@ public class UnitScript : MonoBehaviour
 
     public void StopCapacity(bool FromCptyScript = false)
     {
+        CapacitySystem.Instance.CapacityRunning = false;
         UIInstance.Instance.ActivateNextPhaseButton();
         RunningCapacity = false;
         CapacitySystem.Instance.Updatebutton();

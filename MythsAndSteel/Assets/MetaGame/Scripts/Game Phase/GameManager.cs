@@ -598,7 +598,7 @@ public class GameManager : MonoSingleton<GameManager>
     /// <summary>
     /// Arrete le choix de case
     /// </summary>
-    void StopEventModeTile()
+    public void StopEventModeTile()
     {
         _titleValidation = "";
         _descriptionValidation = "";

@@ -8,6 +8,8 @@ public class CapacitySystem : MonoSingleton<CapacitySystem>
     [SerializeField] private Sprite attacklaunchspritebutton;
     [SerializeField] private Sprite attackcancelspritebutton;
 
+    [SerializeField] public bool CapacityRunning = false;
+
     public void Updatebutton()
     {
         GameObject Unit = RaycastManager.Instance.ActualUnitSelected;

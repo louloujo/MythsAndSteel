@@ -28,6 +28,10 @@ public class Fire : TerrainParent
 
     private void Start()
     {
+        if(GetComponentInParent<TileScript>().Unit != null)
+        {
+            OnUnityAdd(GetComponentInParent<TileScript>().Unit.GetComponent<UnitScript>());
+        }
         Check();
     }
     public void Check()

@@ -22,12 +22,14 @@ public class CapaTest : Capacity
 
         GameManager.Instance._eventCall += EndCpty;
         GameManager.Instance._eventCallCancel += StopCpty;
-        GameManager.Instance.StartEventModeTiles(2, GetComponent<UnitScript>().UnitSO.IsInRedArmy, tile, "Embrasement!", "Voulez-vous vraiment embraser cette case ?", true);
+        GameManager.Instance.StartEventModeTiles(1, GetComponent<UnitScript>().UnitSO.IsInRedArmy, tile, "Embrasement!", "Voulez-vous vraiment embraser cette case ?");
+        
         base.StartCpty();
     }
 
     public override void StopCpty()
     {
+        GameManager.Instance.StopEventModeTile();
         GameManager.Instance.TileChooseList.Clear();
         GetComponent<UnitScript>().StopCapacity(true);
         base.StopCpty();
@@ -37,11 +39,11 @@ public class CapaTest : Capacity
     {
         GameManager.Instance._eventCall -= EndCpty;
         GetComponent<UnitScript>().EndCapacity();
-        fr.CreateFire(GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().TileId);
-        fr.CreateFire(GameManager.Instance.TileChooseList[1].GetComponent<TileScript>().TileId);
-
+        if(GameManager.Instance.TileChooseList.Count > 0)
+        {
+            fr.CreateFire(GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().TileId);
+        }
         base.EndCpty();        
         GameManager.Instance.TileChooseList.Clear();
-
     }
 }
