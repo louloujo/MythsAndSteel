@@ -435,6 +435,8 @@ public class Mouvement : MonoSingleton<Mouvement>
 
         RaycastManager.Instance.ActualTileSelected = null;
 
+        UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
+
         UIInstance.Instance.ActivateNextPhaseButton();
 
         _mvmtRunning = false;
