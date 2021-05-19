@@ -106,7 +106,7 @@ public class TileSelectionMovement : MonoSingleton<TileSelectionMovement>
            && GameManager.Instance.ChooseUnitForEvent == false && GameManager.Instance.ChooseTileForEvent == false)
         {
             if(RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitSO.IsInRedArmy == GameManager.Instance.IsPlayerRedTurn || 
-               RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé) == true){
+               RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé) == true){
                 GetComponent<Animator>().SetBool("HasUnit",  true);
             }
             else{

@@ -217,7 +217,7 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
                                 }
                                 else
                                 {
-                                    Unit.GetComponent<UnitScript>().UnitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.Invincible);
+                                    Unit.GetComponent<UnitScript>().UnitStatuts.Remove(MYthsAndSteel_Enum.UnitStatut.Invincible);
                                 }
                             }
                             if (!God1)
@@ -240,7 +240,7 @@ public class ConsoleManager : MonoSingleton<ConsoleManager>
                                 }
                                 else
                                 {
-                                    Unit.GetComponent<UnitScript>().UnitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.Invincible);
+                                    Unit.GetComponent<UnitScript>().UnitStatuts.Remove(MYthsAndSteel_Enum.UnitStatut.Invincible);
                                 }
                             }
                             if (!God2)
