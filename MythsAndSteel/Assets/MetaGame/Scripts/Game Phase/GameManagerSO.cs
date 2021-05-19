@@ -460,4 +460,20 @@ public class GameManagerSO : ScriptableObject
        GameManager.Instance.isGamePaused = false;
        SceneManager.LoadScene(1);
     }
+    public void LoadScene(int sceneToLoad)
+    {
+        Time.timeScale = 1;
+      
+        GoToDebutPhase = null;
+        azer = false;
+        GoToActivationPhase = null;
+        GoToOrgoneJ1Phase = null;
+        GoToActionJ1Phase = null;
+        GoToOrgoneJ2Phase = null;
+        GoToActionJ2Phase = null;
+        GoToStrategyPhase = null;
+        GameManager.Instance.isGamePaused = false;
+        SceneManager.LoadScene(sceneToLoad);
+      
+    }
 }
