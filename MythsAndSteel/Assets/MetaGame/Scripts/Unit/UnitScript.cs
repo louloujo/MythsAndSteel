@@ -651,7 +651,12 @@ public class UnitScript : MonoBehaviour
     }
     public void RemoveStatutToUnit(MYthsAndSteel_Enum.UnitStatut stat)
     {
-        if(_unitStatuts.Contains(stat)) _unitStatuts.Remove(stat);
+        if (_unitStatuts.Contains(stat))
+        {
+            _unitStatuts.Remove(stat);
+            NextStepSetter(stat);
+
+        }
     }
 
     #endregion Statut
@@ -778,7 +783,7 @@ public class UnitScript : MonoBehaviour
             _diceBonus += 4;
           
             ResetTurn();
-            _unitStatuts.Remove(MYthsAndSteel_Enum.UnitStatut.Possédé);
+          RemoveStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Possédé);
         }
     }
 }
