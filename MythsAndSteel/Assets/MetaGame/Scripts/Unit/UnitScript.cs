@@ -191,8 +191,90 @@ public class UnitScript : MonoBehaviour
 
     [Header("------------------- STATU DE L'UNITE -------------------")]
     //Statut que possède l'unité
-    [SerializeField] private List<MYthsAndSteel_Enum.UnitStatut> _unitStatus = new List<MYthsAndSteel_Enum.UnitStatut>();
-    public List<MYthsAndSteel_Enum.UnitStatut> UnitStatus => _unitStatus;
+    [SerializeField] private List<MYthsAndSteel_Enum.UnitStatut> _unitStatuts = new List<MYthsAndSteel_Enum.UnitStatut>();
+    public List<MYthsAndSteel_Enum.UnitStatut> UnitStatuts
+    {
+        get
+        {
+            return _unitStatuts;
+        }
+        set
+        { 
+            _unitStatuts = value;
+        }
+    }
+
+    [SerializeField] private Animator StatusPrefab;
+    [SerializeField] private ScriptableStatus StatusData;
+
+    public int step = 0;
+    Coroutine last;
+    IEnumerator NextStep()
+    {
+        if (StatusPrefab.GetBool("In"))
+        {
+            StatusPrefab.SetBool("In", false);
+            yield return new WaitForSeconds(1f);
+        }
+        if(UnitStatuts.Count >= step && step >= 0)
+        {
+            StatusPrefab.runtimeAnimatorController = GetAnimator(_unitStatuts[step]);
+        }
+        StatusPrefab.SetBool("In", true);
+        yield return new WaitForSeconds(3);
+        if(UnitStatuts.Count > 1)
+        {
+            NewStep();
+        }
+        if (UnitStatuts.Count == 0)
+        {
+            StatusPrefab.runtimeAnimatorController = null;
+            StatusPrefab.GetComponent<SpriteRenderer>().sprite = null;
+        }
+    }
+
+    public void NewStep()
+    {
+        if(step >= UnitStatuts.Count - 1)
+        {
+            step = 0;
+        }
+        else if(UnitStatuts.Count != 0)
+        {
+            step++;
+        }
+        last = StartCoroutine(NextStep());
+    }
+
+    public RuntimeAnimatorController GetAnimator(MYthsAndSteel_Enum.UnitStatut ST)
+    {
+        foreach(Data D in StatusData.Data)
+        {
+            if(D.Status == ST)
+            {
+                if(D.Animation != null)
+                {
+                    return D.Animation;
+                }
+                else
+                {
+                    Debug.LogError("Miss animation");
+                }
+            }
+        }
+        Debug.LogError("Miss animation");
+        return null;
+    }
+
+    public void NextStepSetter(MYthsAndSteel_Enum.UnitStatut ST)
+    {
+        if(last != null)
+        {
+            StopCoroutine(last);
+        }
+        step = UnitStatuts.IndexOf(ST);
+        last = StartCoroutine(NextStep());
+    }
 
     public bool hasUseActivation = false;
     [SerializeField] private Animator _Animation;
@@ -306,7 +388,7 @@ public class UnitScript : MonoBehaviour
     /// <param name="Damage"></param>
     public virtual void TakeDamage(int Damage, bool IsOrgoneDamage = false)
     {
-        if(!_unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Invincible))
+        if(!_unitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Invincible))
             {
 
         if (_shield > 0)
@@ -505,9 +587,6 @@ public class UnitScript : MonoBehaviour
             GameManager.Instance.DeathByOrgone--;
         }
 
-
-
-
         PlayerScript.Instance.GiveEventCard(UnitSO.IsInRedArmy ? 1 : 2);
         IsDead = false;
 
@@ -541,9 +620,43 @@ public class UnitScript : MonoBehaviour
     #endregion LifeMethods
 
     #region Statut
+
+    public void test()
+    {
+        AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Immobilisation);
+    }
+    public void test2()
+    {
+        AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.ArmeEpidemiologique);
+    }
+    public void poss()
+    {
+        AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Possédé);
+    }
+    public void poss1()
+    {
+        AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre);
+    }
+    public void poss2()
+    {
+        AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut.PeutPasPrendreDesObjectifs);
+    }
     public void AddStatutToUnit(MYthsAndSteel_Enum.UnitStatut stat)
     {
-        _unitStatus.Add(stat);
+        if (!_unitStatuts.Contains(stat))
+        {
+            _unitStatuts.Add(stat);
+            NextStepSetter(stat);
+        }
+    }
+    public void RemoveStatutToUnit(MYthsAndSteel_Enum.UnitStatut stat)
+    {
+        if (_unitStatuts.Contains(stat))
+        {
+            _unitStatuts.Remove(stat);
+            NextStepSetter(stat);
+
+        }
     }
 
     #endregion Statut
@@ -622,12 +735,12 @@ public class UnitScript : MonoBehaviour
     /// </summary>
     public void checkMovementLeft()
     {
-        if (UnitSO.IsInRedArmy && !hasUseActivation || (!_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)) && !hasUseActivation) 
+        if (UnitSO.IsInRedArmy && !hasUseActivation || (!_unitSO.IsInRedArmy && _unitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)) && !hasUseActivation) 
         {
             hasUseActivation = true;
             PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
         }
-        else if (!UnitSO.IsInRedArmy && !hasUseActivation || (_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)) && !hasUseActivation)
+        else if (!UnitSO.IsInRedArmy && !hasUseActivation || (_unitSO.IsInRedArmy && _unitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)) && !hasUseActivation)
         {
             hasUseActivation = true;
             PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
@@ -651,12 +764,12 @@ public class UnitScript : MonoBehaviour
             _isActivationDone = true;
 
             //Réduit le nombre d'activation restante
-            if (_unitSO.IsInRedArmy || (!_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
+            if (_unitSO.IsInRedArmy || (!_unitSO.IsInRedArmy && _unitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
             {
                 if (!_hasStartMove) PlayerScript.Instance.RedPlayerInfos.ActivationLeft--;
                 UIInstance.Instance.UpdateActivationLeft();
             }
-            else if (!_unitSO.IsInRedArmy || (_unitSO.IsInRedArmy && _unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
+            else if (!_unitSO.IsInRedArmy || (_unitSO.IsInRedArmy && _unitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
             {
                 if (!_hasStartMove) PlayerScript.Instance.BluePlayerInfos.ActivationLeft--;
                 UIInstance.Instance.UpdateActivationLeft();
@@ -665,12 +778,12 @@ public class UnitScript : MonoBehaviour
     }
     public void ResetStatutPossesion()
     {
-        if (_unitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
+        if (_unitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
         {
             _diceBonus += 4;
           
             ResetTurn();
-            _unitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.Possédé);
+          RemoveStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Possédé);
         }
     }
 }

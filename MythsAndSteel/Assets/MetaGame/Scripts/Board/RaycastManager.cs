@@ -188,7 +188,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                 if(_actualUnitSelected == UnitInTile && !Mouvement.Instance.MvmtRunning && Attaque.Instance.IsInAttack)
                 {
 
-                    if(!UnitInTile.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
+                    if(!UnitInTile.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
                     {
 
                     Debug.Log("fjdkms");
@@ -202,7 +202,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                 }
                 else if(!Mouvement.Instance.Selected && !Attaque.Instance.Selected && UnitInTile != null)
                 {
-                    if (!UnitInTile.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
+                    if (!UnitInTile.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
                     {
 
                     UnitScript currentUnitScript = UnitInTile.GetComponent<UnitScript>();
@@ -281,14 +281,14 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         {
             if(GameManager.Instance.IsPlayerRedTurn)
             {
-                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, true) && !uniTouch.UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
+                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, true) && !uniTouch.UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
                 {
                     return false;
                 }
             }
             else
             {
-                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, false) && !uniTouch.UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
+                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, false) && !uniTouch.UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
                 {
                     return false;
                 }

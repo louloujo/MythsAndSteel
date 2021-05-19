@@ -615,7 +615,7 @@ public class Attaque : MonoSingleton<Attaque>
             {
 
 
-                if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
+                if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
                 {
                    
                     _isInAttack = false;
@@ -636,7 +636,7 @@ public class Attaque : MonoSingleton<Attaque>
                 if (tileSelected != null)
                 {
                 
-                    if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
+                    if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
                     {
 
                         GetStats();
@@ -660,7 +660,7 @@ public class Attaque : MonoSingleton<Attaque>
         {
             if (tileId != -1)
             {
-                if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
+                if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
                 {
                     _isInAttack = false;
                     StartAttack(tileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
@@ -679,7 +679,7 @@ public class Attaque : MonoSingleton<Attaque>
                 if (tileSelected != null)
                 {
            
-                    if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
+                    if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
                     {
                         Debug.Log(_selectedUnit);
                         _selected = true;
@@ -708,11 +708,11 @@ public class Attaque : MonoSingleton<Attaque>
         {
             if (TilesManager.Instance.TileList[TileId].TryGetComponent(out TileScript u) && u.Unit != null)
             {
-                if (GameManager.Instance.IsPlayerRedTurn && u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy || (GameManager.Instance.IsPlayerRedTurn && !u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy && u.Unit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
+                if (GameManager.Instance.IsPlayerRedTurn && u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy || (GameManager.Instance.IsPlayerRedTurn && !u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy && u.Unit.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
                 {
                     _JaugeAttack.SynchAttackBorne(u.Unit.GetComponent<UnitScript>());
                 }
-                else if (!GameManager.Instance.IsPlayerRedTurn && !u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy || (!GameManager.Instance.IsPlayerRedTurn && !u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy && u.Unit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
+                else if (!GameManager.Instance.IsPlayerRedTurn && !u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy || (!GameManager.Instance.IsPlayerRedTurn && !u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy && u.Unit.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
                 {
                     _JaugeAttack.SynchAttackBorne(u.Unit.GetComponent<UnitScript>());
                 }
