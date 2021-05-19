@@ -41,7 +41,12 @@ public class CapaTest : Capacity
         GetComponent<UnitScript>().EndCapacity();
         if(GameManager.Instance.TileChooseList.Count > 0)
         {
+            foreach(int id in PlayerStatic.GetNeighbourDiag(GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().TileId, GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().Line, false))
+            {
+                fr.CreateFire(id);
+            }
             fr.CreateFire(GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().TileId);
+            
         }
         base.EndCpty();        
         GameManager.Instance.TileChooseList.Clear();
