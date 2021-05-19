@@ -79,6 +79,7 @@ public class UnitScript : MonoBehaviour
         }
     }
 
+    public bool RunningCapacity = false;
 
     [Header("------------------- MOUVEMENT -------------------")]
     //Vitesse de déplacement
@@ -282,6 +283,17 @@ public class UnitScript : MonoBehaviour
 
     //Récupération de stats pour l'écran de victoire
  
+    public bool GotCapacity()
+    {
+        if(TryGetComponent<Capacity>(out Capacity C))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 
     #endregion Variables
@@ -776,6 +788,45 @@ public class UnitScript : MonoBehaviour
             }
         }
     }
+
+    public void StartCapacity()
+    {
+        CapacitySystem.Instance.CapacityRunning = true;
+        RunningCapacity = true; 
+        CapacitySystem.Instance.Updatebutton();
+        UIInstance.Instance.DesactivateNextPhaseButton();
+            if (TryGetComponent<Capacity>(out Capacity T))
+            {
+                Debug.Log("starrt");
+                T.StartCpty();
+            }
+    }
+
+    public void EndCapacity()
+    {
+        CapacitySystem.Instance.CapacityRunning = false;
+        _isActivationDone = true;
+        RunningCapacity = false; 
+        CapacitySystem.Instance.Updatebutton();
+        UIInstance.Instance.ActivateNextPhaseButton();
+        checkActivation();
+    }
+
+    public void StopCapacity(bool FromCptyScript = false)
+    {
+        CapacitySystem.Instance.CapacityRunning = false;
+        UIInstance.Instance.ActivateNextPhaseButton();
+        RunningCapacity = false;
+        CapacitySystem.Instance.Updatebutton();
+        if (TryGetComponent<Capacity>(out Capacity T))
+        {
+            if (!FromCptyScript)
+            {
+                T.StopCpty();
+            }
+        }
+    }
+
     public void ResetStatutPossesion()
     {
         if (_unitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
