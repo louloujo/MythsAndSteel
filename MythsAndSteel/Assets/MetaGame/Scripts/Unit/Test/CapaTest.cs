@@ -10,6 +10,9 @@ public class CapaTest : Capacity
 
     public override void StartCpty()
     {
+        int ressourcePlayer = GetComponent<UnitScript>().UnitSO.IsInRedArmy ? PlayerScript.Instance.RedPlayerInfos.Ressource : PlayerScript.Instance.BluePlayerInfos.Ressource;
+        if (ressourcePlayer >= Capacity1Cost)
+        {
         List<GameObject> tile = new List<GameObject>();
         foreach(GameObject T in TilesManager.Instance.TileList)
         {
@@ -23,7 +26,9 @@ public class CapaTest : Capacity
         GameManager.Instance._eventCall += EndCpty;
         GameManager.Instance._eventCallCancel += StopCpty;
         GameManager.Instance.StartEventModeTiles(1, GetComponent<UnitScript>().UnitSO.IsInRedArmy, tile, "Embrasement!", "Voulez-vous vraiment embraser cette case ?");
-        
+
+        }
+    
         base.StartCpty();
     }
 
@@ -37,6 +42,15 @@ public class CapaTest : Capacity
 
     public override void EndCpty()
     {
+        if (GetComponent<UnitScript>().UnitSO.IsInRedArmy)
+        {
+            PlayerScript.Instance.RedPlayerInfos.Ressource -= Capacity1Cost;
+        }
+        else
+        {
+            PlayerScript.Instance.BluePlayerInfos.Ressource -= Capacity1Cost;
+        }
+        
         GameManager.Instance._eventCall -= EndCpty;
         GetComponent<UnitScript>().EndCapacity();
         if(GameManager.Instance.TileChooseList.Count > 0)
@@ -48,6 +62,7 @@ public class CapaTest : Capacity
             fr.CreateFire(GameManager.Instance.TileChooseList[0].GetComponent<TileScript>().TileId);
             
         }
+        
         base.EndCpty();        
         GameManager.Instance.TileChooseList.Clear();
     }

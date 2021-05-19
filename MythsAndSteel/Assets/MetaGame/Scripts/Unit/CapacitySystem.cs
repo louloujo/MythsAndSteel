@@ -33,9 +33,16 @@ public class CapacitySystem : MonoSingleton<CapacitySystem>
                         UIInstance.Instance.ActivateNextPhaseButton();
                     }
                 }
+                else
+                {
+                    ButtonLaunchCapacity.SetActive(false);
+                    UIInstance.Instance.ActivateNextPhaseButton();
+                }
             }
+            
             else
             {
+              
                 ButtonLaunchCapacity.SetActive(false);
                 UIInstance.Instance.ActivateNextPhaseButton();
             }
