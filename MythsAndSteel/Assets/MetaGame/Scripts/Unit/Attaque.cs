@@ -779,6 +779,19 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
+    [SerializeField] private bool _attackselected = false;
+    public bool attackselected
+    {
+        get
+        {
+            return _attackselected;
+        }
+        set
+        {
+            _attackselected = value;
+            CapacitySystem.Instance.Updatebutton();
+        }
+    }
     /// <summary>
     /// Ajout une case d'attaque à la liste
     /// </summary>
@@ -813,6 +826,7 @@ public class Attaque : MonoSingleton<Attaque>
                                 }
                             }
                         }
+                        attackselected = true;
                         _selectedTiles.Add(tileId);
                         TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect, _selectedSprite, 1);
                     }
@@ -821,6 +835,7 @@ public class Attaque : MonoSingleton<Attaque>
         }
         else
         {
+            attackselected = false;
             RemoveTileFromList(tileId);
         }
 
@@ -861,6 +876,8 @@ public class Attaque : MonoSingleton<Attaque>
     /// </summary>
     public void StopAttack()
     {
+        attackselected = false;
+        attackselected = false;
         selectedUnitEnnemy = null;
         _isInAttack = false;
         _selected = false;
@@ -982,6 +999,7 @@ public class Attaque : MonoSingleton<Attaque>
     public void ApplyAttack()
     {
         Randomdice();
+        CapacitySystem.Instance.Updatebutton();
         IsInAttack = false;
         _selectedUnit.GetComponent<UnitScript>()._isActionDone = true;
         

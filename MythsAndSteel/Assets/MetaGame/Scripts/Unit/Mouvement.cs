@@ -371,6 +371,7 @@ public class Mouvement : MonoSingleton<Mouvement>
     /// <param name="Range"></param>
     public void StartMouvement(int tileId, int Range)
     {
+        mvmtrunning = false;
         if (!_mvmtRunning && !_isInMouvement)
         {
             _isInMouvement = true;
@@ -390,6 +391,7 @@ public class Mouvement : MonoSingleton<Mouvement>
     /// </summary>
     public void StopMouvement(bool forceStop)
     {
+        mvmtrunning = false;
         if(Last != null)
         {
             StopCoroutine(Last);
@@ -432,6 +434,8 @@ public class Mouvement : MonoSingleton<Mouvement>
         mUnit = null;
 
         RaycastManager.Instance.ActualTileSelected = null;
+
+        UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
 
         UIInstance.Instance.ActivateNextPhaseButton();
 
@@ -660,11 +664,27 @@ public class Mouvement : MonoSingleton<Mouvement>
         }
     }
 
+    [SerializeField] private bool _mvmtrunning = false;
+    public bool mvmtrunning
+    {
+        get
+        {
+            return _mvmtrunning;
+        }
+        set
+        {
+            _mvmtrunning = value;
+            CapacitySystem.Instance.Updatebutton();
+        }
+    }
+
     /// <summary>
     /// Assigne le prochain mouvement demandé à l'unité. Change les stats de l'ancienne et de la nouvelle case. Actualise les informations de position de l'unité.
     /// </summary>
     public void ApplyMouvement()
     {
+        mvmtrunning = true;
+
         foreach(int ID in PlayerStatic.GetNeighbourDiag(selectedTileId[selectedTileId.Count - 1], TilesManager.Instance.TileList[selectedTileId.Count - 1].GetComponent<TileScript>().Line, false))
         {
             TilesManager.Instance.TileList[ID].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);

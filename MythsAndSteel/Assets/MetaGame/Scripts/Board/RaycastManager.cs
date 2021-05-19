@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class RaycastManager : MonoSingleton<RaycastManager>
 {
@@ -58,12 +59,16 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                 }
                 _actualUnitSelected = value;
                 if (value != null)
-                {
+                {                    
+                    value.GetComponent<UnitScript>().RunningCapacity = false;
+                    CapacitySystem.Instance.Updatebutton();
                     AttackJauge(true);
                 }
             }
         }
     }
+
+
 
     [Header("PANNEAU DES BOUTONS QUAND CLIC SUR UNITE")]
     //Est ce que les joueurs peuvent jouer
@@ -188,16 +193,15 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                 if(_actualUnitSelected == UnitInTile && !Mouvement.Instance.MvmtRunning && Attaque.Instance.IsInAttack)
                 {
 
+
                     if(!UnitInTile.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
+
                     {
-
-                    Debug.Log("fjdkms");
-
-                    Attaque.Instance.StopAttack();
-                    Mouvement.Instance.StopMouvement(true);
-                    UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
-                    _actualTileSelected = null;
-                    ActualUnitSelected = null;
+                        Attaque.Instance.StopAttack();
+                        Mouvement.Instance.StopMouvement(true);
+                        UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
+                        _actualTileSelected = null;
+                        ActualUnitSelected = null;
                     }
                 }
                 else if(!Mouvement.Instance.Selected && !Attaque.Instance.Selected && UnitInTile != null)
@@ -211,6 +215,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                         
                         _actualTileSelected = _tile;
                         ActualUnitSelected = _unitInTile;
+                        ActualUnitSelected.GetComponent<UnitScript>().StopCapacity();
                         Mouvement.Instance.StartMvmtForSelectedUnit();
                         Attaque.Instance.StartAttackSelectionUnit();
                     }
@@ -255,6 +260,8 @@ public class RaycastManager : MonoSingleton<RaycastManager>
             Attaque.Instance.AddTileToList(Tile.GetComponent<TileScript>().TileId);
         }
     }
+
+
 
     /// <summary>
     /// Déselectionne un élément (case ou unité)
