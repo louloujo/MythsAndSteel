@@ -1528,9 +1528,9 @@ MonoBehaviour:
   _actualTurnNumber: 0
   _TurnNumber: {fileID: 1228111641}
   _isPlayerRedStarting: 0
-  _isPlayerRedTurn: 0
-  _isInTurn: 0
-  _actualTurnPhase: 0
+  _isPlayerRedTurn: 1
+  _isInTurn: 1
+  _actualTurnPhase: 3
   _changeActivPhase: {fileID: 1965578499}
   _eventCardSO: {fileID: 11400000, guid: 955303dc40a1fa54984cef9072aef4ad, type: 2}
   _managerSO: {fileID: 11400000, guid: 915a645e0a8638b4d8f4a6522da5cc44, type: 2}
