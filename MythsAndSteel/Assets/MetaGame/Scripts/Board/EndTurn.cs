@@ -243,7 +243,7 @@ public class EndTurn : MonoBehaviour
                 {
                     GameManager.Instance.VictoryForArmy(2);
                 }
-                break;
+                    break;
             case 2: // SHANGHAI
                 if (PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber == RedObjCount) /* RedObjCount = 2 */
                 {
@@ -254,18 +254,25 @@ public class EndTurn : MonoBehaviour
                 {
                     GameManager.Instance.VictoryForArmy(2);
                 }
-                break;
+                    break;
             case 3: // STALINGRAD
-                if (false) 
+                if (GameManager.Instance.ActualTurnNumber >= 6 && PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber > PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber) 
                 {
-                    GameManager.Instance.VictoryForArmy(1); // NON
-                    Debug.LogError("PTN");
+                    GameManager.Instance.VictoryForArmy(1);
                 }
-                if (false)
+                else { PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber = 0; }
+
+                if (GameManager.Instance.ActualTurnNumber == 12)
                 {
-                    GameManager.Instance.VictoryForArmy(2); // NON
+                    GameManager.Instance.VictoryForArmy(1);
                 }
-                break;
+
+                if (GameManager.Instance.ActualTurnNumber >= 6 && PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber > PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber)
+                {
+                    GameManager.Instance.VictoryForArmy(2);
+                }
+                else { PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber = 0; }
+                    break;
             case 4: // HUSKY
                 if (GameManager.Instance.ActualTurnNumber == 10)
                 {
@@ -280,8 +287,7 @@ public class EndTurn : MonoBehaviour
                     }
                     else { PlayerScript.Instance.BluePlayerInfos.GoalCapturePointsNumber = 0; }
                 }
-                break;
-
+                    break;
             case 5: // GUADALCANAL
                 if (GameManager.Instance.ActualTurnNumber == 12)
                 {
@@ -292,7 +298,7 @@ public class EndTurn : MonoBehaviour
                 {
                     GameManager.Instance.VictoryForArmy(2);
                 }
-                break;
+                    break;
             case 6: // EL ALAMEIN
                 if (PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber == RedObjCount) /* RedObjCount = 1 */
                 {
@@ -308,7 +314,7 @@ public class EndTurn : MonoBehaviour
                 {
                     GameManager.Instance.VictoryForArmy(2); 
                 }
-                break;
+                    break;
             case 7: // ELSENBORN
                 if (PlayerScript.Instance.RedPlayerInfos.GoalCapturePointsNumber == RedObjCount) /* RedObjCount = 1 */
                 {
@@ -319,10 +325,9 @@ public class EndTurn : MonoBehaviour
                 {
                     GameManager.Instance.VictoryForArmy(2);
                 }
-                break;
+                    break;
         }
         
-
         if (PlayerScript.Instance.UnitRef.UnitListBluePlayer.Count == 0)
         {
             GameManager.Instance.VictoryForArmy(1);
@@ -333,5 +338,4 @@ public class EndTurn : MonoBehaviour
             GameManager.Instance.VictoryForArmy(2);
         }
     }
-
 }
