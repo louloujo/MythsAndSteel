@@ -11,7 +11,10 @@ public class Attaque : MonoSingleton<Attaque>
 
     public List<int> _newNeighbourId => newNeighbourId;
     [SerializeField] private List<int> newNeighbourId = new List<int>(); // Voisins atteignables avec le range de l'unitÃ©.
-
+    [SerializeField]
+    private GameObject PanelBlockant1;
+    [SerializeField]
+    private GameObject PanelBlockant2;
     //Est ce que l'unitÃ© a commencÃ© Ã  choisir son dÃ©placement ?
     [SerializeField] private bool _isInAttack;
     public bool IsInAttack
@@ -615,7 +618,7 @@ public class Attaque : MonoSingleton<Attaque>
             {
 
 
-                if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
+                if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
                 {
                    
                     _isInAttack = false;
@@ -636,7 +639,7 @@ public class Attaque : MonoSingleton<Attaque>
                 if (tileSelected != null)
                 {
                 
-                    if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
+                    if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
                     {
 
                         GetStats();
@@ -660,7 +663,7 @@ public class Attaque : MonoSingleton<Attaque>
         {
             if (tileId != -1)
             {
-                if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
+                if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
                 {
                     _isInAttack = false;
                     StartAttack(tileId, _selectedUnit.GetComponent<UnitScript>().AttackRange + _selectedUnit.GetComponent<UnitScript>().AttackRangeBonus);
@@ -679,7 +682,7 @@ public class Attaque : MonoSingleton<Attaque>
                 if (tileSelected != null)
                 {
            
-                    if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
+                    if (!_selectedUnit.GetComponent<UnitScript>()._isActionDone && !_selectedUnit.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre))
                     {
                         Debug.Log(_selectedUnit);
                         _selected = true;
@@ -708,11 +711,11 @@ public class Attaque : MonoSingleton<Attaque>
         {
             if (TilesManager.Instance.TileList[TileId].TryGetComponent(out TileScript u) && u.Unit != null)
             {
-                if (GameManager.Instance.IsPlayerRedTurn && u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy || (GameManager.Instance.IsPlayerRedTurn && !u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy && u.Unit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
+                if (GameManager.Instance.IsPlayerRedTurn && u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy || (GameManager.Instance.IsPlayerRedTurn && !u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy && u.Unit.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
                 {
                     _JaugeAttack.SynchAttackBorne(u.Unit.GetComponent<UnitScript>());
                 }
-                else if (!GameManager.Instance.IsPlayerRedTurn && !u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy || (!GameManager.Instance.IsPlayerRedTurn && !u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy && u.Unit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
+                else if (!GameManager.Instance.IsPlayerRedTurn && !u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy || (!GameManager.Instance.IsPlayerRedTurn && !u.Unit.GetComponent<UnitScript>().UnitSO.IsInRedArmy && u.Unit.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé)))
                 {
                     _JaugeAttack.SynchAttackBorne(u.Unit.GetComponent<UnitScript>());
                 }
@@ -730,6 +733,11 @@ public class Attaque : MonoSingleton<Attaque>
         if (!_isInAttack)
         {
             _isInAttack = true;
+
+                PanelBlockant1.SetActive(true);
+            
+                PanelBlockant2.SetActive(true);
+            
             ID = new List<int>();
             ID.Add(tileId);
 
@@ -779,6 +787,19 @@ public class Attaque : MonoSingleton<Attaque>
         }
     }
 
+    [SerializeField] private bool _attackselected = false;
+    public bool attackselected
+    {
+        get
+        {
+            return _attackselected;
+        }
+        set
+        {
+            _attackselected = value;
+            CapacitySystem.Instance.Updatebutton();
+        }
+    }
     /// <summary>
     /// Ajout une case d'attaque à la liste
     /// </summary>
@@ -813,6 +834,7 @@ public class Attaque : MonoSingleton<Attaque>
                                 }
                             }
                         }
+                        attackselected = true;
                         _selectedTiles.Add(tileId);
                         TilesManager.Instance.TileList[tileId].GetComponent<TileScript>().ActiveChildObj(MYthsAndSteel_Enum.ChildTileType.AttackSelect, _selectedSprite, 1);
                     }
@@ -821,6 +843,7 @@ public class Attaque : MonoSingleton<Attaque>
         }
         else
         {
+            attackselected = false;
             RemoveTileFromList(tileId);
         }
 
@@ -861,10 +884,14 @@ public class Attaque : MonoSingleton<Attaque>
     /// </summary>
     public void StopAttack()
     {
+        attackselected = false;
+        attackselected = false;
         selectedUnitEnnemy = null;
         _isInAttack = false;
         _selected = false;
-        
+        PanelBlockant1.SetActive(false);
+
+        PanelBlockant2.SetActive(false);
         RemoveTileSprite();
 
         // Clear de toutes les listes et stats
@@ -982,6 +1009,7 @@ public class Attaque : MonoSingleton<Attaque>
     public void ApplyAttack()
     {
         Randomdice();
+        CapacitySystem.Instance.Updatebutton();
         IsInAttack = false;
         _selectedUnit.GetComponent<UnitScript>()._isActionDone = true;
         

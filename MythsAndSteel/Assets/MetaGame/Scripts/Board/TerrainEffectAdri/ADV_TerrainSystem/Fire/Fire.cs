@@ -28,6 +28,10 @@ public class Fire : TerrainParent
 
     private void Start()
     {
+        if(GetComponentInParent<TileScript>().Unit != null)
+        {
+            OnUnityAdd(GetComponentInParent<TileScript>().Unit.GetComponent<UnitScript>());
+        }
         Check();
     }
     public void Check()
@@ -39,13 +43,13 @@ public class Fire : TerrainParent
 
             if (GetComponentInParent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Feu))
             {
-                GetComponentInParent<TileScript>().TerrainEffectList.Remove(MYthsAndSteel_Enum.TerrainType.Feu);
+                //GetComponentInParent<TileScript>().TerrainEffectList.Remove(MYthsAndSteel_Enum.TerrainType.Feu);
             }
             if (!GetComponentInParent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Brasier))
             {
-                GetComponentInParent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Brasier);
+               // GetComponentInParent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Brasier);
             }
-            GetComponentInParent<ChildEffect>().Type = MYthsAndSteel_Enum.TerrainType.Brasier;
+           // GetComponentInParent<ChildEffect>().Type = MYthsAndSteel_Enum.TerrainType.Brasier;
             Type = type.brasier;
 
         }
@@ -57,13 +61,13 @@ public class Fire : TerrainParent
 
             if (GetComponentInParent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Brasier))
             {
-                GetComponentInParent<TileScript>().TerrainEffectList.Remove(MYthsAndSteel_Enum.TerrainType.Brasier);
+                //GetComponentInParent<TileScript>().TerrainEffectList.Remove(MYthsAndSteel_Enum.TerrainType.Brasier);
             }
             if (!GetComponentInParent<TileScript>().TerrainEffectList.Contains(MYthsAndSteel_Enum.TerrainType.Feu))
             {
-                GetComponentInParent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Feu);
+                //GetComponentInParent<TileScript>().TerrainEffectList.Add(MYthsAndSteel_Enum.TerrainType.Feu);
             }
-            GetComponent<ChildEffect>().Type = MYthsAndSteel_Enum.TerrainType.Feu;
+            //GetComponent<ChildEffect>().Type = MYthsAndSteel_Enum.TerrainType.Feu;
             Type = type.feu;
         }
         else if (TurnLeft <= 0)
@@ -106,6 +110,7 @@ public class Fire : TerrainParent
 
     public override void EndTurnEffect(TileScript ts, UnitScript Unit = null)
     {
+        TurnLeft--;
         Debug.Log(TurnLeft);
         if (TurnLeft == 2)
         {

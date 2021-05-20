@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class RaycastManager : MonoSingleton<RaycastManager>
 {
@@ -58,12 +59,16 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                 }
                 _actualUnitSelected = value;
                 if (value != null)
-                {
+                {                    
+                    value.GetComponent<UnitScript>().RunningCapacity = false;
+                    CapacitySystem.Instance.Updatebutton();
                     AttackJauge(true);
                 }
             }
         }
     }
+
+
 
     [Header("PANNEAU DES BOUTONS QUAND CLIC SUR UNITE")]
     //Est ce que les joueurs peuvent jouer
@@ -188,21 +193,20 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                 if(_actualUnitSelected == UnitInTile && !Mouvement.Instance.MvmtRunning && Attaque.Instance.IsInAttack)
                 {
 
-                    if(!UnitInTile.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
+
+                    if(!UnitInTile.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
+
                     {
-
-                    Debug.Log("fjdkms");
-
-                    Attaque.Instance.StopAttack();
-                    Mouvement.Instance.StopMouvement(true);
-                    UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
-                    _actualTileSelected = null;
-                    ActualUnitSelected = null;
+                        Attaque.Instance.StopAttack();
+                        Mouvement.Instance.StopMouvement(true);
+                        UIInstance.Instance.ActivationUnitPanel.CloseMovementPanel();
+                        _actualTileSelected = null;
+                        ActualUnitSelected = null;
                     }
                 }
                 else if(!Mouvement.Instance.Selected && !Attaque.Instance.Selected && UnitInTile != null)
                 {
-                    if (!UnitInTile.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
+                    if (!UnitInTile.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
                     {
 
                     UnitScript currentUnitScript = UnitInTile.GetComponent<UnitScript>();
@@ -211,6 +215,7 @@ public class RaycastManager : MonoSingleton<RaycastManager>
                         
                         _actualTileSelected = _tile;
                         ActualUnitSelected = _unitInTile;
+                        ActualUnitSelected.GetComponent<UnitScript>().StopCapacity();
                         Mouvement.Instance.StartMvmtForSelectedUnit();
                         Attaque.Instance.StartAttackSelectionUnit();
                     }
@@ -256,6 +261,8 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         }
     }
 
+
+
     /// <summary>
     /// Déselectionne un élément (case ou unité)
     /// </summary>
@@ -281,14 +288,14 @@ public class RaycastManager : MonoSingleton<RaycastManager>
         {
             if(GameManager.Instance.IsPlayerRedTurn)
             {
-                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, true) && !uniTouch.UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
+                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, true) && !uniTouch.UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
                 {
                     return false;
                 }
             }
             else
             {
-                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, false) && !uniTouch.UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
+                if(!PlayerStatic.CheckIsUnitArmy(uniTouch, false) && !uniTouch.UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Possédé))
                 {
                     return false;
                 }

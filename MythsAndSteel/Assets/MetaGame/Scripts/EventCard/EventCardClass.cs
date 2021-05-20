@@ -1009,7 +1009,7 @@ foreach (GameObject element in TilesManager.Instance.TileList)
         typeUnitChoose = MYthsAndSteel_Enum.TypeUnite.Autre;
         GameManager.Instance.UnitChooseList.Clear();
         //Remove la carte event chez le bon joueur
-        RemoveEvents(MYthsAndSteel_Enum.EventCard.Sabotage);
+        RemoveEvents(MYthsAndSteel_Enum.EventCard.Paralysie);
     }
     public void LaunchParalysie()
     {

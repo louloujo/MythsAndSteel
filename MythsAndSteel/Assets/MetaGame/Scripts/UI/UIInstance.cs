@@ -152,6 +152,17 @@ public class UIInstance : MonoSingleton<UIInstance>
     [SerializeField] private List<GameObject> _effetDeTerrain;
     public List<GameObject> effetDeTerrain => _effetDeTerrain;
 
+    // ------------------------------------------
+
+    [SerializeField] private GameObject _prefabSlotStatuts;
+    public GameObject prefabSlotStatuts => _prefabSlotStatuts;
+
+    [SerializeField] private GameObject _parentSlotStatuts;
+    public GameObject parentSlotStatuts => _parentSlotStatuts;
+
+    [SerializeField] private List<GameObject> _Statuts;
+    public List<GameObject> Statuts => _Statuts;
+
     #endregion ShiftClicPanelP2
 
     [Header("ENFANTS CASE DU PLATEAU")]
@@ -230,6 +241,7 @@ public class UIInstance : MonoSingleton<UIInstance>
 
     //Variable du Scriptable.
     public TerrainTypeClass Terrain;
+    public ScriptableStatus StatusSc;
 
     public void CallUpdateUI(GameObject Tile)
     {

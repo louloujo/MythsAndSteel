@@ -143,21 +143,6 @@ public class MouseCommand : MonoBehaviour
                 int capaSize = 130 + (20 * truncateLine);
                 contentSize += capaSize;
             }
-            // CAPACITY 2. 
-            if (Capa.ReturnInfo(UI.capacityPrefab, 1) != null)
-            {
-                UI.capacityParent.transform.parent.parent.GetComponent<ScrollRect>().verticalScrollbar.value = 1;
-                GameObject CAPA2 = Instantiate(Capa.ReturnInfo(UI.capacityPrefab, 1), Vector2.zero, Quaternion.identity);
-                CAPA2.transform.SetParent(UI.capacityParent.transform);
-                CAPA2.transform.localScale = new Vector3(.9f, .9f, .9f);
-                UI.capacityList.Add(CAPA2);
-
-                int lengthTxt = CAPA2.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text.Length;
-                float LengthLine = (float)lengthTxt / 21;
-                int truncateLine = (int)LengthLine;
-                int capaSize = 130 + (20 * truncateLine);
-                contentSize += capaSize;
-            }
 
             UI.capacityParent.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.capacityParent.GetComponent<RectTransform>().sizeDelta.x, contentSize);
         }
@@ -212,6 +197,36 @@ public class MouseCommand : MonoBehaviour
             UI.effetDeTerrain.Add(Effet);
 
             UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta.x, 212 * UI.effetDeTerrain.Count);
+        }
+
+        if (RaycastManager.Instance.Tile.GetComponent<TileScript>().TerrainEffectList.Count == 0)
+        {
+            GameObject Effet = Instantiate(UI.prefabSlotEffetDeTerrain, UI.parentSlotEffetDeTerrain.transform.position, Quaternion.identity);
+            Effet.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Liste vide.";
+            Effet.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Cette unité n'a actuellement aucun pouvoir.";
+            Effet.transform.SetParent(UI.parentSlotEffetDeTerrain.transform);
+            Effet.transform.localScale = new Vector3(.9f, .9f, .9f);
+            UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.parentSlotEffetDeTerrain.GetComponent<RectTransform>().sizeDelta.x, 212 * UI.Statuts.Count);
+        }
+
+        for (int i = UI.Statuts.Count - 1; i >= 0; i--)
+        {
+            Destroy(UI.Statuts[UI.Statuts.Count - 1]);
+            UI.Statuts.RemoveAt(UI.Statuts.Count - 1);
+        }
+
+        UI.parentSlotStatuts.transform.parent.parent.GetComponent<ScrollRect>().verticalScrollbar.value = 1;
+        if(RaycastManager.Instance.UnitInTile != null)
+        {
+            foreach (MYthsAndSteel_Enum.UnitStatut status in RaycastManager.Instance.UnitInTile.GetComponent<UnitScript>().UnitStatuts)
+            {
+                GameObject Effet = Instantiate(UI.StatusSc.ReturnInfo(UI.prefabSlotStatuts, status), UI.parentSlotStatuts.transform.position, Quaternion.identity);
+                Effet.transform.SetParent(UI.parentSlotStatuts.transform);
+                Effet.transform.localScale = new Vector3(.9f, .9f, .9f);
+                UI.Statuts.Add(Effet);
+
+                UI.parentSlotStatuts.GetComponent<RectTransform>().sizeDelta = new Vector2(UI.parentSlotStatuts.GetComponent<RectTransform>().sizeDelta.x, 212 * UI.Statuts.Count);
+            }
         }
     }
 

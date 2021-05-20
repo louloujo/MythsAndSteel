@@ -233,10 +233,11 @@ public class GameManagerSO : ScriptableObject
                     foreach (GameObject unit in refunit)
                     {
 
-                        if (unit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.ArmeEpidemiologique))
+                        if (unit.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.ArmeEpidemiologique))
                         {
 
                             unit.GetComponent<UnitScript>().TakeDamage(1);
+                            unit.GetComponent<UnitScript>().RemoveStatutToUnit(MYthsAndSteel_Enum.UnitStatut.ArmeEpidemiologique);
                             foreach (int i in PlayerStatic.GetNeighbourDiag(unit.GetComponent<UnitScript>().ActualTiledId, TilesManager.Instance.TileList[unit.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().Line, false))
                             {
 
@@ -245,6 +246,7 @@ public class GameManagerSO : ScriptableObject
                                     TilesManager.Instance.TileList[i].GetComponent<TileScript>().Unit.GetComponent<UnitScript>().TakeDamage(1);
                                 }
                             }
+                            
                             GameManager.Instance.armeEpidemelogiqueStat = 0;
                             refunit = null;
 
@@ -263,9 +265,9 @@ public class GameManagerSO : ScriptableObject
                         foreach (GameObject unit in refunit)
                         {
 
-                            if (unit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
+                            if (unit.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
                             {
-                                unit.GetComponent<UnitScript>().UnitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.Paralysie);
+                                unit.GetComponent<UnitScript>().RemoveStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Paralysie);
                             }
 
                         }
@@ -352,18 +354,18 @@ public class GameManagerSO : ScriptableObject
                 foreach (GameObject unit in PlayerScript.Instance.UnitRef.UnitListRedPlayer)
                 {
 
-                    unit.GetComponent<UnitScript>().UnitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre);
-                    unit.GetComponent<UnitScript>().UnitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.Invincible);
-                    unit.GetComponent<UnitScript>().UnitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre);
+                    unit.GetComponent<UnitScript>().RemoveStatutToUnit(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre);
+                    unit.GetComponent<UnitScript>().RemoveStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Invincible);
+                    unit.GetComponent<UnitScript>().RemoveStatutToUnit(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre);
 
                 }
 
                 foreach (GameObject unit in PlayerScript.Instance.UnitRef.UnitListBluePlayer)
                 {
 
-                    unit.GetComponent<UnitScript>().UnitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre);
-                    unit.GetComponent<UnitScript>().UnitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.Invincible);
-                    unit.GetComponent<UnitScript>().UnitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre);
+                    unit.GetComponent<UnitScript>().RemoveStatutToUnit(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre);
+                    unit.GetComponent<UnitScript>().RemoveStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Invincible);
+                    unit.GetComponent<UnitScript>().RemoveStatutToUnit(MYthsAndSteel_Enum.UnitStatut.PeutPasCombattre);
 
 
                 }
@@ -382,10 +384,11 @@ public class GameManagerSO : ScriptableObject
                     foreach (GameObject unit in refunit)
                     {
 
-                        if (unit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.ArmeEpidemiologique))
+                        if (unit.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.ArmeEpidemiologique))
                         {
 
                             unit.GetComponent<UnitScript>().TakeDamage(1);
+                            unit.GetComponent<UnitScript>().RemoveStatutToUnit(MYthsAndSteel_Enum.UnitStatut.ArmeEpidemiologique);
                             foreach (int i in PlayerStatic.GetNeighbourDiag(unit.GetComponent<UnitScript>().ActualTiledId, TilesManager.Instance.TileList[unit.GetComponent<UnitScript>().ActualTiledId].GetComponent<TileScript>().Line, false))
                             {
 
@@ -419,9 +422,9 @@ public class GameManagerSO : ScriptableObject
                     foreach (GameObject unit in refunit)
                     {
 
-                        if (unit.GetComponent<UnitScript>().UnitStatus.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
+                        if (unit.GetComponent<UnitScript>().UnitStatuts.Contains(MYthsAndSteel_Enum.UnitStatut.Paralysie))
                         {
-                            unit.GetComponent<UnitScript>().UnitStatus.Remove(MYthsAndSteel_Enum.UnitStatut.Paralysie);
+                            unit.GetComponent<UnitScript>().RemoveStatutToUnit(MYthsAndSteel_Enum.UnitStatut.Paralysie);
                         }
 
                     }
