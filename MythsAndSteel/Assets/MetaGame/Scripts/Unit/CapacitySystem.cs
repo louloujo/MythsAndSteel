@@ -7,7 +7,10 @@ public class CapacitySystem : MonoSingleton<CapacitySystem>
 {
     [SerializeField] private Sprite attacklaunchspritebutton;
     [SerializeField] private Sprite attackcancelspritebutton;
-
+    [SerializeField]
+    public GameObject PanelBlockant1;
+    [SerializeField]
+    public GameObject PanelBlockant2;
     [SerializeField] public bool CapacityRunning = false;
 
     public void Updatebutton()
@@ -65,12 +68,16 @@ public class CapacitySystem : MonoSingleton<CapacitySystem>
                     Mouvement.Instance.StopMouvement(true);
                     Unit.GetComponent<UnitScript>().StartCapacity();
                     Unit.GetComponent<UnitScript>().RunningCapacity = true;
+                    PanelBlockant1.SetActive(true);
+                    PanelBlockant2.SetActive(true);
                     Updatebutton();
                 }
                 else if (Unit.GetComponent<UnitScript>().RunningCapacity)
                 {
                     Unit.GetComponent<UnitScript>().StopCapacity();
                     Unit.GetComponent<UnitScript>().RunningCapacity = false;
+                    PanelBlockant1.SetActive(false);
+                    PanelBlockant2.SetActive(false);
                     Updatebutton();
                 }
             }
