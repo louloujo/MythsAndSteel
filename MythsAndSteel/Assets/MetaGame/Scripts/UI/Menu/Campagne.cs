@@ -217,24 +217,31 @@ public class Campagne : MonoBehaviour
 
             case 1:
                 PlayerPrefs.SetInt("RethelDone", 1);
+                PlayerPrefs.SetInt("Bataille", 1);
                 break;
             case 2:
                 PlayerPrefs.SetInt("ShanghaiDone", 1);
+                PlayerPrefs.SetInt("Bataille", 2);
                 break;
             case 3:
                 PlayerPrefs.SetInt("StalingradDone", 1);
+                PlayerPrefs.SetInt("Bataille", 3);
                 break;
             case 4:
                 PlayerPrefs.SetInt("HuskyDone", 1);
+                PlayerPrefs.SetInt("Bataille", 4);
                 break;
             case 5:
                 PlayerPrefs.SetInt("GuadalcanalDone", 1);
+                PlayerPrefs.SetInt("Bataille", 5);
                 break;
             case 6:
                 PlayerPrefs.SetInt("ElAlameinDone", 1);
+                PlayerPrefs.SetInt("Bataille", 6);
                 break;
             case 7:
                 PlayerPrefs.SetInt("ElsenbornDone", 1);
+                PlayerPrefs.SetInt("Bataille", 7);
                 break;
             default:
                 break;
