@@ -5529,7 +5529,7 @@ MonoBehaviour:
   render1: {fileID: 628933551328896066, guid: 38e78899b63747846919312a4620c871, type: 3}
   _Capacity1Description: "Je suis la premi\xE8re capacit\xE9 et je me porte bien"
   _Capacity1Cost: 2
-  fr: {fileID: 1530706438}
+  fr: {fileID: 0}
 --- !u!1 &410746577 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2505849687832993500, guid: 9c16f23506dd9eb4cae93373ea3e8c51, type: 3}
@@ -8577,7 +8577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.data[0]
-      value: 31
+      value: 41
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.data[1]
@@ -10935,7 +10935,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 719715694, guid: cab109d310ee2b743ba60a48e05bdebf, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 719715695, guid: cab109d310ee2b743ba60a48e05bdebf, type: 3}
       propertyPath: m_Controller
@@ -22000,17 +22000,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1530706438 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7780306759594069911, guid: 82fd186201c46234f8e6ac17722814fb, type: 3}
-  m_PrefabInstance: {fileID: 1431489988}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6937b03a9b4d074c9f004cf970903c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1545514385
 GameObject:
   m_ObjectHideFlags: 0
@@ -22339,7 +22328,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RedObjCount: 1
   BlueObjCount: 1
-  goalTileList: []
+  RedgoalTileList: []
+  BluegoalTileList: []
 --- !u!1 &1563925672
 GameObject:
   m_ObjectHideFlags: 0
@@ -25415,11 +25405,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.data[0]
-      value: 31
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.data[1]
-      value: 31
+      value: 43
       objectReference: {fileID: 0}
     - target: {fileID: 5729802673627382403, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: m_Name
@@ -33434,11 +33424,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.data[0]
-      value: 41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4227640084239285831, guid: ee6b1ce0faa94234f9a29df7bd08b393, type: 3}
       propertyPath: _terrainEffectList.Array.data[1]
