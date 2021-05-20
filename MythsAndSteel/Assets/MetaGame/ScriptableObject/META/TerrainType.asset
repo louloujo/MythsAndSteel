@@ -226,3 +226,15 @@ MonoBehaviour:
     render: {fileID: 21300000, guid: ce82b59a0f7b12e418fca4dbfe39b997, type: 3}
     MustBeInstantiate: 1
     Child: {fileID: 4352697046244975141, guid: 61e52e18ad8013e4dbf10f00bb923c4e, type: 3}
+  - _terrainName: Objectif Rouge
+    _description: "Case \xE0 capturer pour faire gagner l'\xE9quipe Rouge"
+    _eventType: 2a000000
+    render: {fileID: 0}
+    MustBeInstantiate: 1
+    Child: {fileID: 0}
+  - _terrainName: Objectif Bleu
+    _description: "Case \xE0 capturer pour faire gagner l'\xE9quipe Bleu"
+    _eventType: 2b000000
+    render: {fileID: 0}
+    MustBeInstantiate: 1
+    Child: {fileID: 0}

@@ -788,8 +788,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void Paused()
     {
-
-
         Time.timeScale = 0;
         pauseMenu.SetActive(true);
         BackgroundPaused.SetActive(true);

@@ -49,14 +49,14 @@ public class Player
         }
         set
         {
-            _Ressource = value;            
+            _Ressource = value;
             UIInstance.Instance.UpdateRessourceLeft();
         }
     }
 
-    [Header("OBJECTIF")]
+    [Header("Objectif actuellement capturé")]
     //Nombre d'objectif actuellement capturé
-    public int GoalCapturePointsNumber; 
+    public int GoalCapturePointsNumber;     
 
     public bool HasCreateUnit; //est ce que le joueur a créer une unité durant sont tour
     #endregion Variables
