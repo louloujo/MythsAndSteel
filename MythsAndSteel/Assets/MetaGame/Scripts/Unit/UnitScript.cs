@@ -806,7 +806,9 @@ public class UnitScript : MonoBehaviour
     {
         CapacitySystem.Instance.CapacityRunning = false;
         _isActivationDone = true;
-        RunningCapacity = false; 
+        RunningCapacity = false;
+        CapacitySystem.Instance.PanelBlockant1.SetActive(false);
+        CapacitySystem.Instance.PanelBlockant2.SetActive(false);
         CapacitySystem.Instance.Updatebutton();
         UIInstance.Instance.ActivateNextPhaseButton();
         checkActivation();
@@ -815,6 +817,8 @@ public class UnitScript : MonoBehaviour
     public void StopCapacity(bool FromCptyScript = false)
     {
         CapacitySystem.Instance.CapacityRunning = false;
+        CapacitySystem.Instance.PanelBlockant1.SetActive(false);
+        CapacitySystem.Instance.PanelBlockant2.SetActive(false);
         UIInstance.Instance.ActivateNextPhaseButton();
         RunningCapacity = false;
         CapacitySystem.Instance.Updatebutton();

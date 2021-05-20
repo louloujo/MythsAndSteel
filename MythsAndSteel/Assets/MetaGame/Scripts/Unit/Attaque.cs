@@ -11,7 +11,10 @@ public class Attaque : MonoSingleton<Attaque>
 
     public List<int> _newNeighbourId => newNeighbourId;
     [SerializeField] private List<int> newNeighbourId = new List<int>(); // Voisins atteignables avec le range de l'unitÃ©.
-
+    [SerializeField]
+    private GameObject PanelBlockant1;
+    [SerializeField]
+    private GameObject PanelBlockant2;
     //Est ce que l'unitÃ© a commencÃ© Ã  choisir son dÃ©placement ?
     [SerializeField] private bool _isInAttack;
     public bool IsInAttack
@@ -730,6 +733,11 @@ public class Attaque : MonoSingleton<Attaque>
         if (!_isInAttack)
         {
             _isInAttack = true;
+
+                PanelBlockant1.SetActive(true);
+            
+                PanelBlockant2.SetActive(true);
+            
             ID = new List<int>();
             ID.Add(tileId);
 
@@ -881,7 +889,9 @@ public class Attaque : MonoSingleton<Attaque>
         selectedUnitEnnemy = null;
         _isInAttack = false;
         _selected = false;
-        
+        PanelBlockant1.SetActive(false);
+
+        PanelBlockant2.SetActive(false);
         RemoveTileSprite();
 
         // Clear de toutes les listes et stats
