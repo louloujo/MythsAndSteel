@@ -684,7 +684,7 @@ public class Mouvement : MonoSingleton<Mouvement>
     public void ApplyMouvement()
     {
         mvmtrunning = true;
-
+        UIInstance.Instance.DesactivateNextPhaseButton();
         foreach(int ID in PlayerStatic.GetNeighbourDiag(selectedTileId[selectedTileId.Count - 1], TilesManager.Instance.TileList[selectedTileId.Count - 1].GetComponent<TileScript>().Line, false))
         {
             TilesManager.Instance.TileList[ID].GetComponent<TileScript>().DesActiveChildObj(MYthsAndSteel_Enum.ChildTileType.MoveArrow);

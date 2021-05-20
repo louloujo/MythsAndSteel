@@ -198,43 +198,43 @@ MonoBehaviour:
     Child: {fileID: 0}
   - _terrainName: "Pt. \xC9puis\xE9"
     _description: "Point de ressource \xE9puis\xE9"
-    _eventType: 22000000
+    _eventType: 21000000
     render: {fileID: 21300000, guid: ba025916471d63f48be3fe5d880752b3, type: 3}
     MustBeInstantiate: 1
     Child: {fileID: 7295470563782542346, guid: a3510d7a12c1ba54e8594430f6db3e28, type: 3}
   - _terrainName: Brasier
     _description: "Case embras\xE9e."
-    _eventType: 23000000
+    _eventType: 22000000
     render: {fileID: 21300000, guid: 3d22f4fa890fc2d4fb056354c5dccaba, type: 3}
     MustBeInstantiate: 1
     Child: {fileID: 4840181140325066073, guid: 2c4bce46ac3d9114db40c4aa43f9fd1f, type: 3}
   - _terrainName: Feu
     _description: "Case emflamm\xE9e."
-    _eventType: 24000000
+    _eventType: 23000000
     render: {fileID: 21300000, guid: f9dd8bef7361d5c489fd683fc644e5b8, type: 3}
     MustBeInstantiate: 1
     Child: {fileID: 4840181140325066073, guid: 2c4bce46ac3d9114db40c4aa43f9fd1f, type: 3}
   - _terrainName: "Barbel\xE9"
     _description: "Inflige 2 points de d\xE9g\xE2ts."
-    _eventType: 25000000260000002700000028000000
+    _eventType: 25000000260000002700000024000000
     render: {fileID: 21300000, guid: 9b9ce38bfad3a734ab5935779bb47782, type: 3}
     MustBeInstantiate: 1
     Child: {fileID: 2443697204554867568, guid: 6121b405301c5ea44bedafd9513f86f0, type: 3}
   - _terrainName: "D\xE9tonation"
     _description: "Inflige 2 points de d\xE9g\xE2ts \xE0 la fin du tour de l'adversaire."
-    _eventType: 29000000
+    _eventType: 28000000
     render: {fileID: 21300000, guid: ce82b59a0f7b12e418fca4dbfe39b997, type: 3}
     MustBeInstantiate: 1
     Child: {fileID: 4352697046244975141, guid: 61e52e18ad8013e4dbf10f00bb923c4e, type: 3}
   - _terrainName: Objectif Rouge
     _description: "Case \xE0 capturer pour faire gagner l'\xE9quipe Rouge"
-    _eventType: 2a000000
+    _eventType: 29000000
     render: {fileID: 0}
     MustBeInstantiate: 1
     Child: {fileID: 0}
   - _terrainName: Objectif Bleu
     _description: "Case \xE0 capturer pour faire gagner l'\xE9quipe Bleu"
-    _eventType: 2b000000
+    _eventType: 2a000000
     render: {fileID: 0}
     MustBeInstantiate: 1
     Child: {fileID: 0}
