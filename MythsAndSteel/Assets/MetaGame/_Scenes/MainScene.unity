@@ -9528,7 +9528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camSpeed: 15
   camPosMax: 1.5625
-  margin: 100
+  margin: 64
 --- !u!1 &722833885
 GameObject:
   m_ObjectHideFlags: 0
