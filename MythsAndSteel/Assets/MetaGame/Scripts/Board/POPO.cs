@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class POPO : MonoBehaviour
 {
 
-	public float camSpeed;
-	public float camPosMax = 1.55f;
-	public float margin = 10f;
+	public float camSpeed = 15f;
+	public float camPosMax = 1.5625f;
+	public float margin = 64f;
 
 
     void Start()
