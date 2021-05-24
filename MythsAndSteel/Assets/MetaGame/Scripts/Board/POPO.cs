@@ -22,8 +22,8 @@ public class POPO : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         Vector3 camPos = this.transform.position;
 
-        print(camPos.y);
-        print(mousePos.y);
+        // print(camPos.y);
+        // print(mousePos.y);
 
         if (mousePos.y > 1080f - margin && camPos.y < camPosMax) {
         	this.transform.position = camPos + Vector3.up*camSpeed*Time.deltaTime;
